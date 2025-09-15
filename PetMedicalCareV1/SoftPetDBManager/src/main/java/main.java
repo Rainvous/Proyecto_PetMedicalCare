@@ -9,5 +9,6 @@ public class main {
     public String KARINA;
     public String Jorge;
     public String David;
+    public String F1;
     
 }
