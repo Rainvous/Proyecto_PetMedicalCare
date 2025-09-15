@@ -23,6 +23,10 @@ public class DBManager {
     private String usuario;
     private String contraseña;
     private static DBManager dbManager = null;
+    public String PABLO;
+    public String KARINA;
+    public String Jorge;
+    public String David;
     
     private DBManager(){
         //constructor privado para evitar que se creen instancias.
