@@ -11,6 +11,6 @@ public class main {
     public String David;
     public String F1;
     public String Carlos;
-     
+    public String Prueba;
     
 }
