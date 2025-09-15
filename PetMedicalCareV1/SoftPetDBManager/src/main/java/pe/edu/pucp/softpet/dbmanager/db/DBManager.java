@@ -23,7 +23,7 @@ public class DBManager {
     private String usuario;
     private String contraseña;
     private static DBManager dbManager = null;
-    private String holamundoPepe;
+   
     
     
     
@@ -61,16 +61,26 @@ public class DBManager {
     }
 
     private String getURL() {
+        //Esto incialmente fue hecho por melgar pero he cambiado
+        //el codigo para poder conectarme a una bd en la nube
         String url = this.tipo_de_driver.concat("://");
         url = url.concat(this.nombre_de_host);
         url = url.concat(":");
         url = url.concat(this.puerto);
         url = url.concat("/");
         url = url.concat(this.base_de_datos);
-        //System.out.println(url);
+        System.out.println(url);
+        //Con el codigo de melgar sale: jdbc:mysql://localhost:3306/petmedicalcarev1
+        //Con el cambio hecho saldrá: 
         return url;
     }
-
+/*NOTA: RECUERDA QUE PARA PODER CONECTARTE A AWS al momento de agregar el URL este debe salir de esta manera
+    URL="jdbc:mysql://labs-2025-2-prog3.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/laboratorio4";
+    USUARIO= (indicado en el aws en este caso es admin)
+    contraseña = (contra indicada, tmb puedes cifrarla)
+    
+    PARA ESO HAY QUE MODIFICAR EL arhcivo properties
+*/
     private void leer_archivo_de_propiedades() {
         Properties properties = new Properties();
         try {
