@@ -127,7 +127,7 @@ public class ProductoDAOImpl extends DAOImplBase implements ProductoDAO {
 
     @Override
     protected void agregarObjetoALaLista(List lista) throws SQLException {
-        
+        return uur;
     }
 
 }
