@@ -3,19 +3,19 @@ package pe.edu.pucp.softpet.model;
 import pe.edu.pucp.softpet.model.actoresdto.MascotasDTO;
 
 
-public class HistoriasAtencion {
+public class HistorialDeAtencionesDTO {
 
     private String historiaId;
     private MascotasDTO mascotaId;
     private String estadoMascota;
 
-    public HistoriasAtencion() {
+    public HistorialDeAtencionesDTO() {
         this.historiaId = null;
         this.mascotaId = null;
         this.estadoMascota = null;
     }
 
-    public HistoriasAtencion(String historiaId, MascotasDTO mascotaId, String estadoMascota) {
+    public HistorialDeAtencionesDTO(String historiaId, MascotasDTO mascotaId, String estadoMascota) {
         this.historiaId = historiaId;
         this.mascotaId = mascotaId;
         this.estadoMascota = estadoMascota;
