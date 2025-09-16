@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.model.actoresdto.PersonasDTO;
  *
  * @author User
  */
-public interface PersonasDAO {
+public interface PersonaDAO {
      public Integer insertar(PersonasDTO persona);
     
     public PersonasDTO obtenerPorId(Integer personaId);

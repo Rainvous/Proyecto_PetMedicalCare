@@ -13,7 +13,7 @@ public class ProductosDTO {
 
     
     private Integer producto_id;
-    private Tipo_ProductosDTO tipo_producto_id;
+    private TipoProductosDTO tipo_producto_id;
     private String nombre;
     private String presentacion;
     private Double precio_unitario;
@@ -28,7 +28,7 @@ public class ProductosDTO {
         this.cantidad_total = null;
     }
 
-    public ProductosDTO(Integer producto_id, Tipo_ProductosDTO tipo_producto_id, String nombre, String presentacion, Double precio_unitario, Integer cantidad_total) {
+    public ProductosDTO(Integer producto_id, TipoProductosDTO tipo_producto_id, String nombre, String presentacion, Double precio_unitario, Integer cantidad_total) {
         this.producto_id = producto_id;
         this.tipo_producto_id = tipo_producto_id;
         this.nombre = nombre;

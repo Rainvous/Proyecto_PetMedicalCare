@@ -8,20 +8,20 @@ package pe.edu.pucp.softpet.model.productosDTO;
  *
  * @author User
  */
-public class Tipo_ProductosDTO {
+public class TipoProductosDTO {
 
     
     private Integer tipo_producto_id;
     private String nombre;
     private String descripcion;
     
-    public Tipo_ProductosDTO(){
+    public TipoProductosDTO(){
         tipo_producto_id=null;
         nombre=null;
         descripcion=null;
     }
     
-    public Tipo_ProductosDTO(Integer tipo_producto_id,
+    public TipoProductosDTO(Integer tipo_producto_id,
         String nombre,
         String descripcion){
         this.tipo_producto_id=tipo_producto_id;

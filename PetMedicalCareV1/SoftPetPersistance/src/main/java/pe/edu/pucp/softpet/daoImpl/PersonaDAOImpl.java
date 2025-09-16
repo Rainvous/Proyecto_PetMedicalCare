@@ -5,19 +5,19 @@
 package pe.edu.pucp.softpet.daoImpl;
 
 import java.util.ArrayList;
-import pe.edu.pucp.softpet.dao.PersonasDAO;
 import pe.edu.pucp.softpet.daoImpl.base.DAOImplBase;
 import pe.edu.pucp.softpet.model.actoresdto.PersonasDTO;
+import pe.edu.pucp.softpet.dao.PersonaDAO;
 
 /**
  *
  * @author User
  */
-public class PersonasDAOImpl extends DAOImplBase implements PersonasDAO {
+public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
 
     private PersonasDTO persona;
 
-    public PersonasDAOImpl(String nombre_tabla) {
+    public PersonaDAOImpl(String nombre_tabla) {
         super("nombre");
         this.persona=null;
     }
