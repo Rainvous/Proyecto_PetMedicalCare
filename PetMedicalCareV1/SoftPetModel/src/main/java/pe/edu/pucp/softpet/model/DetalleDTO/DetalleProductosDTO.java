@@ -36,7 +36,8 @@ public class DetalleProductosDTO {
         this.total = null;
         this.descripcion = null;
     }
-    public DetalleProductosDTO(Integer cita_producto_id, CitaAtencionDTO cita_id, ProductosDTO producto_id, Integer cantidad, Double total, String descripcion) {
+    public DetalleProductosDTO(Integer cita_producto_id, CitaAtencionDTO cita_id, 
+            ProductosDTO producto_id, Integer cantidad, Double total, String descripcion) {
         this.cita_producto_id = cita_producto_id;
         this.cita_id = cita_id;
         this.producto = producto_id;
