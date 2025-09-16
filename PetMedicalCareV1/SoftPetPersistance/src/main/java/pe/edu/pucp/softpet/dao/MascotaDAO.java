@@ -21,7 +21,7 @@ public interface MascotaDAO {
 
     public Integer modificar(MascotasDTO mascota);
 
-    public Integer eliminar(MascotaDAO mascota);
+    public Integer eliminar(MascotasDTO mascota);
 
 }
 

@@ -13,7 +13,7 @@ import pe.edu.pucp.softpet.model.actoresdto.MascotasDTO;
 
 import pe.edu.pucp.softpet.daoImpl.base.DAOImplBase;
 import pe.edu.pucp.softpet.daoImpl.util.Columna;
-import pe.edu.pucp.softpet.dbmanager.db.DBManager;
+import pe.edu.pucp.softpet.model.actoresdto.PersonasDTO;
 
 
 public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO{
@@ -122,7 +122,7 @@ public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO{
     protected void instanciarObjetoDelResultSet() throws SQLException {
         MascotasDTO m = new MascotasDTO();
         m.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
-        m.setPersona(()this.resultSet.getObject("PERSONA_ID"));
+        m.setPersona((PersonasDTO)this.resultSet.getObject("PERSONA_ID"));
         m.setNombre(this.resultSet.getString("NOMBRE"));
         m.setRaza(this.resultSet.getString("RAZA"));
         m.setColor(this.resultSet.getString("COLOR"));
@@ -131,22 +131,17 @@ public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO{
 
     @Override
     protected void agregarObjetoALaLista(List lista) throws SQLException {
-        PersonasDTO p = new PersonasDTO();
-        p.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-        p.setNombre(this.resultSet.getString("NOMBRE"));
-        p.setDireccion(this.resultSet.getString("DIRECCION"));
-        p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setTelefono(this.resultSet.getString("TELEFONO"));
-
-        p.setTipoPersona(this.resultSet.getString("TIPO_PERSONA"));
-        p.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));
-        p.setNroDocumento(this.resultSet.getString("NRO_DOCUMENTO"));
-
-        lista.add(p);
+        MascotasDTO m = new MascotasDTO();
+        m.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
+        m.setPersona((PersonasDTO)this.resultSet.getObject("PERSONA_ID"));
+        m.setNombre(this.resultSet.getString("NOMBRE"));
+        m.setRaza(this.resultSet.getString("RAZA"));
+        m.setColor(this.resultSet.getString("COLOR"));
+        lista.add(m);
     }
 
-    @Override
-    public Integer eliminar(MascotaDAO mascota) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    @Override
+//    public Integer eliminar(MascotasDTO mascota) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 }
