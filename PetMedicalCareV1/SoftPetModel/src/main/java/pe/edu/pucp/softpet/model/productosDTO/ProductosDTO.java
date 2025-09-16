@@ -8,35 +8,36 @@ package pe.edu.pucp.softpet.model.productosDTO;
  *
  * @author User
  */
-public class ProdutosDTO {
+public class ProductosDTO {
+
 
     
     private Integer producto_id;
-    private Integer tipo_producto_id;
+    private Tipo_ProductosDTO tipo_producto_id;
     private String nombre;
     private String presentacion;
-    private String precio_unitario_decimal;
+    private Double precio_unitario;
     private Integer cantidad_total;
     
-    public ProdutosDTO(){
-         producto_id=null;
-         tipo_producto_id=null;
-         nombre=null;
-         presentacion=null;
-         precio_unitario_decimal=null;
-         cantidad_total=null;
+    public ProductosDTO() {
+        this.producto_id = null;
+        this.tipo_producto_id = null;
+        this.nombre = null;
+        this.presentacion = null;
+        this.precio_unitario = null;
+        this.cantidad_total = null;
+    }
+
+    public ProductosDTO(Integer producto_id, Tipo_ProductosDTO tipo_producto_id, String nombre, String presentacion, Double precio_unitario, Integer cantidad_total) {
+        this.producto_id = producto_id;
+        this.tipo_producto_id = tipo_producto_id;
+        this.nombre = nombre;
+        this.presentacion = presentacion;
+        this.precio_unitario = precio_unitario;
+        this.cantidad_total = cantidad_total;
     }
     
-    public ProdutosDTO(Integer producto_id,Integer tipo_producto_id,
-    String nombre,String presentacion,String precio_unitario_decimal,
-    Integer cantidad_total){
-         this.producto_id=producto_id;
-         this.tipo_producto_id=tipo_producto_id;
-         this.nombre=nombre;
-         this.presentacion=presentacion;
-         this.precio_unitario_decimal=precio_unitario_decimal;
-         this.cantidad_total=cantidad_total;
-    }
+    
     
     /**
      * @return the producto_id
@@ -50,20 +51,6 @@ public class ProdutosDTO {
      */
     public void setProducto_id(Integer producto_id) {
         this.producto_id = producto_id;
-    }
-
-    /**
-     * @return the tipo_producto_id
-     */
-    public Integer getTipo_producto_id() {
-        return tipo_producto_id;
-    }
-
-    /**
-     * @param tipo_producto_id the tipo_producto_id to set
-     */
-    public void setTipo_producto_id(Integer tipo_producto_id) {
-        this.tipo_producto_id = tipo_producto_id;
     }
 
     /**
@@ -95,17 +82,17 @@ public class ProdutosDTO {
     }
 
     /**
-     * @return the precio_unitario_decimal
+     * @return the precio_unitario
      */
-    public String getPrecio_unitario_decimal() {
-        return precio_unitario_decimal;
+    public Double getPrecio_unitario() {
+        return precio_unitario;
     }
 
     /**
-     * @param precio_unitario_decimal the precio_unitario_decimal to set
+     * @param precio_unitario the precio_unitario to set
      */
-    public void setPrecio_unitario_decimal(String precio_unitario_decimal) {
-        this.precio_unitario_decimal = precio_unitario_decimal;
+    public void setPrecio_unitario(Double precio_unitario) {
+        this.precio_unitario = precio_unitario;
     }
 
     /**
@@ -121,4 +108,5 @@ public class ProdutosDTO {
     public void setCantidad_total(Integer cantidad_total) {
         this.cantidad_total = cantidad_total;
     }
+    
 }

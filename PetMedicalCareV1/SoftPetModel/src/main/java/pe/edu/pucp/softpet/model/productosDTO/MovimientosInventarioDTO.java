@@ -5,6 +5,7 @@
 package pe.edu.pucp.softpet.model.productosDTO;
 
 import java.util.Date;
+import pe.edu.pucp.softpet.model.atencionmedicaDTO.CitaAtencionDTO;
 
 /**
  *
@@ -12,42 +13,40 @@ import java.util.Date;
  */
 public class MovimientosInventarioDTO {
 
-    /**
-     * @return the movimiento_id
-     */
-    
-    
     
     private Integer movimiento_id;
-    private Integer producto_id;
-    private Integer cita_id;
+    private ProductosDTO producto_id;
+    private CitaAtencionDTO cita_id;
     private String tipo_movimiento;
     private Integer cantidad;
     private Date fecha;
     private String motivo;
+
     
-    public MovimientosInventarioDTO(){
-        movimiento_id=null;
-        producto_id=null;
-        cita_id=null;
-        tipo_movimiento=null;
-        cantidad=null;
-        fecha=null;
-        motivo=null;
+    public MovimientosInventarioDTO() {
+        this.movimiento_id = null;
+        this.producto_id = null;
+        this.cita_id = null;
+        this.tipo_movimiento = null;
+        this.cantidad = null;
+        this.fecha = null;
+        this.motivo = null;
+    }
+    public MovimientosInventarioDTO(Integer movimiento_id, ProductosDTO producto_id, CitaAtencionDTO cita_id, String tipo_movimiento, Integer cantidad, Date fecha, String motivo) {
+        this.movimiento_id = movimiento_id;
+        this.producto_id = producto_id;
+        this.cita_id = cita_id;
+        this.tipo_movimiento = tipo_movimiento;
+        this.cantidad = cantidad;
+        this.fecha = fecha;
+        this.motivo = motivo;
     }
     
-    public MovimientosInventarioDTO(Integer movimiento_id,
-        Integer producto_id,Integer cita_id,String tipo_movimiento,Integer cantidad,
-        Date fecha,String motivo){
-        this.movimiento_id=movimiento_id;
-        this.producto_id=producto_id;
-        this.cita_id=cita_id;
-        this.tipo_movimiento=tipo_movimiento;
-        this.cantidad=cantidad;
-        this.fecha=fecha;
-        this.motivo=motivo;
-    }
     
+    
+    /**
+     * @return the movimiento_id
+     */
     public Integer getMovimiento_id() {
         return movimiento_id;
     }
@@ -57,34 +56,6 @@ public class MovimientosInventarioDTO {
      */
     public void setMovimiento_id(Integer movimiento_id) {
         this.movimiento_id = movimiento_id;
-    }
-
-    /**
-     * @return the producto_id
-     */
-    public Integer getProducto_id() {
-        return producto_id;
-    }
-
-    /**
-     * @param producto_id the producto_id to set
-     */
-    public void setProducto_id(Integer producto_id) {
-        this.producto_id = producto_id;
-    }
-
-    /**
-     * @return the cita_id
-     */
-    public Integer getCita_id() {
-        return cita_id;
-    }
-
-    /**
-     * @param cita_id the cita_id to set
-     */
-    public void setCita_id(Integer cita_id) {
-        this.cita_id = cita_id;
     }
 
     /**
@@ -143,5 +114,10 @@ public class MovimientosInventarioDTO {
         this.motivo = motivo;
     }
 
+    /**
+     * @return the movimiento_id
+     */
+    
+    
     
 }
