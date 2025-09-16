@@ -1,0 +1,8 @@
+pe\edu\pucp\softpet\dao\PersonaDAO.class
+pe\edu\pucp\softpet\daoImpl\base\DAOImplBase.class
+pe\edu\pucp\softpet\daoImpl\PersonaDAOImpl.class
+pe\edu\pucp\softpet\daoImpl\base\DAOImplBase$1.class
+pe\edu\pucp\softpet\daoImpl\ProductoDAOImpl.class
+pe\edu\pucp\softpet\daoImpl\util\Columna.class
+pe\edu\pucp\softpet\dao\ProductoDAO.class
+pe\edu\pucp\softpet\daoImpl\util\Tipo_Operacion.class
