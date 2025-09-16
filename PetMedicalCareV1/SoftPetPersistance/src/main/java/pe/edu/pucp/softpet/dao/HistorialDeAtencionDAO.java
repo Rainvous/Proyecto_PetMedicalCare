@@ -2,6 +2,7 @@
 package pe.edu.pucp.softpet.dao;
 
 import java.util.ArrayList;
+import pe.edu.pucp.softpet.model.HistorialDeAtencionesDTO;
 
 /**
  *
@@ -9,12 +10,12 @@ import java.util.ArrayList;
  */
 public interface HistorialDeAtencionDAO {
     
-    public Integer insertar(HistorialDeAtencionDAO historialDeAtencion);
+    public Integer insertar(HistorialDeAtencionesDTO historialDeAtencion);
 
-    public HistorialDeAtencionDAO obtenerPorId(Integer historiaAtencion_id);
+    public HistorialDeAtencionesDTO obtenerPorId(Integer historiaAtencion_id);
 
-    public ArrayList<HistorialDeAtencionDAO> listarTodos();
+    public ArrayList<HistorialDeAtencionesDTO> listarTodos();
 
-    public Integer modificar(HistorialDeAtencionDAO historialDeAtencion);
+    public Integer modificar(HistorialDeAtencionesDTO historialDeAtencion);
 
 }
