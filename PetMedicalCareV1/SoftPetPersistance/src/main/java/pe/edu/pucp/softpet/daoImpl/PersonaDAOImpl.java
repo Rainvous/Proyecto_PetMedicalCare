@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.softpet.daoImpl.base.DAOImplBase;
 import pe.edu.pucp.softpet.model.actoresdto.PersonasDTO;
 import pe.edu.pucp.softpet.dao.PersonaDAO;
+import pe.edu.pucp.softpet.daoImpl.util.Columna;
 
 /**
  *
@@ -18,14 +19,24 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
     private PersonasDTO persona;
 
     public PersonaDAOImpl(String nombre_tabla) {
-        super("nombre");
+        super("PERSONA");
         this.persona=null;
     }
     
     @Override
     protected void configurarListaDeColumnas() {
         
+        this.listaColumnas.add(new Columna("PERSONA_ID", true, true));
+        this.listaColumnas.add(new Columna("NOMBRE", false, false));
+        this.listaColumnas.add(new Columna("DIRECCION",false,false));
+        this.listaColumnas.add(new Columna("CORREO",false,false));
         
+        this.listaColumnas.add(new Columna("TELEFONO",false,false));
+        
+        this.listaColumnas.add(new Columna("SEXO",false,false));
+        this.listaColumnas.add(new Columna("TIPO_PERSONA",false,false));
+        this.listaColumnas.add(new Columna("TIPO_DOCUMENTO",false,false));
+        this.listaColumnas.add(new Columna("NRO_DOCUMENTO",false,false));
     }
 
     @Override
