@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.productosDTO;
 
 /**
@@ -10,15 +6,13 @@ package pe.edu.pucp.softpet.model.productosDTO;
  */
 public class ProductosDTO {
 
-
-    
     private Integer producto_id;
     private TipoProductosDTO tipo_producto;
     private String nombre;
     private String presentacion;
     private Double precio_unitario;
     private Integer cantidad_total;
-    
+
     public ProductosDTO() {
         this.producto_id = null;
         this.tipo_producto = null;
@@ -36,9 +30,7 @@ public class ProductosDTO {
         this.precio_unitario = precio_unitario;
         this.cantidad_total = cantidad_total;
     }
-    
-    
-    
+
     /**
      * @return the producto_id
      */
@@ -122,5 +114,5 @@ public class ProductosDTO {
     public void setTipo_producto(TipoProductosDTO tipo_producto) {
         this.tipo_producto = tipo_producto;
     }
-    
+
 }

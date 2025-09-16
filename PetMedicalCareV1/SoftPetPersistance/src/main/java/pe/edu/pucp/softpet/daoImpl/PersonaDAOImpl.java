@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 //package pe.edu.pucp.softpet.daoImpl;
 //
 //import java.sql.SQLException;
@@ -13,7 +9,7 @@
 //import pe.edu.pucp.softpet.daoImpl.util.Columna;
 //import pe.edu.pucp.softpet.model.TipoSexo;
 //
-///**
+ ///**
 // *
 // * @author AMARU 
 //NOTA: ESTE CODIGO LO DEJO POR SI ACASO
@@ -135,19 +131,18 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
     protected void configurarListaDeColumnas() {
         // Definir columnas y metadatos (PK, autogenerado)
         // Orden aquí importa: se ocupará para generar SQL y parámetros.
-        this.listaColumnas.add(new Columna("PERSONA_ID", true,  true));  // PK, autogenerado
-        this.listaColumnas.add(new Columna("NOMBRE",      false, false));
-        this.listaColumnas.add(new Columna("DIRECCION",   false, false));
-        this.listaColumnas.add(new Columna("CORREO",      false, false));
-        this.listaColumnas.add(new Columna("TELEFONO",    false, false));
-        this.listaColumnas.add(new Columna("SEXO",        false, false));
-        this.listaColumnas.add(new Columna("TIPO_PERSONA",false, false));
+        this.listaColumnas.add(new Columna("PERSONA_ID", true, true));  // PK, autogenerado
+        this.listaColumnas.add(new Columna("NOMBRE", false, false));
+        this.listaColumnas.add(new Columna("DIRECCION", false, false));
+        this.listaColumnas.add(new Columna("CORREO", false, false));
+        this.listaColumnas.add(new Columna("TELEFONO", false, false));
+        this.listaColumnas.add(new Columna("SEXO", false, false));
+        this.listaColumnas.add(new Columna("TIPO_PERSONA", false, false));
         this.listaColumnas.add(new Columna("TIPO_DOCUMENTO", false, false));
-        this.listaColumnas.add(new Columna("NRO_DOCUMENTO",  false, false));
+        this.listaColumnas.add(new Columna("NRO_DOCUMENTO", false, false));
     }
 
     // ===== PersonaDAO =====
-
     @Override
     public Integer insertar(PersonasDTO persona) {
         this.persona = persona;
@@ -190,7 +185,6 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
     }
 
     // ===== Hooks llamados por DAOImplBase =====
-
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         // Orden de parámetros = orden de columnas NO autogeneradas:
@@ -255,9 +249,13 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
                 p.setSexo(TipoSexo.valueOf(sexoStr));
             } catch (IllegalArgumentException ex) {
                 // Si guardan “F/M” u otros valores, aquí puedes mapear
-                if ("F".equalsIgnoreCase(sexoStr)) p.setSexo(TipoSexo.FEMENINO);
-                else if ("M".equalsIgnoreCase(sexoStr)) p.setSexo(TipoSexo.MASCULINO);
-                else p.setSexo(null);
+                if ("F".equalsIgnoreCase(sexoStr)) {
+                    p.setSexo(TipoSexo.FEMENINO);
+                } else if ("M".equalsIgnoreCase(sexoStr)) {
+                    p.setSexo(TipoSexo.MASCULINO);
+                } else {
+                    p.setSexo(null);
+                }
             }
         }
 
@@ -282,9 +280,13 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
             try {
                 p.setSexo(TipoSexo.valueOf(sexoStr));
             } catch (IllegalArgumentException ex) {
-                if ("F".equalsIgnoreCase(sexoStr)) p.setSexo(TipoSexo.FEMENINO);
-                else if ("M".equalsIgnoreCase(sexoStr)) p.setSexo(TipoSexo.MASCULINO);
-                else p.setSexo(null);
+                if ("F".equalsIgnoreCase(sexoStr)) {
+                    p.setSexo(TipoSexo.FEMENINO);
+                } else if ("M".equalsIgnoreCase(sexoStr)) {
+                    p.setSexo(TipoSexo.MASCULINO);
+                } else {
+                    p.setSexo(null);
+                }
             }
         }
 

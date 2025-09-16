@@ -10,7 +10,6 @@ import pe.edu.pucp.softpet.daoImpl.util.Columna;
 import pe.edu.pucp.softpet.daoImpl.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.dbmanager.db.DBManager;
 
-
 public abstract class DAOImplBase {
 
     protected String nombre_tabla;
@@ -287,7 +286,7 @@ public abstract class DAOImplBase {
             }
         }
     }
-    
+
     public List listarTodos() {
         List lista = new ArrayList<>();
         try {
@@ -321,8 +320,8 @@ public abstract class DAOImplBase {
     protected void limpiarObjetoDelResultSet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    protected void agregarObjetoALaLista(List lista)throws SQLException {
+
+    protected void agregarObjetoALaLista(List lista) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -339,6 +338,6 @@ public abstract class DAOImplBase {
             System.err.println("Error al intentar retornarUltimoAutoGenerado - " + ex);
         }
         return resultado;
-    }        
+    }
 
 }

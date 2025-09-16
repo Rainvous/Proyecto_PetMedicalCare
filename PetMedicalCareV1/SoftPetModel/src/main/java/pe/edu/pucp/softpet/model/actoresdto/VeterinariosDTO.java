@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.actoresdto;
 
 import java.util.Date;
@@ -11,11 +7,11 @@ import java.util.Date;
  * @author snipe
  */
 public class VeterinariosDTO {
-    
+
     private Integer veterinarioId;
     private String especializacion;
     private Date fechaDeContratacion;
-    private PersonasDTO personaId;
+    private PersonasDTO persona;
     private String estado;
     private Double sueldo;
 
@@ -23,16 +19,16 @@ public class VeterinariosDTO {
         this.veterinarioId = null;
         this.especializacion = null;
         this.fechaDeContratacion = null;
-        this.personaId = null;
+        this.persona = null;
         this.estado = null;
         this.sueldo = null;
     }
-    
-    public VeterinariosDTO(Integer veterinarioId, String especializacion, Date fechaDeContratacion, PersonasDTO personaId, String estado, Double sueldo) {
+
+    public VeterinariosDTO(Integer veterinarioId, String especializacion, Date fechaDeContratacion, PersonasDTO persona, String estado, Double sueldo) {
         this.veterinarioId = veterinarioId;
         this.especializacion = especializacion;
         this.fechaDeContratacion = fechaDeContratacion;
-        this.personaId = personaId;
+        this.persona = persona;
         this.estado = estado;
         this.sueldo = sueldo;
     }
@@ -82,15 +78,15 @@ public class VeterinariosDTO {
     /**
      * @return the personaId
      */
-    public PersonasDTO getPersonaId() {
-        return personaId;
+    public PersonasDTO getPersona() {
+        return persona;
     }
 
     /**
-     * @param personaId the personaId to set
+     * @param persona the persona to set
      */
-    public void setPersonaId(PersonasDTO personaId) {
-        this.personaId = personaId;
+    public void setPersona(PersonasDTO persona) {
+        this.persona = persona;
     }
 
     /**
@@ -121,6 +117,4 @@ public class VeterinariosDTO {
         this.sueldo = sueldo;
     }
 
-    
-    
 }

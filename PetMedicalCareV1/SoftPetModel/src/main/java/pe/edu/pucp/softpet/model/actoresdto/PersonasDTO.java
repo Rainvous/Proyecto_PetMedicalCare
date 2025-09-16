@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.actoresdto;
 
 import pe.edu.pucp.softpet.model.TipoSexo;
 
 public class PersonasDTO {
-    
+
     private Integer personaId;
     private String nombre;
     private String direccion;
@@ -29,7 +25,7 @@ public class PersonasDTO {
         this.tipoDocumento = null;
         this.nroDocumento = null;
     }
-    
+
     public PersonasDTO(Integer personaId, String nombre, String direccion, String correo, String telefono, TipoSexo sexo, String tipoPersona, String tipoDocumento, String nroDocumento) {
         this.personaId = personaId;
         this.nombre = nombre;
@@ -167,7 +163,5 @@ public class PersonasDTO {
     public void setNroDocumento(String nroDocumento) {
         this.nroDocumento = nroDocumento;
     }
-    
-    
-    
+
 }

@@ -8,9 +8,9 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 public class Cifrado {
-    
+
     private static final String llave = "Fullchow#2025";
-    
+
     public static String cifrarMD5(String texto) {
         String base64EncryptedString = "";
         try {
@@ -37,17 +37,17 @@ public class Cifrado {
 
     public static String descifrarMD5(String textoEncriptado) {
         String base64EncryptedString = "";
-       
+
         try {
             byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digestOfPassword = md.digest(llave.getBytes("utf-8"));
             byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
             SecretKey key = new SecretKeySpec(keyBytes, "DESede");
-            
+
             Cipher decipher = Cipher.getInstance("DESede");
             decipher.init(Cipher.DECRYPT_MODE, key);
-            
+
             byte[] plainText = decipher.doFinal(message);
 
             base64EncryptedString = new String(plainText, "UTF-8");
@@ -55,7 +55,7 @@ public class Cifrado {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         return base64EncryptedString;
     }
 
