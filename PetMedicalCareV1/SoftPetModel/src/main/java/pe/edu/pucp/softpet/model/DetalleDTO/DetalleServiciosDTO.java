@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.DetalleDTO;
 
 import pe.edu.pucp.softpet.model.atencionmedicaDTO.CitaAtencionDTO;
@@ -13,32 +9,29 @@ import pe.edu.pucp.softpet.model.serviciosdto.ServiciosDTO;
  */
 public class DetalleServiciosDTO {
 
-    
     private Integer citaXServicioId;
     //Falta Colocar la cita Atencion su ID
-    private CitaAtencionDTO cita_id;
-    private ServiciosDTO servicioId;
+    private CitaAtencionDTO cita;
+    private ServiciosDTO servicio;
     private String descripcion;
     private Double total;
 
-    
     public DetalleServiciosDTO() {
-        citaXServicioId = null;
-        cita_id = null;
-        servicioId = null;
-        descripcion = null;
-        total = null;
+        this.citaXServicioId = null;
+        this.cita = null;
+        this.servicio = null;
+        this.descripcion = null;
+        this.total = null;
     }
-    
-    public DetalleServiciosDTO(Integer citaXServicioId, CitaAtencionDTO cita_id, ServiciosDTO servicioId, String descripcion, Double total) {
+
+    public DetalleServiciosDTO(Integer citaXServicioId, CitaAtencionDTO cita, ServiciosDTO servicio, String descripcion, Double total) {
         this.citaXServicioId = citaXServicioId;
-        this.cita_id = cita_id;
-        this.servicioId = servicioId;
+        this.cita = cita;
+        this.servicio = servicio;
         this.descripcion = descripcion;
         this.total = total;
     }
-    
-   
+
     /**
      * @return the citaXServicioId
      */
@@ -80,6 +73,33 @@ public class DetalleServiciosDTO {
     public void setTotal(Double total) {
         this.total = total;
     }
-    
-   
+
+    /**
+     * @return the cita
+     */
+    public CitaAtencionDTO getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(CitaAtencionDTO cita) {
+        this.cita = cita;
+    }
+
+    /**
+     * @return the servicio
+     */
+    public ServiciosDTO getServicio() {
+        return servicio;
+    }
+
+    /**
+     * @param servicio the servicio to set
+     */
+    public void setServicio(ServiciosDTO servicio) {
+        this.servicio = servicio;
+    }
+
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.productosDTO;
 
 import java.util.Date;
@@ -12,30 +8,28 @@ import java.util.Date;
  */
 public class InventarioDTO {
 
-    
     private Integer inventario_id;
-    private ProductosDTO producto_id;
+    private ProductosDTO producto;
     private Date fechaultimomov;
     private String lote;
     private Integer cantidad_lote;
 
-    
     public InventarioDTO() {
         this.inventario_id = null;
-        this.producto_id = null;
+        this.producto = null;
         this.fechaultimomov = null;
         this.lote = null;
         this.cantidad_lote = null;
     }
-    public InventarioDTO(Integer inventario_id, ProductosDTO producto_id, Date fechaultimomov, String lote, Integer cantidad_lote) {
+
+    public InventarioDTO(Integer inventario_id, ProductosDTO producto, Date fechaultimomov, String lote, Integer cantidad_lote) {
         this.inventario_id = inventario_id;
-        this.producto_id = producto_id;
+        this.producto = producto;
         this.fechaultimomov = fechaultimomov;
         this.lote = lote;
         this.cantidad_lote = cantidad_lote;
     }
-    
-    
+
     /**
      * @return the inventario_id
      */
@@ -92,6 +86,18 @@ public class InventarioDTO {
         this.cantidad_lote = cantidad_lote;
     }
 
-    
-    
+    /**
+     * @return the producto
+     */
+    public ProductosDTO getProducto() {
+        return producto;
+    }
+
+    /**
+     * @param producto the producto to set
+     */
+    public void setProducto(ProductosDTO producto) {
+        this.producto = producto;
+    }
+
 }

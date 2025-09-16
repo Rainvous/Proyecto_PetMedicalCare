@@ -1,27 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model;
 
 import pe.edu.pucp.softpet.model.actoresdto.MascotasDTO;
 
-/**
- *
- * @author snipe
- */
+
 public class HistoriasAtencion {
-    
-   private String historiaId;
-   private MascotasDTO mascotaId;
-   private String estadoMascota;
+
+    private String historiaId;
+    private MascotasDTO mascotaId;
+    private String estadoMascota;
 
     public HistoriasAtencion() {
         this.historiaId = null;
         this.mascotaId = null;
         this.estadoMascota = null;
     }
-   
+
     public HistoriasAtencion(String historiaId, MascotasDTO mascotaId, String estadoMascota) {
         this.historiaId = historiaId;
         this.mascotaId = mascotaId;
@@ -69,6 +62,5 @@ public class HistoriasAtencion {
     public void setEstadoMascota(String estadoMascota) {
         this.estadoMascota = estadoMascota;
     }
-   
-    
+
 }

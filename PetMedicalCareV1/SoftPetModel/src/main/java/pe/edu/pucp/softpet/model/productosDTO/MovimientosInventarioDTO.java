@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.productosDTO;
 
 import java.util.Date;
@@ -13,37 +9,34 @@ import pe.edu.pucp.softpet.model.atencionmedicaDTO.CitaAtencionDTO;
  */
 public class MovimientosInventarioDTO {
 
-    
     private Integer movimiento_id;
-    private ProductosDTO producto_id;
-    private CitaAtencionDTO cita_id;
+    private ProductosDTO producto;
+    private CitaAtencionDTO cita;
     private String tipo_movimiento;
     private Integer cantidad;
     private Date fecha;
     private String motivo;
 
-    
     public MovimientosInventarioDTO() {
         this.movimiento_id = null;
-        this.producto_id = null;
-        this.cita_id = null;
+        this.producto = null;
+        this.cita = null;
         this.tipo_movimiento = null;
         this.cantidad = null;
         this.fecha = null;
         this.motivo = null;
     }
-    public MovimientosInventarioDTO(Integer movimiento_id, ProductosDTO producto_id, CitaAtencionDTO cita_id, String tipo_movimiento, Integer cantidad, Date fecha, String motivo) {
+
+    public MovimientosInventarioDTO(Integer movimiento_id, ProductosDTO producto, CitaAtencionDTO cita, String tipo_movimiento, Integer cantidad, Date fecha, String motivo) {
         this.movimiento_id = movimiento_id;
-        this.producto_id = producto_id;
-        this.cita_id = cita_id;
+        this.producto = producto;
+        this.cita = cita;
         this.tipo_movimiento = tipo_movimiento;
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.motivo = motivo;
     }
-    
-    
-    
+
     /**
      * @return the movimiento_id
      */
@@ -115,9 +108,34 @@ public class MovimientosInventarioDTO {
     }
 
     /**
+     * @return the producto
+     */
+    public ProductosDTO getProducto() {
+        return producto;
+    }
+
+    /**
+     * @param producto the producto to set
+     */
+    public void setProducto(ProductosDTO producto) {
+        this.producto = producto;
+    }
+
+    /**
+     * @return the cita
+     */
+    public CitaAtencionDTO getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(CitaAtencionDTO cita) {
+        this.cita = cita;
+    }
+
+    /**
      * @return the movimiento_id
      */
-    
-    
-    
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.actoresdto;
 
 /**
@@ -9,24 +5,24 @@ package pe.edu.pucp.softpet.model.actoresdto;
  * @author snipe
  */
 public class MascotasDTO {
-    
+
     private Integer mascotaId;
-    private PersonasDTO personaId;
+    private PersonasDTO persona;
     private String nombre;
     private String raza;
     private String color;
 
     public MascotasDTO() {
         this.mascotaId = null;
-        this.personaId = null;
+        this.persona = null;
         this.nombre = null;
         this.raza = null;
         this.color = null;
-    }    
-    
-    public MascotasDTO(Integer mascotaId, PersonasDTO personaId, String nombre, String raza, String color) {
+    }
+
+    public MascotasDTO(Integer mascotaId, PersonasDTO persona, String nombre, String raza, String color) {
         this.mascotaId = mascotaId;
-        this.personaId = personaId;
+        this.persona = persona;
         this.nombre = nombre;
         this.raza = raza;
         this.color = color;
@@ -49,15 +45,15 @@ public class MascotasDTO {
     /**
      * @return the personaId
      */
-    public PersonasDTO getPersonaId() {
-        return personaId;
+    public PersonasDTO getPersona() {
+        return persona;
     }
 
     /**
-     * @param personaId the personaId to set
+     * @param persona the personaId to set
      */
-    public void setPersonaId(PersonasDTO personaId) {
-        this.personaId = personaId;
+    public void setPersona(PersonasDTO persona) {
+        this.persona = persona;
     }
 
     /**
@@ -101,5 +97,5 @@ public class MascotasDTO {
     public void setColor(String color) {
         this.color = color;
     }
-    
+
 }

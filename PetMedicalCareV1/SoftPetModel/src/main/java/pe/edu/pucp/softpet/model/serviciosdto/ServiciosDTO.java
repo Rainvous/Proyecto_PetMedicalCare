@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.serviciosdto;
 
 /**
@@ -9,6 +5,7 @@ package pe.edu.pucp.softpet.model.serviciosdto;
  * @author snipe
  */
 public class ServiciosDTO {
+
     private Integer servicioId;
     private TipoServiciosDTO tipoServicioDTO;
     private String nombre;
@@ -100,7 +97,5 @@ public class ServiciosDTO {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    
-    
+
 }

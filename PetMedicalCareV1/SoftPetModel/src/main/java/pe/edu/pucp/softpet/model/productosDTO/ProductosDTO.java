@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.model.productosDTO;
 
 /**
@@ -10,35 +6,31 @@ package pe.edu.pucp.softpet.model.productosDTO;
  */
 public class ProductosDTO {
 
-
-    
     private Integer producto_id;
-    private Tipo_ProductosDTO tipo_producto_id;
+    private TipoProductosDTO tipo_producto;
     private String nombre;
     private String presentacion;
     private Double precio_unitario;
     private Integer cantidad_total;
-    
+
     public ProductosDTO() {
         this.producto_id = null;
-        this.tipo_producto_id = null;
+        this.tipo_producto = null;
         this.nombre = null;
         this.presentacion = null;
         this.precio_unitario = null;
         this.cantidad_total = null;
     }
 
-    public ProductosDTO(Integer producto_id, Tipo_ProductosDTO tipo_producto_id, String nombre, String presentacion, Double precio_unitario, Integer cantidad_total) {
+    public ProductosDTO(Integer producto_id, TipoProductosDTO tipo_producto, String nombre, String presentacion, Double precio_unitario, Integer cantidad_total) {
         this.producto_id = producto_id;
-        this.tipo_producto_id = tipo_producto_id;
+        this.tipo_producto = tipo_producto;
         this.nombre = nombre;
         this.presentacion = presentacion;
         this.precio_unitario = precio_unitario;
         this.cantidad_total = cantidad_total;
     }
-    
-    
-    
+
     /**
      * @return the producto_id
      */
@@ -108,5 +100,19 @@ public class ProductosDTO {
     public void setCantidad_total(Integer cantidad_total) {
         this.cantidad_total = cantidad_total;
     }
-    
+
+    /**
+     * @return the tipo_producto
+     */
+    public TipoProductosDTO getTipo_producto() {
+        return tipo_producto;
+    }
+
+    /**
+     * @param tipo_producto the tipo_producto to set
+     */
+    public void setTipo_producto(TipoProductosDTO tipo_producto) {
+        this.tipo_producto = tipo_producto;
+    }
+
 }
