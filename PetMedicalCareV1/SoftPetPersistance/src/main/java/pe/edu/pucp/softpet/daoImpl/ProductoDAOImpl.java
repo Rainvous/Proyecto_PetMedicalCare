@@ -70,7 +70,7 @@ public class ProductoDAOImpl extends DAOImplBase implements ProductoDAO {
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
 
-        this.statement.setInt(6, this.producto.getProducto_id());
+        this.statement.setInt(1, this.producto.getProducto_id());
     }
 
     @Override
