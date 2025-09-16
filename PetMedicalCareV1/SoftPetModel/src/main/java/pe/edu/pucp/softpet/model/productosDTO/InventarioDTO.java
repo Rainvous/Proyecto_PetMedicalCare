@@ -14,35 +14,28 @@ public class InventarioDTO {
 
     
     private Integer inventario_id;
-    private Integer producto_id;
-    private Integer cita_id;
-    private String tipo_movimiento;
-    private Integer cantidad;
-    private Date fecha;
-    private String motivo;
+    private ProductosDTO producto_id;
+    private Date fechaultimomov;
+    private String lote;
+    private Integer cantidad_lote;
+
     
-    
-    public InventarioDTO(){
-        inventario_id=null;
-        producto_id=null;
-        cita_id=null;
-        tipo_movimiento=null;
-        cantidad=null;
-        fecha=null;
-        motivo=null;
+    public InventarioDTO() {
+        this.inventario_id = null;
+        this.producto_id = null;
+        this.fechaultimomov = null;
+        this.lote = null;
+        this.cantidad_lote = null;
+    }
+    public InventarioDTO(Integer inventario_id, ProductosDTO producto_id, Date fechaultimomov, String lote, Integer cantidad_lote) {
+        this.inventario_id = inventario_id;
+        this.producto_id = producto_id;
+        this.fechaultimomov = fechaultimomov;
+        this.lote = lote;
+        this.cantidad_lote = cantidad_lote;
     }
     
-    public InventarioDTO(Integer inventario_id,Integer producto_id,
-    Integer cita_id, String tipo_movimiento, Integer cantidad,Date fecha,
-    String motivo){
-        this.inventario_id=inventario_id;
-        this.producto_id=producto_id;
-        this.cita_id=cita_id;
-        this.tipo_movimiento=tipo_movimiento;
-        this.cantidad=cantidad;
-        this.fecha=fecha;
-        this.motivo=motivo;
-    }
+    
     /**
      * @return the inventario_id
      */
@@ -58,86 +51,47 @@ public class InventarioDTO {
     }
 
     /**
-     * @return the producto_id
+     * @return the fechaultimomov
      */
-    public Integer getProducto_id() {
-        return producto_id;
+    public Date getFechaultimomov() {
+        return fechaultimomov;
     }
 
     /**
-     * @param producto_id the producto_id to set
+     * @param fechaultimomov the fechaultimomov to set
      */
-    public void setProducto_id(Integer producto_id) {
-        this.producto_id = producto_id;
+    public void setFechaultimomov(Date fechaultimomov) {
+        this.fechaultimomov = fechaultimomov;
     }
 
     /**
-     * @return the cita_id
+     * @return the lote
      */
-    public Integer getCita_id() {
-        return cita_id;
+    public String getLote() {
+        return lote;
     }
 
     /**
-     * @param cita_id the cita_id to set
+     * @param lote the lote to set
      */
-    public void setCita_id(Integer cita_id) {
-        this.cita_id = cita_id;
+    public void setLote(String lote) {
+        this.lote = lote;
     }
 
     /**
-     * @return the tipo_movimiento
+     * @return the cantidad_lote
      */
-    public String getTipo_movimiento() {
-        return tipo_movimiento;
+    public Integer getCantidad_lote() {
+        return cantidad_lote;
     }
 
     /**
-     * @param tipo_movimiento the tipo_movimiento to set
+     * @param cantidad_lote the cantidad_lote to set
      */
-    public void setTipo_movimiento(String tipo_movimiento) {
-        this.tipo_movimiento = tipo_movimiento;
+    public void setCantidad_lote(Integer cantidad_lote) {
+        this.cantidad_lote = cantidad_lote;
     }
 
-    /**
-     * @return the cantidad
-     */
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    /**
-     * @param cantidad the cantidad to set
-     */
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    /**
-     * @return the fecha
-     */
-    public Date getFecha() {
-        return fecha;
-    }
-
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    /**
-     * @return the motivo
-     */
-    public String getMotivo() {
-        return motivo;
-    }
-
-    /**
-     * @param motivo the motivo to set
-     */
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
+    
+    
 }
