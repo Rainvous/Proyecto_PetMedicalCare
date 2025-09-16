@@ -79,13 +79,15 @@ public class ProductoDAOImpl extends DAOImplBase implements ProductoDAO {
 
     @Override
     public ProductosDTO obtenerPorId(Integer productoId) {
-        // ... hoy 16/09 veré mi clase :) para hacer esto
-        return producto;
+        this.producto = new ProductosDTO();
+        this.producto.setProducto_id(productoId);
+        super.obtenerPorId();
+        return this.producto;
     }
 
     @Override
     public ArrayList<ProductosDTO> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return (ArrayList<ProductosDTO>) super.listarTodos();
     }
 
     @Override
