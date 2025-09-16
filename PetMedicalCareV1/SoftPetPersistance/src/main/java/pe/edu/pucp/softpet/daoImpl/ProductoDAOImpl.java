@@ -2,11 +2,13 @@ package pe.edu.pucp.softpet.daoImpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.softpet.dao.ProductoDAO;
 import pe.edu.pucp.softpet.daoImpl.base.DAOImplBase;
 import pe.edu.pucp.softpet.daoImpl.util.Columna;
 import pe.edu.pucp.softpet.dbmanager.db.DBManager;
 import pe.edu.pucp.softpet.model.productosDTO.ProductosDTO;
+import pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO;
 
 /**
  *
@@ -100,6 +102,32 @@ public class ProductoDAOImpl extends DAOImplBase implements ProductoDAO {
     public Integer eliminar(ProductosDTO producto) {
         this.producto = producto;
         return super.eliminar();
+    }
+    
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.statement.setInt(1, this.producto.getProducto_id());
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.producto = new ProductosDTO();
+        this.producto.setProducto_id(this.resultSet.getInt("PRODUCTO_ID"));
+        this.producto.setTipo_producto((TipoProductosDTO) this.resultSet.getObject("TIPO_PRODUCTO_ID"));
+        this.producto.setNombre(this.resultSet.getString("NOMBRE"));
+        this.producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
+        this.producto.setPrecio_unitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
+        this.producto.setCantidad_total(this.resultSet.getInt("CANTIDAD_TOTAL"));
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.producto = null;
+    }
+
+    @Override
+    protected void agregarObjetoALaLista(List lista) throws SQLException {
+        return uur;
     }
 
 }

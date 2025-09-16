@@ -1,4 +1,9 @@
-package pe.edu.pucp.softpet.model.DetalleDTO;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
 
 import pe.edu.pucp.softpet.model.atencionmedicaDTO.CitaAtencionDTO;
 import pe.edu.pucp.softpet.model.productosDTO.ProductosDTO;
@@ -9,31 +14,38 @@ import pe.edu.pucp.softpet.model.productosDTO.ProductosDTO;
  */
 public class DetalleProductosDTO {
 
+    
+    
     private Integer cita_producto_id;
-    private CitaAtencionDTO cita;
+    
+    private CitaAtencionDTO cita_id;
+    
+    
+    
     private ProductosDTO producto;
     private Integer cantidad;
     private Double total;
     private String descripcion;
-
+    
+    
     public DetalleProductosDTO() {
         this.cita_producto_id = null;
-        this.cita = null;
+        this.cita_id = null;
         this.producto = null;
         this.cantidad = null;
         this.total = null;
         this.descripcion = null;
     }
-
-    public DetalleProductosDTO(Integer cita_producto_id, CitaAtencionDTO cita, ProductosDTO producto_id, Integer cantidad, Double total, String descripcion) {
+    public DetalleProductosDTO(Integer cita_producto_id, CitaAtencionDTO cita_id, 
+            ProductosDTO producto_id, Integer cantidad, Double total, String descripcion) {
         this.cita_producto_id = cita_producto_id;
-        this.cita = cita;
+        this.cita_id = cita_id;
         this.producto = producto_id;
         this.cantidad = cantidad;
         this.total = total;
         this.descripcion = descripcion;
     }
-
+    
     /**
      * @return the cita_producto_id
      */
@@ -88,33 +100,5 @@ public class DetalleProductosDTO {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    /**
-     * @return the cita
-     */
-    public CitaAtencionDTO getCita() {
-        return cita;
-    }
-
-    /**
-     * @param cita the cita to set
-     */
-    public void setCita(CitaAtencionDTO cita) {
-        this.cita = cita;
-    }
-
-    /**
-     * @return the producto
-     */
-    public ProductosDTO getProducto() {
-        return producto;
-    }
-
-    /**
-     * @param producto the producto to set
-     */
-    public void setProducto(ProductosDTO producto) {
-        this.producto = producto;
     }
 }
