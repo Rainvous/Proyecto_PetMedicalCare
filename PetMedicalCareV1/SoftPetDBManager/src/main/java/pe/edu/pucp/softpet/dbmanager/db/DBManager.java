@@ -48,12 +48,12 @@ public class DBManager {
     }
 
     public Connection getConnection() {
+       // Cifrado.cifrarMD5(this.contraseña); aqui se ha puesto la contraseña cifrada y eso lo
+       //guardo en properties
         try {            
-            Class.forName(this.driver);
-            //System.out.println(this.usuario);
-            //System.out.println(this.contraseña);
-            //System.out.println(Cifrado.descifrarMD5(this.contraseña));
-            this.conexion = DriverManager.getConnection(getURL(), this.usuario, "Fullchow#2025");// Cifrado.descifrarMD5(this.contraseña)
+            Class.forName(this.driver); //aqui hay un polimorfico (Indica que tipo de driverManager usara (MySql, SQLserver, etc)
+            this.conexion = DriverManager.getConnection(getURL(), this.usuario, Cifrado.descifrarMD5(this.contraseña));//
+            //aqui en cifrado desencripta la contraseña
         } catch (ClassNotFoundException | SQLException ex) {
             System.err.println("Error al generar la conexión - " + ex);
         }
@@ -96,6 +96,7 @@ public class DBManager {
             this.puerto = properties.getProperty("puerto");
             this.usuario = properties.getProperty("usuario");
             this.contraseña = properties.getProperty("contrasenha");
+            
         } catch (FileNotFoundException ex) {
             System.err.println("Error al leer el archivo de propiedades - " + ex);
         } catch (IOException ex) {
