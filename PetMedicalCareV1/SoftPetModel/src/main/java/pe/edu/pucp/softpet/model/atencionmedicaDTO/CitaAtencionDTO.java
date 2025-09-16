@@ -19,6 +19,7 @@ public class CitaAtencionDTO {
     private Date fecha_registro;
     private Time hora_inicio;
     private Time hora_fin;
+    private Double monto;
     private String estado;
 
     public CitaAtencionDTO() {
@@ -155,6 +156,20 @@ public class CitaAtencionDTO {
      */
     public void setVeterinario(VeterinariosDTO veterinario) {
         this.veterinario = veterinario;
+    }
+
+    /**
+     * @return the monto
+     */
+    public Double getMonto() {
+        return monto;
+    }
+
+    /**
+     * @param monto the monto to set
+     */
+    public void setMonto(Double monto) {
+        this.monto = monto;
     }
 
 }
