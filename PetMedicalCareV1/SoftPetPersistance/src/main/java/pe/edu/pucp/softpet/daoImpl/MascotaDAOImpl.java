@@ -122,7 +122,7 @@ public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO{
     protected void instanciarObjetoDelResultSet() throws SQLException {
         MascotasDTO m = new MascotasDTO();
         m.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
-        m.setPersona(this.resultSet.getObject("PERSONA_ID"));
+        m.setPersona(()this.resultSet.getObject("PERSONA_ID"));
         m.setNombre(this.resultSet.getString("NOMBRE"));
         m.setRaza(this.resultSet.getString("RAZA"));
         m.setColor(this.resultSet.getString("COLOR"));
