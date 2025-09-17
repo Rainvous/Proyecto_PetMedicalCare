@@ -27,6 +27,8 @@ public class PersonaDAOTest {
         System.out.println("result: "+resultado);
         assertTrue(resultado != 0);
         
+        
+        
         // Verifica que exista (por documento) en el listado
         PersonasDTO encontrada = buscarPorDocumento(persona.getNroDocumento());
         assertNotNull(encontrada);

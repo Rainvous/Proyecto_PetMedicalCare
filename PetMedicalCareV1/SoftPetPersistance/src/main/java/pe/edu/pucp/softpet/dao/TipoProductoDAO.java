@@ -20,5 +20,8 @@ public interface TipoProductoDAO {
     public ArrayList<TipoProductosDTO> listarTodos();
 
     public Integer modificar(TipoProductosDTO tipoProductos);
+    
+    
+   
 
 }
