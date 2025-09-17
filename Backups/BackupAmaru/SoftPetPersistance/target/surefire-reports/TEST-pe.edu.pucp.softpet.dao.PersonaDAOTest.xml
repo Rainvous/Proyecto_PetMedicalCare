@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="1.835" tests="5" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="2.593" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\PetMedicalCareV1\SoftPetPersistance\target\test-classes;D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\PetMedicalCareV1\SoftPetPersistance\target\classes;C:\Users\User\.m2\repository\pe\edu\pucp\SoftPetDBManager\1.0-SNAPSHOT\SoftPetDBManager-1.0-SNAPSHOT.jar;C:\Users\User\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\User\.m2\repository\com\mysql\mysql-connector-j\9.4.0\mysql-connector-j-9.4.0.jar;C:\Users\User\.m2\repository\com\google\protobuf\protobuf-java\4.31.1\protobuf-java-4.31.1.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\User\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\User\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\User\.m2\repository\pe\edu\pucp\softpet\SoftPetModel\1.0-SNAPSHOT\SoftPetModel-1.0-SNAPSHOT.jar;"/>
+    <property name="java.class.path" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\Backups\BackupAmaru\SoftPetPersistance\target\test-classes;D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\Backups\BackupAmaru\SoftPetPersistance\target\classes;C:\Users\User\.m2\repository\pe\edu\pucp\SoftPetDBManager\1.0-SNAPSHOT\SoftPetDBManager-1.0-SNAPSHOT.jar;C:\Users\User\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\User\.m2\repository\com\mysql\mysql-connector-j\9.4.0\mysql-connector-j-9.4.0.jar;C:\Users\User\.m2\repository\com\google\protobuf\protobuf-java\4.31.1\protobuf-java-4.31.1.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\User\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\User\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\User\.m2\repository\pe\edu\pucp\softpet\SoftPetModel\1.0-SNAPSHOT\SoftPetModel-1.0-SNAPSHOT.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="user.country" value="PE"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
-    <property name="sun.java.command" value="C:\Users\User\AppData\Local\Temp\surefire7038536455442650686\surefirebooter-20250916205033459_3.jar C:\Users\User\AppData\Local\Temp\surefire7038536455442650686 2025-09-16T20-50-33_367-jvmRun1 surefire-20250916205033459_1tmp surefire_0-20250916205033459_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\User\AppData\Local\Temp\surefire6279619903050594022\surefirebooter-20250916211343866_3.jar C:\Users\User\AppData\Local\Temp\surefire6279619903050594022 2025-09-16T21-13-43_760-jvmRun1 surefire-20250916211343866_1tmp surefire_0-20250916211343866_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\PetMedicalCareV1\SoftPetPersistance\target\test-classes;D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\PetMedicalCareV1\SoftPetPersistance\target\classes;C:\Users\User\.m2\repository\pe\edu\pucp\SoftPetDBManager\1.0-SNAPSHOT\SoftPetDBManager-1.0-SNAPSHOT.jar;C:\Users\User\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\User\.m2\repository\com\mysql\mysql-connector-j\9.4.0\mysql-connector-j-9.4.0.jar;C:\Users\User\.m2\repository\com\google\protobuf\protobuf-java\4.31.1\protobuf-java-4.31.1.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\User\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\User\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\User\.m2\repository\pe\edu\pucp\softpet\SoftPetModel\1.0-SNAPSHOT\SoftPetModel-1.0-SNAPSHOT.jar;"/>
+    <property name="surefire.test.class.path" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\Backups\BackupAmaru\SoftPetPersistance\target\test-classes;D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\Backups\BackupAmaru\SoftPetPersistance\target\classes;C:\Users\User\.m2\repository\pe\edu\pucp\SoftPetDBManager\1.0-SNAPSHOT\SoftPetDBManager-1.0-SNAPSHOT.jar;C:\Users\User\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\User\.m2\repository\com\mysql\mysql-connector-j\9.4.0\mysql-connector-j-9.4.0.jar;C:\Users\User\.m2\repository\com\google\protobuf\protobuf-java\4.31.1\protobuf-java-4.31.1.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\User\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\User\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\User\.m2\repository\pe\edu\pucp\softpet\SoftPetModel\1.0-SNAPSHOT\SoftPetModel-1.0-SNAPSHOT.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\User"/>
     <property name="user.language" value="es"/>
@@ -25,12 +25,12 @@
     <property name="java.version.date" value="2024-07-16"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-22"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\PetMedicalCareV1\SoftPetPersistance"/>
+    <property name="basedir" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\Backups\BackupAmaru\SoftPetPersistance"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\User\AppData\Local\Temp\surefire7038536455442650686\surefirebooter-20250916205033459_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\User\AppData\Local\Temp\surefire6279619903050594022\surefirebooter-20250916211343866_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="22.0.2+9-70"/>
@@ -46,7 +46,7 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\User\AppData\Local\Temp\"/>
     <property name="java.version" value="22.0.2"/>
-    <property name="user.dir" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\PetMedicalCareV1\SoftPetPersistance"/>
+    <property name="user.dir" value="D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\PETMEDICALCARE\Proyecto_PetMedicalCare\Backups\BackupAmaru\SoftPetPersistance"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
@@ -59,31 +59,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="testModificar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.019"/>
+  <testcase name="testModificar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.018"/>
   <testcase name="testObtenerPorId" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.001"/>
   <testcase name="testEliminar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.001"/>
-  <testcase name="testInsertar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="1.79">
-    <failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
-	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
-	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
-	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
-	at pe.edu.pucp.softpet.dao.PersonaDAOTest.testInsertar(PersonaDAOTest.java:28)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-]]></failure>
+  <testcase name="testInsertar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="2.548">
     <system-out><![CDATA[insertar
 jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
 dml_ INSERT INTO PERSONA(NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 hola detalle de sexo: FEMENINO
-STatement: com.mysql.cj.jdbc.CallableStatement: INSERT INTO PERSONA(NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO) VALUES ('Juan', 'Direccion de Juan', 'juan.test@example.com', '900100200', 'FEMENINO', 'CLIENTE', 'DNI', '12345678')
-result: 0
+STatement: com.mysql.cj.jdbc.CallableStatement: INSERT INTO PERSONA(NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO) VALUES ('Juan', 'Direccion de Juan', '.pepito@.com', '900100200', 'FEMENINO', 'CLIENTE', 'DNI', '12345678')
+result: 9
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
 ]]></system-out>
-    <system-err><![CDATA[Error al intentar insertar - java.sql.SQLException: Data truncated for column 'SEXO' at row 1
-]]></system-err>
   </testcase>
   <testcase name="testListarTodos" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.001"/>
 </testsuite>
