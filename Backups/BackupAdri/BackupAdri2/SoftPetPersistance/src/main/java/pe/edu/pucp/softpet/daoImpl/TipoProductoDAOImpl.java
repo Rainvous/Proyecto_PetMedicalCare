@@ -116,10 +116,10 @@ public class TipoProductoDAOImpl extends DAOImplBase implements  TipoProductoDAO
         this.instanciarObjetoDelResultSet();
         lista.add(this.tipoProducto);
     }
-    @Override
-    public void eliminar(){
-        
-    }
+//    @Override
+//    public void eliminar(){
+//        
+//    }
 
     
 }

@@ -1,0 +1,51 @@
+-------------------------------------------------------------------------------
+Test set: pe.edu.pucp.softpet.dao.TipoProductoDAOTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 2, Errors: 2, Skipped: 0, Time elapsed: 8.960 s <<< FAILURE! -- in pe.edu.pucp.softpet.dao.TipoProductoDAOTest
+pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testModificar -- Time elapsed: 2.238 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO.getTipo_producto_id()" is null
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.incluirValorDeParametrosParaModificacion(TipoProductoDAOImpl.java:59)
+	at pe.edu.pucp.softpet.daoImpl.base.DAOImplBase.ejecuta_DML(DAOImplBase.java:110)
+	at pe.edu.pucp.softpet.daoImpl.base.DAOImplBase.modificar(DAOImplBase.java:80)
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.modificar(TipoProductoDAOImpl.java:91)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testModificar(TipoProductoDAOTest.java:72)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testObtenerPorId -- Time elapsed: 2.054 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO.getTipo_producto_id()" is null
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.incluirValorDeParametrosParaObtenerPorId(TipoProductoDAOImpl.java:98)
+	at pe.edu.pucp.softpet.daoImpl.base.DAOImplBase.obtenerPorId(DAOImplBase.java:275)
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.obtenerPorId(TipoProductoDAOImpl.java:79)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testObtenerPorId(TipoProductoDAOTest.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testInsertar -- Time elapsed: 1.251 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: not <null>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:49)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:35)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:30)
+	at org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:304)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testInsertar(TipoProductoDAOTest.java:35)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testListarTodos -- Time elapsed: 3.409 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testListarTodos(TipoProductoDAOTest.java:61)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
