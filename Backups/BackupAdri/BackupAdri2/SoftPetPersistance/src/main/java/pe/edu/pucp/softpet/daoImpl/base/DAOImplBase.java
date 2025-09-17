@@ -113,6 +113,7 @@ public abstract class DAOImplBase {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
+             System.out.println("dml_HECHO-> "+sql);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();

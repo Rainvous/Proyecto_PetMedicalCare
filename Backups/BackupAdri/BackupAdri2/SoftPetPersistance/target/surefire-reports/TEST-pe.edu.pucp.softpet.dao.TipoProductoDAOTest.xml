@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="1.881" tests="5" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="pe.edu.pucp.softpet.dao.TipoProductoDAOTest" time="8.96" tests="5" errors="2" skipped="0" failures="2">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,10 +59,63 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="testModificar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.019"/>
-  <testcase name="testObtenerPorId" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.001"/>
-  <testcase name="testEliminar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.0"/>
-  <testcase name="testInsertar" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="1.841">
+  <testcase name="testModificar" classname="pe.edu.pucp.softpet.dao.TipoProductoDAOTest" time="2.238">
+    <error message="Cannot invoke &quot;java.lang.Integer.intValue()&quot; because the return value of &quot;pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO.getTipo_producto_id()&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO.getTipo_producto_id()" is null
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.incluirValorDeParametrosParaModificacion(TipoProductoDAOImpl.java:59)
+	at pe.edu.pucp.softpet.daoImpl.base.DAOImplBase.ejecuta_DML(DAOImplBase.java:110)
+	at pe.edu.pucp.softpet.daoImpl.base.DAOImplBase.modificar(DAOImplBase.java:80)
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.modificar(TipoProductoDAOImpl.java:91)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testModificar(TipoProductoDAOTest.java:72)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></error>
+    <system-out><![CDATA[TipoProducto - modificar
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
+dml_ INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+dml_HECHO-> INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
+dml_ UPDATE TIPO_PRODUCTO SET NOMBRE=?, DESCRIPCION=? WHERE ID_TIPO_PRODUCTO=?
+]]></system-out>
+  </testcase>
+  <testcase name="testObtenerPorId" classname="pe.edu.pucp.softpet.dao.TipoProductoDAOTest" time="2.054">
+    <error message="Cannot invoke &quot;java.lang.Integer.intValue()&quot; because the return value of &quot;pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO.getTipo_producto_id()&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO.getTipo_producto_id()" is null
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.incluirValorDeParametrosParaObtenerPorId(TipoProductoDAOImpl.java:98)
+	at pe.edu.pucp.softpet.daoImpl.base.DAOImplBase.obtenerPorId(DAOImplBase.java:275)
+	at pe.edu.pucp.softpet.daoImpl.TipoProductoDAOImpl.obtenerPorId(TipoProductoDAOImpl.java:79)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testObtenerPorId(TipoProductoDAOTest.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></error>
+    <system-out><![CDATA[TipoProducto - obtenerPorId
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
+dml_ INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+dml_HECHO-> INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
+]]></system-out>
+  </testcase>
+  <testcase name="testEliminar" classname="pe.edu.pucp.softpet.dao.TipoProductoDAOTest" time="0.0"/>
+  <testcase name="testInsertar" classname="pe.edu.pucp.softpet.dao.TipoProductoDAOTest" time="1.251">
+    <failure message="expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: not <null>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:49)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:35)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:30)
+	at org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:304)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testInsertar(TipoProductoDAOTest.java:35)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></failure>
+    <system-out><![CDATA[TipoProducto - insertar
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
+dml_ INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+dml_HECHO-> INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+]]></system-out>
+  </testcase>
+  <testcase name="testListarTodos" classname="pe.edu.pucp.softpet.dao.TipoProductoDAOTest" time="3.409">
     <failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -70,21 +123,21 @@
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
 	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
-	at pe.edu.pucp.softpet.dao.PersonaDAOTest.testInsertar(PersonaDAOTest.java:28)
+	at pe.edu.pucp.softpet.dao.TipoProductoDAOTest.testListarTodos(TipoProductoDAOTest.java:61)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
 ]]></failure>
-    <system-out><![CDATA[insertar
+    <system-out><![CDATA[TipoProducto - listarTodos
 jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
-dml_ INSERT INTO PERSONA(NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-hola detalle de sexo: FEMENINO
-STatement: com.mysql.cj.jdbc.CallableStatement: INSERT INTO PERSONA(NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO) VALUES ('Juan', 'Direccion de Juan', '.test@example.com', '900100200', 'FEMENINO', 'CLIENTE', 'DNI', '12345678')
-dml_HECHO-> INSERT INTO PERSONA(NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-result: 0
+dml_ INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+dml_HECHO-> INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
+dml_ INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+dml_HECHO-> INSERT INTO TIPO_PRODUCTO(NOMBRE, DESCRIPCION) VALUES (?, ?)
+jdbc:mysql://petmedicalcare-db.cb00kc8g8po3.us-east-1.rds.amazonaws.com:3306/PETMEDICALCARE
 ]]></system-out>
-    <system-err><![CDATA[Error al intentar insertar - java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '.test@example.com' for key 'PERSONA.CORREO'
+    <system-err><![CDATA[Error al intentar listarTodos - java.sql.SQLSyntaxErrorException: Unknown column 'ID_TIPO_PRODUCTO' in 'field list'
 ]]></system-err>
   </testcase>
-  <testcase name="testListarTodos" classname="pe.edu.pucp.softpet.dao.PersonaDAOTest" time="0.0"/>
 </testsuite>
