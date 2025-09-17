@@ -37,7 +37,7 @@ public class TipoProductoDAOImpl extends DAOImplBase implements  TipoProductoDAO
     @Override
     protected void configurarListaDeColumnas() {
 
-        this.listaColumnas.add(new Columna("ID_TIPO_PRODUCTO", true, true));
+        this.listaColumnas.add(new Columna("TIPO_PRODUCTO_ID", true, true));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("DESCRIPCION", false, false));
     }
@@ -102,7 +102,7 @@ public class TipoProductoDAOImpl extends DAOImplBase implements  TipoProductoDAO
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.tipoProducto = new TipoProductosDTO();
-        this.tipoProducto.setTipo_producto_id(this.resultSet.getInt("ID_TIPO_PRODUCTO"));
+        this.tipoProducto.setTipo_producto_id(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
         this.tipoProducto.setNombre(this.resultSet.getString("NOMBRE"));
         this.tipoProducto.setDescripcion(this.resultSet.getString("DESCRIPCION"));
     }
@@ -116,11 +116,5 @@ public class TipoProductoDAOImpl extends DAOImplBase implements  TipoProductoDAO
     protected void agregarObjetoALaLista(List lista) throws SQLException {
         this.instanciarObjetoDelResultSet();
         lista.add(this.tipoProducto);
-    }
-    
-    @Override
-    public Integer eliminar(TipoProductosDTO tipo_producto) {
-        this.tipoProducto = tipo_producto;
-        return super.eliminar();
     }
 }
