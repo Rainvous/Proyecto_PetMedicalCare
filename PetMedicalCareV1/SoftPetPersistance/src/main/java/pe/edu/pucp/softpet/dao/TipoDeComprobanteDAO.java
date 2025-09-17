@@ -5,6 +5,7 @@
 package pe.edu.pucp.softpet.dao;
 
 import java.util.ArrayList;
+import pe.edu.pucp.softpet.model.facturaciondto.TipoComprobantesDTO;
 
 
 /**
@@ -12,7 +13,15 @@ import java.util.ArrayList;
  * @author User
  */
 public interface TipoDeComprobanteDAO {
-    
+    public Integer insertar(TipoComprobantesDTO tipo_comprobante);
+
+    public TipoComprobantesDTO obtenerPorId(Integer tipo_comprobante_id);
+
+    public ArrayList<TipoComprobantesDTO> listarTodos();
+
+    public Integer modificar(TipoComprobantesDTO tipo_comprobante);
+
+    public Integer eliminar(TipoComprobantesDTO tipo_comprobante);
     
     
 }
