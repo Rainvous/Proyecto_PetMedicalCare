@@ -52,7 +52,7 @@ public class CitaAtencionDAOImpl extends DAOImplBase implements CitaAtencionDAO 
         this.statement.setObject(1, this.citaAtencion.getMascota());
         this.statement.setObject(2, this.citaAtencion.getVeterinario());
         this.statement.setString(3, this.citaAtencion.getTratamiento());
-        //this.statement.setString(4, this.citaAtencion.getObservacion());
+        this.statement.setString(4, this.citaAtencion.getObservacion());
         this.statement.setDate(5, (Date) this.citaAtencion.getFecha_registro());
         this.statement.setTime(6, this.citaAtencion.getHora_inicio());
         this.statement.setTime(7, this.citaAtencion.getHora_fin());
@@ -66,7 +66,7 @@ public class CitaAtencionDAOImpl extends DAOImplBase implements CitaAtencionDAO 
         this.statement.setObject(1, this.citaAtencion.getMascota());
         this.statement.setObject(2, this.citaAtencion.getVeterinario());
         this.statement.setString(3, this.citaAtencion.getTratamiento());
-        //this.statement.setString(4, this.citaAtencion.getObservacion());
+        this.statement.setString(4, this.citaAtencion.getObservacion());
         this.statement.setDate(5, (Date) this.citaAtencion.getFecha_registro());
         this.statement.setTime(6, this.citaAtencion.getHora_inicio());
         this.statement.setTime(7, this.citaAtencion.getHora_fin());
@@ -114,7 +114,7 @@ public class CitaAtencionDAOImpl extends DAOImplBase implements CitaAtencionDAO 
         this.citaAtencion.setMascota((MascotasDTO) this.resultSet.getObject("MASCOTA_ID"));
         this.citaAtencion.setVeterinario((VeterinariosDTO) this.resultSet.getObject("VETERINARIO_ID"));
         this.citaAtencion.setTratamiento(this.resultSet.getString("TRATAMIENTO"));
-        //this.citaAtencion.setObservacion(this.resultSet.getString("OBSERVACION"));
+        this.citaAtencion.setObservacion(this.resultSet.getString("OBSERVACION"));
         this.citaAtencion.setFecha_registro(this.resultSet.getDate("FECHA_REGISTRO"));
         this.citaAtencion.setHora_inicio(this.resultSet.getTime("HORA_INICIO"));
         this.citaAtencion.setHora_fin(this.resultSet.getTime("HORA_FIN"));

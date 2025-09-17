@@ -19,7 +19,7 @@ public class VeterinariosDTO {
         this.veterinarioId = null;
         this.especializacion = null;
         this.fechaDeContratacion = null;
-        this.persona = null;
+        this.persona = null; // un toque, veré el code de mlegar , es que amaru no uso id jakjksj muda quedé
         this.estado = null;
         this.sueldo = null;
     }

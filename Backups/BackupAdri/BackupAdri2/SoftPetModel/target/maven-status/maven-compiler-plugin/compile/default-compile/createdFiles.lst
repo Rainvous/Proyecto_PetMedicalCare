@@ -1,0 +1,16 @@
+pe\edu\pucp\softpet\model\productosDTO\TipoProductosDTO.class
+pe\edu\pucp\softpet\model\serviciosdto\ServiciosDTO.class
+pe\edu\pucp\softpet\model\HistorialDeAtencionesDTO.class
+pe\edu\pucp\softpet\model\atencionmedicaDTO\CitaAtencionDTO.class
+pe\edu\pucp\softpet\model\actoresdto\MascotasDTO.class
+pe\edu\pucp\softpet\model\facturaciondto\ComprobantesDePagoDTO.class
+pe\edu\pucp\softpet\model\facturaciondto\TipoComprobantesDTO.class
+pe\edu\pucp\softpet\model\DetalleDTO\DetalleServiciosDTO.class
+pe\edu\pucp\softpet\model\productosDTO\InventarioDTO.class
+pe\edu\pucp\softpet\model\actoresdto\VeterinariosDTO.class
+pe\edu\pucp\softpet\model\serviciosdto\TipoServiciosDTO.class
+pe\edu\pucp\softpet\model\productosDTO\MovimientosInventarioDTO.class
+pe\edu\pucp\softpet\model\productosDTO\ProductosDTO.class
+pe\edu\pucp\softpet\model\DetalleDTO\DetalleProductosDTO.class
+pe\edu\pucp\softpet\model\TipoSexo.class
+pe\edu\pucp\softpet\model\actoresdto\PersonasDTO.class

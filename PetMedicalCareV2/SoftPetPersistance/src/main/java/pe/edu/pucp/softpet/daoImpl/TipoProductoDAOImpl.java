@@ -10,6 +10,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.TipoProductoDAO;
 import pe.edu.pucp.softpet.daoImpl.base.DAOImplBase;
 import pe.edu.pucp.softpet.daoImpl.util.Columna;
+import pe.edu.pucp.softpet.model.actoresdto.PersonasDTO;
 import pe.edu.pucp.softpet.model.productosDTO.TipoProductosDTO;
 /**
  *
@@ -115,5 +116,11 @@ public class TipoProductoDAOImpl extends DAOImplBase implements  TipoProductoDAO
     protected void agregarObjetoALaLista(List lista) throws SQLException {
         this.instanciarObjetoDelResultSet();
         lista.add(this.tipoProducto);
+    }
+    
+    @Override
+    public Integer eliminar(TipoProductosDTO tipo_producto) {
+        this.tipoProducto = tipo_producto;
+        return super.eliminar();
     }
 }
