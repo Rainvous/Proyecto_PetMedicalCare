@@ -21,4 +21,6 @@ public interface TipoProductoDAO {
 
     public Integer modificar(TipoProductosDTO tipoProductos);
 
+
+
 }
