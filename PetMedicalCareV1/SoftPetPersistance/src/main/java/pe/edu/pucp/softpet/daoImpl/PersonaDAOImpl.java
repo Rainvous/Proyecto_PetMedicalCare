@@ -1,106 +1,4 @@
-//package pe.edu.pucp.softpet.daoImpl;
-//
-//import java.sql.SQLException;
-//import java.util.ArrayList;
-//import static javax.management.Query.or;
-//import pe.edu.pucp.softpet.daoImpl.base.DAOImplBase;
-//import pe.edu.pucp.softpet.model.actoresdto.PersonasDTO;
-//import pe.edu.pucp.softpet.dao.PersonaDAO;
-//import pe.edu.pucp.softpet.daoImpl.util.Columna;
-//import pe.edu.pucp.softpet.model.TipoSexo;
-//
- ///**
-// *
-// * @author AMARU 
-//NOTA: ESTE CODIGO LO DEJO POR SI ACASO
 
-// */
-//public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
-//
-//    private PersonasDTO persona;
-//
-//    public PersonaDAOImpl(String nombre_tabla) {
-//        super("PERSONA");
-//        this.persona = null;
-//    }
-//
-//    @Override
-//    protected void configurarListaDeColumnas() {
-//
-//        this.listaColumnas.add(new Columna("PERSONA_ID", true, true));
-//        this.listaColumnas.add(new Columna("NOMBRE", false, false));
-//        this.listaColumnas.add(new Columna("DIRECCION", false, false));
-//        this.listaColumnas.add(new Columna("CORREO", false, false));
-//
-//        this.listaColumnas.add(new Columna("TELEFONO", false, false));
-//
-//        this.listaColumnas.add(new Columna("SEXO", false, false));
-//        this.listaColumnas.add(new Columna("TIPO_PERSONA", false, false));
-//        this.listaColumnas.add(new Columna("TIPO_DOCUMENTO", false, false));
-//        this.listaColumnas.add(new Columna("NRO_DOCUMENTO", false, false));
-//        // new Columna(nombre_tabla, retornarLlavePrimaria, retornarLlavePrimaria)
-//    }
-//
-//    @Override
-//    public Integer insertar(PersonasDTO persona) {
-//        this.persona = persona;
-//        return super.insertar();
-//    }
-//
-//    @Override
-//    public PersonasDTO obtenerPorId(Integer personaId) {
-//        // Preparar “contexto” para que los hooks sepan qué ID poner en el WHERE
-//        this.persona = new PersonasDTO();
-//        this.persona.setPersonaId(personaId);
-//
-//        super.obtenerPorId(); // DAOImplBase ejecuta SELECT ... WHERE PK=?, y luego llama a instanciarObjetoDelResultSet()
-//
-//        return this.persona; // queda seteada en instanciarObjetoDelResultSet()
-//    }
-//    //INICIO DE FUNCIONES DE LA CLASE DAOImplBase
-//
-//    @Override
-//    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-//        Integer condicion;
-//        this.statement.setString(1, this.persona.getNombre());
-//        this.statement.setString(2, this.persona.getDireccion());
-//        this.statement.setString(3, this.persona.getCorreo());
-//        this.statement.setString(4, this.persona.getTelefono());
-//
-//        this.statement.setInt(5, this.persona.getSexo() == TipoSexo.FEMENINO ? 1 : 0);
-//        //CASO DE ARRIBA ES PARA ENUM
-//        this.statement.setString(6, this.persona.getTipoPersona());
-//        this.statement.setString(7, this.persona.getTipoDocumento());
-//        this.statement.setString(7, this.persona.getNroDocumento());
-//    }
-//
-//    @Override
-//    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//    //FIN DE LA FUNCIONES DAOImplBase
-//
-//    @Override
-//    public ArrayList<PersonasDTO> listarTodos() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer modificar(PersonasDTO persona) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Integer eliminar(PersonasDTO persona) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//}
 package pe.edu.pucp.softpet.daoImpl;
 
 import java.sql.SQLException;
@@ -195,6 +93,7 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.statement.setString(4, this.persona.getTelefono());
 
         // Si tu columna SEXO es VARCHAR:
+        System.out.println("hola detalle de sexo: "+this.persona.getSexo().name());
         this.statement.setString(5, this.persona.getSexo() != null ? this.persona.getSexo().name() : null);
         // Si en tu BD SEXO es tinyint/number, cambia a:
         // this.statement.setInt(5, this.persona.getSexo() == TipoSexo.FEMENINO ? 1 : 0);
@@ -202,6 +101,7 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.statement.setString(6, this.persona.getTipoPersona());
         this.statement.setString(7, this.persona.getTipoDocumento());
         this.statement.setString(8, this.persona.getNroDocumento());
+        System.out.println("STatement: "+this.statement);
     }
 
     @Override

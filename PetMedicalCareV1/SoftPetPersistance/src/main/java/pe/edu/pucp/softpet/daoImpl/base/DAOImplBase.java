@@ -100,6 +100,7 @@ public abstract class DAOImplBase {
                     sql = this.generarSQLParaEliminacion();
                     break;
             }
+            System.out.println("dml_ "+sql);
             this.colocarSQLEnStatement(sql);
             switch (tipo_operacion) {
                 case Tipo_Operacion.INSERTAR:
@@ -156,6 +157,7 @@ public abstract class DAOImplBase {
         sql = sql.concat(") VALUES (");
         sql = sql.concat(sql_parametros);
         sql = sql.concat(")");
+        
         return sql;
     }
 
