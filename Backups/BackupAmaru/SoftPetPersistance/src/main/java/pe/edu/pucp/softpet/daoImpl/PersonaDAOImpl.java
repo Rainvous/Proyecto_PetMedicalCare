@@ -73,6 +73,7 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
     @Override
     public Integer modificar(PersonasDTO persona) {
         this.persona = persona;
+        System.out.println("ENTRE A LA PRIMERA FUNCION MODIFICAR");
         return super.modificar();
     }
 
@@ -119,6 +120,8 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
 
         // WHERE PERSONA_ID = ?
         this.statement.setInt(9, this.persona.getPersonaId());
+        
+        System.out.println("VALUES DE MODIFICACION: "+ this.statement);
     }
 
     //Hay que cambiar la pos de personId, de 1 a 9

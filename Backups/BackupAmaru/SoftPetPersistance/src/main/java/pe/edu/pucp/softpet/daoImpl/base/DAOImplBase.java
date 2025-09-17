@@ -16,7 +16,7 @@ public abstract class DAOImplBase {
     protected ArrayList<Columna> listaColumnas;
     protected Boolean retornarLlavePrimaria;
     protected Connection conexion;
-    protected CallableStatement statement;
+    protected CallableStatement statement=null;
     protected ResultSet resultSet;
 
     public DAOImplBase(String nombre_tabla) {
@@ -59,6 +59,10 @@ public abstract class DAOImplBase {
     }
 
     private void colocarSQLEnStatement(String sql) throws SQLException {
+         System.out.println("ENTRE A COLOCAR STATEMENTE");
+          //System.out.println("ENTRE A LA SEGUNDA FUNCION MODIFICAR");
+          System.out.println(this.statement);
+          
         this.statement = this.conexion.prepareCall(sql);
 
     }
@@ -77,6 +81,7 @@ public abstract class DAOImplBase {
     }
 
     protected Integer modificar() {
+        System.out.println("ENTRE A LA SEGUNDA FUNCION MODIFICAR");
         return this.ejecuta_DML(Tipo_Operacion.MODIFICAR);
     }
 
@@ -101,6 +106,7 @@ public abstract class DAOImplBase {
                     break;
             }
             System.out.println("dml_ "+sql);
+            
             this.colocarSQLEnStatement(sql);
             switch (tipo_operacion) {
                 case Tipo_Operacion.INSERTAR:
@@ -113,6 +119,7 @@ public abstract class DAOImplBase {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
+            System.out.println("RESULTADO FINAL: "+sql);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();
