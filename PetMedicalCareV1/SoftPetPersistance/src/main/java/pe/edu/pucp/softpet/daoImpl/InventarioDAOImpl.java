@@ -39,11 +39,11 @@ public class InventarioDAOImpl extends DAOImplBase implements  InventarioDAO{
     @Override
     protected void configurarListaDeColumnas() {
 
-        this.listaColumnas.add(new Columna("SERVICIO_ID", true, true));
-        this.listaColumnas.add(new Columna("TIPO_SERVICIO_ID", false, false));
-        this.listaColumnas.add(new Columna("NOMBRE", false, false));
-        this.listaColumnas.add(new Columna("COSTO", false, false));
-        this.listaColumnas.add(new Columna("ESTADO", false, false));
+        this.listaColumnas.add(new Columna("ID_INVENTARIO", true, true));
+        this.listaColumnas.add(new Columna("ID_PRODUCTO", false, false));
+        this.listaColumnas.add(new Columna("FECHAULTIMOMOV", false, false));
+        this.listaColumnas.add(new Columna("LOTE", false, false));
+        this.listaColumnas.add(new Columna("CANTIDAD_LOTE", false, false));
     }
 
     @Override
@@ -114,8 +114,8 @@ public class InventarioDAOImpl extends DAOImplBase implements  InventarioDAO{
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.inventario = new InventarioDTO();
-        this.inventario.setInventario_id(this.resultSet.getInt("INVENTARIO_ID"));
-        this.inventario.setProducto((ProductosDTO) this.resultSet.getObject("PRODUCTO_ID"));
+        this.inventario.setInventario_id(this.resultSet.getInt("ID_INVENTARIO"));
+        this.inventario.setProducto((ProductosDTO) this.resultSet.getObject("ID_PRODUCTO"));
         this.inventario.setFechaultimomov(this.resultSet.getDate("FECHAULTIMOMOV"));
         this.inventario.setLote(this.resultSet.getString("LOTE"));
         this.inventario.setCantidad_lote(this.resultSet.getInt("CANTIDAD_LOTE"));

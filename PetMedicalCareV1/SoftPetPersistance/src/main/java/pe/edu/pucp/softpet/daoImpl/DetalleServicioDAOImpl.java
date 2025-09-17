@@ -40,8 +40,8 @@ public class DetalleServicioDAOImpl extends DAOImplBase implements DetalleServic
     protected void configurarListaDeColumnas() {
 
         this.listaColumnas.add(new Columna("CITAXSERVICIO", true, true));
-        this.listaColumnas.add(new Columna("CITA_ID", false, false));
-        this.listaColumnas.add(new Columna("SERVICIO_ID", false, false));
+        this.listaColumnas.add(new Columna("ID_CITA", false, false));
+        this.listaColumnas.add(new Columna("ID_SERVICIO", false, false));
         this.listaColumnas.add(new Columna("DESCRIPCION", false, false));
         this.listaColumnas.add(new Columna("TOTAL", false, false));
         
@@ -116,8 +116,8 @@ public class DetalleServicioDAOImpl extends DAOImplBase implements DetalleServic
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.detalleServicio = new DetalleServiciosDTO();
         this.detalleServicio.setCitaXServicioId(this.resultSet.getInt("CITAXSERVICIO_ID"));
-        this.detalleServicio.setCita((CitaAtencionDTO) this.resultSet.getObject("CITA_ID"));
-        this.detalleServicio.setServicio((ServiciosDTO)this.resultSet.getObject("SERVICIO_ID"));
+        this.detalleServicio.setCita((CitaAtencionDTO) this.resultSet.getObject("ID_CITA"));
+        this.detalleServicio.setServicio((ServiciosDTO)this.resultSet.getObject("ID_SERVICIO"));
         this.detalleServicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.detalleServicio.setTotal(this.resultSet.getDouble("TOTAL"));
     }

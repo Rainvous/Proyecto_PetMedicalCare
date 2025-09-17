@@ -39,8 +39,8 @@ public class ServiciosDAOImpl extends DAOImplBase implements  ServiciosDAO{
     @Override
     protected void configurarListaDeColumnas() {
 
-        this.listaColumnas.add(new Columna("SERVICIO_ID", true, true));
-        this.listaColumnas.add(new Columna("TIPO_SERVICIO_ID", false, false));
+        this.listaColumnas.add(new Columna("ID_SERVICIO", true, true));
+        this.listaColumnas.add(new Columna("ID_TIPO_SERVICIO", false, false));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("COSTO", false, false));
         this.listaColumnas.add(new Columna("ESTADO", false, false));
@@ -114,8 +114,8 @@ public class ServiciosDAOImpl extends DAOImplBase implements  ServiciosDAO{
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.servicio = new ServiciosDTO();
-        this.servicio.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
-        this.servicio.setTipoServicioDTO((TipoServiciosDTO) this.resultSet.getObject("TIPO_SERVICIO_ID"));
+        this.servicio.setServicioId(this.resultSet.getInt("ID_SERVICIO"));
+        this.servicio.setTipoServicioDTO((TipoServiciosDTO) this.resultSet.getObject("ID_TIPO_SERVICIO"));
         this.servicio.setNombre(this.resultSet.getString("NOMBRE"));
         this.servicio.setCosto(this.resultSet.getDouble("COSTO"));
         this.servicio.setEstado(this.resultSet.getString("ESTADO"));
