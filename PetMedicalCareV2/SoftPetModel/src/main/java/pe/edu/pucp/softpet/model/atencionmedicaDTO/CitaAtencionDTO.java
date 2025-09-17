@@ -15,10 +15,11 @@ public class CitaAtencionDTO {
     private MascotasDTO mascota;
     private VeterinariosDTO veterinario;
     private String tratamiento;
-    //private Text observacion;
+    private String observacion;
     private Date fecha_registro;
     private Time hora_inicio;
     private Time hora_fin;
+    private Double monto;
     private String estado;
 
     public CitaAtencionDTO() {
@@ -26,22 +27,27 @@ public class CitaAtencionDTO {
         this.mascota = null;
         this.veterinario = null;
         this.tratamiento = null;
+        this.observacion = null;
         this.fecha_registro = null;
         this.hora_inicio = null;
         this.hora_fin = null;
+        this.monto = null;
         this.estado = null;
     }
 
     public CitaAtencionDTO(Integer cita_id, MascotasDTO mascota,
-            VeterinariosDTO veterinario, String tratamiento,
-            Date fecha_registro, Time hora_inicio, Time hora_fin, String estado) {
+            VeterinariosDTO veterinario, String tratamiento, String observacion,
+            Date fecha_registro, Time hora_inicio, Time hora_fin, 
+            Double monto, String estado) {
         this.cita_id = cita_id;
         this.mascota = mascota;
         this.veterinario = veterinario;
         this.tratamiento = tratamiento;
+        this.observacion = observacion;
         this.fecha_registro = fecha_registro;
         this.hora_inicio = hora_inicio;
         this.hora_fin = hora_fin;
+        this.monto = monto;
         this.estado = estado;
     }
 
@@ -155,6 +161,34 @@ public class CitaAtencionDTO {
      */
     public void setVeterinario(VeterinariosDTO veterinario) {
         this.veterinario = veterinario;
+    }
+
+    /**
+     * @return the monto
+     */
+    public Double getMonto() {
+        return monto;
+    }
+
+    /**
+     * @param monto the monto to set
+     */
+    public void setMonto(Double monto) {
+        this.monto = monto;
+    }
+
+    /**
+     * @return the observacion
+     */
+    public String getObservacion() {
+        return observacion;
+    }
+
+    /**
+     * @param observacion the observacion to set
+     */
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
 }

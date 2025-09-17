@@ -143,7 +143,7 @@ public class PersonaDAOTest {
         // Muchos DTO separan apellidos; si no, puedes incluirlo en nombre
         // y omitir campos inexistentes según tu modelo real.
         p.setDireccion("Direccion de " + nombre);
-        p.setCorreo( ".pepito@.com");
+        p.setCorreo( "uwu@.com");
         p.setTelefono("900100200");
         p.setSexo(TipoSexo.FEMENINO);
         p.setTipoPersona("CLIENTE");

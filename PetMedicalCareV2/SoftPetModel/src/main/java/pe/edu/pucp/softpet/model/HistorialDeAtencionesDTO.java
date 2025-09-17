@@ -5,48 +5,48 @@ import pe.edu.pucp.softpet.model.actoresdto.MascotasDTO;
 
 public class HistorialDeAtencionesDTO {
 
-    private String historiaId;
-    private MascotasDTO mascotaId;
+    private Integer historiaId;
+    private MascotasDTO mascota;
     private String estadoMascota;
 
     public HistorialDeAtencionesDTO() {
         this.historiaId = null;
-        this.mascotaId = null;
+        this.mascota = null;
         this.estadoMascota = null;
     }
 
-    public HistorialDeAtencionesDTO(String historiaId, MascotasDTO mascotaId, String estadoMascota) {
+    public HistorialDeAtencionesDTO(Integer historiaId, MascotasDTO mascota, String estadoMascota) {
         this.historiaId = historiaId;
-        this.mascotaId = mascotaId;
+        this.mascota = mascota;
         this.estadoMascota = estadoMascota;
     }
 
     /**
      * @return the historiaId
      */
-    public String getHistoriaId() {
+    public Integer getHistoriaId() {
         return historiaId;
     }
 
     /**
      * @param historiaId the historiaId to set
      */
-    public void setHistoriaId(String historiaId) {
+    public void setHistoriaId(Integer historiaId) {
         this.historiaId = historiaId;
     }
 
     /**
-     * @return the mascotaId
+     * @return the mascota
      */
-    public MascotasDTO getMascotaId() {
-        return mascotaId;
+    public MascotasDTO getMascota() {
+        return mascota;
     }
 
     /**
-     * @param mascotaId the mascotaId to set
+     * @param mascota the mascotaId to set
      */
-    public void setMascotaId(MascotasDTO mascotaId) {
-        this.mascotaId = mascotaId;
+    public void setMascota(MascotasDTO mascota) {
+        this.mascota = mascota;
     }
 
     /**
