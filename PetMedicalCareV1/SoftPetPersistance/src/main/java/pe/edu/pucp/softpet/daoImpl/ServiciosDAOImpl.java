@@ -108,7 +108,7 @@ public class ServiciosDAOImpl extends DAOImplBase implements  ServiciosDAO{
     
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        this.statement.setInt(1, this.servicio.getServicioId());
+        this.statement.setInt(5, this.servicio.getServicioId());
     }
 
     @Override
