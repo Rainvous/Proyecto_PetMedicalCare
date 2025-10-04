@@ -93,7 +93,7 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         // NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setBoolean(3, this.usuarios.getActivo());
+        this.statement.setInt(3, this.usuarios.getActivo()? 1:0);
         this.statement.setDate(4, this.usuarios.getFechaModificacion());
         this.statement.setString(5, this.usuarios.getUsuarioModificador());
         
@@ -108,7 +108,7 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         // Mismo orden que inserción, y al final el PK:
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setBoolean(3, this.usuarios.getActivo());
+        this.statement.setInt(3, this.usuarios.getActivo()? 1:0);
         this.statement.setDate(4, this.usuarios.getFechaModificacion());
         this.statement.setString(5, this.usuarios.getUsuarioModificador());
         
@@ -140,7 +140,7 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         p.setUsername(this.resultSet.getString("USERNAME"));
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getBoolean("ACTIVO"));
+        p.setActivo(this.resultSet.getInt("ACTIVO")==1);
         p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
       
         p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
@@ -156,7 +156,7 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         p.setUsername(this.resultSet.getString("USERNAME"));
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getBoolean("ACTIVO"));
+        p.setActivo(this.resultSet.getInt("ACTIVO")==1);
         p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
       
         p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
