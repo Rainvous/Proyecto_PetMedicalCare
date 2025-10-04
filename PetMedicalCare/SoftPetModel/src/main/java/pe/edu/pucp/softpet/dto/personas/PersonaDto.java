@@ -12,7 +12,7 @@ public class PersonaDto {
     private Boolean activo;
     private String tipoDocumento;
     private Integer nroDocumento;
-    private String ruc;
+    private Integer ruc;
     private UsuarioDto usuario;
 
     public PersonaDto() {
@@ -30,7 +30,7 @@ public class PersonaDto {
     
     public PersonaDto(Integer personaId, String nombre, String direccion, 
             String telefono, String sexo, Boolean activo, String tipoDocumento, 
-            Integer nroDocumento, String ruc, UsuarioDto usuario) {
+            Integer nroDocumento, Integer ruc, UsuarioDto usuario) {
         this.personaId = personaId;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -158,14 +158,14 @@ public class PersonaDto {
     /**
      * @return the ruc
      */
-    public String getRuc() {
+    public Integer getRuc() {
         return ruc;
     }
 
     /**
      * @param ruc the ruc to set
      */
-    public void setRuc(String ruc) {
+    public void setRuc(Integer ruc) {
         this.ruc = ruc;
     }
 

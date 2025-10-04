@@ -1,0 +1,115 @@
+package pe.edu.pucp.softpet.daoImp;
+
+import java.sql.SQLException;
+import pe.edu.pucp.softpet.dao.MascotaDAO;
+import pe.edu.pucp.softpet.daoImp.util.Columna;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+
+public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO {
+    
+    private MascotaDto mascota;
+
+    public MascotaDAOImpl() {
+        super("MASCOTAS");
+        this.mascota = null;
+        this.retornarLlavePrimaria = true;
+    }
+
+    @Override
+    protected void configurarListaDeColumnas() {
+        this.listaColumnas.add(new Columna("MASCOTA_ID", true, true));
+        this.listaColumnas.add(new Columna("NOMBRE", false, false));
+        this.listaColumnas.add(new Columna("ESPECIE", false, false));
+        this.listaColumnas.add(new Columna("SEXO", false, false));
+        this.listaColumnas.add(new Columna("RAZA", false, false));
+        this.listaColumnas.add(new Columna("COLOR", false, false));
+        this.listaColumnas.add(new Columna("ACTIVO", false, false));
+        this.listaColumnas.add(new Columna("FECHA_DEFUNCION", false, false));
+        this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
+        this.statement.setString(1, this.mascota.getNombre());
+        this.statement.setString(2, this.mascota.getEspecie());
+        this.statement.setString(3, this.mascota.getSexo());
+        this.statement.setString(4, this.mascota.getRaza());
+        this.statement.setString(5, this.mascota.getColor());
+        this.statement.setInt(6, this.mascota.getActivo() ? 1 : 0);
+        this.statement.setDate(7, this.mascota.getFechaDefuncion());
+        this.statement.setInt(8, this.mascota.getPersona().getPersonaId());
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        this.statement.setString(1, this.mascota.getNombre());
+        this.statement.setString(2, this.mascota.getEspecie());
+        this.statement.setString(3, this.mascota.getSexo());
+        this.statement.setString(4, this.mascota.getRaza());
+        this.statement.setString(5, this.mascota.getColor());
+        this.statement.setInt(6, this.mascota.getActivo() ? 1 : 0);
+        this.statement.setDate(7, this.mascota.getFechaDefuncion());
+        this.statement.setInt(8, this.mascota.getPersona().getPersonaId());
+        this.statement.setInt();
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
+        this.statement.setInt(1, this.mascota.getRolId());
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.statement.setInt(1, this.mascota.getRolId());
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.mascota = new MascotaDto();
+        this.mascota.setRolId(this.resultSet.getInt("ROL_ID"));
+        this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
+        this.mascota.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.mascota = null;
+    }
+
+    @Override
+    protected void agregarObjetoALaLista(List lista) throws SQLException {
+        this.instanciarObjetoDelResultSet();
+        lista.add(this.mascota);
+    }
+
+    @Override
+    public Integer insertar(MascotaDto mascota) {
+        this.mascota = mascota;
+        return super.insertar();
+    }
+
+    @Override
+    public MascotaDto obtenerPorId(Integer mascotaId) {
+        this.mascota = new MascotaDto();
+        this.mascota.setRolId(mascotaId);
+        super.obtenerPorId();
+        return this.mascota;
+    }
+
+    @Override
+    public ArrayList<MascotaDto> listarTodos() {
+        return (ArrayList<MascotaDto>) super.listarTodos();
+    }
+
+    @Override
+    public Integer modificar(MascotaDto mascota) {
+        this.mascota = mascota;
+        return super.modificar();
+    }
+
+    @Override
+    public Integer eliminar(MascotaDto mascota) {
+        this.mascota = mascota;
+        return super.eliminar();
+    }
+}
