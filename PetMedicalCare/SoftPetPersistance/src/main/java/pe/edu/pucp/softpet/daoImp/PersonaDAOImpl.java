@@ -52,7 +52,7 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.statement.setString(6, this.persona.getTipoDocumento());
         this.statement.setInt(7, this.persona.getNroDocumento());
         this.statement.setInt(8, this.persona.getRuc());
-        this.statement.setObject(9, this.persona.getUsuario().getUsuarioId());
+        this.statement.setInt(9, this.persona.getUsuario().getUsuarioId());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.statement.setString(6, this.persona.getTipoDocumento());
         this.statement.setInt(7, this.persona.getNroDocumento());
         this.statement.setInt(8, this.persona.getRuc());
-        this.statement.setObject(9, this.persona.getUsuario().getUsuarioId());
+        this.statement.setInt(9, this.persona.getUsuario().getUsuarioId());
 
         this.statement.setInt(10, this.persona.getPersonaId());
     }
@@ -91,6 +91,7 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.persona.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.persona.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));
         this.persona.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
+
         this.persona.setRuc(this.resultSet.getInt("RUC"));
         this.persona.setUsuario(new UsuarioDAOImpl().obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
     }
