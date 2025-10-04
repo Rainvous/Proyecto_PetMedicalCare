@@ -1,9 +1,12 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.softpet.dao.MascotaDAO;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO {
     
@@ -50,25 +53,31 @@ public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO {
         this.statement.setInt(6, this.mascota.getActivo() ? 1 : 0);
         this.statement.setDate(7, this.mascota.getFechaDefuncion());
         this.statement.setInt(8, this.mascota.getPersona().getPersonaId());
-        this.statement.setInt();
+        this.statement.setInt(9, this.mascota.getMascotaId());
     }
 
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-        this.statement.setInt(1, this.mascota.getRolId());
+        this.statement.setInt(1, this.mascota.getMascotaId());
     }
 
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        this.statement.setInt(1, this.mascota.getRolId());
+        this.statement.setInt(1, this.mascota.getMascotaId());
     }
 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.mascota = new MascotaDto();
-        this.mascota.setRolId(this.resultSet.getInt("ROL_ID"));
+        this.mascota.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
         this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
+        this.mascota.setEspecie(this.resultSet.getString("ESPECIE"));
+        this.mascota.setSexo(this.resultSet.getString("SEXO"));
+        this.mascota.setRaza(this.resultSet.getString("RAZA"));
+        this.mascota.setColor(this.resultSet.getString("COLOR"));
         this.mascota.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+        this.mascota.setFechaDefuncion(this.resultSet.getDate("FECHA_DEFUNCION"));
+        //this.mascota.setPersona(new PersonaDAOImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
     }
 
     @Override
@@ -91,7 +100,7 @@ public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO {
     @Override
     public MascotaDto obtenerPorId(Integer mascotaId) {
         this.mascota = new MascotaDto();
-        this.mascota.setRolId(mascotaId);
+        this.mascota.setMascotaId(mascotaId);
         super.obtenerPorId();
         return this.mascota;
     }
