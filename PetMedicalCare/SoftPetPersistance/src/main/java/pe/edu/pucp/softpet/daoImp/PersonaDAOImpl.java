@@ -1,28 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.softpet.dao.PersonaDAO;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
-import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
-import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
+import pe.edu.pucp.softpet.dao.PersonaDao;
 
-/**
- *
- * @author marti
- */
-
-public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
+public class PersonaDaoImpl extends DAOImplBase implements PersonaDao {
 
     private PersonaDto persona;
 
-    public PersonaDAOImpl() {
+    public PersonaDaoImpl() {
         super("PERSONAS");
         this.persona = null;
         this.retornarLlavePrimaria = true;
@@ -93,7 +82,7 @@ public class PersonaDAOImpl extends DAOImplBase implements PersonaDAO {
         this.persona.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
 
         this.persona.setRuc(this.resultSet.getInt("RUC"));
-        this.persona.setUsuario(new UsuarioDAOImpl().obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
+        this.persona.setUsuario(new UsuarioDaoImpl().obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
     }
 
     @Override

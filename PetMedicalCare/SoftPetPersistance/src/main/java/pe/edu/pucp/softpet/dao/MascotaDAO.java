@@ -3,7 +3,7 @@ package pe.edu.pucp.softpet.dao;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 
-public interface MascotaDAO {
+public interface MascotaDao {
 
     public Integer insertar(MascotaDto mascota);
 

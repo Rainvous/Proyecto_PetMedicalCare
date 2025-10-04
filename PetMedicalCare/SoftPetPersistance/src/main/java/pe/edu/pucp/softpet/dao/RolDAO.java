@@ -3,7 +3,7 @@ package pe.edu.pucp.softpet.dao;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 
-public interface RolDAO {
+public interface RolDao {
 
     public Integer insertar(RolDto rol);
 

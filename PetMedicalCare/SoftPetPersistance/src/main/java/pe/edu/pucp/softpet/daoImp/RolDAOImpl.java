@@ -3,15 +3,15 @@ package pe.edu.pucp.softpet.daoImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.softpet.dao.RolDAO;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.RolDto;
+import pe.edu.pucp.softpet.dao.RolDao;
 
-public class RolDAOImpl extends DAOImplBase implements RolDAO {
+public class RolDaoImpl extends DAOImplBase implements RolDao {
 
     private RolDto rol;
 
-    public RolDAOImpl() {
+    public RolDaoImpl() {
         super("ROLES");
         this.rol = null;
         this.retornarLlavePrimaria = true;

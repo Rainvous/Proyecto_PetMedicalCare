@@ -1,30 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.softpet.dao.UsuariosDAO;
-import pe.edu.pucp.softpet.daoImp.DAOImplBase;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
-/**
- *
- * @author marti
- */
-public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
+import pe.edu.pucp.softpet.dao.UsuariosDao;
+
+public class UsuarioDaoImpl extends DAOImplBase implements UsuariosDao {
 
     private UsuarioDto usuarios;
 
-    public UsuarioDAOImpl() {
+    public UsuarioDaoImpl() {
         super("USUARIOS"); // nombre de tabla en BD
         this.usuarios = null;
     }
 
-    public UsuarioDAOImpl(String nombre_tabla) {
+    public UsuarioDaoImpl(String nombre_tabla) {
         super(nombre_tabla);
         this.usuarios = null;
     }
@@ -93,10 +85,9 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         // NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setInt(3, this.usuarios.getActivo()? 1:0);
+        this.statement.setInt(3, this.usuarios.getActivo() ? 1 : 0);
         this.statement.setDate(4, this.usuarios.getFechaModificacion());
         this.statement.setString(5, this.usuarios.getUsuarioModificador());
-        
 
         this.statement.setString(6, this.usuarios.getUsuarioCreador());
         this.statement.setDate(7, this.usuarios.getFechaCreacion());
@@ -108,10 +99,9 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         // Mismo orden que inserción, y al final el PK:
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setInt(3, this.usuarios.getActivo()? 1:0);
+        this.statement.setInt(3, this.usuarios.getActivo() ? 1 : 0);
         this.statement.setDate(4, this.usuarios.getFechaModificacion());
         this.statement.setString(5, this.usuarios.getUsuarioModificador());
-        
 
         this.statement.setString(6, this.usuarios.getUsuarioCreador());
         this.statement.setDate(7, this.usuarios.getFechaCreacion());
@@ -140,9 +130,9 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         p.setUsername(this.resultSet.getString("USERNAME"));
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        p.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-      
+
         p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
         p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
         p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
@@ -156,9 +146,9 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         p.setUsername(this.resultSet.getString("USERNAME"));
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        p.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-      
+
         p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
         p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
         p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));

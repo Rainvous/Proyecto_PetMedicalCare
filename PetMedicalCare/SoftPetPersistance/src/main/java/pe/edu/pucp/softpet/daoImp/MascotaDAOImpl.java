@@ -3,16 +3,15 @@ package pe.edu.pucp.softpet.daoImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.softpet.dao.MascotaDAO;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
-import pe.edu.pucp.softpet.dto.personas.PersonaDto;
+import pe.edu.pucp.softpet.dao.MascotaDao;
 
-public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO {
-    
+public class MascotaDaoImpl extends DAOImplBase implements MascotaDao {
+
     private MascotaDto mascota;
 
-    public MascotaDAOImpl() {
+    public MascotaDaoImpl() {
         super("MASCOTAS");
         this.mascota = null;
         this.retornarLlavePrimaria = true;
@@ -77,7 +76,7 @@ public class MascotaDAOImpl extends DAOImplBase implements MascotaDAO {
         this.mascota.setColor(this.resultSet.getString("COLOR"));
         this.mascota.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.mascota.setFechaDefuncion(this.resultSet.getDate("FECHA_DEFUNCION"));
-        //this.mascota.setPersona(new PersonaDAOImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        this.mascota.setPersona(new PersonaDaoImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
     }
 
     @Override
