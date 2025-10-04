@@ -15,16 +15,16 @@ import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
  *
  * @author marti
  */
-public class UsuariosDAOImpl extends DAOImplBase implements UsuariosDAO {
+public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
 
     private UsuarioDto usuarios;
 
-    public UsuariosDAOImpl() {
+    public UsuarioDAOImpl() {
         super("USUARIOS"); // nombre de tabla en BD
         this.usuarios = null;
     }
 
-    public UsuariosDAOImpl(String nombre_tabla) {
+    public UsuarioDAOImpl(String nombre_tabla) {
         super(nombre_tabla);
         this.usuarios = null;
     }
