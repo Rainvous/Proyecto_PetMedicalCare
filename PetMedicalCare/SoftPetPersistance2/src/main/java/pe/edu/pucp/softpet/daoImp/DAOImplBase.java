@@ -412,7 +412,7 @@ public abstract class DAOImplBase {
         ejecutarDMLEnBD();
     }
 
-    protected void SetDeUsuario(String usuario) throws SQLException {
+    private void SetDeUsuario(String usuario) throws SQLException {
         //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
         //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
         //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
@@ -424,7 +424,7 @@ public abstract class DAOImplBase {
         }
     }
 
-    public void UsuarioQueModifica(String user) {
+    public void NombreDelUsuarioQueModifica(String user) {
         this.usuario = user;
     }
 }

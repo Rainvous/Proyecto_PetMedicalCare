@@ -44,14 +44,14 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.statement.setString(1, this.servicio.getNombre());
         this.statement.setDouble(2, this.servicio.getCosto());
         this.statement.setString(3, this.servicio.getEstado());
-        this.statement.setString(3, this.servicio.getDescripcion());
+        this.statement.setString(4, this.servicio.getDescripcion());
 //        if (this.servicio.getActivo() == null) {
 //            System.out.println("nos");
 //        }
-        this.statement.setInt(4, this.servicio.getActivo() ? 1 : 0);
+        this.statement.setInt(5, this.servicio.getActivo() ? 1 : 0);
 
         int idTiposervicio = this.servicio.getTipoServicio().getTipoServicioId();
-        this.statement.setInt(5, idTiposervicio);
+        this.statement.setInt(6, idTiposervicio);
         //System.out.println(statement);
 
     }
@@ -61,16 +61,16 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.statement.setString(1, this.servicio.getNombre());
         this.statement.setDouble(2, this.servicio.getCosto());
         this.statement.setString(3, this.servicio.getEstado());
-        this.statement.setString(3, this.servicio.getDescripcion());
+        this.statement.setString(4, this.servicio.getDescripcion());
         if (this.servicio.getActivo() == null) {
             System.out.println("nos");
         }
-        this.statement.setInt(4, this.servicio.getActivo() ? 1 : 0);
+        this.statement.setInt(5, this.servicio.getActivo() ? 1 : 0);
 
         int idTiposervicio = this.servicio.getTipoServicio().getTipoServicioId();
-        this.statement.setInt(5, idTiposervicio);
+        this.statement.setInt(6, idTiposervicio);
 
-        this.statement.setInt(6, this.servicio.getServicioId());
+        this.statement.setInt(7, this.servicio.getServicioId());
     }
 
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
