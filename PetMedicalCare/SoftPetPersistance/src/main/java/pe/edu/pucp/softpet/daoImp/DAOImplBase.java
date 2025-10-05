@@ -20,6 +20,7 @@ public abstract class DAOImplBase {
     protected CallableStatement statement;
     protected ResultSet resultSet;
 
+    protected String usuario;
     public DAOImplBase(String nombre_tabla) {
         this.nombre_tabla = nombre_tabla;
         this.retornarLlavePrimaria = false;

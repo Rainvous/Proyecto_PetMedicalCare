@@ -14,7 +14,7 @@ public class DocumentoPagoDto {
     private Double subtotalSinIGV;
     private Double IGVTotal;
     private Double total;
-
+    private Boolean activo;
     public DocumentoPagoDto() {
         this.documentoPagoId = null;
         this.serie = null;
@@ -26,11 +26,13 @@ public class DocumentoPagoDto {
         this.subtotalSinIGV = null;
         this.IGVTotal = null;
         this.total = null;
+        this.activo =null;
     }
     
     public DocumentoPagoDto(Integer documentoPagoId, String serie, 
             String numero, Double tasaIGV, Date fechaEmision, String metodoPago, 
-            String estado, Double subtotalSinIGV, Double IGVTotal, Double total) {
+            String estado, Double subtotalSinIGV, Double IGVTotal, Double total,
+            Boolean activo) {
         this.documentoPagoId = documentoPagoId;
         this.serie = serie;
         this.numero = numero;
@@ -41,6 +43,7 @@ public class DocumentoPagoDto {
         this.subtotalSinIGV = subtotalSinIGV;
         this.IGVTotal = IGVTotal;
         this.total = total;
+        this.activo = activo;
     }
 
     /**
@@ -181,5 +184,20 @@ public class DocumentoPagoDto {
      */
     public void setTotal(Double total) {
         this.total = total;
+    }
+    
+    
+        /**
+     * @return the activo
+     */
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the total to set
+     */
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }

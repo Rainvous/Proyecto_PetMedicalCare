@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
-import pe.edu.pucp.softpet.dao.UsuariosDao;
+import pe.edu.pucp.softpet.dao.UsuarioDao;
 
-public class UsuarioDaoImpl extends DAOImplBase implements UsuariosDao {
+public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDao {
 
     private UsuarioDto usuarios;
 
     public UsuarioDaoImpl() {
         super("USUARIOS"); // nombre de tabla en BD
+        this.usuario = "backend_java";
         this.usuarios = null;
     }
 
@@ -110,7 +111,6 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuariosDao {
         this.statement.setInt(8, this.usuarios.getUsuarioId());
     }
 
-    //Hay que cambiar la pos de personId, de 1 a 9
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         // DELETE ... WHERE PERSONA_ID = ?
