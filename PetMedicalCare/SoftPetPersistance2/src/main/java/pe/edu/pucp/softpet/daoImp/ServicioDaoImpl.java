@@ -73,6 +73,7 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.statement.setInt(7, this.servicio.getServicioId());
     }
 
+    @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.statement.setInt(1, this.servicio.getServicioId());
     }
