@@ -18,7 +18,7 @@ public interface DaoBase<T> {
     
     public Integer insertar(T entity);
 
-    
+   // public <T> obtenerPorId(Integer idDto);
 
     public ArrayList<T> listarTodos();
 

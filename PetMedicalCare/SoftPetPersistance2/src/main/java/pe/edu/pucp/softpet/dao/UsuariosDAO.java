@@ -9,14 +9,7 @@ import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
  *
  * @author marti
  */
-public interface UsuariosDAO {
-    public Integer insertar(UsuarioDto usuario);
+public interface UsuariosDAO extends DaoBase<UsuarioDto> {
+     public UsuarioDto obtenerPorId(Integer idDto);
 
-    public UsuarioDto obtenerPorId(Integer usuarioId);
-
-    public ArrayList<UsuarioDto> listarTodos();
-
-    public Integer modificar(UsuarioDto usuario);
-
-    public Integer eliminar(UsuarioDto usuario);
 }

@@ -22,6 +22,8 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
     public UsuarioDAOImpl() {
         super("USUARIOS"); // nombre de tabla en BD
         this.usuarios = null;
+        this.usuario="backend_java";
+        this.retornarLlavePrimaria=true;
     }
 
     public UsuarioDAOImpl(String nombre_tabla) {
@@ -38,10 +40,10 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         this.listaColumnas.add(new Columna("PASSWORD", false, false));
         this.listaColumnas.add(new Columna("CORREO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("FECHA_MODIFICACION", false, false));
-        this.listaColumnas.add(new Columna("USUARIO_MODIFICADOR", false, false));
-        this.listaColumnas.add(new Columna("USUARIO_CREADOR", false, false));
-        this.listaColumnas.add(new Columna("FECHA_CREACION", false, false));
+//        this.listaColumnas.add(new Columna("FECHA_MODIFICACION", false, false));
+//        this.listaColumnas.add(new Columna("USUARIO_MODIFICADOR", false, false));
+//        this.listaColumnas.add(new Columna("USUARIO_CREADOR", false, false));
+//        this.listaColumnas.add(new Columna("FECHA_CREACION", false, false));
     }
 
     // ===== PersonaDAO =====
@@ -93,13 +95,14 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         // NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setBoolean(3, this.usuarios.getActivo());
-        this.statement.setDate(4, this.usuarios.getFechaModificacion());
-        this.statement.setString(5, this.usuarios.getUsuarioModificador());
-        
-
-        this.statement.setString(6, this.usuarios.getUsuarioCreador());
-        this.statement.setDate(7, this.usuarios.getFechaCreacion());
+         this.statement.setString(3, this.usuarios.getCorreo());
+        this.statement.setBoolean(4, this.usuarios.getActivo());
+//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
+//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
+//        
+//
+//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
+//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
     }
 
     @Override
@@ -108,16 +111,17 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         // Mismo orden que inserción, y al final el PK:
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setBoolean(3, this.usuarios.getActivo());
-        this.statement.setDate(4, this.usuarios.getFechaModificacion());
-        this.statement.setString(5, this.usuarios.getUsuarioModificador());
-        
-
-        this.statement.setString(6, this.usuarios.getUsuarioCreador());
-        this.statement.setDate(7, this.usuarios.getFechaCreacion());
+         this.statement.setString(3, this.usuarios.getCorreo());
+        this.statement.setBoolean(4, this.usuarios.getActivo());
+//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
+//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
+//        
+//
+//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
+//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
 
         // WHERE PERSONA_ID = ?
-        this.statement.setInt(8, this.usuarios.getUsuarioId());
+        this.statement.setInt(5, this.usuarios.getUsuarioId());
     }
 
     //Hay que cambiar la pos de personId, de 1 a 9
@@ -141,11 +145,11 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
         p.setActivo(this.resultSet.getBoolean("ACTIVO"));
-        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-      
-        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
-        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
-        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
+//        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
+//      
+//        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
+//        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
+//        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
         this.usuarios = p; // importante: `obtenerPorId` devolverá `this.persona`
     }
 
@@ -157,11 +161,11 @@ public class UsuarioDAOImpl extends DAOImplBase implements UsuariosDAO {
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
         p.setActivo(this.resultSet.getBoolean("ACTIVO"));
-        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-      
-        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
-        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
-        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
+//        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
+//      
+//        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
+//        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
+//        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
 
         lista.add(p);
     }

@@ -45,14 +45,14 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.statement.setDouble(2, this.servicio.getCosto());
         this.statement.setString(3, this.servicio.getEstado());
         this.statement.setString(3, this.servicio.getDescripcion());
-        if (this.servicio.getActivo() == null) {
-            System.out.println("nos");
-        }
+//        if (this.servicio.getActivo() == null) {
+//            System.out.println("nos");
+//        }
         this.statement.setInt(4, this.servicio.getActivo() ? 1 : 0);
 
         int idTiposervicio = this.servicio.getTipoServicio().getTipoServicioId();
         this.statement.setInt(5, idTiposervicio);
-        System.out.println(statement);
+        //System.out.println(statement);
 
     }
 
