@@ -415,12 +415,16 @@ public abstract class DAOImplBase {
     protected void SetDeUsuario(String usuario) throws SQLException {
         //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
         //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
-      //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
-              try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
+        //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
+        try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
             System.out.println("------>" + psSet);
             psSet.setString(1, usuario);
             System.out.println("------>" + psSet);
             psSet.execute();
         }
+    }
+
+    public void UsuarioQueModifica(String user) {
+        this.usuario = user;
     }
 }
