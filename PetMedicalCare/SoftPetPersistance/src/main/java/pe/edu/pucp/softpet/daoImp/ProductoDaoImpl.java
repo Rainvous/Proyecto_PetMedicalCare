@@ -6,7 +6,6 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
-import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
 /**
  *

@@ -50,7 +50,6 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
         this.statement.setInt(5, this.detalleServicio.getCita().getCitaId());
 
         this.statement.setInt(6, this.detalleServicio.getDetalleServicioId());
-
     }
 
     @Override

@@ -29,7 +29,6 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.listaColumnas.add(new Columna("INDICACION", false, false));
         this.listaColumnas.add(new Columna("RECETA_MEDICA_ID", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-
     }
 
     @Override
@@ -50,7 +49,6 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.statement.setInt(5, this.detalleReceta.getActivo() ? 1 : 0);
 
         this.statement.setInt(6, this.detalleReceta.getDetalleRecetaId());
-
     }
 
     @Override
