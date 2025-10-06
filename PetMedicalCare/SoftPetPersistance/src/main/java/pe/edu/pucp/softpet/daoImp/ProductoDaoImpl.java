@@ -31,23 +31,17 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         this.listaColumnas.add(new Columna("PRECIO_UNITARIO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("TIPO_PRODUCTO_ID", false, false));
-
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        //NOTA NO ES NECESARIO AGREGAR LA FECHA
+        // NOTA NO ES NECESARIO AGREGAR LA FECHA
         this.statement.setString(1, this.producto.getNombre());
         this.statement.setString(2, this.producto.getPresentacion());
         this.statement.setDouble(3, this.producto.getPrecioUnitario());
-        if (this.producto.getActivo() == null) {
-            System.out.println("nos");
-        }
         this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
-        int idTipoProducto = this.producto.getTipoProducto().getTipoProductoId();
-        this.statement.setInt(5, idTipoProducto);
-        System.out.println(statement);
-
+        this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
+        // System.out.println(statement);
     }
 
     @Override
@@ -56,8 +50,7 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         this.statement.setString(2, this.producto.getPresentacion());
         this.statement.setDouble(3, this.producto.getPrecioUnitario());
         this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
-        int idTipoProducto = this.producto.getTipoProducto().getTipoProductoId();
-        this.statement.setInt(5, idTipoProducto);
+        this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
 
         this.statement.setInt(6, this.producto.getProductoId());
     }
@@ -130,5 +123,4 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         this.producto = entity;
         return super.eliminar();
     }
-
 }

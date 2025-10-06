@@ -13,25 +13,17 @@ import pe.edu.pucp.softpet.dao.UsuarioDAO;
  */
 public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
 
-    private UsuarioDto usuarios;
+    private UsuarioDto usuario;
 
     public UsuarioDaoImpl() {
-        super("USUARIOS"); // nombre de tabla en BD
-        this.usuarios = null;
-        this.usuario = "backend_java";
+        super("USUARIOS");
+        this.usuario = null;
         this.retornarLlavePrimaria = true;
-    }
-
-    public UsuarioDaoImpl(String nombre_tabla) {
-        super(nombre_tabla);
-        this.usuarios = null;
     }
 
     @Override
     protected void configurarListaDeColumnas() {
-        // Definir columnas y metadatos (PK, autogenerado)
-        // Orden aquí importa: se ocupará para generar SQL y parámetros.
-        this.listaColumnas.add(new Columna("USUARIO_ID", true, true));  // PK, autogenerado
+        this.listaColumnas.add(new Columna("USUARIO_ID", true, true));
         this.listaColumnas.add(new Columna("USENAME", false, false));
         this.listaColumnas.add(new Columna("PASSWORD", false, false));
         this.listaColumnas.add(new Columna("CORREO", false, false));
@@ -42,127 +34,97 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
 //        this.listaColumnas.add(new Columna("FECHA_CREACION", false, false));
     }
 
-    // ===== PersonaDAO =====
     @Override
-    public Integer insertar(UsuarioDto usuarios) {
-        this.usuarios = usuarios;
-        // Si quieres que retorne el ID autogenerado:
-        this.retornarLlavePrimaria = true;
+    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
+        this.statement.setString(1, this.usuario.getUsername());
+        this.statement.setString(2, this.usuario.getPassword());
+        this.statement.setString(3, this.usuario.getCorreo());
+        this.statement.setBoolean(4, this.usuario.getActivo());
+//        this.statement.setDate(4, this.usuario.getFechaModificacion());
+//        this.statement.setString(5, this.usuario.getUsuarioModificador());
+//        this.statement.setString(6, this.usuario.getUsuarioCreador());
+//        this.statement.setDate(7, this.usuario.getFechaCreacion());
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        this.statement.setString(1, this.usuario.getUsername());
+        this.statement.setString(2, this.usuario.getPassword());
+        this.statement.setString(3, this.usuario.getCorreo());
+        this.statement.setBoolean(4, this.usuario.getActivo());
+//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
+//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
+//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
+//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
+
+        this.statement.setInt(5, this.usuario.getUsuarioId());
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
+        this.statement.setInt(1, this.usuario.getUsuarioId());
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.statement.setInt(1, this.usuario.getUsuarioId());
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.usuario = new UsuarioDto();
+        this.usuario.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
+        this.usuario.setUsername(this.resultSet.getString("USERNAME"));
+        this.usuario.setPassword(this.resultSet.getString("PASSWORD"));
+        this.usuario.setCorreo(this.resultSet.getString("CORREO"));
+        this.usuario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+//        this.usuario.setActivo.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
+//      
+//        this.usuario.setActivo.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
+//        this.usuario.setActivo.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
+//        this.usuario.setActivo.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.usuario = null;
+    }
+
+    @Override
+    protected void agregarObjetoALaLista(List lista) throws SQLException {
+        this.instanciarObjetoDelResultSet();
+        lista.add(this.usuario);
+    }
+
+    @Override
+    public Integer insertar(UsuarioDto usuario) {
+        this.usuario = usuario;
         return super.insertar();
     }
 
     @Override
     public UsuarioDto obtenerPorId(Integer usuarioId) {
-        // Preparar “contexto” para que los hooks sepan qué ID poner en el WHERE
-        this.usuarios = new UsuarioDto();
-        this.usuarios.setUsuarioId(usuarioId);
+        this.usuario = new UsuarioDto();
+        this.usuario.setUsuarioId(usuarioId);
+        super.obtenerPorId();
 
-        super.obtenerPorId(); // DAOImplBase ejecuta SELECT ... WHERE PK=?, y luego llama a instanciarObjetoDelResultSet()
-
-        return this.usuarios; // queda seteada en instanciarObjetoDelResultSet()
+        return this.usuario;
     }
 
     @Override
     public ArrayList<UsuarioDto> listarTodos() {
-        List lista = super.listarTodos(); // DAOImplBase iterará el ResultSet y llamará a agregarObjetoALaLista(lista)
-        ArrayList<UsuarioDto> resultado = new ArrayList<>();
-        for (Object o : lista) {
-            resultado.add((UsuarioDto) o);
-        }
-        return resultado;
+        return (ArrayList<UsuarioDto>) super.listarTodos();
     }
 
     @Override
-    public Integer modificar(UsuarioDto usuarios) {
-        this.usuarios = usuarios;
+    public Integer modificar(UsuarioDto usuario) {
+        this.usuario = usuario;
         return super.modificar();
     }
 
     @Override
-    public Integer eliminar(UsuarioDto usuarios) {
-        this.usuarios = usuarios;
+    public Integer eliminar(UsuarioDto usuario) {
+        this.usuario = usuario;
         return super.eliminar();
-    }
-
-    // ===== Hooks llamados por DAOImplBase =====
-    @Override
-    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        // Orden de parámetros = orden de columnas NO autogeneradas:
-        // NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO
-        this.statement.setString(1, this.usuarios.getUsername());
-        this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setString(3, this.usuarios.getCorreo());
-        this.statement.setBoolean(4, this.usuarios.getActivo());
-//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
-//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
-//        
-//
-//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
-//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        // UPDATE PERSONA SET (todas NO PK) WHERE (PK)
-        // Mismo orden que inserción, y al final el PK:
-        this.statement.setString(1, this.usuarios.getUsername());
-        this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setString(3, this.usuarios.getCorreo());
-        this.statement.setBoolean(4, this.usuarios.getActivo());
-//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
-//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
-//        
-//
-//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
-//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
-
-        // WHERE PERSONA_ID = ?
-        this.statement.setInt(5, this.usuarios.getUsuarioId());
-    }
-
-    //Hay que cambiar la pos de personId, de 1 a 9
-    @Override
-    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-        // DELETE ... WHERE PERSONA_ID = ?
-        this.statement.setInt(1, this.usuarios.getUsuarioId());
-    }
-
-    @Override
-    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        // SELECT ... WHERE PERSONA_ID = ?
-        this.statement.setInt(1, this.usuarios.getUsuarioId());
-    }
-
-    @Override
-    protected void instanciarObjetoDelResultSet() throws SQLException {
-        UsuarioDto p = new UsuarioDto();
-        p.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
-        p.setUsername(this.resultSet.getString("USERNAME"));
-        p.setPassword(this.resultSet.getString("PASSWORD"));
-        p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getBoolean("ACTIVO"));
-//        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-//      
-//        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
-//        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
-//        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
-        this.usuarios = p; // importante: `obtenerPorId` devolverá `this.persona`
-    }
-
-    @Override
-    protected void agregarObjetoALaLista(List lista) throws SQLException {
-        UsuarioDto p = new UsuarioDto();
-        p.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
-        p.setUsername(this.resultSet.getString("USERNAME"));
-        p.setPassword(this.resultSet.getString("PASSWORD"));
-        p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getBoolean("ACTIVO"));
-//        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-//      
-//        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
-//        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
-//        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
-
-        lista.add(p);
     }
 }

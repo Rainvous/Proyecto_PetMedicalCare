@@ -1,7 +1,6 @@
 package pe.edu.pucp.softpet.dto.citas;
 
 import java.sql.Date;
-import java.sql.Time;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 
@@ -9,9 +8,9 @@ public class CitaAtencionDto {
 
     private Integer citaId;
     private String observacion;
-    private Time fechaHoraInicio;
+    private Date fechaHoraInicio;
     private Date fechaRegistro;
-    private Time fechaHoraFin;
+    private Date fechaHoraFin;
     private Double monto;
     private Boolean activo;
     private String peso;
@@ -32,7 +31,7 @@ public class CitaAtencionDto {
     }
 
     public CitaAtencionDto(Integer citaId, String observacion,
-            Time fechaHoraInicio, Date fechaRegistro, Time fechaHoraFin,
+            Date fechaHoraInicio, Date fechaRegistro, Date fechaHoraFin,
             Double monto, Boolean activo, String peso,
             VeterinarioDto veterinario, MascotaDto mascota) {
         this.citaId = citaId;
@@ -78,14 +77,14 @@ public class CitaAtencionDto {
     /**
      * @return the fechaHoraInicio
      */
-    public Time getFechaHoraInicio() {
+    public Date getFechaHoraInicio() {
         return fechaHoraInicio;
     }
 
     /**
      * @param fechaHoraInicio the fechaHoraInicio to set
      */
-    public void setFechaHoraInicio(Time fechaHoraInicio) {
+    public void setFechaHoraInicio(Date fechaHoraInicio) {
         this.fechaHoraInicio = fechaHoraInicio;
     }
 
@@ -106,14 +105,14 @@ public class CitaAtencionDto {
     /**
      * @return the fechaHoraFin
      */
-    public Time getFechaHoraFin() {
+    public Date getFechaHoraFin() {
         return fechaHoraFin;
     }
 
     /**
      * @param fechaHoraFin the fechaHoraFin to set
      */
-    public void setFechaHoraFin(Time fechaHoraFin) {
+    public void setFechaHoraFin(Date fechaHoraFin) {
         this.fechaHoraFin = fechaHoraFin;
     }
 

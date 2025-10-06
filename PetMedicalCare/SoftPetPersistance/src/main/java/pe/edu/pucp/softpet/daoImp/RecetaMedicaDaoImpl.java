@@ -27,7 +27,6 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
         this.listaColumnas.add(new Columna("DIAGNOSTICO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("CITA_ID", false, false));
-
     }
 
     @Override

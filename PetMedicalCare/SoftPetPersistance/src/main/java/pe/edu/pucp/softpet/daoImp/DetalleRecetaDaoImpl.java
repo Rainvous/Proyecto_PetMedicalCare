@@ -70,7 +70,8 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.detalleReceta.setCantidad(this.resultSet.getInt("CANTIDAD"));
         this.detalleReceta.setDescripcionMedicamento(this.resultSet.getString("DESCRIPCION_MEDICAMENTO"));
         this.detalleReceta.setIndicacion(this.resultSet.getString("INDICACION"));
-        this.detalleReceta.setReceta(new RecetaMedicaDaoImpl().obtenerPorId(this.resultSet.getInt("RECETA_MEDICA_ID")));
+        this.detalleReceta.setReceta(new RecetaMedicaDaoImpl().
+                obtenerPorId(this.resultSet.getInt("RECETA_MEDICA_ID")));
         this.detalleReceta.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 

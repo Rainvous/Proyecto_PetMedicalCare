@@ -80,7 +80,6 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.persona.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.persona.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));
         this.persona.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
-
         this.persona.setRuc(this.resultSet.getInt("RUC"));
         this.persona.setUsuario(new UsuarioDaoImpl().obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
     }

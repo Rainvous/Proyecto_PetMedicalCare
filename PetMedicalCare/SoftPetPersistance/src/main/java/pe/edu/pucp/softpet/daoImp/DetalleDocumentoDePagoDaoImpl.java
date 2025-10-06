@@ -63,7 +63,7 @@ public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements Detall
         this.statement.setInt(9, this.detalleDocumento.getServicio().getServicioId());
         this.statement.setInt(10, this.detalleDocumento.getProducto().getProductoId());
 
-        this.statement.setInt(10, this.detalleDocumento.getDddpId());
+        this.statement.setInt(11, this.detalleDocumento.getDddpId());
     }
 
     @Override
@@ -89,8 +89,10 @@ public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements Detall
         this.detalleDocumento.setImporteTotal(this.resultSet.getDouble("IMPORTE_TOTAL"));
         this.detalleDocumento.setDocumentoPago(new DocumentoDePagoDaoImpl().
                 obtenerPorId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID")));
-        this.detalleDocumento.setServicio(new ServicioDaoImpl().obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
-        this.detalleDocumento.setProducto(new ProductoDaoImpl().obtenerPorId(this.resultSet.getInt("PRODUCTO_ID")));
+        this.detalleDocumento.setServicio(new ServicioDaoImpl().
+                obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
+        this.detalleDocumento.setProducto(new ProductoDaoImpl().
+                obtenerPorId(this.resultSet.getInt("PRODUCTO_ID")));
     }
 
     @Override

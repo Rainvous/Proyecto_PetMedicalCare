@@ -25,9 +25,9 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("CITA_ID", true, true));
         this.listaColumnas.add(new Columna("OBSERVACION", false, false));
+        this.listaColumnas.add(new Columna("FECHA_HORA_INICIO", false, false));
         this.listaColumnas.add(new Columna("FECHA_REGISTRO", false, false));
-        this.listaColumnas.add(new Columna("HORA_INICIO", false, false));
-        this.listaColumnas.add(new Columna("HORA_FIN", false, false));
+        this.listaColumnas.add(new Columna("FECHA_HORA_FIN", false, false));
         this.listaColumnas.add(new Columna("MONTO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("PESO_MASCOTA", false, false));
@@ -35,34 +35,31 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.listaColumnas.add(new Columna("MASCOTA_ID", false, false));
     }
 
-    //REVISAR ESTO, YA QUE LOS ATRIBUTOS DE FECHAHORAINICIO Y FECHARHORAFIN,
-    //NO COINCIDE CON LOS ATRIBUTOS QUE ESTAN EN LA BD
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setString(1, this.citaAtencion.getObservacion());
-        this.statement.setDate(2, this.citaAtencion.getFechaRegistro());
-        this.statement.setTime(3, this.citaAtencion.getFechaHoraInicio());
-        this.statement.setTime(4, this.citaAtencion.getFechaHoraFin());
+        this.statement.setDate(2, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setDate(3, this.citaAtencion.getFechaRegistro());
+        this.statement.setDate(4, this.citaAtencion.getFechaHoraFin());
         this.statement.setDouble(5, this.citaAtencion.getMonto());
         this.statement.setInt(6, this.citaAtencion.getActivo() ? 1 : 0);
         this.statement.setString(7, this.citaAtencion.getPeso());
         this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setString(1, this.citaAtencion.getObservacion());
-        this.statement.setDate(2, this.citaAtencion.getFechaRegistro());
-        this.statement.setTime(3, this.citaAtencion.getFechaHoraInicio());
-        this.statement.setTime(4, this.citaAtencion.getFechaHoraFin());
+        this.statement.setDate(2, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setDate(3, this.citaAtencion.getFechaRegistro());
+        this.statement.setDate(4, this.citaAtencion.getFechaHoraFin());
         this.statement.setDouble(5, this.citaAtencion.getMonto());
         this.statement.setInt(6, this.citaAtencion.getActivo() ? 1 : 0);
         this.statement.setString(7, this.citaAtencion.getPeso());
         this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-
+        
         this.statement.setInt(10, this.citaAtencion.getCitaId());
     }
 
@@ -81,15 +78,16 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.citaAtencion = new CitaAtencionDto();
         this.citaAtencion.setCitaId(this.resultSet.getInt("CITA_ID"));
         this.citaAtencion.setObservacion(this.resultSet.getString("OBSERVACION"));
+        this.citaAtencion.setFechaHoraInicio(this.resultSet.getDate("FECHA_HORA_INICIO"));
         this.citaAtencion.setFechaRegistro(this.resultSet.getDate("FECHA_REGISTRO"));
-        this.citaAtencion.setFechaHoraInicio(this.resultSet.getTime("HORA_INICIO"));
-        this.citaAtencion.setFechaHoraFin(this.resultSet.getTime("HORA_FIN"));
+        this.citaAtencion.setFechaHoraFin(this.resultSet.getDate("FECHA_HORA_FIN"));
         this.citaAtencion.setMonto(this.resultSet.getDouble("MONTO"));
         this.citaAtencion.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.citaAtencion.setPeso(this.resultSet.getString("PESO_MASCOTA"));
-        this.citaAtencion.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
-        this.citaAtencion.setMascota(new MascotaDaoImpl().obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));
-
+        this.citaAtencion.setVeterinario(new VeterinarioDaoImpl().
+                obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
+        this.citaAtencion.setMascota(new MascotaDaoImpl().
+                obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));
     }
 
     @Override
@@ -110,9 +108,9 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     }
 
     @Override
-    public CitaAtencionDto obtenerPorId(Integer citaAtencioniD) {
+    public CitaAtencionDto obtenerPorId(Integer citaAtencionId) {
         this.citaAtencion = new CitaAtencionDto();
-        this.citaAtencion.setCitaId(citaAtencioniD);
+        this.citaAtencion.setCitaId(citaAtencionId);
         super.obtenerPorId();
         return this.citaAtencion;
     }

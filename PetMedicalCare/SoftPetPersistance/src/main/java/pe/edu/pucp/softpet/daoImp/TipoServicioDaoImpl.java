@@ -41,6 +41,7 @@ public class TipoServicioDaoImpl extends DaoBaseImpl implements TipoServicioDao 
         this.statement.setString(1, this.tipoServicio.getNombre());
         this.statement.setString(2, this.tipoServicio.getDescripcion());
         this.statement.setInt(3, this.tipoServicio.getActivo() ? 1 : 0);
+        
         this.statement.setInt(4, this.tipoServicio.getTipoServicioId());
     }
 
@@ -81,9 +82,9 @@ public class TipoServicioDaoImpl extends DaoBaseImpl implements TipoServicioDao 
     }
 
     @Override
-    public TipoServicioDto obtenerPorId(Integer tipoServicioiD) {
+    public TipoServicioDto obtenerPorId(Integer tipoServicioId) {
         this.tipoServicio = new TipoServicioDto();
-        this.tipoServicio.setTipoServicioId(tipoServicioiD);
+        this.tipoServicio.setTipoServicioId(tipoServicioId);
         super.obtenerPorId();
         return this.tipoServicio;
     }
@@ -100,7 +101,7 @@ public class TipoServicioDaoImpl extends DaoBaseImpl implements TipoServicioDao 
     }
 
     @Override
-    public Integer eliminar(TipoServicioDto rol) {
+    public Integer eliminar(TipoServicioDto tipoServicio) {
         this.tipoServicio = tipoServicio;
         return super.eliminar();
     }

@@ -64,7 +64,7 @@ public abstract class DaoBaseImpl {
     }
 
     protected void colocarSQLEnStatement(String sql) throws SQLException {
-        System.out.println("cololcar-> " + sql);
+        System.out.println("Colocar SQL: " + sql);
         this.statement = this.conexion.prepareCall(sql);
     }
 
@@ -142,8 +142,8 @@ public abstract class DaoBaseImpl {
     }
 
     protected String generarSQLParaInsercion() {
-        //La sentencia que se generará es similiar a
-        //INSERT INTO INV_ALMACENES (NOMBRE, ALMACEN_CENTRAL) VALUES (?,?)
+        // La sentencia que se generará es similiar a
+        // INSERT INTO INV_ALMACENES (NOMBRE, ALMACEN_CENTRAL) VALUES (?,?)
         String sql = "INSERT INTO ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat("(");
@@ -167,8 +167,8 @@ public abstract class DaoBaseImpl {
     }
 
     protected String generarSQLParaModificacion() {
-        //sentencia SQL a generar es similar a 
-        //UPDATE INV_ALMACENES SET NOMBRE=?, ALMACEN_CENTRAL=? WHERE ALMACEN_ID=?
+        // Sentencia SQL a generar es similar a 
+        // UPDATE INV_ALMACENES SET NOMBRE=?, ALMACEN_CENTRAL=? WHERE ALMACEN_ID=?
         String sql = "UPDATE ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat(" SET ");
@@ -197,8 +197,8 @@ public abstract class DaoBaseImpl {
     }
 
     protected String generarSQLParaEliminacion() {
-        //sentencia SQL a generar es similar a 
-        //DELETE FROM INV_ALMACENES WHERE ALMACEN_ID=?
+        // Sentencia SQL a generar es similar a 
+        // DELETE FROM INV_ALMACENES WHERE ALMACEN_ID=?
         String sql = "DELETE FROM ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat(" WHERE ");
@@ -217,8 +217,8 @@ public abstract class DaoBaseImpl {
     }
 
     protected String generarSQLParaObtenerPorId() {
-        //sentencia SQL a generar es similar a 
-        //SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES WHERE ALMACEN_ID = ?
+        // Sentencia SQL a generar es similar a 
+        // SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES WHERE ALMACEN_ID = ?
         String sql = "SELECT ";
         String sql_columnas = "";
         String sql_predicado = "";
@@ -244,8 +244,8 @@ public abstract class DaoBaseImpl {
     }
 
     protected String generarSQLParaListarTodos() {
-        //sentencia SQL a generar es similar a 
-        //SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES
+        // Sentencia SQL a generar es similar a 
+        // SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES
         String sql = "SELECT ";
         String sql_columnas = "";
         for (Columna columna : this.listaColumnas) {

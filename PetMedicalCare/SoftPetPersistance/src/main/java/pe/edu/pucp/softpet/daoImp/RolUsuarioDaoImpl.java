@@ -84,9 +84,9 @@ public class RolUsuarioDaoImpl extends DaoBaseImpl implements RolUsuarioDao {
     }
 
     @Override
-    public RolUsuarioDto obtenerPorId(Integer rolUsuarioiD) {
+    public RolUsuarioDto obtenerPorId(Integer rolUsuarioId) {
         this.rolUsuario = new RolUsuarioDto();
-        this.rolUsuario.setRolUsuarioId(rolUsuarioiD);
+        this.rolUsuario.setRolUsuarioId(rolUsuarioId);
         super.obtenerPorId();
         return this.rolUsuario;
     }

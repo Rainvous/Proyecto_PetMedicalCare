@@ -82,9 +82,9 @@ public class TipoProductoDaoImpl extends DaoBaseImpl implements TipoProductoDao 
     }
 
     @Override
-    public TipoProductoDto obtenerPorId(Integer tipoProductoiD) {
+    public TipoProductoDto obtenerPorId(Integer tipoProductoId) {
         this.tipoProducto = new TipoProductoDto();
-        this.tipoProducto.setTipoProductoId(tipoProductoiD);
+        this.tipoProducto.setTipoProductoId(tipoProductoId);
         super.obtenerPorId();
         return this.tipoProducto;
     }

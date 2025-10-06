@@ -29,6 +29,8 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.listaColumnas.add(new Columna("ESTADO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
+        this.listaColumnas.add(new Columna("FECHA_INICIO_JORNADA", false, false));
+        this.listaColumnas.add(new Columna("FECHA_FIN_JORNADA", false, false));
     }
 
     @Override
@@ -38,6 +40,8 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.statement.setString(3, this.veterinario.getEstado());
         this.statement.setInt(4, this.veterinario.getActivo() ? 1 : 0);
         this.statement.setInt(5, this.veterinario.getPersona().getPersonaId());
+        this.statement.setDate(6, this.veterinario.getFechaInicioJornada());
+        this.statement.setDate(7, this.veterinario.getFechaFinJornada());
     }
 
     @Override
@@ -47,8 +51,10 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.statement.setString(3, this.veterinario.getEstado());
         this.statement.setInt(4, this.veterinario.getActivo() ? 1 : 0);
         this.statement.setInt(5, this.veterinario.getPersona().getPersonaId());
+        this.statement.setDate(6, this.veterinario.getFechaInicioJornada());
+        this.statement.setDate(7, this.veterinario.getFechaFinJornada());
 
-        this.statement.setInt(6, this.veterinario.getVeterinarioId());
+        this.statement.setInt(8, this.veterinario.getVeterinarioId());
     }
 
     @Override
@@ -70,6 +76,8 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.veterinario.setEstado(this.resultSet.getString("ESTADO"));
         this.veterinario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        this.veterinario.setFechaInicioJornada(this.resultSet.getDate("FECHA_INICIO_JORNADA"));
+        this.veterinario.setFechaFinJornada(this.resultSet.getDate("FECHA_FIN_JORNADA"));
     }
 
     @Override
