@@ -6,7 +6,6 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
-import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
 /**
  *
@@ -54,7 +53,7 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         this.statement.setString(4, this.servicio.getDescripcion());
         this.statement.setInt(5, this.servicio.getActivo() ? 1 : 0);
         this.statement.setInt(6, this.servicio.getTipoServicio().getTipoServicioId());
-        
+
         this.statement.setInt(7, this.servicio.getServicioId());
     }
 
@@ -77,10 +76,12 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         this.servicio.setEstado(this.resultSet.getString("ESTADO"));
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        TipoServicioDto tipoServicio = new TipoServicioDto();
-        tipoServicio.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
-
-        this.servicio.setTipoServicio(tipoServicio);
+        this.servicio.setTipoServicio(new TipoServicioDaoImpl().
+                obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
+//        TipoServicioDto tipoServicio = new TipoServicioDto();
+//        tipoServicio.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
+//
+//        this.servicio.setTipoServicio(tipoServicio);
     }
 
     @Override

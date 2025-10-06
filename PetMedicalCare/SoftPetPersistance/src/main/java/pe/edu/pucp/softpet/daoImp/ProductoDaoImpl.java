@@ -73,11 +73,12 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         this.producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
         this.producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
         this.producto.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        TipoProductoDto tipoProducto = new TipoProductoDto();
-        tipoProducto.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
-
-        this.producto.setTipoProducto(tipoProducto);
-
+        this.producto.setTipoProducto(new TipoProductoDaoImpl().
+                obtenerPorId(this.resultSet.getInt("TIPO_PRODUCTO_ID")));
+//        TipoProductoDto tipoProducto = new TipoProductoDto();
+//        tipoProducto.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
+//
+//        this.producto.setTipoProducto(tipoProducto);
     }
 
     @Override
@@ -106,10 +107,8 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
     @Override
     public Integer insertar(ProductoDto entity) {
-
         this.producto = entity;
         return super.insertar();
-
     }
 
     @Override
