@@ -13,8 +13,8 @@ public class TipoProductoDto {
         this.descripcion = null;
         this.activo = null;
     }
-    
-    public TipoProductoDto(Integer tipoProductoId, String nombre, 
+
+    public TipoProductoDto(Integer tipoProductoId, String nombre,
             String descripcion, Boolean activo) {
         this.tipoProductoId = tipoProductoId;
         this.nombre = nombre;

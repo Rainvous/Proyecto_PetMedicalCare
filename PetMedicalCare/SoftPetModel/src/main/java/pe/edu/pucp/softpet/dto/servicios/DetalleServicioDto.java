@@ -3,7 +3,7 @@ package pe.edu.pucp.softpet.dto.servicios;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 
 public class DetalleServicioDto {
-    
+
     private Integer detalleServicioId;
     private String descripcion;
     private Double costo;
@@ -19,9 +19,9 @@ public class DetalleServicioDto {
         this.servicio = null;
         this.cita = null;
     }
-    
-    public DetalleServicioDto(Integer detalleServicioId, String descripcion, 
-            Double costo, Boolean activo, ServicioDto servicio, 
+
+    public DetalleServicioDto(Integer detalleServicioId, String descripcion,
+            Double costo, Boolean activo, ServicioDto servicio,
             CitaAtencionDto cita) {
         this.detalleServicioId = detalleServicioId;
         this.descripcion = descripcion;

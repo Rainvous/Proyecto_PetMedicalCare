@@ -3,7 +3,7 @@ package pe.edu.pucp.softpet.dto.productos;
 import java.sql.Date;
 
 public class ProductoDto {
-    
+
     private Integer productoId;
     private String nombre;
     private String presentacion;
@@ -27,10 +27,10 @@ public class ProductoDto {
         this.usuarioCreador = null;
         this.fechaCreacion = null;
     }
-    
-    public ProductoDto(Integer productoId, String nombre, String presentacion, 
-            Double precioUnitario, Boolean activo, TipoProductoDto tipoProducto, 
-            Date fechaModificacion, String usuarioModificador, 
+
+    public ProductoDto(Integer productoId, String nombre, String presentacion,
+            Double precioUnitario, Boolean activo, TipoProductoDto tipoProducto,
+            Date fechaModificacion, String usuarioModificador,
             String usuarioCreador, Date fechaCreacion) {
         this.productoId = productoId;
         this.nombre = nombre;

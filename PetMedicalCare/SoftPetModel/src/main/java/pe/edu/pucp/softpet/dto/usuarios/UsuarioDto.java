@@ -3,7 +3,7 @@ package pe.edu.pucp.softpet.dto.usuarios;
 import java.sql.Date;
 
 public class UsuarioDto {
-    
+
     private Integer usuarioId;
     private String username;
     private String password;
@@ -25,9 +25,9 @@ public class UsuarioDto {
         this.usuarioCreador = null;
         this.fechaCreacion = null;
     }
-    
-    public UsuarioDto(Integer usuarioId, String username, String password, 
-            String correo, Boolean activo, Date fechaModificacion, 
+
+    public UsuarioDto(Integer usuarioId, String username, String password,
+            String correo, Boolean activo, Date fechaModificacion,
             String usuarioModificador, String usuarioCreador, Date fechaCreacion) {
         this.usuarioId = usuarioId;
         this.username = username;

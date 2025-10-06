@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -10,13 +6,12 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
-import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
 /**
  *
  * @author User
  */
-public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
+public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
     private ServicioDto servicio;
 
@@ -45,15 +40,9 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.statement.setDouble(2, this.servicio.getCosto());
         this.statement.setString(3, this.servicio.getEstado());
         this.statement.setString(4, this.servicio.getDescripcion());
-//        if (this.servicio.getActivo() == null) {
-//            System.out.println("nos");
-//        }
         this.statement.setInt(5, this.servicio.getActivo() ? 1 : 0);
-
-        int idTiposervicio = this.servicio.getTipoServicio().getTipoServicioId();
-        this.statement.setInt(6, idTiposervicio);
+        this.statement.setInt(6, this.servicio.getTipoServicio().getTipoServicioId());
         //System.out.println(statement);
-
     }
 
     @Override
@@ -62,13 +51,8 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.statement.setDouble(2, this.servicio.getCosto());
         this.statement.setString(3, this.servicio.getEstado());
         this.statement.setString(4, this.servicio.getDescripcion());
-        if (this.servicio.getActivo() == null) {
-            System.out.println("nos");
-        }
         this.statement.setInt(5, this.servicio.getActivo() ? 1 : 0);
-
-        int idTiposervicio = this.servicio.getTipoServicio().getTipoServicioId();
-        this.statement.setInt(6, idTiposervicio);
+        this.statement.setInt(6, this.servicio.getTipoServicio().getTipoServicioId());
 
         this.statement.setInt(7, this.servicio.getServicioId());
     }
@@ -92,24 +76,18 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.servicio.setEstado(this.resultSet.getString("ESTADO"));
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        TipoServicioDto tipoServicio = new TipoServicioDto();
-        tipoServicio.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
-
-        this.servicio.setTipoServicio(tipoServicio);
-
+        this.servicio.setTipoServicio(new TipoServicioDaoImpl().
+                obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
+//        TipoServicioDto tipoServicio = new TipoServicioDto();
+//        tipoServicio.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
+//
+//        this.servicio.setTipoServicio(tipoServicio);
     }
 
     @Override
     protected void limpiarObjetoDelResultSet() {
         this.servicio = null;
     }
-//        this.listaColumnas.add(new Columna("SERVICIO_ID", true, true));  // PK, autogenerado
-//        this.listaColumnas.add(new Columna("NOMBRE", false, false));
-//        this.listaColumnas.add(new Columna("COSTO", false, false));
-//        this.listaColumnas.add(new Columna("ESTADO", false, false));
-//        this.listaColumnas.add(new Columna("DESCRIPCION", false, false));
-//        this.listaColumnas.add(new Columna("ACTIVO", false, false));
-//        this.listaColumnas.add(new Columna("TIPO_SERVICIO_ID", false, false));
 
     @Override
     protected void agregarObjetoALaLista(List lista) throws SQLException {
@@ -147,5 +125,4 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.servicio = entity;
         return super.eliminar();
     }
-
 }

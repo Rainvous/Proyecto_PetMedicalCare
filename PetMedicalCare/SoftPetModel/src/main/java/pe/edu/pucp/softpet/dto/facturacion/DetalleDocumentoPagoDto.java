@@ -4,7 +4,7 @@ import pe.edu.pucp.softpet.dto.productos.ProductoDto;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
 public class DetalleDocumentoPagoDto {
-    
+
     private Integer dddpId;
     private Integer nroItem;
     private String descripcion;
@@ -30,10 +30,10 @@ public class DetalleDocumentoPagoDto {
         this.servicio = null;
         this.producto = null;
     }
-    
-    public DetalleDocumentoPagoDto(Integer dddpId, Integer nroItem, 
-            String descripcion, Integer cantidad, Double precioUnitarioSinIGV, 
-            Double valorVenta, Double IGVItem, Double importeTotal, 
+
+    public DetalleDocumentoPagoDto(Integer dddpId, Integer nroItem,
+            String descripcion, Integer cantidad, Double precioUnitarioSinIGV,
+            Double valorVenta, Double IGVItem, Double importeTotal,
             DocumentoPagoDto documentoPago, ServicioDto servicio, ProductoDto producto) {
         this.dddpId = dddpId;
         this.nroItem = nroItem;

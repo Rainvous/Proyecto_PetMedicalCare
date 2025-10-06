@@ -3,7 +3,7 @@ package pe.edu.pucp.softpet.dto.servicios;
 import java.sql.Date;
 
 public class ServicioDto {
-    
+
     private Integer servicioId;
     private String nombre;
     private Double costo;
@@ -29,11 +29,11 @@ public class ServicioDto {
         this.fechaCreacion = null;
         this.tipoServicio = null;
     }
-    
-    public ServicioDto(Integer servicioId, String nombre, Double costo, 
-            String estado, String descripcion, Boolean activo, 
-            Date fechaModificacion, String usuarioModificador, 
-            String usuarioCreador, Date fechaCreacion, 
+
+    public ServicioDto(Integer servicioId, String nombre, Double costo,
+            String estado, String descripcion, Boolean activo,
+            Date fechaModificacion, String usuarioModificador,
+            String usuarioCreador, Date fechaCreacion,
             TipoServicioDto tipoServicio) {
         this.servicioId = servicioId;
         this.nombre = nombre;

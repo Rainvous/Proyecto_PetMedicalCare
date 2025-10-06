@@ -3,13 +3,15 @@ package pe.edu.pucp.softpet.dto.personas;
 import java.sql.Date;
 
 public class VeterinarioDto {
-   
+
     private Integer veterinarioId;
     private String especializacion;
     private Date fechaContratacion;
     private String estado;
     private Boolean activo;
     private PersonaDto persona;
+    private Date fechaInicioJornada;
+    private Date fechaFinJornada;
 
     public VeterinarioDto() {
         this.veterinarioId = null;
@@ -18,17 +20,21 @@ public class VeterinarioDto {
         this.estado = null;
         this.activo = null;
         this.persona = null;
+        this.fechaInicioJornada = null;
+        this.fechaFinJornada = null;
     }
-    
-    public VeterinarioDto(Integer veterinarioId, String especializacion, 
-            Date fechaContratacion, String estado, Boolean activo, 
-            PersonaDto persona) {
+
+    public VeterinarioDto(Integer veterinarioId, String especializacion,
+            Date fechaContratacion, String estado, Boolean activo,
+            PersonaDto persona, Date fechaInicioJornada, Date fechaFinJornada) {
         this.veterinarioId = veterinarioId;
         this.especializacion = especializacion;
         this.fechaContratacion = fechaContratacion;
         this.estado = estado;
         this.activo = activo;
         this.persona = persona;
+        this.fechaInicioJornada = fechaInicioJornada;
+        this.fechaFinJornada = fechaFinJornada;
     }
 
     /**
@@ -113,5 +119,33 @@ public class VeterinarioDto {
      */
     public void setPersona(PersonaDto persona) {
         this.persona = persona;
+    }
+
+    /**
+     * @return the fechaInicioJornada
+     */
+    public Date getFechaInicioJornada() {
+        return fechaInicioJornada;
+    }
+
+    /**
+     * @param fechaInicioJornada the fechaInicioJornada to set
+     */
+    public void setFechaInicioJornada(Date fechaInicioJornada) {
+        this.fechaInicioJornada = fechaInicioJornada;
+    }
+
+    /**
+     * @return the fechaFinJornada
+     */
+    public Date getFechaFinJornada() {
+        return fechaFinJornada;
+    }
+
+    /**
+     * @param fechaFinJornada the fechaFinJornada to set
+     */
+    public void setFechaFinJornada(Date fechaFinJornada) {
+        this.fechaFinJornada = fechaFinJornada;
     }
 }

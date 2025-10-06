@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -15,7 +11,7 @@ import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
  *
  * @author marti
  */
-public class TipoProductoDaoImpl extends DAOImplBase implements TipoProductoDao {
+public class TipoProductoDaoImpl extends DaoBaseImpl implements TipoProductoDao {
 
     private TipoProductoDto tipoProducto;
 
@@ -86,9 +82,9 @@ public class TipoProductoDaoImpl extends DAOImplBase implements TipoProductoDao 
     }
 
     @Override
-    public TipoProductoDto obtenerPorId(Integer tipoProductoiD) {
+    public TipoProductoDto obtenerPorId(Integer tipoProductoId) {
         this.tipoProducto = new TipoProductoDto();
-        this.tipoProducto.setTipoProductoId(tipoProductoiD);
+        this.tipoProducto.setTipoProductoId(tipoProductoId);
         super.obtenerPorId();
         return this.tipoProducto;
     }

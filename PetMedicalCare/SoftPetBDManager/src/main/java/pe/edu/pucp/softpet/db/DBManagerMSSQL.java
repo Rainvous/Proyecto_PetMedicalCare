@@ -18,7 +18,7 @@ public class DBManagerMSSQL extends DBManager {
         //System.out.println(url);
         return url;
     }
-    
+
     @Override
     public String retornarSQLParaUltimoAutoGenerado() {
         return "select @@IDENTITY as id";

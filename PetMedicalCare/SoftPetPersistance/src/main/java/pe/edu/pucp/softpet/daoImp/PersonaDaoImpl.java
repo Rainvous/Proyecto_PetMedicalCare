@@ -1,4 +1,4 @@
- package pe.edu.pucp.softpet.daoImp;
+package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
 
-public class PersonaDaoImpl extends DAOImplBase implements PersonaDao {
+public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
     private PersonaDto persona;
 
@@ -80,7 +80,6 @@ public class PersonaDaoImpl extends DAOImplBase implements PersonaDao {
         this.persona.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.persona.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));
         this.persona.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
-
         this.persona.setRuc(this.resultSet.getInt("RUC"));
         this.persona.setUsuario(new UsuarioDaoImpl().obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
     }

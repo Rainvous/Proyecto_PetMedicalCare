@@ -3,7 +3,7 @@ package pe.edu.pucp.softpet.dto.recetas;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 
 public class RecetaMedicaDto {
-    
+
     private Integer recetaMedicaId;
     private String diagnostico;
     private Boolean activo;
@@ -15,8 +15,8 @@ public class RecetaMedicaDto {
         this.activo = null;
         this.cita = null;
     }
-    
-    public RecetaMedicaDto(Integer recetaMedicaId, String diagnostico, 
+
+    public RecetaMedicaDto(Integer recetaMedicaId, String diagnostico,
             Boolean activo, CitaAtencionDto cita) {
         this.recetaMedicaId = recetaMedicaId;
         this.diagnostico = diagnostico;

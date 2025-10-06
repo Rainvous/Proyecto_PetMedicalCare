@@ -1,7 +1,7 @@
 package pe.edu.pucp.softpet.dto.recetas;
 
 public class DetalleRecetaDto {
-    
+
     private Integer detalleRecetaId;
     private Integer cantidad;
     private String descripcionMedicamento;
@@ -17,9 +17,9 @@ public class DetalleRecetaDto {
         this.receta = null;
         this.activo = null;
     }
-    
-    public DetalleRecetaDto(Integer detalleRecetaId, Integer cantidad, 
-            String descripcionMedicamento, String indicacion, 
+
+    public DetalleRecetaDto(Integer detalleRecetaId, Integer cantidad,
+            String descripcionMedicamento, String indicacion,
             RecetaMedicaDto receta, Boolean activo) {
         this.detalleRecetaId = detalleRecetaId;
         this.cantidad = cantidad;

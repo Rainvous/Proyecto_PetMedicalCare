@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.daoImp;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,15 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.daoImp.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.db.DBManager;
 //NOTA: ESTA DAOimplBase ESTA MODIFICADO
 //SE AGREGÓ EL 
 
-public abstract class DAOImplBase {
+public abstract class DaoBaseImpl {
 
     protected String nombre_tabla;
     protected ArrayList<Columna> listaColumnas;
@@ -28,7 +25,7 @@ public abstract class DAOImplBase {
 
     protected String usuario;
 
-    public DAOImplBase(String nombre_tabla) {
+    public DaoBaseImpl(String nombre_tabla) {
         this.nombre_tabla = nombre_tabla;
         this.retornarLlavePrimaria = false;
         this.incluirListaDeColumnas();
@@ -67,7 +64,7 @@ public abstract class DAOImplBase {
     }
 
     protected void colocarSQLEnStatement(String sql) throws SQLException {
-        System.out.println("cololcar-> " + sql);
+        System.out.println("Colocar SQL: " + sql);
         this.statement = this.conexion.prepareCall(sql);
     }
 
@@ -145,8 +142,8 @@ public abstract class DAOImplBase {
     }
 
     protected String generarSQLParaInsercion() {
-        //La sentencia que se generará es similiar a
-        //INSERT INTO INV_ALMACENES (NOMBRE, ALMACEN_CENTRAL) VALUES (?,?)
+        // La sentencia que se generará es similiar a
+        // INSERT INTO INV_ALMACENES (NOMBRE, ALMACEN_CENTRAL) VALUES (?,?)
         String sql = "INSERT INTO ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat("(");
@@ -170,8 +167,8 @@ public abstract class DAOImplBase {
     }
 
     protected String generarSQLParaModificacion() {
-        //sentencia SQL a generar es similar a 
-        //UPDATE INV_ALMACENES SET NOMBRE=?, ALMACEN_CENTRAL=? WHERE ALMACEN_ID=?
+        // Sentencia SQL a generar es similar a 
+        // UPDATE INV_ALMACENES SET NOMBRE=?, ALMACEN_CENTRAL=? WHERE ALMACEN_ID=?
         String sql = "UPDATE ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat(" SET ");
@@ -200,8 +197,8 @@ public abstract class DAOImplBase {
     }
 
     protected String generarSQLParaEliminacion() {
-        //sentencia SQL a generar es similar a 
-        //DELETE FROM INV_ALMACENES WHERE ALMACEN_ID=?
+        // Sentencia SQL a generar es similar a 
+        // DELETE FROM INV_ALMACENES WHERE ALMACEN_ID=?
         String sql = "DELETE FROM ";
         sql = sql.concat(this.nombre_tabla);
         sql = sql.concat(" WHERE ");
@@ -220,8 +217,8 @@ public abstract class DAOImplBase {
     }
 
     protected String generarSQLParaObtenerPorId() {
-        //sentencia SQL a generar es similar a 
-        //SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES WHERE ALMACEN_ID = ?
+        // Sentencia SQL a generar es similar a 
+        // SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES WHERE ALMACEN_ID = ?
         String sql = "SELECT ";
         String sql_columnas = "";
         String sql_predicado = "";
@@ -247,8 +244,8 @@ public abstract class DAOImplBase {
     }
 
     protected String generarSQLParaListarTodos() {
-        //sentencia SQL a generar es similar a 
-        //SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES
+        // Sentencia SQL a generar es similar a 
+        // SELECT ALMACEN_ID, NOMBRE, ALMACEN_CENTRAL FROM INV_ALMACENES
         String sql = "SELECT ";
         String sql_columnas = "";
         for (Columna columna : this.listaColumnas) {
@@ -416,7 +413,9 @@ public abstract class DAOImplBase {
         //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
         //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
         //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
-        if(usuario.isEmpty())return;
+        if (usuario.isEmpty()) {
+            return;
+        }
         try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
             System.out.println("------>" + psSet);
             psSet.setString(1, usuario);

@@ -1,7 +1,7 @@
 package pe.edu.pucp.softpet.dto.servicios;
 
 public class TipoServicioDto {
-    
+
     private Integer tipoServicioId;
     private String nombre;
     private String descripcion;
@@ -13,8 +13,8 @@ public class TipoServicioDto {
         this.descripcion = null;
         this.activo = null;
     }
-    
-    public TipoServicioDto(Integer tipoServicioId, String nombre, 
+
+    public TipoServicioDto(Integer tipoServicioId, String nombre,
             String descripcion, Boolean activo) {
         this.tipoServicioId = tipoServicioId;
         this.nombre = nombre;

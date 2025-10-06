@@ -1,11 +1,11 @@
 package pe.edu.pucp.softpet.db;
 
-public class DBManagerMySQL  extends DBManager {
-    
-    protected DBManagerMySQL(){
-        
+public class DBManagerMySQL extends DBManager {
+
+    protected DBManagerMySQL() {
+
     }
-    
+
     @Override
     protected String getURL() {
         String url = this.tipo_de_driver.concat("://");
@@ -14,7 +14,7 @@ public class DBManagerMySQL  extends DBManager {
         url = url.concat(this.puerto);
         url = url.concat("/");
         url = url.concat(this.base_de_datos);
-        System.out.println(url);
+        System.out.println("URL: " + url);
         return url;
     }
 
@@ -22,5 +22,5 @@ public class DBManagerMySQL  extends DBManager {
     public String retornarSQLParaUltimoAutoGenerado() {
         return "select @@last_insert_id as id";
     }
-        
+
 }
