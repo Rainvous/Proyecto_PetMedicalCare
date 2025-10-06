@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -56,7 +52,7 @@ public class DetalleDocumentoDePagoDaoImpl extends DAOImplBase implements Detall
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-                this.statement.setInt(1, this.detalleDocumento.getNroItem());
+        this.statement.setInt(1, this.detalleDocumento.getNroItem());
         this.statement.setString(2, this.detalleDocumento.getDescripcion());
         this.statement.setInt(3, this.detalleDocumento.getCantidad());
         this.statement.setDouble(4, this.detalleDocumento.getPrecioUnitarioSinIGV());

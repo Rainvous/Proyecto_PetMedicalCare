@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -10,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dao.TipoServicioDao;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
+
 /**
  *
  * @author marti
@@ -36,14 +33,14 @@ public class TipoServicioDaoImpl extends DAOImplBase implements TipoServicioDao 
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setString(1, this.tipoServicio.getNombre());
         this.statement.setString(2, this.tipoServicio.getDescripcion());
-        this.statement.setInt(3, this.tipoServicio.getActivo()? 1:0);
+        this.statement.setInt(3, this.tipoServicio.getActivo() ? 1 : 0);
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-                this.statement.setString(1, this.tipoServicio.getNombre());
+        this.statement.setString(1, this.tipoServicio.getNombre());
         this.statement.setString(2, this.tipoServicio.getDescripcion());
-        this.statement.setInt(3, this.tipoServicio.getActivo()? 1:0);
+        this.statement.setInt(3, this.tipoServicio.getActivo() ? 1 : 0);
         this.statement.setInt(4, this.tipoServicio.getTipoServicioId());
     }
 

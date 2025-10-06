@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -90,7 +86,7 @@ public class DocumentoDePagoDaoImpl extends DAOImplBase implements DocumentoDePa
         this.documentoPago.setSubtotalSinIGV(this.resultSet.getDouble("SUBTOTAL_SIN_IGV"));
         this.documentoPago.setIGVTotal(this.resultSet.getDouble("IGV_TOTAL"));
         this.documentoPago.setTotal(this.resultSet.getDouble("TOTAL"));
-        this.documentoPago.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.documentoPago.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override

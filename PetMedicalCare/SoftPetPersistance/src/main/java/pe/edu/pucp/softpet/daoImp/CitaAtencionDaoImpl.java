@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -59,14 +55,14 @@ public class CitaAtencionDaoImpl extends DAOImplBase implements CitaAtencionDao 
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setString(1, this.citaAtencion.getObservacion());
         this.statement.setDate(2, this.citaAtencion.getFechaRegistro());
-               this.statement.setTime(3, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setTime(3, this.citaAtencion.getFechaHoraInicio());
         this.statement.setTime(4, this.citaAtencion.getFechaHoraFin());
         this.statement.setDouble(5, this.citaAtencion.getMonto());
         this.statement.setInt(6, this.citaAtencion.getActivo() ? 1 : 0);
         this.statement.setString(7, this.citaAtencion.getPeso());
         this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-        
+
         this.statement.setInt(10, this.citaAtencion.getCitaId());
     }
 
@@ -89,7 +85,7 @@ public class CitaAtencionDaoImpl extends DAOImplBase implements CitaAtencionDao 
         this.citaAtencion.setFechaHoraInicio(this.resultSet.getTime("HORA_INICIO"));
         this.citaAtencion.setFechaHoraFin(this.resultSet.getTime("HORA_FIN"));
         this.citaAtencion.setMonto(this.resultSet.getDouble("MONTO"));
-        this.citaAtencion.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.citaAtencion.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.citaAtencion.setPeso(this.resultSet.getString("PESO_MASCOTA"));
         this.citaAtencion.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
         this.citaAtencion.setMascota(new MascotaDaoImpl().obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));

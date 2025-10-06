@@ -1,4 +1,4 @@
- package pe.edu.pucp.softpet.daoImp;
+package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

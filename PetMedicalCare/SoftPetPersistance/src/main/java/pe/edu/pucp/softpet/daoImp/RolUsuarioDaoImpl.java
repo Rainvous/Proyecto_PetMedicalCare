@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.softpet.dao.PersonaDao;
 import pe.edu.pucp.softpet.dao.RolUsuarioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
@@ -47,7 +42,7 @@ public class RolUsuarioDaoImpl extends DAOImplBase implements RolUsuarioDao {
         this.statement.setInt(1, this.rolUsuario.getRol().getRolId());
         this.statement.setInt(2, this.rolUsuario.getUsuario().getUsuarioId());
         this.statement.setInt(3, this.rolUsuario.getActivo() ? 1 : 0);
-        
+
         this.statement.setInt(4, this.rolUsuario.getRolUsuarioId());
     }
 
@@ -67,8 +62,8 @@ public class RolUsuarioDaoImpl extends DAOImplBase implements RolUsuarioDao {
         this.rolUsuario.setRolUsuarioId(this.resultSet.getInt("ROL_USUARIO_ID"));
         this.rolUsuario.setRol(new RolDaoImpl().obtenerPorId(this.resultSet.getInt("ROL_ID")));
         this.rolUsuario.setUsuario(new UsuarioDaoImpl().obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
-        this.rolUsuario.setActivo(this.resultSet.getInt("ACTIVO")==1);
-      
+        this.rolUsuario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+
     }
 
     @Override

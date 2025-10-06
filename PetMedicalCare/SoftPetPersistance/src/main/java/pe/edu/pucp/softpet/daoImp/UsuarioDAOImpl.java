@@ -1,29 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.softpet.dao.UsuariosDAO;
-import pe.edu.pucp.softpet.daoImp.DAOImplBase;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
+import pe.edu.pucp.softpet.dao.UsuarioDAO;
+
 /**
  *
  * @author marti
  */
-public class UsuarioDaoImpl extends DAOImplBase implements UsuariosDAO {
+public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDAO {
 
     private UsuarioDto usuarios;
 
     public UsuarioDaoImpl() {
         super("USUARIOS"); // nombre de tabla en BD
         this.usuarios = null;
-        this.usuario="backend_java";
-        this.retornarLlavePrimaria=true;
+        this.usuario = "backend_java";
+        this.retornarLlavePrimaria = true;
     }
 
     public UsuarioDaoImpl(String nombre_tabla) {
@@ -95,7 +91,7 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuariosDAO {
         // NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-         this.statement.setString(3, this.usuarios.getCorreo());
+        this.statement.setString(3, this.usuarios.getCorreo());
         this.statement.setBoolean(4, this.usuarios.getActivo());
 //        this.statement.setDate(4, this.usuarios.getFechaModificacion());
 //        this.statement.setString(5, this.usuarios.getUsuarioModificador());
@@ -111,7 +107,7 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuariosDAO {
         // Mismo orden que inserción, y al final el PK:
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-         this.statement.setString(3, this.usuarios.getCorreo());
+        this.statement.setString(3, this.usuarios.getCorreo());
         this.statement.setBoolean(4, this.usuarios.getActivo());
 //        this.statement.setDate(4, this.usuarios.getFechaModificacion());
 //        this.statement.setString(5, this.usuarios.getUsuarioModificador());

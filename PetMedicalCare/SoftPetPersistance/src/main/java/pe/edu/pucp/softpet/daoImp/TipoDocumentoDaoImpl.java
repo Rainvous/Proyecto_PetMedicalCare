@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -61,7 +57,7 @@ public class TipoDocumentoDaoImpl extends DAOImplBase implements TipoDocumentoDa
         this.tipoDocumento = new TipoDocumentoDto();
         this.tipoDocumento.setTipoDocumentoId(this.resultSet.getInt("TIPO_DOCUMENTO_ID"));
         this.tipoDocumento.setNombre(this.resultSet.getString("NOMBRE"));
-        this.tipoDocumento.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.tipoDocumento.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override

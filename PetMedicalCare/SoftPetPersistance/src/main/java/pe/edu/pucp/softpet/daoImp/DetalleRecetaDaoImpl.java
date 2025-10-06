@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -75,7 +71,7 @@ public class DetalleRecetaDaoImpl extends DAOImplBase implements DetalleRecetaDa
         this.detalleReceta.setDescripcionMedicamento(this.resultSet.getString("DESCRIPCION_MEDICAMENTO"));
         this.detalleReceta.setIndicacion(this.resultSet.getString("INDICACION"));
         this.detalleReceta.setReceta(new RecetaMedicaDaoImpl().obtenerPorId(this.resultSet.getInt("RECETA_MEDICA_ID")));
-        this.detalleReceta.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.detalleReceta.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override

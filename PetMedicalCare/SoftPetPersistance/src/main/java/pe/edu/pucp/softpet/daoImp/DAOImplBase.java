@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.daoImp;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.daoImp.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.db.DBManager;
@@ -416,7 +413,9 @@ public abstract class DAOImplBase {
         //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
         //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
         //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
-        if(usuario.isEmpty())return;
+        if (usuario.isEmpty()) {
+            return;
+        }
         try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
             System.out.println("------>" + psSet);
             psSet.setString(1, usuario);
