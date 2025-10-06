@@ -8,5 +8,4 @@ import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
  */
 public interface ServicioDao extends DaoBase<ServicioDto> {
 
-    public ServicioDto obtenerPorId(Integer idDto);
 }

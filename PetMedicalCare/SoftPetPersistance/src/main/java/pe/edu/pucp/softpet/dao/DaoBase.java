@@ -9,12 +9,13 @@ import java.util.ArrayList;
  */
 public interface DaoBase<T> {
 
-    public Integer insertar(T entity);
+    Integer insertar(T entity);
 
-    // public <T> obtenerPorId(Integer idDto);
-    public ArrayList<T> listarTodos();
+    T obtenerPorId(Integer id);
 
-    public Integer modificar(T entity);
+    ArrayList<T> listarTodos();
 
-    public Integer eliminar(T entity);
+    Integer modificar(T entity);
+
+    Integer eliminar(T entity);
 }

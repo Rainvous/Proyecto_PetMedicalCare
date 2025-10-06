@@ -8,5 +8,4 @@ import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
  */
 public interface UsuarioDAO extends DaoBase<UsuarioDto> {
 
-    public UsuarioDto obtenerPorId(Integer idDto);
 }

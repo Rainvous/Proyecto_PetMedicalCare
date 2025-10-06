@@ -8,5 +8,4 @@ import pe.edu.pucp.softpet.dto.productos.ProductoDto;
  */
 public interface ProductoDao extends DaoBase<ProductoDto> {
 
-    public ProductoDto obtenerPorId(Integer idDto);
 }
