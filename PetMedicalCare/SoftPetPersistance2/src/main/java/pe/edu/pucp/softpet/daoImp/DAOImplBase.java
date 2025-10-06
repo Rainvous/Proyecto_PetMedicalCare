@@ -416,6 +416,7 @@ public abstract class DAOImplBase {
         //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
         //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
         //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
+        if(usuario.isEmpty())return;
         try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
             System.out.println("------>" + psSet);
             psSet.setString(1, usuario);

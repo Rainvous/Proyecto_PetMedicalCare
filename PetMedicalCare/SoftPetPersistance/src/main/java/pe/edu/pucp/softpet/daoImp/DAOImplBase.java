@@ -1,15 +1,21 @@
 package pe.edu.pucp.softpet.daoImp;
 
+import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.daoImp.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.db.DBManager;
+//NOTA: ESTA DAOimplBase ESTA MODIFICADO
+//SE AGREGÓ EL 
 
 public abstract class DAOImplBase {
 
@@ -21,6 +27,7 @@ public abstract class DAOImplBase {
     protected ResultSet resultSet;
 
     protected String usuario;
+
     public DAOImplBase(String nombre_tabla) {
         this.nombre_tabla = nombre_tabla;
         this.retornarLlavePrimaria = false;
@@ -60,7 +67,7 @@ public abstract class DAOImplBase {
     }
 
     protected void colocarSQLEnStatement(String sql) throws SQLException {
-        System.out.println(sql);
+        System.out.println("cololcar-> " + sql);
         this.statement = this.conexion.prepareCall(sql);
     }
 
@@ -86,8 +93,10 @@ public abstract class DAOImplBase {
 
     private Integer ejecuta_DML(Tipo_Operacion tipo_operacion) {
         Integer resultado = 0;
+
         try {
             this.iniciarTransaccion();
+            this.SetDeUsuario(usuario);
             String sql = null;
             switch (tipo_operacion) {
                 case Tipo_Operacion.INSERTAR:
@@ -112,6 +121,7 @@ public abstract class DAOImplBase {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
+            System.err.println("CRUD-> " + statement);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();
@@ -396,5 +406,26 @@ public abstract class DAOImplBase {
                 System.err.println("Error al cerrar la conexión - " + ex);
             }
         }
+    }
+
+    public void EjecutaSetUsuario() throws SQLException {
+        ejecutarDMLEnBD();
+    }
+
+    private void SetDeUsuario(String usuario) throws SQLException {
+        //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
+        //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
+        //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
+        if(usuario.isEmpty())return;
+        try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
+            System.out.println("------>" + psSet);
+            psSet.setString(1, usuario);
+            System.out.println("------>" + psSet);
+            psSet.execute();
+        }
+    }
+
+    public void NombreDelUsuarioQueModifica(String user) {
+        this.usuario = user;
     }
 }

@@ -1,20 +1,29 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import pe.edu.pucp.softpet.dao.UsuariosDAO;
+import pe.edu.pucp.softpet.daoImp.DAOImplBase;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
-import pe.edu.pucp.softpet.dao.UsuarioDao;
-
-public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDao {
+/**
+ *
+ * @author marti
+ */
+public class UsuarioDaoImpl extends DAOImplBase implements UsuariosDAO {
 
     private UsuarioDto usuarios;
 
     public UsuarioDaoImpl() {
         super("USUARIOS"); // nombre de tabla en BD
-        this.usuario = "backend_java";
         this.usuarios = null;
+        this.usuario="backend_java";
+        this.retornarLlavePrimaria=true;
     }
 
     public UsuarioDaoImpl(String nombre_tabla) {
@@ -31,10 +40,10 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDao {
         this.listaColumnas.add(new Columna("PASSWORD", false, false));
         this.listaColumnas.add(new Columna("CORREO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("FECHA_MODIFICACION", false, false));
-        this.listaColumnas.add(new Columna("USUARIO_MODIFICADOR", false, false));
-        this.listaColumnas.add(new Columna("USUARIO_CREADOR", false, false));
-        this.listaColumnas.add(new Columna("FECHA_CREACION", false, false));
+//        this.listaColumnas.add(new Columna("FECHA_MODIFICACION", false, false));
+//        this.listaColumnas.add(new Columna("USUARIO_MODIFICADOR", false, false));
+//        this.listaColumnas.add(new Columna("USUARIO_CREADOR", false, false));
+//        this.listaColumnas.add(new Columna("FECHA_CREACION", false, false));
     }
 
     // ===== PersonaDAO =====
@@ -86,12 +95,14 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDao {
         // NOMBRE, DIRECCION, CORREO, TELEFONO, SEXO, TIPO_PERSONA, TIPO_DOCUMENTO, NRO_DOCUMENTO
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setInt(3, this.usuarios.getActivo() ? 1 : 0);
-        this.statement.setDate(4, this.usuarios.getFechaModificacion());
-        this.statement.setString(5, this.usuarios.getUsuarioModificador());
-
-        this.statement.setString(6, this.usuarios.getUsuarioCreador());
-        this.statement.setDate(7, this.usuarios.getFechaCreacion());
+         this.statement.setString(3, this.usuarios.getCorreo());
+        this.statement.setBoolean(4, this.usuarios.getActivo());
+//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
+//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
+//        
+//
+//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
+//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
     }
 
     @Override
@@ -100,17 +111,20 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDao {
         // Mismo orden que inserción, y al final el PK:
         this.statement.setString(1, this.usuarios.getUsername());
         this.statement.setString(2, this.usuarios.getPassword());
-        this.statement.setInt(3, this.usuarios.getActivo() ? 1 : 0);
-        this.statement.setDate(4, this.usuarios.getFechaModificacion());
-        this.statement.setString(5, this.usuarios.getUsuarioModificador());
-
-        this.statement.setString(6, this.usuarios.getUsuarioCreador());
-        this.statement.setDate(7, this.usuarios.getFechaCreacion());
+         this.statement.setString(3, this.usuarios.getCorreo());
+        this.statement.setBoolean(4, this.usuarios.getActivo());
+//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
+//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
+//        
+//
+//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
+//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
 
         // WHERE PERSONA_ID = ?
-        this.statement.setInt(8, this.usuarios.getUsuarioId());
+        this.statement.setInt(5, this.usuarios.getUsuarioId());
     }
 
+    //Hay que cambiar la pos de personId, de 1 a 9
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         // DELETE ... WHERE PERSONA_ID = ?
@@ -130,12 +144,12 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDao {
         p.setUsername(this.resultSet.getString("USERNAME"));
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-
-        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
-        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
-        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
+        p.setActivo(this.resultSet.getBoolean("ACTIVO"));
+//        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
+//      
+//        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
+//        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
+//        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
         this.usuarios = p; // importante: `obtenerPorId` devolverá `this.persona`
     }
 
@@ -146,12 +160,12 @@ public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDao {
         p.setUsername(this.resultSet.getString("USERNAME"));
         p.setPassword(this.resultSet.getString("PASSWORD"));
         p.setCorreo(this.resultSet.getString("CORREO"));
-        p.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-
-        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
-        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
-        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
+        p.setActivo(this.resultSet.getBoolean("ACTIVO"));
+//        p.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
+//      
+//        p.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
+//        p.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
+//        p.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
 
         lista.add(p);
     }

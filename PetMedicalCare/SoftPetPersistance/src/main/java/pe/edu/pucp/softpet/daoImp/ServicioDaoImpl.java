@@ -73,6 +73,7 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.statement.setInt(7, this.servicio.getServicioId());
     }
 
+    @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.statement.setInt(1, this.servicio.getServicioId());
     }
@@ -91,10 +92,10 @@ public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
         this.servicio.setEstado(this.resultSet.getString("ESTADO"));
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        TipoServicioDto tipoProducto = new TipoServicioDto();
-        tipoProducto.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
+        TipoServicioDto tipoServicio = new TipoServicioDto();
+        tipoServicio.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
 
-        this.servicio.setTipoServicio(tipoProducto);
+        this.servicio.setTipoServicio(tipoServicio);
 
     }
 

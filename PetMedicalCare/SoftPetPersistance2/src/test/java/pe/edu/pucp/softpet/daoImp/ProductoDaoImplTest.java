@@ -109,9 +109,16 @@ public class ProductoDaoImplTest {
         servicio.setServicioId(result);
         servicio.setNombre("Modificacion Prueba");
         
+        
+        
+        
         Integer result2 = serviDAO.modificar(servicio);
         assertTrue(result2 > 0);
-         
+         System.out.println("obtener por id");
+        servicio=null;
+        servicio= serviDAO.obtenerPorId(2);
+        System.err.println("EL SERVICIO ES: "+servicio.getNombre()+" FK"+servicio.getServicioId());
+        assertNotNull(servicio);
                  
     }
 
