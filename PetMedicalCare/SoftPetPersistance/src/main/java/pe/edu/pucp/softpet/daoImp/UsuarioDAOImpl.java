@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dao.UsuarioDAO;
  *
  * @author marti
  */
-public class UsuarioDaoImpl extends DAOImplBase implements UsuarioDAO {
+public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
 
     private UsuarioDto usuarios;
 

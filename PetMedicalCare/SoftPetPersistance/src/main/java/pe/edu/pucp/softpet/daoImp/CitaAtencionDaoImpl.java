@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dao.CitaAtencionDao;
  *
  * @author marti
  */
-public class CitaAtencionDaoImpl extends DAOImplBase implements CitaAtencionDao {
+public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao {
 
     private CitaAtencionDto citaAtencion;
 

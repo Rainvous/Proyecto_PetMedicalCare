@@ -14,7 +14,7 @@ import pe.edu.pucp.softpet.db.DBManager;
 //NOTA: ESTA DAOimplBase ESTA MODIFICADO
 //SE AGREGÓ EL 
 
-public abstract class DAOImplBase {
+public abstract class DaoBaseImpl {
 
     protected String nombre_tabla;
     protected ArrayList<Columna> listaColumnas;
@@ -25,7 +25,7 @@ public abstract class DAOImplBase {
 
     protected String usuario;
 
-    public DAOImplBase(String nombre_tabla) {
+    public DaoBaseImpl(String nombre_tabla) {
         this.nombre_tabla = nombre_tabla;
         this.retornarLlavePrimaria = false;
         this.incluirListaDeColumnas();

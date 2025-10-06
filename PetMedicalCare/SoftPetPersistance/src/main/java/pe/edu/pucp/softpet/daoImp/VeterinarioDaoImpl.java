@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
  *
  * @author marti
  */
-public class VeterinarioDaoImpl extends DAOImplBase implements VeterinarioDao {
+public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
 
     private VeterinarioDto veterinario;
 

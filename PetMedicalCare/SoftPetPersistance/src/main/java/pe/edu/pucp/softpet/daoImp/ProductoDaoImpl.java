@@ -12,7 +12,7 @@ import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
  *
  * @author User
  */
-public class ProductoDaoImpl extends DAOImplBase implements ProductoDao {
+public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
     private ProductoDto producto;
 

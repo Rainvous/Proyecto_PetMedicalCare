@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
  *
  * @author marti
  */
-public class DetalleDocumentoDePagoDaoImpl extends DAOImplBase implements DetalleDocumentoDePagoDao {
+public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements DetalleDocumentoDePagoDao {
 
     private DetalleDocumentoPagoDto detalleDocumento;
 

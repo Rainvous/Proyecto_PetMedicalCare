@@ -12,7 +12,7 @@ import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
  *
  * @author User
  */
-public class ServicioDaoImpl extends DAOImplBase implements ServicioDao {
+public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
     private ServicioDto servicio;
 

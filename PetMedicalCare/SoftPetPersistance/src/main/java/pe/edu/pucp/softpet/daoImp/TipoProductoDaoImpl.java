@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
  *
  * @author marti
  */
-public class TipoProductoDaoImpl extends DAOImplBase implements TipoProductoDao {
+public class TipoProductoDaoImpl extends DaoBaseImpl implements TipoProductoDao {
 
     private TipoProductoDto tipoProducto;
 

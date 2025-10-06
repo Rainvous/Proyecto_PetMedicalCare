@@ -7,7 +7,7 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 import pe.edu.pucp.softpet.dao.RolDao;
 
-public class RolDaoImpl extends DAOImplBase implements RolDao {
+public class RolDaoImpl extends DaoBaseImpl implements RolDao {
 
     private RolDto rol;
 

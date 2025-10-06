@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
  *
  * @author marti
  */
-public class RolUsuarioDaoImpl extends DAOImplBase implements RolUsuarioDao {
+public class RolUsuarioDaoImpl extends DaoBaseImpl implements RolUsuarioDao {
 
     private RolUsuarioDto rolUsuario;
 

@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dto.servicios.DetalleServicioDto;
  *
  * @author marti
  */
-public class DetalleServicioDaoImpl extends DAOImplBase implements DetalleServicioDao {
+public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServicioDao {
 
     private DetalleServicioDto detalleServicio;
 

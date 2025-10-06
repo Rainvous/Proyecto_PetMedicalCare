@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dto.recetas.DetalleRecetaDto;
  *
  * @author marti
  */
-public class DetalleRecetaDaoImpl extends DAOImplBase implements DetalleRecetaDao {
+public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDao {
 
     private DetalleRecetaDto detalleReceta;
 

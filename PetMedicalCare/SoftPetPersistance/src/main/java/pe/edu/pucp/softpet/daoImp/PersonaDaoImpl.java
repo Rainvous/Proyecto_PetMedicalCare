@@ -7,7 +7,7 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
 
-public class PersonaDaoImpl extends DAOImplBase implements PersonaDao {
+public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
     private PersonaDto persona;
 
