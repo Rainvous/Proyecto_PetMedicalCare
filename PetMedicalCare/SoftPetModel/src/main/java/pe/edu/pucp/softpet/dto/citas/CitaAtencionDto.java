@@ -6,7 +6,7 @@ import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 
 public class CitaAtencionDto {
-    
+
     private Integer citaId;
     private String observacion;
     private Time fechaHoraInicio;
@@ -30,10 +30,10 @@ public class CitaAtencionDto {
         this.veterinario = null;
         this.mascota = null;
     }
-    
-    public CitaAtencionDto(Integer citaId, String observacion, 
-            Time fechaHoraInicio, Date fechaRegistro, Time fechaHoraFin, 
-            Double monto, Boolean activo, String peso, 
+
+    public CitaAtencionDto(Integer citaId, String observacion,
+            Time fechaHoraInicio, Date fechaRegistro, Time fechaHoraFin,
+            Double monto, Boolean activo, String peso,
             VeterinarioDto veterinario, MascotaDto mascota) {
         this.citaId = citaId;
         this.observacion = observacion;

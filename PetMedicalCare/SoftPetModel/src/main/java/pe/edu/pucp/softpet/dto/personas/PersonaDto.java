@@ -27,9 +27,9 @@ public class PersonaDto {
         this.ruc = null;
         this.usuario = null;
     }
-    
-    public PersonaDto(Integer personaId, String nombre, String direccion, 
-            String telefono, String sexo, Boolean activo, String tipoDocumento, 
+
+    public PersonaDto(Integer personaId, String nombre, String direccion,
+            String telefono, String sexo, Boolean activo, String tipoDocumento,
             Integer nroDocumento, Integer ruc, UsuarioDto usuario) {
         this.personaId = personaId;
         this.nombre = nombre;

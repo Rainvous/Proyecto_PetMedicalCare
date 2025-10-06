@@ -1,7 +1,7 @@
 package pe.edu.pucp.softpet.dto.usuarios;
 
 public class RolDto {
-    
+
     private Integer rolId;
     private String nombre;
     private Boolean activo;
@@ -11,7 +11,7 @@ public class RolDto {
         this.nombre = null;
         this.activo = null;
     }
-    
+
     public RolDto(Integer rolId, String nombre, Boolean activo) {
         this.rolId = rolId;
         this.nombre = nombre;

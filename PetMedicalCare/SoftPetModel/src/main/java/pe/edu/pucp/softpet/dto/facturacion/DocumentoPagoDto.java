@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.dto.facturacion;
 
 import java.sql.Date;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class DocumentoPagoDto {
 
@@ -15,6 +16,9 @@ public class DocumentoPagoDto {
     private Double IGVTotal;
     private Double total;
     private Boolean activo;
+    private TipoDocumentoDto tipoDocumento;
+    private PersonaDto persona;
+
     public DocumentoPagoDto() {
         this.documentoPagoId = null;
         this.serie = null;
@@ -26,13 +30,15 @@ public class DocumentoPagoDto {
         this.subtotalSinIGV = null;
         this.IGVTotal = null;
         this.total = null;
-        this.activo =null;
+        this.activo = null;
+        this.tipoDocumento = null;
+        this.persona = null;
     }
-    
-    public DocumentoPagoDto(Integer documentoPagoId, String serie, 
-            String numero, Double tasaIGV, Date fechaEmision, String metodoPago, 
+
+    public DocumentoPagoDto(Integer documentoPagoId, String serie,
+            String numero, Double tasaIGV, Date fechaEmision, String metodoPago,
             String estado, Double subtotalSinIGV, Double IGVTotal, Double total,
-            Boolean activo) {
+            Boolean activo, TipoDocumentoDto tipoDocumento, PersonaDto persona) {
         this.documentoPagoId = documentoPagoId;
         this.serie = serie;
         this.numero = numero;
@@ -44,6 +50,8 @@ public class DocumentoPagoDto {
         this.IGVTotal = IGVTotal;
         this.total = total;
         this.activo = activo;
+        this.tipoDocumento = tipoDocumento;
+        this.persona = persona;
     }
 
     /**
@@ -185,9 +193,8 @@ public class DocumentoPagoDto {
     public void setTotal(Double total) {
         this.total = total;
     }
-    
-    
-        /**
+
+    /**
      * @return the activo
      */
     public Boolean getActivo() {
@@ -199,5 +206,33 @@ public class DocumentoPagoDto {
      */
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    /**
+     * @return the tipoDocumento
+     */
+    public TipoDocumentoDto getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    /**
+     * @param tipoDocumento the tipoDocumento to set
+     */
+    public void setTipoDocumento(TipoDocumentoDto tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    /**
+     * @return the persona
+     */
+    public PersonaDto getPersona() {
+        return persona;
+    }
+
+    /**
+     * @param persona the persona to set
+     */
+    public void setPersona(PersonaDto persona) {
+        this.persona = persona;
     }
 }

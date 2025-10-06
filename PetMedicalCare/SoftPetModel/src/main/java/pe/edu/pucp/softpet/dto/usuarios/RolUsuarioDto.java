@@ -13,8 +13,8 @@ public class RolUsuarioDto {
         this.rol = null;
         this.activo = null;
     }
-    
-    public RolUsuarioDto(Integer rolUsuarioId, UsuarioDto usuario, 
+
+    public RolUsuarioDto(Integer rolUsuarioId, UsuarioDto usuario,
             RolDto rol, Boolean activo) {
         this.rolUsuarioId = rolUsuarioId;
         this.usuario = usuario;
