@@ -76,8 +76,7 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         this.servicio.setEstado(this.resultSet.getString("ESTADO"));
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.servicio.setTipoServicio(new TipoServicioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
+        this.servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
 //        TipoServicioDto tipoServicio = new TipoServicioDto();
 //        tipoServicio.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
 //

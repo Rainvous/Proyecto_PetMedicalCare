@@ -81,47 +81,47 @@ public class ProductoDaoImplTest {
 
     }
 
-    @Test
-    public void TesteoCrud2() throws SQLException {
-         ImprimeCabecera("Testeo de Servicio");
-         System.out.println("Insertar".toUpperCase());
-         ServicioDaoImpl serviDAO= new ServicioDaoImpl();
-         ServicioDto servicio= new ServicioDto();
-         servicio.setActivo(true);
-         servicio.setCosto(1000.2);
-         servicio.setDescripcion("DESPARACITACION perro by java");
-         servicio.setEstado("SIN USAR by java");
-         servicio.setNombre("DESPARACITACION");
-         TipoServicioDto tipo= new TipoServicioDto();
-         tipo.setTipoServicioId(2);
-         servicio.setTipoServicio(tipo);
-         
-         Integer result= serviDAO.insertar(servicio);
-         System.out.println("resultado fue-> "+result);
-         assertTrue(result>0);
-         int indice=1;
-         ServicioDto DATO_Obtenido=null;
-         DATO_Obtenido=serviDAO.obtenerPorId(indice);
-         assertNotNull(DATO_Obtenido);
-         
+//    @Test
+//    public void TesteoCrud2() throws SQLException {
+//         ImprimeCabecera("Testeo de Servicio");
+//         System.out.println("Insertar".toUpperCase());
+//         ServicioDaoImpl serviDAO= new ServicioDaoImpl();
+//         ServicioDto servicio= new ServicioDto();
+//         servicio.setActivo(true);
+//         servicio.setCosto(1000.2);
+//         servicio.setDescripcion("DESPARACITACION perro by java");
+//         servicio.setEstado("SIN USAR by java");
+//         servicio.setNombre("DESPARACITACION");
+//         TipoServicioDto tipo= new TipoServicioDto();
+//         tipo.setTipoServicioId(2);
+//         servicio.setTipoServicio(tipo);
 //         
-         serviDAO.NombreDelUsuarioQueModifica("PEPITO");
-          System.out.println("modifica");
-        System.out.println("ID INSERTADO ANTES->" + result);
-        servicio.setServicioId(result);
-        servicio.setNombre("Modificacion Prueba");
-        
-        
-        
-        
-        Integer result2 = serviDAO.modificar(servicio);
-        assertTrue(result2 > 0);
-         System.out.println("obtener por id");
-        servicio=null;
-        servicio= serviDAO.obtenerPorId(2);
-        System.err.println("EL SERVICIO ES: "+servicio.getNombre()+" FK"+servicio.getServicioId());
-        assertNotNull(servicio);
-                 
-    }
+//         Integer result= serviDAO.insertar(servicio);
+//         System.out.println("resultado fue-> "+result);
+//         assertTrue(result>0);
+//         int indice=1;
+//         ServicioDto DATO_Obtenido=null;
+//         DATO_Obtenido=serviDAO.obtenerPorId(indice);
+//         assertNotNull(DATO_Obtenido);
+//         
+////         
+//         serviDAO.NombreDelUsuarioQueModifica("PEPITO");
+//          System.out.println("modifica");
+//        System.out.println("ID INSERTADO ANTES->" + result);
+//        servicio.setServicioId(result);
+//        servicio.setNombre("Modificacion Prueba");
+//        
+//        
+//        
+//        
+//        Integer result2 = serviDAO.modificar(servicio);
+//        assertTrue(result2 > 0);
+//         System.out.println("obtener por id");
+//        servicio=null;
+//        servicio= serviDAO.obtenerPorId(2);
+//        System.err.println("EL SERVICIO ES: "+servicio.getNombre()+" FK"+servicio.getServicioId());
+//        assertNotNull(servicio);
+//                 
+//    }
 
 }

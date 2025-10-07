@@ -19,13 +19,14 @@ public class TipoProductoDaoImpl extends DaoBaseImpl implements TipoProductoDao 
         super("TIPOS_PRODUCTO");
         this.tipoProducto = null;
         this.retornarLlavePrimaria = true;
+        
     }
 
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("TIPO_PRODUCTO_ID", true, true));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
-        this.listaColumnas.add(new Columna("DESCIPCION", false, false));
+        this.listaColumnas.add(new Columna("DESCRIPCION", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
 

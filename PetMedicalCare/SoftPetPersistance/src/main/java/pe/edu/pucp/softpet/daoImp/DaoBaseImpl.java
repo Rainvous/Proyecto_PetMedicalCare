@@ -118,7 +118,7 @@ public abstract class DaoBaseImpl {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
-            System.err.println("CRUD-> " + statement);
+            System.out.println("CRUD-> " + statement);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();
@@ -299,6 +299,7 @@ public abstract class DaoBaseImpl {
             } else {
                 this.limpiarObjetoDelResultSet();
             }
+            System.out.println("SELECT  -> " + statement);
         } catch (SQLException ex) {
             System.err.println("Error al intentar obtenerPorId - " + ex);
         } finally {
