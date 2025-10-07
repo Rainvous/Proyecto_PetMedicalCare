@@ -6,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
+import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
 /**
  *
@@ -120,5 +121,75 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
     public Integer eliminar(ProductoDto entity) {
         this.producto = entity;
         return super.eliminar();
+    }
+
+    ///PROCEDURES Y SELECTS
+    @Override
+    public ArrayList<ProductoDto> ListarPorTipo(String NombreTipo) {
+        ProductoDto productoAux = new ProductoDto();
+        TipoProductoDto tipo = new TipoProductoDto();
+        tipo.setNombre(NombreTipo);
+        productoAux.setTipoProducto(tipo);
+        String sql = GenerarSQLSelectPorTipo();
+        return (ArrayList<ProductoDto>) super.listarTodos(sql, this::incluirValorDeParametrosParaListarPorTipo, productoAux);
+    }
+
+    private String GenerarSQLSelectPorTipo() {
+        String sql = "SELECT * ";
+        sql = sql.concat("FROM PRODUCTOS p ");
+        sql = sql.concat("JOIN TIPOS_PRODUCTO tp ON tp.tipo_producto_id=p.tipo_producto_id ");
+        sql = sql.concat("WHERE tp.nombre LIKE ?");
+        return sql;
+    }
+
+    private String GenerarSQLSelectPorNombre() {
+        String sql = "SELECT * ";
+        sql = sql.concat("FROM PRODUCTOS p ");
+        sql = sql.concat("WHERE p.nombre LIKE ?");
+        return sql;
+
+    }
+
+    private void incluirValorDeParametrosPorNombre(Object objetoParametro) {
+        ProductoDto parametro = (ProductoDto) objetoParametro;
+        String nombre = "%";
+        nombre = nombre.concat(parametro.getNombre());
+        nombre = nombre.concat("%");
+
+        try {
+            this.statement.setString(1, nombre);
+
+        } catch (SQLException ex) {
+            System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
+            System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+
+        }
+
+    }
+
+    private void incluirValorDeParametrosParaListarPorTipo(Object objetoParametro) {
+        ProductoDto parametro = (ProductoDto) objetoParametro;
+        String tipo = "%";
+        tipo = tipo.concat(parametro.getTipoProducto().getNombre());
+        tipo = tipo.concat("%");
+
+        try {
+            this.statement.setString(1, tipo);
+
+        } catch (SQLException ex) {
+            System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
+            System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+
+        }
+
+    }
+
+    @Override
+    public ArrayList<ProductoDto> ListarPorNombre(String Nombre) {
+        ProductoDto productoAux = new ProductoDto();
+        productoAux.setNombre(Nombre);
+     
+        String sql = GenerarSQLSelectPorNombre();
+        return (ArrayList<ProductoDto>) super.listarTodos(sql, this::incluirValorDeParametrosPorNombre, productoAux);
     }
 }

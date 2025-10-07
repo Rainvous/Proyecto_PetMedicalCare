@@ -52,8 +52,16 @@ public class ProductoDaoImplTest {
         assertNotNull(ProductoObtenido);
 
         ArrayList<ProductoDto> listarProducto = prodDao.listarTodos();
-        System.out.println("cant" + listarProducto.size());
+        System.out.println("cant de todo->>>>> " + listarProducto.size());
         assertTrue(listarProducto.isEmpty() == false);
+
+        ArrayList<ProductoDto> listarPorTipo = prodDao.ListarPorTipo("Accesorio");
+        System.out.println("cant por Listar por tipo-> " + listarPorTipo.size());
+        assertTrue(listarPorTipo.isEmpty() == false);
+
+        ArrayList<ProductoDto> listarPorNombre = prodDao.ListarPorNombre("h");
+        System.out.println("cant por Listar por Nombre-> " + listarPorNombre.size());
+        assertTrue(listarPorNombre.isEmpty() == false);
 
         System.out.println("modifica");
         System.out.println("ID INSERTADO ANTES->" + resultado);
@@ -71,7 +79,10 @@ public class ProductoDaoImplTest {
         result2 = 0;
         result2 = prodDao.eliminar(ProductoObtenido);
         assertTrue(result2 > 0);
-
+        System.out.println("RESULTADOS");
+        System.out.println("cant por Listar por Nombre-> " + listarPorNombre.size());
+        System.out.println("cant por Listar por tipo-> " + listarPorTipo.size());
+        System.out.println("cant de todo->>>>> " + listarProducto.size());
     }
 
 //    @Test
@@ -97,6 +108,7 @@ public class ProductoDaoImplTest {
 //         DATO_Obtenido=serviDAO.obtenerPorId(indice);
 //         assertNotNull(DATO_Obtenido);
 //         
+
 ////         
 //         serviDAO.NombreDelUsuarioQueModifica("PEPITO");
 //          System.out.println("modifica");

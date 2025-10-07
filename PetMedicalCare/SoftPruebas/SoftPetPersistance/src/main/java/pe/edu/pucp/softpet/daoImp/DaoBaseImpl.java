@@ -347,6 +347,7 @@ public abstract class DaoBaseImpl {
             while (this.resultSet.next()) {
                 agregarObjetoALaLista(lista);
             }
+            System.err.println("SELECT -> "+this.statement);
         } catch (SQLException ex) {
             System.err.println("Error al intentar listarTodos - " + ex);
         } finally {
