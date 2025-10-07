@@ -16,7 +16,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     private DocumentoPagoDto documentoPago;
 
     public DocumentoDePagoDaoImpl() {
-        super("DOCUMENTO_DE_PAGO");
+        super("DOCUMENTOS_DE_PAGO");
         this.documentoPago = null;
         this.retornarLlavePrimaria = true;
     }
@@ -25,6 +25,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("DOCUMENTO_DE_PAGO_ID", true, true));
         this.listaColumnas.add(new Columna("SERIE", false, false));
+        this.listaColumnas.add(new Columna("NUMERO", false, false));
         this.listaColumnas.add(new Columna("TASA_IGV", false, false));
         this.listaColumnas.add(new Columna("FECHA_EMISION", false, false));
         this.listaColumnas.add(new Columna("METODO_DE_PAGO", false, false));
@@ -40,34 +41,35 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setString(1, this.documentoPago.getSerie());
-        this.statement.setDouble(2, this.documentoPago.getTasaIGV());
-        this.statement.setDate(3, this.documentoPago.getFechaEmision());
-        this.statement.setString(4, this.documentoPago.getMetodoPago());
-        this.statement.setString(5, this.documentoPago.getEstado());
-        this.statement.setDouble(6, this.documentoPago.getSubtotalSinIGV());
-        this.statement.setDouble(7, this.documentoPago.getIGVTotal());
-        this.statement.setDouble(8, this.documentoPago.getTotal());
-        this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
-        this.statement.setInt(10, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
-        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
+        this.statement.setString(2, this.documentoPago.getNumero());
+        this.statement.setDouble(3, this.documentoPago.getTasaIGV());
+        this.statement.setDate(4, this.documentoPago.getFechaEmision());
+        this.statement.setString(5, this.documentoPago.getMetodoPago());
+        this.statement.setString(6, this.documentoPago.getEstado());
+        this.statement.setDouble(7, this.documentoPago.getSubtotalSinIGV());
+        this.statement.setDouble(8, this.documentoPago.getIGVTotal());
+        this.statement.setDouble(9, this.documentoPago.getTotal());
+        this.statement.setInt(10, this.documentoPago.getActivo() ? 1 : 0);
+        this.statement.setInt(11, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
+        this.statement.setInt(12, this.documentoPago.getPersona().getPersonaId());
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setString(1, this.documentoPago.getSerie());
-        this.statement.setDouble(2, this.documentoPago.getTasaIGV());
-        this.statement.setDate(3, this.documentoPago.getFechaEmision());
-        this.statement.setString(4, this.documentoPago.getMetodoPago());
-        this.statement.setString(5, this.documentoPago.getEstado());
-        this.statement.setDouble(6, this.documentoPago.getSubtotalSinIGV());
-        this.statement.setDouble(7, this.documentoPago.getIGVTotal());
-        this.statement.setDouble(8, this.documentoPago.getTotal());
-        this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
-        this.statement.setInt(10, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
-        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
+        this.statement.setString(2, this.documentoPago.getNumero());
+        this.statement.setDouble(3, this.documentoPago.getTasaIGV());
+        this.statement.setDate(4, this.documentoPago.getFechaEmision());
+        this.statement.setString(5, this.documentoPago.getMetodoPago());
+        this.statement.setString(6, this.documentoPago.getEstado());
+        this.statement.setDouble(7, this.documentoPago.getSubtotalSinIGV());
+        this.statement.setDouble(8, this.documentoPago.getIGVTotal());
+        this.statement.setDouble(9, this.documentoPago.getTotal());
+        this.statement.setInt(10, this.documentoPago.getActivo() ? 1 : 0);
+        this.statement.setInt(11, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
+        this.statement.setInt(12, this.documentoPago.getPersona().getPersonaId());
 
-        this.statement.setInt(12, this.documentoPago.getDocumentoPagoId());
-
+        this.statement.setInt(13, this.documentoPago.getDocumentoPagoId());
     }
 
     @Override
@@ -85,6 +87,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.documentoPago = new DocumentoPagoDto();
         this.documentoPago.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO"));
         this.documentoPago.setSerie(this.resultSet.getString("SERIE"));
+        this.documentoPago.setNumero(this.resultSet.getString("NUMERO"));
         this.documentoPago.setTasaIGV(this.resultSet.getDouble("TASA_IGV"));
         this.documentoPago.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
         this.documentoPago.setMetodoPago(this.resultSet.getString("METODO_DE_PAGO"));
