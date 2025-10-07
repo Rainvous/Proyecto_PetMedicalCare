@@ -414,6 +414,7 @@ public abstract class DaoBaseImpl {
         //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
         //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
         //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
+        if(this.usuario==null)return;
         if (usuario.isEmpty()) {
             return;
         }
