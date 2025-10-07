@@ -23,7 +23,7 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
 
     @Override
     protected void configurarListaDeColumnas() {
-        this.listaColumnas.add(new Columna("DETALLE_SERVICIO", true, true));
+        this.listaColumnas.add(new Columna("DETALLE_SERVICIO_ID", true, true));
         this.listaColumnas.add(new Columna("DESCRIPCION", false, false));
         this.listaColumnas.add(new Columna("COSTO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
