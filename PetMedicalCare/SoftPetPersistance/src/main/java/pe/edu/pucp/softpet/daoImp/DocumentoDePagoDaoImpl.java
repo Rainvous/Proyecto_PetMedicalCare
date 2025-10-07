@@ -19,6 +19,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         super("DOCUMENTOS_DE_PAGO");
         this.documentoPago = null;
         this.retornarLlavePrimaria = true;
+        this.usuario = "user_backend";
     }
 
     @Override
@@ -85,7 +86,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.documentoPago = new DocumentoPagoDto();
-        this.documentoPago.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO"));
+        this.documentoPago.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID"));
         this.documentoPago.setSerie(this.resultSet.getString("SERIE"));
         this.documentoPago.setNumero(this.resultSet.getString("NUMERO"));
         this.documentoPago.setTasaIGV(this.resultSet.getDouble("TASA_IGV"));

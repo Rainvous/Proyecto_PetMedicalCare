@@ -19,6 +19,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         super("CITAS_ATENCION");
         this.citaAtencion = null;
         this.retornarLlavePrimaria = true;
+        this.usuario = "user_backend";
     }
 
     @Override

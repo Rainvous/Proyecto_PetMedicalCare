@@ -19,6 +19,7 @@ public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements Detall
         super("DETALLES_DOCUMENTO_DE_PAGO");
         this.detalleDocumento = null;
         this.retornarLlavePrimaria = true;
+        this.usuario = "user_backend";
     }
 
     @Override
