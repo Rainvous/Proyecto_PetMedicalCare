@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -15,7 +11,7 @@ import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
  *
  * @author marti
  */
-public class DetalleDocumentoDePagoDaoImpl extends DAOImplBase implements DetalleDocumentoDePagoDao {
+public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements DetalleDocumentoDePagoDao {
 
     private DetalleDocumentoPagoDto detalleDocumento;
 
@@ -56,7 +52,7 @@ public class DetalleDocumentoDePagoDaoImpl extends DAOImplBase implements Detall
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-                this.statement.setInt(1, this.detalleDocumento.getNroItem());
+        this.statement.setInt(1, this.detalleDocumento.getNroItem());
         this.statement.setString(2, this.detalleDocumento.getDescripcion());
         this.statement.setInt(3, this.detalleDocumento.getCantidad());
         this.statement.setDouble(4, this.detalleDocumento.getPrecioUnitarioSinIGV());
@@ -67,7 +63,7 @@ public class DetalleDocumentoDePagoDaoImpl extends DAOImplBase implements Detall
         this.statement.setInt(9, this.detalleDocumento.getServicio().getServicioId());
         this.statement.setInt(10, this.detalleDocumento.getProducto().getProductoId());
 
-        this.statement.setInt(10, this.detalleDocumento.getDddpId());
+        this.statement.setInt(11, this.detalleDocumento.getDddpId());
     }
 
     @Override
@@ -93,8 +89,10 @@ public class DetalleDocumentoDePagoDaoImpl extends DAOImplBase implements Detall
         this.detalleDocumento.setImporteTotal(this.resultSet.getDouble("IMPORTE_TOTAL"));
         this.detalleDocumento.setDocumentoPago(new DocumentoDePagoDaoImpl().
                 obtenerPorId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID")));
-        this.detalleDocumento.setServicio(new ServicioDaoImpl().obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
-        this.detalleDocumento.setProducto(new ProductoDaoImpl().obtenerPorId(this.resultSet.getInt("PRODUCTO_ID")));
+        this.detalleDocumento.setServicio(new ServicioDaoImpl().
+                obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
+        this.detalleDocumento.setProducto(new ProductoDaoImpl().
+                obtenerPorId(this.resultSet.getInt("PRODUCTO_ID")));
     }
 
     @Override

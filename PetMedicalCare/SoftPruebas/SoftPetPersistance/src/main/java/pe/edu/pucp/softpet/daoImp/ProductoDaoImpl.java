@@ -1,23 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
-import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
 /**
  *
  * @author User
  */
-public class ProductoDaoImpl extends DAOImplBase implements ProductoDao {
+public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
     private ProductoDto producto;
 
@@ -36,23 +30,17 @@ public class ProductoDaoImpl extends DAOImplBase implements ProductoDao {
         this.listaColumnas.add(new Columna("PRECIO_UNITARIO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("TIPO_PRODUCTO_ID", false, false));
-
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        //NOTA NO ES NECESARIO AGREGAR LA FECHA
+        // NOTA NO ES NECESARIO AGREGAR LA FECHA
         this.statement.setString(1, this.producto.getNombre());
         this.statement.setString(2, this.producto.getPresentacion());
         this.statement.setDouble(3, this.producto.getPrecioUnitario());
-        if (this.producto.getActivo() == null) {
-            System.out.println("nos");
-        }
         this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
-        int idTipoProducto = this.producto.getTipoProducto().getTipoProductoId();
-        this.statement.setInt(5, idTipoProducto);
-        System.out.println(statement);
-
+        this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
+        // System.out.println(statement);
     }
 
     @Override
@@ -61,8 +49,7 @@ public class ProductoDaoImpl extends DAOImplBase implements ProductoDao {
         this.statement.setString(2, this.producto.getPresentacion());
         this.statement.setDouble(3, this.producto.getPrecioUnitario());
         this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
-        int idTipoProducto = this.producto.getTipoProducto().getTipoProductoId();
-        this.statement.setInt(5, idTipoProducto);
+        this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
 
         this.statement.setInt(6, this.producto.getProductoId());
     }
@@ -85,11 +72,12 @@ public class ProductoDaoImpl extends DAOImplBase implements ProductoDao {
         this.producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
         this.producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
         this.producto.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        TipoProductoDto tipoProducto = new TipoProductoDto();
-        tipoProducto.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
-
-        this.producto.setTipoProducto(tipoProducto);
-
+        this.producto.setTipoProducto(new TipoProductoDaoImpl().
+                obtenerPorId(this.resultSet.getInt("TIPO_PRODUCTO_ID")));
+//        TipoProductoDto tipoProducto = new TipoProductoDto();
+//        tipoProducto.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
+//
+//        this.producto.setTipoProducto(tipoProducto);
     }
 
     @Override
@@ -118,10 +106,8 @@ public class ProductoDaoImpl extends DAOImplBase implements ProductoDao {
 
     @Override
     public Integer insertar(ProductoDto entity) {
-
         this.producto = entity;
         return super.insertar();
-
     }
 
     @Override
@@ -135,5 +121,4 @@ public class ProductoDaoImpl extends DAOImplBase implements ProductoDao {
         this.producto = entity;
         return super.eliminar();
     }
-
 }

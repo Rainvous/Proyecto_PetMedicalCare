@@ -7,7 +7,7 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dao.MascotaDao;
 
-public class MascotaDaoImpl extends DAOImplBase implements MascotaDao {
+public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
 
     private MascotaDto mascota;
 

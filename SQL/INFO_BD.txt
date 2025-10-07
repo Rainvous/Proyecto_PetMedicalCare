@@ -1,0 +1,7 @@
+BASE DE DATOS 2
+name:softpet-db
+esquema:petmedicalcare
+host:softpet-db.cdqj9uesoo0i.us-east-1.rds.amazonaws.com
+puerto:3306
+user: admin
+contra: Fullchow#2025

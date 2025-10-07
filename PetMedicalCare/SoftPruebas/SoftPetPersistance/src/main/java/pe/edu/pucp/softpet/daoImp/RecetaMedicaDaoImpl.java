@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import pe.edu.pucp.softpet.dao.PersonaDao;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
@@ -16,7 +11,7 @@ import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
  *
  * @author marti
  */
-public class RecetaMedicaDaoImpl extends DAOImplBase implements RecetaMedicaDao {
+public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao {
 
     private RecetaMedicaDto recetaMedica;
 
@@ -32,7 +27,6 @@ public class RecetaMedicaDaoImpl extends DAOImplBase implements RecetaMedicaDao 
         this.listaColumnas.add(new Columna("DIAGNOSTICO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("CITA_ID", false, false));
-
     }
 
     @Override
@@ -47,7 +41,7 @@ public class RecetaMedicaDaoImpl extends DAOImplBase implements RecetaMedicaDao 
         this.statement.setString(1, this.recetaMedica.getDiagnostico());
         this.statement.setInt(2, this.recetaMedica.getActivo() ? 1 : 0);
         this.statement.setInt(3, this.recetaMedica.getCita().getCitaId());
-        
+
         this.statement.setInt(4, this.recetaMedica.getRecetaMedicaId());
     }
 
@@ -66,7 +60,7 @@ public class RecetaMedicaDaoImpl extends DAOImplBase implements RecetaMedicaDao 
         this.recetaMedica = new RecetaMedicaDto();
         this.recetaMedica.setRecetaMedicaId(this.resultSet.getInt("RECETAS_MEDICA_ID"));
         this.recetaMedica.setDiagnostico(this.resultSet.getString("DIAGNOSTICO"));
-        this.recetaMedica.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.recetaMedica.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.recetaMedica.setCita(new CitaAtencionDaoImpl().obtenerPorId(this.resultSet.getInt("CITA_ID")));
     }
 

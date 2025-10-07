@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -15,7 +11,7 @@ import pe.edu.pucp.softpet.dto.servicios.DetalleServicioDto;
  *
  * @author marti
  */
-public class DetalleServicioDaoImpl extends DAOImplBase implements DetalleServicioDao {
+public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServicioDao {
 
     private DetalleServicioDto detalleServicio;
 
@@ -54,7 +50,6 @@ public class DetalleServicioDaoImpl extends DAOImplBase implements DetalleServic
         this.statement.setInt(5, this.detalleServicio.getCita().getCitaId());
 
         this.statement.setInt(6, this.detalleServicio.getDetalleServicioId());
-
     }
 
     @Override
@@ -73,7 +68,7 @@ public class DetalleServicioDaoImpl extends DAOImplBase implements DetalleServic
         this.detalleServicio.setDetalleServicioId(this.resultSet.getInt("DETALLE_SERVICIO_ID"));
         this.detalleServicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.detalleServicio.setCosto(this.resultSet.getDouble("COSTO"));
-        this.detalleServicio.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.detalleServicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.detalleServicio.setServicio(new ServicioDaoImpl().obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
         this.detalleServicio.setCita(new CitaAtencionDaoImpl().obtenerPorId(this.resultSet.getInt("CITA_ID")));
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -15,7 +11,7 @@ import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
  *
  * @author marti
  */
-public class DocumentoDePagoDaoImpl extends DAOImplBase implements DocumentoDePagoDao {
+public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePagoDao {
 
     private DocumentoPagoDto documentoPago;
 
@@ -37,6 +33,8 @@ public class DocumentoDePagoDaoImpl extends DAOImplBase implements DocumentoDePa
         this.listaColumnas.add(new Columna("IGV_TOTAL", false, false));
         this.listaColumnas.add(new Columna("TOTAL", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
+        this.listaColumnas.add(new Columna("TIPO_DOCUMENTO_ID", false, false));
+        this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
     }
 
     @Override
@@ -50,6 +48,8 @@ public class DocumentoDePagoDaoImpl extends DAOImplBase implements DocumentoDePa
         this.statement.setDouble(7, this.documentoPago.getIGVTotal());
         this.statement.setDouble(8, this.documentoPago.getTotal());
         this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
+        this.statement.setInt(10, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
+        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
     }
 
     @Override
@@ -63,8 +63,10 @@ public class DocumentoDePagoDaoImpl extends DAOImplBase implements DocumentoDePa
         this.statement.setDouble(7, this.documentoPago.getIGVTotal());
         this.statement.setDouble(8, this.documentoPago.getTotal());
         this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
+        this.statement.setInt(10, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
+        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
 
-        this.statement.setInt(10, this.documentoPago.getDocumentoPagoId());
+        this.statement.setInt(12, this.documentoPago.getDocumentoPagoId());
 
     }
 
@@ -90,7 +92,11 @@ public class DocumentoDePagoDaoImpl extends DAOImplBase implements DocumentoDePa
         this.documentoPago.setSubtotalSinIGV(this.resultSet.getDouble("SUBTOTAL_SIN_IGV"));
         this.documentoPago.setIGVTotal(this.resultSet.getDouble("IGV_TOTAL"));
         this.documentoPago.setTotal(this.resultSet.getDouble("TOTAL"));
-        this.documentoPago.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.documentoPago.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+        this.documentoPago.setTipoDocumento(new TipoDocumentoDaoImpl().
+                obtenerPorId(this.resultSet.getInt("TIPO_DOCUMENTO_ID")));
+        this.documentoPago.setPersona(new PersonaDaoImpl().
+                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
     }
 
     @Override

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
@@ -15,7 +11,7 @@ import pe.edu.pucp.softpet.dto.recetas.DetalleRecetaDto;
  *
  * @author marti
  */
-public class DetalleRecetaDaoImpl extends DAOImplBase implements DetalleRecetaDao {
+public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDao {
 
     private DetalleRecetaDto detalleReceta;
 
@@ -33,7 +29,6 @@ public class DetalleRecetaDaoImpl extends DAOImplBase implements DetalleRecetaDa
         this.listaColumnas.add(new Columna("INDICACION", false, false));
         this.listaColumnas.add(new Columna("RECETA_MEDICA_ID", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-
     }
 
     @Override
@@ -54,7 +49,6 @@ public class DetalleRecetaDaoImpl extends DAOImplBase implements DetalleRecetaDa
         this.statement.setInt(5, this.detalleReceta.getActivo() ? 1 : 0);
 
         this.statement.setInt(6, this.detalleReceta.getDetalleRecetaId());
-
     }
 
     @Override
@@ -74,8 +68,9 @@ public class DetalleRecetaDaoImpl extends DAOImplBase implements DetalleRecetaDa
         this.detalleReceta.setCantidad(this.resultSet.getInt("CANTIDAD"));
         this.detalleReceta.setDescripcionMedicamento(this.resultSet.getString("DESCRIPCION_MEDICAMENTO"));
         this.detalleReceta.setIndicacion(this.resultSet.getString("INDICACION"));
-        this.detalleReceta.setReceta(new RecetaMedicaDaoImpl().obtenerPorId(this.resultSet.getInt("RECETA_MEDICA_ID")));
-        this.detalleReceta.setActivo(this.resultSet.getInt("ACTIVO")==1);
+        this.detalleReceta.setReceta(new RecetaMedicaDaoImpl().
+                obtenerPorId(this.resultSet.getInt("RECETA_MEDICA_ID")));
+        this.detalleReceta.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override
