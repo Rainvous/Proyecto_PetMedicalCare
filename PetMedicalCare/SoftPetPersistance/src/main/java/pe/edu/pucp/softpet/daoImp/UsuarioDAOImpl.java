@@ -24,7 +24,7 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("USUARIO_ID", true, true));
-        this.listaColumnas.add(new Columna("USENAME", false, false));
+        this.listaColumnas.add(new Columna("USERNAME", false, false));
         this.listaColumnas.add(new Columna("PASSWORD", false, false));
         this.listaColumnas.add(new Columna("CORREO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));

@@ -22,6 +22,7 @@ public class DocumentoDePagoBo {
 
     public DocumentoDePagoBo() {
         this.documentoDePagoDao = new DocumentoDePagoDaoImpl();
+        
     }
 
     // Inserta un documento de pago

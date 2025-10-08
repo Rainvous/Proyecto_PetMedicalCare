@@ -24,7 +24,7 @@ public class RolUsuarioDaoImpl extends DaoBaseImpl implements RolUsuarioDao {
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("ROL_USUARIO_ID", true, true));
-        this.listaColumnas.add(new Columna("ROL", false, false));
+        this.listaColumnas.add(new Columna("ROL_ID", false, false));
         this.listaColumnas.add(new Columna("USUARIO_ID", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
