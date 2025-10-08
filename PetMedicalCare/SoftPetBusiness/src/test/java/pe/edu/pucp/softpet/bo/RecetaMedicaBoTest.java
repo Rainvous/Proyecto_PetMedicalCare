@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
+import pe.edu.pucp.softpet.bo.RecetaMedicaBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
-/**
- *
- * @author marti
- */
 public class RecetaMedicaBoTest {
 
     private final RecetaMedicaBo recetaBo = new RecetaMedicaBo();
@@ -33,7 +26,7 @@ public class RecetaMedicaBoTest {
      */
     @Test
     public void testModificar() {
-         System.out.println("=== Modificar Receta ===");
+        System.out.println("=== Modificar Receta ===");
         Integer result = recetaBo.modificar(2, "Infección leve modificada", true, 1);
         assertTrue(result > 0);
         System.out.println("Modificación exitosa");
@@ -60,7 +53,7 @@ public class RecetaMedicaBoTest {
      */
     @Test
     public void testObtenerPorId() {
-           System.out.println("=== Obtener Receta por ID ===");
+        System.out.println("=== Obtener Receta por ID ===");
         RecetaMedicaDto receta = recetaBo.obtenerPorId(1);
         assertNotNull(receta);
         System.out.println("Receta: " + receta.getDiagnostico());
@@ -71,7 +64,7 @@ public class RecetaMedicaBoTest {
      */
     @Test
     public void testListarTodos() {
-          System.out.println("=== Listar Recetas ===");
+        System.out.println("=== Listar Recetas ===");
         ArrayList<RecetaMedicaDto> lista = recetaBo.listarTodos();
         assertNotNull(lista);
         System.out.println("Cantidad: " + lista.size());

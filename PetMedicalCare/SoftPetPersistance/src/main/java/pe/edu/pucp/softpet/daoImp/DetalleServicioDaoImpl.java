@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.DetalleServicioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.servicios.DetalleServicioDto;
 
-/**
- *
- * @author marti
- */
 public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServicioDao {
 
     private DetalleServicioDto detalleServicio;
@@ -29,7 +25,6 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("SERVICIO_ID", false, false));
         this.listaColumnas.add(new Columna("CITA_ID", false, false));
-
     }
 
     @Override

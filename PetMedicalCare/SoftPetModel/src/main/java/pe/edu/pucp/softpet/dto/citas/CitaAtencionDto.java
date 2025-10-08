@@ -16,6 +16,7 @@ public class CitaAtencionDto {
     private String peso;
     private VeterinarioDto veterinario;
     private MascotaDto mascota;
+    private String estado;
 
     public CitaAtencionDto() {
         this.citaId = null;
@@ -28,12 +29,13 @@ public class CitaAtencionDto {
         this.peso = null;
         this.veterinario = null;
         this.mascota = null;
+        this.estado = null;
     }
 
     public CitaAtencionDto(Integer citaId, String observacion,
             Date fechaHoraInicio, Date fechaRegistro, Date fechaHoraFin,
             Double monto, Boolean activo, String peso,
-            VeterinarioDto veterinario, MascotaDto mascota) {
+            VeterinarioDto veterinario, MascotaDto mascota, String estado) {
         this.citaId = citaId;
         this.observacion = observacion;
         this.fechaHoraInicio = fechaHoraInicio;
@@ -44,6 +46,7 @@ public class CitaAtencionDto {
         this.peso = peso;
         this.veterinario = veterinario;
         this.mascota = mascota;
+        this.estado = estado;
     }
 
     /**
@@ -184,5 +187,19 @@ public class CitaAtencionDto {
      */
     public void setMascota(MascotaDto mascota) {
         this.mascota = mascota;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

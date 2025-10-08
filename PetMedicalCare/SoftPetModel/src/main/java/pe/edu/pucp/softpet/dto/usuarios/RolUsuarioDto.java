@@ -3,22 +3,22 @@ package pe.edu.pucp.softpet.dto.usuarios;
 public class RolUsuarioDto {
 
     private Integer rolUsuarioId;
-    private UsuarioDto usuario;
     private RolDto rol;
+    private UsuarioDto usuario;
     private Boolean activo;
 
     public RolUsuarioDto() {
         this.rolUsuarioId = null;
-        this.usuario = null;
         this.rol = null;
+        this.usuario = null;
         this.activo = null;
     }
 
-    public RolUsuarioDto(Integer rolUsuarioId, UsuarioDto usuario,
-            RolDto rol, Boolean activo) {
+    public RolUsuarioDto(Integer rolUsuarioId, RolDto rol,
+            UsuarioDto usuario, Boolean activo) {
         this.rolUsuarioId = rolUsuarioId;
-        this.usuario = usuario;
         this.rol = rol;
+        this.usuario = usuario;
         this.activo = activo;
     }
 
@@ -37,20 +37,6 @@ public class RolUsuarioDto {
     }
 
     /**
-     * @return the usuario
-     */
-    public UsuarioDto getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(UsuarioDto usuario) {
-        this.usuario = usuario;
-    }
-
-    /**
      * @return the rol
      */
     public RolDto getRol() {
@@ -62,6 +48,20 @@ public class RolUsuarioDto {
      */
     public void setRol(RolDto rol) {
         this.rol = rol;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioDto getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioDto usuario) {
+        this.usuario = usuario;
     }
 
     /**

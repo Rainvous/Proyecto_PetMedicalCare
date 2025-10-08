@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
+import pe.edu.pucp.softpet.bo.CitaAtencionBo;
 import java.util.ArrayList;
 import java.util.Date;
 import org.junit.jupiter.api.Test;
@@ -48,6 +45,8 @@ public class CitaAtencionBoTest {
 
         int veterinarioId = 3; // Debe existir
         int mascotaId = 1;     // Debe existir
+        
+        String estadoCita = "Confirmado";
 
         Integer idGenerado = citaBo.insertar(
                 observacion,
@@ -58,7 +57,8 @@ public class CitaAtencionBoTest {
                 activo,
                 pesoMascota,
                 veterinarioId,
-                mascotaId
+                mascotaId,
+                estadoCita
         );
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
@@ -85,6 +85,8 @@ public class CitaAtencionBoTest {
 
         int veterinarioId = 3;
         int mascotaId = 1;
+        
+        String estadoCita = "Terminado";
 
         Integer resultado = citaBo.modificar(
                 idCitaExistente,
@@ -96,7 +98,8 @@ public class CitaAtencionBoTest {
                 nuevoActivo,
                 nuevoPeso,
                 veterinarioId,
-                mascotaId
+                mascotaId,
+                estadoCita
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar > 0 si la actualización fue exitosa");
@@ -122,6 +125,8 @@ public class CitaAtencionBoTest {
 
         int veterinarioId = 3;
         int mascotaId = 1;
+        
+        String estadoCita = "Pendiente";
 
         Integer idGenerado = citaBo.insertar(
                 observacion,
@@ -132,7 +137,8 @@ public class CitaAtencionBoTest {
                 activo,
                 peso,
                 veterinarioId,
-                mascotaId
+                mascotaId,
+                estadoCita
         );
 
         assertTrue(idGenerado > 0, "No se pudo insertar la cita para eliminarla.");
@@ -168,6 +174,7 @@ public class CitaAtencionBoTest {
         if (cita.getMascota() != null) {
             System.out.println("Mascota ID: " + cita.getMascota().getMascotaId());
         }
+        System.out.println("Peso Mascota: " + cita.getEstado());
     }
 
     /**
@@ -199,7 +206,7 @@ public class CitaAtencionBoTest {
             if (c.getMascota() != null) {
                 System.out.println("Mascota ID: " + c.getMascota().getMascotaId());
             }
+            System.out.println("Peso Mascota: " + c.getEstado());
         }
     }
-
 }

@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.TipoProductoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
-/**
- *
- * @author marti
- */
 public class TipoProductoDaoImpl extends DaoBaseImpl implements TipoProductoDao {
 
     private TipoProductoDto tipoProducto;
@@ -19,7 +15,6 @@ public class TipoProductoDaoImpl extends DaoBaseImpl implements TipoProductoDao 
         super("TIPOS_PRODUCTO");
         this.tipoProducto = null;
         this.retornarLlavePrimaria = true;
-        
     }
 
     @Override

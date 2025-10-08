@@ -1,4 +1,4 @@
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,27 +8,19 @@ import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.TipoDocumentoDaoImpl;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author marti
- */
 public class DocumentoDePagoBo {
-        private DocumentoDePagoDao documentoDePagoDao;
+
+    private DocumentoDePagoDao documentoDePagoDao;
 
     public DocumentoDePagoBo() {
         this.documentoDePagoDao = new DocumentoDePagoDaoImpl();
-        
+
     }
 
     // Inserta un documento de pago
-    public Integer insertar(String serie,String numero, double tasaIGV, Date fechaEmision, String metodoPago,
-                            String estado, double subtotalSinIGV, double igvTotal,
-                            double total, boolean activo, int tipoDocumentoId, int personaId) {
+    public Integer insertar(String serie, String numero, double tasaIGV, Date fechaEmision, String metodoPago,
+            String estado, double subtotalSinIGV, double igvTotal,
+            double total, boolean activo, int tipoDocumentoId, int personaId) {
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
 
         // Normalizamos textos
@@ -51,12 +43,12 @@ public class DocumentoDePagoBo {
     }
 
     // Modifica un documento existente
-    public Integer modificar(int documentoPagoId, String serie,String numero, double tasaIGV, Date fechaEmision, String metodoPago,
-                              String estado, double subtotalSinIGV, double igvTotal,
-                              double total, boolean activo, int tipoDocumentoId, int personaId) {
-        
+    public Integer modificar(int documentoPagoId, String serie, String numero, double tasaIGV, Date fechaEmision, String metodoPago,
+            String estado, double subtotalSinIGV, double igvTotal,
+            double total, boolean activo, int tipoDocumentoId, int personaId) {
+
         java.sql.Date fechaEmisionSQL = new java.sql.Date(fechaEmision.getTime());
-        
+
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
 
         documentoPago.setDocumentoPagoId(documentoPagoId);

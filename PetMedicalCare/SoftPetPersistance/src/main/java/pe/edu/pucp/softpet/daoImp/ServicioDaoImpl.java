@@ -8,10 +8,6 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
-/**
- *
- * @author User
- */
 public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
     private ServicioDto servicio;
@@ -25,7 +21,7 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
     @Override
     protected void configurarListaDeColumnas() {
-        this.listaColumnas.add(new Columna("SERVICIO_ID", true, true));  // PK, autogenerado
+        this.listaColumnas.add(new Columna("SERVICIO_ID", true, true));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("COSTO", false, false));
         this.listaColumnas.add(new Columna("ESTADO", false, false));
@@ -36,14 +32,13 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        //NOTA NO ES NECESARIO AGREGAR LA AUDITORIA
+        // NOTA: la auditoria se maneja con un trigger
         this.statement.setString(1, this.servicio.getNombre());
         this.statement.setDouble(2, this.servicio.getCosto());
         this.statement.setString(3, this.servicio.getEstado());
         this.statement.setString(4, this.servicio.getDescripcion());
         this.statement.setInt(5, this.servicio.getActivo() ? 1 : 0);
         this.statement.setInt(6, this.servicio.getTipoServicio().getTipoServicioId());
-        //System.out.println(statement);
     }
 
     @Override
@@ -77,11 +72,8 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         this.servicio.setEstado(this.resultSet.getString("ESTADO"));
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
-//        TipoServicioDto tipoServicio = new TipoServicioDto();
-//        tipoServicio.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
-//
-//        this.servicio.setTipoServicio(tipoServicio);
+        this.servicio.setTipoServicio(new TipoServicioDaoImpl().
+                obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
     }
 
     @Override
@@ -126,6 +118,10 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         return super.eliminar();
     }
 
+    /// PROCEDURES Y SELECT'
+    /// @param NombreTipo
+    /// @return s
+    
     @Override
     public ArrayList<ServicioDto> ListarPorTipoServicio(String NombreTipo) {
         ServicioDto productoAux = new ServicioDto();
@@ -144,11 +140,9 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
         try {
             this.statement.setString(1, nombre);
-
         } catch (SQLException ex) {
             System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
             System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-
         }
     }
 
@@ -158,7 +152,6 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         sql = sql.concat("JOIN TIPOS_SERVICIO ts ON ts.tipo_servicio_id=s.tipo_servicio_id ");
         sql = sql.concat("WHERE ts.nombre LIKE ?");
         return sql;
-
     }
 
     private String GenerarSQLSelectPorNombre() {
@@ -167,22 +160,21 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         sql = sql.concat("WHERE p.nombre LIKE ?");
         return sql;
     }
-    private void incluirValorDeParametrosPorNombre(Object objetoParametro){
-         ServicioDto parametro = (ServicioDto) objetoParametro;
+
+    private void incluirValorDeParametrosPorNombre(Object objetoParametro) {
+        ServicioDto parametro = (ServicioDto) objetoParametro;
         String nombre = "%";
         nombre = nombre.concat(parametro.getTipoServicio().getNombre());
         nombre = nombre.concat("%");
 
         try {
             this.statement.setString(1, nombre);
-
         } catch (SQLException ex) {
             System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
             System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-
         }
-
     }
+
     @Override
     public ArrayList<ServicioDto> ListarPorNombre(String Nombre) {
         ServicioDto Aux = new ServicioDto();
@@ -191,5 +183,4 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         String sql = GenerarSQLSelectPorNombre();
         return (ArrayList<ServicioDto>) super.listarTodos(sql, this::incluirValorDeParametrosPorNombre, Aux);
     }
-
 }

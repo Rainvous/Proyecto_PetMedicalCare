@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
+import pe.edu.pucp.softpet.bo.ServicioBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
-/**
- *
- * @author marti
- */
 public class ServicioBoTest {
 
     private static ServicioBo servicioBo;
@@ -26,7 +19,7 @@ public class ServicioBoTest {
      * Test de insertar servicio
      */
     @Test
-    
+
     public void testInsertar() {
         System.out.println("=== Test: insertar servicio ===");
 
@@ -41,9 +34,8 @@ public class ServicioBoTest {
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
         System.out.println("Servicio insertado con ID: " + idGenerado);
-        
-        System.out.println("Resultado de inserción: " + idGenerado);
 
+        System.out.println("Resultado de inserción: " + idGenerado);
     }
 
     /**

@@ -1,7 +1,8 @@
 package pe.edu.pucp.softpet.daoImp.util;
 
-//esta clase representa la clase que incorporará los metadatos a la solución
+// Esta clase representa la clase que incorporará los metadatos a la solución
 public class Columna {
+
     private String nombre;
     private Boolean esLlavePrimaria;
     private Boolean esAutoGenerado;
@@ -11,7 +12,7 @@ public class Columna {
         this.esLlavePrimaria = esLlavePrimaria;
         this.esAutoGenerado = esAutoGenerado;
     }
-        
+
     /**
      * @return the nombre
      */
@@ -53,6 +54,4 @@ public class Columna {
     public void setEsAutoGenerado(Boolean esAutoGenerado) {
         this.esAutoGenerado = esAutoGenerado;
     }
-    
-    
 }

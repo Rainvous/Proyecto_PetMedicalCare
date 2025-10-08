@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
+import pe.edu.pucp.softpet.bo.DetalleDocumentoDePagoBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +30,7 @@ public class DetalleDocumentoDePagoBoTest {
     @Test
     @Order(1)
     public void testInsertar() {
-         System.out.println("=== Test: insertar detalle de documento de pago ===");
+        System.out.println("=== Test: insertar detalle de documento de pago ===");
 
         int nroItem = 1;
         String descripcion = "Consulta Veterinaria";
@@ -64,7 +61,7 @@ public class DetalleDocumentoDePagoBoTest {
     public void testModificar() {
         System.out.println("=== Test: modificar detalle existente ===");
 
-        int detalleIdExistente = 8; 
+        int detalleIdExistente = 8;
         int nroItem = 2;
         String descripcion = "Vacuna Antirrábica";
         int cantidad = 3;
@@ -92,7 +89,7 @@ public class DetalleDocumentoDePagoBoTest {
     @Test
     @Order(3)
     public void testEliminar() {
-         System.out.println("=== Test: eliminar detalle de documento de pago ===");
+        System.out.println("=== Test: eliminar detalle de documento de pago ===");
 
         // Insertamos uno temporal para eliminarlo
         int nroItem = 99;
@@ -118,6 +115,7 @@ public class DetalleDocumentoDePagoBoTest {
         assertTrue(resultado > 0, "El método eliminar debe retornar > 0 si la eliminación fue exitosa");
         System.out.println("Detalle eliminado correctamente (ID: " + idGenerado + ")");
     }
+
     /**
      * Test of obtenerPorId method, of class DetalleDocumentoDePagoBo.
      */
@@ -158,7 +156,7 @@ public class DetalleDocumentoDePagoBoTest {
     @Test
     @Order(5)
     public void testListarTodos() {
-       System.out.println("=== Test: listar todos los detalles de documentos de pago ===");
+        System.out.println("=== Test: listar todos los detalles de documentos de pago ===");
 
         ArrayList<DetalleDocumentoPagoDto> lista = detalleBo.listarTodos();
 
@@ -188,5 +186,4 @@ public class DetalleDocumentoDePagoBoTest {
             }
         }
     }
-
 }

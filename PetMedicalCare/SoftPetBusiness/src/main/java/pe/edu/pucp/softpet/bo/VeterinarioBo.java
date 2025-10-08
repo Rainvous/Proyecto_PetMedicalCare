@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -11,10 +7,6 @@ import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 
-/**
- *
- * @author marti
- */
 public class VeterinarioBo {
 
     private VeterinarioDao veterinarioDao;

@@ -14,6 +14,7 @@ public class ProductoDto {
     private String usuarioModificador;
     private String usuarioCreador;
     private Date fechaCreacion;
+    private Integer stock;
 
     public ProductoDto() {
         this.productoId = null;
@@ -26,12 +27,13 @@ public class ProductoDto {
         this.usuarioModificador = null;
         this.usuarioCreador = null;
         this.fechaCreacion = null;
+        this.stock = null;
     }
 
     public ProductoDto(Integer productoId, String nombre, String presentacion,
             Double precioUnitario, Boolean activo, TipoProductoDto tipoProducto,
             Date fechaModificacion, String usuarioModificador,
-            String usuarioCreador, Date fechaCreacion) {
+            String usuarioCreador, Date fechaCreacion, Integer stock) {
         this.productoId = productoId;
         this.nombre = nombre;
         this.presentacion = presentacion;
@@ -42,6 +44,7 @@ public class ProductoDto {
         this.usuarioModificador = usuarioModificador;
         this.usuarioCreador = usuarioCreador;
         this.fechaCreacion = fechaCreacion;
+        this.stock = stock;
     }
 
     /**
@@ -182,5 +185,19 @@ public class ProductoDto {
      */
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    /**
+     * @return the stock
+     */
+    public Integer getStock() {
+        return stock;
+    }
+
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }

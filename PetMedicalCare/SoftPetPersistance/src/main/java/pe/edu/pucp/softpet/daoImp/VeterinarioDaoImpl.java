@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 
-/**
- *
- * @author marti
- */
 public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
 
     private VeterinarioDto veterinario;
@@ -75,7 +71,8 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.veterinario.setFechaContratacion(this.resultSet.getDate("FECHA_DE_CONTRATACION"));
         this.veterinario.setEstado(this.resultSet.getString("ESTADO"));
         this.veterinario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        this.veterinario.setPersona(new PersonaDaoImpl().
+                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
         this.veterinario.setFechaInicioJornada(this.resultSet.getDate("FECHA_INICIO_JORNADA"));
         this.veterinario.setFechaFinJornada(this.resultSet.getDate("FECHA_FIN_JORNADA"));
     }

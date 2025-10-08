@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.DetalleRecetaDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.recetas.DetalleRecetaDto;
 
-/**
- *
- * @author marti
- */
 public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDao {
 
     private DetalleRecetaDto detalleReceta;

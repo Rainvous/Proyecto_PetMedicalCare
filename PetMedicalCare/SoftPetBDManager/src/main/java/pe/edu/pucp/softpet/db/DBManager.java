@@ -49,8 +49,8 @@ public abstract class DBManager {
     public Connection getConnection() {
         try {
             Class.forName(this.driver);
-            System.out.println("Usuario: " + this.usuario);
-            System.out.println("Contraseña: " + this.contraseña);
+            // System.out.println("Usuario: " + this.usuario);
+            // System.out.println("Contraseña: " + this.contraseña);
             // System.out.println("getURL(): " + getURL());
             // System.out.println(Cifrado.descifrarMD5(this.contraseña));
             this.conexion = DriverManager.getConnection(getURL(), this.usuario, Cifrado.descifrarMD5(this.contraseña));

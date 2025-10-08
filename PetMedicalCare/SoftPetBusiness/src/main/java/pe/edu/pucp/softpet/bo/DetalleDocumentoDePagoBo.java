@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.DetalleDocumentoDePagoDao;
@@ -12,11 +8,8 @@ import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
 import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
 import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
 
-/**
- *
- * @author marti
- */
 public class DetalleDocumentoDePagoBo {
+
     private DetalleDocumentoDePagoDao detalleDao;
 
     public DetalleDocumentoDePagoBo() {
@@ -25,9 +18,9 @@ public class DetalleDocumentoDePagoBo {
 
     // Inserta un nuevo detalle de documento de pago
     public Integer insertar(int nroItem, String descripcion, int cantidad,
-                            double precioUnitarioSinIGV, double valorVenta,
-                            double igvItem, double importeTotal,
-                            int documentoPagoId, int servicioId, int productoId) {
+            double precioUnitarioSinIGV, double valorVenta,
+            double igvItem, double importeTotal,
+            int documentoPagoId, int servicioId, int productoId) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
         detalle.setNroItem(nroItem);
@@ -48,9 +41,9 @@ public class DetalleDocumentoDePagoBo {
 
     // Modifica un detalle existente
     public Integer modificar(int detalleId, int nroItem, String descripcion, int cantidad,
-                             double precioUnitarioSinIGV, double valorVenta,
-                             double igvItem, double importeTotal,
-                             int documentoPagoId, int servicioId, int productoId) {
+            double precioUnitarioSinIGV, double valorVenta,
+            double igvItem, double importeTotal,
+            int documentoPagoId, int servicioId, int productoId) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
         detalle.setDddpId(detalleId);

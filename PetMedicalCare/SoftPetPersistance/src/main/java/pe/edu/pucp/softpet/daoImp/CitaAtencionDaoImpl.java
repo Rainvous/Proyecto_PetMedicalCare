@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
 
-/**
- *
- * @author marti
- */
 public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao {
 
     private CitaAtencionDto citaAtencion;
@@ -34,6 +30,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.listaColumnas.add(new Columna("PESO_MASCOTA", false, false));
         this.listaColumnas.add(new Columna("VETERINARIO_ID", false, false));
         this.listaColumnas.add(new Columna("MASCOTA_ID", false, false));
+        this.listaColumnas.add(new Columna("ESTADO_CITA", false, false));
     }
 
     @Override
@@ -47,6 +44,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setString(7, this.citaAtencion.getPeso());
         this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
+        this.statement.setString(10, this.citaAtencion.getEstado());
     }
 
     @Override
@@ -60,8 +58,9 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setString(7, this.citaAtencion.getPeso());
         this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-        
-        this.statement.setInt(10, this.citaAtencion.getCitaId());
+        this.statement.setString(10, this.citaAtencion.getEstado());
+
+        this.statement.setInt(11, this.citaAtencion.getCitaId());
     }
 
     @Override
@@ -89,6 +88,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
                 obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
         this.citaAtencion.setMascota(new MascotaDaoImpl().
                 obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));
+        this.citaAtencion.setEstado(this.resultSet.getString("ESTADO_CITA"));
     }
 
     @Override

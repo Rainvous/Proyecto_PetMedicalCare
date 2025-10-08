@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
-/**
- *
- * @author marti
- */
 public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao {
 
     private RecetaMedicaDto recetaMedica;

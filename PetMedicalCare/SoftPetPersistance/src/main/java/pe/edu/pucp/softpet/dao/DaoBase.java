@@ -2,9 +2,7 @@ package pe.edu.pucp.softpet.dao;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author User
+/*
  * @param <T> Tipo de Entidad (DTO) que usara el DAO
  */
 public interface DaoBase<T> {

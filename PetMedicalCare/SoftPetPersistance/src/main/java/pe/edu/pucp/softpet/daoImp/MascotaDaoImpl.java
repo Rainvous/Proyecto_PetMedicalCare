@@ -52,6 +52,7 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setInt(6, this.mascota.getActivo() ? 1 : 0);
         this.statement.setDate(7, this.mascota.getFechaDefuncion());
         this.statement.setInt(8, this.mascota.getPersona().getPersonaId());
+        
         this.statement.setInt(9, this.mascota.getMascotaId());
     }
 

@@ -8,10 +8,6 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
 import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
-/**
- *
- * @author User
- */
 public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
     private ProductoDto producto;
@@ -25,23 +21,24 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
     @Override
     protected void configurarListaDeColumnas() {
-        this.listaColumnas.add(new Columna("PRODUCTO_ID", true, true));  // PK, autogenerado
+        this.listaColumnas.add(new Columna("PRODUCTO_ID", true, true));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("PRESENTACION", false, false));
         this.listaColumnas.add(new Columna("PRECIO_UNITARIO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("TIPO_PRODUCTO_ID", false, false));
+        this.listaColumnas.add(new Columna("STOCK", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        // NOTA NO ES NECESARIO AGREGAR LA FECHA
+        // NOTA: la auditoria se maneja con un trigger
         this.statement.setString(1, this.producto.getNombre());
         this.statement.setString(2, this.producto.getPresentacion());
         this.statement.setDouble(3, this.producto.getPrecioUnitario());
         this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
         this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
-        // System.out.println(statement);
+        this.statement.setInt(6, this.producto.getStock());
     }
 
     @Override
@@ -51,8 +48,9 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         this.statement.setDouble(3, this.producto.getPrecioUnitario());
         this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
         this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
+        this.statement.setInt(6, this.producto.getStock());
 
-        this.statement.setInt(6, this.producto.getProductoId());
+        this.statement.setInt(7, this.producto.getProductoId());
     }
 
     @Override
@@ -75,10 +73,7 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         this.producto.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.producto.setTipoProducto(new TipoProductoDaoImpl().
                 obtenerPorId(this.resultSet.getInt("TIPO_PRODUCTO_ID")));
-//        TipoProductoDto tipoProducto = new TipoProductoDto();
-//        tipoProducto.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
-//
-//        this.producto.setTipoProducto(tipoProducto);
+        this.producto.setStock(this.resultSet.getInt("STOCK"));
     }
 
     @Override
@@ -123,7 +118,10 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         return super.eliminar();
     }
 
-    ///PROCEDURES Y SELECTS
+    /// PROCEDURES Y SELECT's
+    
+    /// @param NombreTipo
+    /// @return T
     
     @Override
     public ArrayList<ProductoDto> ListarPorTipo(String NombreTipo) {
@@ -148,7 +146,6 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         sql = sql.concat("FROM PRODUCTOS p ");
         sql = sql.concat("WHERE p.nombre LIKE ?");
         return sql;
-
     }
 
     private void incluirValorDeParametrosPorNombre(Object objetoParametro) {
@@ -163,9 +160,7 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         } catch (SQLException ex) {
             System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
             System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-
         }
-
     }
 
     private void incluirValorDeParametrosParaListarPorTipo(Object objetoParametro) {
@@ -180,16 +175,14 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         } catch (SQLException ex) {
             System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
             System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-
         }
-
     }
 
     @Override
     public ArrayList<ProductoDto> ListarPorNombre(String Nombre) {
         ProductoDto productoAux = new ProductoDto();
         productoAux.setNombre(Nombre);
-     
+
         String sql = GenerarSQLSelectPorNombre();
         return (ArrayList<ProductoDto>) super.listarTodos(sql, this::incluirValorDeParametrosPorNombre, productoAux);
     }

@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 
-/**
- *
- * @author marti
- */
 public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePagoDao {
 
     private DocumentoPagoDto documentoPago;

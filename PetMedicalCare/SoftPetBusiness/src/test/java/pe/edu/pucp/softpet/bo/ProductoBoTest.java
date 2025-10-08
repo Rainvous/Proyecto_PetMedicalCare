@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
+import pe.edu.pucp.softpet.bo.ProductoBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
-import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
-/**
- *
- * @author marti
- */
 public class ProductoBoTest {
 
     private ProductoBo productoBo;
@@ -34,11 +26,12 @@ public class ProductoBoTest {
         String presentacion = "  botella 250ml  ";
         double precio = 19.90;
         boolean activo = true;
+        int stock = 10;
 
         int tipoProductoId = 1;
 
         //insertar
-        Integer idGenerado = productoBo.insertar(nombre, presentacion, precio, activo, tipoProductoId);
+        Integer idGenerado = productoBo.insertar(nombre, presentacion, precio, activo, tipoProductoId, stock);
 
         // Solo verificar que el ID generado sea válido
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
@@ -56,6 +49,7 @@ public class ProductoBoTest {
         String nuevaPresentacion = "botella 300ml";
         double nuevoPrecio = 25.50;
         boolean nuevoActivo = false;
+        int stock = 3;
         int tipoProductoId = 1;
 
         Integer resultado = productoBo.modificar(
@@ -64,7 +58,8 @@ public class ProductoBoTest {
                 nuevaPresentacion,
                 nuevoPrecio,
                 nuevoActivo,
-                tipoProductoId
+                tipoProductoId,
+                stock
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar true si la actualización fue exitosa");
@@ -82,9 +77,10 @@ public class ProductoBoTest {
         String presentacion = "Paquete individual";
         double precio = 10.50;
         boolean activo = true;
+        int stock = 5;
         int tipoProductoId = 1;
 
-        Integer idGenerado = productoBo.insertar(nombre, presentacion, precio, activo, tipoProductoId);
+        Integer idGenerado = productoBo.insertar(nombre, presentacion, precio, activo, tipoProductoId, stock);
         assertTrue(idGenerado > 0, "No se pudo insertar el producto para eliminar.");
 
         // Ahora eliminamos
@@ -128,7 +124,8 @@ public class ProductoBoTest {
             System.out.println("Nombre: " + p.getNombre());
             System.out.println("Presentación: " + p.getPresentacion());
             System.out.println("Precio: " + p.getPrecioUnitario());
-            System.out.println("Activo: " + (p.getActivo()? "Sí" : "No"));
+            System.out.println("Activo: " + (p.getActivo() ? "Sí" : "No"));
+            System.out.println("Stock: " + p.getStock());
             if (p.getTipoProducto() != null) {
                 System.out.println("Tipo de producto ID: " + p.getTipoProducto().getTipoProductoId());
             }

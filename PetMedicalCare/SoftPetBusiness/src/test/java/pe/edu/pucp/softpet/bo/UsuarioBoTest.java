@@ -1,46 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
+import pe.edu.pucp.softpet.bo.UsuarioBo;
 import java.sql.Date;
 import java.util.ArrayList;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import pe.edu.pucp.softpet.dto.usuarios.RolDto;
-import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 
-/**
- *
- * @author snipe
- */
 public class UsuarioBoTest {
-    
+
     private UsuarioBo usuarioBo;
-    
+
     public UsuarioBoTest() {
         this.usuarioBo = new UsuarioBo();
     }
-    
+
     @Test
     public void testInsertar() {
         System.out.println("insertar");
         ArrayList<Integer> listaUsuarioID = new ArrayList<>();
         insertarUsuario(listaUsuarioID);
         //eliminarTodo();
-        
     }
-    
-    private void insertarUsuario (ArrayList<Integer> listaRolID){
+
+    private void insertarUsuario(ArrayList<Integer> listaRolID) {
         Date fechaModificacion = Date.valueOf("2025-10-07");
         Date fechaCreacion = Date.valueOf("2025-10-07");
-        
+
         Integer resultado = this.usuarioBo.insertar(
                 "Snipe",
                 "AA00",
@@ -54,8 +40,8 @@ public class UsuarioBoTest {
         assertTrue(resultado != 0);
         listaRolID.add(resultado);
     }
-    
-   @Test
+
+    @Test
     public void testObtenerPorId() {
         System.out.println("obtenerPorId");
         ArrayList<Integer> listaUsuarioId = new ArrayList<>();
@@ -70,14 +56,15 @@ public class UsuarioBoTest {
         System.out.println("listarTodos");
         ArrayList<Integer> listaUsuarioId = new ArrayList<>();
         insertarUsuario(listaUsuarioId);
-        
+
         ArrayList<UsuarioDto> listaUsuario = this.usuarioBo.listarTodos();
-        assertTrue(listaUsuarioId.size()>0);
+        assertTrue(listaUsuarioId.size() > 0);
         for (Integer i = 0; i < listaUsuarioId.size(); i++) {
-            assertTrue(listaUsuarioId.get(i)>0);
+            assertTrue(listaUsuarioId.get(i) > 0);
         }
         //eliminarTodo();
     }
+
     @Test
     public void testModificar() {
         System.out.println("=== Test: modificar Usuario existente ===");
@@ -99,6 +86,7 @@ public class UsuarioBoTest {
 
         assertTrue(resultado > 0, "El método modificar debe retornar true si la actualización fue exitosa");
     }
+
     @Test
     public void testEliminar() {
         System.out.println("eliminar");

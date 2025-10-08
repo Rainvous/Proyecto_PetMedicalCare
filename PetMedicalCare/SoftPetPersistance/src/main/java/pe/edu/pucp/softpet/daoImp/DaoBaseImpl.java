@@ -11,8 +11,6 @@ import java.util.function.Consumer;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.daoImp.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.db.DBManager;
-//NOTA: ESTA DAOimplBase ESTA MODIFICADO
-//SE AGREGÓ EL 
 
 public abstract class DaoBaseImpl {
 
@@ -118,7 +116,7 @@ public abstract class DaoBaseImpl {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
-            System.out.println("CRUD-> " + statement);
+            System.out.println("CRUD: " + statement);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();
@@ -261,15 +259,15 @@ public abstract class DaoBaseImpl {
     }
 
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public Integer retornarUltimoAutoGenerado() {
@@ -312,15 +310,15 @@ public abstract class DaoBaseImpl {
     }
 
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
-        throw new UnsupportedOperationException("El método no ha sido sobreescrito."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("El método no ha sido sobreescrito.");
     }
 
     protected void instanciarObjetoDelResultSet() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     protected void limpiarObjetoDelResultSet() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public List listarTodos() {
@@ -360,7 +358,7 @@ public abstract class DaoBaseImpl {
     }
 
     protected void agregarObjetoALaLista(List lista) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public void ejecutarProcedimientoAlmacenado(String sql,
@@ -411,10 +409,12 @@ public abstract class DaoBaseImpl {
     }
 
     private void SetDeUsuario(String usuario) throws SQLException {
-        //NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
-        //NO PUEDES HACERLO APARTE PORQUE ABRES Y CIERRAS CONEXIONES VARIAS VECES
-        //  if(usuario.isEmpty())return;//si no hay nada no agrega esto
-        if(this.usuario==null)return;
+        // NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
+        // NO SE PUEDE HACER APARTE PORQUE SE ABRE Y CIERRA CONEXIONES VARIAS VECES
+        //  if(usuario.isEmpty())return; // Si no hay nada no agrega esto
+        if (this.usuario == null) {
+            return;
+        }
         if (usuario.isEmpty()) {
             return;
         }

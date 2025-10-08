@@ -6,12 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dao.UsuarioDAO;
-import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 
-/**
- *
- * @author marti
- */
 public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
 
     private UsuarioDto usuario;
@@ -29,22 +24,15 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
         this.listaColumnas.add(new Columna("PASSWORD", false, false));
         this.listaColumnas.add(new Columna("CORREO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-//        this.listaColumnas.add(new Columna("FECHA_MODIFICACION", false, false));
-//        this.listaColumnas.add(new Columna("USUARIO_MODIFICADOR", false, false));
-//        this.listaColumnas.add(new Columna("USUARIO_CREADOR", false, false));
-//        this.listaColumnas.add(new Columna("FECHA_CREACION", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
+        // NOTA: la auditoria se maneja con un trigger
         this.statement.setString(1, this.usuario.getUsername());
         this.statement.setString(2, this.usuario.getPassword());
         this.statement.setString(3, this.usuario.getCorreo());
         this.statement.setBoolean(4, this.usuario.getActivo());
-//        this.statement.setDate(4, this.usuario.getFechaModificacion());
-//        this.statement.setString(5, this.usuario.getUsuarioModificador());
-//        this.statement.setString(6, this.usuario.getUsuarioCreador());
-//        this.statement.setDate(7, this.usuario.getFechaCreacion());
     }
 
     @Override
@@ -53,10 +41,6 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
         this.statement.setString(2, this.usuario.getPassword());
         this.statement.setString(3, this.usuario.getCorreo());
         this.statement.setBoolean(4, this.usuario.getActivo());
-//        this.statement.setDate(4, this.usuarios.getFechaModificacion());
-//        this.statement.setString(5, this.usuarios.getUsuarioModificador());
-//        this.statement.setString(6, this.usuarios.getUsuarioCreador());
-//        this.statement.setDate(7, this.usuarios.getFechaCreacion());
 
         this.statement.setInt(5, this.usuario.getUsuarioId());
     }
@@ -79,11 +63,6 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
         this.usuario.setPassword(this.resultSet.getString("PASSWORD"));
         this.usuario.setCorreo(this.resultSet.getString("CORREO"));
         this.usuario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-//        this.usuario.setActivo.setFechaModificacion(this.resultSet.getDate("FECHA_MODIFICACION"));
-//      
-//        this.usuario.setActivo.setUsuarioModificador(this.resultSet.getString("USUARIO_MODIFICADOR"));
-//        this.usuario.setActivo.setUsuarioCreador(this.resultSet.getString("FECHA_CREACION"));
-//        this.usuario.setActivo.setFechaCreacion(this.resultSet.getDate("FECHA_CREACION"));
     }
 
     @Override
@@ -129,6 +108,9 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
         return super.eliminar();
     }
 
+    /// PROCEDURES Y SELECT'
+    /// @return s
+
     public String generarListarPorCorreoYContra() {
 //         String sql = "SELECT * ";
 //         sql = sql.concat("FROM ROLES r ");
@@ -136,29 +118,27 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
 //         sql = sql.concat("JOIN USUARIOS usu ON usu.usuario_id=ru.usuario_id ");
 //         sql = sql.concat("WHERE usu.usuario_id= ? ");
 
-        String sql="SELECT * ";
-        sql= sql.concat("FROM USUARIO usu ");
-        sql= sql.concat("WHERE usu.correo like ? ");
-        sql= sql.concat("AND usu.password like ? ");
+        String sql = "SELECT * ";
+        sql = sql.concat("FROM USUARIO usu ");
+        sql = sql.concat("WHERE usu.correo like ? ");
+        sql = sql.concat("AND usu.password like ? ");
         return sql;
     }
 
     public void incluirValorDeParametrosParaListarPorCorreoYContra(Object objetoParametros) {
         UsuarioDto parametro = (UsuarioDto) objetoParametros;
-        String correo="%";
-        String contra="%";
-        correo= correo.concat(parametro.getCorreo());
-        correo= correo.concat("%");
-        contra= contra.concat(parametro.getPassword());
-        contra= contra.concat("%");
-         try {
+        String correo = "%";
+        String contra = "%";
+        correo = correo.concat(parametro.getCorreo());
+        correo = correo.concat("%");
+        contra = contra.concat(parametro.getPassword());
+        contra = contra.concat("%");
+        try {
             this.statement.setString(1, correo);
             this.statement.setString(2, contra);
-
         } catch (SQLException ex) {
             System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
             System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-
         }
     }
 

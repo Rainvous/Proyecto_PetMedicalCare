@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
-/**
- *
- * @author User
- */
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
@@ -25,7 +17,7 @@ public class ProductoBo {
     // Inserta un producto asegurando que el nombre y presentación estén en mayúsculas
     public Integer insertar(String nombre, String presentacion,
             double precioUnitario, boolean activo,
-            int tipoProductoId) {
+            int tipoProductoId, int stock) {
         ProductoDto producto = new ProductoDto();
 
         // Convertimos nombre y presentación a mayúsculas y eliminamos espacios extra
@@ -36,6 +28,8 @@ public class ProductoBo {
 
         // Asignamos el tipo de producto
         producto.setTipoProducto(new TipoProductoDaoImpl().obtenerPorId(tipoProductoId));
+        
+        producto.setStock(stock);
 
         return this.productoDao.insertar(producto);
     }
@@ -43,7 +37,7 @@ public class ProductoBo {
     // Modifica un producto
     public Integer modificar(int productoId, String nombre, String presentacion,
             double precioUnitario, boolean activo,
-            int tipoProductoId) {
+            int tipoProductoId, int stock) {
         ProductoDto producto = new ProductoDto();
 
         producto.setProductoId(productoId);
@@ -51,7 +45,10 @@ public class ProductoBo {
         producto.setPresentacion(presentacion.trim().toUpperCase());
         producto.setPrecioUnitario(precioUnitario);
         producto.setActivo(activo);
+        
         producto.setTipoProducto(new TipoProductoDaoImpl().obtenerPorId(tipoProductoId));
+        
+        producto.setStock(stock);
 
         return this.productoDao.modificar(producto);
     }

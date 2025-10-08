@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.RolUsuarioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
 
-/**
- *
- * @author marti
- */
 public class RolUsuarioDaoImpl extends DaoBaseImpl implements RolUsuarioDao {
 
     private RolUsuarioDto rolUsuario;
@@ -34,7 +30,6 @@ public class RolUsuarioDaoImpl extends DaoBaseImpl implements RolUsuarioDao {
         this.statement.setInt(1, this.rolUsuario.getRol().getRolId());
         this.statement.setInt(2, this.rolUsuario.getUsuario().getUsuarioId());
         this.statement.setInt(3, this.rolUsuario.getActivo() ? 1 : 0);
-
     }
 
     @Override

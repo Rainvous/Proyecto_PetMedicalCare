@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.ServicioDao;
@@ -10,11 +6,8 @@ import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
 import pe.edu.pucp.softpet.daoImp.TipoServicioDaoImpl;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
-/**
- *
- * @author marti
- */
 public class ServicioBo {
+
     private ServicioDao servicioDao;
 
     public ServicioBo() {
@@ -23,7 +16,7 @@ public class ServicioBo {
 
     // Inserta un servicio asegurando que el nombre y descripción estén en mayúsculas
     public Integer insertar(String nombre, double costo, String estado,
-                            String descripcion, boolean activo, int tipoServicioId) {
+            String descripcion, boolean activo, int tipoServicioId) {
         ServicioDto servicio = new ServicioDto();
 
         // Normalizamos los textos (trim + upper)
@@ -41,7 +34,7 @@ public class ServicioBo {
 
     // Modifica un servicio existente
     public Integer modificar(int servicioId, String nombre, double costo, String estado,
-                             String descripcion, boolean activo, int tipoServicioId) {
+            String descripcion, boolean activo, int tipoServicioId) {
         ServicioDto servicio = new ServicioDto();
 
         servicio.setServicioId(servicioId);

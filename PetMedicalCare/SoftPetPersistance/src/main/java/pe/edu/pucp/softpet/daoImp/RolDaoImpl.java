@@ -35,6 +35,7 @@ public class RolDaoImpl extends DaoBaseImpl implements RolDao {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setString(1, this.rol.getNombre());
         this.statement.setInt(2, this.rol.getActivo() ? 1 : 0);
+
         this.statement.setInt(3, this.rol.getRolId());
     }
 
@@ -103,7 +104,7 @@ public class RolDaoImpl extends DaoBaseImpl implements RolDao {
         UsuarioDto usuario = new UsuarioDto();
         usuario.setUsuarioId(idUser);
         String sql = GenerarSQLListarRolesDeUsuario();
-        return (ArrayList<RolDto>) super.listarTodos(sql,this::incluirValorDeParametrosParaListarPorRolesUsuario,usuario);
+        return (ArrayList<RolDto>) super.listarTodos(sql, this::incluirValorDeParametrosParaListarPorRolesUsuario, usuario);
     }
 
     private String GenerarSQLListarRolesDeUsuario() {
@@ -115,17 +116,15 @@ public class RolDaoImpl extends DaoBaseImpl implements RolDao {
         sql = sql.concat("WHERE usu.usuario_id= ? ");
         return sql;
     }
-     public void incluirValorDeParametrosParaListarPorRolesUsuario(Object objetoParametros) {
-         UsuarioDto parametros = (UsuarioDto)objetoParametros;
-         
-          try {
-            this.statement.setInt(1, parametros.getUsuarioId());
-            
 
+    public void incluirValorDeParametrosParaListarPorRolesUsuario(Object objetoParametros) {
+        UsuarioDto parametros = (UsuarioDto) objetoParametros;
+
+        try {
+            this.statement.setInt(1, parametros.getUsuarioId());
         } catch (SQLException ex) {
             System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
             System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-
         }
-     }
+    }
 }

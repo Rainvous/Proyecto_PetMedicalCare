@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package pe.edu.pucp.bo;
+package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,12 +8,9 @@ import pe.edu.pucp.softpet.daoImp.MascotaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 
-/**
- *
- * @author marti
- */
 public class CitaAtencionBo {
-        private CitaAtencionDao citaAtencionDao;
+
+    private CitaAtencionDao citaAtencionDao;
 
     public CitaAtencionBo() {
         this.citaAtencionDao = new CitaAtencionDaoImpl();
@@ -25,8 +18,9 @@ public class CitaAtencionBo {
 
     // Inserta una nueva cita
     public Integer insertar(String observacion, Date fechaHoraInicio, Date fechaRegistro,
-                            Date fechaHoraFin, double monto, boolean activo, 
-                            String pesoMascota, int veterinarioId, int mascotaId) {
+            Date fechaHoraFin, double monto, boolean activo,
+            String pesoMascota, int veterinarioId, int mascotaId, 
+            String estadoCita) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
 
@@ -44,17 +38,18 @@ public class CitaAtencionBo {
         cita.setPeso(pesoMascota.trim());
         cita.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(veterinarioId));
         cita.setMascota(new MascotaDaoImpl().obtenerPorId(mascotaId));
+        cita.setEstado(estadoCita);
 
         return this.citaAtencionDao.insertar(cita);
-
     }
 
     // Modifica una cita existente
     public Integer modificar(int citaId, String observacion, Date fechaHoraInicio, Date fechaRegistro,
-                             Date fechaHoraFin, double monto, boolean activo, 
-                             String pesoMascota, int veterinarioId, int mascotaId) {
+            Date fechaHoraFin, double monto, boolean activo,
+            String pesoMascota, int veterinarioId, int mascotaId,
+            String estadoCita) {
 
-      CitaAtencionDto cita = new CitaAtencionDto();
+        CitaAtencionDto cita = new CitaAtencionDto();
 
         // ✅ Conversión correcta
         java.sql.Date fechaInicioSQL = new java.sql.Date(fechaHoraInicio.getTime());
@@ -71,8 +66,8 @@ public class CitaAtencionBo {
         cita.setPeso(pesoMascota.trim());
         cita.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(veterinarioId));
         cita.setMascota(new MascotaDaoImpl().obtenerPorId(mascotaId));
+        cita.setEstado(estadoCita);
 
-        
         return this.citaAtencionDao.modificar(cita);
     }
 

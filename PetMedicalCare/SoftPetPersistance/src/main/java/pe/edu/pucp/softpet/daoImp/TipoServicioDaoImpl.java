@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dao.TipoServicioDao;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
-/**
- *
- * @author marti
- */
 public class TipoServicioDaoImpl extends DaoBaseImpl implements TipoServicioDao {
 
     private TipoServicioDto tipoServicio;
@@ -41,7 +37,7 @@ public class TipoServicioDaoImpl extends DaoBaseImpl implements TipoServicioDao 
         this.statement.setString(1, this.tipoServicio.getNombre());
         this.statement.setString(2, this.tipoServicio.getDescripcion());
         this.statement.setInt(3, this.tipoServicio.getActivo() ? 1 : 0);
-        
+
         this.statement.setInt(4, this.tipoServicio.getTipoServicioId());
     }
 

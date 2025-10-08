@@ -7,10 +7,6 @@ import pe.edu.pucp.softpet.dao.TipoDocumentoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.TipoDocumentoDto;
 
-/**
- *
- * @author marti
- */
 public class TipoDocumentoDaoImpl extends DaoBaseImpl implements TipoDocumentoDao {
 
     private TipoDocumentoDto tipoDocumento;
