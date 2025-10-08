@@ -6,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 import pe.edu.pucp.softpet.dao.RolDao;
+import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 
 public class RolDaoImpl extends DaoBaseImpl implements RolDao {
 
@@ -96,4 +97,35 @@ public class RolDaoImpl extends DaoBaseImpl implements RolDao {
         this.rol = rol;
         return super.eliminar();
     }
+
+    @Override
+    public ArrayList<RolDto> ObtenerRolesDelUsuario(Integer idUser) {
+        UsuarioDto usuario = new UsuarioDto();
+        usuario.setUsuarioId(idUser);
+        String sql = GenerarSQLListarRolesDeUsuario();
+        return (ArrayList<RolDto>) super.listarTodos(sql,this::incluirValorDeParametrosParaListarPorRolesUsuario,usuario);
+    }
+
+    private String GenerarSQLListarRolesDeUsuario() {
+
+        String sql = "SELECT * ";
+        sql = sql.concat("FROM ROLES r ");
+        sql = sql.concat("JOIN ROLES_USUARIO ru ON ru.rol_id=r.rol_id ");
+        sql = sql.concat("JOIN USUARIOS usu ON usu.usuario_id=ru.usuario_id ");
+        sql = sql.concat("WHERE usu.usuario_id= ? ");
+        return sql;
+    }
+     public void incluirValorDeParametrosParaListarPorRolesUsuario(Object objetoParametros) {
+         UsuarioDto parametros = (UsuarioDto)objetoParametros;
+         
+          try {
+            this.statement.setInt(1, parametros.getUsuarioId());
+            
+
+        } catch (SQLException ex) {
+            System.err.println("No se pudo incluirValores de parametro den el Statement-> " + this.statement);
+            System.getLogger(ProductoDaoImpl.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+
+        }
+     }
 }

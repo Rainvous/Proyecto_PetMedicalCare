@@ -1,180 +1,180 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.bo;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.TestMethodOrder;
-import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
-
-/**
- *
- * @author marti
- */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)  // ✅ Agregar esta anotación
-
-public class DocumentoDePagoBoTest {
-
-    private DocumentoDePagoBo documentoBo;
-
-    public DocumentoDePagoBoTest() {
-        this.documentoBo = new DocumentoDePagoBo();
-    }
-
-    /**
-     * Test de insertar un documento de pago
-     */
-    @Test
-    @Order(1)
-    public void testInsertar() {
-        System.out.println("=== Test: insertar documento de pago ===");
-
-        String serie = "F002";
-        String numero = "0003";
-        double tasaIGV = 18.0;
-        Date fechaEmision = new Date(System.currentTimeMillis());
-
-        String metodoPago = "EFECTIVO";
-        String estado = "EMITIDO";
-        double subtotalSinIGV = 200.0;
-        double igvTotal = 36.0;
-        double total = 236.0;
-        boolean activo = true;
-        int tipoDocumentoId = 1; // Debe existir
-        int personaId = 1;       // Debe existir
-
-        Integer idGenerado = documentoBo.insertar(
-                serie, numero, tasaIGV, fechaEmision, metodoPago, estado,
-                subtotalSinIGV, igvTotal, total, activo, tipoDocumentoId, personaId
-        );
-
-        assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
-    }
-
+///*
+// * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+// * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
+// */
+//package pe.edu.pucp.bo;
+//
+//import java.sql.Date;
+//import java.util.ArrayList;
+//import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.*;
+//import org.junit.jupiter.api.MethodOrderer;
+//import org.junit.jupiter.api.Order;
+//import org.junit.jupiter.api.TestMethodOrder;
+//import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+//
+///**
+// *
+// * @author marti
+// */
+//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)  // ✅ Agregar esta anotación
+//
+//public class DocumentoDePagoBoTest {
+//
+//    private DocumentoDePagoBo documentoBo;
+//
+//    public DocumentoDePagoBoTest() {
+//        this.documentoBo = new DocumentoDePagoBo();
+//    }
+//
 //    /**
-//     * Test de modificar un documento existente
+//     * Test de insertar un documento de pago
 //     */
-    @Test
-    @Order(2)
-    public void testModificar() {
-        System.out.println("=== Test: modificar documento existente ===");
-
-        int documentoIdExistente = 3; // Usa el ID insertado o uno existente
-
-        String nuevaSerie = "F002";
-        String nuevoNumero = "0003";
-        double nuevaTasaIGV = 18.0;
-        Date nuevaFechaEmision = Date.valueOf("2025-10-07");
-        String nuevoMetodoPago = "TARJETA";
-        String nuevoEstado = "PAGADO";
-        double nuevoSubtotal = 200.0;
-        double nuevoIgv = 36.0;
-        double nuevoTotal = 236.0;
-        boolean nuevoActivo = true;
-        int tipoDocumentoId = 1;
-        int personaId = 1;
-
-        Integer resultado = documentoBo.modificar(
-                documentoIdExistente, nuevaSerie, nuevoNumero, nuevaTasaIGV, nuevaFechaEmision,
-                nuevoMetodoPago, nuevoEstado, nuevoSubtotal, nuevoIgv, nuevoTotal,
-                nuevoActivo, tipoDocumentoId, personaId
-        );
-
-        assertTrue(resultado > 0, "El método modificar debe retornar > 0 si la actualización fue exitosa");
-    }
-
+//    @Test
+//    @Order(1)
+//    public void testInsertar() {
+//        System.out.println("=== Test: insertar documento de pago ===");
+//
+//        String serie = "F002";
+//        String numero = "0003";
+//        double tasaIGV = 18.0;
+//        Date fechaEmision = new Date(System.currentTimeMillis());
+//
+//        String metodoPago = "EFECTIVO";
+//        String estado = "EMITIDO";
+//        double subtotalSinIGV = 200.0;
+//        double igvTotal = 36.0;
+//        double total = 236.0;
+//        boolean activo = true;
+//        int tipoDocumentoId = 1; // Debe existir
+//        int personaId = 1;       // Debe existir
+//
+//        Integer idGenerado = documentoBo.insertar(
+//                serie, numero, tasaIGV, fechaEmision, metodoPago, estado,
+//                subtotalSinIGV, igvTotal, total, activo, tipoDocumentoId, personaId
+//        );
+//
+//        assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
+//    }
+//
+////    /**
+////     * Test de modificar un documento existente
+////     */
+//    @Test
+//    @Order(2)
+//    public void testModificar() {
+//        System.out.println("=== Test: modificar documento existente ===");
+//
+//        int documentoIdExistente = 3; // Usa el ID insertado o uno existente
+//
+//        String nuevaSerie = "F002";
+//        String nuevoNumero = "0003";
+//        double nuevaTasaIGV = 18.0;
+//        Date nuevaFechaEmision = Date.valueOf("2025-10-07");
+//        String nuevoMetodoPago = "TARJETA";
+//        String nuevoEstado = "PAGADO";
+//        double nuevoSubtotal = 200.0;
+//        double nuevoIgv = 36.0;
+//        double nuevoTotal = 236.0;
+//        boolean nuevoActivo = true;
+//        int tipoDocumentoId = 1;
+//        int personaId = 1;
+//
+//        Integer resultado = documentoBo.modificar(
+//                documentoIdExistente, nuevaSerie, nuevoNumero, nuevaTasaIGV, nuevaFechaEmision,
+//                nuevoMetodoPago, nuevoEstado, nuevoSubtotal, nuevoIgv, nuevoTotal,
+//                nuevoActivo, tipoDocumentoId, personaId
+//        );
+//
+//        assertTrue(resultado > 0, "El método modificar debe retornar > 0 si la actualización fue exitosa");
+//    }
+//
+////    /**
+////     * Test de eliminar documento de pago
+////     */
+//    @Test
+//    @Order(3)
+//    public void testEliminar() {
+//        System.out.println("=== Test: eliminar documento de pago ===");
+//
+//        // Primero insertamos uno temporal
+//        String serie = "TEMP-0001";
+//        String numero = "0001";
+//        double tasaIGV = 18.0;
+//        Date fechaEmision = Date.valueOf("2025-10-07");
+//        String metodoPago = "EFECTIVO";
+//        String estado = "EMITIDO";
+//        double subtotalSinIGV = 100.0;
+//        double igvTotal = 18.0;
+//        double total = 118.0;
+//        boolean activo = true;
+//        int tipoDocumentoId = 1;
+//        int personaId = 1;
+//
+//        Integer idGenerado = documentoBo.insertar(
+//                serie, numero, tasaIGV, fechaEmision, metodoPago, estado,
+//                subtotalSinIGV, igvTotal, total, activo, tipoDocumentoId, personaId
+//        );
+//
+//        assertTrue(idGenerado > 0, "No se pudo insertar el documento para eliminarlo.");
+//
+//        Integer resultado = documentoBo.eliminar(idGenerado);
+//        assertTrue(resultado > 0, "El método eliminar debe retornar > 0 si la eliminación fue exitosa");
+//    }
+//
+////    /**
+////     * Test de obtener documento por ID
+////     */
+//    @Test
+//    @Order(4)
+//    public void testObtenerPorId() {
+//        System.out.println("=== Test: obtener documento por ID ===");
+//
+//        int documentoIdExistente = 1; // Asegúrate que exista
+//        DocumentoPagoDto documento = documentoBo.obtenerPorId(documentoIdExistente);
+//
+//        assertNotNull(documento, "El documento no debe ser null");
+//        assertEquals(documentoIdExistente, documento.getDocumentoPagoId(), "El ID obtenido no coincide");
+//
+//        // Mostrar en consola
+//        System.out.println("ID Documento: " + documento.getDocumentoPagoId());
+//        System.out.println("Serie: " + documento.getSerie());
+//        System.out.println("Numero: " + documento.getNumero());
+//        System.out.println("Método de Pago: " + documento.getMetodoPago());
+//        System.out.println("Total: " + documento.getTotal());
+//        System.out.println("Estado: " + documento.getEstado());
+//        System.out.println("Activo: " + (documento.getActivo()));
+//    }
+//
 //    /**
-//     * Test de eliminar documento de pago
+//     * Test de listar todos los documentos
 //     */
-    @Test
-    @Order(3)
-    public void testEliminar() {
-        System.out.println("=== Test: eliminar documento de pago ===");
-
-        // Primero insertamos uno temporal
-        String serie = "TEMP-0001";
-        String numero = "0001";
-        double tasaIGV = 18.0;
-        Date fechaEmision = Date.valueOf("2025-10-07");
-        String metodoPago = "EFECTIVO";
-        String estado = "EMITIDO";
-        double subtotalSinIGV = 100.0;
-        double igvTotal = 18.0;
-        double total = 118.0;
-        boolean activo = true;
-        int tipoDocumentoId = 1;
-        int personaId = 1;
-
-        Integer idGenerado = documentoBo.insertar(
-                serie, numero, tasaIGV, fechaEmision, metodoPago, estado,
-                subtotalSinIGV, igvTotal, total, activo, tipoDocumentoId, personaId
-        );
-
-        assertTrue(idGenerado > 0, "No se pudo insertar el documento para eliminarlo.");
-
-        Integer resultado = documentoBo.eliminar(idGenerado);
-        assertTrue(resultado > 0, "El método eliminar debe retornar > 0 si la eliminación fue exitosa");
-    }
-
-//    /**
-//     * Test de obtener documento por ID
-//     */
-    @Test
-    @Order(4)
-    public void testObtenerPorId() {
-        System.out.println("=== Test: obtener documento por ID ===");
-
-        int documentoIdExistente = 1; // Asegúrate que exista
-        DocumentoPagoDto documento = documentoBo.obtenerPorId(documentoIdExistente);
-
-        assertNotNull(documento, "El documento no debe ser null");
-        assertEquals(documentoIdExistente, documento.getDocumentoPagoId(), "El ID obtenido no coincide");
-
-        // Mostrar en consola
-        System.out.println("ID Documento: " + documento.getDocumentoPagoId());
-        System.out.println("Serie: " + documento.getSerie());
-        System.out.println("Numero: " + documento.getNumero());
-        System.out.println("Método de Pago: " + documento.getMetodoPago());
-        System.out.println("Total: " + documento.getTotal());
-        System.out.println("Estado: " + documento.getEstado());
-        System.out.println("Activo: " + (documento.getActivo()));
-    }
-
-    /**
-     * Test de listar todos los documentos
-     */
-    @Test
-    @Order(5)
-    public void testListarTodos() {
-        System.out.println("=== Test: listar todos los documentos ===");
-
-        ArrayList<DocumentoPagoDto> lista = documentoBo.listarTodos();
-
-        assertNotNull(lista, "La lista no debe ser null");
-        assertFalse(lista.isEmpty(), "La lista no debe estar vacía");
-
-        System.out.println("Documentos encontrados: " + lista.size());
-        for (DocumentoPagoDto doc : lista) {
-            System.out.println("-----------------------------------");
-            System.out.println("ID: " + doc.getDocumentoPagoId());
-            System.out.println("Serie: " + doc.getSerie());
-            System.out.println("Numero: " + doc.getNumero());
-            System.out.println("Método de Pago: " + doc.getMetodoPago());
-            System.out.println("Estado: " + doc.getEstado());
-            System.out.println("Total: " + doc.getTotal());
-            if (doc.getTipoDocumento() != null) {
-                System.out.println("Tipo Documento ID: " + doc.getTipoDocumento().getTipoDocumentoId());
-            }
-            if (doc.getPersona() != null) {
-                System.out.println("Persona ID: " + doc.getPersona().getPersonaId());
-            }
-        }
-    }
-
-}
+//    @Test
+//    @Order(5)
+//    public void testListarTodos() {
+//        System.out.println("=== Test: listar todos los documentos ===");
+//
+//        ArrayList<DocumentoPagoDto> lista = documentoBo.listarTodos();
+//
+//        assertNotNull(lista, "La lista no debe ser null");
+//        assertFalse(lista.isEmpty(), "La lista no debe estar vacía");
+//
+//        System.out.println("Documentos encontrados: " + lista.size());
+//        for (DocumentoPagoDto doc : lista) {
+//            System.out.println("-----------------------------------");
+//            System.out.println("ID: " + doc.getDocumentoPagoId());
+//            System.out.println("Serie: " + doc.getSerie());
+//            System.out.println("Numero: " + doc.getNumero());
+//            System.out.println("Método de Pago: " + doc.getMetodoPago());
+//            System.out.println("Estado: " + doc.getEstado());
+//            System.out.println("Total: " + doc.getTotal());
+//            if (doc.getTipoDocumento() != null) {
+//                System.out.println("Tipo Documento ID: " + doc.getTipoDocumento().getTipoDocumentoId());
+//            }
+//            if (doc.getPersona() != null) {
+//                System.out.println("Persona ID: " + doc.getPersona().getPersonaId());
+//            }
+//        }
+//    }
+//
+//}

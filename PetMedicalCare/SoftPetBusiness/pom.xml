@@ -13,11 +13,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SoftPetPersistance</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>SoftPetModel</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -38,6 +33,11 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.10.3</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SoftPetPersistance</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>
