@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.UsuarioBo;
 import java.sql.Date;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,8 @@ public class UsuarioBoTest {
 
     @Test
     public void testInsertar() {
-        System.out.println("insertar");
+        System.out.println("=== Test: Insertar - USUARIOS ===");
+
         ArrayList<Integer> listaUsuarioID = new ArrayList<>();
         insertarUsuario(listaUsuarioID);
         //eliminarTodo();
@@ -37,13 +37,15 @@ public class UsuarioBoTest {
                 "Snipe",
                 fechaCreacion
         );
+
         assertTrue(resultado != 0);
         listaRolID.add(resultado);
     }
 
     @Test
     public void testObtenerPorId() {
-        System.out.println("obtenerPorId");
+        System.out.println("=== Test: Obtener por ID - USUARIOS ===");
+
         ArrayList<Integer> listaUsuarioId = new ArrayList<>();
         insertarUsuario(listaUsuarioId);
         UsuarioDto usuarioDto = this.usuarioBo.obtenerPorId(listaUsuarioId.get(0));
@@ -53,7 +55,8 @@ public class UsuarioBoTest {
 
     @Test
     public void testListarTodos() {
-        System.out.println("listarTodos");
+        System.out.println("=== Test: Listar todos - USUARIOS ===");
+
         ArrayList<Integer> listaUsuarioId = new ArrayList<>();
         insertarUsuario(listaUsuarioId);
 
@@ -67,7 +70,8 @@ public class UsuarioBoTest {
 
     @Test
     public void testModificar() {
-        System.out.println("=== Test: modificar Usuario existente ===");
+        System.out.println("=== Test: Modificar - USUARIOS ===");
+
         Date fechaModificacion = Date.valueOf("2025-10-07");
         Date fechaCreacion = Date.valueOf("2025-10-07");
 
@@ -89,7 +93,8 @@ public class UsuarioBoTest {
 
     @Test
     public void testEliminar() {
-        System.out.println("eliminar");
+        System.out.println("=== Test: Eliminar - USUARIOS ===");
+
         //ArrayList<Integer> listaRolUsuarioId = new ArrayList<>();
         usuarioBo.eliminar(10);
         //eliminarTodo();

@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.DetalleDocumentoDePagoBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +29,7 @@ public class DetalleDocumentoDePagoBoTest {
     @Test
     @Order(1)
     public void testInsertar() {
-        System.out.println("=== Test: insertar detalle de documento de pago ===");
+        System.out.println("=== Test: Insertar - DETALLES_DOCUMENTOS_DE_PAGO ===");
 
         int nroItem = 1;
         String descripcion = "Consulta Veterinaria";
@@ -59,7 +58,7 @@ public class DetalleDocumentoDePagoBoTest {
     @Test
     @Order(2)
     public void testModificar() {
-        System.out.println("=== Test: modificar detalle existente ===");
+        System.out.println("=== Test: Modificar - DETALLES_DOCUMENTOS_DE_PAGO ===");
 
         int detalleIdExistente = 8;
         int nroItem = 2;
@@ -122,9 +121,9 @@ public class DetalleDocumentoDePagoBoTest {
     @Test
     @Order(4)
     public void testObtenerPorId() {
-        System.out.println("=== Test: obtener detalle por ID ===");
+        System.out.println("=== Test: Obtener por ID - DETALLES_DOCUMENTOS_DE_PAGO ===");
 
-        int detalleIdExistente = 1; // Asegúrate que exista
+        int detalleIdExistente = 1; // Asegurarse que exista
         DetalleDocumentoPagoDto detalle = detalleBo.obtenerPorId(detalleIdExistente);
 
         assertNotNull(detalle, "El detalle no debe ser null");
@@ -156,7 +155,7 @@ public class DetalleDocumentoDePagoBoTest {
     @Test
     @Order(5)
     public void testListarTodos() {
-        System.out.println("=== Test: listar todos los detalles de documentos de pago ===");
+        System.out.println("=== Test: Listar todos - DETALLES_DOCUMENTOS_DE_PAGO ===");
 
         ArrayList<DetalleDocumentoPagoDto> lista = detalleBo.listarTodos();
 

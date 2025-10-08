@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.RolUsuarioBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +17,8 @@ public class RolUsuarioBoTest {
 
     @Test
     public void testInsertar() {
-        System.out.println("insertar");
+        System.out.println("=== Test: Insertar - ROLES_USUARIO ===");
+        
         ArrayList<Integer> listaRolID = new ArrayList<>();
         insertarRolUsuario(listaRolID);
         //eliminarTodo();
@@ -33,7 +33,8 @@ public class RolUsuarioBoTest {
 
     @Test
     public void testObtenerPorId() {
-        System.out.println("obtenerPorId");
+        System.out.println("=== Test: Obtener por ID - ROLES_USUARIO ===");
+        
         ArrayList<Integer> listaRolUsuarioId = new ArrayList<>();
         insertarRolUsuario(listaRolUsuarioId);
         RolUsuarioDto rolUsuarioDto = this.rolUsuarioBo.obtenerPorID(listaRolUsuarioId.get(0));
@@ -43,7 +44,8 @@ public class RolUsuarioBoTest {
 
     @Test
     public void testListarTodos() {
-        System.out.println("listarTodos");
+        System.out.println("=== Test: Listar todos - ROLES_USUARIO ===");
+        
         ArrayList<Integer> listaRolId = new ArrayList<>();
         insertarRolUsuario(listaRolId);
 
@@ -57,7 +59,7 @@ public class RolUsuarioBoTest {
 
     @Test
     public void testModificar() {
-        System.out.println("=== Test: modificar rolUsuario existente ===");
+        System.out.println("=== Test: Modificar - ROLES_USUARIO ===");
 
         int rolUsuarioId = 1; // Asumimos que ya existe
         UsuarioDto usuario = new UsuarioDto();
@@ -67,10 +69,7 @@ public class RolUsuarioBoTest {
         rol.setRolId(1);
         usuario.setUsuarioId(2);
         Integer resultado = rolUsuarioBo.modificar(
-                rolUsuarioId,
-                usuario,
-                rol,
-                activo
+                rolUsuarioId, usuario, rol, activo
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar true si la actualización fue exitosa");
@@ -78,7 +77,8 @@ public class RolUsuarioBoTest {
 
     @Test
     public void testEliminar() {
-        System.out.println("eliminar");
+        System.out.println("=== Test: Eliminar - ROLES_USUARIO ===");
+        
         //ArrayList<Integer> listaRolUsuarioId = new ArrayList<>();
         rolUsuarioBo.eliminar(33);
         //eliminarTodo();

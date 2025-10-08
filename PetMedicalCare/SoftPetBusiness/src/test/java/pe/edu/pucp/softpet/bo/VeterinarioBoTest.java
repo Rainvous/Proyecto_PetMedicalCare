@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.VeterinarioBo;
 import java.sql.Date;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ public class VeterinarioBoTest {
     @Test
     @Order(1)
     public void testInsertar() {
-        System.out.println("=== Test: insertar veterinario ===");
+        System.out.println("=== Test: Insertar - VETERINARIOS ===");
 
         // Datos de prueba
         String especializacion = "Cardiología";
@@ -34,13 +33,8 @@ public class VeterinarioBoTest {
         Date fechaFinJornada = new Date(System.currentTimeMillis() + (365L * 24 * 60 * 60 * 1000)); // +1 año
 
         Integer idGenerado = veterinarioBo.insertar(
-                especializacion,
-                fechaContratacion,
-                estado,
-                activo,
-                personaId,
-                fechaInicioJornada,
-                fechaFinJornada
+                especializacion, fechaContratacion, estado, activo,
+                personaId, fechaInicioJornada, fechaFinJornada
         );
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
@@ -53,7 +47,7 @@ public class VeterinarioBoTest {
     @Test
     @Order(2)
     public void testModificar() {
-        System.out.println("=== Test: modificar veterinario ===");
+        System.out.println("=== Test: Modificar - VETERINARIOS ===");
 
         int veterinarioId = 3; // Debe existir
         String nuevaEspecializacion = "Traumatología";
@@ -65,14 +59,9 @@ public class VeterinarioBoTest {
         Date fechaFinJornada = new Date(System.currentTimeMillis() + (365L * 24 * 60 * 60 * 1000));
 
         Integer resultado = veterinarioBo.modificar(
-                veterinarioId,
-                nuevaEspecializacion,
-                fechaContratacion,
-                nuevoEstado,
-                activo,
-                personaId,
-                fechaInicioJornada,
-                fechaFinJornada
+                veterinarioId, nuevaEspecializacion, fechaContratacion,
+                nuevoEstado, activo, personaId,
+                fechaInicioJornada, fechaFinJornada
         );
 
         assertTrue(resultado > 0, "La modificación debe retornar > 0");
@@ -85,7 +74,7 @@ public class VeterinarioBoTest {
     @Test
     @Order(3)
     public void testEliminar() {
-        System.out.println("=== Test: eliminar veterinario ===");
+        System.out.println("=== Test: Eliminar - VETERINARIOS ===");
 
         // Primero insertamos uno para eliminar
         String especializacion = "Temporal";
@@ -97,13 +86,8 @@ public class VeterinarioBoTest {
         Date fechaFinJornada = new Date(System.currentTimeMillis() + (365L * 24 * 60 * 60 * 1000));
 
         Integer idGenerado = veterinarioBo.insertar(
-                especializacion,
-                fechaContratacion,
-                estado,
-                activo,
-                personaId,
-                fechaInicioJornada,
-                fechaFinJornada
+                especializacion, fechaContratacion, estado,
+                activo, personaId, fechaInicioJornada, fechaFinJornada
         );
 
         assertTrue(idGenerado > 0, "No se pudo insertar el veterinario para eliminar");
@@ -120,7 +104,7 @@ public class VeterinarioBoTest {
     @Test
     @Order(4)
     public void testObtenerPorId() {
-        System.out.println("=== Test: obtener veterinario por ID ===");
+        System.out.println("=== Test: Obtener por ID - VETERINARIOS ===");
 
         int veterinarioId = 1; // Debe existir
         VeterinarioDto veterinario = veterinarioBo.obtenerPorId(veterinarioId);
@@ -145,7 +129,7 @@ public class VeterinarioBoTest {
     @Test
     @Order(5)
     public void testListarTodos() {
-        System.out.println("=== Test: listar todos los veterinarios ===");
+        System.out.println("=== Test: Listar todos - VETERINARIOS ===");
 
         ArrayList<VeterinarioDto> lista = veterinarioBo.listarTodos();
 

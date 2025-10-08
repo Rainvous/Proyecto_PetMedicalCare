@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.RolBO;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +15,8 @@ public class RolBOTest {
 
     @Test
     public void testInsertar() {
-        System.out.println("insertar");
+        System.out.println("=== Test: Insertar - ROLES ===");
+
         ArrayList<Integer> listaRolID = new ArrayList<>();
         insertarRol(listaRolID);
         //eliminarTodo();
@@ -30,7 +30,8 @@ public class RolBOTest {
 
     @Test
     public void testObtenerPorId() {
-        System.out.println("obtenerPorId");
+        System.out.println("=== Test: Obtener por ID - ROLES ===");
+
         ArrayList<Integer> listaRolId = new ArrayList<>();
         insertarRol(listaRolId);
         RolDto rolDto = this.rolBo.obtenerPorID(listaRolId.get(0));
@@ -40,7 +41,8 @@ public class RolBOTest {
 
     @Test
     public void testListarTodos() {
-        System.out.println("listarTodos");
+        System.out.println("=== Test: Listar todos - ROLES ===");
+
         ArrayList<Integer> listaRolId = new ArrayList<>();
         insertarRol(listaRolId);
 
@@ -54,7 +56,8 @@ public class RolBOTest {
 
     @Test
     public void testEliminar() {
-        System.out.println("eliminar");
+        System.out.println("=== Test: Eliminar - ROLES ===");
+
         ArrayList<Integer> listaRolId = new ArrayList<>();
         insertarRol(listaRolId);
         // eliminarTodo();
@@ -62,7 +65,7 @@ public class RolBOTest {
 
     @Test
     public void testModificar() {
-        System.out.println("=== Test: modificar producto existente ===");
+        System.out.println("=== Test: Modificar - ROLES ===");
 
         int idRol = 1; // Asumimos que ya existe
         String nuevoNombre = "ADMINISTRADOR";

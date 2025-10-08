@@ -1,8 +1,7 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.CitaAtencionBo;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.MethodOrderer;
@@ -10,11 +9,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import org.junit.jupiter.api.Order;
 
-/**
- *
- * @author marti
- */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)  // ✅ Agregar esta anotación
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class CitaAtencionBoTest {
 
@@ -30,35 +25,26 @@ public class CitaAtencionBoTest {
     @Test
     @Order(1)
     public void testInsertar() {
-        System.out.println("=== Test: insertar cita de atención ===");
+        System.out.println("=== Test: Insertar - CITAS_ATENCION ===");
 
         // Fechas dinámicas
         Date fechaInicio = new Date(System.currentTimeMillis());
         Date fechaRegistro = new Date(System.currentTimeMillis());
-        Date fechaFin = new Date(System.currentTimeMillis() + (2 * 60 * 60 * 1000)); // +2 horas
+        Date fechaFin = new Date(System.currentTimeMillis() + (2 * 60 * 60 * 1000)); // + 2 horas
 
         // Datos de prueba
         String observacion = "Control general del perro";
         double monto = 120.50;
         boolean activo = true;
         String pesoMascota = "12.4";
+        String estadoCita = "Confirmado";
 
         int veterinarioId = 3; // Debe existir
         int mascotaId = 1;     // Debe existir
-        
-        String estadoCita = "Confirmado";
 
         Integer idGenerado = citaBo.insertar(
-                observacion,
-                fechaInicio,
-                fechaRegistro,
-                fechaFin,
-                monto,
-                activo,
-                pesoMascota,
-                veterinarioId,
-                mascotaId,
-                estadoCita
+                observacion, fechaInicio, fechaRegistro, fechaFin, monto,
+                activo, pesoMascota, veterinarioId, mascotaId, estadoCita
         );
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
@@ -70,9 +56,9 @@ public class CitaAtencionBoTest {
     @Test
     @Order(2)
     public void testModificar() {
-        System.out.println("=== Test: modificar cita existente ===");
+        System.out.println("=== Test: Modificar - CITAS_ATENCION ===");
 
-        int idCitaExistente = 2; // Asegúrate de que exista una cita con este ID
+        int idCitaExistente = 2; // Debe existir
         // Fechas dinámicas
         Date fechaInicio = new Date(System.currentTimeMillis());
         Date fechaRegistro = new Date(System.currentTimeMillis());
@@ -82,24 +68,15 @@ public class CitaAtencionBoTest {
         double nuevoMonto = 150.0;
         boolean nuevoActivo = true;
         String nuevoPeso = "13.0";
+        String estadoCita = "Terminado";
 
         int veterinarioId = 3;
         int mascotaId = 1;
-        
-        String estadoCita = "Terminado";
 
         Integer resultado = citaBo.modificar(
-                idCitaExistente,
-                nuevaObservacion,
-                fechaInicio,
-                fechaRegistro,
-                fechaFin,
-                nuevoMonto,
-                nuevoActivo,
-                nuevoPeso,
-                veterinarioId,
-                mascotaId,
-                estadoCita
+                idCitaExistente, nuevaObservacion, fechaInicio,
+                fechaRegistro, fechaFin, nuevoMonto, nuevoActivo,
+                nuevoPeso, veterinarioId, mascotaId, estadoCita
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar > 0 si la actualización fue exitosa");
@@ -111,34 +88,25 @@ public class CitaAtencionBoTest {
     @Test
     @Order(3)
     public void testEliminar() {
-        System.out.println("=== Test: eliminar cita ===");
+        System.out.println("=== Test: Eliminar - CITAS_ATENCION ===");
 
-         // Fechas dinámicas
+        // Fechas dinámicas
         Date fechaInicio = new Date(System.currentTimeMillis());
         Date fechaRegistro = new Date(System.currentTimeMillis());
         Date fechaFin = new Date(System.currentTimeMillis() + (2 * 60 * 60 * 1000)); // +2 horas
-        
+
         String observacion = "Cita temporal para eliminar";
         double monto = 80.0;
         boolean activo = true;
         String peso = "10.5";
+        String estadoCita = "Pendiente";
 
         int veterinarioId = 3;
         int mascotaId = 1;
-        
-        String estadoCita = "Pendiente";
 
         Integer idGenerado = citaBo.insertar(
-                observacion,
-                fechaInicio,
-                fechaRegistro,
-                fechaFin,
-                monto,
-                activo,
-                peso,
-                veterinarioId,
-                mascotaId,
-                estadoCita
+                observacion, fechaInicio, fechaRegistro, fechaFin,
+                monto, activo, peso, veterinarioId, mascotaId, estadoCita
         );
 
         assertTrue(idGenerado > 0, "No se pudo insertar la cita para eliminarla.");
@@ -154,7 +122,7 @@ public class CitaAtencionBoTest {
     @Test
     @Order(4)
     public void testObtenerPorId() {
-        System.out.println("=== Test: obtener cita por ID ===");
+        System.out.println("=== Test: Obtener por ID - CITAS_ATENCION ===");
 
         int idCitaExistente = 1;
         CitaAtencionDto cita = citaBo.obtenerPorId(idCitaExistente);
@@ -168,13 +136,13 @@ public class CitaAtencionBoTest {
         System.out.println("Monto: " + cita.getMonto());
         System.out.println("Activo: " + (cita.getActivo() ? "Sí" : "No"));
         System.out.println("Peso Mascota: " + cita.getPeso());
+        System.out.println("Estado Cita: " + cita.getEstado());
         if (cita.getVeterinario() != null) {
             System.out.println("Veterinario ID: " + cita.getVeterinario().getVeterinarioId());
         }
         if (cita.getMascota() != null) {
             System.out.println("Mascota ID: " + cita.getMascota().getMascotaId());
         }
-        System.out.println("Peso Mascota: " + cita.getEstado());
     }
 
     /**
@@ -183,7 +151,7 @@ public class CitaAtencionBoTest {
     @Test
     @Order(5)
     public void testListarTodos() {
-        System.out.println("=== Test: listar todas las citas ===");
+        System.out.println("=== Test: Listar todo - CITAS_ATENCION ===");
 
         ArrayList<CitaAtencionDto> lista = citaBo.listarTodos();
 
@@ -200,13 +168,13 @@ public class CitaAtencionBoTest {
             System.out.println("Monto: " + c.getMonto());
             System.out.println("Activo: " + (c.getActivo() ? "Sí" : "No"));
             System.out.println("Peso: " + c.getPeso());
+            System.out.println("Estado Cita: " + c.getEstado());
             if (c.getVeterinario() != null) {
                 System.out.println("Veterinario ID: " + c.getVeterinario().getVeterinarioId());
             }
             if (c.getMascota() != null) {
                 System.out.println("Mascota ID: " + c.getMascota().getMascotaId());
             }
-            System.out.println("Peso Mascota: " + c.getEstado());
         }
     }
 }

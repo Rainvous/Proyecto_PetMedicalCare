@@ -62,7 +62,7 @@ public abstract class DaoBaseImpl {
     }
 
     protected void colocarSQLEnStatement(String sql) throws SQLException {
-        System.out.println("Colocar SQL: " + sql);
+        System.out.println("SQL: " + sql);
         this.statement = this.conexion.prepareCall(sql);
     }
 
@@ -116,7 +116,7 @@ public abstract class DaoBaseImpl {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
-            System.out.println("CRUD: " + statement);
+            // System.out.println("CRUD: " + statement);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();
@@ -297,7 +297,7 @@ public abstract class DaoBaseImpl {
             } else {
                 this.limpiarObjetoDelResultSet();
             }
-            System.out.println("SELECT  -> " + statement);
+            // System.out.println("SELECT: " + statement);
         } catch (SQLException ex) {
             System.err.println("Error al intentar obtenerPorId - " + ex);
         } finally {
@@ -419,9 +419,9 @@ public abstract class DaoBaseImpl {
             return;
         }
         try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
-            System.out.println("------>" + psSet);
+            // System.out.println("------>" + psSet);
             psSet.setString(1, usuario);
-            System.out.println("------>" + psSet);
+            // System.out.println("------>" + psSet);
             psSet.execute();
         }
     }

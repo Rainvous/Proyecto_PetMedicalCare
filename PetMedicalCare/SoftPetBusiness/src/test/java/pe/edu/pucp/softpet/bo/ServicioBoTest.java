@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.ServicioBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,20 +20,21 @@ public class ServicioBoTest {
     @Test
 
     public void testInsertar() {
-        System.out.println("=== Test: insertar servicio ===");
+        System.out.println("=== Test: Insertar - SERVICIOS ===");
 
         String nombre = "  baño y corte  ";
         double costo = 45.50;
         String estado = "DISPONIBLE";
         String descripcion = "  servicio completo de baño y corte de pelo  ";
         boolean activo = true;
-        int tipoServicioId = 1; // ⚠️ Asegúrate de que exista en tu BD
+        int tipoServicioId = 1;
 
-        idGenerado = servicioBo.insertar(nombre, costo, estado, descripcion, activo, tipoServicioId);
+        idGenerado = servicioBo.insertar(
+                nombre, costo, estado, descripcion, activo, tipoServicioId
+        );
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
         System.out.println("Servicio insertado con ID: " + idGenerado);
-
         System.out.println("Resultado de inserción: " + idGenerado);
     }
 
@@ -43,18 +43,21 @@ public class ServicioBoTest {
      */
     @Test
     public void testModificar() {
-        System.out.println("=== Test: modificar servicio ===");
+        System.out.println("=== Test: Modificar - SERVICIOS ===");
 
-        String nuevoNombre = "  baño especial para perros grandes  ";
+        String nuevoNombre = "Baño especial para perros grandes";
         double nuevoCosto = 60.00;
         String nuevoEstado = "NO DISPONIBLE";
-        String nuevaDescripcion = "  incluye shampoo medicado y secado profesional  ";
+        String nuevaDescripcion = "Incluye shampoo medicado y secado profesional";
         boolean nuevoActivo = true;
         int tipoServicioId = 1;
 
-        Integer resultado = servicioBo.modificar(23, nuevoNombre, nuevoCosto, nuevoEstado, nuevaDescripcion, nuevoActivo, tipoServicioId);
-        assertTrue(resultado > 0, "El resultado de la modificación debe ser mayor que 0");
+        Integer resultado = servicioBo.modificar(
+                23, nuevoNombre, nuevoCosto, nuevoEstado, nuevaDescripcion,
+                nuevoActivo, tipoServicioId
+        );
 
+        assertTrue(resultado > 0, "El resultado de la modificación debe ser mayor que 0");
         System.out.println("Servicio modificado correctamente. ID: " + resultado);
     }
 
@@ -63,7 +66,7 @@ public class ServicioBoTest {
      */
     @Test
     public void testObtenerPorId() {
-        System.out.println("=== Test: obtener servicio por ID ===");
+        System.out.println("=== Test: Obtener por ID - SERVICIOS ===");
 
         ServicioDto servicio = servicioBo.obtenerPorId(23);
         assertNotNull(servicio, "El servicio obtenido no debe ser null");
@@ -83,7 +86,7 @@ public class ServicioBoTest {
      */
     @Test
     public void testListarTodos() {
-        System.out.println("=== Test: listar todos los servicios ===");
+        System.out.println("=== Test: Listar todos - SERVICIOS ===");
 
         ArrayList<ServicioDto> lista = servicioBo.listarTodos();
 
@@ -98,7 +101,7 @@ public class ServicioBoTest {
      */
     @Test
     public void testEliminar() {
-        System.out.println("=== Test: eliminar servicio ===");
+        System.out.println("=== Test: Eliminar - SERVICIOS ===");
 
         // Insertamos un servicio temporal para eliminar
         String nombre = "servicio temporal";

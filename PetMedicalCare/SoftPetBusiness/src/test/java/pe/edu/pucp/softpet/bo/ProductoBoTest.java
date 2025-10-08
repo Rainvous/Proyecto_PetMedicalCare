@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.bo;
 
-import pe.edu.pucp.softpet.bo.ProductoBo;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,11 +18,11 @@ public class ProductoBoTest {
      */
     @Test
     public void testInsertar() {
-        System.out.println("=== Test: insertar producto ===");
+        System.out.println("=== Test: Insertar - PRODUCTOS ===");
 
         // Datos de entrada (nombre y presentacion con espacios/minúsculas)
-        String nombre = "   shampoo para perros  ";
-        String presentacion = "  botella 250ml  ";
+        String nombre = "Shampoo para perros";
+        String presentacion = "Botella 250ml";
         double precio = 19.90;
         boolean activo = true;
         int stock = 10;
@@ -31,7 +30,9 @@ public class ProductoBoTest {
         int tipoProductoId = 1;
 
         //insertar
-        Integer idGenerado = productoBo.insertar(nombre, presentacion, precio, activo, tipoProductoId, stock);
+        Integer idGenerado = productoBo.insertar(
+                nombre, presentacion, precio, activo, tipoProductoId, stock
+        );
 
         // Solo verificar que el ID generado sea válido
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
@@ -42,24 +43,19 @@ public class ProductoBoTest {
      */
     @Test
     public void testModificar() {
-        System.out.println("=== Test: modificar producto existente ===");
+        System.out.println("=== Test: Modificar - PRODUCTOS ===");
 
         int idProductoExistente = 8; // Asumimos que ya existe
         String nuevoNombre = "Shampoo Premium para perros";
-        String nuevaPresentacion = "botella 300ml";
+        String nuevaPresentacion = "Botella 300ml";
         double nuevoPrecio = 25.50;
         boolean nuevoActivo = false;
         int stock = 3;
         int tipoProductoId = 1;
 
         Integer resultado = productoBo.modificar(
-                idProductoExistente,
-                nuevoNombre,
-                nuevaPresentacion,
-                nuevoPrecio,
-                nuevoActivo,
-                tipoProductoId,
-                stock
+                idProductoExistente, nuevoNombre, nuevaPresentacion,
+                nuevoPrecio, nuevoActivo, tipoProductoId, stock
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar true si la actualización fue exitosa");
@@ -70,7 +66,7 @@ public class ProductoBoTest {
      */
     @Test
     public void testEliminar() {
-        System.out.println("=== Test: eliminar producto ===");
+        System.out.println("=== Test: Eliminar - PRODUCTOS ===");
 
         // Insertamos un producto temporal para eliminarlo
         String nombre = "Collar para gatos";
@@ -80,7 +76,9 @@ public class ProductoBoTest {
         int stock = 5;
         int tipoProductoId = 1;
 
-        Integer idGenerado = productoBo.insertar(nombre, presentacion, precio, activo, tipoProductoId, stock);
+        Integer idGenerado = productoBo.insertar(
+                nombre, presentacion, precio, activo, tipoProductoId, stock
+        );
         assertTrue(idGenerado > 0, "No se pudo insertar el producto para eliminar.");
 
         // Ahora eliminamos
@@ -93,14 +91,13 @@ public class ProductoBoTest {
      */
     @Test
     public void testObtenerPorId() {
-        System.out.println("=== Test: obtener producto por ID ===");
+        System.out.println("=== Test: Obtener por ID - PRODUCTOS ===");
 
-        int idProductoExistente = 1; // Asegúrate de que este ID exista
+        int idProductoExistente = 1; // Asegurarse de que este ID exista
         ProductoDto producto = productoBo.obtenerPorId(idProductoExistente);
 
         assertNotNull(producto, "El producto no debe ser null");
         assertEquals(idProductoExistente, producto.getProductoId(), "El ID obtenido no coincide");
-
     }
 
     /**
@@ -108,7 +105,7 @@ public class ProductoBoTest {
      */
     @Test
     public void testListarTodos() {
-        System.out.println("=== Test: listar todos los productos ===");
+        System.out.println("=== Test: Listar todos - PRODUCTOS ===");
 
         ArrayList<ProductoDto> lista = productoBo.listarTodos();
 
@@ -131,5 +128,4 @@ public class ProductoBoTest {
             }
         }
     }
-
 }
