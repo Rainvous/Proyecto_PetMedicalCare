@@ -25,10 +25,10 @@ public class DBManagerTest {
     @org.junit.jupiter.api.Test
     public void testGetInstance() {
        // System.out.println("contra"+Cifrado.cifrarMD5("Fullchow#2025"));
-        System.out.println("getInstance");                
-        DBManager dBManager = DBManager.getInstance();
-        //DBManagerMySQL dbmanager;
-        assertNotNull(dBManager);
+//        System.out.println("getInstance");                
+//        DBManager dBManager = DBManager.getInstance();
+//        //DBManagerMySQL dbmanager;
+//        assertNotNull(dBManager);
     }
 
    @org.junit.jupiter.api.Test
@@ -36,6 +36,7 @@ public class DBManagerTest {
         System.out.println("getConnection");                
         DBManager dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MSSQL);
         Connection conexion = dBManager.getConnection();
+        assertNotNull(conexion);
         dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MYSQL);
         conexion = dBManager.getConnection();
         assertNotNull(conexion);

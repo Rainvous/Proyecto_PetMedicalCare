@@ -112,7 +112,7 @@ public abstract class DBManager {
             properties.load(this.getClass().getResourceAsStream(nmArchivoConf));
             this.driver = properties.getProperty("driver" + prefijo);
             this.tipo_de_driver = properties.getProperty("tipo_de_driver" + prefijo);
-            this.base_de_datos = properties.getProperty("base_de_datos");
+            this.base_de_datos = properties.getProperty("base_de_datos"+prefijo);
             this.nombre_de_host = properties.getProperty("nombre_de_host" + prefijo);
             this.puerto = properties.getProperty("puerto" + prefijo);
             this.usuario = properties.getProperty("usuario");

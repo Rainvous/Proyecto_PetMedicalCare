@@ -1,8 +1,7 @@
 -- ===============================================
 -- DROP de todas las tablas (ordenado por FKs)
 -- ===============================================
-use tu_esquema;
-SET FOREIGN_KEY_CHECKS = 0;
+use petmedicalcare;
 DROP TABLE IF EXISTS `DETALLES_DOCUMENTO_DE_PAGO`;
 DROP TABLE IF EXISTS `DETALLES_RECETA`;
 DROP TABLE IF EXISTS `DOCUMENTOS_DE_PAGO`;
