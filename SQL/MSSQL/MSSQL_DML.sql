@@ -1,0 +1,210 @@
+USE petmedicalcare;
+GO
+
+/* =========================================================
+   1) Catálogos base (sin FKs entre sí)
+   ========================================================= */
+-- ROLES (hasta 5)
+INSERT INTO dbo.ROLES (NOMBRE, ACTIVO) VALUES
+(N'Administrador', 1),
+(N'Veterinario', 1),
+(N'Recepcionista', 1),
+(N'Cajero', 1),
+(N'Cliente', 1);
+
+-- USUARIOS (hasta 5)
+INSERT INTO dbo.USUARIOS (USERNAME, [PASSWORD], CORREO, ACTIVO, FECHA_MODIFICACION, USUARIO_MODIFICADOR, USUARIO_CREADOR, FECHA_CREACION) VALUES
+(N'admin',   N'hashed123', N'admin@pmc.com',   1, '2025-10-01T10:00:00', N'system', N'system', '2025-10-01T09:00:00'),
+(N'vet1',    N'hashed123', N'vet1@pmc.com',    1, '2025-10-02T11:00:00', N'admin',  N'admin',  '2025-10-02T10:30:00'),
+(N'recep1',  N'hashed123', N'recep1@pmc.com',  1, '2025-10-03T08:10:00', N'admin',  N'admin',  '2025-10-03T08:00:00'),
+(N'cajero1', N'hashed123', N'cajero1@pmc.com', 1, '2025-10-03T09:20:00', N'admin',  N'admin',  '2025-10-03T09:00:00'),
+
+
+/* =========================================================
+   1) Catálogos base (sin FKs entre sí)
+   ========================================================= */
+-- ROLES (hasta 5)
+INSERT INTO dbo.ROLES (NOMBRE, ACTIVO) VALUES
+(N'Administrador', 1),
+(N'Veterinario', 1),
+(N'Recepcionista', 1),
+(N'Cajero', 1),
+(N'Cliente', 1);
+
+-- USUARIOS (hasta 5)
+INSERT INTO dbo.USUARIOS (USERNAME, [PASSWORD], CORREO, ACTIVO, FECHA_MODIFICACION, USUARIO_MODIFICADOR, USUARIO_CREADOR, FECHA_CREACION) VALUES
+(N'admin',   N'hashed123', N'admin@pmc.com',   1, '2025-10-01T10:00:00', N'system', N'system', '2025-10-01T09:00:00'),
+(N'vet1',    N'hashed123', N'vet1@pmc.com',    1, '2025-10-02T11:00:00', N'admin',  N'admin',  '2025-10-02T10:30:00'),
+(N'recep1',  N'hashed123', N'recep1@pmc.com',  1, '2025-10-03T08:10:00', N'admin',  N'admin',  '2025-10-03T08:00:00'),
+(N'cajero1', N'hashed123', N'cajero1@pmc.com', 1, '2025-10-03T09:20:00', N'admin',  N'admin',  '2025-10-03T09:00:00'),
+(N'cli1',    N'hashed123', N'cli1@pmc.com',    1, '2025-10-04T12:00:00', N'admin',  N'admin',  '2025-10-04T11:45:00');
+
+-- TIPOS_SERVICIO (hasta 5)
+INSERT INTO dbo.TIPOS_SERVICIO (NOMBRE, DESCRIPCION, ACTIVO) VALUES
+(N'Consulta',        N'Consulta general', 1),
+(N'Vacunación',      N'Aplicación de vacunas', 1),
+(N'Desparasitación', N'Tratamiento antiparasitario', 1),
+(N'Baño',            N'Baño e higiene', 1),
+(N'Cirugía',         N'Procedimientos quirúrgicos', 1);
+
+-- TIPOS_PRODUCTO (hasta 5)
+INSERT INTO dbo.TIPOS_PRODUCTO (NOMBRE, DESCRIPCION, ACTIVO) VALUES
+(N'Alimento',     N'Alimento para mascotas', 1),
+(N'Medicamento',  N'Fármacos y tratamientos', 1),
+(N'Accesorio',    N'Collares, juguetes, etc.', 1);
+
+-- TIPOS_DOCUMENTO (hasta 5)
+INSERT INTO dbo.TIPOS_DOCUMENTO (NOMBRE, ACTIVO) VALUES
+(N'Boleta', 1),
+(N'Factura', 1),
+(N'Nota de crédito', 1);
+
+/* =========================================================
+   2) Entidades que referencian catálogos anteriores
+   ========================================================= */
+-- PERSONAS (FK USUARIOS) (hasta 5)
+INSERT INTO dbo.PERSONAS (NOMBRE, DIRECCION, TELEFONO, SEXO, ACTIVO, TIPO_DOCUMENTO, NRO_DOCUMENTO, RUC, USUARIO_ID) VALUES
+(N'Juan Pérez',   N'Av. Siempre Viva 123', N'999111222', 'M', 1, N'DNI',  N'12345678', NULL, (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'cli1')),
+(N'Dra. Ana Ríos',N'Calle Salud 456',      N'988777666', 'F', 1, N'DNI',  N'87654321', NULL, (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'vet1')),
+(N'Carla Soto',   N'Jr. Central 789',      N'977555444', 'F', 1, N'DNI',  N'44556677', NULL, (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'recep1')),
+(N'Luis Díaz',    N'Psj. Norte 321',       N'966333222', 'M', 1, N'DNI',  N'55667788', NULL, (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'cajero1')),
+(N'Root Admin',   N'Oficina Central',      N'955000999', 'M', 1, N'DNI',  N'11112222', N'20123456789', (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'admin'));
+
+-- MASCOTAS (FK PERSONAS dueñas) (hasta 5)
+INSERT INTO dbo.MASCOTAS (NOMBRE, ESPECIE, SEXO, RAZA, COLOR, ACTIVO, FECHA_DEFUNCION, PERSONA_ID) VALUES
+(N'Bobby',  N'Perro', 'M', N'Labrador',  N'Dorado', 1, NULL, (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez')),
+(N'Mishi',  N'Gato',  'F', N'Siamés',    N'Crema',  1, NULL, (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez')),
+(N'Rocky',  N'Perro', 'M', N'Bulldog',   N'Blanco', 1, NULL, (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez')),
+(N'Luna',   N'Gato',  'F', N'Mestizo',   N'Negro',  1, NULL, (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez')),
+(N'Kira',   N'Perro', 'F', N'Beagle',    N'Tricolor',1, NULL, (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez'));
+
+-- VETERINARIOS (FK PERSONAS) (hasta 3)
+INSERT INTO dbo.VETERINARIOS (ESPECIALIZACION, FECHA_DE_CONTRATACION, ESTADO, ACTIVO, PERSONA_ID) VALUES
+(N'Medicina general', '2024-01-10', N'Activo', 1, (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Dra. Ana Ríos')),
+(N'Cirugía',          '2024-03-05', N'Activo', 1, (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Root Admin')); -- admin como vet auxiliar
+
+-- SERVICIOS (FK TIPOS_SERVICIO) (hasta 5)
+INSERT INTO dbo.SERVICIOS (NOMBRE, COSTO, ESTADO, DESCRIPCION, ACTIVO, FECHA_MODIFICACION, USUARIO_MODIFICADOR, USUARIO_CREADOR, FECHA_CREACION, TIPO_SERVICIO_ID) VALUES
+(N'Consulta básica',     50.00, N'Disponible', N'Consulta general de 20 min', 1, '2025-10-10T10:00:00', N'admin', N'admin', '2025-10-10T09:00:00',
+    (SELECT TIPO_SERVICIO_ID FROM dbo.TIPOS_SERVICIO WHERE NOMBRE=N'Consulta')),
+(N'Vacuna antirrábica',  70.00, N'Disponible', N'Aplicación de vacuna', 1, '2025-10-10T10:10:00', N'admin', N'admin', '2025-10-10T09:10:00',
+    (SELECT TIPO_SERVICIO_ID FROM dbo.TIPOS_SERVICIO WHERE NOMBRE=N'Vacunación')),
+(N'Desparasitación oral',40.00, N'Disponible', N'Tratamiento antiparasitario', 1, '2025-10-10T10:20:00', N'admin', N'admin', '2025-10-10T09:20:00',
+    (SELECT TIPO_SERVICIO_ID FROM dbo.TIPOS_SERVICIO WHERE NOMBRE=N'Desparasitación')),
+(N'Baño estándar',       45.00, N'Disponible', N'Baño e higiene', 1, '2025-10-10T10:30:00', N'admin', N'admin', '2025-10-10T09:30:00',
+    (SELECT TIPO_SERVICIO_ID FROM dbo.TIPOS_SERVICIO WHERE NOMBRE=N'Baño')),
+(N'Cirugía menor',      300.00, N'Bajo demanda', N'Procedimiento menor', 1, '2025-10-10T10:40:00', N'admin', N'admin', '2025-10-10T09:40:00',
+    (SELECT TIPO_SERVICIO_ID FROM dbo.TIPOS_SERVICIO WHERE NOMBRE=N'Cirugía'));
+
+-- PRODUCTOS (FK TIPOS_PRODUCTO) (hasta 5)
+INSERT INTO dbo.PRODUCTOS (NOMBRE, PRESENTACION, PRECIO_UNITARIO, ACTIVO, TIPO_PRODUCTO_ID, FECHA_MODIFICACION, USUARIO_MODIFICADOR, USUARIO_CREADOR, FECHA_CREACION, STOCK) VALUES
+(N'Croquetas Premium',   N'Bolsa 5kg', 120.00, 1, (SELECT TIPO_PRODUCTO_ID FROM dbo.TIPOS_PRODUCTO WHERE NOMBRE=N'Alimento'), '2025-10-11T08:00:00', N'admin', N'admin', '2025-10-11T07:50:00', 50),
+(N'Pipeta Antipulgas',   N'Pipeta 2.5ml', 35.00, 1, (SELECT TIPO_PRODUCTO_ID FROM dbo.TIPOS_PRODUCTO WHERE NOMBRE=N'Medicamento'), '2025-10-11T08:05:00', N'admin', N'admin', '2025-10-11T07:55:00', 80),
+(N'Collar Ajustable',    N'Unidad', 25.00, 1, (SELECT TIPO_PRODUCTO_ID FROM dbo.TIPOS_PRODUCTO WHERE NOMBRE=N'Accesorio'), '2025-10-11T08:10:00', N'admin', N'admin', '2025-10-11T08:00:00', 100),
+(N'Jarabe Antiparasitario', N'Frasco 100ml', 30.00, 1, (SELECT TIPO_PRODUCTO_ID FROM dbo.TIPOS_PRODUCTO WHERE NOMBRE=N'Medicamento'), '2025-10-11T08:15:00', N'admin', N'admin', '2025-10-11T08:05:00', 40),
+(N'Shampoo Canino',      N'Frasco 250ml', 28.00, 1, (SELECT TIPO_PRODUCTO_ID FROM dbo.TIPOS_PRODUCTO WHERE NOMBRE=N'Accesorio'), '2025-10-11T08:20:00', N'admin', N'admin', '2025-10-11T08:10:00', 60);
+
+/* =========================================================
+   3) Transaccionales que referencian varias entidades
+   ========================================================= */
+-- CITAS_ATENCION (FK VETERINARIOS, MASCOTAS) (hasta 5)
+INSERT INTO dbo.CITAS_ATENCION (OBSERVACION, FECHA_HORA_INICIO, FECHA_REGISTRO, FECHA_HORA_FIN, MONTO, ACTIVO, PESO_MASCOTA, VETERINARIO_ID, MASCOTA_ID, ESTADO_CITA) VALUES
+(N'Chequeo inicial',  '2025-10-12T09:00:00', '2025-10-12', '2025-10-12T09:20:00', 50.00, 1, 28.5,
+ (SELECT VETERINARIO_ID FROM dbo.VETERINARIOS WHERE ESPECIALIZACION=N'Medicina general' AND PERSONA_ID=(SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Dra. Ana Ríos')),
+ (SELECT MASCOTA_ID FROM dbo.MASCOTAS WHERE NOMBRE=N'Bobby'), N'Completada'),
+
+(N'Vacunación anual', '2025-10-12T10:00:00', '2025-10-12', '2025-10-12T10:15:00', 70.00, 1, 4.2,
+ (SELECT VETERINARIO_ID FROM dbo.VETERINARIOS WHERE ESPECIALIZACION=N'Medicina general' AND PERSONA_ID=(SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Dra. Ana Ríos')),
+ (SELECT MASCOTA_ID FROM dbo.MASCOTAS WHERE NOMBRE=N'Mishi'), N'Completada'),
+
+(N'Desparasitación',  '2025-10-13T11:00:00', '2025-10-13', '2025-10-13T11:10:00', 40.00, 1, 12.0,
+ (SELECT VETERINARIO_ID FROM dbo.VETERINARIOS WHERE ESPECIALIZACION=N'Medicina general' AND PERSONA_ID=(SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Dra. Ana Ríos')),
+ (SELECT MASCOTA_ID FROM dbo.MASCOTAS WHERE NOMBRE=N'Rocky'), N'Completada'),
+
+(N'Baño y aseo',      '2025-10-14T16:00:00', '2025-10-14', '2025-10-14T16:45:00', 45.00, 1, 3.5,
+ (SELECT VETERINARIO_ID FROM dbo.VETERINARIOS WHERE ESPECIALIZACION=N'Cirugía' AND PERSONA_ID=(SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Root Admin')),
+ (SELECT MASCOTA_ID FROM dbo.MASCOTAS WHERE NOMBRE=N'Luna'), N'Completada'),
+
+(N'Preoperatorio',    '2025-10-15T08:30:00', '2025-10-15', '2025-10-15T08:50:00', 50.00, 1, 10.1,
+ (SELECT VETERINARIO_ID FROM dbo.VETERINARIOS WHERE ESPECIALIZACION=N'Cirugía' AND PERSONA_ID=(SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Root Admin')),
+ (SELECT MASCOTA_ID FROM dbo.MASCOTAS WHERE NOMBRE=N'Kira'), N'Pendiente');
+
+-- RECETAS_MEDICA (FK CITAS_ATENCION) (hasta 3)
+INSERT INTO dbo.RECETAS_MEDICA (DIAGNOSTICO, ACTIVO, CITA_ID) VALUES
+(N'Gastritis leve', 1, (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Chequeo inicial')),
+(N'Vacunación aplicada', 1, (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Vacunación anual')),
+(N'Parásitos internos', 1, (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Desparasitación'));
+
+-- ROLES_USUARIO (FK ROLES, USUARIOS) (hasta 5)
+INSERT INTO dbo.ROLES_USUARIO (ROL_ID, USUARIO_ID, ACTIVO) VALUES
+((SELECT ROL_ID FROM dbo.ROLES WHERE NOMBRE=N'Administrador'), (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'admin'), 1),
+((SELECT ROL_ID FROM dbo.ROLES WHERE NOMBRE=N'Veterinario'),   (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'vet1'), 1),
+((SELECT ROL_ID FROM dbo.ROLES WHERE NOMBRE=N'Recepcionista'), (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'recep1'), 1),
+((SELECT ROL_ID FROM dbo.ROLES WHERE NOMBRE=N'Cajero'),        (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'cajero1'), 1),
+((SELECT ROL_ID FROM dbo.ROLES WHERE NOMBRE=N'Cliente'),       (SELECT USUARIO_ID FROM dbo.USUARIOS WHERE USERNAME=N'cli1'), 1);
+
+-- DETALLES_SERVICIO (FK SERVICIOS, CITAS_ATENCION) (hasta 5)
+INSERT INTO dbo.DETALLES_SERVICIO (DESCRIPCION, COSTO, ACTIVO, SERVICIO_ID, CITA_ID) VALUES
+(N'Consulta general', 50.00, 1,
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Consulta básica'),
+ (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Chequeo inicial')),
+
+(N'Aplicación vacuna antirrábica', 70.00, 1,
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Vacuna antirrábica'),
+ (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Vacunación anual')),
+
+(N'Tratamiento oral', 40.00, 1,
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Desparasitación oral'),
+ (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Desparasitación')),
+
+(N'Baño estándar', 45.00, 1,
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Baño estándar'),
+ (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Baño y aseo')),
+
+(N'Consulta preoperatoria', 50.00, 1,
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Consulta básica'),
+ (SELECT CITA_ID FROM dbo.CITAS_ATENCION WHERE OBSERVACION=N'Preoperatorio'));
+
+-- DOCUMENTOS_DE_PAGO (FK TIPOS_DOCUMENTO, PERSONAS) (hasta 3)
+INSERT INTO dbo.DOCUMENTOS_DE_PAGO (SERIE, NUMERO, TASA_IGV, FECHA_EMISION, METODO_DE_PAGO, ESTADO, SUBTOTAL_SIN_IGV, IGV_TOTAL, TOTAL, ACTIVO, TIPO_DOCUMENTO_ID, PERSONA_ID) VALUES
+(N'B001', N'000001', 18.00, '2025-10-12', N'Efectivo', N'Emitido', 50.00, 9.00, 59.00, 1,
+ (SELECT TIPO_DOCUMENTO_ID FROM dbo.TIPOS_DOCUMENTO WHERE NOMBRE=N'Boleta'),
+ (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez')),
+
+(N'B001', N'000002', 18.00, '2025-10-12', N'Tarjeta', N'Emitido', 70.00, 12.60, 82.60, 1,
+ (SELECT TIPO_DOCUMENTO_ID FROM dbo.TIPOS_DOCUMENTO WHERE NOMBRE=N'Boleta'),
+ (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez')),
+
+(N'F001', N'000101', 18.00, '2025-10-13', N'Transferencia', N'Emitido', 40.00, 7.20, 47.20, 1,
+ (SELECT TIPO_DOCUMENTO_ID FROM dbo.TIPOS_DOCUMENTO WHERE NOMBRE=N'Factura'),
+ (SELECT PERSONA_ID FROM dbo.PERSONAS WHERE NOMBRE=N'Juan Pérez'));
+
+-- DETALLES_RECETA (FK RECETAS_MEDICA) (hasta 5)
+INSERT INTO dbo.DETALLES_RECETA (CANTIDAD, DESCRIPCION_MEDICAMENTO, INDICACION, RECETA_MEDICA_ID, ACTIVO) VALUES
+(1, N'Omeprazol 10mg',  N'Una vez al día por 5 días', (SELECT RECETAS_MEDICA_ID FROM dbo.RECETAS_MEDICA WHERE DIAGNOSTICO=N'Gastritis leve'), 1),
+(1, N'Vitamina B',      N'Dosis única',               (SELECT RECETAS_MEDICA_ID FROM dbo.RECETAS_MEDICA WHERE DIAGNOSTICO=N'Gastritis leve'), 1),
+(1, N'Vacuna antirrábica', N'Aplicada en cita',       (SELECT RECETAS_MEDICA_ID FROM dbo.RECETAS_MEDICA WHERE DIAGNOSTICO=N'Vacunación aplicada'), 1),
+(1, N'Antiparasitario oral', N'Cada 12 horas por 3 días', (SELECT RECETAS_MEDICA_ID FROM dbo.RECETAS_MEDICA WHERE DIAGNOSTICO=N'Parásitos internos'), 1);
+
+-- DETALLES_DOCUMENTO_DE_PAGO (FK DOCUMENTOS_DE_PAGO, SERVICIOS, PRODUCTOS) (hasta 5)
+-- Boleta 000001: Consulta básica (servicio)
+INSERT INTO dbo.DETALLES_DOCUMENTO_DE_PAGO (NRO_ITEM, DESCRIPCION, CANTIDAD, PRECIO_UNITARIO_SIN_IGV, VALOR_VENTA, IGV_ITEM, IMPORTE_TOTAL, DOCUMENTO_DE_PAGO_ID, SERVICIO_ID, PRODUCTO_ID) VALUES
+(1, N'Consulta básica', 1, 50.00, 50.00, 9.00, 59.00,
+ (SELECT DOCUMENTO_DE_PAGO_ID FROM dbo.DOCUMENTOS_DE_PAGO WHERE SERIE=N'B001' AND NUMERO=N'000001'),
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Consulta básica'), NULL);
+
+-- Boleta 000002: Vacuna antirrábica (servicio) + Pipeta (producto)
+INSERT INTO dbo.DETALLES_DOCUMENTO_DE_PAGO (NRO_ITEM, DESCRIPCION, CANTIDAD, PRECIO_UNITARIO_SIN_IGV, VALOR_VENTA, IGV_ITEM, IMPORTE_TOTAL, DOCUMENTO_DE_PAGO_ID, SERVICIO_ID, PRODUCTO_ID) VALUES
+(1, N'Vacuna antirrábica', 1, 70.00, 70.00, 12.60, 82.60,
+ (SELECT DOCUMENTO_DE_PAGO_ID FROM dbo.DOCUMENTOS_DE_PAGO WHERE SERIE=N'B001' AND NUMERO=N'000002'),
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Vacuna antirrábica'), NULL),
+(2, N'Pipeta Antipulgas', 1, 35.00, 35.00, 6.30, 41.30,
+ (SELECT DOCUMENTO_DE_PAGO_ID FROM dbo.DOCUMENTOS_DE_PAGO WHERE SERIE=N'B001' AND NUMERO=N'000002'),
+ NULL,
+ (SELECT PRODUCTO_ID FROM dbo.PRODUCTOS WHERE NOMBRE=N'Pipeta Antipulgas'));
+
+-- Factura 000101: Desparasitación oral (servicio)
+INSERT INTO dbo.DETALLES_DOCUMENTO_DE_PAGO (NRO_ITEM, DESCRIPCION, CANTIDAD, PRECIO_UNITARIO_SIN_IGV, VALOR_VENTA, IGV_ITEM, IMPORTE_TOTAL, DOCUMENTO_DE_PAGO_ID, SERVICIO_ID, PRODUCTO_ID) VALUES
+(1, N'Desparasitación oral', 1, 40.00, 40.00, 7.20, 47.20,
+ (SELECT DOCUMENTO_DE_PAGO_ID FROM dbo.DOCUMENTOS_DE_PAGO WHERE SERIE=N'F001' AND NUMERO=N'000101'),
+ (SELECT SERVICIO_ID FROM dbo.SERVICIOS WHERE NOMBRE=N'Desparasitación oral'), NULL);

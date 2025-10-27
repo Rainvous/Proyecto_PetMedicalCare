@@ -1,0 +1,117 @@
+/* sidebar.css - Estilos para el sidebar de PetMedicalCare */
+
+.sidebar-petmedical {
+    width: 250px;
+    background: linear-gradient(180deg, #00bcd4 0%, #0097a7 100%);
+    color: white;
+    padding: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+/* Header del sidebar */
+.sidebar-header {
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-icon {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.sidebar-brand {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.sidebar-divider {
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 0.5rem 0;
+}
+
+/* Navegación */
+.sidebar-nav {
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav .nav-item {
+    margin: 0;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.sidebar-link i {
+    width: 24px;
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding-left: 2rem;
+}
+
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-left: 4px solid white;
+}
+
+/* Footer del sidebar con usuario */
+.sidebar-footer {
+    margin-top: auto;
+    padding: 1.5rem 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00bcd4;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: white;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Contenedor principal */
+.content-wrapper {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    overflow-y: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-petmedical {
+        width: 100%;
+    }
+}

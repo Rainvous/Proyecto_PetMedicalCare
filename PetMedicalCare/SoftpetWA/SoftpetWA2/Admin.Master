@@ -1,0 +1,115 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="SoftpetWA2.Admin" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Fonts/css/all.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <link href="Content/sidebar.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.bundle.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/jquery-3.7.1.js"></script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+     <div class="container-fluid d-flex p-0 h-100">
+     <!--Menu Lateral-->
+     <div id="bdSidebar" class="sidebar-petmedical d-flex flex-column flex-shrink-0 offcanvas-md offcanvas-start">
+         <!-- Header con logo y nombre -->
+         <div class="sidebar-header">
+             <div class="d-flex align-items-center">
+                 <i class="fa-solid fa-heart-pulse"></i>
+                 <span class="sidebar-brand">PetMedicalCare</span>
+             </div>
+             <button class="btn btn-link text-white">
+                 <i class="fas fa-bars"></i>
+             </button>
+         </div>
+         
+         <hr class="sidebar-divider">
+         
+         <!-- Menú de navegación -->
+         <ul class="sidebar-nav nav flex-column mb-auto">
+             <li class="nav-item">
+                 <a href="#" class="sidebar-link">
+                     <i class="fas fa-home"></i>
+                     <span>Dashboard</span>
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a href="#" class="sidebar-link"> <!-- Referencia a un aspx -->
+                     <i class="fas fa-calendar-alt"></i>
+                     <span>Agenda de Citas</span>
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a href="GestionClientes.aspx" class="sidebar-link"> <!-- Referencia a un aspx -->
+                     <i class="fas fa-users"></i>
+                     <span>Clientes</span>
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a href="#" class="sidebar-link"> <!-- Referencia a un aspx -->
+                     <i class="fas fa-paw"></i>
+                     <span>Mascotas</span>
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a href="#" class="sidebar-link"> <!-- Referencia a un aspx -->
+                     <i class="fas fa-folder-open"></i>
+                     <span>Expedientes</span>
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a href="#" class="sidebar-link"> <!-- Referencia a un aspx -->
+                     <i class="fas fa-boxes"></i>
+                     <span>Inventario</span>
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a href="#" class="sidebar-link"> <!-- Referencia a un aspx -->
+                     <i class="fas fa-concierge-bell"></i>
+                     <span>Servicios</span>
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a href="#" class="sidebar-link"> <!-- Referencia a un aspx -->
+                     <i class="fas fa-shopping-cart"></i>
+                     <span>Punto de Venta</span>
+                 </a>
+             </li>
+            
+         </ul>
+         
+         <!-- Footer del sidebar con usuario -->
+         <div class="sidebar-footer">
+             <a href="#" class="sidebar-link">
+             <div class="d-flex align-items-center">
+                 <div class="user-avatar">
+                     <span>A</span>
+                 </div>
+                 <div class="ms-2">
+                     
+                     <div class="user-name">
+                         
+                         Anita</div> <!-- Referencia a un aspx -->
+                     <div class="user-role">Recepción</div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     
+      <!-- Contenido de la Página Web -->
+      <div class="content-wrapper flex-grow-1">
+          <form runat="server">
+              <asp:ContentPlaceHolder ID="cphContenido" runat="server">
+              </asp:ContentPlaceHolder>
+          </form>
+      </div>
+     </div>
+</body>
+</html>

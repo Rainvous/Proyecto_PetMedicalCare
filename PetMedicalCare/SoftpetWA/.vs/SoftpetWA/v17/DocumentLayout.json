@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\petmedicalcare_entregas\\softpetwa\\softpetwa2\\gestionclientes.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|solutionrelative:softpetwa2\\gestionclientes.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\petmedicalcare_entregas\\softpetwa\\softpetwa2\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|solutionrelative:softpetwa2\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\petmedicalcare_entregas\\softpetwa\\softpetwa2\\gestionclientes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|solutionrelative:softpetwa2\\gestionclientes.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\petmedicalcare_entregas\\softpetwa\\softpetwa2\\content\\gestionclientes.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|solutionrelative:softpetwa2\\content\\gestionclientes.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\petmedicalcare_entregas\\softpetwa\\softpetwa2\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{849BBD49-66CF-4D89-A081-FBD1D79B5B5B}|SoftpetWA2\\SoftpetWA2.csproj|solutionrelative:softpetwa2\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "gestionclientes.css",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\Content\\gestionclientes.css",
+              "RelativeDocumentMoniker": "SoftpetWA2\\Content\\gestionclientes.css",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\Content\\gestionclientes.css",
+              "RelativeToolTip": "SoftpetWA2\\Content\\gestionclientes.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-27T00:27:38.596Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GestionClientes.aspx.cs",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\GestionClientes.aspx.cs",
+              "RelativeDocumentMoniker": "SoftpetWA2\\GestionClientes.aspx.cs",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\GestionClientes.aspx.cs",
+              "RelativeToolTip": "SoftpetWA2\\GestionClientes.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T00:24:55.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GestionClientes.aspx",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\GestionClientes.aspx",
+              "RelativeDocumentMoniker": "SoftpetWA2\\GestionClientes.aspx",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\GestionClientes.aspx",
+              "RelativeToolTip": "SoftpetWA2\\GestionClientes.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-10-27T00:20:01.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "index.aspx",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\index.aspx",
+              "RelativeDocumentMoniker": "SoftpetWA2\\index.aspx",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\index.aspx",
+              "RelativeToolTip": "SoftpetWA2\\index.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-10-26T23:08:23.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Admin.Master",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\Admin.Master",
+              "RelativeDocumentMoniker": "SoftpetWA2\\Admin.Master",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\PetMedicalCARE_Entregas\\SoftpetWA\\SoftpetWA2\\Admin.Master",
+              "RelativeToolTip": "SoftpetWA2\\Admin.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-10-26T22:56:03.694Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

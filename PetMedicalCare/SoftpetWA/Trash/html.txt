@@ -1,0 +1,29 @@
+<!-- Contenido Derecha -->
+<div class="bg-light flex-fill overflow-auto">
+       <!-- Barra superior para dispositivos pequeños -->
+    <div class="p-2 d-md-none d-flex text-white bg-primary">
+        <a data-bs-toggle="offcanvas" data-bs-target="#bdSidebar" class="text-white" href="#">
+            <i class="fa-solid fa-bars"></i>
+        </a>
+        <img src="Images/pucp.png" class="ms-3" width="75">
+    </div>
+    <!-- Barra de Usuario -->
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand d-sm-none d-md-block d-none d-sm-block">Gestión de Inventario</a>
+            <form class="d-flex">
+                <div class="dropdown ps-3">
+                    <button class="btn btn-outline-light dropdown-toggle"
+                        id="btnUsuario" data-bs-toggle="dropdown" type="button"
+                        aria-expanded="false">
+                        <i class="fas fa-user me-2"></i>Andrés Melgar
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="btnUsuario">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </nav>
