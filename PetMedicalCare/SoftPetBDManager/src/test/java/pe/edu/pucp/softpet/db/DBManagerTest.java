@@ -8,6 +8,7 @@ import java.sql.Connection;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import pe.edu.pucp.softpet.util.Cifrado;
+import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 /**
  *
@@ -30,11 +31,13 @@ public class DBManagerTest {
         assertNotNull(dBManager);
     }
 
-    @org.junit.jupiter.api.Test
+   @org.junit.jupiter.api.Test
     public void testGetConnection() {
         System.out.println("getConnection");                
-        DBManager dBManager = DBManager.getInstance();
+        DBManager dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MSSQL);
         Connection conexion = dBManager.getConnection();
+        dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MYSQL);
+        conexion = dBManager.getConnection();
         assertNotNull(conexion);
     }
     

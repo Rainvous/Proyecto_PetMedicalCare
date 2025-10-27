@@ -5,27 +5,97 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.daoImp.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.db.DBManager;
+import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 public abstract class DaoBaseImpl {
 
+    /*ATRIBUTOS DEL DAO IMPL BASE DE MELGAR
+    ATRIBUTOS DEFAULT*/
     protected String nombre_tabla;
     protected ArrayList<Columna> listaColumnas;
     protected Boolean retornarLlavePrimaria;
     protected Connection conexion;
     protected CallableStatement statement;
     protected ResultSet resultSet;
+    /*ATRIBUTOS QUE HAN SIDO AGREGADOS AL DAO*/
+    protected String usuario; //Esto es para el trigger
+    protected MotorDeBaseDeDatos tipoMotor = MotorDeBaseDeDatos.MYSQL; //Ayuda a cambiar rapidamente entre motores (El dbManager tmb ha sido modificado)
+    protected boolean TieneAuditoria = false; //tiene auditoria es para activar el trigger de auditoria de algunas tablas (Y AYUDA A SETEAR EL USUARIO que modifico la tabla)
 
-    protected String usuario;
+    /*OJO: La auditoria solo es para tablas que tienen triggers*/
 
+ /*    ------------------------------------------------------------------------
+    INICIO DE FUNCIONES PARA AUDITORIA Y MOTOR DE BASE DE DATOS (by AmaruMVP)
+        ------------------------------------------------------------------------*/
+    public void EstablecerMotorBaseDeDatos(MotorDeBaseDeDatos input) {
+        tipoMotor = input;
+    }
+
+    public void EstablecerMotorBaseDeDatos(String input) {
+        if (MotorDeBaseDeDatos.MSSQL.toString() == input) {
+            tipoMotor = MotorDeBaseDeDatos.MSSQL;
+        } else {
+            tipoMotor = MotorDeBaseDeDatos.MYSQL;
+        }
+    }
+    //NUEVO CONSTRUCTOR PARA AUDITORIA
+
+    public DaoBaseImpl(String nombre_tabla, boolean TieneAuditoria) {
+        this.nombre_tabla = nombre_tabla;
+        this.retornarLlavePrimaria = false;
+        this.TieneAuditoria = TieneAuditoria;
+        this.incluirListaDeColumnas();
+    }
+    //FUNCION PARA AUDITORIA 
+    //NOTA : Agregar un booleano para no usar siempre esta funcion ->LISTO
+
+    private void SetDeUsuario(String usuario) throws SQLException {
+        // NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
+        // NO SE PUEDE HACER APARTE PORQUE SE ABRE Y CIERRA CONEXIONES VARIAS VECES
+        if (this.usuario == null) {
+            return;
+        }
+        if (usuario.isEmpty()) {
+            return;
+        }
+        try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
+            System.out.println("------>" + psSet);
+            psSet.setString(1, usuario);
+            System.out.println("------>" + psSet);
+            psSet.execute();
+        }
+    }
+
+    public void NombreDelUsuarioQueModifica(String user) {
+        this.usuario = user;
+    }
+
+    public void EjecutaSetUsuario() throws SQLException {
+        ejecutarDMLEnBD();
+    }
+
+    /*FIN de las funciones de auditoria y motor de base de datos
+        ------------------------------------------------------------------------*/
+
+ /*
+    ------------------------------------------------------------------------
+    INICIO de las  Funciones del DaoImplBase  de melgar
+    ------------------------------------------------------------------------
+     */
     public DaoBaseImpl(String nombre_tabla) {
         this.nombre_tabla = nombre_tabla;
         this.retornarLlavePrimaria = false;
+
         this.incluirListaDeColumnas();
     }
 
@@ -37,7 +107,7 @@ public abstract class DaoBaseImpl {
     protected abstract void configurarListaDeColumnas();
 
     protected void abrirConexion() {
-        this.conexion = DBManager.getInstance().getConnection();
+        this.conexion = DBManager.getInstance(this.tipoMotor).getConnection();
     }
 
     protected void cerrarConexion() throws SQLException {
@@ -62,7 +132,7 @@ public abstract class DaoBaseImpl {
     }
 
     protected void colocarSQLEnStatement(String sql) throws SQLException {
-        System.out.println("SQL: " + sql);
+        System.out.println("Colocar SQL: " + sql);
         this.statement = this.conexion.prepareCall(sql);
     }
 
@@ -91,7 +161,10 @@ public abstract class DaoBaseImpl {
 
         try {
             this.iniciarTransaccion();
-            this.SetDeUsuario(usuario);
+            // NOTA: FALTA IMPLEMENTAR PARA MSSQL
+            if (this.TieneAuditoria) {
+                this.SetDeUsuario(usuario);
+            }
             String sql = null;
             switch (tipo_operacion) {
                 case Tipo_Operacion.INSERTAR:
@@ -105,6 +178,7 @@ public abstract class DaoBaseImpl {
                     break;
             }
             this.colocarSQLEnStatement(sql);
+            //System.out.println("CRUD: " + sql);
             switch (tipo_operacion) {
                 case Tipo_Operacion.INSERTAR:
                     this.incluirValorDeParametrosParaInsercion();
@@ -116,7 +190,7 @@ public abstract class DaoBaseImpl {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
-            // System.out.println("CRUD: " + statement);
+            System.out.println("CRUD de statement: " + statement);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();
@@ -297,7 +371,7 @@ public abstract class DaoBaseImpl {
             } else {
                 this.limpiarObjetoDelResultSet();
             }
-            // System.out.println("SELECT: " + statement);
+            System.out.println("SELECT  -> " + statement);
         } catch (SQLException ex) {
             System.err.println("Error al intentar obtenerPorId - " + ex);
         } finally {
@@ -404,29 +478,248 @@ public abstract class DaoBaseImpl {
         }
     }
 
-    public void EjecutaSetUsuario() throws SQLException {
-        ejecutarDMLEnBD();
+    /*
+    FIN de las  Funciones del DaoImplBase  de melgar 
+    ------------------------------------------------------------------------*/
+
+ /*
+    ------------------------------------------------------------------------
+    INICIO de las funcion DaoImplBase para procedures creado By AmaruMVP
+    ------------------------------------------------------------------------
+     */
+  
+    //FUNCION PROCEDURE PARA MANEJAR SELECTS que traen informacion de una entidad
+    public List ejecutarProcedimientoLectura(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada) {
+        //esto es para procedures que tienen SELECTS
+        List lista = new ArrayList<>();
+        try {
+            abrirConexion();
+            // CallableStatement cs = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, null);
+            String ProcedureSQL = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, null);
+            colocarSQLEnStatement(ProcedureSQL);
+            if (parametrosEntrada != null) {
+                //registrarParametrosEntrada(this.statement, parametrosEntrada);
+                registrarParametrosEntrada(parametrosEntrada);
+            }
+              System.out.println("Call-> "+this.statement);   
+            //  this.resultSet = cs.executeQuery(); 
+            ejecutarSelectEnDB();
+            while (this.resultSet.next()) {
+                agregarObjetoALaLista(lista);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error ejecutando procedimiento almacenado de lectura: " + ex.getMessage());
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+
+        return lista;
     }
 
-    private void SetDeUsuario(String usuario) throws SQLException {
-        // NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
-        // NO SE PUEDE HACER APARTE PORQUE SE ABRE Y CIERRA CONEXIONES VARIAS VECES
-        //  if(usuario.isEmpty())return; // Si no hay nada no agrega esto
-        if (this.usuario == null) {
-            return;
+    /*FUNCIONES DE APOYO PARA LO QUE ES LA LLAMADA A PROCEDIMIENTOS
+    BY EL HORARIO DE PAZ*/
+    //FUNCION 2
+    public String formarLlamadaProcedimiento(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada, Map<Integer, Object> parametrosSalida) throws SQLException {
+
+        StringBuilder call = new StringBuilder("{call " + nombreProcedimiento + "(");
+        int cantParametrosEntrada = 0;
+        int cantParametrosSalida = 0;
+        if (parametrosEntrada != null) {
+            cantParametrosEntrada = parametrosEntrada.size();
         }
-        if (usuario.isEmpty()) {
-            return;
+        if (parametrosSalida != null) {
+            cantParametrosSalida = parametrosSalida.size();
         }
-        try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
-            // System.out.println("------>" + psSet);
-            psSet.setString(1, usuario);
-            // System.out.println("------>" + psSet);
-            psSet.execute();
+        int numParams = cantParametrosEntrada + cantParametrosSalida;
+        for (int i = 0; i < numParams; i++) {
+            call.append("?");
+            if (i < numParams - 1) {
+                call.append(",");
+            }
+        }
+        call.append(")}");
+        return call.toString();
+        //return con.prepareCall(call.toString());
+    }
+
+    //FUNCION 3    
+    private void registrarParametrosEntrada(Map<Integer, Object> parametros) throws SQLException {
+        //FUNCION MELGARIZADA
+        for (Map.Entry<Integer, Object> entry : parametros.entrySet()) {
+            Integer key = entry.getKey();
+            Object value = entry.getValue();
+            switch (value) {
+                case Integer entero ->
+                    this.statement.setInt(key, entero);
+                case String cadena ->
+                    this.statement.setString(key, cadena);
+                case Double decimal ->
+                    this.statement.setDouble(key, decimal);
+                case Boolean booleano ->
+                    this.statement.setBoolean(key, booleano);
+                case java.util.Date fecha ->
+                    this.statement.setDate(key, new java.sql.Date(fecha.getTime()));
+                case Character caracter ->
+                    this.statement.setString(key, String.valueOf(caracter));
+                case byte[] archivo ->
+                    this.statement.setBytes(key, archivo);
+                default -> {
+                }
+                // Agregar más tipos según sea necesario
+            }
         }
     }
 
-    public void NombreDelUsuarioQueModifica(String user) {
-        this.usuario = user;
+    //FUNCION 4
+    //FALTA IMPLEMENTAR
+    private void registrarParametrosSalida(CallableStatement cst, Map<Integer, Object> params) throws SQLException {
+        for (Map.Entry<Integer, Object> entry : params.entrySet()) {
+            Integer posicion = entry.getKey();
+            int sqlType = (int) entry.getValue();
+            cst.registerOutParameter(posicion, sqlType);
+        }
     }
+
+    //FUNCION 5
+    //Falta implementar
+    private void obtenerValoresSalida(CallableStatement cst, Map<Integer, Object> parametrosSalida) throws SQLException {
+        for (Map.Entry<Integer, Object> entry : parametrosSalida.entrySet()) {
+            Integer posicion = entry.getKey();
+            int sqlType = (int) entry.getValue();
+            Object value = null;
+            switch (sqlType) {
+                case Types.INTEGER ->
+                    value = cst.getInt(posicion);
+                case Types.VARCHAR ->
+                    value = cst.getString(posicion);
+                case Types.DOUBLE ->
+                    value = cst.getDouble(posicion);
+                case Types.BOOLEAN ->
+                    value = cst.getBoolean(posicion);
+                case Types.DATE ->
+                    value = cst.getDate(posicion);
+                case Types.BLOB ->
+                    value = cst.getBytes(posicion);
+                // Agregar más tipos según sea necesario
+            }
+            parametrosSalida.put(posicion, value);
+        }
+    }
+     /*
+ 
+    FIN de las funcion DaoImplBase para procedures creado By AmaruMVP
+    ------------------------------------------------------------------------
+     */
 }
+/*
+FUNCIONES QUE QUEDARON OLVIDADAS
+//FUNCION DE PAZ 1
+  public CallableStatement formarLlamadaProcedimiento(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada, Map<Integer, Object> parametrosSalida) throws SQLException {
+
+        StringBuilder call = new StringBuilder("{call " + nombreProcedimiento + "(");
+        int cantParametrosEntrada = 0;
+        int cantParametrosSalida = 0;
+        if (parametrosEntrada != null) {
+            cantParametrosEntrada = parametrosEntrada.size();
+        }
+        if (parametrosSalida != null) {
+            cantParametrosSalida = parametrosSalida.size();
+        }
+        int numParams = cantParametrosEntrada + cantParametrosSalida;
+        for (int i = 0; i < numParams; i++) {
+            call.append("?");
+            if (i < numParams - 1) {
+                call.append(",");
+            }
+        }
+        call.append(")}");
+        colocarSQLEnStatement(call.toString());
+        // conexion.prepareCall(usuario);
+        return this.statement;
+        //return con.prepareCall(call.toString());
+    }
+//FUNCION DE PAZ 2
+    private void registrarParametrosEntrada(CallableStatement cs, Map<Integer, Object> parametros) throws SQLException {
+        for (Map.Entry<Integer, Object> entry : parametros.entrySet()) {
+            Integer key = entry.getKey();
+            Object value = entry.getValue();
+            switch (value) {
+                case Integer entero ->
+                    cs.setInt(key, entero);
+                case String cadena ->
+                    cs.setString(key, cadena);
+                case Double decimal ->
+                    cs.setDouble(key, decimal);
+                case Boolean booleano ->
+                    cs.setBoolean(key, booleano);
+                case java.util.Date fecha ->
+                    cs.setDate(key, new java.sql.Date(fecha.getTime()));
+                case Character caracter ->
+                    cs.setString(key, String.valueOf(caracter));
+                case byte[] archivo ->
+                    cs.setBytes(key, archivo);
+                default -> {
+                }
+                // Agregar más tipos según sea necesario
+            }
+        }
+    }
+ */
+//-------------------------------------------------------------------------------------------------------
+  ///////////INTENTO DE CREACION DE PROCEDURES USANDO CODIGO DE PA
+    //-------------------------------------------------------------------------------------------------------
+        //Métodos para llamadas a Procedimientos Almacenados
+    //FUNCION 1
+//    public int ejecutarProcedimiento(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada, Map<Integer, Object> parametrosSalida)  {
+//        //ESTO PARA PROCEDURE CON ENTRADA Y SALIDA DE DATOS
+//        //UTILES PARA MODIFICAR, INSERTAR
+//        int resultado = 0;
+//        try{
+//            abrirConexion();
+//            this.statement = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, parametrosSalida);
+//            if(parametrosEntrada != null)
+//                registrarParametrosEntrada(this.statement, parametrosEntrada);
+//            if(parametrosSalida != null)
+//                registrarParametrosSalida(this.statement, parametrosSalida);
+//        
+//            resultado = this.statement.executeUpdate();
+//        
+//            if(parametrosSalida != null)
+//                obtenerValoresSalida(this.statement, parametrosSalida);
+//        }catch(SQLException ex){
+//            System.out.println("Error ejecutando procedimiento almacenado: " + ex.getMessage());
+//        }finally{
+//            try {
+//                cerrarConexion();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(DaoBaseImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return resultado;
+//    }
+
+    /*
+    EJEMPLO USANDO LA FUNCION
+        @Override
+    public int insertar(Cliente cliente) {
+        Map<Integer,Object> parametrosSalida = new HashMap<>();   
+        Map<Integer,Object> parametrosEntrada = new HashMap<>();
+        parametrosSalida.put(1, Types.INTEGER);
+        parametrosEntrada.put(2, cliente.getDni());
+        parametrosEntrada.put(3, cliente.getNombre());
+        parametrosEntrada.put(4, cliente.getApellidoPaterno());
+        parametrosEntrada.put(5, cliente.getSexo());
+        parametrosEntrada.put(6, cliente.getFechaNacimiento());
+        parametrosEntrada.put(7, cliente.getLineaCredito());
+        parametrosEntrada.put(8, cliente.getCategoria().toString());
+        DBManager.getInstance().ejecutarProcedimiento("INSERTAR_CLIENTE", parametrosEntrada, parametrosSalida);
+        cliente.setIdPersona((int) parametrosSalida.get(1));
+        System.out.println("Se ha realizado el registro del cliente");
+        return cliente.getIdPersona();
+    }
+    +/
+    */

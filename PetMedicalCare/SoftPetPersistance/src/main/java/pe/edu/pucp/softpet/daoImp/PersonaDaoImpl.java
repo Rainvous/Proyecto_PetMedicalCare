@@ -2,7 +2,9 @@ package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
@@ -124,5 +126,15 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     public Integer eliminar(PersonaDto persona) {
         this.persona = persona;
         return super.eliminar();
+    }
+        
+    public ArrayList<PersonaDto> ListasBusquedaAvanzada(PersonaDto persona){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        parametrosEntrada.put(1,persona.getNombre());
+        parametrosEntrada.put(2,persona.getNroDocumento());
+        parametrosEntrada.put(3,persona.getRuc());
+        parametrosEntrada.put(4,persona.getTelefono());
+        
+        return (ArrayList<PersonaDto>)super.ejecutarProcedimientoLectura("sp_buscar_personas_avanzada", parametrosEntrada);
     }
 }
