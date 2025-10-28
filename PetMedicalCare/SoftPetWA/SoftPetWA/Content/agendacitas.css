@@ -1,0 +1,156 @@
+﻿/* Nombre del archivo: Content/agendacitas.css */
+
+/* --- Estilos para el resumen superior (Citas de Hoy, Confirmadas, etc.) --- */
+.summary-item {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #e0e0e0;
+    padding: 0 1.5rem;
+}
+
+    .summary-item:last-child {
+        border-right: none;
+    }
+
+    .summary-item .count {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        line-height: 1;
+    }
+
+    .summary-item .label {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-left: 0.5rem;
+    }
+
+    .summary-item .icon-circle-sm {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+
+        .summary-item .icon-circle-sm i {
+            font-size: 1rem;
+        }
+
+/* Colores para los íconos del resumen */
+.text-primary-custom {
+    color: #29b6f6 !important;
+}
+
+.bg-primary-soft {
+    background-color: #e3f2fd;
+}
+
+.text-success-custom {
+    color: #66bb6a !important;
+}
+
+.bg-success-soft {
+    background-color: #e8f5e9;
+}
+
+.text-danger-custom {
+    color: #ef5350 !important;
+}
+
+.bg-danger-soft {
+    background-color: #ffebee;
+}
+
+
+/* --- Estilos para la Agenda (Timeline) --- */
+
+/* Content/agendacitas.css */
+
+/* --- Estilos para la Agenda (Timeline) --- */
+
+.agenda-timeline {
+    /* position: relative; <-- ELIMINA O COMENTA ESTA LÍNEA */
+    padding-left: 70px; /* Espacio para las etiquetas de hora */
+}
+
+/* NUEVA CLASE para la fila de la hora */
+.timeline-slot {
+    position: relative; /* Será el ancla para la etiqueta de la hora */
+    min-height: 40px; /* <-- ESTA ES LA CLAVE: da altura a las filas vacías */
+}
+
+/* Las etiquetas de hora (08:00, 09:00, etc.) */
+.time-label {
+    position: absolute;
+    left: -70px; /* Lo mueve al área del padding izquierdo */
+    top: 0;
+    width: 60px; /* Ancho fijo para la hora */
+    text-align: right; /* Alinea la hora a la derecha */
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+
+/* La tarjeta de cita */
+.appointment-card {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    /* El borde de color de la izquierda */
+    border-left-width: 5px;
+}
+
+    .appointment-card h6 {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+    }
+
+    .appointment-card .meta-info {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .appointment-card .appointment-time {
+        font-weight: 600;
+        color: #333;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+/* --- Colores de estado para las tarjetas de cita --- */
+
+/* Verde (Confirmada) */
+.status-confirmada {
+    border-left-color: #66bb6a;
+}
+
+    .status-confirmada .badge-status {
+        color: #66bb6a;
+    }
+
+/* Naranja/Amarillo (Pendiente) */
+.status-pendiente {
+    border-left-color: #ffa726;
+}
+
+    .status-pendiente .badge-status {
+        color: #ffa726;
+    }
+
+/* Rojo (Cancelada) */
+.status-cancelada {
+    border-left-color: #ef5350;
+}
+
+    .status-cancelada .badge-status {
+        color: #ef5350;
+    }

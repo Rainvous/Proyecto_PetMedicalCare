@@ -1,0 +1,139 @@
+﻿<%-- Cliente.Master --%>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Cliente.master.cs" Inherits="SoftPetWA.Cliente" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title><asp:ContentPlaceHolder ID="cphTitulo" runat="server">Inicio</asp:ContentPlaceHolder> - PetMedicalCare</title>
+
+    <%-- Mismos Links CSS que Secretaria.Master --%>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Fonts/css/all.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <link href="Content/sidebar.css" rel="stylesheet" /> 
+
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="main-wrapper d-flex" id="wrapper">
+
+            <div id="bdSidebar" class="sidebar-petmedical d-flex flex-column flex-shrink-0">
+         
+                <div class="sidebar-header">
+                    <%-- ESTE ES EL CÓDIGO CORREGIDO --%>
+                    <asp:HyperLink NavigateUrl="~/Cliente_Inicio.aspx" CssClass="sidebar-brand-container" runat="server">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        <span class="sidebar-brand">PetMedicalCare</span>
+                    </asp:HyperLink>
+                    <%-- Quitamos el botón de toggle de aquí --%>
+                </div>
+         
+                <hr class="sidebar-divider">
+         
+                <ul class="sidebar-nav nav flex-column">
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlInicio" runat="server" CssClass="sidebar-link" NavigateUrl="~/Cliente_Inicio.aspx">
+                            <i class="fas fa-home"></i><span>Inicio</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlCitas" runat="server" CssClass="sidebar-link" NavigateUrl="~/Cliente_ReservarCita_Paso1.aspx"> <%-- Link a Cliente_MisCitas.aspx --%>
+                            <i class="fas fa-calendar-alt"></i><span>Mis Citas</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlMascotas" runat="server" CssClass="sidebar-link" NavigateUrl="~/Cliente_Mascotas.aspx"> <%-- Link a Cliente_Mascotas.aspx --%>
+                            <i class="fas fa-paw"></i><span>Mascotas</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlHistorial" runat="server" CssClass="sidebar-link" NavigateUrl="~/Cliente_HistorialMedico.aspx"> <%-- Link a Cliente_Historial.aspx --%>
+                            <i class="fas fa-notes-medical"></i><span>Historial Médico</span>
+                        </asp:HyperLink>
+                    </li>
+                </ul>
+         
+                <div class="sidebar-footer">
+                    <asp:HyperLink ID="hlPerfil" runat="server"   CssClass="sidebar-link text-decoration-none"  NavigateUrl="~/Cliente_Perfil.aspx"> <%-- Link a Cliente_Perfil.aspx --%>
+                        <div class="d-flex align-items-center">
+                            <div class="user-avatar">
+                                <span>M</span>
+                            </div>
+                            <div class="ms-2">
+                                <div class="user-name">Miguel</div>
+                                <div class="user-role">Cliente</div>
+                            </div>
+                        </div>
+                    </asp:HyperLink>
+                </div>
+            </div>
+     
+            <div class="content-wrapper">
+                
+                <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+                    <%-- ¡CAMBIO CLAVE! Añadimos clases Flexbox al container --%>
+                    <div class="container-fluid d-flex justify-content-between align-items-center"> 
+                        <%-- Elemento Izquierdo --%>
+                        <button type="button" class="btn btn-outline-secondary" id="sidebarToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <%-- Elemento Derecho (agrupado en un div para ms-auto si es necesario, pero ul ya lo hace) --%>
+                        <ul class="navbar-nav ms-auto d-flex flex-row"> <%-- Añadido d-flex flex-row para asegurar alineación horizontal --%>
+                            <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-cog"></i></a>
+                            </li>
+                        
+                            <%-- =================================== --%>
+                            <%--       AÑADE ESTE ELEMENTO LI        --%>
+                            <%-- =================================== --%>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="lnkLogout" runat="server" CssClass="nav-link" OnClick="lnkLogout_Click" ToolTip="Cerrar Sesión">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </asp:LinkButton>
+                            </li>
+                            <%-- =================================== --%>
+                        </ul>
+                    </div> 
+                </nav>
+                
+                <div class="p-4">
+                    <asp:ContentPlaceHolder ID="cphContenido" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+
+        <%-- Scripts (Igual que Secretaria) --%>
+        <script src="Scripts/jquery-3.7.1.js"></script>
+        <script src="Scripts/bootstrap.bundle.js"></script>
+        <script>
+            $("#sidebarToggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            $(function () {
+                var url = window.location.pathname;
+                var activePage = url.substring(url.lastIndexOf('/') + 1);
+                $('.sidebar-link').each(function () {
+                    var linkPage = this.href.substring(this.href.lastIndexOf('/') + 1);
+                    if (activePage.toLowerCase() == linkPage.toLowerCase()) {
+                        $(this).addClass('active');
+                    } else {
+                        $(this).removeClass('active');
+                    }
+                });
+            });
+        </script>
+        <asp:ContentPlaceHolder ID="cphScripts" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

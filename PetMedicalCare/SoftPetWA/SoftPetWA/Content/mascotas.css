@@ -1,0 +1,163 @@
+﻿/* Nombre del archivo: Content/mascotas.css */
+
+/* --- Tarjeta Principal de Mascota --- */
+.pet-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+    overflow: hidden; /* Para que el header azul respete el borde */
+}
+
+/* --- 1. Cabecera de la Tarjeta (Azul) --- */
+.pet-card-header {
+    background-color: #00A3A3; /* Mismo azul que el sidebar */
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.pet-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    border: 4px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 0 auto 0.75rem auto;
+}
+
+    .pet-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.pet-card-header .pet-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+}
+
+.pet-card-header .pet-breed {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.pet-status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* --- 2. Cuerpo de la Tarjeta (Info Mascota) --- */
+.pet-card-body {
+    padding: 1rem 1.5rem;
+}
+
+.pet-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+    .pet-info-row .label {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .pet-info-row .value {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+/* --- 3. Sub-tarjeta de Propietario --- */
+.pet-owner-card {
+    background-color: #f8f9fa; /* Gris claro */
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.owner-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+.owner-info .name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    line-height: 1.2;
+}
+
+.owner-info .phone {
+    font-size: 0.8rem;
+    color: #6c757d;
+    display: block;
+    line-height: 1.2;
+}
+
+/* --- 4. Pie de la Tarjeta (Acciones) --- */
+.pet-card-footer {
+    padding: 0 1.5rem 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pet-action-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px; /* Botones redondeados */
+    text-decoration: none;
+}
+
+    .pet-action-btn i {
+        margin-right: 4px;
+    }
+
+/* Colores de los botones de acción */
+.btn-historial {
+    background-color: #e3f2fd; /* Celeste */
+    color: #29b6f6;
+}
+
+    .btn-historial:hover {
+        background-color: #bbdefb;
+        color: #29b6f6;
+    }
+
+.btn-editar {
+    background-color: #fff3e0; /* Naranja claro */
+    color: #ffa726;
+}
+
+    .btn-editar:hover {
+        background-color: #ffe0b2;
+        color: #ffa726;
+    }
+
+.btn-eliminar {
+    background-color: #ffebee; /* Rojo claro */
+    color: #ef5350;
+}
+
+    .btn-eliminar:hover {
+        background-color: #ffcdd2;
+        color: #ef5350;
+    }

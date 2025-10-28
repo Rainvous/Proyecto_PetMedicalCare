@@ -1,0 +1,128 @@
+﻿/* Nombre del archivo: Content/reservarcita-calendario.css */
+
+/* --- Calendario --- */
+.calendar-container {
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+    .calendar-header .month-year {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+.calendar-nav .btn {
+    border-radius: 50% !important;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    line-height: 30px; /* Center icon vertically */
+}
+
+/* Grid del calendario */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas iguales */
+    gap: 5px; /* Espacio entre celdas */
+}
+
+/* Cabecera de días (Dom, Lun, etc.) */
+.day-header {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+    padding-bottom: 0.5rem;
+}
+
+/* Celda de fecha */
+.date-cell {
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+    .date-cell:hover {
+        background-color: #f8f9fa;
+        border-color: #e0e0e0;
+    }
+
+    .date-cell.other-month {
+        color: #adb5bd; /* Días del mes anterior/siguiente */
+        cursor: default;
+        background-color: #f8f9fa;
+        border-color: transparent;
+    }
+
+    .date-cell.selected {
+        background-color: #00A3A3; /* Azul/Teal */
+        color: #fff;
+        border-color: #00A3A3;
+        font-weight: 700;
+    }
+
+    .date-cell.disabled { /* Si hubiera días no disponibles */
+        color: #ced4da;
+        cursor: not-allowed;
+        background-color: #f8f9fa;
+        text-decoration: line-through;
+    }
+
+/* --- Horarios Disponibles --- */
+.time-slots-container {
+    margin-top: 1.5rem;
+}
+
+.time-slots-header {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.time-slot-btn {
+    border: 1px solid #e0e0e0;
+    border-radius: 20px; /* Botones redondeados */
+    padding: 0.4rem 1rem;
+    margin-right: 0.5rem; /*Para la separacion entre bloques Horizontalmente*/
+    margin-bottom: 0.75rem; /*Para la separacion entre bloques verticalmente*/
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #333;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    display: inline-block; /*Fija para que los botonos no actuen como una linea de texto sino que tambien actuen como un bloque que sele puede dar una separacion de arriba y abajo , no solo derecha o izquierda*/
+}
+
+    .time-slot-btn:hover {
+        border-color: #00A3A3;
+        color: #00A3A3;
+    }
+
+    .time-slot-btn.selected {
+        background-color: #00A3A3; /* Azul/Teal */
+        color: #fff;
+        border-color: #00A3A3;
+    }
+
+    .time-slot-btn.disabled { /* Si hubiera horarios no disponibles */
+        color: #ced4da;
+        cursor: not-allowed;
+        background-color: #f8f9fa;
+        border-color: #f0f0f0;
+        text-decoration: line-through;
+    }

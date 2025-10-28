@@ -1,0 +1,154 @@
+﻿<%-- Nombre del archivo: Veterinario.Master (Corregido y similar a Secretaria.Master) --%>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Veterinario.master.cs" Inherits="SoftPetWA.Veterinario" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title><asp:ContentPlaceHolder ID="cphTitulo" runat="server">Inicio</asp:ContentPlaceHolder> - PetMedicalCare</title>
+
+    <%-- Links CSS locales (Igual que Secretaria.Master) --%>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Fonts/css/all.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <link href="Content/sidebar.css" rel="stylesheet" /> <%-- Reutilizamos el mismo sidebar.css --%>
+
+    <%-- Placeholder para CSS adicionales --%>
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="main-wrapper d-flex" id="wrapper">
+
+            <%-- Sidebar (Menú Lateral) --%>
+            <div id="bdSidebar" class="sidebar-petmedical d-flex flex-column flex-shrink-0">
+         
+                <%-- Header con logo y nombre --%>
+                <div class="sidebar-header">
+                    <a href="~/Veterinario_Inicio.aspx" class="sidebar-brand-container">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        <span class="sidebar-brand">PetMedicalCare</span>
+                    </a>
+                    <%-- El botón de toggle está en la navbar --%>
+                </div>
+         
+                <hr class="sidebar-divider">
+         
+                <%-- Menú de navegación del Veterinario --%>
+                <ul class="sidebar-nav nav flex-column">
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlInicio" runat="server" CssClass="sidebar-link" NavigateUrl="~/Veterinario_Inicio.aspx">
+                            <i class="fas fa-home"></i><span>Inicio</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlMiAgenda" runat="server" CssClass="sidebar-link" NavigateUrl="~/Veterinario_Agenda.aspx">
+                            <i class="fas fa-calendar-alt"></i><span>Mi Agenda</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlConsulta" runat="server" CssClass="sidebar-link" NavigateUrl="~/Veterinario_Consulta.aspx">
+                            <i class="fas fa-stethoscope"></i><span>Consulta</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlRecetas" runat="server" CssClass="sidebar-link" NavigateUrl="~/Veterinario_Recetas.aspx">
+                            <i class="fas fa-prescription-bottle-alt"></i><span>Recetas</span>
+                        </asp:HyperLink>
+                    </li>
+                    <%-- Puedes añadir más enlaces aquí si son necesarios --%>
+                </ul>
+         
+                <%-- Footer del sidebar con usuario Veterinario --%>
+                <div class="sidebar-footer">
+                    <div class="d-flex align-items-center">
+                        <div class="user-avatar" style="color: #0097a7;"> <%-- Ajusta el color si es necesario --%>
+                            <span>DR</span> <%-- Iniciales del Veterinario --%>
+                        </div>
+                        <div class="ms-2">
+                            <div class="user-name">Dr. Rony</div> <%-- Nombre del Veterinario --%>
+                            <div class="user-role">Veterinario</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+            <%-- Contenido de la Página Web --%>
+            <div class="content-wrapper">
+                
+                <%-- Navbar (Barra Superior) - Estructura igual a Secretaria.Master --%>
+                <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+                    <%-- ¡CAMBIO CLAVE! Añadimos clases Flexbox al container --%>
+                    <div class="container-fluid d-flex justify-content-between align-items-center"> 
+                        <%-- Elemento Izquierdo --%>
+                        <button type="button" class="btn btn-outline-secondary" id="sidebarToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <%-- Elemento Derecho (agrupado en un div para ms-auto si es necesario, pero ul ya lo hace) --%>
+                        <ul class="navbar-nav ms-auto d-flex flex-row"> <%-- Añadido d-flex flex-row para asegurar alineación horizontal --%>
+                            <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-cog"></i></a>
+                            </li>
+                        
+                            <%-- =================================== --%>
+                            <%--       AÑADE ESTE ELEMENTO LI        --%>
+                            <%-- =================================== --%>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="lnkLogout" runat="server" CssClass="nav-link" OnClick="lnkLogout_Click" ToolTip="Cerrar Sesión">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </asp:LinkButton>
+                            </li>
+                            <%-- =================================== --%>
+
+                        </ul>
+                    </div> 
+                </nav>
+                
+                <%-- Contenedor principal del contenido --%>
+                <div class="p-4">
+                    <asp:ContentPlaceHolder ID="cphContenido" runat="server">
+                        <%-- Aquí se carga el contenido de cada página de Veterinario --%>
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+
+        <%-- Scripts locales (Igual que Secretaria.Master) --%>
+        <script src="Scripts/jquery-3.7.1.js"></script>
+        <script src="Scripts/bootstrap.bundle.js"></script>
+
+        <%-- Script para el toggle del sidebar (Igual que Secretaria.Master) --%>
+        <script>
+            $("#sidebarToggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+
+            // Código para resaltar el item activo del sidebar (Igual que Secretaria.Master)
+            $(function () {
+                var url = window.location.pathname;
+                var activePage = url.substring(url.lastIndexOf('/') + 1);
+                $('.sidebar-link').each(function () {
+                    var linkPage = this.href.substring(this.href.lastIndexOf('/') + 1);
+                    if (activePage.toLowerCase() == linkPage.toLowerCase()) {
+                        $(this).addClass('active');
+                    } else {
+                        $(this).removeClass('active');
+                    }
+                });
+            });
+        </script>
+        
+        <%-- Placeholder para scripts adicionales --%>
+        <asp:ContentPlaceHolder ID="cphScripts" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
