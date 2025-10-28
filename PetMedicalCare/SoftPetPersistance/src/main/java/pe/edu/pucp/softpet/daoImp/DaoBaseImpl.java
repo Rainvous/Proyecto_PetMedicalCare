@@ -561,12 +561,17 @@ public abstract class DaoBaseImpl {
                     this.statement.setDouble(key, decimal);
                 case Boolean booleano ->
                     this.statement.setBoolean(key, booleano);
+                case java.sql.Date fechaSQL ->
+                    this.statement.setDate(key, fechaSQL); //POR SI ACASO PONGO ESTE
                 case java.util.Date fecha ->
                     this.statement.setDate(key, new java.sql.Date(fecha.getTime()));
+                
                 case Character caracter ->
                     this.statement.setString(key, String.valueOf(caracter));
                 case byte[] archivo ->
                     this.statement.setBytes(key, archivo);
+                
+                    
                 default -> {
                 }
                 // Agregar más tipos según sea necesario

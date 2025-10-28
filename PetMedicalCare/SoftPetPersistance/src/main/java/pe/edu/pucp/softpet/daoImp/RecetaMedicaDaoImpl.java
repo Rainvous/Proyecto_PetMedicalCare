@@ -12,17 +12,22 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     private RecetaMedicaDto recetaMedica;
 
     public RecetaMedicaDaoImpl() {
-        super("RECETAS_MEDICA");
+        super("RECETAS_MEDICAS");
         this.recetaMedica = null;
         this.retornarLlavePrimaria = true;
     }
 
     @Override
     protected void configurarListaDeColumnas() {
-        this.listaColumnas.add(new Columna("RECETAS_MEDICA_ID", true, true));
+        this.listaColumnas.add(new Columna("RECETA_MEDICA_ID", true, true));
         this.listaColumnas.add(new Columna("DIAGNOSTICO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("CITA_ID", false, false));
+        this.listaColumnas.add(new Columna("FECHA_EMISION", false, false));
+        this.listaColumnas.add(new Columna("VIGENCIA_HASTA", false, false));
+        this.listaColumnas.add(new Columna("OBSERVACIONES", false, false));
+        
+        
     }
 
     @Override
@@ -30,6 +35,9 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
         this.statement.setString(1, this.recetaMedica.getDiagnostico());
         this.statement.setInt(2, this.recetaMedica.getActivo() ? 1 : 0);
         this.statement.setInt(3, this.recetaMedica.getCita().getCitaId());
+        this.statement.setDate(4, this.recetaMedica.getFechaEmision());
+        this.statement.setDate(5, this.recetaMedica.getVigenciaHasta());
+        this.statement.setString(6, this.recetaMedica.getObservaciones());
     }
 
     @Override
@@ -37,8 +45,11 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
         this.statement.setString(1, this.recetaMedica.getDiagnostico());
         this.statement.setInt(2, this.recetaMedica.getActivo() ? 1 : 0);
         this.statement.setInt(3, this.recetaMedica.getCita().getCitaId());
+        this.statement.setDate(4, this.recetaMedica.getFechaEmision());
+        this.statement.setDate(5, this.recetaMedica.getVigenciaHasta());
+        this.statement.setString(6, this.recetaMedica.getObservaciones());
 
-        this.statement.setInt(4, this.recetaMedica.getRecetaMedicaId());
+        this.statement.setInt(7, this.recetaMedica.getRecetaMedicaId());
     }
 
     @Override
@@ -54,10 +65,14 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.recetaMedica = new RecetaMedicaDto();
-        this.recetaMedica.setRecetaMedicaId(this.resultSet.getInt("RECETAS_MEDICA_ID"));
+        this.recetaMedica.setRecetaMedicaId(this.resultSet.getInt("RECETA_MEDICA_ID"));
         this.recetaMedica.setDiagnostico(this.resultSet.getString("DIAGNOSTICO"));
         this.recetaMedica.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.recetaMedica.setCita(new CitaAtencionDaoImpl().obtenerPorId(this.resultSet.getInt("CITA_ID")));
+        this.recetaMedica.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
+        this.recetaMedica.setVigenciaHasta(this.resultSet.getDate("VIGENCIA_HASTA"));
+        this.recetaMedica.setObservaciones(this.resultSet.getString("OBSERVACIONES"));
+        
     }
 
     @Override

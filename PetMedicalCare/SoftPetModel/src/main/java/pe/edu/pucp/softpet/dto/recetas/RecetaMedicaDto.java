@@ -1,81 +1,95 @@
 package pe.edu.pucp.softpet.dto.recetas;
 
+import java.sql.Date;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 
 public class RecetaMedicaDto {
 
     private Integer recetaMedicaId;
+    private Date fechaEmision;
+    private Date vigenciaHasta;
     private String diagnostico;
+    private String observaciones;
     private Boolean activo;
-    private CitaAtencionDto cita;
 
+    private CitaAtencionDto cita; // FK a CITA
+
+    // Constructor vacío
     public RecetaMedicaDto() {
         this.recetaMedicaId = null;
+        this.fechaEmision = null;
+        this.vigenciaHasta = null;
         this.diagnostico = null;
+        this.observaciones = null;
         this.activo = null;
         this.cita = null;
     }
 
-    public RecetaMedicaDto(Integer recetaMedicaId, String diagnostico,
-            Boolean activo, CitaAtencionDto cita) {
+    // Constructor con parámetros
+    public RecetaMedicaDto(Integer recetaMedicaId, Date fechaEmision, Date vigenciaHasta,
+                           String diagnostico, String observaciones, Boolean activo,
+                           CitaAtencionDto cita) {
         this.recetaMedicaId = recetaMedicaId;
+        this.fechaEmision = fechaEmision;
+        this.vigenciaHasta = vigenciaHasta;
         this.diagnostico = diagnostico;
+        this.observaciones = observaciones;
         this.activo = activo;
         this.cita = cita;
     }
 
-    /**
-     * @return the recetaMedicaId
-     */
     public Integer getRecetaMedicaId() {
         return recetaMedicaId;
     }
 
-    /**
-     * @param recetaMedicaId the recetaMedicaId to set
-     */
     public void setRecetaMedicaId(Integer recetaMedicaId) {
         this.recetaMedicaId = recetaMedicaId;
     }
 
-    /**
-     * @return the diagnostico
-     */
+    public Date getFechaEmision() {
+        return fechaEmision;
+    }
+
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
+    }
+
+    public Date getVigenciaHasta() {
+        return vigenciaHasta;
+    }
+
+    public void setVigenciaHasta(Date vigenciaHasta) {
+        this.vigenciaHasta = vigenciaHasta;
+    }
+
     public String getDiagnostico() {
         return diagnostico;
     }
 
-    /**
-     * @param diagnostico the diagnostico to set
-     */
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
     }
 
-    /**
-     * @return the activo
-     */
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
     public Boolean getActivo() {
         return activo;
     }
 
-    /**
-     * @param activo the activo to set
-     */
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
 
-    /**
-     * @return the cita
-     */
     public CitaAtencionDto getCita() {
         return cita;
     }
 
-    /**
-     * @param cita the cita to set
-     */
     public void setCita(CitaAtencionDto cita) {
         this.cita = cita;
     }

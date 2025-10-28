@@ -23,8 +23,14 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.listaColumnas.add(new Columna("CANTIDAD", false, false));
         this.listaColumnas.add(new Columna("DESCRIPCION_MEDICAMENTO", false, false));
         this.listaColumnas.add(new Columna("INDICACION", false, false));
-        this.listaColumnas.add(new Columna("RECETA_MEDICA_ID", false, false));
+        this.listaColumnas.add(new Columna("VIA_ADMINISTRACION", false, false));
+        this.listaColumnas.add(new Columna("DOSIS", false, false));
+        this.listaColumnas.add(new Columna("FRECUENCIA", false, false));
+        this.listaColumnas.add(new Columna("DURACION", false, false));
+        
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
+        this.listaColumnas.add(new Columna("RECETA_MEDICA_ID", false, false));
+        
     }
 
     @Override
@@ -32,17 +38,27 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.statement.setInt(1, this.detalleReceta.getCantidad());
         this.statement.setString(2, this.detalleReceta.getDescripcionMedicamento());
         this.statement.setString(3, this.detalleReceta.getIndicacion());
-        this.statement.setInt(4, this.detalleReceta.getReceta().getRecetaMedicaId());
-        this.statement.setInt(5, this.detalleReceta.getActivo() ? 1 : 0);
+        this.statement.setString(4, this.detalleReceta.getViaAdministracion());
+        this.statement.setString(5, this.detalleReceta.getDosis());
+        this.statement.setString(6, this.detalleReceta.getFrecuencia());
+        this.statement.setString(7, this.detalleReceta.getDuracion());
+        this.statement.setInt(8, this.detalleReceta.getActivo() ? 1 : 0);
+        this.statement.setInt(9, this.detalleReceta.getReceta().getRecetaMedicaId());
+        
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setInt(1, this.detalleReceta.getCantidad());
+     this.statement.setInt(1, this.detalleReceta.getCantidad());
         this.statement.setString(2, this.detalleReceta.getDescripcionMedicamento());
         this.statement.setString(3, this.detalleReceta.getIndicacion());
-        this.statement.setInt(4, this.detalleReceta.getReceta().getRecetaMedicaId());
-        this.statement.setInt(5, this.detalleReceta.getActivo() ? 1 : 0);
+        this.statement.setString(4, this.detalleReceta.getViaAdministracion());
+        this.statement.setString(5, this.detalleReceta.getDosis());
+        this.statement.setString(6, this.detalleReceta.getFrecuencia());
+        this.statement.setString(7, this.detalleReceta.getDuracion());
+        this.statement.setInt(8, this.detalleReceta.getActivo() ? 1 : 0);
+        this.statement.setInt(9, this.detalleReceta.getReceta().getRecetaMedicaId());
+        
 
         this.statement.setInt(6, this.detalleReceta.getDetalleRecetaId());
     }
@@ -64,6 +80,11 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.detalleReceta.setCantidad(this.resultSet.getInt("CANTIDAD"));
         this.detalleReceta.setDescripcionMedicamento(this.resultSet.getString("DESCRIPCION_MEDICAMENTO"));
         this.detalleReceta.setIndicacion(this.resultSet.getString("INDICACION"));
+        this.detalleReceta.setViaAdministracion(this.resultSet.getString("VIA_ADMINISTRACION"));
+        this.detalleReceta.setDosis(this.resultSet.getString("DOSIS"));
+        this.detalleReceta.setFrecuencia(this.resultSet.getString("FRECUENCIA"));
+        this.detalleReceta.setDuracion(this.resultSet.getString("DURACION"));
+        
         this.detalleReceta.setReceta(new RecetaMedicaDaoImpl().
                 obtenerPorId(this.resultSet.getInt("RECETA_MEDICA_ID")));
         this.detalleReceta.setActivo(this.resultSet.getInt("ACTIVO") == 1);

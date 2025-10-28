@@ -2,11 +2,88 @@ package pe.edu.pucp.softpet.dto.recetas;
 
 public class DetalleRecetaDto {
 
+    /**
+     * @return the presentacion
+     */
+    public String getPresentacion() {
+        return presentacion;
+    }
+
+    /**
+     * @param presentacion the presentacion to set
+     */
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
+    }
+
+    /**
+     * @return the viaAdministracion
+     */
+    public String getViaAdministracion() {
+        return viaAdministracion;
+    }
+
+    /**
+     * @param viaAdministracion the viaAdministracion to set
+     */
+    public void setViaAdministracion(String viaAdministracion) {
+        this.viaAdministracion = viaAdministracion;
+    }
+
+    /**
+     * @return the dosis
+     */
+    public String getDosis() {
+        return dosis;
+    }
+
+    /**
+     * @param dosis the dosis to set
+     */
+    public void setDosis(String dosis) {
+        this.dosis = dosis;
+    }
+
+    /**
+     * @return the frecuencia
+     */
+    public String getFrecuencia() {
+        return frecuencia;
+    }
+
+    /**
+     * @param frecuencia the frecuencia to set
+     */
+    public void setFrecuencia(String frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
+    /**
+     * @return the duracion
+     */
+    public String getDuracion() {
+        return duracion;
+    }
+
+    /**
+     * @param duracion the duracion to set
+     */
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
+    }
+
     private Integer detalleRecetaId;
     private Integer cantidad;
     private String descripcionMedicamento;
     private String indicacion;
     private RecetaMedicaDto receta;
+    private String presentacion;
+    private String viaAdministracion;
+    private String dosis;
+    private String frecuencia;
+    private String duracion;
+ 
+    
     private Boolean activo;
 
     public DetalleRecetaDto() {

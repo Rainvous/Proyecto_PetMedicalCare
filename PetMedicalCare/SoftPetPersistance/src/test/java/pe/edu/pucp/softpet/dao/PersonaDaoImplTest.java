@@ -62,11 +62,11 @@ public class PersonaDaoImplTest {
     public void testListasBusquedaAvanzada() {
         PersonaDaoImpl personadao= new PersonaDaoImpl();
         PersonaDto person= new PersonaDto();
-        person.setNombre("ana");
-        person.setNroDocumento(0);
+        person.setNombre("");
+        person.setNroDocumento(234);
         person.setRuc(0);
         person.setTelefono("");
-        personadao.EstablecerMotorBaseDeDatos(MotorDeBaseDeDatos.MSSQL.toString());
+        personadao.EstablecerMotorBaseDeDatos(MotorDeBaseDeDatos.MYSQL.toString());
         ArrayList<PersonaDto> personas= personadao.ListasBusquedaAvanzada(person);
         System.out.println("BUSQUEDA DE PERSONAS AVANZADO");
         for( PersonaDto p : personas){

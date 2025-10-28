@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
+import pe.edu.pucp.softpet.daoImp.util.enums.EstadoDocumentoDePago;
+import pe.edu.pucp.softpet.daoImp.util.enums.TipoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
+import pe.edu.pucp.softpet.dto.facturacion.TipoDocumentoDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePagoDao {
 
@@ -23,15 +28,14 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.listaColumnas.add(new Columna("DOCUMENTO_DE_PAGO_ID", true, true));
         this.listaColumnas.add(new Columna("SERIE", false, false));
         this.listaColumnas.add(new Columna("NUMERO", false, false));
-        this.listaColumnas.add(new Columna("TASA_IGV", false, false));
         this.listaColumnas.add(new Columna("FECHA_EMISION", false, false));
-        this.listaColumnas.add(new Columna("METODO_DE_PAGO", false, false));
+        this.listaColumnas.add(new Columna("TIPO_DOCUMENTO", false, false));
         this.listaColumnas.add(new Columna("ESTADO", false, false));
-        this.listaColumnas.add(new Columna("SUBTOTAL_SIN_IGV", false, false));
+        this.listaColumnas.add(new Columna("SUBTOTAL", false, false));
         this.listaColumnas.add(new Columna("IGV_TOTAL", false, false));
         this.listaColumnas.add(new Columna("TOTAL", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("TIPO_DOCUMENTO_ID", false, false));
+        this.listaColumnas.add(new Columna("METODO_DE_PAGO_ID", false, false));
         this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
     }
 
@@ -39,34 +43,57 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setString(1, this.documentoPago.getSerie());
         this.statement.setString(2, this.documentoPago.getNumero());
-        this.statement.setDouble(3, this.documentoPago.getTasaIGV());
-        this.statement.setDate(4, this.documentoPago.getFechaEmision());
-        this.statement.setString(5, this.documentoPago.getMetodoPago());
-        this.statement.setString(6, this.documentoPago.getEstado());
-        this.statement.setDouble(7, this.documentoPago.getSubtotalSinIGV());
-        this.statement.setDouble(8, this.documentoPago.getIGVTotal());
-        this.statement.setDouble(9, this.documentoPago.getTotal());
-        this.statement.setInt(10, this.documentoPago.getActivo() ? 1 : 0);
-        this.statement.setInt(11, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
-        this.statement.setInt(12, this.documentoPago.getPersona().getPersonaId());
+       
+        this.statement.setDate(3, new java.sql.Date(this.documentoPago.getFechaEmision().getTime()));
+        //FORMA DE CASTEAR UN SQL DATE
+        this.statement.setString(4, sacarTipoDocumento(this.documentoPago.getTipoDocumento()));
+        this.statement.setString(5, sacarEstado(this.documentoPago.getEstado()));
+        this.statement.setDouble(6, this.documentoPago.getSubtotal());
+        this.statement.setDouble(7, this.documentoPago.getIGVTotal());
+        this.statement.setDouble(8, this.documentoPago.getTotal());
+        this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
+        this.statement.setInt(10, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
+        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
     }
-
+    protected String sacarTipoDocumento(String data){
+        if(data.equals(TipoDocumentoDePago.BOLETA.toString())
+                ||  data.equals("boleta")){
+            return TipoDocumentoDePago.BOLETA.toString();
+        }
+        else{
+            return TipoDocumentoDePago.FACTURA.toString();
+        }
+    }
+    protected String sacarEstado(String data){
+        if(data.equals(EstadoDocumentoDePago.EMITIDO.toString()) ||
+                data.equals("emitido")){
+            return EstadoDocumentoDePago.EMITIDO.toString();
+        }
+        else if( data.equals(EstadoDocumentoDePago.PAGADO.toString())
+                    || data.equals("pagado")){
+            return EstadoDocumentoDePago.PAGADO.toString();
+        }
+        else{
+            return EstadoDocumentoDePago.ANULADO.toString();
+        }
+    }
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setString(1, this.documentoPago.getSerie());
         this.statement.setString(2, this.documentoPago.getNumero());
-        this.statement.setDouble(3, this.documentoPago.getTasaIGV());
-        this.statement.setDate(4, this.documentoPago.getFechaEmision());
-        this.statement.setString(5, this.documentoPago.getMetodoPago());
-        this.statement.setString(6, this.documentoPago.getEstado());
-        this.statement.setDouble(7, this.documentoPago.getSubtotalSinIGV());
-        this.statement.setDouble(8, this.documentoPago.getIGVTotal());
-        this.statement.setDouble(9, this.documentoPago.getTotal());
-        this.statement.setInt(10, this.documentoPago.getActivo() ? 1 : 0);
-        this.statement.setInt(11, this.documentoPago.getTipoDocumento().getTipoDocumentoId());
-        this.statement.setInt(12, this.documentoPago.getPersona().getPersonaId());
+       
+        this.statement.setDate(3, new java.sql.Date(this.documentoPago.getFechaEmision().getTime()));
+        //FORMA DE CASTEAR UN SQL DATE
+        this.statement.setString(4, sacarTipoDocumento(this.documentoPago.getTipoDocumento()));
+        this.statement.setString(5, sacarTipoDocumento(this.documentoPago.getEstado()));
+        this.statement.setDouble(6, this.documentoPago.getSubtotal());
+        this.statement.setDouble(7, this.documentoPago.getIGVTotal());
+        this.statement.setDouble(8, this.documentoPago.getTotal());
+        this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
+        this.statement.setInt(10, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
+        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
 
-        this.statement.setInt(13, this.documentoPago.getDocumentoPagoId());
+        this.statement.setInt(12, this.documentoPago.getDocumentoPagoId());
     }
 
     @Override
@@ -85,18 +112,21 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.documentoPago.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID"));
         this.documentoPago.setSerie(this.resultSet.getString("SERIE"));
         this.documentoPago.setNumero(this.resultSet.getString("NUMERO"));
-        this.documentoPago.setTasaIGV(this.resultSet.getDouble("TASA_IGV"));
+    
         this.documentoPago.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
-        this.documentoPago.setMetodoPago(this.resultSet.getString("METODO_DE_PAGO"));
+        
+        this.documentoPago.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO")); //NO LO CASTEO CON ENUMS PQ YA ESTÁ
         this.documentoPago.setEstado(this.resultSet.getString("ESTADO"));
-        this.documentoPago.setSubtotalSinIGV(this.resultSet.getDouble("SUBTOTAL_SIN_IGV"));
+        this.documentoPago.setSubtotal(this.resultSet.getDouble("SUBTOTAL"));
         this.documentoPago.setIGVTotal(this.resultSet.getDouble("IGV_TOTAL"));
         this.documentoPago.setTotal(this.resultSet.getDouble("TOTAL"));
         this.documentoPago.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.documentoPago.setTipoDocumento(new TipoDocumentoDaoImpl().
-                obtenerPorId(this.resultSet.getInt("TIPO_DOCUMENTO_ID")));
-        this.documentoPago.setPersona(new PersonaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        MetodoDePagoDto tp= new MetodoDePagoDto();
+        tp.setMetodoDePagoId(this.resultSet.getInt("METODO_DE_PAGO_ID"));
+        this.documentoPago.setMetodoDePago(tp);
+        PersonaDto aux= new PersonaDto();
+        aux.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+        this.documentoPago.setPersona(aux);
     }
 
     @Override

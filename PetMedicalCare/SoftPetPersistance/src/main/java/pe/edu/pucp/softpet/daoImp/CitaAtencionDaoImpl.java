@@ -6,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
+import pe.edu.pucp.softpet.daoImp.util.enums.EstadoCita;
 
 public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao {
 
@@ -16,6 +17,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.citaAtencion = null;
         this.retornarLlavePrimaria = true;
         this.usuario = "user_backend";
+        
     }
 
     @Override
@@ -44,7 +46,22 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setString(7, this.citaAtencion.getPeso());
         this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-        this.statement.setString(10, this.citaAtencion.getEstado());
+        String aux="";
+       aux=retornaEstadoCita(this.citaAtencion.getEstado());
+        this.statement.setString(10, aux );
+    }
+    protected String retornaEstadoCita(String estado){
+        String aux="";
+         if(this.citaAtencion.getEstado().equals(EstadoCita.ATENDIDA.toString())){
+            aux=EstadoCita.ATENDIDA.toString();
+        }
+        else if(this.citaAtencion.getEstado().equals(EstadoCita.CANCELADA.toString())){
+            aux=EstadoCita.CANCELADA.toString();
+        }
+        else{
+            aux=EstadoCita.PROGRAMADA.toString();
+        }
+         return aux;
     }
 
     @Override
@@ -58,7 +75,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setString(7, this.citaAtencion.getPeso());
         this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-        this.statement.setString(10, this.citaAtencion.getEstado());
+        this.statement.setString(10, retornaEstadoCita(this.citaAtencion.getEstado()));
 
         this.statement.setInt(11, this.citaAtencion.getCitaId());
     }

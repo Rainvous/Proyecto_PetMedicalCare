@@ -5,24 +5,39 @@ import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
 public class DetalleDocumentoPagoDto {
 
+    /**
+     * @return the activo
+     */
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     private Integer dddpId;
     private Integer nroItem;
     private String descripcion;
     private Integer cantidad;
-    private Double precioUnitarioSinIGV;
+    private Double precioUnitario;
     private Double valorVenta;
     private Double IGVItem;
     private Double importeTotal;
     private DocumentoPagoDto documentoPago;
     private ServicioDto servicio;
     private ProductoDto producto;
+    private Boolean activo;
 
     public DetalleDocumentoPagoDto() {
         this.dddpId = null;
         this.nroItem = null;
         this.descripcion = null;
         this.cantidad = null;
-        this.precioUnitarioSinIGV = null;
+        this.precioUnitario = null;
         this.valorVenta = null;
         this.IGVItem = null;
         this.importeTotal = null;
@@ -39,7 +54,7 @@ public class DetalleDocumentoPagoDto {
         this.nroItem = nroItem;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
-        this.precioUnitarioSinIGV = precioUnitarioSinIGV;
+        this.precioUnitario = precioUnitarioSinIGV;
         this.valorVenta = valorVenta;
         this.IGVItem = IGVItem;
         this.importeTotal = importeTotal;
@@ -107,15 +122,15 @@ public class DetalleDocumentoPagoDto {
     /**
      * @return the precioUnitarioSinIGV
      */
-    public Double getPrecioUnitarioSinIGV() {
-        return precioUnitarioSinIGV;
+    public Double getPrecioUnitario() {
+        return precioUnitario;
     }
 
     /**
      * @param precioUnitarioSinIGV the precioUnitarioSinIGV to set
      */
-    public void setPrecioUnitarioSinIGV(Double precioUnitarioSinIGV) {
-        this.precioUnitarioSinIGV = precioUnitarioSinIGV;
+    public void setPrecioUnitario(Double precioUnitarioSinIGV) {
+        this.precioUnitario = precioUnitarioSinIGV;
     }
 
     /**
