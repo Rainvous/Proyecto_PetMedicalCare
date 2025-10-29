@@ -93,7 +93,7 @@ public abstract class DBManager {
             // System.out.println("getURL(): " + getURL());
             // System.out.println(Cifrado.descifrarMD5(this.contraseña));
             this.conexion = DriverManager.getConnection(getURL(), this.usuario, this.contraseña);
-           System.out.println("url: " + getURL());
+           //System.out.println("url: " + getURL());
 //            System.out.println("conext: " + this.conexion);
         } catch (ClassNotFoundException | SQLException ex) {
             System.err.println("Error al generar la conexión - " + ex);
