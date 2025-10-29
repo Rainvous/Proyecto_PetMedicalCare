@@ -1,4 +1,4 @@
-package pe.edu.pucp.softpetws;
+package pe.edu.pucp.softpet.services.softpetws;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
