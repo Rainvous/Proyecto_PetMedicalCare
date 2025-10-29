@@ -8,47 +8,39 @@ import pe.edu.pucp.softpet.daoImp.TipoProductoDaoImpl;
 
 public class ProductoBo {
 
-    private ProductoDao productoDao;
+    private final ProductoDao productoDao;
 
     public ProductoBo() {
         this.productoDao = new ProductoDaoImpl();
     }
 
     // Inserta un producto asegurando que el nombre y presentación estén en mayúsculas
-    public Integer insertar(String nombre, String presentacion,
-            double precioUnitario, boolean activo,
-            int tipoProductoId, int stock) {
+    public Integer insertar(int tipoProductoId, String nombre,
+            String presentacion, double precioUnitario, int stock, boolean activo) {
         ProductoDto producto = new ProductoDto();
 
-        // Convertimos nombre y presentación a mayúsculas y eliminamos espacios extra
-        producto.setNombre(nombre.trim().toUpperCase());
-        producto.setPresentacion(presentacion.trim().toUpperCase());
-        producto.setPrecioUnitario(precioUnitario);
-        producto.setActivo(activo);
-
-        // Asignamos el tipo de producto
         producto.setTipoProducto(new TipoProductoDaoImpl().obtenerPorId(tipoProductoId));
-        
+        producto.setNombre(nombre);
+        producto.setPresentacion(presentacion);
+        producto.setPrecioUnitario(precioUnitario);
         producto.setStock(stock);
+        producto.setActivo(activo);
 
         return this.productoDao.insertar(producto);
     }
 
     // Modifica un producto
-    public Integer modificar(int productoId, String nombre, String presentacion,
-            double precioUnitario, boolean activo,
-            int tipoProductoId, int stock) {
+    public Integer modificar(int productoId, int tipoProductoId, String nombre,
+            String presentacion, double precioUnitario, int stock, boolean activo) {
         ProductoDto producto = new ProductoDto();
 
         producto.setProductoId(productoId);
-        producto.setNombre(nombre.trim().toUpperCase());
-        producto.setPresentacion(presentacion.trim().toUpperCase());
-        producto.setPrecioUnitario(precioUnitario);
-        producto.setActivo(activo);
-        
         producto.setTipoProducto(new TipoProductoDaoImpl().obtenerPorId(tipoProductoId));
-        
+        producto.setNombre(nombre);
+        producto.setPresentacion(presentacion);
+        producto.setPrecioUnitario(precioUnitario);
         producto.setStock(stock);
+        producto.setActivo(activo);
 
         return this.productoDao.modificar(producto);
     }
