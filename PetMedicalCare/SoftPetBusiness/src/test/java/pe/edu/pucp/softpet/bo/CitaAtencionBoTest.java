@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Order;
 
 public class CitaAtencionBoTest {
 
-    private CitaAtencionBo citaBo;
+    private final CitaAtencionBo citaBo;
 
     public CitaAtencionBoTest() {
         this.citaBo = new CitaAtencionBo();
@@ -36,7 +36,7 @@ public class CitaAtencionBoTest {
         String observacion = "Control general del perro";
         double monto = 120.50;
         boolean activo = true;
-        String pesoMascota = "12.4";
+        double pesoMascota = 12.4;
         String estadoCita = "Confirmado";
 
         int veterinarioId = 3; // Debe existir
@@ -67,7 +67,7 @@ public class CitaAtencionBoTest {
         String nuevaObservacion = "Revisión post vacuna";
         double nuevoMonto = 150.0;
         boolean nuevoActivo = true;
-        String nuevoPeso = "13.0";
+        double nuevoPeso = 13.0;
         String estadoCita = "Terminado";
 
         int veterinarioId = 3;
@@ -98,7 +98,7 @@ public class CitaAtencionBoTest {
         String observacion = "Cita temporal para eliminar";
         double monto = 80.0;
         boolean activo = true;
-        String peso = "10.5";
+        double peso = 10.5;
         String estadoCita = "Pendiente";
 
         int veterinarioId = 3;
@@ -135,7 +135,7 @@ public class CitaAtencionBoTest {
         System.out.println("Observación: " + cita.getObservacion());
         System.out.println("Monto: " + cita.getMonto());
         System.out.println("Activo: " + (cita.getActivo() ? "Sí" : "No"));
-        System.out.println("Peso Mascota: " + cita.getPeso());
+        System.out.println("Peso Mascota: " + cita.getPesoMascota());
         System.out.println("Estado Cita: " + cita.getEstado());
         if (cita.getVeterinario() != null) {
             System.out.println("Veterinario ID: " + cita.getVeterinario().getVeterinarioId());
@@ -167,7 +167,7 @@ public class CitaAtencionBoTest {
             System.out.println("Observación: " + c.getObservacion());
             System.out.println("Monto: " + c.getMonto());
             System.out.println("Activo: " + (c.getActivo() ? "Sí" : "No"));
-            System.out.println("Peso: " + c.getPeso());
+            System.out.println("Peso: " + c.getPesoMascota());
             System.out.println("Estado Cita: " + c.getEstado());
             if (c.getVeterinario() != null) {
                 System.out.println("Veterinario ID: " + c.getVeterinario().getVeterinarioId());
