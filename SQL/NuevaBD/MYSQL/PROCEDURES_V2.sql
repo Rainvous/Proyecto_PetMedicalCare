@@ -60,3 +60,5 @@ CALL sp_buscar_personas_avanzada('ana', '789', NULL, '');
 
 -- Sin filtros (retorna todo)
 CALL sp_buscar_personas_avanzada('', '0', '0', '');
+
+select * from CITAS_ATENCION;
