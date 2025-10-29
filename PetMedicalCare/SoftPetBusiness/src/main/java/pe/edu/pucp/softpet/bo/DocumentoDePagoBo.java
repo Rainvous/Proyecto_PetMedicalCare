@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
+import pe.edu.pucp.softpet.daoImp.MetodoDePagoDaoImpl;
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.util.enums.EstadoDocumentoDePago;
 import pe.edu.pucp.softpet.daoImp.util.enums.TipoDocumentoDePago;
@@ -61,9 +62,9 @@ public class DocumentoDePagoBo {
         documentoPago.setNumero(numero.trim());
 
         documentoPago.setFechaEmision(fechaEmisionSQL);
-        documentoPago.setFechaEmision((java.sql.Date) fechaEmision);
-        MetodoDePagoDto me = new MetodoDePagoDto();
-        me.setMetodoDePagoId(MetodoDePagoId);
+        documentoPago.setFechaEmision((java.sql.Date) fechaEmision);        
+        documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().obtenerPorId(MetodoDePagoId));
+
         documentoPago.setEstado(estado.toString());
         documentoPago.setSubtotal(subtotal);
         documentoPago.setIGVTotal(igvTotal);

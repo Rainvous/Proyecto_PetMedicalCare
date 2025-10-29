@@ -28,9 +28,11 @@ public class DocumentoDePagoBoTest {
     @Order(1)
     public void testInsertar() {
         System.out.println("=== Test: Insertar - DOCUMENTOS_DE_PAGO ===");
-
-        String serie = "F002";
-        String numero = "0003";
+        //Datos a insertar para que le funcione el test, o pruebe con otros datos de serie y numero
+        //serie = "F0054"
+        //numero = "0045"
+        String serie = "F0019";
+        String numero = "0012";
         Date fechaEmision = new Date(System.currentTimeMillis());
         String metodoPago = "EFECTIVO";
         double subtotal = 200.0;
@@ -49,6 +51,7 @@ public class DocumentoDePagoBoTest {
         );
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
+        documentoBo.eliminar(idGenerado);
     }
 
     /**
@@ -58,9 +61,11 @@ public class DocumentoDePagoBoTest {
     @Order(2)
     public void testModificar() {
         System.out.println("=== Test: Modificar - DOCUMENTOS_DE_PAGO ===");
-
-        String serie = "F002";
-        String numero = "0003";
+        //Datos a insertar para que le funcione el test, o pruebe con otros datos de serie y numero
+        //serie = "F0054"
+        //numero = "0045"
+        String serie = "F202";
+        String numero = "1003";
         Date fechaEmision = new Date(System.currentTimeMillis());
         String metodoPago = "EFECTIVO";
         double subtotal = 200.0;
@@ -68,11 +73,11 @@ public class DocumentoDePagoBoTest {
         double total = 236.0;
         boolean activo = true;
         EstadoDocumentoDePago estado = EstadoDocumentoDePago.EMITIDO;
-        TipoDocumentoDePago tipoDocumento = TipoDocumentoDePago.BOLETA; // Debe existir
+        TipoDocumentoDePago tipoDocumento = TipoDocumentoDePago.FACTURA; // Debe existir
         int MetodoDePagoId = 1; // Debe existir
         int personaId = 1;       // Debe existir
 
-        Integer resultado = documentoBo.modificar(MetodoDePagoId,
+        Integer resultado = documentoBo.modificar(10,
                 serie, numero, fechaEmision, metodoPago,
             estado, subtotal, igvTotal,  tipoDocumento,
             total, activo, MetodoDePagoId, personaId
