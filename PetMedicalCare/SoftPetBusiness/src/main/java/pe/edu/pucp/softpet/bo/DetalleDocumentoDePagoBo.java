@@ -43,7 +43,6 @@ public class DetalleDocumentoDePagoBo {
     // Modifica un detalle existente
     public Integer modificar(int detalleId, int nroItem, String descripcion, int cantidad,
             double precioUnitario, double valorVenta,
-             double importeTotal,
             int documentoPagoId, int servicioId, int productoId, boolean esActivo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();

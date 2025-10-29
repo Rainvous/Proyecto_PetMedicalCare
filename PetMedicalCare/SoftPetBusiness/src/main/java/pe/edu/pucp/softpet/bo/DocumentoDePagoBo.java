@@ -21,7 +21,7 @@ public class DocumentoDePagoBo {
     }
 
     // Inserta un documento de pago
-    public Integer insertar(String serie, String numero, double tasaIGV, Date fechaEmision, String metodoPago,
+    public Integer insertar(String serie, String numero, Date fechaEmision, String metodoPago,
             EstadoDocumentoDePago estado, double subtotal, double igvTotal,  TipoDocumentoDePago tipoDocumento,
             double total, boolean activo, int MetodoDePagoId, int personaId) {
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
@@ -48,7 +48,7 @@ public class DocumentoDePagoBo {
     }
 
     // Modifica un documento existente
-    public Integer modificar(int documentoPagoId, String serie, String numero, double tasaIGV, Date fechaEmision, String metodoPago,
+    public Integer modificar(int documentoPagoId, String serie, String numero, Date fechaEmision, String metodoPago,
             EstadoDocumentoDePago estado, double subtotal, double igvTotal,  TipoDocumentoDePago tipoDocumento,
             double total, boolean activo, int MetodoDePagoId, int personaId) {
 

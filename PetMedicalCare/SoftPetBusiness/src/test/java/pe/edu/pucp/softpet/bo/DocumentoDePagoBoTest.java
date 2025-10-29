@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
+import pe.edu.pucp.softpet.daoImp.util.enums.EstadoDocumentoDePago;
+import pe.edu.pucp.softpet.daoImp.util.enums.TipoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -29,21 +31,21 @@ public class DocumentoDePagoBoTest {
 
         String serie = "F002";
         String numero = "0003";
-        double tasaIGV = 18.0;
         Date fechaEmision = new Date(System.currentTimeMillis());
         String metodoPago = "EFECTIVO";
-        String estado = "EMITIDO";
-        double subtotalSinIGV = 200.0;
+        double subtotal = 200.0;
         double igvTotal = 36.0;
         double total = 236.0;
         boolean activo = true;
-        int tipoDocumentoId = 1; // Debe existir
+        EstadoDocumentoDePago estado = EstadoDocumentoDePago.EMITIDO;
+        TipoDocumentoDePago tipoDocumento = TipoDocumentoDePago.FACTURA; // Debe existir
+        int MetodoDePagoId = 1; // Debe existir
         int personaId = 1;       // Debe existir
 
         Integer idGenerado = documentoBo.insertar(
-                serie, numero, tasaIGV, fechaEmision, metodoPago, estado,
-                subtotalSinIGV, igvTotal, total, activo, tipoDocumentoId,
-                personaId
+                serie, numero, fechaEmision, metodoPago,
+            estado, subtotal, igvTotal,  tipoDocumento,
+            total, activo, MetodoDePagoId, personaId
         );
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
@@ -57,25 +59,23 @@ public class DocumentoDePagoBoTest {
     public void testModificar() {
         System.out.println("=== Test: Modificar - DOCUMENTOS_DE_PAGO ===");
 
-        int documentoIdExistente = 3; // Usa el ID insertado o uno existente
+        String serie = "F002";
+        String numero = "0003";
+        Date fechaEmision = new Date(System.currentTimeMillis());
+        String metodoPago = "EFECTIVO";
+        double subtotal = 200.0;
+        double igvTotal = 36.0;
+        double total = 236.0;
+        boolean activo = true;
+        EstadoDocumentoDePago estado = EstadoDocumentoDePago.EMITIDO;
+        TipoDocumentoDePago tipoDocumento = TipoDocumentoDePago.BOLETA; // Debe existir
+        int MetodoDePagoId = 1; // Debe existir
+        int personaId = 1;       // Debe existir
 
-        String nuevaSerie = "F002";
-        String nuevoNumero = "0003";
-        double nuevaTasaIGV = 18.0;
-        Date nuevaFechaEmision = Date.valueOf("2025-10-07");
-        String nuevoMetodoPago = "TARJETA";
-        String nuevoEstado = "PAGADO";
-        double nuevoSubtotal = 200.0;
-        double nuevoIgv = 36.0;
-        double nuevoTotal = 236.0;
-        boolean nuevoActivo = true;
-        int tipoDocumentoId = 1;
-        int personaId = 1;
-
-        Integer resultado = documentoBo.modificar(
-                documentoIdExistente, nuevaSerie, nuevoNumero, nuevaTasaIGV,
-                nuevaFechaEmision, nuevoMetodoPago, nuevoEstado, nuevoSubtotal,
-                nuevoIgv, nuevoTotal, nuevoActivo, tipoDocumentoId, personaId
+        Integer resultado = documentoBo.modificar(MetodoDePagoId,
+                serie, numero, fechaEmision, metodoPago,
+            estado, subtotal, igvTotal,  tipoDocumento,
+            total, activo, MetodoDePagoId, personaId
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar > 0 si la actualización fue exitosa");
@@ -89,24 +89,23 @@ public class DocumentoDePagoBoTest {
     public void testEliminar() {
         System.out.println("=== Test: Eliminar - DOCUMENTOS_DE_PAGO ===");
 
-        // Primero insertamos uno temporal
-        String serie = "TEMP-0001";
-        String numero = "0001";
-        double tasaIGV = 18.0;
-        Date fechaEmision = Date.valueOf("2025-10-07");
+        String serie = "B002";
+        String numero = "0003";
+        Date fechaEmision = new Date(System.currentTimeMillis());
         String metodoPago = "EFECTIVO";
-        String estado = "EMITIDO";
-        double subtotalSinIGV = 100.0;
-        double igvTotal = 18.0;
-        double total = 118.0;
+        double subtotal = 200.0;
+        double igvTotal = 36.0;
+        double total = 236.0;
         boolean activo = true;
-        int tipoDocumentoId = 1;
-        int personaId = 1;
+        EstadoDocumentoDePago estado = EstadoDocumentoDePago.EMITIDO;
+        TipoDocumentoDePago tipoDocumento = TipoDocumentoDePago.BOLETA; // Debe existir
+        int MetodoDePagoId = 1; // Debe existir
+        int personaId = 1;       // Debe existir
 
         Integer idGenerado = documentoBo.insertar(
-                serie, numero, tasaIGV, fechaEmision, metodoPago, estado,
-                subtotalSinIGV, igvTotal, total, activo, tipoDocumentoId,
-                personaId
+                serie, numero, fechaEmision, metodoPago,
+            estado, subtotal, igvTotal,  tipoDocumento,
+            total, activo, MetodoDePagoId, personaId
         );
 
         assertTrue(idGenerado > 0, "No se pudo insertar el documento para eliminarlo.");
@@ -133,7 +132,7 @@ public class DocumentoDePagoBoTest {
         System.out.println("ID Documento: " + documento.getDocumentoPagoId());
         System.out.println("Serie: " + documento.getSerie());
         System.out.println("Numero: " + documento.getNumero());
-        System.out.println("Método de Pago: " + documento.getMetodoPago());
+        System.out.println("Método de Pago: " + documento.getMetodoDePago());
         System.out.println("Total: " + documento.getTotal());
         System.out.println("Estado: " + documento.getEstado());
         System.out.println("Activo: " + (documento.getActivo()));
@@ -158,11 +157,11 @@ public class DocumentoDePagoBoTest {
             System.out.println("ID: " + doc.getDocumentoPagoId());
             System.out.println("Serie: " + doc.getSerie());
             System.out.println("Numero: " + doc.getNumero());
-            System.out.println("Método de Pago: " + doc.getMetodoPago());
+            System.out.println("Método de Pago: " + doc.getMetodoDePago());
             System.out.println("Estado: " + doc.getEstado());
             System.out.println("Total: " + doc.getTotal());
             if (doc.getTipoDocumento() != null) {
-                System.out.println("Tipo Documento ID: " + doc.getTipoDocumento().getTipoDocumentoId());
+                System.out.println("Tipo Documento ID: " + doc.getTipoDocumento());
             }
             if (doc.getPersona() != null) {
                 System.out.println("Persona ID: " + doc.getPersona().getPersonaId());

@@ -16,7 +16,7 @@ import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
 
 public class DetalleDocumentoDePagoBoTest {
 
-    private DetalleDocumentoDePagoBo detalleBo;
+    private final DetalleDocumentoDePagoBo detalleBo;
 
     public DetalleDocumentoDePagoBoTest() {
         this.detalleBo = new DetalleDocumentoDePagoBo();
@@ -36,15 +36,13 @@ public class DetalleDocumentoDePagoBoTest {
         int cantidad = 2;
         double precioUnitarioSinIGV = 50.0;
         double valorVenta = 100.0;
-        double igvItem = 18.0;
-        double importeTotal = 118.0;
         int documentoPagoId = 1; // Debe existir
         int servicioId = 1;      // Debe existir
         int productoId = 1;      // Debe existir
 
         Integer idGenerado = detalleBo.insertar(
                 nroItem, descripcion, cantidad, precioUnitarioSinIGV,
-                valorVenta, igvItem, importeTotal,
+                valorVenta, 
                 documentoPagoId, servicioId, productoId
         );
 
@@ -66,16 +64,14 @@ public class DetalleDocumentoDePagoBoTest {
         int cantidad = 3;
         double precioUnitarioSinIGV = 40.0;
         double valorVenta = 120.0;
-        double igvItem = 21.6;
-        double importeTotal = 141.6;
         int documentoPagoId = 1;
         int servicioId = 1;
         int productoId = 1;
 
         Integer resultado = detalleBo.modificar(
                 detalleIdExistente, nroItem, descripcion, cantidad,
-                precioUnitarioSinIGV, valorVenta, igvItem, importeTotal,
-                documentoPagoId, servicioId, productoId
+                precioUnitarioSinIGV, valorVenta,
+                documentoPagoId, servicioId, productoId, true
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar > 0 si la actualización fue exitosa");
@@ -96,15 +92,13 @@ public class DetalleDocumentoDePagoBoTest {
         int cantidad = 1;
         double precioUnitarioSinIGV = 10.0;
         double valorVenta = 10.0;
-        double igvItem = 1.8;
-        double importeTotal = 11.8;
         int documentoPagoId = 1;
         int servicioId = 1;
         int productoId = 1;
 
         Integer idGenerado = detalleBo.insertar(
                 nroItem, descripcion, cantidad, precioUnitarioSinIGV,
-                valorVenta, igvItem, importeTotal,
+                valorVenta, 
                 documentoPagoId, servicioId, productoId
         );
 
@@ -133,10 +127,8 @@ public class DetalleDocumentoDePagoBoTest {
         System.out.println("Nro Item: " + detalle.getNroItem());
         System.out.println("Descripción: " + detalle.getDescripcion());
         System.out.println("Cantidad: " + detalle.getCantidad());
-        System.out.println("Precio Unitario sin IGV: " + detalle.getPrecioUnitarioSinIGV());
+        System.out.println("Precio Unitario sin IGV: " + detalle.getPrecioUnitario());
         System.out.println("Valor Venta: " + detalle.getValorVenta());
-        System.out.println("IGV Item: " + detalle.getIGVItem());
-        System.out.println("Importe Total: " + detalle.getImporteTotal());
 
         if (detalle.getDocumentoPago() != null) {
             System.out.println("Documento Pago ID: " + detalle.getDocumentoPago().getDocumentoPagoId());
@@ -169,10 +161,8 @@ public class DetalleDocumentoDePagoBoTest {
             System.out.println("Nro Item: " + det.getNroItem());
             System.out.println("Descripción: " + det.getDescripcion());
             System.out.println("Cantidad: " + det.getCantidad());
-            System.out.println("Precio Unitario sin IGV: " + det.getPrecioUnitarioSinIGV());
+            System.out.println("Precio Unitario sin IGV: " + det.getPrecioUnitario());
             System.out.println("Valor Venta: " + det.getValorVenta());
-            System.out.println("IGV Item: " + det.getIGVItem());
-            System.out.println("Importe Total: " + det.getImporteTotal());
 
             if (det.getDocumentoPago() != null) {
                 System.out.println("Documento Pago ID: " + det.getDocumentoPago().getDocumentoPagoId());
