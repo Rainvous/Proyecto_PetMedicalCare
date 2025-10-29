@@ -5,36 +5,33 @@ import java.sql.Date;
 public class VeterinarioDto {
 
     private Integer veterinarioId;
-    private String especializacion;
+    private PersonaDto persona;
+    private Integer especialidadId;
     private Date fechaContratacion;
     private String estado;
+    private String especialidad;
     private Boolean activo;
-    private PersonaDto persona;
-    private Date fechaInicioJornada;
-    private Date fechaFinJornada;
 
     public VeterinarioDto() {
         this.veterinarioId = null;
-        this.especializacion = null;
+        this.persona = null;
+        this.especialidadId = null;
         this.fechaContratacion = null;
         this.estado = null;
+        this.especialidad = null;
         this.activo = null;
-        this.persona = null;
-        this.fechaInicioJornada = null;
-        this.fechaFinJornada = null;
     }
 
-    public VeterinarioDto(Integer veterinarioId, String especializacion,
-            Date fechaContratacion, String estado, Boolean activo,
-            PersonaDto persona, Date fechaInicioJornada, Date fechaFinJornada) {
+    public VeterinarioDto(Integer veterinarioId, PersonaDto persona,
+            Integer especialidadId, Date fechaContratacion, String estado,
+            String especialidad, Boolean activo) {
         this.veterinarioId = veterinarioId;
-        this.especializacion = especializacion;
+        this.persona = persona;
+        this.especialidadId = especialidadId;
         this.fechaContratacion = fechaContratacion;
         this.estado = estado;
+        this.especialidad = especialidad;
         this.activo = activo;
-        this.persona = persona;
-        this.fechaInicioJornada = fechaInicioJornada;
-        this.fechaFinJornada = fechaFinJornada;
     }
 
     /**
@@ -52,17 +49,31 @@ public class VeterinarioDto {
     }
 
     /**
-     * @return the especializacion
+     * @return the persona
      */
-    public String getEspecializacion() {
-        return especializacion;
+    public PersonaDto getPersona() {
+        return persona;
     }
 
     /**
-     * @param especializacion the especializacion to set
+     * @param persona the persona to set
      */
-    public void setEspecializacion(String especializacion) {
-        this.especializacion = especializacion;
+    public void setPersona(PersonaDto persona) {
+        this.persona = persona;
+    }
+
+    /**
+     * @return the especialidadId
+     */
+    public Integer getEspecialidadId() {
+        return especialidadId;
+    }
+
+    /**
+     * @param especialidadId the especialidadId to set
+     */
+    public void setEspecialidadId(Integer especialidadId) {
+        this.especialidadId = especialidadId;
     }
 
     /**
@@ -94,6 +105,20 @@ public class VeterinarioDto {
     }
 
     /**
+     * @return the especialidad
+     */
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    /**
+     * @param especialidad the especialidad to set
+     */
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    /**
      * @return the activo
      */
     public Boolean getActivo() {
@@ -105,47 +130,5 @@ public class VeterinarioDto {
      */
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    /**
-     * @return the persona
-     */
-    public PersonaDto getPersona() {
-        return persona;
-    }
-
-    /**
-     * @param persona the persona to set
-     */
-    public void setPersona(PersonaDto persona) {
-        this.persona = persona;
-    }
-
-    /**
-     * @return the fechaInicioJornada
-     */
-    public Date getFechaInicioJornada() {
-        return fechaInicioJornada;
-    }
-
-    /**
-     * @param fechaInicioJornada the fechaInicioJornada to set
-     */
-    public void setFechaInicioJornada(Date fechaInicioJornada) {
-        this.fechaInicioJornada = fechaInicioJornada;
-    }
-
-    /**
-     * @return the fechaFinJornada
-     */
-    public Date getFechaFinJornada() {
-        return fechaFinJornada;
-    }
-
-    /**
-     * @param fechaFinJornada the fechaFinJornada to set
-     */
-    public void setFechaFinJornada(Date fechaFinJornada) {
-        this.fechaFinJornada = fechaFinJornada;
     }
 }

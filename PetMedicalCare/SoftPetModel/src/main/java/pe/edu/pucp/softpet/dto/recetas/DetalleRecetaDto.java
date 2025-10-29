@@ -2,6 +2,88 @@ package pe.edu.pucp.softpet.dto.recetas;
 
 public class DetalleRecetaDto {
 
+    private Integer detalleRecetaId;
+    private RecetaMedicaDto receta;
+    private String descripcionMedicamento;
+    private String presentacion;
+    private String viaAdministracion;
+    private String dosis;
+    private String frecuencia;
+    private String duracion;
+    private String indicacion;
+    private Boolean activo;
+
+    public DetalleRecetaDto() {
+        this.detalleRecetaId = null;
+        this.receta = null;
+        this.descripcionMedicamento = null;
+        this.presentacion = null;
+        this.viaAdministracion = null;
+        this.dosis = null;
+        this.frecuencia = null;
+        this.duracion = null;
+        this.indicacion = null;
+        this.activo = null;
+    }
+
+    public DetalleRecetaDto(Integer detalleRecetaId, RecetaMedicaDto receta,
+            String descripcionMedicamento, String presentacion,
+            String viaAdministracion, String dosis, String frecuencia,
+            String duracion, String indicacion, Boolean activo) {
+        this.detalleRecetaId = detalleRecetaId;
+        this.receta = receta;
+        this.descripcionMedicamento = descripcionMedicamento;
+        this.presentacion = presentacion;
+        this.viaAdministracion = viaAdministracion;
+        this.dosis = dosis;
+        this.frecuencia = frecuencia;
+        this.duracion = duracion;
+        this.indicacion = indicacion;
+        this.activo = activo;
+    }
+
+    /**
+     * @return the detalleRecetaId
+     */
+    public Integer getDetalleRecetaId() {
+        return detalleRecetaId;
+    }
+
+    /**
+     * @param detalleRecetaId the detalleRecetaId to set
+     */
+    public void setDetalleRecetaId(Integer detalleRecetaId) {
+        this.detalleRecetaId = detalleRecetaId;
+    }
+
+    /**
+     * @return the receta
+     */
+    public RecetaMedicaDto getReceta() {
+        return receta;
+    }
+
+    /**
+     * @param receta the receta to set
+     */
+    public void setReceta(RecetaMedicaDto receta) {
+        this.receta = receta;
+    }
+
+    /**
+     * @return the descripcionMedicamento
+     */
+    public String getDescripcionMedicamento() {
+        return descripcionMedicamento;
+    }
+
+    /**
+     * @param descripcionMedicamento the descripcionMedicamento to set
+     */
+    public void setDescripcionMedicamento(String descripcionMedicamento) {
+        this.descripcionMedicamento = descripcionMedicamento;
+    }
+
     /**
      * @return the presentacion
      */
@@ -72,82 +154,6 @@ public class DetalleRecetaDto {
         this.duracion = duracion;
     }
 
-    private Integer detalleRecetaId;
-    private Integer cantidad;
-    private String descripcionMedicamento;
-    private String indicacion;
-    private RecetaMedicaDto receta;
-    private String presentacion;
-    private String viaAdministracion;
-    private String dosis;
-    private String frecuencia;
-    private String duracion;
- 
-    
-    private Boolean activo;
-
-    public DetalleRecetaDto() {
-        this.detalleRecetaId = null;
-        this.cantidad = null;
-        this.descripcionMedicamento = null;
-        this.indicacion = null;
-        this.receta = null;
-        this.activo = null;
-    }
-
-    public DetalleRecetaDto(Integer detalleRecetaId, Integer cantidad,
-            String descripcionMedicamento, String indicacion,
-            RecetaMedicaDto receta, Boolean activo) {
-        this.detalleRecetaId = detalleRecetaId;
-        this.cantidad = cantidad;
-        this.descripcionMedicamento = descripcionMedicamento;
-        this.indicacion = indicacion;
-        this.receta = receta;
-        this.activo = activo;
-    }
-
-    /**
-     * @return the detalleRecetaId
-     */
-    public Integer getDetalleRecetaId() {
-        return detalleRecetaId;
-    }
-
-    /**
-     * @param detalleRecetaId the detalleRecetaId to set
-     */
-    public void setDetalleRecetaId(Integer detalleRecetaId) {
-        this.detalleRecetaId = detalleRecetaId;
-    }
-
-    /**
-     * @return the cantidad
-     */
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    /**
-     * @param cantidad the cantidad to set
-     */
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    /**
-     * @return the descripcionMedicamento
-     */
-    public String getDescripcionMedicamento() {
-        return descripcionMedicamento;
-    }
-
-    /**
-     * @param descripcionMedicamento the descripcionMedicamento to set
-     */
-    public void setDescripcionMedicamento(String descripcionMedicamento) {
-        this.descripcionMedicamento = descripcionMedicamento;
-    }
-
     /**
      * @return the indicacion
      */
@@ -160,20 +166,6 @@ public class DetalleRecetaDto {
      */
     public void setIndicacion(String indicacion) {
         this.indicacion = indicacion;
-    }
-
-    /**
-     * @return the receta
-     */
-    public RecetaMedicaDto getReceta() {
-        return receta;
-    }
-
-    /**
-     * @param receta the receta to set
-     */
-    public void setReceta(RecetaMedicaDto receta) {
-        this.receta = receta;
     }
 
     /**

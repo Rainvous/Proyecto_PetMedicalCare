@@ -9,7 +9,6 @@ import pe.edu.pucp.softpet.daoImp.util.enums.EstadoDocumentoDePago;
 import pe.edu.pucp.softpet.daoImp.util.enums.TipoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
-import pe.edu.pucp.softpet.dto.facturacion.TipoDocumentoDto;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePagoDao {
