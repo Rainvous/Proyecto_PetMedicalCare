@@ -58,7 +58,7 @@ public class DetalleDocumentoDePagoBoTest {
     public void testModificar() {
         System.out.println("=== Test: Modificar - DETALLES_DOCUMENTOS_DE_PAGO ===");
 
-        int detalleIdExistente = 8;
+        int detalleIdExistente = 2;
         int nroItem = 2;
         String descripcion = "Vacuna Antirrábica";
         int cantidad = 3;

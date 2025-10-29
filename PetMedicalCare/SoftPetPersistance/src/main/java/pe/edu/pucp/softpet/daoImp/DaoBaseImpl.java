@@ -67,9 +67,9 @@ public abstract class DaoBaseImpl {
             return;
         }
         try (PreparedStatement psSet = this.conexion.prepareStatement("SET @app_user := ?")) {
-            System.out.println("------>" + psSet);
+            //System.out.println("------>" + psSet);
             psSet.setString(1, usuario);
-            System.out.println("------>" + psSet);
+            //System.out.println("------>" + psSet);
             psSet.execute();
         }
     }
@@ -188,7 +188,7 @@ public abstract class DaoBaseImpl {
                     this.incluirValorDeParametrosParaEliminacion();
                     break;
             }
-            System.out.println("CRUD de statement: " + statement);
+            //System.out.println("CRUD de statement: " + statement);
             resultado = this.ejecutarDMLEnBD();
             if (this.retornarLlavePrimaria && tipo_operacion == Tipo_Operacion.INSERTAR) {
                 resultado = this.retornarUltimoAutoGenerado();
@@ -369,7 +369,7 @@ public abstract class DaoBaseImpl {
             } else {
                 this.limpiarObjetoDelResultSet();
             }
-            System.out.println("SELECT  -> " + statement);
+            //System.out.println("SELECT  -> " + statement);
         } catch (SQLException ex) {
             System.err.println("Error al intentar obtenerPorId - " + ex);
         } finally {
@@ -498,7 +498,7 @@ public abstract class DaoBaseImpl {
                 //registrarParametrosEntrada(this.statement, parametrosEntrada);
                 registrarParametrosEntrada(parametrosEntrada);
             }
-            System.out.println("Call-> " + this.statement);
+            //System.out.println("Call-> " + this.statement);
             //  this.resultSet = cs.executeQuery(); 
             ejecutarSelectEnDB();
             while (this.resultSet.next()) {
