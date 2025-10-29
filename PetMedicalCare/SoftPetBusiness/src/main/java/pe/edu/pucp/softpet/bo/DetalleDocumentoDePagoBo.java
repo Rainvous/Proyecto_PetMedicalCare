@@ -18,18 +18,19 @@ public class DetalleDocumentoDePagoBo {
 
     // Inserta un nuevo detalle de documento de pago
     public Integer insertar(int nroItem, String descripcion, int cantidad,
-            double precioUnitarioSinIGV, double valorVenta,
-            double igvItem, double importeTotal,
+            double precioUnitario, double valorVenta,
+           
             int documentoPagoId, int servicioId, int productoId) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
         detalle.setNroItem(nroItem);
         detalle.setDescripcion(descripcion.trim().toUpperCase());
         detalle.setCantidad(cantidad);
-        detalle.setPrecioUnitarioSinIGV(precioUnitarioSinIGV);
+        detalle.setPrecioUnitario(precioUnitario);
         detalle.setValorVenta(valorVenta);
-        detalle.setIGVItem(igvItem);
-        detalle.setImporteTotal(importeTotal);
+        detalle.setActivo(Boolean.TRUE);
+        
+      
 
         // Relaciones con otras entidades
         detalle.setDocumentoPago(new DocumentoDePagoDaoImpl().obtenerPorId(documentoPagoId));
@@ -41,19 +42,19 @@ public class DetalleDocumentoDePagoBo {
 
     // Modifica un detalle existente
     public Integer modificar(int detalleId, int nroItem, String descripcion, int cantidad,
-            double precioUnitarioSinIGV, double valorVenta,
-            double igvItem, double importeTotal,
-            int documentoPagoId, int servicioId, int productoId) {
+            double precioUnitario, double valorVenta,
+             double importeTotal,
+            int documentoPagoId, int servicioId, int productoId, boolean esActivo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
         detalle.setDddpId(detalleId);
         detalle.setNroItem(nroItem);
         detalle.setDescripcion(descripcion.trim().toUpperCase());
         detalle.setCantidad(cantidad);
-        detalle.setPrecioUnitarioSinIGV(precioUnitarioSinIGV);
+         detalle.setPrecioUnitario(precioUnitario);
         detalle.setValorVenta(valorVenta);
-        detalle.setIGVItem(igvItem);
-        detalle.setImporteTotal(importeTotal);
+        detalle.setActivo(esActivo);
+        
 
         detalle.setDocumentoPago(new DocumentoDePagoDaoImpl().obtenerPorId(documentoPagoId));
         detalle.setServicio(new ServicioDaoImpl().obtenerPorId(servicioId));

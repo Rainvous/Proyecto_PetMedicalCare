@@ -19,7 +19,7 @@ public class CitaAtencionBo {
     // Inserta una nueva cita
     public Integer insertar(String observacion, Date fechaHoraInicio, Date fechaRegistro,
             Date fechaHoraFin, double monto, boolean activo,
-            String pesoMascota, int veterinarioId, int mascotaId, 
+            double pesoMascota, int veterinarioId, int mascotaId, 
             String estadoCita) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
@@ -35,7 +35,7 @@ public class CitaAtencionBo {
         cita.setFechaHoraFin(fechaFinSQL);
         cita.setMonto(monto);
         cita.setActivo(activo);
-        cita.setPeso(pesoMascota.trim());
+        cita.setPesoMascota(pesoMascota);
         cita.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(veterinarioId));
         cita.setMascota(new MascotaDaoImpl().obtenerPorId(mascotaId));
         cita.setEstado(estadoCita);
@@ -46,7 +46,7 @@ public class CitaAtencionBo {
     // Modifica una cita existente
     public Integer modificar(int citaId, String observacion, Date fechaHoraInicio, Date fechaRegistro,
             Date fechaHoraFin, double monto, boolean activo,
-            String pesoMascota, int veterinarioId, int mascotaId,
+            double pesoMascota, int veterinarioId, int mascotaId,
             String estadoCita) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
@@ -63,7 +63,7 @@ public class CitaAtencionBo {
         cita.setFechaHoraFin(fechaFinSQL);
         cita.setMonto(monto);
         cita.setActivo(activo);
-        cita.setPeso(pesoMascota.trim());
+        cita.setPesoMascota(pesoMascota);
         cita.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(veterinarioId));
         cita.setMascota(new MascotaDaoImpl().obtenerPorId(mascotaId));
         cita.setEstado(estadoCita);
