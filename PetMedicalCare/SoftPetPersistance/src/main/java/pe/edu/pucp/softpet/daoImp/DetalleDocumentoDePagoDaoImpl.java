@@ -35,10 +35,10 @@ public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements Detall
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setInt(1, this.detalleDocumento.getNroItem());
-        this.statement.setInt(2, this.detalleDocumento.getDocumentoPago().getDocumentoPagoId());
-        this.statement.setInt(3, this.detalleDocumento.getServicio().getServicioId());
-        this.statement.setInt(4, this.detalleDocumento.getProducto().getProductoId());
+        this.statement.setInt(1, this.detalleDocumento.getDocumentoPago().getDocumentoPagoId());
+        this.statement.setInt(2, this.detalleDocumento.getServicio().getServicioId());
+        this.statement.setInt(3, this.detalleDocumento.getProducto().getProductoId());
+        this.statement.setInt(4, this.detalleDocumento.getNroItem());
         this.statement.setString(5, this.detalleDocumento.getDescripcion());
         this.statement.setInt(6, this.detalleDocumento.getCantidad());
         this.statement.setDouble(7, this.detalleDocumento.getPrecioUnitario());
@@ -48,10 +48,10 @@ public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements Detall
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setInt(1, this.detalleDocumento.getNroItem());
-        this.statement.setInt(2, this.detalleDocumento.getDocumentoPago().getDocumentoPagoId());
-        this.statement.setInt(3, this.detalleDocumento.getServicio().getServicioId());
-        this.statement.setInt(4, this.detalleDocumento.getProducto().getProductoId());
+        this.statement.setInt(1, this.detalleDocumento.getDocumentoPago().getDocumentoPagoId());
+        this.statement.setInt(2, this.detalleDocumento.getServicio().getServicioId());
+        this.statement.setInt(3, this.detalleDocumento.getProducto().getProductoId());
+        this.statement.setInt(4, this.detalleDocumento.getNroItem());
         this.statement.setString(5, this.detalleDocumento.getDescripcion());
         this.statement.setInt(6, this.detalleDocumento.getCantidad());
         this.statement.setDouble(7, this.detalleDocumento.getPrecioUnitario());
