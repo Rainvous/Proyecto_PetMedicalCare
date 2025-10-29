@@ -87,7 +87,7 @@ public class DetalleDocumentoDePagoBoTest {
         System.out.println("=== Test: eliminar detalle de documento de pago ===");
 
         // Insertamos uno temporal para eliminarlo
-        int nroItem = 99;
+        int nroItem = 2;
         String descripcion = "Temporal para eliminar";
         int cantidad = 1;
         double precioUnitarioSinIGV = 10.0;
