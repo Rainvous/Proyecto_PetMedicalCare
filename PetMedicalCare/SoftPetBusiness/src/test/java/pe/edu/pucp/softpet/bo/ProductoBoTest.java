@@ -7,7 +7,7 @@ import pe.edu.pucp.softpet.dto.productos.ProductoDto;
 
 public class ProductoBoTest {
 
-    private ProductoBo productoBo;
+    private final ProductoBo productoBo;
 
     public ProductoBoTest() {
         this.productoBo = new ProductoBo();
@@ -31,7 +31,7 @@ public class ProductoBoTest {
 
         //insertar
         Integer idGenerado = productoBo.insertar(
-                nombre, presentacion, precio, activo, tipoProductoId, stock
+                tipoProductoId, nombre, presentacion, precio, stock, activo
         );
 
         // Solo verificar que el ID generado sea válido
@@ -54,8 +54,8 @@ public class ProductoBoTest {
         int tipoProductoId = 1;
 
         Integer resultado = productoBo.modificar(
-                idProductoExistente, nuevoNombre, nuevaPresentacion,
-                nuevoPrecio, nuevoActivo, tipoProductoId, stock
+                idProductoExistente, tipoProductoId, nuevoNombre, nuevaPresentacion,
+                nuevoPrecio, stock, nuevoActivo
         );
 
         assertTrue(resultado > 0, "El método modificar debe retornar true si la actualización fue exitosa");
@@ -77,7 +77,7 @@ public class ProductoBoTest {
         int tipoProductoId = 1;
 
         Integer idGenerado = productoBo.insertar(
-                nombre, presentacion, precio, activo, tipoProductoId, stock
+                tipoProductoId, nombre, presentacion, precio, stock, activo
         );
         assertTrue(idGenerado > 0, "No se pudo insertar el producto para eliminar.");
 

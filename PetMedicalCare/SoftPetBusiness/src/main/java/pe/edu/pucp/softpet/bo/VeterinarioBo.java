@@ -9,57 +9,43 @@ import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 
 public class VeterinarioBo {
 
-    private VeterinarioDao veterinarioDao;
+    private final VeterinarioDao veterinarioDao;
 
     public VeterinarioBo() {
         this.veterinarioDao = new VeterinarioDaoImpl();
     }
 
     // Inserta un nuevo veterinario
-    public Integer insertar(String especializacion, Date fechaContratacion,
-            String estado, boolean activo, int personaId,
-            Date fechaInicioJornada, Date fechaFinJornada) {
+    public Integer insertar(int personaId, int especialidadId,
+            Date fechaContratacion, String estado, String especialidad,
+            boolean activo) {
+
         VeterinarioDto veterinario = new VeterinarioDto();
 
-        // Conversión de java.util.Date a java.sql.Date
-        java.sql.Date fechaContratacionSQL = new java.sql.Date(fechaContratacion.getTime());
-        java.sql.Date fechaInicioSQL = fechaInicioJornada != null
-                ? new java.sql.Date(fechaInicioJornada.getTime()) : null;
-        java.sql.Date fechaFinSQL = fechaFinJornada != null
-                ? new java.sql.Date(fechaFinJornada.getTime()) : null;
-
-        veterinario.setEspecializacion(especializacion.trim().toUpperCase());
-        veterinario.setFechaContratacion(fechaContratacionSQL);
-        veterinario.setEstado(estado.trim());
-        veterinario.setActivo(activo);
         veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        veterinario.setFechaInicioJornada(fechaInicioSQL);
-        veterinario.setFechaFinJornada(fechaFinSQL);
+        veterinario.setEspecialidadId(especialidadId);
+        veterinario.setFechaContratacion(fechaContratacion);
+        veterinario.setEstado(estado);
+        veterinario.setEspecialidad(especialidad);
+        veterinario.setActivo(activo);
 
         return this.veterinarioDao.insertar(veterinario);
     }
 
     // Modifica un veterinario existente
-    public Integer modificar(int veterinarioId, String especializacion,
-            Date fechaContratacion, String estado, boolean activo,
-            int personaId, Date fechaInicioJornada, Date fechaFinJornada) {
+    public Integer modificar(int veterinarioId, int personaId, int especialidadId,
+            Date fechaContratacion, String estado, String especialidad,
+            boolean activo) {
+
         VeterinarioDto veterinario = new VeterinarioDto();
 
-        // Conversión de java.util.Date a java.sql.Date
-        java.sql.Date fechaContratacionSQL = new java.sql.Date(fechaContratacion.getTime());
-        java.sql.Date fechaInicioSQL = fechaInicioJornada != null
-                ? new java.sql.Date(fechaInicioJornada.getTime()) : null;
-        java.sql.Date fechaFinSQL = fechaFinJornada != null
-                ? new java.sql.Date(fechaFinJornada.getTime()) : null;
-
         veterinario.setVeterinarioId(veterinarioId);
-        veterinario.setEspecializacion(especializacion.trim().toUpperCase());
-        veterinario.setFechaContratacion(fechaContratacionSQL);
-        veterinario.setEstado(estado.trim());
-        veterinario.setActivo(activo);
         veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        veterinario.setFechaInicioJornada(fechaInicioSQL);
-        veterinario.setFechaFinJornada(fechaFinSQL);
+        veterinario.setEspecialidadId(especialidadId);
+        veterinario.setFechaContratacion(fechaContratacion);
+        veterinario.setEstado(estado);
+        veterinario.setEspecialidad(especialidad);
+        veterinario.setActivo(activo);
 
         return this.veterinarioDao.modificar(veterinario);
     }

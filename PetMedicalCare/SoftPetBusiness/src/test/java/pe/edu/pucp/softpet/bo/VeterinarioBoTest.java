@@ -9,7 +9,7 @@ import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 
 public class VeterinarioBoTest {
 
-    private VeterinarioBo veterinarioBo;
+    private final VeterinarioBo veterinarioBo;
 
     public VeterinarioBoTest() {
         this.veterinarioBo = new VeterinarioBo();
@@ -24,17 +24,16 @@ public class VeterinarioBoTest {
         System.out.println("=== Test: Insertar - VETERINARIOS ===");
 
         // Datos de prueba
-        String especializacion = "Cardiología";
+        int personaId = 1;
+        int especialidadId = 1;
         Date fechaContratacion = new Date(System.currentTimeMillis());
-        String estado = "Activo";
+        String estado = "ACTIVO";
+        String especialidad = "Cardiología";
         boolean activo = true;
-        int personaId = 1; // Debe existir en la BD
-        Date fechaInicioJornada = new Date(System.currentTimeMillis());
-        Date fechaFinJornada = new Date(System.currentTimeMillis() + (365L * 24 * 60 * 60 * 1000)); // +1 año
-
+        
         Integer idGenerado = veterinarioBo.insertar(
-                especializacion, fechaContratacion, estado, activo,
-                personaId, fechaInicioJornada, fechaFinJornada
+                personaId, especialidadId, fechaContratacion, estado,
+                especialidad, activo
         );
 
         assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
@@ -49,19 +48,18 @@ public class VeterinarioBoTest {
     public void testModificar() {
         System.out.println("=== Test: Modificar - VETERINARIOS ===");
 
-        int veterinarioId = 3; // Debe existir
-        String nuevaEspecializacion = "Traumatología";
+        // Datos de prueba
+        int veterinarioId = 3;
+        int personaId = 2;
+        int especialidadId = 1;
         Date fechaContratacion = new Date(System.currentTimeMillis());
-        String nuevoEstado = "Activo";
+        String estado = "SUSPENDIDO";
+        String especialidad = "Traumatología";
         boolean activo = true;
-        int personaId = 2; // Debe existir
-        Date fechaInicioJornada = new Date(System.currentTimeMillis());
-        Date fechaFinJornada = new Date(System.currentTimeMillis() + (365L * 24 * 60 * 60 * 1000));
 
         Integer resultado = veterinarioBo.modificar(
-                veterinarioId, nuevaEspecializacion, fechaContratacion,
-                nuevoEstado, activo, personaId,
-                fechaInicioJornada, fechaFinJornada
+                veterinarioId, personaId, especialidadId, fechaContratacion,
+                estado, especialidad, activo
         );
 
         assertTrue(resultado > 0, "La modificación debe retornar > 0");
@@ -77,17 +75,16 @@ public class VeterinarioBoTest {
         System.out.println("=== Test: Eliminar - VETERINARIOS ===");
 
         // Primero insertamos uno para eliminar
-        String especializacion = "Temporal";
-        Date fechaContratacion = new Date(System.currentTimeMillis());
-        String estado = "Activo";
-        boolean activo = true;
         int personaId = 1;
-        Date fechaInicioJornada = new Date(System.currentTimeMillis());
-        Date fechaFinJornada = new Date(System.currentTimeMillis() + (365L * 24 * 60 * 60 * 1000));
+        int especialidadId = 3;
+        Date fechaContratacion = new Date(System.currentTimeMillis());
+        String estado = "ACTIVO";
+        String especialidad = "Cardiología";
+        boolean activo = true;
 
         Integer idGenerado = veterinarioBo.insertar(
-                especializacion, fechaContratacion, estado,
-                activo, personaId, fechaInicioJornada, fechaFinJornada
+                personaId, especialidadId, fechaContratacion, estado,
+                especialidad, activo
         );
 
         assertTrue(idGenerado > 0, "No se pudo insertar el veterinario para eliminar");
@@ -114,8 +111,10 @@ public class VeterinarioBoTest {
 
         // Mostrar datos
         System.out.println("ID Veterinario: " + veterinario.getVeterinarioId());
-        System.out.println("Especialización: " + veterinario.getEspecializacion());
+        System.out.println("Especialidad ID: " + veterinario.getEspecialidadId());
+        System.out.println("Fecha contratación: " + veterinario.getFechaContratacion());
         System.out.println("Estado: " + veterinario.getEstado());
+        System.out.println("Especialidad: " + veterinario.getEspecialidad());
         System.out.println("Activo: " + (veterinario.getActivo() ? "Sí" : "No"));
         if (veterinario.getPersona() != null) {
             System.out.println("Persona ID: " + veterinario.getPersona().getPersonaId());
@@ -140,7 +139,7 @@ public class VeterinarioBoTest {
         for (VeterinarioDto v : lista) {
             System.out.println("-----------------------------------");
             System.out.println("ID: " + v.getVeterinarioId());
-            System.out.println("Especialización: " + v.getEspecializacion());
+            System.out.println("Especialización: " + v.getEspecialidad());
             System.out.println("Estado: " + v.getEstado());
             System.out.println("Activo: " + (v.getActivo() ? "Sí" : "No"));
             if (v.getPersona() != null) {
