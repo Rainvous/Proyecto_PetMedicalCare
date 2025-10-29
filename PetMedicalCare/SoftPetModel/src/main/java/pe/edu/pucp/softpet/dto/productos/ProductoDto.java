@@ -5,46 +5,46 @@ import java.sql.Date;
 public class ProductoDto {
 
     private Integer productoId;
+    private TipoProductoDto tipoProducto;
     private String nombre;
     private String presentacion;
     private Double precioUnitario;
+    private Integer stock;
     private Boolean activo;
-    private TipoProductoDto tipoProducto;
-    private Date fechaModificacion;
-    private String usuarioModificador;
     private String usuarioCreador;
     private Date fechaCreacion;
-    private Integer stock;
+    private String usuarioModificador;
+    private Date fechaModificacion;
 
     public ProductoDto() {
         this.productoId = null;
+        this.tipoProducto = null;
         this.nombre = null;
         this.presentacion = null;
         this.precioUnitario = null;
+        this.stock = null;
         this.activo = null;
-        this.tipoProducto = null;
-        this.fechaModificacion = null;
-        this.usuarioModificador = null;
         this.usuarioCreador = null;
         this.fechaCreacion = null;
-        this.stock = null;
+        this.usuarioModificador = null;
+        this.fechaModificacion = null;
     }
 
-    public ProductoDto(Integer productoId, String nombre, String presentacion,
-            Double precioUnitario, Boolean activo, TipoProductoDto tipoProducto,
-            Date fechaModificacion, String usuarioModificador,
-            String usuarioCreador, Date fechaCreacion, Integer stock) {
+    public ProductoDto(Integer productoId, TipoProductoDto tipoProducto,
+            String nombre, String presentacion, Double precioUnitario,
+            Integer stock, Boolean activo, String usuarioCreador,
+            Date fechaCreacion, String usuarioModificador, Date fechaModificacion) {
         this.productoId = productoId;
+        this.tipoProducto = tipoProducto;
         this.nombre = nombre;
         this.presentacion = presentacion;
         this.precioUnitario = precioUnitario;
+        this.stock = stock;
         this.activo = activo;
-        this.tipoProducto = tipoProducto;
-        this.fechaModificacion = fechaModificacion;
-        this.usuarioModificador = usuarioModificador;
         this.usuarioCreador = usuarioCreador;
         this.fechaCreacion = fechaCreacion;
-        this.stock = stock;
+        this.usuarioModificador = usuarioModificador;
+        this.fechaModificacion = fechaModificacion;
     }
 
     /**
@@ -59,6 +59,20 @@ public class ProductoDto {
      */
     public void setProductoId(Integer productoId) {
         this.productoId = productoId;
+    }
+
+    /**
+     * @return the tipoProducto
+     */
+    public TipoProductoDto getTipoProducto() {
+        return tipoProducto;
+    }
+
+    /**
+     * @param tipoProducto the tipoProducto to set
+     */
+    public void setTipoProducto(TipoProductoDto tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
 
     /**
@@ -104,6 +118,20 @@ public class ProductoDto {
     }
 
     /**
+     * @return the stock
+     */
+    public Integer getStock() {
+        return stock;
+    }
+
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    /**
      * @return the activo
      */
     public Boolean getActivo() {
@@ -115,48 +143,6 @@ public class ProductoDto {
      */
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    /**
-     * @return the tipoProducto
-     */
-    public TipoProductoDto getTipoProducto() {
-        return tipoProducto;
-    }
-
-    /**
-     * @param tipoProducto the tipoProducto to set
-     */
-    public void setTipoProducto(TipoProductoDto tipoProducto) {
-        this.tipoProducto = tipoProducto;
-    }
-
-    /**
-     * @return the fechaModificacion
-     */
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    /**
-     * @param fechaModificacion the fechaModificacion to set
-     */
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
-    }
-
-    /**
-     * @return the usuarioModificador
-     */
-    public String getUsuarioModificador() {
-        return usuarioModificador;
-    }
-
-    /**
-     * @param usuarioModificador the usuarioModificador to set
-     */
-    public void setUsuarioModificador(String usuarioModificador) {
-        this.usuarioModificador = usuarioModificador;
     }
 
     /**
@@ -188,16 +174,31 @@ public class ProductoDto {
     }
 
     /**
-     * @return the stock
+     * @return the usuarioModificador
      */
-    public Integer getStock() {
-        return stock;
+    public String getUsuarioModificador() {
+        return usuarioModificador;
     }
 
     /**
-     * @param stock the stock to set
+     * @param usuarioModificador the usuarioModificador to set
      */
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setUsuarioModificador(String usuarioModificador) {
+        this.usuarioModificador = usuarioModificador;
     }
+
+    /**
+     * @return the fechaModificacion
+     */
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    /**
+     * @param fechaModificacion the fechaModificacion to set
+     */
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
 }

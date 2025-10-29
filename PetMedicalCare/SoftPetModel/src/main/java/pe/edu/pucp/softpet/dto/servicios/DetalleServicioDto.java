@@ -5,30 +5,29 @@ import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 public class DetalleServicioDto {
 
     private Integer detalleServicioId;
+    private CitaAtencionDto cita;
+    private ServicioDto servicio;
     private String descripcion;
     private Double costo;
     private Boolean activo;
-    private ServicioDto servicio;
-    private CitaAtencionDto cita;
 
     public DetalleServicioDto() {
         this.detalleServicioId = null;
+        this.cita = null;
+        this.servicio = null;
         this.descripcion = null;
         this.costo = null;
         this.activo = null;
-        this.servicio = null;
-        this.cita = null;
     }
 
-    public DetalleServicioDto(Integer detalleServicioId, String descripcion,
-            Double costo, Boolean activo, ServicioDto servicio,
-            CitaAtencionDto cita) {
+    public DetalleServicioDto(Integer detalleServicioId, CitaAtencionDto cita,
+            ServicioDto servicio, String descripcion, Double costo, Boolean activo) {
         this.detalleServicioId = detalleServicioId;
+        this.cita = cita;
+        this.servicio = servicio;
         this.descripcion = descripcion;
         this.costo = costo;
         this.activo = activo;
-        this.servicio = servicio;
-        this.cita = cita;
     }
 
     /**
@@ -43,6 +42,34 @@ public class DetalleServicioDto {
      */
     public void setDetalleServicioId(Integer detalleServicioId) {
         this.detalleServicioId = detalleServicioId;
+    }
+
+    /**
+     * @return the cita
+     */
+    public CitaAtencionDto getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(CitaAtencionDto cita) {
+        this.cita = cita;
+    }
+
+    /**
+     * @return the servicio
+     */
+    public ServicioDto getServicio() {
+        return servicio;
+    }
+
+    /**
+     * @param servicio the servicio to set
+     */
+    public void setServicio(ServicioDto servicio) {
+        this.servicio = servicio;
     }
 
     /**
@@ -85,33 +112,5 @@ public class DetalleServicioDto {
      */
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    /**
-     * @return the servicio
-     */
-    public ServicioDto getServicio() {
-        return servicio;
-    }
-
-    /**
-     * @param servicio the servicio to set
-     */
-    public void setServicio(ServicioDto servicio) {
-        this.servicio = servicio;
-    }
-
-    /**
-     * @return the cita
-     */
-    public CitaAtencionDto getCita() {
-        return cita;
-    }
-
-    /**
-     * @param cita the cita to set
-     */
-    public void setCita(CitaAtencionDto cita) {
-        this.cita = cita;
     }
 }

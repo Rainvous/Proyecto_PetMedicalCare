@@ -4,41 +4,41 @@ import java.sql.Date;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class MascotaDto {
-  
+
     private Integer mascotaId;
+    private PersonaDto persona;
     private String nombre;
     private String especie;
     private String sexo;
     private String raza;
     private String color;
-    private Boolean activo;
     private Date fechaDefuncion;
-    private PersonaDto persona;
+    private Boolean activo;
 
     public MascotaDto() {
         this.mascotaId = null;
+        this.persona = null;
         this.nombre = null;
         this.especie = null;
         this.sexo = null;
         this.raza = null;
         this.color = null;
-        this.activo = null;
         this.fechaDefuncion = null;
-        this.persona = null;
+        this.activo = null;
     }
-    
-    public MascotaDto(Integer mascotaId, String nombre, String especie, 
-            String sexo, String raza, String color, Boolean activo, 
-            Date fechaDefuncion, PersonaDto persona) {
+
+    public MascotaDto(Integer mascotaId, PersonaDto persona, String nombre,
+            String especie, String sexo, String raza, String color,
+            Date fechaDefuncion, Boolean activo) {
         this.mascotaId = mascotaId;
+        this.persona = persona;
         this.nombre = nombre;
         this.especie = especie;
         this.sexo = sexo;
         this.raza = raza;
         this.color = color;
-        this.activo = activo;
         this.fechaDefuncion = fechaDefuncion;
-        this.persona = persona;
+        this.activo = activo;
     }
 
     /**
@@ -53,6 +53,20 @@ public class MascotaDto {
      */
     public void setMascotaId(Integer mascotaId) {
         this.mascotaId = mascotaId;
+    }
+
+    /**
+     * @return the persona
+     */
+    public PersonaDto getPersona() {
+        return persona;
+    }
+
+    /**
+     * @param persona the persona to set
+     */
+    public void setPersona(PersonaDto persona) {
+        this.persona = persona;
     }
 
     /**
@@ -126,20 +140,6 @@ public class MascotaDto {
     }
 
     /**
-     * @return the activo
-     */
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    /**
-     * @param activo the activo to set
-     */
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-
-    /**
      * @return the fechaDefuncion
      */
     public Date getFechaDefuncion() {
@@ -154,16 +154,16 @@ public class MascotaDto {
     }
 
     /**
-     * @return the persona
+     * @return the activo
      */
-    public PersonaDto getPersona() {
-        return persona;
+    public Boolean getActivo() {
+        return activo;
     }
 
     /**
-     * @param persona the persona to set
+     * @param activo the activo to set
      */
-    public void setPersona(PersonaDto persona) {
-        this.persona = persona;
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }

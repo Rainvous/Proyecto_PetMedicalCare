@@ -5,47 +5,46 @@ import java.sql.Date;
 public class ServicioDto {
 
     private Integer servicioId;
+    private TipoServicioDto tipoServicio;
     private String nombre;
+    private String descripcion;
     private Double costo;
     private String estado;
-    private String descripcion;
     private Boolean activo;
-    private Date fechaModificacion;
-    private String usuarioModificador;
     private String usuarioCreador;
     private Date fechaCreacion;
-    private TipoServicioDto tipoServicio;
+    private String usuarioModificador;
+    private Date fechaModificacion;
 
     public ServicioDto() {
         this.servicioId = null;
+        this.tipoServicio = null;
         this.nombre = null;
+        this.descripcion = null;
         this.costo = null;
         this.estado = null;
-        this.descripcion = null;
         this.activo = null;
-        this.fechaModificacion = null;
-        this.usuarioModificador = null;
         this.usuarioCreador = null;
         this.fechaCreacion = null;
-        this.tipoServicio = null;
+        this.usuarioModificador = null;
+        this.fechaModificacion = null;
     }
 
-    public ServicioDto(Integer servicioId, String nombre, Double costo,
-            String estado, String descripcion, Boolean activo,
-            Date fechaModificacion, String usuarioModificador,
-            String usuarioCreador, Date fechaCreacion,
-            TipoServicioDto tipoServicio) {
+    public ServicioDto(Integer servicioId, TipoServicioDto tipoServicio,
+            String nombre, String descripcion, Double costo, String estado,
+            Boolean activo, String usuarioCreador, Date fechaCreacion,
+            String usuarioModificador, Date fechaModificacion) {
         this.servicioId = servicioId;
+        this.tipoServicio = tipoServicio;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.costo = costo;
         this.estado = estado;
-        this.descripcion = descripcion;
         this.activo = activo;
-        this.fechaModificacion = fechaModificacion;
-        this.usuarioModificador = usuarioModificador;
         this.usuarioCreador = usuarioCreador;
         this.fechaCreacion = fechaCreacion;
-        this.tipoServicio = tipoServicio;
+        this.usuarioModificador = usuarioModificador;
+        this.fechaModificacion = fechaModificacion;
     }
 
     /**
@@ -63,6 +62,20 @@ public class ServicioDto {
     }
 
     /**
+     * @return the tipoServicio
+     */
+    public TipoServicioDto getTipoServicio() {
+        return tipoServicio;
+    }
+
+    /**
+     * @param tipoServicio the tipoServicio to set
+     */
+    public void setTipoServicio(TipoServicioDto tipoServicio) {
+        this.tipoServicio = tipoServicio;
+    }
+
+    /**
      * @return the nombre
      */
     public String getNombre() {
@@ -74,6 +87,20 @@ public class ServicioDto {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     /**
@@ -105,20 +132,6 @@ public class ServicioDto {
     }
 
     /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * @param descripcion the descripcion to set
-     */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    /**
      * @return the activo
      */
     public Boolean getActivo() {
@@ -130,34 +143,6 @@ public class ServicioDto {
      */
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    /**
-     * @return the fechaModificacion
-     */
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    /**
-     * @param fechaModificacion the fechaModificacion to set
-     */
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
-    }
-
-    /**
-     * @return the usuarioModificador
-     */
-    public String getUsuarioModificador() {
-        return usuarioModificador;
-    }
-
-    /**
-     * @param usuarioModificador the usuarioModificador to set
-     */
-    public void setUsuarioModificador(String usuarioModificador) {
-        this.usuarioModificador = usuarioModificador;
     }
 
     /**
@@ -189,16 +174,30 @@ public class ServicioDto {
     }
 
     /**
-     * @return the tipoServicio
+     * @return the usuarioModificador
      */
-    public TipoServicioDto getTipoServicio() {
-        return tipoServicio;
+    public String getUsuarioModificador() {
+        return usuarioModificador;
     }
 
     /**
-     * @param tipoServicio the tipoServicio to set
+     * @param usuarioModificador the usuarioModificador to set
      */
-    public void setTipoServicio(TipoServicioDto tipoServicio) {
-        this.tipoServicio = tipoServicio;
+    public void setUsuarioModificador(String usuarioModificador) {
+        this.usuarioModificador = usuarioModificador;
+    }
+
+    /**
+     * @return the fechaModificacion
+     */
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    /**
+     * @param fechaModificacion the fechaModificacion to set
+     */
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
 }

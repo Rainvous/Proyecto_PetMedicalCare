@@ -7,45 +7,45 @@ import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 public class CitaAtencionDto {
 
     private Integer citaId;
+    private VeterinarioDto veterinario;
+    private MascotaDto mascota;
     private String observacion;
     private Date fechaHoraInicio;
     private Date fechaRegistro;
     private Date fechaHoraFin;
     private Double monto;
     private Boolean activo;
-    private String peso;
-    private VeterinarioDto veterinario;
-    private MascotaDto mascota;
+    private Double pesoMascota;
     private String estado;
 
     public CitaAtencionDto() {
         this.citaId = null;
+        this.veterinario = null;
+        this.mascota = null;
         this.observacion = null;
         this.fechaHoraInicio = null;
         this.fechaRegistro = null;
         this.fechaHoraFin = null;
         this.monto = null;
         this.activo = null;
-        this.peso = null;
-        this.veterinario = null;
-        this.mascota = null;
+        this.pesoMascota = null;
         this.estado = null;
     }
 
-    public CitaAtencionDto(Integer citaId, String observacion,
-            Date fechaHoraInicio, Date fechaRegistro, Date fechaHoraFin,
-            Double monto, Boolean activo, String peso,
-            VeterinarioDto veterinario, MascotaDto mascota, String estado) {
+    public CitaAtencionDto(Integer citaId, VeterinarioDto veterinario,
+            MascotaDto mascota, Date fechaHoraInicio, Date fechaRegistro,
+            Date fechaHoraFin, Double monto, Boolean activo, Double pesoMascota,
+            String observacion, String estado) {
         this.citaId = citaId;
+        this.veterinario = veterinario;
+        this.mascota = mascota;
         this.observacion = observacion;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaRegistro = fechaRegistro;
         this.fechaHoraFin = fechaHoraFin;
         this.monto = monto;
         this.activo = activo;
-        this.peso = peso;
-        this.veterinario = veterinario;
-        this.mascota = mascota;
+        this.pesoMascota = pesoMascota;
         this.estado = estado;
     }
 
@@ -61,6 +61,34 @@ public class CitaAtencionDto {
      */
     public void setCitaId(Integer citaId) {
         this.citaId = citaId;
+    }
+
+    /**
+     * @return the veterinario
+     */
+    public VeterinarioDto getVeterinario() {
+        return veterinario;
+    }
+
+    /**
+     * @param veterinario the veterinario to set
+     */
+    public void setVeterinario(VeterinarioDto veterinario) {
+        this.veterinario = veterinario;
+    }
+
+    /**
+     * @return the mascota
+     */
+    public MascotaDto getMascota() {
+        return mascota;
+    }
+
+    /**
+     * @param mascota the mascota to set
+     */
+    public void setMascota(MascotaDto mascota) {
+        this.mascota = mascota;
     }
 
     /**
@@ -148,45 +176,17 @@ public class CitaAtencionDto {
     }
 
     /**
-     * @return the peso
+     * @return the pesoMascota
      */
-    public String getPeso() {
-        return peso;
+    public Double getPesoMascota() {
+        return pesoMascota;
     }
 
     /**
-     * @param peso the peso to set
+     * @param pesoMascota the peso to set
      */
-    public void setPeso(String peso) {
-        this.peso = peso;
-    }
-
-    /**
-     * @return the veterinario
-     */
-    public VeterinarioDto getVeterinario() {
-        return veterinario;
-    }
-
-    /**
-     * @param veterinario the veterinario to set
-     */
-    public void setVeterinario(VeterinarioDto veterinario) {
-        this.veterinario = veterinario;
-    }
-
-    /**
-     * @return the mascota
-     */
-    public MascotaDto getMascota() {
-        return mascota;
-    }
-
-    /**
-     * @param mascota the mascota to set
-     */
-    public void setMascota(MascotaDto mascota) {
-        this.mascota = mascota;
+    public void setPesoMascota(Double pesoMascota) {
+        this.pesoMascota = pesoMascota;
     }
 
     /**

@@ -9,10 +9,10 @@ public class UsuarioDto {
     private String password;
     private String correo;
     private Boolean activo;
-    private Date fechaModificacion;
-    private String usuarioModificador;
     private String usuarioCreador;
     private Date fechaCreacion;
+    private String usuarioModificador;
+    private Date fechaModificacion;
 
     public UsuarioDto() {
         this.usuarioId = null;
@@ -20,24 +20,24 @@ public class UsuarioDto {
         this.password = null;
         this.correo = null;
         this.activo = null;
-        this.fechaModificacion = null;
-        this.usuarioModificador = null;
         this.usuarioCreador = null;
         this.fechaCreacion = null;
+        this.usuarioModificador = null;
+        this.fechaModificacion = null;
     }
 
     public UsuarioDto(Integer usuarioId, String username, String password,
-            String correo, Boolean activo, Date fechaModificacion,
-            String usuarioModificador, String usuarioCreador, Date fechaCreacion) {
+            String correo, Boolean activo, String usuarioCreador,
+            Date fechaCreacion, String usuarioModificador, Date fechaModificacion) {
         this.usuarioId = usuarioId;
         this.username = username;
         this.password = password;
         this.correo = correo;
         this.activo = activo;
-        this.fechaModificacion = fechaModificacion;
-        this.usuarioModificador = usuarioModificador;
         this.usuarioCreador = usuarioCreador;
         this.fechaCreacion = fechaCreacion;
+        this.usuarioModificador = usuarioModificador;
+        this.fechaModificacion = fechaModificacion;
     }
 
     /**
@@ -111,34 +111,6 @@ public class UsuarioDto {
     }
 
     /**
-     * @return the fechaModificacion
-     */
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    /**
-     * @param fechaModificacion the fechaModificacion to set
-     */
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
-    }
-
-    /**
-     * @return the usuarioModificador
-     */
-    public String getUsuarioModificador() {
-        return usuarioModificador;
-    }
-
-    /**
-     * @param usuarioModificador the usuarioModificador to set
-     */
-    public void setUsuarioModificador(String usuarioModificador) {
-        this.usuarioModificador = usuarioModificador;
-    }
-
-    /**
      * @return the usuarioCreador
      */
     public String getUsuarioCreador() {
@@ -164,5 +136,33 @@ public class UsuarioDto {
      */
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    /**
+     * @return the usuarioModificador
+     */
+    public String getUsuarioModificador() {
+        return usuarioModificador;
+    }
+
+    /**
+     * @param usuarioModificador the usuarioModificador to set
+     */
+    public void setUsuarioModificador(String usuarioModificador) {
+        this.usuarioModificador = usuarioModificador;
+    }
+
+    /**
+     * @return the fechaModificacion
+     */
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    /**
+     * @param fechaModificacion the fechaModificacion to set
+     */
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
 }

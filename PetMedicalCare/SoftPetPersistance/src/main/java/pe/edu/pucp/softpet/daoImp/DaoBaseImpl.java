@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.daoImp.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.db.DBManager;
@@ -19,14 +17,14 @@ import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 public abstract class DaoBaseImpl {
 
-    /*ATRIBUTOS DEL DAO IMPL BASE DE MELGAR
-    ATRIBUTOS DEFAULT*/
+    /*ATRIBUTOS DEFAULT*/
     protected String nombre_tabla;
     protected ArrayList<Columna> listaColumnas;
     protected Boolean retornarLlavePrimaria;
     protected Connection conexion;
     protected CallableStatement statement;
     protected ResultSet resultSet;
+
     /*ATRIBUTOS QUE HAN SIDO AGREGADOS AL DAO*/
     protected String usuario; //Esto es para el trigger
     protected MotorDeBaseDeDatos tipoMotor = MotorDeBaseDeDatos.MYSQL; //Ayuda a cambiar rapidamente entre motores (El dbManager tmb ha sido modificado)
@@ -42,7 +40,7 @@ public abstract class DaoBaseImpl {
     }
 
     public void EstablecerMotorBaseDeDatos(String input) {
-        if (MotorDeBaseDeDatos.MSSQL.toString() == input) {
+        if (MotorDeBaseDeDatos.MSSQL.toString().equals(input)) {
             tipoMotor = MotorDeBaseDeDatos.MSSQL;
         } else {
             tipoMotor = MotorDeBaseDeDatos.MYSQL;
@@ -87,9 +85,9 @@ public abstract class DaoBaseImpl {
     /*FIN de las funciones de auditoria y motor de base de datos
         ------------------------------------------------------------------------*/
 
- /*
+    /*
     ------------------------------------------------------------------------
-    INICIO de las  Funciones del DaoImplBase  de melgar
+    INICIO de las  Funciones del DaoImplBase Deafult
     ------------------------------------------------------------------------
      */
     public DaoBaseImpl(String nombre_tabla) {
@@ -479,7 +477,7 @@ public abstract class DaoBaseImpl {
     }
 
     /*
-    FIN de las  Funciones del DaoImplBase  de melgar 
+    FIN de las  Funciones del DaoImplBase Default 
     ------------------------------------------------------------------------*/
 
  /*
@@ -487,7 +485,6 @@ public abstract class DaoBaseImpl {
     INICIO de las funcion DaoImplBase para procedures creado By AmaruMVP
     ------------------------------------------------------------------------
      */
-  
     //FUNCION PROCEDURE PARA MANEJAR SELECTS que traen informacion de una entidad
     public List ejecutarProcedimientoLectura(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada) {
         //esto es para procedures que tienen SELECTS
@@ -501,7 +498,7 @@ public abstract class DaoBaseImpl {
                 //registrarParametrosEntrada(this.statement, parametrosEntrada);
                 registrarParametrosEntrada(parametrosEntrada);
             }
-              System.out.println("Call-> "+this.statement);   
+            System.out.println("Call-> " + this.statement);
             //  this.resultSet = cs.executeQuery(); 
             ejecutarSelectEnDB();
             while (this.resultSet.next()) {
@@ -565,13 +562,12 @@ public abstract class DaoBaseImpl {
                     this.statement.setDate(key, fechaSQL); //POR SI ACASO PONGO ESTE
                 case java.util.Date fecha ->
                     this.statement.setDate(key, new java.sql.Date(fecha.getTime()));
-                
+
                 case Character caracter ->
                     this.statement.setString(key, String.valueOf(caracter));
                 case byte[] archivo ->
                     this.statement.setBytes(key, archivo);
-                
-                    
+
                 default -> {
                 }
                 // Agregar más tipos según sea necesario
@@ -614,7 +610,7 @@ public abstract class DaoBaseImpl {
             parametrosSalida.put(posicion, value);
         }
     }
-     /*
+    /*
  
     FIN de las funcion DaoImplBase para procedures creado By AmaruMVP
     ------------------------------------------------------------------------
@@ -675,7 +671,7 @@ FUNCIONES QUE QUEDARON OLVIDADAS
     }
  */
 //-------------------------------------------------------------------------------------------------------
-  ///////////INTENTO DE CREACION DE PROCEDURES USANDO CODIGO DE PA
+///////////INTENTO DE CREACION DE PROCEDURES USANDO CODIGO DE PA
     //-------------------------------------------------------------------------------------------------------
         //Métodos para llamadas a Procedimientos Almacenados
     //FUNCION 1

@@ -17,65 +17,62 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.citaAtencion = null;
         this.retornarLlavePrimaria = true;
         this.usuario = "user_backend";
-        
     }
 
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("CITA_ID", true, true));
-        this.listaColumnas.add(new Columna("OBSERVACION", false, false));
-        this.listaColumnas.add(new Columna("FECHA_HORA_INICIO", false, false));
-        this.listaColumnas.add(new Columna("FECHA_REGISTRO", false, false));
-        this.listaColumnas.add(new Columna("FECHA_HORA_FIN", false, false));
-        this.listaColumnas.add(new Columna("MONTO", false, false));
-        this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("PESO_MASCOTA", false, false));
         this.listaColumnas.add(new Columna("VETERINARIO_ID", false, false));
         this.listaColumnas.add(new Columna("MASCOTA_ID", false, false));
+        this.listaColumnas.add(new Columna("FECHA_REGISTRO", false, false));
+        this.listaColumnas.add(new Columna("FECHA_HORA_INICIO", false, false));
+        this.listaColumnas.add(new Columna("FECHA_HORA_FIN", false, false));
+        this.listaColumnas.add(new Columna("PESO_MASCOTA", false, false));
+        this.listaColumnas.add(new Columna("MONTO", false, false));
         this.listaColumnas.add(new Columna("ESTADO_CITA", false, false));
+        this.listaColumnas.add(new Columna("OBSERVACION", false, false));
+        this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setString(1, this.citaAtencion.getObservacion());
-        this.statement.setDate(2, this.citaAtencion.getFechaHoraInicio());
+
+        this.statement.setInt(1, this.citaAtencion.getVeterinario().getVeterinarioId());
+        this.statement.setInt(2, this.citaAtencion.getMascota().getMascotaId());
         this.statement.setDate(3, this.citaAtencion.getFechaRegistro());
-        this.statement.setDate(4, this.citaAtencion.getFechaHoraFin());
-        this.statement.setDouble(5, this.citaAtencion.getMonto());
-        this.statement.setInt(6, this.citaAtencion.getActivo() ? 1 : 0);
-        this.statement.setString(7, this.citaAtencion.getPeso());
-        this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
-        this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-        String aux="";
-       aux=retornaEstadoCita(this.citaAtencion.getEstado());
-        this.statement.setString(10, aux );
+        this.statement.setDate(4, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setDate(5, this.citaAtencion.getFechaHoraFin());
+        this.statement.setDouble(6, this.citaAtencion.getPesoMascota());
+        this.statement.setDouble(7, this.citaAtencion.getMonto());
+        this.statement.setString(8, retornaEstadoCita(this.citaAtencion.getEstado()));
+        this.statement.setString(9, this.citaAtencion.getObservacion());
+        this.statement.setInt(10, this.citaAtencion.getActivo() ? 1 : 0);
     }
-    protected String retornaEstadoCita(String estado){
-        String aux="";
-         if(this.citaAtencion.getEstado().equals(EstadoCita.ATENDIDA.toString())){
-            aux=EstadoCita.ATENDIDA.toString();
+
+    protected String retornaEstadoCita(String estado) {
+        String aux = "";
+        if (this.citaAtencion.getEstado().equals(EstadoCita.ATENDIDA.toString())) {
+            aux = EstadoCita.ATENDIDA.toString();
+        } else if (this.citaAtencion.getEstado().equals(EstadoCita.CANCELADA.toString())) {
+            aux = EstadoCita.CANCELADA.toString();
+        } else {
+            aux = EstadoCita.PROGRAMADA.toString();
         }
-        else if(this.citaAtencion.getEstado().equals(EstadoCita.CANCELADA.toString())){
-            aux=EstadoCita.CANCELADA.toString();
-        }
-        else{
-            aux=EstadoCita.PROGRAMADA.toString();
-        }
-         return aux;
+        return aux;
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setString(1, this.citaAtencion.getObservacion());
-        this.statement.setDate(2, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setInt(1, this.citaAtencion.getVeterinario().getVeterinarioId());
+        this.statement.setInt(2, this.citaAtencion.getMascota().getMascotaId());
         this.statement.setDate(3, this.citaAtencion.getFechaRegistro());
-        this.statement.setDate(4, this.citaAtencion.getFechaHoraFin());
-        this.statement.setDouble(5, this.citaAtencion.getMonto());
-        this.statement.setInt(6, this.citaAtencion.getActivo() ? 1 : 0);
-        this.statement.setString(7, this.citaAtencion.getPeso());
-        this.statement.setInt(8, this.citaAtencion.getVeterinario().getVeterinarioId());
-        this.statement.setInt(9, this.citaAtencion.getMascota().getMascotaId());
-        this.statement.setString(10, retornaEstadoCita(this.citaAtencion.getEstado()));
+        this.statement.setDate(4, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setDate(5, this.citaAtencion.getFechaHoraFin());
+        this.statement.setDouble(6, this.citaAtencion.getPesoMascota());
+        this.statement.setDouble(7, this.citaAtencion.getMonto());
+        this.statement.setString(8, retornaEstadoCita(this.citaAtencion.getEstado()));
+        this.statement.setString(9, this.citaAtencion.getObservacion());
+        this.statement.setInt(10, this.citaAtencion.getActivo() ? 1 : 0);
 
         this.statement.setInt(11, this.citaAtencion.getCitaId());
     }
@@ -94,18 +91,18 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.citaAtencion = new CitaAtencionDto();
         this.citaAtencion.setCitaId(this.resultSet.getInt("CITA_ID"));
-        this.citaAtencion.setObservacion(this.resultSet.getString("OBSERVACION"));
-        this.citaAtencion.setFechaHoraInicio(this.resultSet.getDate("FECHA_HORA_INICIO"));
-        this.citaAtencion.setFechaRegistro(this.resultSet.getDate("FECHA_REGISTRO"));
-        this.citaAtencion.setFechaHoraFin(this.resultSet.getDate("FECHA_HORA_FIN"));
-        this.citaAtencion.setMonto(this.resultSet.getDouble("MONTO"));
-        this.citaAtencion.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.citaAtencion.setPeso(this.resultSet.getString("PESO_MASCOTA"));
         this.citaAtencion.setVeterinario(new VeterinarioDaoImpl().
                 obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
         this.citaAtencion.setMascota(new MascotaDaoImpl().
                 obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));
+        this.citaAtencion.setFechaRegistro(this.resultSet.getDate("FECHA_REGISTRO"));
+        this.citaAtencion.setFechaHoraInicio(this.resultSet.getDate("FECHA_HORA_INICIO"));
+        this.citaAtencion.setFechaHoraFin(this.resultSet.getDate("FECHA_HORA_FIN"));
+        this.citaAtencion.setPesoMascota(this.resultSet.getDouble("PESO_MASCOTA"));
+        this.citaAtencion.setMonto(this.resultSet.getDouble("MONTO"));
         this.citaAtencion.setEstado(this.resultSet.getString("ESTADO_CITA"));
+        this.citaAtencion.setObservacion(this.resultSet.getString("OBSERVACION"));
+        this.citaAtencion.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override
