@@ -1,29 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.softpet.daoImp;
-
-import java.util.Date;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
-import pe.edu.pucp.softpet.daoImp.util.enums.EstadoCita;
-import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
-import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
-import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
-
-/**
- *
- * @author User
- */
-public class CitaAtencionDaoImplTest {
-    
-    public CitaAtencionDaoImplTest() {
-    }
-
-    @Test
-    public void testSomeMethod() {
-        
+//package pe.edu.pucp.softpet.daoImp;
+//
+//import java.util.Date;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//import org.junit.jupiter.api.Test;
+//import pe.edu.pucp.softpet.daoImp.util.enums.EstadoCita;
+//import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+//import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+//import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+//
+//public class CitaAtencionDaoImplTest {
+//    
+//    public CitaAtencionDaoImplTest() {
+//    }
+//
+//    @Test
+//    public void testSomeMethod() {
+//        
 //        CitaAtencionDto cita= new CitaAtencionDto();
 //        VeterinarioDto vet= new VeterinarioDto();
 //        MascotaDto mas= new MascotaDto();
@@ -48,7 +40,7 @@ public class CitaAtencionDaoImplTest {
 //        for (CitaAtencionDto cita2 : citadao.listarTodos()){
 //            System.out.println("->"+cita2.getCitaId()+" "+cita2.getFechaHoraFin());
 //        }
-        
-    }
-    
-}
+//        
+//    }
+//    
+//}

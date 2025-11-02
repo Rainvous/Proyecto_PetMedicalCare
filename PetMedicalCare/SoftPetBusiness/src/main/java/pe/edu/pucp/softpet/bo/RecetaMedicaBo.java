@@ -2,13 +2,10 @@ package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import java.sql.Date;
-
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.RecetaMedicaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
-
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
-import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 
 public class RecetaMedicaBo {
 
@@ -18,67 +15,48 @@ public class RecetaMedicaBo {
         this.recetaDao = new RecetaMedicaDaoImpl();
     }
 
-    // INSERTAR (PK autoincremental: no se pasa)
-    // Orden de parámetros alineado al DaoImpl/DDL: FK -> propios -> auditoría
-    public Integer insertar(int citaId,
-                            String diagnostico,
-                            Date fechaEmision,
-                            Date vigenciaHasta,
-                            String observaciones,
-                            boolean activo) {
+    public Integer insertar(int citaId, Date fechaEmision, Date vigenciaHasta,
+            String diagnostico, String observaciones, boolean activo) {
 
-        RecetaMedicaDto dto = new RecetaMedicaDto();
+        RecetaMedicaDto receta = new RecetaMedicaDto();
 
-        CitaAtencionDto cita = new CitaAtencionDaoImpl().obtenerPorId(citaId);
-        dto.setCita(cita);
+        receta.setCita(new CitaAtencionDaoImpl().obtenerPorId(citaId));
+        receta.setFechaEmision(fechaEmision);
+        receta.setVigenciaHasta(vigenciaHasta);
+        receta.setDiagnostico(diagnostico);
+        receta.setObservaciones(observaciones);
+        receta.setActivo(activo);
 
-        dto.setDiagnostico(diagnostico);
-        dto.setFechaEmision(fechaEmision);
-        dto.setVigenciaHasta(vigenciaHasta);
-        dto.setObservaciones(observaciones);
-        dto.setActivo(activo);
-
-        return this.recetaDao.insertar(dto);
+        return this.recetaDao.insertar(receta);
     }
 
-    // MODIFICAR
-    public Integer modificar(int recetaMedicaId,
-                             int citaId,
-                             String diagnostico,
-                             Date fechaEmision,
-                             Date vigenciaHasta,
-                             String observaciones,
-                             boolean activo) {
+    public Integer modificar(int recetaId, int citaId, Date fechaEmision,
+            Date vigenciaHasta, String diagnostico, String observaciones,
+            boolean activo) {
 
-        RecetaMedicaDto dto = new RecetaMedicaDto();
+        RecetaMedicaDto receta = new RecetaMedicaDto();
 
-        dto.setRecetaMedicaId(recetaMedicaId);
+        receta.setRecetaMedicaId(recetaId);
+        receta.setCita(new CitaAtencionDaoImpl().obtenerPorId(citaId));
+        receta.setFechaEmision(fechaEmision);
+        receta.setVigenciaHasta(vigenciaHasta);
+        receta.setDiagnostico(diagnostico);
+        receta.setObservaciones(observaciones);
+        receta.setActivo(activo);
 
-        CitaAtencionDto cita = new CitaAtencionDaoImpl().obtenerPorId(citaId);
-        dto.setCita(cita);
-
-        dto.setDiagnostico(diagnostico);
-        dto.setFechaEmision(fechaEmision);
-        dto.setVigenciaHasta(vigenciaHasta);
-        dto.setObservaciones(observaciones);
-        dto.setActivo(activo);
-
-        return this.recetaDao.modificar(dto);
+        return this.recetaDao.modificar(receta);
     }
 
-    // ELIMINAR
     public Integer eliminar(int recetaMedicaId) {
         RecetaMedicaDto dto = new RecetaMedicaDto();
         dto.setRecetaMedicaId(recetaMedicaId);
         return this.recetaDao.eliminar(dto);
     }
 
-    // OBTENER POR ID
     public RecetaMedicaDto obtenerPorId(int recetaMedicaId) {
         return this.recetaDao.obtenerPorId(recetaMedicaId);
     }
 
-    // LISTAR TODOS
     public ArrayList<RecetaMedicaDto> listarTodos() {
         return this.recetaDao.listarTodos();
     }

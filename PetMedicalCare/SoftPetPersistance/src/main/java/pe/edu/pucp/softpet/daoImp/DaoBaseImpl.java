@@ -17,7 +17,7 @@ import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 public abstract class DaoBaseImpl {
 
-    /*ATRIBUTOS DEFAULT*/
+    /* ATRIBUTOS DEFAULT */
     protected String nombre_tabla;
     protected ArrayList<Columna> listaColumnas;
     protected Boolean retornarLlavePrimaria;
@@ -25,16 +25,18 @@ public abstract class DaoBaseImpl {
     protected CallableStatement statement;
     protected ResultSet resultSet;
 
-    /*ATRIBUTOS QUE HAN SIDO AGREGADOS AL DAO*/
+    /* ATRIBUTOS QUE HAN SIDO AGREGADOS AL DAO */
     protected String usuario; //Esto es para el trigger
-    protected MotorDeBaseDeDatos tipoMotor = MotorDeBaseDeDatos.MYSQL; //Ayuda a cambiar rapidamente entre motores (El dbManager tmb ha sido modificado)
-    protected boolean TieneAuditoria = false; //tiene auditoria es para activar el trigger de auditoria de algunas tablas (Y AYUDA A SETEAR EL USUARIO que modifico la tabla)
+    protected MotorDeBaseDeDatos tipoMotor = MotorDeBaseDeDatos.MYSQL; // Ayuda a cambiar rapidamente entre motores (El dbManager tmb ha sido modificado)
+    protected boolean TieneAuditoria = false; // Tiene auditoria es para activar el trigger de auditoria de algunas tablas (Y AYUDA A SETEAR EL USUARIO que modifico la tabla)
 
-    /*OJO: La auditoria solo es para tablas que tienen triggers*/
+    /* NOTA: La auditoria solo es para tablas que tienen triggers */
 
- /*    ------------------------------------------------------------------------
+    /*
+    ------------------------------------------------------------------------
     INICIO DE FUNCIONES PARA AUDITORIA Y MOTOR DE BASE DE DATOS (by AmaruMVP)
-        ------------------------------------------------------------------------*/
+    ------------------------------------------------------------------------
+     */
     public void EstablecerMotorBaseDeDatos(MotorDeBaseDeDatos input) {
         tipoMotor = input;
     }
@@ -46,7 +48,7 @@ public abstract class DaoBaseImpl {
             tipoMotor = MotorDeBaseDeDatos.MYSQL;
         }
     }
-    //NUEVO CONSTRUCTOR PARA AUDITORIA
+    // NUEVO CONSTRUCTOR PARA AUDITORIA
 
     public DaoBaseImpl(String nombre_tabla, boolean TieneAuditoria) {
         this.nombre_tabla = nombre_tabla;
@@ -54,9 +56,9 @@ public abstract class DaoBaseImpl {
         this.TieneAuditoria = TieneAuditoria;
         this.incluirListaDeColumnas();
     }
-    //FUNCION PARA AUDITORIA 
-    //NOTA : Agregar un booleano para no usar siempre esta funcion ->LISTO
 
+    // FUNCION PARA AUDITORIA 
+    //NOTA : Agregar un booleano para no usar siempre esta funcion
     private void SetDeUsuario(String usuario) throws SQLException {
         // NOTA IMPORTANTE: ESTE SET SE USA DURANTE LA TRANSACCION
         // NO SE PUEDE HACER APARTE PORQUE SE ABRE Y CIERRA CONEXIONES VARIAS VECES
@@ -82,8 +84,11 @@ public abstract class DaoBaseImpl {
         ejecutarDMLEnBD();
     }
 
-    /*FIN de las funciones de auditoria y motor de base de datos
-        ------------------------------------------------------------------------*/
+    /*
+    ------------------------------------------------------------------------
+    FIN de las funciones de auditoria y motor de base de datos
+    ------------------------------------------------------------------------
+     */
 
     /*
     ------------------------------------------------------------------------
@@ -477,10 +482,12 @@ public abstract class DaoBaseImpl {
     }
 
     /*
+    ------------------------------------------------------------------------
     FIN de las  Funciones del DaoImplBase Default 
-    ------------------------------------------------------------------------*/
+    ------------------------------------------------------------------------
+    */
 
- /*
+    /*
     ------------------------------------------------------------------------
     INICIO de las funcion DaoImplBase para procedures creado By AmaruMVP
     ------------------------------------------------------------------------
@@ -517,8 +524,7 @@ public abstract class DaoBaseImpl {
         return lista;
     }
 
-    /*FUNCIONES DE APOYO PARA LO QUE ES LA LLAMADA A PROCEDIMIENTOS
-    BY EL HORARIO DE PAZ*/
+    /* FUNCIONES DE APOYO PARA LO QUE ES LA LLAMADA A PROCEDIMIENTOS */
     //FUNCION 2
     public String formarLlamadaProcedimiento(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada, Map<Integer, Object> parametrosSalida) throws SQLException {
 
@@ -545,7 +551,7 @@ public abstract class DaoBaseImpl {
 
     //FUNCION 3    
     private void registrarParametrosEntrada(Map<Integer, Object> parametros) throws SQLException {
-        //FUNCION MELGARIZADA
+        
         for (Map.Entry<Integer, Object> entry : parametros.entrySet()) {
             Integer key = entry.getKey();
             Object value = entry.getValue();

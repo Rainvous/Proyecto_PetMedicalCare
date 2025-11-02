@@ -1,7 +1,6 @@
 package pe.edu.pucp.softpet.dto.personas;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class HorarioLaboralDto {
 
@@ -9,8 +8,8 @@ public class HorarioLaboralDto {
     private VeterinarioDto veterinario;
     private Date fecha;
     private String estado;
-    private Timestamp horaInicio;
-    private Timestamp horaFin;
+    private Date horaInicio;
+    private Date horaFin;
     private Boolean activo;
 
     public HorarioLaboralDto() {
@@ -24,7 +23,7 @@ public class HorarioLaboralDto {
     }
 
     public HorarioLaboralDto(Integer horarioLaboralId, VeterinarioDto veterinario,
-            Date fecha, String estado, Timestamp horaInicio, Timestamp horaFin,
+            Date fecha, String estado, Date horaInicio, Date horaFin,
             Boolean activo) {
         this.horarioLaboralId = horarioLaboralId;
         this.veterinario = veterinario;
@@ -94,28 +93,28 @@ public class HorarioLaboralDto {
     /**
      * @return the horaInicio
      */
-    public Timestamp getHoraInicio() {
+    public Date getHoraInicio() {
         return horaInicio;
     }
 
     /**
      * @param horaInicio the horaInicio to set
      */
-    public void setHoraInicio(Timestamp horaInicio) {
+    public void setHoraInicio(Date horaInicio) {
         this.horaInicio = horaInicio;
     }
 
     /**
      * @return the horaFin
      */
-    public Timestamp getHoraFin() {
+    public Date getHoraFin() {
         return horaFin;
     }
 
     /**
      * @param horaFin the horaFin to set
      */
-    public void setHoraFin(Timestamp horaFin) {
+    public void setHoraFin(Date horaFin) {
         this.horaFin = horaFin;
     }
 

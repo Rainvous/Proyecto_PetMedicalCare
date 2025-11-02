@@ -14,9 +14,9 @@ public class ProductoBo {
         this.productoDao = new ProductoDaoImpl();
     }
 
-    // Inserta un producto asegurando que el nombre y presentación estén en mayúsculas
-    public Integer insertar(int tipoProductoId, String nombre,
-            String presentacion, double precioUnitario, int stock, boolean activo) {
+    public Integer insertar(int tipoProductoId, String nombre, String presentacion,
+            double precioUnitario, int stock, boolean activo) {
+
         ProductoDto producto = new ProductoDto();
 
         producto.setTipoProducto(new TipoProductoDaoImpl().obtenerPorId(tipoProductoId));
@@ -29,9 +29,9 @@ public class ProductoBo {
         return this.productoDao.insertar(producto);
     }
 
-    // Modifica un producto
     public Integer modificar(int productoId, int tipoProductoId, String nombre,
             String presentacion, double precioUnitario, int stock, boolean activo) {
+
         ProductoDto producto = new ProductoDto();
 
         producto.setProductoId(productoId);
@@ -45,19 +45,16 @@ public class ProductoBo {
         return this.productoDao.modificar(producto);
     }
 
-    // Elimina un producto por ID
     public Integer eliminar(int productoId) {
         ProductoDto producto = new ProductoDto();
         producto.setProductoId(productoId);
         return this.productoDao.eliminar(producto);
     }
 
-    // Obtiene un producto por su ID
     public ProductoDto obtenerPorId(int productoId) {
         return this.productoDao.obtenerPorId(productoId);
     }
 
-    // Lista todos los productos
     public ArrayList<ProductoDto> listarTodos() {
         return this.productoDao.listarTodos();
     }

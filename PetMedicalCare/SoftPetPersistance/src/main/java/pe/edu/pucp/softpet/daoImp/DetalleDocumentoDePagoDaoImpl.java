@@ -6,7 +6,6 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.DetalleDocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
-import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 
 public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements DetalleDocumentoDePagoDao {
 

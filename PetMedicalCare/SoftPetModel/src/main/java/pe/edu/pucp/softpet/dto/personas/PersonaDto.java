@@ -182,5 +182,4 @@ public class PersonaDto {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
 }

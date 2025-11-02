@@ -23,9 +23,9 @@ public class RecetaMedicaDto {
         this.activo = null;
     }
 
-    public RecetaMedicaDto(Integer recetaMedicaId, Date fechaEmision, Date vigenciaHasta,
-            String diagnostico, String observaciones, Boolean activo,
-            CitaAtencionDto cita) {
+    public RecetaMedicaDto(Integer recetaMedicaId, CitaAtencionDto cita,
+            Date fechaEmision, Date vigenciaHasta, String diagnostico,
+            String observaciones, Boolean activo) {
         this.recetaMedicaId = recetaMedicaId;
         this.cita = cita;
         this.fechaEmision = fechaEmision;

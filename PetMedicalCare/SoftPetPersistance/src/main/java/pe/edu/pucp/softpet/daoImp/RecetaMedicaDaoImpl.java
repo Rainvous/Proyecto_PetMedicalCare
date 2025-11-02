@@ -20,34 +20,32 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("RECETA_MEDICA_ID", true, true));
-        this.listaColumnas.add(new Columna("DIAGNOSTICO", false, false));
-        this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("CITA_ID", false, false));
         this.listaColumnas.add(new Columna("FECHA_EMISION", false, false));
         this.listaColumnas.add(new Columna("VIGENCIA_HASTA", false, false));
+        this.listaColumnas.add(new Columna("DIAGNOSTICO", false, false));
         this.listaColumnas.add(new Columna("OBSERVACIONES", false, false));
-        
-        
+        this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setString(1, this.recetaMedica.getDiagnostico());
-        this.statement.setInt(2, this.recetaMedica.getActivo() ? 1 : 0);
-        this.statement.setInt(3, this.recetaMedica.getCita().getCitaId());
-        this.statement.setDate(4, this.recetaMedica.getFechaEmision());
-        this.statement.setDate(5, this.recetaMedica.getVigenciaHasta());
-        this.statement.setString(6, this.recetaMedica.getObservaciones());
+        this.statement.setInt(1, this.recetaMedica.getCita().getCitaId());
+        this.statement.setDate(2, this.recetaMedica.getFechaEmision());
+        this.statement.setDate(3, this.recetaMedica.getVigenciaHasta());
+        this.statement.setString(4, this.recetaMedica.getDiagnostico());
+        this.statement.setString(5, this.recetaMedica.getObservaciones());
+        this.statement.setInt(6, this.recetaMedica.getActivo() ? 1 : 0);
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setString(1, this.recetaMedica.getDiagnostico());
-        this.statement.setInt(2, this.recetaMedica.getActivo() ? 1 : 0);
-        this.statement.setInt(3, this.recetaMedica.getCita().getCitaId());
-        this.statement.setDate(4, this.recetaMedica.getFechaEmision());
-        this.statement.setDate(5, this.recetaMedica.getVigenciaHasta());
-        this.statement.setString(6, this.recetaMedica.getObservaciones());
+        this.statement.setInt(1, this.recetaMedica.getCita().getCitaId());
+        this.statement.setDate(2, this.recetaMedica.getFechaEmision());
+        this.statement.setDate(3, this.recetaMedica.getVigenciaHasta());
+        this.statement.setString(4, this.recetaMedica.getDiagnostico());
+        this.statement.setString(5, this.recetaMedica.getObservaciones());
+        this.statement.setInt(6, this.recetaMedica.getActivo() ? 1 : 0);
 
         this.statement.setInt(7, this.recetaMedica.getRecetaMedicaId());
     }
@@ -66,13 +64,13 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.recetaMedica = new RecetaMedicaDto();
         this.recetaMedica.setRecetaMedicaId(this.resultSet.getInt("RECETA_MEDICA_ID"));
-        this.recetaMedica.setDiagnostico(this.resultSet.getString("DIAGNOSTICO"));
-        this.recetaMedica.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.recetaMedica.setCita(new CitaAtencionDaoImpl().obtenerPorId(this.resultSet.getInt("CITA_ID")));
+        this.recetaMedica.setCita(new CitaAtencionDaoImpl().
+                obtenerPorId(this.resultSet.getInt("CITA_ID")));
         this.recetaMedica.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
+        this.recetaMedica.setDiagnostico(this.resultSet.getString("DIAGNOSTICO"));
         this.recetaMedica.setVigenciaHasta(this.resultSet.getDate("VIGENCIA_HASTA"));
         this.recetaMedica.setObservaciones(this.resultSet.getString("OBSERVACIONES"));
-        
+        this.recetaMedica.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override

@@ -11,6 +11,7 @@ public class DetalleRecetaDto {
     private String frecuencia;
     private String duracion;
     private String indicacion;
+    private String cantidad;
     private Boolean activo;
 
     public DetalleRecetaDto() {
@@ -23,13 +24,14 @@ public class DetalleRecetaDto {
         this.frecuencia = null;
         this.duracion = null;
         this.indicacion = null;
+        this.cantidad = null;
         this.activo = null;
     }
 
     public DetalleRecetaDto(Integer detalleRecetaId, RecetaMedicaDto receta,
             String descripcionMedicamento, String presentacion,
             String viaAdministracion, String dosis, String frecuencia,
-            String duracion, String indicacion, Boolean activo) {
+            String duracion, String indicacion, String cantidad, Boolean activo) {
         this.detalleRecetaId = detalleRecetaId;
         this.receta = receta;
         this.descripcionMedicamento = descripcionMedicamento;
@@ -39,6 +41,7 @@ public class DetalleRecetaDto {
         this.frecuencia = frecuencia;
         this.duracion = duracion;
         this.indicacion = indicacion;
+        this.cantidad = cantidad;
         this.activo = activo;
     }
 
@@ -166,6 +169,20 @@ public class DetalleRecetaDto {
      */
     public void setIndicacion(String indicacion) {
         this.indicacion = indicacion;
+    }
+    
+    /**
+     * @return the cantidad
+     */
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * @param cantidad the cantidad to set
+     */
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
     }
 
     /**

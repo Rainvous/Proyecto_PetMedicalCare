@@ -28,6 +28,7 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.listaColumnas.add(new Columna("FRECUENCIA", false, false));
         this.listaColumnas.add(new Columna("DURACION", false, false));
         this.listaColumnas.add(new Columna("INDICACION", false, false));
+        this.listaColumnas.add(new Columna("CANTIDAD", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
 
@@ -41,7 +42,8 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.statement.setString(6, this.detalleReceta.getFrecuencia());
         this.statement.setString(7, this.detalleReceta.getDuracion());
         this.statement.setString(8, this.detalleReceta.getIndicacion());
-        this.statement.setInt(9, this.detalleReceta.getActivo() ? 1 : 0);
+        this.statement.setString(9, this.detalleReceta.getCantidad());
+        this.statement.setInt(10, this.detalleReceta.getActivo() ? 1 : 0);
     }
 
     @Override
@@ -54,7 +56,8 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.statement.setString(6, this.detalleReceta.getFrecuencia());
         this.statement.setString(7, this.detalleReceta.getDuracion());
         this.statement.setString(8, this.detalleReceta.getIndicacion());
-        this.statement.setInt(9, this.detalleReceta.getActivo() ? 1 : 0);
+        this.statement.setString(9, this.detalleReceta.getCantidad());
+        this.statement.setInt(10, this.detalleReceta.getActivo() ? 1 : 0);
 
         this.statement.setInt(10, this.detalleReceta.getDetalleRecetaId());
     }
@@ -82,6 +85,7 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.detalleReceta.setFrecuencia(this.resultSet.getString("FRECUENCIA"));
         this.detalleReceta.setDuracion(this.resultSet.getString("DURACION"));
         this.detalleReceta.setIndicacion(this.resultSet.getString("INDICACION"));
+        this.detalleReceta.setCantidad(this.resultSet.getString("CANTIDAD"));
         this.detalleReceta.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 

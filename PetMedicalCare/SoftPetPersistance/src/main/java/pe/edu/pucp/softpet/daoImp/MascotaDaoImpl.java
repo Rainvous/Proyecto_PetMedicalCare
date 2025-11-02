@@ -20,38 +20,38 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("MASCOTA_ID", true, true));
+        this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("ESPECIE", false, false));
         this.listaColumnas.add(new Columna("SEXO", false, false));
         this.listaColumnas.add(new Columna("RAZA", false, false));
         this.listaColumnas.add(new Columna("COLOR", false, false));
-        this.listaColumnas.add(new Columna("ACTIVO", false, false));
         this.listaColumnas.add(new Columna("FECHA_DEFUNCION", false, false));
-        this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
+        this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setString(1, this.mascota.getNombre());
-        this.statement.setString(2, this.mascota.getEspecie());
-        this.statement.setString(3, this.mascota.getSexo());
-        this.statement.setString(4, this.mascota.getRaza());
-        this.statement.setString(5, this.mascota.getColor());
-        this.statement.setInt(6, this.mascota.getActivo() ? 1 : 0);
+        this.statement.setInt(1, this.mascota.getPersona().getPersonaId());
+        this.statement.setString(2, this.mascota.getNombre());
+        this.statement.setString(3, this.mascota.getEspecie());
+        this.statement.setString(4, this.mascota.getSexo());
+        this.statement.setString(5, this.mascota.getRaza());
+        this.statement.setString(6, this.mascota.getColor());
         this.statement.setDate(7, this.mascota.getFechaDefuncion());
-        this.statement.setInt(8, this.mascota.getPersona().getPersonaId());
+        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setString(1, this.mascota.getNombre());
-        this.statement.setString(2, this.mascota.getEspecie());
-        this.statement.setString(3, this.mascota.getSexo());
-        this.statement.setString(4, this.mascota.getRaza());
-        this.statement.setString(5, this.mascota.getColor());
-        this.statement.setInt(6, this.mascota.getActivo() ? 1 : 0);
+        this.statement.setInt(1, this.mascota.getPersona().getPersonaId());
+        this.statement.setString(2, this.mascota.getNombre());
+        this.statement.setString(3, this.mascota.getEspecie());
+        this.statement.setString(4, this.mascota.getSexo());
+        this.statement.setString(5, this.mascota.getRaza());
+        this.statement.setString(6, this.mascota.getColor());
         this.statement.setDate(7, this.mascota.getFechaDefuncion());
-        this.statement.setInt(8, this.mascota.getPersona().getPersonaId());
+        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
         
         this.statement.setInt(9, this.mascota.getMascotaId());
     }
@@ -70,14 +70,15 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.mascota = new MascotaDto();
         this.mascota.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
+        this.mascota.setPersona(new PersonaDaoImpl().
+                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
         this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
         this.mascota.setEspecie(this.resultSet.getString("ESPECIE"));
         this.mascota.setSexo(this.resultSet.getString("SEXO"));
         this.mascota.setRaza(this.resultSet.getString("RAZA"));
         this.mascota.setColor(this.resultSet.getString("COLOR"));
-        this.mascota.setActivo(this.resultSet.getInt("ACTIVO") == 1);
         this.mascota.setFechaDefuncion(this.resultSet.getDate("FECHA_DEFUNCION"));
-        this.mascota.setPersona(new PersonaDaoImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        this.mascota.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override

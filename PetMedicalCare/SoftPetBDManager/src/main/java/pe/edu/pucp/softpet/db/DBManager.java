@@ -26,7 +26,7 @@ public abstract class DBManager {
     private static String prefijo;
 
     protected DBManager() {
-        //constructor protegido para evitar que se creen instancias.
+        // Constructor protegido para evitar que se creen instancias.
     }
 
     public static DBManager getInstance() {
@@ -44,26 +44,27 @@ public abstract class DBManager {
         return DBManager.dbManager;
     }
 
-    private static void createInstance(MotorDeBaseDeDatos motorElegido1) {
+    private static void createInstance(MotorDeBaseDeDatos motorElegido) {
 
-        //System.out.println("s->>"+motorElegido);
-        if (motorElegido1 == MotorDeBaseDeDatos.MYSQL) {
-            DBManager.dbManager = new DBManagerMySQL();
-            DBManager.motorElegido = MotorDeBaseDeDatos.MYSQL;
-            DBManager.prefijo = "_mysql";
-            //System.out.println("ENTRO A MYSQL");
-        } else if (motorElegido1 == MotorDeBaseDeDatos.MSSQL) {
-            DBManager.dbManager = new DBManagerMSSQL();
-            motorElegido = MotorDeBaseDeDatos.MSSQL;
-            DBManager.prefijo = "_mssql";
-            //System.out.println("ENTRO A MSSQL");
-
-        } else {
-            System.err.println("No se creo la instancia bien");
+        switch (motorElegido) {
+            case MotorDeBaseDeDatos.MYSQL:
+                DBManager.dbManager = new DBManagerMySQL();
+                DBManager.motorElegido = MotorDeBaseDeDatos.MYSQL;
+                DBManager.prefijo = "_mysql";
+                //System.out.println("ENTRO A MYSQL");
+                break;
+            case MotorDeBaseDeDatos.MSSQL:
+                DBManager.dbManager = new DBManagerMSSQL();
+                DBManager.motorElegido = MotorDeBaseDeDatos.MSSQL;
+                DBManager.prefijo = "_mssql";
+                //System.out.println("ENTRO A MSSQL");
+                break;
+            default:
+                System.err.println("Error al crear la instancia");
+                break;
         }
-        // System.out.println("-> " + DBManager.obtenerMotorDeBaseDeDato().toString());
-        DBManager.dbManager.leer_archivo_de_propiedades();
 
+        DBManager.dbManager.leer_archivo_de_propiedades();
     }
 
     private static void createInstance() {
@@ -88,13 +89,14 @@ public abstract class DBManager {
     public Connection getConnection() {
         try {
             Class.forName(this.driver);
-//             System.out.println("Usuario: " + this.usuario);
-//             System.out.println("Contraseña: " + this.contraseña);
+            // System.out.println("Usuario: " + this.usuario);
+            // System.out.println("Contraseña: " + this.contraseña);
             // System.out.println("getURL(): " + getURL());
             // System.out.println(Cifrado.descifrarMD5(this.contraseña));
+            // this.conexion = DriverManager.getConnection(getURL(), this.usuario, Cifrado.descifrarMD5(this.contraseña));
             this.conexion = DriverManager.getConnection(getURL(), this.usuario, this.contraseña);
-           //System.out.println("url: " + getURL());
-//            System.out.println("conext: " + this.conexion);
+            // System.out.println("url: " + getURL());
+            // System.out.println("conext: " + this.conexion);
         } catch (ClassNotFoundException | SQLException ex) {
             System.err.println("Error al generar la conexión - " + ex);
         }
@@ -108,17 +110,14 @@ public abstract class DBManager {
         try {
             // El archivo de configuración se encuentra en la carpeta src/main/resources/jdbc.properties            
             String nmArchivoConf = "/" + ARCHIVO_CONFIGURACION;
-            //System.out.println("ola-> " + prefijo);
             properties.load(this.getClass().getResourceAsStream(nmArchivoConf));
             this.driver = properties.getProperty("driver" + prefijo);
             this.tipo_de_driver = properties.getProperty("tipo_de_driver" + prefijo);
-            this.base_de_datos = properties.getProperty("base_de_datos"+prefijo);
+            this.base_de_datos = properties.getProperty("base_de_datos" + prefijo);
             this.nombre_de_host = properties.getProperty("nombre_de_host" + prefijo);
             this.puerto = properties.getProperty("puerto" + prefijo);
             this.usuario = properties.getProperty("usuario");
-            this.contraseña = properties.getProperty("contra"+prefijo);
-            //System.out.println("contra"+this.contraseña);
-            // System.out.println(" " + this.driver + " " + this.nombre_de_host + " " + this.usuario + " " + this.puerto);
+            this.contraseña = properties.getProperty("contra" + prefijo);
         } catch (FileNotFoundException ex) {
             System.err.println("Error al leer el archivo de propiedades - " + ex);
         } catch (IOException ex) {
@@ -131,10 +130,9 @@ public abstract class DBManager {
         try {
             String nmArchivoConf = "/" + ARCHIVO_CONFIGURACION;
 
-            //al ser un método estático, no se puede invocar al getResoucer así
-            //properties.load(this.getClass().getResourceAsStream(nmArchivoConf));            
             properties.load(DBManager.class.getResourceAsStream(nmArchivoConf));
             String tipo_de_driver = properties.getProperty("tipo_de_driver_mysql");
+
             if (tipo_de_driver.equals("jdbc:mysql")) {
                 return MotorDeBaseDeDatos.MYSQL;
             } else {

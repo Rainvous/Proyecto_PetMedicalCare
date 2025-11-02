@@ -22,33 +22,33 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("PRODUCTO_ID", true, true));
+        this.listaColumnas.add(new Columna("TIPO_PRODUCTO_ID", false, false));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("PRESENTACION", false, false));
         this.listaColumnas.add(new Columna("PRECIO_UNITARIO", false, false));
-        this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("TIPO_PRODUCTO_ID", false, false));
         this.listaColumnas.add(new Columna("STOCK", false, false));
+        this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         // NOTA: la auditoria se maneja con un trigger
-        this.statement.setString(1, this.producto.getNombre());
-        this.statement.setString(2, this.producto.getPresentacion());
-        this.statement.setDouble(3, this.producto.getPrecioUnitario());
-        this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
-        this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
-        this.statement.setInt(6, this.producto.getStock());
+        this.statement.setInt(1, this.producto.getTipoProducto().getTipoProductoId());
+        this.statement.setString(2, this.producto.getNombre());
+        this.statement.setString(3, this.producto.getPresentacion());
+        this.statement.setDouble(4, this.producto.getPrecioUnitario());
+        this.statement.setInt(5, this.producto.getStock());
+        this.statement.setInt(6, this.producto.getActivo() ? 1 : 0);
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setString(1, this.producto.getNombre());
-        this.statement.setString(2, this.producto.getPresentacion());
-        this.statement.setDouble(3, this.producto.getPrecioUnitario());
-        this.statement.setInt(4, this.producto.getActivo() ? 1 : 0);
-        this.statement.setInt(5, this.producto.getTipoProducto().getTipoProductoId());
-        this.statement.setInt(6, this.producto.getStock());
+        this.statement.setInt(1, this.producto.getTipoProducto().getTipoProductoId());
+        this.statement.setString(2, this.producto.getNombre());
+        this.statement.setString(3, this.producto.getPresentacion());
+        this.statement.setDouble(4, this.producto.getPrecioUnitario());
+        this.statement.setInt(5, this.producto.getStock());
+        this.statement.setInt(6, this.producto.getActivo() ? 1 : 0);
 
         this.statement.setInt(7, this.producto.getProductoId());
     }
@@ -67,13 +67,13 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.producto = new ProductoDto();
         this.producto.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
+        this.producto.setTipoProducto(new TipoProductoDaoImpl().
+                obtenerPorId(this.resultSet.getInt("TIPO_PRODUCTO_ID")));
         this.producto.setNombre(this.resultSet.getString("NOMBRE"));
         this.producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
         this.producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
-        this.producto.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.producto.setTipoProducto(new TipoProductoDaoImpl().
-                obtenerPorId(this.resultSet.getInt("TIPO_PRODUCTO_ID")));
         this.producto.setStock(this.resultSet.getInt("STOCK"));
+        this.producto.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
     @Override

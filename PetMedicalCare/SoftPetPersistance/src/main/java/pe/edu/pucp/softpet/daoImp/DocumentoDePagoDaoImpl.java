@@ -25,72 +25,68 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("DOCUMENTO_DE_PAGO_ID", true, true));
+        this.listaColumnas.add(new Columna("METODO_DE_PAGO_ID", false, false));
+        this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
+        this.listaColumnas.add(new Columna("TIPO_DOCUMENTO", false, false));
         this.listaColumnas.add(new Columna("SERIE", false, false));
         this.listaColumnas.add(new Columna("NUMERO", false, false));
         this.listaColumnas.add(new Columna("FECHA_EMISION", false, false));
-        this.listaColumnas.add(new Columna("TIPO_DOCUMENTO", false, false));
         this.listaColumnas.add(new Columna("ESTADO", false, false));
         this.listaColumnas.add(new Columna("SUBTOTAL", false, false));
         this.listaColumnas.add(new Columna("IGV_TOTAL", false, false));
         this.listaColumnas.add(new Columna("TOTAL", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("METODO_DE_PAGO_ID", false, false));
-        this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setString(1, this.documentoPago.getSerie());
-        this.statement.setString(2, this.documentoPago.getNumero());
-       
-        this.statement.setDate(3, new java.sql.Date(this.documentoPago.getFechaEmision().getTime()));
-        //FORMA DE CASTEAR UN SQL DATE
-        this.statement.setString(4, sacarTipoDocumento(this.documentoPago.getTipoDocumento()));
-        this.statement.setString(5, sacarEstado(this.documentoPago.getEstado()));
-        this.statement.setDouble(6, this.documentoPago.getSubtotal());
-        this.statement.setDouble(7, this.documentoPago.getIGVTotal());
-        this.statement.setDouble(8, this.documentoPago.getTotal());
-        this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
-        this.statement.setInt(10, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
-        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
+        this.statement.setInt(1, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
+        this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
+        this.statement.setString(3, sacarTipoDocumento(this.documentoPago.getTipoDocumento()));
+        this.statement.setString(4, this.documentoPago.getSerie());
+        this.statement.setString(5, this.documentoPago.getNumero());
+        this.statement.setDate(6, this.documentoPago.getFechaEmision());
+        this.statement.setString(7, sacarEstado(this.documentoPago.getEstado()));
+        this.statement.setDouble(8, this.documentoPago.getSubtotal());
+        this.statement.setDouble(9, this.documentoPago.getIGVTotal());
+        this.statement.setDouble(10, this.documentoPago.getTotal());
+        this.statement.setInt(11, this.documentoPago.getActivo() ? 1 : 0);
     }
-    protected String sacarTipoDocumento(String data){
-        if(data.equals(TipoDocumentoDePago.BOLETA.toString())
-                ||  data.equals("boleta")){
+
+    protected String sacarTipoDocumento(String data) {
+        if (data.equals(TipoDocumentoDePago.BOLETA.toString())
+                || data.equals("boleta")) {
             return TipoDocumentoDePago.BOLETA.toString();
-        }
-        else{
+        } else {
             return TipoDocumentoDePago.FACTURA.toString();
         }
     }
-    protected String sacarEstado(String data){
-        if(data.equals(EstadoDocumentoDePago.EMITIDO.toString()) ||
-                data.equals("emitido")){
+
+    protected String sacarEstado(String data) {
+        if (data.equals(EstadoDocumentoDePago.EMITIDO.toString())
+                || data.equals("emitido")) {
             return EstadoDocumentoDePago.EMITIDO.toString();
-        }
-        else if( data.equals(EstadoDocumentoDePago.PAGADO.toString())
-                    || data.equals("pagado")){
+        } else if (data.equals(EstadoDocumentoDePago.PAGADO.toString())
+                || data.equals("pagado")) {
             return EstadoDocumentoDePago.PAGADO.toString();
-        }
-        else{
+        } else {
             return EstadoDocumentoDePago.ANULADO.toString();
         }
     }
+
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setString(1, this.documentoPago.getSerie());
-        this.statement.setString(2, this.documentoPago.getNumero());
-       
-        this.statement.setDate(3, new java.sql.Date(this.documentoPago.getFechaEmision().getTime()));
-        //FORMA DE CASTEAR UN SQL DATE
-        this.statement.setString(4, sacarTipoDocumento(this.documentoPago.getTipoDocumento()));
-        this.statement.setString(5, sacarTipoDocumento(this.documentoPago.getEstado()));
-        this.statement.setDouble(6, this.documentoPago.getSubtotal());
-        this.statement.setDouble(7, this.documentoPago.getIGVTotal());
-        this.statement.setDouble(8, this.documentoPago.getTotal());
-        this.statement.setInt(9, this.documentoPago.getActivo() ? 1 : 0);
-        this.statement.setInt(10, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
-        this.statement.setInt(11, this.documentoPago.getPersona().getPersonaId());
+        this.statement.setInt(1, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
+        this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
+        this.statement.setString(3, sacarTipoDocumento(this.documentoPago.getTipoDocumento()));
+        this.statement.setString(4, this.documentoPago.getSerie());
+        this.statement.setString(5, this.documentoPago.getNumero());
+        this.statement.setDate(6, this.documentoPago.getFechaEmision());
+        this.statement.setString(7, sacarEstado(this.documentoPago.getEstado()));
+        this.statement.setDouble(8, this.documentoPago.getSubtotal());
+        this.statement.setDouble(9, this.documentoPago.getIGVTotal());
+        this.statement.setDouble(10, this.documentoPago.getTotal());
+        this.statement.setInt(11, this.documentoPago.getActivo() ? 1 : 0);
 
         this.statement.setInt(12, this.documentoPago.getDocumentoPagoId());
     }
@@ -109,23 +105,18 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.documentoPago = new DocumentoPagoDto();
         this.documentoPago.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID"));
+        this.documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().
+                obtenerPorId(this.resultSet.getInt("METODO_DE_PAGO_ID")));
+        this.documentoPago.setPersona(new PersonaDaoImpl().
+                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
         this.documentoPago.setSerie(this.resultSet.getString("SERIE"));
         this.documentoPago.setNumero(this.resultSet.getString("NUMERO"));
-    
         this.documentoPago.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
-        
-        this.documentoPago.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO")); //NO LO CASTEO CON ENUMS PQ YA ESTÁ
         this.documentoPago.setEstado(this.resultSet.getString("ESTADO"));
         this.documentoPago.setSubtotal(this.resultSet.getDouble("SUBTOTAL"));
         this.documentoPago.setIGVTotal(this.resultSet.getDouble("IGV_TOTAL"));
         this.documentoPago.setTotal(this.resultSet.getDouble("TOTAL"));
         this.documentoPago.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        MetodoDePagoDto tp= new MetodoDePagoDto();
-        tp.setMetodoDePagoId(this.resultSet.getInt("METODO_DE_PAGO_ID"));
-        this.documentoPago.setMetodoDePago(tp);
-        PersonaDto aux= new PersonaDto();
-        aux.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-        this.documentoPago.setPersona(aux);
     }
 
     @Override

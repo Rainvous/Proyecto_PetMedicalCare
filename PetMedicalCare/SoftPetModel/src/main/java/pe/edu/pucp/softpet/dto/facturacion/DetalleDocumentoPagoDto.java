@@ -35,14 +35,14 @@ public class DetalleDocumentoPagoDto {
             Integer cantidad, Double precioUnitario, Double valorVenta,
             Boolean activo) {
         this.dddpId = dddpId;
+        this.documentoPago = documentoPago;
+        this.servicio = servicio;
+        this.producto = producto;
         this.nroItem = nroItem;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.valorVenta = valorVenta;
-        this.documentoPago = documentoPago;
-        this.servicio = servicio;
-        this.producto = producto;
         this.activo = activo;
     }
 

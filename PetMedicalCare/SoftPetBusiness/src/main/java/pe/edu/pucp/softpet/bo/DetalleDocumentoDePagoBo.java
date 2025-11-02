@@ -10,71 +10,61 @@ import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
 
 public class DetalleDocumentoDePagoBo {
 
-    private DetalleDocumentoDePagoDao detalleDao;
+    private final DetalleDocumentoDePagoDao detalleDao;
 
     public DetalleDocumentoDePagoBo() {
         this.detalleDao = new DetalleDocumentoDePagoDaoImpl();
     }
 
-    // Inserta un nuevo detalle de documento de pago
-    public Integer insertar(int nroItem, String descripcion, int cantidad,
-            double precioUnitario, double valorVenta,
-           
-            int documentoPagoId, int servicioId, int productoId) {
+    public Integer insertar(int documentoPagoId, int servicioId, int productoId,
+            int nroItem, String descripcion, int cantidad,
+            double precioUnitario, double valorVenta, boolean activo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
-        detalle.setNroItem(nroItem);
-        detalle.setDescripcion(descripcion.trim().toUpperCase());
-        detalle.setCantidad(cantidad);
-        detalle.setPrecioUnitario(precioUnitario);
-        detalle.setValorVenta(valorVenta);
-        detalle.setActivo(Boolean.TRUE);
-        
-      
 
-        // Relaciones con otras entidades
         detalle.setDocumentoPago(new DocumentoDePagoDaoImpl().obtenerPorId(documentoPagoId));
         detalle.setServicio(new ServicioDaoImpl().obtenerPorId(servicioId));
         detalle.setProducto(new ProductoDaoImpl().obtenerPorId(productoId));
+        detalle.setNroItem(nroItem);
+        detalle.setDescripcion(descripcion);
+        detalle.setCantidad(cantidad);
+        detalle.setPrecioUnitario(precioUnitario);
+        detalle.setValorVenta(valorVenta);
+        detalle.setActivo(activo);
 
         return this.detalleDao.insertar(detalle);
     }
 
-    // Modifica un detalle existente
-    public Integer modificar(int detalleId, int nroItem, String descripcion, int cantidad,
-            double precioUnitario, double valorVenta,
-            int documentoPagoId, int servicioId, int productoId, boolean esActivo) {
+    public Integer modificar(int ddpId, int documentoPagoId, int servicioId,
+            int productoId, int nroItem, String descripcion, int cantidad,
+            double precioUnitario, double valorVenta, boolean activo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
-        detalle.setDddpId(detalleId);
-        detalle.setNroItem(nroItem);
-        detalle.setDescripcion(descripcion.trim().toUpperCase());
-        detalle.setCantidad(cantidad);
-         detalle.setPrecioUnitario(precioUnitario);
-        detalle.setValorVenta(valorVenta);
-        detalle.setActivo(esActivo);
-        
 
+        detalle.setDddpId(ddpId);
         detalle.setDocumentoPago(new DocumentoDePagoDaoImpl().obtenerPorId(documentoPagoId));
         detalle.setServicio(new ServicioDaoImpl().obtenerPorId(servicioId));
         detalle.setProducto(new ProductoDaoImpl().obtenerPorId(productoId));
+        detalle.setNroItem(nroItem);
+        detalle.setDescripcion(descripcion);
+        detalle.setCantidad(cantidad);
+        detalle.setPrecioUnitario(precioUnitario);
+        detalle.setValorVenta(valorVenta);
+        detalle.setActivo(activo);
 
         return this.detalleDao.modificar(detalle);
     }
 
-    // Elimina un detalle por su ID
     public Integer eliminar(int detalleId) {
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
         detalle.setDddpId(detalleId);
         return this.detalleDao.eliminar(detalle);
     }
 
-    // Obtiene un detalle por ID
     public DetalleDocumentoPagoDto obtenerPorId(int detalleId) {
         return this.detalleDao.obtenerPorId(detalleId);
     }
 
-    // Lista todos los detalles registrados
     public ArrayList<DetalleDocumentoPagoDto> listarTodos() {
         return this.detalleDao.listarTodos();
     }

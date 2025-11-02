@@ -50,15 +50,14 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     }
 
     protected String retornaEstadoCita(String estado) {
-        String aux = "";
         if (this.citaAtencion.getEstado().equals(EstadoCita.ATENDIDA.toString())) {
-            aux = EstadoCita.ATENDIDA.toString();
+            estado = EstadoCita.ATENDIDA.toString();
         } else if (this.citaAtencion.getEstado().equals(EstadoCita.CANCELADA.toString())) {
-            aux = EstadoCita.CANCELADA.toString();
+            estado = EstadoCita.CANCELADA.toString();
         } else {
-            aux = EstadoCita.PROGRAMADA.toString();
+            estado = EstadoCita.PROGRAMADA.toString();
         }
-        return aux;
+        return estado;
     }
 
     @Override

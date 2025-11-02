@@ -23,5 +23,4 @@ public class DBManagerMySQL extends DBManager {
     public String retornarSQLParaUltimoAutoGenerado() {
         return "select @@last_insert_id as id";
     }
-
 }

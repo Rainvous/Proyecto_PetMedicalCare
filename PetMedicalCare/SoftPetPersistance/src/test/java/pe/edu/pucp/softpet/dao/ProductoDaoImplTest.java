@@ -1,41 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
-package pe.edu.pucp.softpet.dao;
+//package pe.edu.pucp.softpet.dao;
+//
+//import java.sql.SQLException;
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.Optional;
+//import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.*;
+//import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
+//import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
+//import pe.edu.pucp.softpet.dto.productos.ProductoDto;
+//import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
+//import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
+//import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
-import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
-import pe.edu.pucp.softpet.dto.productos.ProductoDto;
-import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
-import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
-import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
-
-/**
- *
- * @author User
- */
-public class ProductoDaoImplTest {
-
-    public ProductoDaoImplTest() {
-    }
-
-    public void ImprimeCabecera(String titulo) {
-        System.out.println();
-        System.out.println("=======================================================");
-        System.out.println(" TEST: " + titulo.toUpperCase());
-        System.out.println("=======================================================");
-    }
-
-    /**
-     * Test of listarTodos method, of class ProductoDaoImpl.
-     */
+//public class ProductoDaoImplTest {
+//
+//    public ProductoDaoImplTest() {
+//    }
+//
+//    public void ImprimeCabecera(String titulo) {
+//        System.out.println();
+//        System.out.println("=======================================================");
+//        System.out.println(" TEST: " + titulo.toUpperCase());
+//        System.out.println("=======================================================");
+//    }
+//
+//    /**
+//     * Test of listarTodos method, of class ProductoDaoImpl.
+//     */
 //    @Test
 //    public void TesteoCrud() {
 //        ImprimeCabecera("Testeo de producto");
@@ -80,7 +72,7 @@ public class ProductoDaoImplTest {
 //        assertTrue(result2 > 0);
 //
 //    }
-
+//
 //    @Test
 //    public void TesteoCrud2() throws SQLException {
 //         ImprimeCabecera("Testeo de Servicio");
@@ -123,5 +115,5 @@ public class ProductoDaoImplTest {
 //        assertNotNull(servicio);
 //                 
 //    }
-
-}
+//
+//}

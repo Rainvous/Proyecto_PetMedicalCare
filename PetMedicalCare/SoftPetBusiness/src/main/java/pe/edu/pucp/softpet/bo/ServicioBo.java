@@ -8,59 +8,53 @@ import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
 public class ServicioBo {
 
-    private ServicioDao servicioDao;
+    private final ServicioDao servicioDao;
 
     public ServicioBo() {
         this.servicioDao = new ServicioDaoImpl();
     }
 
-    // Inserta un servicio asegurando que el nombre y descripción estén en mayúsculas
-    public Integer insertar(String nombre, double costo, String estado,
-            String descripcion, boolean activo, int tipoServicioId) {
+    public Integer insertar(int tipoServicioId, String nombre, 
+            String descripcion, double costo, String estado, boolean activo){
+
         ServicioDto servicio = new ServicioDto();
-
-        // Normalizamos los textos (trim + upper)
-        servicio.setNombre(nombre.trim().toUpperCase());
-        servicio.setCosto(costo);
-        servicio.setEstado(estado.trim().toUpperCase());
-        servicio.setDescripcion(descripcion.trim().toUpperCase());
-        servicio.setActivo(activo);
-
-        // Asignamos el tipo de servicio
+        
         servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(tipoServicioId));
+        servicio.setNombre(nombre);
+        servicio.setDescripcion(descripcion);
+        servicio.setCosto(costo);
+        servicio.setEstado(estado);
+        servicio.setActivo(activo);
 
         return this.servicioDao.insertar(servicio);
     }
 
-    // Modifica un servicio existente
-    public Integer modificar(int servicioId, String nombre, double costo, String estado,
-            String descripcion, boolean activo, int tipoServicioId) {
+    public Integer modificar(int servicioId, int tipoServicioId, String nombre, 
+            String descripcion, double costo, String estado, boolean activo) {
+        
         ServicioDto servicio = new ServicioDto();
-
+        
         servicio.setServicioId(servicioId);
-        servicio.setNombre(nombre.trim().toUpperCase());
-        servicio.setCosto(costo);
-        servicio.setEstado(estado.trim().toUpperCase());
-        servicio.setDescripcion(descripcion.trim().toUpperCase());
-        servicio.setActivo(activo);
         servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(tipoServicioId));
+        servicio.setNombre(nombre);
+        servicio.setDescripcion(descripcion);
+        servicio.setCosto(costo);
+        servicio.setEstado(estado);
+        servicio.setActivo(activo);
 
         return this.servicioDao.modificar(servicio);
     }
 
-    // Elimina un servicio por su ID
     public Integer eliminar(int servicioId) {
         ServicioDto servicio = new ServicioDto();
         servicio.setServicioId(servicioId);
         return this.servicioDao.eliminar(servicio);
     }
 
-    // Obtiene un servicio por su ID
     public ServicioDto obtenerPorId(int servicioId) {
         return this.servicioDao.obtenerPorId(servicioId);
     }
 
-    // Lista todos los servicios registrados
     public ArrayList<ServicioDto> listarTodos() {
         return this.servicioDao.listarTodos();
     }

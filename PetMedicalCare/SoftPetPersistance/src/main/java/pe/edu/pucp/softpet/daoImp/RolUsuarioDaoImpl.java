@@ -58,7 +58,6 @@ public class RolUsuarioDaoImpl extends DaoBaseImpl implements RolUsuarioDao {
         this.rolUsuario.setRol(new RolDaoImpl().obtenerPorId(this.resultSet.getInt("ROL_ID")));
         this.rolUsuario.setUsuario(new UsuarioDaoImpl().obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
         this.rolUsuario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-
     }
 
     @Override

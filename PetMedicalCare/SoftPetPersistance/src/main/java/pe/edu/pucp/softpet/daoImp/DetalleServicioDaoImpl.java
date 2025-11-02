@@ -20,29 +20,29 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("DETALLE_SERVICIO_ID", true, true));
+        this.listaColumnas.add(new Columna("CITA_ID", false, false));
+        this.listaColumnas.add(new Columna("SERVICIO_ID", false, false));
         this.listaColumnas.add(new Columna("DESCRIPCION", false, false));
         this.listaColumnas.add(new Columna("COSTO", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
-        this.listaColumnas.add(new Columna("SERVICIO_ID", false, false));
-        this.listaColumnas.add(new Columna("CITA_ID", false, false));
     }
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setString(1, this.detalleServicio.getDescripcion());
-        this.statement.setDouble(2, this.detalleServicio.getCosto());
-        this.statement.setInt(3, this.detalleServicio.getActivo() ? 1 : 0);
-        this.statement.setInt(4, this.detalleServicio.getServicio().getServicioId());
-        this.statement.setInt(5, this.detalleServicio.getCita().getCitaId());
+        this.statement.setInt(1, this.detalleServicio.getCita().getCitaId());
+        this.statement.setInt(2, this.detalleServicio.getServicio().getServicioId());
+        this.statement.setString(3, this.detalleServicio.getDescripcion());
+        this.statement.setDouble(4, this.detalleServicio.getCosto());
+        this.statement.setInt(5, this.detalleServicio.getActivo() ? 1 : 0);  
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setString(1, this.detalleServicio.getDescripcion());
-        this.statement.setDouble(2, this.detalleServicio.getCosto());
-        this.statement.setInt(3, this.detalleServicio.getActivo() ? 1 : 0);
-        this.statement.setInt(4, this.detalleServicio.getServicio().getServicioId());
-        this.statement.setInt(5, this.detalleServicio.getCita().getCitaId());
+        this.statement.setInt(1, this.detalleServicio.getCita().getCitaId());
+        this.statement.setInt(2, this.detalleServicio.getServicio().getServicioId());
+        this.statement.setString(3, this.detalleServicio.getDescripcion());
+        this.statement.setDouble(4, this.detalleServicio.getCosto());
+        this.statement.setInt(5, this.detalleServicio.getActivo() ? 1 : 0);  
 
         this.statement.setInt(6, this.detalleServicio.getDetalleServicioId());
     }
@@ -61,11 +61,13 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.detalleServicio = new DetalleServicioDto();
         this.detalleServicio.setDetalleServicioId(this.resultSet.getInt("DETALLE_SERVICIO_ID"));
+        this.detalleServicio.setCita(new CitaAtencionDaoImpl().
+                obtenerPorId(this.resultSet.getInt("CITA_ID")));
+        this.detalleServicio.setServicio(new ServicioDaoImpl().
+                obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
         this.detalleServicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.detalleServicio.setCosto(this.resultSet.getDouble("COSTO"));
         this.detalleServicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        this.detalleServicio.setServicio(new ServicioDaoImpl().obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
-        this.detalleServicio.setCita(new CitaAtencionDaoImpl().obtenerPorId(this.resultSet.getInt("CITA_ID")));
     }
 
     @Override

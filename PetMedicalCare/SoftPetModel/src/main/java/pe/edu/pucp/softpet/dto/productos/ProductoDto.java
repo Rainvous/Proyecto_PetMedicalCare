@@ -200,5 +200,4 @@ public class ProductoDto {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-
 }

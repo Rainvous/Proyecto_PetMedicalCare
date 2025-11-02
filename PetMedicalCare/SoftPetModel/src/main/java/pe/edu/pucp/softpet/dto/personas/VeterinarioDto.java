@@ -6,7 +6,6 @@ public class VeterinarioDto {
 
     private Integer veterinarioId;
     private PersonaDto persona;
-    private Integer especialidadId;
     private Date fechaContratacion;
     private String estado;
     private String especialidad;
@@ -15,7 +14,6 @@ public class VeterinarioDto {
     public VeterinarioDto() {
         this.veterinarioId = null;
         this.persona = null;
-        this.especialidadId = null;
         this.fechaContratacion = null;
         this.estado = null;
         this.especialidad = null;
@@ -23,11 +21,10 @@ public class VeterinarioDto {
     }
 
     public VeterinarioDto(Integer veterinarioId, PersonaDto persona,
-            Integer especialidadId, Date fechaContratacion, String estado,
-            String especialidad, Boolean activo) {
+            Date fechaContratacion, String estado, String especialidad,
+            Boolean activo) {
         this.veterinarioId = veterinarioId;
         this.persona = persona;
-        this.especialidadId = especialidadId;
         this.fechaContratacion = fechaContratacion;
         this.estado = estado;
         this.especialidad = especialidad;
@@ -60,20 +57,6 @@ public class VeterinarioDto {
      */
     public void setPersona(PersonaDto persona) {
         this.persona = persona;
-    }
-
-    /**
-     * @return the especialidadId
-     */
-    public Integer getEspecialidadId() {
-        return especialidadId;
-    }
-
-    /**
-     * @param especialidadId the especialidadId to set
-     */
-    public void setEspecialidadId(Integer especialidadId) {
-        this.especialidadId = especialidadId;
     }
 
     /**

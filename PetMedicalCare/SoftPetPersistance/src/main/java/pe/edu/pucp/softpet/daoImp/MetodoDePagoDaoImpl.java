@@ -3,7 +3,6 @@ package pe.edu.pucp.softpet.daoImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import pe.edu.pucp.softpet.dao.MetodoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
@@ -15,35 +14,30 @@ public class MetodoDePagoDaoImpl extends DaoBaseImpl implements MetodoDePagoDao 
     public MetodoDePagoDaoImpl() {
         super("METODOS_DE_PAGO");
         this.metodo = null;
-        this.retornarLlavePrimaria = true; // PK autogenerada
+        this.retornarLlavePrimaria = true;
     }
 
     @Override
     protected void configurarListaDeColumnas() {
-        // Orden: PK, (FKs si hubiera), propios, auditoría
-        this.listaColumnas.add(new Columna("METODO_DE_PAGO_ID", true, true)); // PK AUTO_INCREMENT
+        this.listaColumnas.add(new Columna("METODO_DE_PAGO_ID", true, true));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
 
-    // ============ INSERT ============
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        // Coincide con columnas SIN la PK
         this.statement.setString(1, this.metodo.getNombre());
-        this.statement.setInt(2, this.metodo.getActivo() != null && this.metodo.getActivo() ? 1 : 0);
+        this.statement.setInt(2, this.metodo.getActivo() ? 1 : 0);
     }
-    
-    // ============ UPDATE ============
+
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setString(1, this.metodo.getNombre());
-        this.statement.setInt(2, this.metodo.getActivo() != null && this.metodo.getActivo() ? 1 : 0);
-        // WHERE ...ID = ?
+        this.statement.setInt(2, this.metodo.getActivo() ? 1 : 0);
+
         this.statement.setInt(3, this.metodo.getMetodoDePagoId());
     }
 
-    // ============ DELETE / GET ============
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.statement.setInt(1, this.metodo.getMetodoDePagoId());
@@ -54,7 +48,6 @@ public class MetodoDePagoDaoImpl extends DaoBaseImpl implements MetodoDePagoDao 
         this.statement.setInt(1, this.metodo.getMetodoDePagoId());
     }
 
-    // ============ ResultSet -> DTO ============
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.metodo = new MetodoDePagoDto();
@@ -74,7 +67,6 @@ public class MetodoDePagoDaoImpl extends DaoBaseImpl implements MetodoDePagoDao 
         lista.add(this.metodo);
     }
 
-    // ============ API pública ============
     @Override
     public Integer insertar(MetodoDePagoDto entity) {
         this.metodo = entity;

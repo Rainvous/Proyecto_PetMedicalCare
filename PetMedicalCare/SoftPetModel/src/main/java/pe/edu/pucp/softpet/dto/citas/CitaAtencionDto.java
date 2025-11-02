@@ -9,44 +9,44 @@ public class CitaAtencionDto {
     private Integer citaId;
     private VeterinarioDto veterinario;
     private MascotaDto mascota;
-    private String observacion;
-    private Date fechaHoraInicio;
     private Date fechaRegistro;
+    private Date fechaHoraInicio;
     private Date fechaHoraFin;
-    private Double monto;
-    private Boolean activo;
     private Double pesoMascota;
+    private Double monto;
     private String estado;
+    private String observacion;
+    private Boolean activo;
 
     public CitaAtencionDto() {
         this.citaId = null;
         this.veterinario = null;
         this.mascota = null;
-        this.observacion = null;
-        this.fechaHoraInicio = null;
         this.fechaRegistro = null;
+        this.fechaHoraInicio = null;
         this.fechaHoraFin = null;
-        this.monto = null;
-        this.activo = null;
         this.pesoMascota = null;
+        this.monto = null;
         this.estado = null;
+        this.observacion = null;
+        this.activo = null;
     }
 
     public CitaAtencionDto(Integer citaId, VeterinarioDto veterinario,
-            MascotaDto mascota, Date fechaHoraInicio, Date fechaRegistro,
-            Date fechaHoraFin, Double monto, Boolean activo, Double pesoMascota,
-            String observacion, String estado) {
+            MascotaDto mascota, Date fechaRegistro, Date fechaHoraInicio,
+            Date fechaHoraFin, Double pesoMascota, Double monto,
+            String estado, String observacion, Boolean activo) {
         this.citaId = citaId;
         this.veterinario = veterinario;
         this.mascota = mascota;
-        this.observacion = observacion;
-        this.fechaHoraInicio = fechaHoraInicio;
         this.fechaRegistro = fechaRegistro;
+        this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFin = fechaHoraFin;
-        this.monto = monto;
-        this.activo = activo;
         this.pesoMascota = pesoMascota;
+        this.monto = monto;
         this.estado = estado;
+        this.observacion = observacion;
+        this.activo = activo;
     }
 
     /**
@@ -92,17 +92,17 @@ public class CitaAtencionDto {
     }
 
     /**
-     * @return the observacion
+     * @return the fechaRegistro
      */
-    public String getObservacion() {
-        return observacion;
+    public Date getFechaRegistro() {
+        return fechaRegistro;
     }
 
     /**
-     * @param observacion the observacion to set
+     * @param fechaRegistro the fechaRegistro to set
      */
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     /**
@@ -120,20 +120,6 @@ public class CitaAtencionDto {
     }
 
     /**
-     * @return the fechaRegistro
-     */
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    /**
-     * @param fechaRegistro the fechaRegistro to set
-     */
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    /**
      * @return the fechaHoraFin
      */
     public Date getFechaHoraFin() {
@@ -145,6 +131,20 @@ public class CitaAtencionDto {
      */
     public void setFechaHoraFin(Date fechaHoraFin) {
         this.fechaHoraFin = fechaHoraFin;
+    }
+
+    /**
+     * @return the pesoMascota
+     */
+    public Double getPesoMascota() {
+        return pesoMascota;
+    }
+
+    /**
+     * @param pesoMascota the pesoMascota to set
+     */
+    public void setPesoMascota(Double pesoMascota) {
+        this.pesoMascota = pesoMascota;
     }
 
     /**
@@ -162,34 +162,6 @@ public class CitaAtencionDto {
     }
 
     /**
-     * @return the activo
-     */
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    /**
-     * @param activo the activo to set
-     */
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-
-    /**
-     * @return the pesoMascota
-     */
-    public Double getPesoMascota() {
-        return pesoMascota;
-    }
-
-    /**
-     * @param pesoMascota the peso to set
-     */
-    public void setPesoMascota(Double pesoMascota) {
-        this.pesoMascota = pesoMascota;
-    }
-
-    /**
      * @return the estado
      */
     public String getEstado() {
@@ -201,5 +173,33 @@ public class CitaAtencionDto {
      */
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the observacion
+     */
+    public String getObservacion() {
+        return observacion;
+    }
+
+    /**
+     * @param observacion the observacion to set
+     */
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    /**
+     * @return the activo
+     */
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }

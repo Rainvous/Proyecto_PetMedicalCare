@@ -21,7 +21,6 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("VETERINARIO_ID", true, true));
         this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
-   
         this.listaColumnas.add(new Columna("FECHA_DE_CONTRATACION", false, false));
         this.listaColumnas.add(new Columna("ESTADO", false, false));
         this.listaColumnas.add(new Columna("ESPECIALIDAD", false, false));
@@ -31,7 +30,6 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-      
         this.statement.setDate(2, this.veterinario.getFechaContratacion());
         this.statement.setString(3, this.veterinario.getEstado());
         this.statement.setString(4, this.veterinario.getEspecialidad());
@@ -41,7 +39,6 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-    
         this.statement.setDate(2, this.veterinario.getFechaContratacion());
         this.statement.setString(3, this.veterinario.getEstado());
         this.statement.setString(4, this.veterinario.getEspecialidad());
@@ -66,7 +63,6 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.veterinario.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
         this.veterinario.setPersona(new PersonaDaoImpl().
                 obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
-
         this.veterinario.setFechaContratacion(this.resultSet.getDate("FECHA_DE_CONTRATACION"));
         this.veterinario.setEstado(this.resultSet.getString("ESTADO"));
         this.veterinario.setEspecialidad(this.resultSet.getString("ESPECIALIDAD"));
