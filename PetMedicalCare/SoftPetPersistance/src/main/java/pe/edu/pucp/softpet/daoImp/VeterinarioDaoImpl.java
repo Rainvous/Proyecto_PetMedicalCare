@@ -6,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
 public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
 
@@ -31,7 +32,7 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
         this.statement.setDate(2, this.veterinario.getFechaContratacion());
-        this.statement.setString(3, this.veterinario.getEstado());
+        this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);
     }
@@ -40,7 +41,7 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
         this.statement.setDate(2, this.veterinario.getFechaContratacion());
-        this.statement.setString(3, this.veterinario.getEstado());
+        this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);
 
@@ -64,7 +65,7 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.veterinario.setPersona(new PersonaDaoImpl().
                 obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
         this.veterinario.setFechaContratacion(this.resultSet.getDate("FECHA_DE_CONTRATACION"));
-        this.veterinario.setEstado(this.resultSet.getString("ESTADO"));
+        this.veterinario.setEstado(EstadoVeterinario.valueOf(this.resultSet.getString("ESTADO")));
         this.veterinario.setEspecialidad(this.resultSet.getString("ESPECIALIDAD"));
         this.veterinario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }

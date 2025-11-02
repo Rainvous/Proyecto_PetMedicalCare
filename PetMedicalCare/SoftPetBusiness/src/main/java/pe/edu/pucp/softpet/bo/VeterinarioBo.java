@@ -6,6 +6,7 @@ import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
 public class VeterinarioBo {
 
@@ -16,7 +17,7 @@ public class VeterinarioBo {
     }
 
     public Integer insertar(int personaId, Date fechaContratacion,
-            String estado, String especialidad, boolean activo) {
+            EstadoVeterinario estado, String especialidad, boolean activo) {
 
         VeterinarioDto veterinario = new VeterinarioDto();
 
@@ -30,7 +31,7 @@ public class VeterinarioBo {
     }
 
     public Integer modificar(int veterinarioId, int personaId, Date fechaContratacion,
-            String estado, String especialidad, boolean activo) {
+            EstadoVeterinario estado, String especialidad, boolean activo) {
 
         VeterinarioDto veterinario = new VeterinarioDto();
 

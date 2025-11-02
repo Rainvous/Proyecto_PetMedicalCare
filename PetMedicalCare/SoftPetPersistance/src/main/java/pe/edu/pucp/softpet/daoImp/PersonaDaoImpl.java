@@ -8,6 +8,7 @@ import java.util.Map;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
+import pe.edu.pucp.softpet.dto.util.enums.Sexo;
 
 public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
@@ -39,7 +40,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.statement.setInt(2, this.persona.getUsuario().getUsuarioId());
         this.statement.setString(3, this.persona.getDireccion());
         this.statement.setString(4, this.persona.getTelefono());
-        this.statement.setString(5, this.persona.getSexo());
+        this.statement.setString(5, this.persona.getSexo().toString());
         this.statement.setInt(6, this.persona.getNroDocumento());
         this.statement.setInt(7, this.persona.getRuc());
         this.statement.setString(8, this.persona.getTipoDocumento());
@@ -52,7 +53,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.statement.setInt(2, this.persona.getUsuario().getUsuarioId());
         this.statement.setString(3, this.persona.getDireccion());
         this.statement.setString(4, this.persona.getTelefono());
-        this.statement.setString(5, this.persona.getSexo());
+        this.statement.setString(5, this.persona.getSexo().toString());
         this.statement.setInt(6, this.persona.getNroDocumento());
         this.statement.setInt(7, this.persona.getRuc());
         this.statement.setString(8, this.persona.getTipoDocumento());
@@ -80,7 +81,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
         this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
-        this.persona.setSexo(this.resultSet.getString("SEXO"));
+        this.persona.setSexo(Sexo.valueOf(this.resultSet.getString("SEXO")));
         this.persona.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
         this.persona.setRuc(this.resultSet.getInt("RUC"));
         this.persona.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));

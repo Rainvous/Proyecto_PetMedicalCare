@@ -1,13 +1,14 @@
 package pe.edu.pucp.softpet.dto.personas;
 
 import java.sql.Date;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoLaboral;
 
 public class HorarioLaboralDto {
 
     private Integer horarioLaboralId;
     private VeterinarioDto veterinario;
     private Date fecha;
-    private String estado;
+    private EstadoLaboral estado;
     private Date horaInicio;
     private Date horaFin;
     private Boolean activo;
@@ -23,7 +24,7 @@ public class HorarioLaboralDto {
     }
 
     public HorarioLaboralDto(Integer horarioLaboralId, VeterinarioDto veterinario,
-            Date fecha, String estado, Date horaInicio, Date horaFin,
+            Date fecha, EstadoLaboral estado, Date horaInicio, Date horaFin,
             Boolean activo) {
         this.horarioLaboralId = horarioLaboralId;
         this.veterinario = veterinario;
@@ -79,14 +80,14 @@ public class HorarioLaboralDto {
     /**
      * @return the estado
      */
-    public String getEstado() {
+    public EstadoLaboral getEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(String estado) {
+    public void setEstado(EstadoLaboral estado) {
         this.estado = estado;
     }
 

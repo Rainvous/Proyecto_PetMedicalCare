@@ -7,6 +7,7 @@ import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
 import pe.edu.pucp.softpet.daoImp.MascotaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionBo {
 
@@ -18,7 +19,7 @@ public class CitaAtencionBo {
 
     public Integer insertar(int veterinarioId, int mascotaId, Date fechaRegistro,
             Date fechaHoraInicio, Date fechaHoraFin, double pesoMascota,
-            double monto, String estado, String observacion, boolean activo) {
+            double monto, EstadoCita estado, String observacion, boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
 
@@ -38,7 +39,7 @@ public class CitaAtencionBo {
 
     public Integer modificar(int citaId, int veterinarioId, int mascotaId,
             Date fechaRegistro, Date fechaHoraInicio, Date fechaHoraFin,
-            double pesoMascota, double monto, String estado, String observacion,
+            double pesoMascota, double monto, EstadoCita estado, String observacion,
             boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();

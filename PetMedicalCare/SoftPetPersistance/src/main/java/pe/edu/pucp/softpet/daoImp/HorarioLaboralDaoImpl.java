@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.softpet.dao.HorarioLaboralDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
-import pe.edu.pucp.softpet.daoImp.util.enums.*;
 import pe.edu.pucp.softpet.dto.personas.HorarioLaboralDto;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoLaboral;
 
 public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboralDao {
 
@@ -33,7 +33,7 @@ public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboral
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.horario.getVeterinario().getVeterinarioId());
         this.statement.setDate(2, this.horario.getFecha());
-        this.statement.setString(3, sacarEstado(this.horario.getEstado()));
+        this.statement.setString(3, this.horario.getEstado().toString());
         this.statement.setDate(4, this.horario.getHoraInicio());
         this.statement.setDate(5, this.horario.getHoraFin());
         this.statement.setInt(6, this.horario.getActivo() ? 1 : 0);
@@ -43,7 +43,7 @@ public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboral
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.horario.getVeterinario().getVeterinarioId());
         this.statement.setDate(2, this.horario.getFecha());
-        this.statement.setString(3, sacarEstado(this.horario.getEstado()));
+        this.statement.setString(3, this.horario.getEstado().toString());
         this.statement.setDate(4, this.horario.getHoraInicio());
         this.statement.setDate(5, this.horario.getHoraFin());
         this.statement.setInt(6, this.horario.getActivo() ? 1 : 0);
@@ -68,19 +68,19 @@ public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboral
         this.horario.setVeterinario(new VeterinarioDaoImpl().
                 obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
         this.horario.setFecha(this.resultSet.getDate("FECHA"));
-        this.horario.setEstado(sacarEstado(this.resultSet.getString("ESTADO")));
+        this.horario.setEstado(EstadoLaboral.valueOf(this.resultSet.getString("ESTADO")));
         this.horario.setHoraInicio(this.resultSet.getDate("HORA_INICIO"));
         this.horario.setHoraFin(this.resultSet.getDate("HORA_FIN"));
         this.horario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 
-    protected String sacarEstado(String data) {
-        if (data.equals(EstadoLaboral.DISPONIBLE.toString()) || data.equals("disponible")) {
-            return EstadoLaboral.DISPONIBLE.toString();
-        } else {
-            return EstadoLaboral.NO_DISPONIBLE.toString();
-        }
-    }
+//    protected String sacarEstado(String data) {
+//        if (data.equals(EstadoLaboral.DISPONIBLE.toString()) || data.equals("disponible")) {
+//            return EstadoLaboral.DISPONIBLE.toString();
+//        } else {
+//            return EstadoLaboral.NO_DISPONIBLE.toString();
+//        }
+//    }
 
     @Override
     protected void limpiarObjetoDelResultSet() {

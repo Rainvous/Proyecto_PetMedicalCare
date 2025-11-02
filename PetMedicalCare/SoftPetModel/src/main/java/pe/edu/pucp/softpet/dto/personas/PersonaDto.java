@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.dto.personas;
 
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
+import pe.edu.pucp.softpet.dto.util.enums.Sexo;
 
 public class PersonaDto {
 
@@ -9,7 +10,7 @@ public class PersonaDto {
     private String nombre;
     private String direccion;
     private String telefono;
-    private String sexo;
+    private Sexo sexo;
     private Integer nroDocumento;
     private Integer ruc;
     private String tipoDocumento;
@@ -29,7 +30,7 @@ public class PersonaDto {
     }
 
     public PersonaDto(Integer personaId, UsuarioDto usuario, String nombre,
-            String direccion, String telefono, String sexo, Integer nroDocumento,
+            String direccion, String telefono, Sexo sexo, Integer nroDocumento,
             Integer ruc, String tipoDocumento, Boolean activo) {
         this.personaId = personaId;
         this.usuario = usuario;
@@ -116,14 +117,14 @@ public class PersonaDto {
     /**
      * @return the sexo
      */
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
     /**
      * @param sexo the sexo to set
      */
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 

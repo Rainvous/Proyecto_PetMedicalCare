@@ -1,13 +1,14 @@
 package pe.edu.pucp.softpet.dto.personas;
 
 import java.sql.Date;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
 public class VeterinarioDto {
 
     private Integer veterinarioId;
     private PersonaDto persona;
     private Date fechaContratacion;
-    private String estado;
+    private EstadoVeterinario estado;
     private String especialidad;
     private Boolean activo;
 
@@ -21,7 +22,7 @@ public class VeterinarioDto {
     }
 
     public VeterinarioDto(Integer veterinarioId, PersonaDto persona,
-            Date fechaContratacion, String estado, String especialidad,
+            Date fechaContratacion, EstadoVeterinario estado, String especialidad,
             Boolean activo) {
         this.veterinarioId = veterinarioId;
         this.persona = persona;
@@ -76,14 +77,14 @@ public class VeterinarioDto {
     /**
      * @return the estado
      */
-    public String getEstado() {
+    public EstadoVeterinario getEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(String estado) {
+    public void setEstado(EstadoVeterinario estado) {
         this.estado = estado;
     }
 

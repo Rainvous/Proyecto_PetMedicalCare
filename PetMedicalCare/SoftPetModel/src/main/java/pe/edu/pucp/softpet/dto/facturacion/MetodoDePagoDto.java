@@ -1,9 +1,11 @@
 package pe.edu.pucp.softpet.dto.facturacion;
 
+import pe.edu.pucp.softpet.dto.util.enums.TipoMetodoPago;
+
 public class MetodoDePagoDto {
 
     private Integer metodoDePagoId;
-    private String nombre;
+    private TipoMetodoPago nombre;
     private Boolean activo;
 
     public MetodoDePagoDto() {
@@ -12,7 +14,8 @@ public class MetodoDePagoDto {
         this.activo = null;
     }
 
-    public MetodoDePagoDto(Integer metodoDePagoId, String nombre, Boolean activo) {
+    public MetodoDePagoDto(Integer metodoDePagoId, TipoMetodoPago nombre, 
+            Boolean activo) {
         this.metodoDePagoId = metodoDePagoId;
         this.nombre = nombre;
         this.activo = activo;
@@ -35,14 +38,14 @@ public class MetodoDePagoDto {
     /**
      * @return the nombre
      */
-    public String getNombre() {
+    public TipoMetodoPago getNombre() {
         return nombre;
     }
 
     /**
      * @param nombre the nombre to set
      */
-    public void setNombre(String nombre) {
+    public void setNombre(TipoMetodoPago nombre) {
         this.nombre = nombre;
     }
 

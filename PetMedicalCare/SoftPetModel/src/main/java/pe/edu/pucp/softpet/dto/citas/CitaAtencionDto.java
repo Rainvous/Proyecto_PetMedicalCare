@@ -3,6 +3,7 @@ package pe.edu.pucp.softpet.dto.citas;
 import java.sql.Date;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionDto {
 
@@ -14,7 +15,7 @@ public class CitaAtencionDto {
     private Date fechaHoraFin;
     private Double pesoMascota;
     private Double monto;
-    private String estado;
+    private EstadoCita estado;
     private String observacion;
     private Boolean activo;
 
@@ -35,7 +36,7 @@ public class CitaAtencionDto {
     public CitaAtencionDto(Integer citaId, VeterinarioDto veterinario,
             MascotaDto mascota, Date fechaRegistro, Date fechaHoraInicio,
             Date fechaHoraFin, Double pesoMascota, Double monto,
-            String estado, String observacion, Boolean activo) {
+            EstadoCita estado, String observacion, Boolean activo) {
         this.citaId = citaId;
         this.veterinario = veterinario;
         this.mascota = mascota;
@@ -164,14 +165,14 @@ public class CitaAtencionDto {
     /**
      * @return the estado
      */
-    public String getEstado() {
+    public EstadoCita getEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(String estado) {
+    public void setEstado(EstadoCita estado) {
         this.estado = estado;
     }
 

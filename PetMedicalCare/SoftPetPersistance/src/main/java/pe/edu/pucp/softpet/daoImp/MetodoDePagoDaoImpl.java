@@ -6,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.MetodoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
+import pe.edu.pucp.softpet.dto.util.enums.TipoMetodoPago;
 
 public class MetodoDePagoDaoImpl extends DaoBaseImpl implements MetodoDePagoDao {
 
@@ -26,13 +27,13 @@ public class MetodoDePagoDaoImpl extends DaoBaseImpl implements MetodoDePagoDao 
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setString(1, this.metodo.getNombre());
+        this.statement.setString(1, this.metodo.getNombre().toString());
         this.statement.setInt(2, this.metodo.getActivo() ? 1 : 0);
     }
 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
-        this.statement.setString(1, this.metodo.getNombre());
+        this.statement.setString(1, this.metodo.getNombre().toString());
         this.statement.setInt(2, this.metodo.getActivo() ? 1 : 0);
 
         this.statement.setInt(3, this.metodo.getMetodoDePagoId());
@@ -52,7 +53,7 @@ public class MetodoDePagoDaoImpl extends DaoBaseImpl implements MetodoDePagoDao 
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.metodo = new MetodoDePagoDto();
         this.metodo.setMetodoDePagoId(this.resultSet.getInt("METODO_DE_PAGO_ID"));
-        this.metodo.setNombre(this.resultSet.getString("NOMBRE"));
+        this.metodo.setNombre(TipoMetodoPago.valueOf(this.resultSet.getString("NOMBRE")));
         this.metodo.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
 

@@ -1,4 +1,4 @@
-package pe.edu.pucp.softpet.daoImp.util.enums;
+package pe.edu.pucp.softpet.dto.util.enums;
 
 public enum EstadoLaboral {
     DISPONIBLE,

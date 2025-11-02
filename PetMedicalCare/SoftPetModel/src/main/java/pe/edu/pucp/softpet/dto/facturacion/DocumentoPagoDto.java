@@ -2,17 +2,19 @@ package pe.edu.pucp.softpet.dto.facturacion;
 
 import java.sql.Date;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoDocumentoDePago;
+import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 
 public class DocumentoPagoDto {
 
     private Integer documentoPagoId;
     private MetodoDePagoDto metodoDePago;
     private PersonaDto persona;
-    private String tipoDocumento;
+    private TipoDocumentoDePago tipoDocumento;
     private String serie;
     private String numero;
     private Date fechaEmision;
-    private String estado;
+    private EstadoDocumentoDePago estado;
     private Double subtotal;
     private Double IGVTotal;
     private Double total;
@@ -34,8 +36,9 @@ public class DocumentoPagoDto {
     }
 
     public DocumentoPagoDto(Integer documentoPagoId, MetodoDePagoDto metodoDePago,
-            PersonaDto persona, String tipoDocumento, String serie, String numero,
-            Date fechaEmision, String estado, Double subtotal, Double IGVTotal,
+            PersonaDto persona, TipoDocumentoDePago tipoDocumento, 
+            String serie, String numero, Date fechaEmision, 
+            EstadoDocumentoDePago estado, Double subtotal, Double IGVTotal,
             Double total, Boolean activo) {
         this.documentoPagoId = documentoPagoId;
         this.metodoDePago = metodoDePago;
@@ -96,14 +99,14 @@ public class DocumentoPagoDto {
     /**
      * @return the tipoDocumento
      */
-    public String getTipoDocumento() {
+    public TipoDocumentoDePago getTipoDocumento() {
         return tipoDocumento;
     }
 
     /**
      * @param tipoDocumento the tipoDocumento to set
      */
-    public void setTipoDocumento(String tipoDocumento) {
+    public void setTipoDocumento(TipoDocumentoDePago tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 
@@ -152,14 +155,14 @@ public class DocumentoPagoDto {
     /**
      * @return the estado
      */
-    public String getEstado() {
+    public EstadoDocumentoDePago getEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(String estado) {
+    public void setEstado(EstadoDocumentoDePago estado) {
         this.estado = estado;
     }
 

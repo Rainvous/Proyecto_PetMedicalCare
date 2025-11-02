@@ -6,9 +6,9 @@ import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
 import pe.edu.pucp.softpet.daoImp.MetodoDePagoDaoImpl;
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
-import pe.edu.pucp.softpet.daoImp.util.enums.EstadoDocumentoDePago;
-import pe.edu.pucp.softpet.daoImp.util.enums.TipoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoDocumentoDePago;
+import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 
 public class DocumentoDePagoBo {
 
@@ -28,11 +28,11 @@ public class DocumentoDePagoBo {
 
         documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().obtenerPorId(metodoDePagoId));
         documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        documentoPago.setTipoDocumento(tipoDocumento.toString());
+        documentoPago.setTipoDocumento(tipoDocumento);
         documentoPago.setSerie(serie);
         documentoPago.setNumero(numero);
         documentoPago.setFechaEmision(fechaEmision);
-        documentoPago.setEstado(estado.toString());
+        documentoPago.setEstado(estado);
         documentoPago.setSubtotal(subtotal);
         documentoPago.setIGVTotal(igvTotal);
         documentoPago.setTotal(total);
@@ -51,11 +51,11 @@ public class DocumentoDePagoBo {
         documentoPago.setDocumentoPagoId(documentoPagoId);
         documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().obtenerPorId(metodoDePagoId));
         documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        documentoPago.setTipoDocumento(tipoDocumento.toString());
+        documentoPago.setTipoDocumento(tipoDocumento);
         documentoPago.setSerie(serie);
         documentoPago.setNumero(numero);
         documentoPago.setFechaEmision(fechaEmision);
-        documentoPago.setEstado(estado.toString());
+        documentoPago.setEstado(estado);
         documentoPago.setSubtotal(subtotal);
         documentoPago.setIGVTotal(igvTotal);
         documentoPago.setTotal(total);

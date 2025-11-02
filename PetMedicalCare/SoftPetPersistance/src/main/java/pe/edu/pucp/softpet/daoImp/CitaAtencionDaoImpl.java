@@ -6,7 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
-import pe.edu.pucp.softpet.daoImp.util.enums.EstadoCita;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao {
 
@@ -44,22 +44,22 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setDate(5, this.citaAtencion.getFechaHoraFin());
         this.statement.setDouble(6, this.citaAtencion.getPesoMascota());
         this.statement.setDouble(7, this.citaAtencion.getMonto());
-        this.statement.setString(8, retornaEstadoCita(this.citaAtencion.getEstado()));
+        this.statement.setString(8, this.citaAtencion.getEstado().toString());
         this.statement.setString(9, this.citaAtencion.getObservacion());
         this.statement.setInt(10, this.citaAtencion.getActivo() ? 1 : 0);
     }
 
-    protected String retornaEstadoCita(String estado) {
-        if (this.citaAtencion.getEstado().equals(EstadoCita.ATENDIDA.toString())) {
-            estado = EstadoCita.ATENDIDA.toString();
-        } else if (this.citaAtencion.getEstado().equals(EstadoCita.CANCELADA.toString())) {
-            estado = EstadoCita.CANCELADA.toString();
-        } else {
-            estado = EstadoCita.PROGRAMADA.toString();
-        }
-        return estado;
-    }
-
+//    protected String retornaEstadoCita(String estado) {
+//        if (this.citaAtencion.getEstado().equals(EstadoCita.ATENDIDA.toString())) {
+//            estado = EstadoCita.ATENDIDA.toString();
+//        } else if (this.citaAtencion.getEstado().equals(EstadoCita.CANCELADA.toString())) {
+//            estado = EstadoCita.CANCELADA.toString();
+//        } else {
+//            estado = EstadoCita.PROGRAMADA.toString();
+//        }
+//        return estado;
+//    }
+    
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.citaAtencion.getVeterinario().getVeterinarioId());
@@ -69,7 +69,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setDate(5, this.citaAtencion.getFechaHoraFin());
         this.statement.setDouble(6, this.citaAtencion.getPesoMascota());
         this.statement.setDouble(7, this.citaAtencion.getMonto());
-        this.statement.setString(8, retornaEstadoCita(this.citaAtencion.getEstado()));
+        this.statement.setString(8, this.citaAtencion.getEstado().toString());
         this.statement.setString(9, this.citaAtencion.getObservacion());
         this.statement.setInt(10, this.citaAtencion.getActivo() ? 1 : 0);
 
@@ -99,7 +99,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.citaAtencion.setFechaHoraFin(this.resultSet.getDate("FECHA_HORA_FIN"));
         this.citaAtencion.setPesoMascota(this.resultSet.getDouble("PESO_MASCOTA"));
         this.citaAtencion.setMonto(this.resultSet.getDouble("MONTO"));
-        this.citaAtencion.setEstado(this.resultSet.getString("ESTADO_CITA"));
+        this.citaAtencion.setEstado(EstadoCita.valueOf(this.resultSet.getString("ESTADO_CITA")));
         this.citaAtencion.setObservacion(this.resultSet.getString("OBSERVACION"));
         this.citaAtencion.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
