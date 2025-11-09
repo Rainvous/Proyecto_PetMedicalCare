@@ -498,15 +498,17 @@ public abstract class DaoBaseImpl {
         List lista = new ArrayList<>();
         try {
             abrirConexion();
-            // CallableStatement cs = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, null);
+           
             String ProcedureSQL = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, null);
+            //call Nombre_procedure (?, ?,?,?)
             colocarSQLEnStatement(ProcedureSQL);
             if (parametrosEntrada != null) {
-                //registrarParametrosEntrada(this.statement, parametrosEntrada);
+                
                 registrarParametrosEntrada(parametrosEntrada);
+                //{ call Nombre_procedure ('pepe', '99','77','66') }
+                
             }
-            //System.out.println("Call-> " + this.statement);
-            //  this.resultSet = cs.executeQuery(); 
+            System.out.println("->"+this.statement);
             ejecutarSelectEnDB();
             while (this.resultSet.next()) {
                 agregarObjetoALaLista(lista);
@@ -547,6 +549,7 @@ public abstract class DaoBaseImpl {
         call.append(")}");
         return call.toString();
         //return con.prepareCall(call.toString());
+        
     }
 
     //FUNCION 3    

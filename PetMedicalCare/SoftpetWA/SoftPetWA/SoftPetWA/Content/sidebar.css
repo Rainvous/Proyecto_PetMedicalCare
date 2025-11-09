@@ -1,0 +1,174 @@
+﻿/* Content/sidebar.css - Estilos para el sidebar y topbar de PetMedicalCare */
+
+/* --- TUS ESTILOS DEL SIDEBAR (MEJORADOS) --- */
+.sidebar-petmedical {
+    width: 250px;
+    background: linear-gradient(180deg, #00bcd4 0%, #0097a7 100%);
+    color: white;
+    padding: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    transition: margin .25s ease-out; /* Transición para ocultar */
+    margin-left: 0;
+}
+
+/* Header del sidebar */
+.sidebar-header {
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px; /* Altura fija */
+}
+
+    .sidebar-header .sidebar-brand-container {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+    }
+
+.sidebar-brand-container i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.sidebar-brand {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.sidebar-toggle-btn {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.sidebar-divider {
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 0.5rem 0;
+}
+
+/* Navegación */
+.sidebar-nav {
+    padding: 0;
+    list-style: none;
+    flex-grow: 1; /* Hace que la lista ocupe el espacio disponible */
+}
+
+    .sidebar-nav .nav-item {
+        margin: 0;
+    }
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+    .sidebar-link i {
+        width: 24px;
+        margin-right: 0.75rem;
+        font-size: 1.1rem;
+    }
+
+    .sidebar-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding-left: 2rem;
+    }
+
+    .sidebar-link.active {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: white;
+        border-left: 4px solid white;
+        padding-left: calc(1.5rem - 4px); /* Ajusta padding por el borde */
+    }
+
+/* Footer del sidebar con usuario */
+.sidebar-footer {
+    /* margin-top: auto; */ /* No es necesario con flex-grow en .sidebar-nav */
+    padding: 1.5rem 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+    .sidebar-footer .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #00bcd4;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .sidebar-footer .user-name {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: white;
+    }
+
+    .sidebar-footer .user-role {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+/* --- ESTILOS ADICIONALES (PARA TOPBAR Y CONTENIDO) --- */
+
+body {
+    background-color: #f5f5f5; /* Fondo gris claro */
+}
+
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.content-wrapper {
+    flex-grow: 1;
+    overflow-y: auto; /* Permite scroll solo en el contenido */
+    height: 100vh;
+}
+
+/* Estilos para la barra superior (Navbar) */
+.navbar-custom {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    height: 60px;
+    padding: 0 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+    .navbar-custom .nav-link {
+        color: #6c757d;
+        margin-left: 15px;
+        font-size: 1.1rem;
+    }
+
+        .navbar-custom .nav-link:hover {
+            color: #333;
+        }
+
+/* Toggle del Sidebar */
+.main-wrapper.toggled .sidebar-petmedical {
+    margin-left: -250px;
+}
+
+@media (max-width: 768px) {
+    .sidebar-petmedical {
+        margin-left: -250px;
+    }
+
+    .main-wrapper.toggled .sidebar-petmedical {
+        margin-left: 0;
+    }
+}

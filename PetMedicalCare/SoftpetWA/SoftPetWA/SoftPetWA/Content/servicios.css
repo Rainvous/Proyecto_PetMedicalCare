@@ -1,0 +1,234 @@
+﻿/* Nombre del archivo: Content/servicios.css */
+
+/* --- Pestañas de Filtro (Reutilizable de Inventario) --- */
+.filter-tabs .nav-link {
+    color: #6c757d;
+    font-weight: 500;
+    border: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    margin-right: 8px;
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 0.3rem 1rem;
+}
+
+    .filter-tabs .nav-link.active {
+        color: #fff;
+        background-color: #00A3A3; /* Azul/Teal */
+        border-color: #00A3A3;
+    }
+
+    .filter-tabs .nav-link:hover {
+        background-color: #e0e0e0;
+    }
+
+    .filter-tabs .nav-link.active:hover {
+        background-color: #008D8D;
+    }
+
+.filter-tabs .badge {
+    margin-left: 5px;
+}
+
+/* --- Tarjeta de Servicio (AJUSTADO) --- */
+.service-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+    overflow: hidden;
+    border-top: 4px solid #00A3A3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* --- Cabecera (Icono y Estado - AJUSTADO Icono) --- */
+.service-card-header {
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.service-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px; /* Slightly rounded square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #ffffff; /* Icon color white */
+    /* background-color: #e3f2fd; Default removed */
+}
+/* --- NUEVO: Colores de fondo para iconos --- */
+.icon-bg-consulta {
+    background-color: #29b6f6;
+}
+/* Azul */
+.icon-bg-radiografia {
+    background-color: #607d8b;
+}
+/* Gris azulado */
+.icon-bg-analisis {
+    background-color: #66bb6a;
+}
+/* Verde */
+.icon-bg-limpieza {
+    background-color: #00bcd4;
+}
+/* Celeste */
+.icon-bg-cirugia {
+    background-color: #ab47bc;
+}
+/* Morado */
+.icon-bg-vacunacion {
+    background-color: #ef5350;
+}
+/* Rojo */
+.icon-bg-bano {
+    background-color: #ffa726;
+}
+/* Naranja */
+/* Añade más si es necesario */
+
+/* --- NUEVO/REVERTIDO: Badges de Estado (Status Badges) --- */
+/* (Estilo copiado/adaptado de inventario.css) */
+.status-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3em 0.7em;
+    border-radius: 20px; /* Bordes redondeados (pill) */
+    text-transform: uppercase;
+    display: inline-block;
+}
+/* Colores */
+.status-activo {
+    background-color: #e8f5e9;
+    color: #198754;
+}
+/* Verde Bootstrap */
+.status-inactivo {
+    background-color: #ffebee;
+    color: #dc3545;
+}
+/* Rojo Bootstrap */
+
+
+/* --- Cuerpo (Nombre, Desc, Precio - AJUSTADO) --- */
+.service-card-body {
+    padding: 0.5rem 1.5rem 1rem 1.5rem; /* Ajustado padding */
+    flex-grow: 1; /* Allow body to take available space */
+}
+
+    .service-card-body .service-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.25rem;
+    }
+
+    .service-card-body .service-desc {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+        min-height: 50px; /* Altura fija para alinear tarjetas */
+    }
+/* --- Pie (Precio y Acciones con Hover - AJUSTADO) --- */
+.service-card-footer {
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    display: flex; /* FLEXBOX */
+    justify-content: space-between; /* Espacio entre precio y acciones */
+    align-items: center; /* Centrado vertical */
+    border-top: 1px solid #e0e0e0;
+}
+
+/* --- NUEVO/AJUSTADO: Estilo del Precio en el Footer --- */
+.service-price-footer {
+    font-size: 1.1rem; /* Tamaño adecuado para el footer */
+    font-weight: 700;
+    color: #00A3A3; /* Color Teal */
+}
+
+/* --- NUEVO: Contenedor de botones de acción --- */
+.service-actions {
+    /* Contenedor para los botones */
+}
+    /* Estilo y visibilidad de botones (Sin Cambios) */
+    .service-actions .btn {
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        font-size: 0.9rem;
+        border-radius: 0.25rem;
+        margin-left: 0.25rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+.service-card:hover .service-actions .btn {
+    opacity: 1;
+    visibility: visible;
+}
+/* Colores sólidos para botones (Sin Cambios) */
+.btn-action-view {
+    background-color: #e3f2fd;
+    color: #2196f3;
+}
+
+    .btn-action-view:hover {
+        background-color: #bbdefb;
+    }
+
+.btn-action-edit {
+    background-color: #fff3e0;
+    color: #ff9800;
+}
+
+    .btn-action-edit:hover {
+        background-color: #ffe0b2;
+    }
+
+.btn-action-delete {
+    background-color: #ffebee;
+    color: #dc3545;
+}
+
+    .btn-action-delete:hover {
+        background-color: #ffcdd2;
+    }
+
+/* ADD THIS BACK TO: Content/servicios.css */
+
+/* --- Paginación Personalizada (Circular Style) --- */
+.custom-pagination .page-item .page-link {
+    border-radius: 50% !important; /* Círculos */
+    margin: 0 2px;
+    border: none;
+    color: #6c757d;
+    width: 36px; /* Ensure consistent size */
+    height: 36px; /* Ensure consistent size */
+    display: flex; /* Center content */
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+    .custom-pagination .page-item .page-link:hover {
+        background-color: #f0f0f0;
+    }
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #00A3A3; /* Azul/Teal */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,163,163,0.3);
+}
+
+/* --- ELIMINADO: Paginación Personalizada --- */
+/* Se eliminaron las reglas .custom-pagination */

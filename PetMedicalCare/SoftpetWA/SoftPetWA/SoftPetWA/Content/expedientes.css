@@ -1,0 +1,199 @@
+﻿/* Nombre del archivo: Content/expedientes.css */
+
+/* --- Tarjeta de Info de Mascota (Izquierda) --- */
+.pet-info-card {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.pet-info-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 0 auto 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    .pet-info-avatar img {
+        width: 90%;
+        height: 90%;
+        object-fit: cover;
+    }
+
+.pet-info-card .pet-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.pet-info-card .pet-breed {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+/* Lista de detalles de la mascota */
+.pet-details-list {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .pet-details-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+        .pet-details-list li .label {
+            color: #6c757d;
+        }
+
+        .pet-details-list li .value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .pet-details-list li:last-child {
+            border-bottom: none;
+        }
+
+/* Tarjeta de propietario (anidada) */
+.owner-info-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+    .owner-info-card .owner-title {
+        font-weight: 700;
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 0.75rem;
+    }
+
+    .owner-info-card .info-item {
+        font-size: 0.85rem;
+        color: #6c757d;
+        display: block; /* Uno por línea */
+        margin-bottom: 0.25rem;
+    }
+
+        .owner-info-card .info-item i {
+            width: 16px;
+            margin-right: 5px;
+        }
+
+
+/* --- Historial Médico (Derecha) --- */
+.timeline-entry {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.timeline-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+    .timeline-header .date {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .timeline-header .title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #00A3A3; /* Azul/Teal */
+        margin: 0;
+    }
+
+    .timeline-header .doctor {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+.timeline-body {
+    padding: 1rem 1.5rem;
+}
+
+/* Secciones coloreadas (Diagnóstico, Receta, etc.) */
+.section-block {
+    margin-bottom: 1rem;
+}
+
+.section-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.section-body {
+    font-size: 0.9rem;
+    color: #333;
+    padding-left: 0.5rem;
+}
+
+/* Colores de las secciones */
+.bg-diagnostico {
+    background-color: #fff3e0;
+    color: #ffa726;
+}
+/* Naranja */
+.bg-receta {
+    background-color: #e3f2fd;
+    color: #29b6f6;
+}
+/* Azul */
+.bg-procedimiento {
+    background-color: #e8f5e9;
+    color: #66bb6a;
+}
+/* Verde */
+
+/* Estilo para items de receta */
+.receta-item {
+    margin-bottom: 0.5rem;
+}
+
+    .receta-item .receta-titulo {
+        font-weight: 600;
+    }
+
+/* Tabla de Vitals */
+.vitals-table {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1rem;
+}
+
+    .vitals-table .label {
+        color: #6c757d;
+    }
+
+    .vitals-table .value {
+        font-weight: 600;
+    }

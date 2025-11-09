@@ -1,0 +1,202 @@
+﻿/* Nombre del archivo: Content/historialmedico.css */
+
+/* --- Tarjeta Info Mascota (Izquierda) --- */
+.pet-summary-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.pet-summary-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1rem auto;
+    background-color: #f0f0f0;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    .pet-summary-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.pet-summary-card .pet-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.pet-summary-card .pet-breed {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+/* Lista de detalles */
+.pet-summary-details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    text-align: left;
+}
+
+    .pet-summary-details li {
+        display: flex;
+        align-items: center;
+        padding: 0.6rem 0;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+        .pet-summary-details li:last-child {
+            border-bottom: none;
+        }
+
+        .pet-summary-details li i {
+            width: 28px; /* Ancho fijo para icono */
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            background-color: #e3f2fd; /* Celeste */
+            color: #29b6f6; /* Azul */
+            font-size: 0.9rem;
+        }
+
+        .pet-summary-details li .label {
+            color: #6c757d;
+            flex-grow: 1; /* Empuja el valor a la derecha */
+        }
+
+        .pet-summary-details li .value {
+            font-weight: 600;
+            color: #333;
+        }
+
+/* Botones inferiores */
+.pet-summary-card .btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+}
+
+/* --- Historial de Atenciones (Derecha) --- */
+.history-filter-tabs .nav-link {
+    color: #6c757d;
+    font-weight: 500;
+    border: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    margin-right: 8px;
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 0.3rem 1rem;
+    font-size: 0.9rem;
+}
+
+    .history-filter-tabs .nav-link.active {
+        color: #fff;
+        background-color: #00A3A3; /* Azul/Teal */
+        border-color: #00A3A3;
+    }
+
+    .history-filter-tabs .nav-link:hover {
+        background-color: #e9ecef;
+    }
+
+    .history-filter-tabs .nav-link.active:hover {
+        background-color: #008D8D;
+    }
+
+    .history-filter-tabs .nav-link i {
+        margin-right: 5px;
+    }
+
+/* Entrada del historial (similar a expedientes) */
+.history-entry {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.history-entry-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .history-entry-header .date-time {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #6c757d;
+    }
+
+    .history-entry-header .entry-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #00A3A3; /* Azul/Teal */
+        margin: 0;
+    }
+
+    .history-entry-header .doctor {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .history-entry-header .entry-type-badge {
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.3em 0.6em;
+        border-radius: 4px;
+        /* Colores se definirán inline o con clases específicas */
+    }
+
+.badge-consulta {
+    background-color: #e3f2fd;
+    color: #29b6f6;
+}
+/* Azul */
+.badge-vacuna {
+    background-color: #e8f5e9;
+    color: #66bb6a;
+}
+/* Verde */
+/* ... otros tipos ... */
+
+.history-entry-body {
+    padding: 1.5rem;
+}
+
+/* Secciones (Diagnóstico, Motivo, Receta, etc. reutilizan clases de expedientes.css) */
+/* Asegúrate de tener estas clases o cópialas aquí si no usas expedientes.css globalmente */
+/*
+.section-block { margin-bottom: 1rem; }
+.section-header { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; }
+.section-body { font-size: 0.9rem; color: #333; padding-left: 0.5rem; white-space: pre-line; }
+.bg-diagnostico { background-color: #fff3e0; color: #ffa726; }
+.bg-receta { background-color: #e3f2fd; color: #29b6f6; }
+.vitals-table { font-size: 0.9rem; margin-top: 1rem; border-top: 1px solid #f0f0f0; padding-top: 1rem; }
+.vitals-table .label { color: #6c757d; }
+.vitals-table .value { font-weight: 600; }
+.receta-item { margin-bottom: 0.5rem; }
+.receta-item .receta-titulo { font-weight: 600; }
+*/
+
+.history-entry-footer {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa; /* Gris claro */
+    border-top: 1px solid #e0e0e0;
+    text-align: right;
+}
