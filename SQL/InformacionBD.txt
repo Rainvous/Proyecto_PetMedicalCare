@@ -1,0 +1,16 @@
+---------------------
+MYSQL
+base de datos: softpet
+password: Fullchow#01
+user: admin
+puerto: 3306
+esquema: petmedicalcare
+url: softpet.cyvzjhf4i02y.us-east-1.rds.amazonaws.com
+---------------------
+MSSQL
+base de datos:softpet-mssql
+password: Fullchow#01
+user: admin
+puerto: 1433
+esquema: FALTA
+url: 
