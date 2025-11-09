@@ -13,4 +13,4 @@ password: Fullchow#01
 user: admin
 puerto: 1433
 esquema: FALTA
-url: 
+url: softpet-mssql.cyvzjhf4i02y.us-east-1.rds.amazonaws.com

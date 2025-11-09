@@ -29,8 +29,10 @@ public class DBManagerTest {
     @org.junit.jupiter.api.Test
     public void testGetConnection() {
         System.out.println("getConnection");
-        DBManager dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MSSQL);
-        Connection conexion = dBManager.getConnection();
+        DBManager dBManager;
+        Connection conexion;
+        dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MSSQL);
+        conexion = dBManager.getConnection();
         assertNotNull(conexion);
         dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MYSQL);
         conexion = dBManager.getConnection();
