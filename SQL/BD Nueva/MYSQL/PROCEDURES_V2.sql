@@ -1,7 +1,7 @@
 -- ===============================================
 -- BUSCAR PERSONASS AVANZADOS
 -- ===============================================
-use tu_esquema;
+use petmedicalcare;
 DROP PROCEDURE IF EXISTS sp_buscar_personas_avanzada;
 DELIMITER $$
 CREATE PROCEDURE `sp_buscar_personas_avanzada`(

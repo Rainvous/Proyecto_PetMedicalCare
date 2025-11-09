@@ -1,4 +1,4 @@
-use tu_esquema;
+use petmedicalcare;
 DELIMITER $$
 
 -- Limpieza
