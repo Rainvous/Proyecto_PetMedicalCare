@@ -59,7 +59,7 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.statement.setString(9, this.detalleReceta.getCantidad());
         this.statement.setInt(10, this.detalleReceta.getActivo() ? 1 : 0);
 
-        this.statement.setInt(10, this.detalleReceta.getDetalleRecetaId());
+        this.statement.setInt(11, this.detalleReceta.getDetalleRecetaId());
     }
 
     @Override

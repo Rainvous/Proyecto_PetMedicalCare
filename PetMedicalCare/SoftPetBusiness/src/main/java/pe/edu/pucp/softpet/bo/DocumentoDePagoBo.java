@@ -1,7 +1,6 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
-import java.sql.Date;
 import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
 import pe.edu.pucp.softpet.daoImp.MetodoDePagoDaoImpl;
@@ -19,20 +18,26 @@ public class DocumentoDePagoBo {
 
     }
 
-    public Integer insertar(int metodoDePagoId, int personaId,
-            TipoDocumentoDePago tipoDocumento, String serie, String numero,
-            Date fechaEmision, EstadoDocumentoDePago estado, double subtotal,
+        public Integer insertar(int metodoDePagoId, int personaId,
+            String tipoDocumento, String serie, String numero,
+            String fechaEmision, String estado, double subtotal,
             double igvTotal, double total, boolean activo) {
 
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
-
+        
+        //Modificado para el SOAP
+        EstadoDocumentoDePago estadoEnum = EstadoDocumentoDePago.valueOf(estado.toUpperCase());
+        TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
+        java.sql.Date fechaEmisionDate = java.sql.Date.valueOf(fechaEmision);
+        
+        
         documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().obtenerPorId(metodoDePagoId));
         documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        documentoPago.setTipoDocumento(tipoDocumento);
+        documentoPago.setTipoDocumento(tipoDocumentoEnum);
         documentoPago.setSerie(serie);
         documentoPago.setNumero(numero);
-        documentoPago.setFechaEmision(fechaEmision);
-        documentoPago.setEstado(estado);
+        documentoPago.setFechaEmision(fechaEmisionDate);
+        documentoPago.setEstado(estadoEnum);
         documentoPago.setSubtotal(subtotal);
         documentoPago.setIGVTotal(igvTotal);
         documentoPago.setTotal(total);
@@ -42,20 +47,25 @@ public class DocumentoDePagoBo {
     }
 
     public Integer modificar(int documentoPagoId, int metodoDePagoId, int personaId,
-            TipoDocumentoDePago tipoDocumento, String serie, String numero,
-            Date fechaEmision, EstadoDocumentoDePago estado, double subtotal,
+            String tipoDocumento, String serie, String numero,
+            String fechaEmision, String estado, double subtotal,
             double igvTotal, double total, boolean activo) {
 
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
+        
+        //Modificado para el SOAP
+        EstadoDocumentoDePago estadoEnum = EstadoDocumentoDePago.valueOf(estado.toUpperCase());
+        TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
+        java.sql.Date fechaEmisionDate = java.sql.Date.valueOf(fechaEmision);
 
         documentoPago.setDocumentoPagoId(documentoPagoId);
         documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().obtenerPorId(metodoDePagoId));
         documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        documentoPago.setTipoDocumento(tipoDocumento);
+        documentoPago.setTipoDocumento(tipoDocumentoEnum);
         documentoPago.setSerie(serie);
         documentoPago.setNumero(numero);
-        documentoPago.setFechaEmision(fechaEmision);
-        documentoPago.setEstado(estado);
+        documentoPago.setFechaEmision(fechaEmisionDate);
+        documentoPago.setEstado(estadoEnum);
         documentoPago.setSubtotal(subtotal);
         documentoPago.setIGVTotal(igvTotal);
         documentoPago.setTotal(total);
