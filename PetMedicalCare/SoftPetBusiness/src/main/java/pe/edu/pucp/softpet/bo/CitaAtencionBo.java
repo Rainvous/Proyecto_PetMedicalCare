@@ -1,5 +1,3 @@
-
-
 package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
@@ -22,6 +20,7 @@ public class CitaAtencionBo {
 
     /**
      * Inserta una nueva Cita de Atención.
+     *
      * @param citaAtencion Objeto DTO con los datos de la cita a insertar.
      * @return El ID de la cita insertada.
      */
@@ -31,15 +30,17 @@ public class CitaAtencionBo {
 
     /**
      * Modifica una Cita de Atención existente.
+     *
      * @param citaAtencion Objeto DTO con los datos de la cita a modificar.
-     * @return Número de filas afectadas (debería ser 1 si se actualiza correctamente).
+     * @return Número de filas afectadas (debería ser 1 si se actualiza
+     * correctamente).
      */
     public Integer modificar(CitaAtencionDto citaAtencion) {
         return this.citaDao.modificar(citaAtencion);
     }
 
     public Integer eliminar(int citaAtencionId) {
-        CitaAtencionDto cita= new CitaAtencionDto();
+        CitaAtencionDto cita = new CitaAtencionDto();
         cita.setCitaId(citaAtencionId);
         return this.citaDao.eliminar(cita);
     }
