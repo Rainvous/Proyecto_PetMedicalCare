@@ -116,7 +116,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="boRestful\CitaAtencionBo.cs" />
     <Compile Include="boRestful\RecetaMedicaBo.cs" />
+    <Compile Include="dtoRestful\CitaAtencion.cs" />
     <Compile Include="dtoRestful\RecetaMedicaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

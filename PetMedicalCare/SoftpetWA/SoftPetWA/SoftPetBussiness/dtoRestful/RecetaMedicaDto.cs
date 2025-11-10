@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-
+//informacion de receta medica, cita asociada
 namespace SoftPetBussiness.Bo
 {
     public class RecetaMedicaDto
