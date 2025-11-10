@@ -14,11 +14,11 @@ public class ServicioBo {
         this.servicioDao = new ServicioDaoImpl();
     }
 
-    public Integer insertar(int tipoServicioId, String nombre, 
-            String descripcion, double costo, String estado, boolean activo){
+    public Integer insertar(int tipoServicioId, String nombre,
+            String descripcion, double costo, String estado, boolean activo) {
 
         ServicioDto servicio = new ServicioDto();
-        
+
         servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(tipoServicioId));
         servicio.setNombre(nombre);
         servicio.setDescripcion(descripcion);
@@ -29,11 +29,11 @@ public class ServicioBo {
         return this.servicioDao.insertar(servicio);
     }
 
-    public Integer modificar(int servicioId, int tipoServicioId, String nombre, 
+    public Integer modificar(int servicioId, int tipoServicioId, String nombre,
             String descripcion, double costo, String estado, boolean activo) {
-        
+
         ServicioDto servicio = new ServicioDto();
-        
+
         servicio.setServicioId(servicioId);
         servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(tipoServicioId));
         servicio.setNombre(nombre);

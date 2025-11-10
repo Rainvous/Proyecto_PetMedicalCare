@@ -47,3 +47,10 @@ D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\Proyecto_PetMedicalCare\Pet
 D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.csproj.CoreCompileInputs.cache
 D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.dll
 D:\PROGRAMAS\C++_java\CICLO_6\REPOSITORIOS_De_Progr3\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.pdb
+C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\bin\SoftPetWA.dll.config
+C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\bin\SoftPetWA.dll
+C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\bin\SoftPetWA.pdb
+C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.csproj.AssemblyReference.cache
+C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.csproj.CoreCompileInputs.cache
+C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.dll
+C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.pdb
