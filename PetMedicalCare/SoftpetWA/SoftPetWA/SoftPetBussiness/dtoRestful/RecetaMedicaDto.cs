@@ -23,6 +23,7 @@ namespace SoftPetBussiness.Bo
         public CitaDto Cita { get; set; }
 
         // Si tu backend usa java.sql.Date (yyyy-MM-dd), Newtonsoft lo parsea a 00:00:00
+        //
         [JsonProperty("fechaEmision")]
         public DateTime? FechaEmision { get; set; }
 

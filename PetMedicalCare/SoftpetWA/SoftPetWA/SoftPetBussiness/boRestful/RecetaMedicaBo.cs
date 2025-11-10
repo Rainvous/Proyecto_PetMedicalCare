@@ -25,7 +25,9 @@ namespace SoftPetBussiness.Bo
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var jsonResponse = response.Content.ReadAsStringAsync().Result;  // Sincrónico
+                Console.WriteLine("Respuesta de listar todos\n" + jsonResponse);
                 var recetas = JsonConvert.DeserializeObject<List<RecetaMedicaDto>>(jsonResponse);
+
                 return recetas;
             }
 
@@ -53,7 +55,7 @@ namespace SoftPetBussiness.Bo
             {
                 DateFormatString = "yyyy-MM-dd"  // Formato de fecha adecuado
             });
-
+            Console.WriteLine("Payload de inserción: " + jsonRequest);
             var content = new StringContent(jsonRequest, Encoding.Default, "application/json");
 
             var response = _httpClient.PostAsync(_baseUrl, content).Result;  // Sincrónico
