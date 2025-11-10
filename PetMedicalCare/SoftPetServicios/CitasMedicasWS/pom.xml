@@ -19,6 +19,16 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SoftPetModel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SoftPetBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     
     <build>

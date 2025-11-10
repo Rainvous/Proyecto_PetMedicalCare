@@ -60,4 +60,21 @@ public class RecetaMedicaBo {
     public ArrayList<RecetaMedicaDto> listarTodos() {
         return this.recetaDao.listarTodos();
     }
+    
+        /** Inserta una receta recibiendo directamente el DTO.
+     * @param receta
+     * @return  */
+    public Integer insertar(RecetaMedicaDto receta) {
+
+        return this.recetaDao.insertar(receta);
+    }
+
+    /** Modifica una receta recibiendo directamente el DTO.
+     * @param receta
+     * @return  */
+    public Integer modificar(RecetaMedicaDto receta) {
+        receta.setCita(new CitaAtencionDaoImpl().obtenerPorId(receta.getCita().getCitaId()));
+    
+        return this.recetaDao.modificar(receta);
+    }
 }

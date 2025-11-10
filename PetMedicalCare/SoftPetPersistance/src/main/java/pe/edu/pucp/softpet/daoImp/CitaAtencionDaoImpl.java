@@ -40,8 +40,8 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setInt(1, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(2, this.citaAtencion.getMascota().getMascotaId());
         this.statement.setDate(3, this.citaAtencion.getFechaRegistro());
-        this.statement.setDate(4, this.citaAtencion.getFechaHoraInicio());
-        this.statement.setDate(5, this.citaAtencion.getFechaHoraFin());
+        this.statement.setTimestamp(4, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setTimestamp(5, this.citaAtencion.getFechaHoraFin());
         this.statement.setDouble(6, this.citaAtencion.getPesoMascota());
         this.statement.setDouble(7, this.citaAtencion.getMonto());
         this.statement.setString(8, this.citaAtencion.getEstado().toString());
@@ -65,8 +65,8 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.statement.setInt(1, this.citaAtencion.getVeterinario().getVeterinarioId());
         this.statement.setInt(2, this.citaAtencion.getMascota().getMascotaId());
         this.statement.setDate(3, this.citaAtencion.getFechaRegistro());
-        this.statement.setDate(4, this.citaAtencion.getFechaHoraInicio());
-        this.statement.setDate(5, this.citaAtencion.getFechaHoraFin());
+       this.statement.setTimestamp(4, this.citaAtencion.getFechaHoraInicio());
+        this.statement.setTimestamp(5, this.citaAtencion.getFechaHoraFin());
         this.statement.setDouble(6, this.citaAtencion.getPesoMascota());
         this.statement.setDouble(7, this.citaAtencion.getMonto());
         this.statement.setString(8, this.citaAtencion.getEstado().toString());
@@ -95,8 +95,8 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         this.citaAtencion.setMascota(new MascotaDaoImpl().
                 obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));
         this.citaAtencion.setFechaRegistro(this.resultSet.getDate("FECHA_REGISTRO"));
-        this.citaAtencion.setFechaHoraInicio(this.resultSet.getDate("FECHA_HORA_INICIO"));
-        this.citaAtencion.setFechaHoraFin(this.resultSet.getDate("FECHA_HORA_FIN"));
+        this.citaAtencion.setFechaHoraInicio(this.resultSet.getTimestamp("FECHA_HORA_INICIO"));
+        this.citaAtencion.setFechaHoraFin(this.resultSet.getTimestamp("FECHA_HORA_FIN"));
         this.citaAtencion.setPesoMascota(this.resultSet.getDouble("PESO_MASCOTA"));
         this.citaAtencion.setMonto(this.resultSet.getDouble("MONTO"));
         this.citaAtencion.setEstado(EstadoCita.valueOf(this.resultSet.getString("ESTADO_CITA")));

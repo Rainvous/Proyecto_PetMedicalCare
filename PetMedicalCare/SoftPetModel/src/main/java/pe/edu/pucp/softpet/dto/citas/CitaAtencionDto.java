@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.dto.citas;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
@@ -11,8 +12,8 @@ public class CitaAtencionDto {
     private VeterinarioDto veterinario;
     private MascotaDto mascota;
     private Date fechaRegistro;
-    private Date fechaHoraInicio;
-    private Date fechaHoraFin;
+    private Timestamp fechaHoraInicio;
+    private Timestamp fechaHoraFin;
     private Double pesoMascota;
     private Double monto;
     private EstadoCita estado;
@@ -34,8 +35,8 @@ public class CitaAtencionDto {
     }
 
     public CitaAtencionDto(Integer citaId, VeterinarioDto veterinario,
-            MascotaDto mascota, Date fechaRegistro, Date fechaHoraInicio,
-            Date fechaHoraFin, Double pesoMascota, Double monto,
+            MascotaDto mascota, Date fechaRegistro, Timestamp fechaHoraInicio,
+            Timestamp fechaHoraFin, Double pesoMascota, Double monto,
             EstadoCita estado, String observacion, Boolean activo) {
         this.citaId = citaId;
         this.veterinario = veterinario;
@@ -109,28 +110,28 @@ public class CitaAtencionDto {
     /**
      * @return the fechaHoraInicio
      */
-    public Date getFechaHoraInicio() {
+    public Timestamp getFechaHoraInicio() {
         return fechaHoraInicio;
     }
 
     /**
      * @param fechaHoraInicio the fechaHoraInicio to set
      */
-    public void setFechaHoraInicio(Date fechaHoraInicio) {
+    public void setFechaHoraInicio(Timestamp fechaHoraInicio) {
         this.fechaHoraInicio = fechaHoraInicio;
     }
 
     /**
      * @return the fechaHoraFin
      */
-    public Date getFechaHoraFin() {
+    public Timestamp getFechaHoraFin() {
         return fechaHoraFin;
     }
 
     /**
      * @param fechaHoraFin the fechaHoraFin to set
      */
-    public void setFechaHoraFin(Date fechaHoraFin) {
+    public void setFechaHoraFin(Timestamp fechaHoraFin) {
         this.fechaHoraFin = fechaHoraFin;
     }
 

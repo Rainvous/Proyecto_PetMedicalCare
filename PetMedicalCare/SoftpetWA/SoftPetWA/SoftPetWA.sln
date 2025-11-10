@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftPetWA", "SoftPetWA\Soft
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftPetBussiness", "SoftPetBussiness\SoftPetBussiness.csproj", "{F4239F60-3BF9-4473-BC4D-A91470758981}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoTest", "BoTest\BoTest.csproj", "{E9089617-2008-4D8C-BE02-450B1354365F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F4239F60-3BF9-4473-BC4D-A91470758981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4239F60-3BF9-4473-BC4D-A91470758981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4239F60-3BF9-4473-BC4D-A91470758981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9089617-2008-4D8C-BE02-450B1354365F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9089617-2008-4D8C-BE02-450B1354365F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9089617-2008-4D8C-BE02-450B1354365F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9089617-2008-4D8C-BE02-450B1354365F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

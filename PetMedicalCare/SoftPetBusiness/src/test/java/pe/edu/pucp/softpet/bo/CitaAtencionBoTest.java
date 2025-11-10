@@ -1,180 +1,154 @@
 //package pe.edu.pucp.softpet.bo;
 //
 //import java.sql.Date;
+//import java.sql.Timestamp;
 //import java.util.ArrayList;
+//
 //import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.*;
 //import org.junit.jupiter.api.MethodOrderer;
-//import org.junit.jupiter.api.TestMethodOrder;
-//import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 //import org.junit.jupiter.api.Order;
+//import org.junit.jupiter.api.TestMethodOrder;
+//
+//// Importa el DTO correcto para CitaAtencion
+//import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+//import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+//import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+//import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 //
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-//
 //public class CitaAtencionBoTest {
 //
-//    private final CitaAtencionBo citaBo;
+//    private final CitaAtencionBo bo;
 //
 //    public CitaAtencionBoTest() {
-//        this.citaBo = new CitaAtencionBo();
+//        this.bo = new CitaAtencionBo();
 //    }
 //
-//    /**
-//     * Test of insertar method, of class CitaAtencionBo.
-//     */
+//    // Helper methods para manejo de fechas y horas
+//    private static Date hoy() {
+//        return new Date(System.currentTimeMillis());  // Fecha actual para fechaRegistro
+//    }
+//
+//    private static Timestamp masMinutos(int minutos) {
+//        long tiempoActual = System.currentTimeMillis();
+//        return new Timestamp(tiempoActual + minutos * 60L * 1000L);  // +30 o +60 minutos
+//    }
+//
+//    private static Timestamp obtenerHoraFin(Timestamp horaInicio, int minutos) {
+//        return new Timestamp(horaInicio.getTime() + minutos * 60L * 1000L);  // +30 o +60 minutos
+//    }
+//
+//    // -------- Tests --------
+//
 //    @Test
 //    @Order(1)
 //    public void testInsertar() {
-//        System.out.println("=== Test: Insertar - CITAS_ATENCION ===");
+//        System.out.println("=== Test: Insertar - CITA_ATENCION ===");
 //
-//        // Fechas dinámicas
-//        Date fechaInicio = new Date(System.currentTimeMillis());
-//        Date fechaRegistro = new Date(System.currentTimeMillis());
-//        Date fechaFin = new Date(System.currentTimeMillis() + (2 * 60 * 60 * 1000)); // + 2 horas
+//        // Crear objetos DTO de Veterinario y Mascota
+//        VeterinarioDto veterinario = new VeterinarioDto();
+//        veterinario.setVeterinarioId(1);  // Asumimos que el ID existe
 //
-//        // Datos de prueba
-//        String observacion = "Control general del perro";
-//        double monto = 120.50;
-//        boolean activo = true;
-//        double pesoMascota = 12.4;
-//        String estadoCita = "Confirmado";
+//        MascotaDto mascota = new MascotaDto();
+//        mascota.setMascotaId(1);  // Asumimos que el ID existe
 //
-//        int veterinarioId = 3; // Debe existir
-//        int mascotaId = 1;     // Debe existir
+//        CitaAtencionDto cita = new CitaAtencionDto();
+//        cita.setVeterinario(veterinario);  // Asignamos el objeto Veterinario
+//        cita.setMascota(mascota);          // Asignamos el objeto Mascota
+//        cita.setFechaRegistro(hoy());     // Usamos java.sql.Date para fechaRegistro
+//         cita.setPesoMascota(10.0);
+//         cita.setMonto(200.3);
+//        // Hora inicio y fin con un intervalo de 30 minutos
+//        Timestamp horaInicio = masMinutos(0);  // Para este ejemplo usaremos la misma hora para inicio
+//        Timestamp horaFin = obtenerHoraFin(horaInicio, 30);  // Intervalo de 30 minutos
 //
-//        Integer idGenerado = citaBo.insertar(
-//                observacion, fechaInicio, fechaRegistro, fechaFin, monto,
-//                activo, pesoMascota, veterinarioId, mascotaId, estadoCita
-//        );
+//        cita.setFechaHoraInicio(horaInicio);
+//        cita.setFechaHoraFin(horaFin);
+//        cita.setEstado(EstadoCita.PROGRAMADA);  // Usamos el enum para el estado
+//        cita.setObservacion("Observación de prueba");
+//        cita.setActivo(true);
 //
-//        assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
+//        Integer idGenerado = bo.insertar(cita);
+//        assertNotNull(idGenerado, "El ID generado no debe ser null");
+//        assertTrue(idGenerado > 0, "El ID generado debe ser > 0");
+//        System.out.println("Insertado con ID: " + idGenerado);
 //    }
 //
-//    /**
-//     * Test of modificar method, of class CitaAtencionBo.
-//     */
 //    @Test
 //    @Order(2)
-//    public void testModificar() {
-//        System.out.println("=== Test: Modificar - CITAS_ATENCION ===");
+//    public void testObtenerPorId() {
+//        System.out.println("=== Test: Obtener por ID - CITA_ATENCION ===");
+//        assertNotNull(1, "Primero debe ejecutarse testInsertar");
 //
-//        int idCitaExistente = 2; // Debe existir
-//        // Fechas dinámicas
-//        Date fechaInicio = new Date(System.currentTimeMillis());
-//        Date fechaRegistro = new Date(System.currentTimeMillis());
-//        Date fechaFin = new Date(System.currentTimeMillis() + (2 * 60 * 60 * 1000)); // +2 horas
-//
-//        String nuevaObservacion = "Revisión post vacuna";
-//        double nuevoMonto = 150.0;
-//        boolean nuevoActivo = true;
-//        double nuevoPeso = 13.0;
-//        String estadoCita = "Terminado";
-//
-//        int veterinarioId = 3;
-//        int mascotaId = 1;
-//
-//        Integer resultado = citaBo.modificar(
-//                idCitaExistente, nuevaObservacion, fechaInicio,
-//                fechaRegistro, fechaFin, nuevoMonto, nuevoActivo,
-//                nuevoPeso, veterinarioId, mascotaId, estadoCita
-//        );
-//
-//        assertTrue(resultado > 0, "El método modificar debe retornar > 0 si la actualización fue exitosa");
+//        CitaAtencionDto dto = bo.obtenerPorId(1);  // Cambiar al id correcto según el entorno
+//        assertNotNull(dto, "El DTO no debe ser null");
+//      
 //    }
 //
-//    /**
-//     * Test of eliminar method, of class CitaAtencionBo.
-//     */
 //    @Test
 //    @Order(3)
-//    public void testEliminar() {
-//        System.out.println("=== Test: Eliminar - CITAS_ATENCION ===");
-//
-//        // Fechas dinámicas
-//        Date fechaInicio = new Date(System.currentTimeMillis());
-//        Date fechaRegistro = new Date(System.currentTimeMillis());
-//        Date fechaFin = new Date(System.currentTimeMillis() + (2 * 60 * 60 * 1000)); // +2 horas
-//
-//        String observacion = "Cita temporal para eliminar";
-//        double monto = 80.0;
-//        boolean activo = true;
-//        double peso = 10.5;
-//        String estadoCita = "Pendiente";
-//
-//        int veterinarioId = 3;
-//        int mascotaId = 1;
-//
-//        Integer idGenerado = citaBo.insertar(
-//                observacion, fechaInicio, fechaRegistro, fechaFin,
-//                monto, activo, peso, veterinarioId, mascotaId, estadoCita
-//        );
-//
-//        assertTrue(idGenerado > 0, "No se pudo insertar la cita para eliminarla.");
-//
-//        // Ahora eliminamos la cita
-//        Integer resultado = citaBo.eliminar(idGenerado);
-//        assertTrue(resultado > 0, "El método eliminar debe retornar > 0 si la eliminación fue exitosa");
-//    }
-//
-//    /**
-//     * Test of obtenerPorId method, of class CitaAtencionBo.
-//     */
-//    @Test
-//    @Order(4)
-//    public void testObtenerPorId() {
-//        System.out.println("=== Test: Obtener por ID - CITAS_ATENCION ===");
-//
-//        int idCitaExistente = 1;
-//        CitaAtencionDto cita = citaBo.obtenerPorId(idCitaExistente);
-//
-//        assertNotNull(cita, "La cita no debe ser null");
-//        assertEquals(idCitaExistente, cita.getCitaId(), "El ID obtenido no coincide");
-//
-//        // Mostrar datos en consola
-//        System.out.println("ID Cita: " + cita.getCitaId());
-//        System.out.println("Observación: " + cita.getObservacion());
-//        System.out.println("Monto: " + cita.getMonto());
-//        System.out.println("Activo: " + (cita.getActivo() ? "Sí" : "No"));
-//        System.out.println("Peso Mascota: " + cita.getPesoMascota());
-//        System.out.println("Estado Cita: " + cita.getEstado());
-//        if (cita.getVeterinario() != null) {
-//            System.out.println("Veterinario ID: " + cita.getVeterinario().getVeterinarioId());
-//        }
-//        if (cita.getMascota() != null) {
-//            System.out.println("Mascota ID: " + cita.getMascota().getMascotaId());
-//        }
-//    }
-//
-//    /**
-//     * Test of listarTodos method, of class CitaAtencionBo.
-//     */
-//    @Test
-//    @Order(5)
 //    public void testListarTodos() {
-//        System.out.println("=== Test: Listar todo - CITAS_ATENCION ===");
+//        System.out.println("=== Test: Listar todos - CITA_ATENCION ===");
 //
-//        ArrayList<CitaAtencionDto> lista = citaBo.listarTodos();
-//
-//        // Validaciones básicas
+//        ArrayList<CitaAtencionDto> lista = bo.listarTodos();
 //        assertNotNull(lista, "La lista no debe ser null");
 //        assertFalse(lista.isEmpty(), "La lista no debe estar vacía");
 //
-//        // Mostrar resultados
-//        System.out.println("Citas encontradas: " + lista.size());
-//        for (CitaAtencionDto c : lista) {
-//            System.out.println("-----------------------------------");
-//            System.out.println("ID Cita: " + c.getCitaId());
-//            System.out.println("Observación: " + c.getObservacion());
-//            System.out.println("Monto: " + c.getMonto());
-//            System.out.println("Activo: " + (c.getActivo() ? "Sí" : "No"));
-//            System.out.println("Peso: " + c.getPesoMascota());
-//            System.out.println("Estado Cita: " + c.getEstado());
-//            if (c.getVeterinario() != null) {
-//                System.out.println("Veterinario ID: " + c.getVeterinario().getVeterinarioId());
-//            }
-//            if (c.getMascota() != null) {
-//                System.out.println("Mascota ID: " + c.getMascota().getMascotaId());
-//            }
-//        }
+//        
+//    }
+//
+//    @Test
+//    @Order(4)
+//    public void testModificar() {
+//        System.out.println("=== Test: Modificar - CITA_ATENCION ===");
+//        assertNotNull(1, "Primero debe ejecutarse testInsertar");
+//
+//        // Crear objetos DTO de Veterinario y Mascota
+//        VeterinarioDto veterinario = new VeterinarioDto();
+//        veterinario.setVeterinarioId(1);  // Asumimos que el ID existe
+//
+//        MascotaDto mascota = new MascotaDto();
+//        mascota.setMascotaId(1);  // Asumimos que el ID existe
+//
+//        CitaAtencionDto cita = new CitaAtencionDto();
+//        cita.setCitaId(1);  // Cambiar ID según el contexto
+//        cita.setVeterinario(veterinario);  // Asignamos el objeto Veterinario
+//        cita.setMascota(mascota);          // Asignamos el objeto Mascota
+//        cita.setFechaRegistro(hoy());     // Usamos java.sql.Date para fechaRegistro
+//        cita.setPesoMascota(10.0);
+//        cita.setMonto(200.3);
+//        // Hora inicio y fin con un intervalo de 1 hora
+//        Timestamp horaInicio = masMinutos(0);
+//        Timestamp horaFin = obtenerHoraFin(horaInicio, 60);  // Intervalo de 60 minutos
+//
+//        cita.setFechaHoraInicio(horaInicio);
+//        cita.setFechaHoraFin(horaFin);
+//        cita.setEstado(EstadoCita.ATENDIDA);  // Usamos el enum para el estado
+//        cita.setObservacion("Observación modificada");
+//        cita.setActivo(false);
+//
+//        Integer filas = bo.modificar(cita);
+//        assertNotNull(filas, "El resultado no debe ser null");
+//        assertTrue(filas > 0, "Debe retornar > 0 si se actualizó");
+//
+//        CitaAtencionDto dto = bo.obtenerPorId(1); // Cambiar ID según el contexto
+//        assertNotNull(dto);
+//        assertEquals(EstadoCita.ATENDIDA, dto.getEstado(), "El estado debe ser ATENDIDA");
+//   
+//    }
+//
+//    @Test
+//    @Order(5)
+//    public void testEliminar() {
+//        System.out.println("=== Test: Eliminar - CITA_ATENCION ===");
+//        assertNotNull(1, "Primero debe ejecutarse testInsertar");
+//
+//        Integer filas = bo.eliminar(6); // Cambiar ID según el contexto
+//        assertNotNull(filas);
+//        assertTrue(filas > 0, "Debe retornar > 0 si se eliminó");
+//
+//        CitaAtencionDto dto = bo.obtenerPorId(1); // Cambiar ID según el contexto
+//        assertNull(dto, "La cita ya no debería existir después de eliminar");
 //    }
 //}

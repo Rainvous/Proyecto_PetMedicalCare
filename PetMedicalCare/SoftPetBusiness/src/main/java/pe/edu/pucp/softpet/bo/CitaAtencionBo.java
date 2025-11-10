@@ -1,6 +1,9 @@
+
+
 package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
 import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
@@ -11,14 +14,46 @@ import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionBo {
 
-    private final CitaAtencionDao citaAtencionDao;
+    private final CitaAtencionDao citaDao;
 
     public CitaAtencionBo() {
-        this.citaAtencionDao = new CitaAtencionDaoImpl();
+        this.citaDao = new CitaAtencionDaoImpl();
+    }
+
+    /**
+     * Inserta una nueva Cita de Atención.
+     * @param citaAtencion Objeto DTO con los datos de la cita a insertar.
+     * @return El ID de la cita insertada.
+     */
+    public Integer insertar(CitaAtencionDto citaAtencion) {
+        return this.citaDao.insertar(citaAtencion);
+    }
+
+    /**
+     * Modifica una Cita de Atención existente.
+     * @param citaAtencion Objeto DTO con los datos de la cita a modificar.
+     * @return Número de filas afectadas (debería ser 1 si se actualiza correctamente).
+     */
+    public Integer modificar(CitaAtencionDto citaAtencion) {
+        return this.citaDao.modificar(citaAtencion);
+    }
+
+    public Integer eliminar(int citaAtencionId) {
+        CitaAtencionDto cita= new CitaAtencionDto();
+        cita.setCitaId(citaAtencionId);
+        return this.citaDao.eliminar(cita);
+    }
+
+    public CitaAtencionDto obtenerPorId(int citaAtencionId) {
+        return this.citaDao.obtenerPorId(citaAtencionId);
+    }
+
+    public ArrayList<CitaAtencionDto> listarTodos() {
+        return this.citaDao.listarTodos();
     }
 
     public Integer insertar(int veterinarioId, int mascotaId, Date fechaRegistro,
-            Date fechaHoraInicio, Date fechaHoraFin, double pesoMascota,
+            Timestamp fechaHoraInicio, Timestamp fechaHoraFin, double pesoMascota,
             double monto, EstadoCita estado, String observacion, boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
@@ -34,11 +69,11 @@ public class CitaAtencionBo {
         cita.setObservacion(observacion);
         cita.setActivo(activo);
 
-        return this.citaAtencionDao.insertar(cita);
+        return this.citaDao.insertar(cita);
     }
 
     public Integer modificar(int citaId, int veterinarioId, int mascotaId,
-            Date fechaRegistro, Date fechaHoraInicio, Date fechaHoraFin,
+            Date fechaRegistro, Timestamp fechaHoraInicio, Timestamp fechaHoraFin,
             double pesoMascota, double monto, EstadoCita estado, String observacion,
             boolean activo) {
 
@@ -56,20 +91,6 @@ public class CitaAtencionBo {
         cita.setObservacion(observacion);
         cita.setActivo(activo);
 
-        return this.citaAtencionDao.modificar(cita);
-    }
-
-    public Integer eliminar(int citaId) {
-        CitaAtencionDto cita = new CitaAtencionDto();
-        cita.setCitaId(citaId);
-        return this.citaAtencionDao.eliminar(cita);
-    }
-
-    public CitaAtencionDto obtenerPorId(int citaId) {
-        return this.citaAtencionDao.obtenerPorId(citaId);
-    }
-
-    public ArrayList<CitaAtencionDto> listarTodos() {
-        return this.citaAtencionDao.listarTodos();
+        return this.citaDao.modificar(cita);
     }
 }

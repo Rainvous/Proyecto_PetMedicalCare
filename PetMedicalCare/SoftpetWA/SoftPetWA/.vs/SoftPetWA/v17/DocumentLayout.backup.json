@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E9089617-2008-4D8C-BE02-450B1354365F}|BoTest\\BoTest.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\proyecto_petmedicalcare\\petmedicalcare\\softpetwa\\softpetwa\\botest\\botest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9089617-2008-4D8C-BE02-450B1354365F}|BoTest\\BoTest.csproj|solutionrelative:botest\\botest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9089617-2008-4D8C-BE02-450B1354365F}|BoTest\\BoTest.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\proyecto_petmedicalcare\\petmedicalcare\\softpetwa\\softpetwa\\botest\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9089617-2008-4D8C-BE02-450B1354365F}|BoTest\\BoTest.csproj|solutionrelative:botest\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4239F60-3BF9-4473-BC4D-A91470758981}|SoftPetBussiness\\SoftPetBussiness.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\proyecto_petmedicalcare\\petmedicalcare\\softpetwa\\softpetwa\\softpetbussiness\\borestful\\recetamedicabo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4239F60-3BF9-4473-BC4D-A91470758981}|SoftPetBussiness\\SoftPetBussiness.csproj|solutionrelative:softpetbussiness\\borestful\\recetamedicabo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4239F60-3BF9-4473-BC4D-A91470758981}|SoftPetBussiness\\SoftPetBussiness.csproj|d:\\programas\\c\u002B\u002B_java\\ciclo_6\\repositorios_de_progr3\\proyecto_petmedicalcare\\petmedicalcare\\softpetwa\\softpetwa\\softpetbussiness\\dtorestful\\recetamedicadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4239F60-3BF9-4473-BC4D-A91470758981}|SoftPetBussiness\\SoftPetBussiness.csproj|solutionrelative:softpetbussiness\\dtorestful\\recetamedicadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +26,65 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\BoTest\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "BoTest\\UnitTest1.cs",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\BoTest\\UnitTest1.cs",
+              "RelativeToolTip": "BoTest\\UnitTest1.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAuwIIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T23:23:59.662Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BoTest.cs",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\BoTest\\BoTest.cs",
+              "RelativeDocumentMoniker": "BoTest\\BoTest.cs",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\BoTest\\BoTest.cs",
+              "RelativeToolTip": "BoTest\\BoTest.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwGYAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T00:40:51.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RecetaMedicaBo.cs",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\SoftPetBussiness\\boRestful\\RecetaMedicaBo.cs",
+              "RelativeDocumentMoniker": "SoftPetBussiness\\boRestful\\RecetaMedicaBo.cs",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\SoftPetBussiness\\boRestful\\RecetaMedicaBo.cs",
+              "RelativeToolTip": "SoftPetBussiness\\boRestful\\RecetaMedicaBo.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAA0wF4AAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T00:35:09.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RecetaMedicaDto.cs",
+              "DocumentMoniker": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\SoftPetBussiness\\dtoRestful\\RecetaMedicaDto.cs",
+              "RelativeDocumentMoniker": "SoftPetBussiness\\dtoRestful\\RecetaMedicaDto.cs",
+              "ToolTip": "D:\\PROGRAMAS\\C\u002B\u002B_java\\CICLO_6\\REPOSITORIOS_De_Progr3\\Proyecto_PetMedicalCare\\PetMedicalCare\\SoftpetWA\\SoftPetWA\\SoftPetBussiness\\dtoRestful\\RecetaMedicaDto.cs",
+              "RelativeToolTip": "SoftPetBussiness\\dtoRestful\\RecetaMedicaDto.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAxwCYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:48:10.625Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
