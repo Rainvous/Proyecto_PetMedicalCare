@@ -1,5 +1,6 @@
 package pe.edu.pucp.softpet.daoImp;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setString(4, this.mascota.getSexo());
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        this.statement.setDate(7, this.mascota.getFechaDefuncion());
+        this.statement.setDate(7, (Date) this.mascota.getFechaDefuncion());
         this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
     }
 
@@ -50,7 +51,7 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setString(4, this.mascota.getSexo());
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        this.statement.setDate(7, this.mascota.getFechaDefuncion());
+        this.statement.setDate(7, (Date) this.mascota.getFechaDefuncion());
         this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
         
         this.statement.setInt(9, this.mascota.getMascotaId());

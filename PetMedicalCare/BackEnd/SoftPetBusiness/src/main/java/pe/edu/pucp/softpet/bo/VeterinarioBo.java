@@ -15,30 +15,30 @@ public class VeterinarioBo {
     public VeterinarioBo() {
         this.veterinarioDao = new VeterinarioDaoImpl();
     }
-
-    public Integer insertar(int personaId, Date fechaContratacion,
-            EstadoVeterinario estado, String especialidad, boolean activo) {
+    
+    public Integer insertar(int personaId, String fechaContratacion,
+            String estado, String especialidad, boolean activo) {
 
         VeterinarioDto veterinario = new VeterinarioDto();
 
         veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        veterinario.setFechaContratacion(fechaContratacion);
-        veterinario.setEstado(estado);
+        veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
+        veterinario.setEstado(EstadoVeterinario.valueOf(estado));
         veterinario.setEspecialidad(especialidad);
         veterinario.setActivo(activo);
 
         return this.veterinarioDao.insertar(veterinario);
     }
 
-    public Integer modificar(int veterinarioId, int personaId, Date fechaContratacion,
-            EstadoVeterinario estado, String especialidad, boolean activo) {
+    public Integer modificar(int veterinarioId, int personaId, String fechaContratacion,
+            String estado, String especialidad, boolean activo) {
 
         VeterinarioDto veterinario = new VeterinarioDto();
 
         veterinario.setVeterinarioId(veterinarioId);
         veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
-        veterinario.setFechaContratacion(fechaContratacion);
-        veterinario.setEstado(estado);
+        veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
+        veterinario.setEstado(EstadoVeterinario.valueOf(estado));
         veterinario.setEspecialidad(especialidad);
         veterinario.setActivo(activo);
 

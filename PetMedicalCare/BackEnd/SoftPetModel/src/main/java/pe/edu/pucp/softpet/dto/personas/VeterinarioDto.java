@@ -1,6 +1,6 @@
 package pe.edu.pucp.softpet.dto.personas;
 
-import java.sql.Date;
+import java.util.Date;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
 public class VeterinarioDto {

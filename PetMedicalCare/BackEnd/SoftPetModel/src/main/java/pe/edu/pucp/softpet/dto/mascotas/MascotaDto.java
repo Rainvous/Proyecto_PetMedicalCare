@@ -1,6 +1,6 @@
 package pe.edu.pucp.softpet.dto.mascotas;
 
-import java.sql.Date;
+import java.util.Date;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class MascotaDto {
