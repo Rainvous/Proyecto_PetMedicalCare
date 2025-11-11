@@ -3,10 +3,13 @@ package pe.edu.pucp.softpet.daoImp;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dao.MascotaDao;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
 
@@ -123,4 +126,17 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.mascota = mascota;
         return super.eliminar();
     }
+    
+    public ArrayList<MascotaDto> ListasBusquedaAvanzada(MascotaDto mascota){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+       
+        parametrosEntrada.put(1,mascota.getNombre());
+        parametrosEntrada.put(2,mascota.getRaza());
+        parametrosEntrada.put(3,mascota.getEspecie());
+        parametrosEntrada.put(4,mascota.getPersona().getNombre());
+        
+        return (ArrayList<MascotaDto>)super.ejecutarProcedimientoLectura("sp_buscar_mascotas_avanzada", parametrosEntrada);
+    }
+    
+    
 }

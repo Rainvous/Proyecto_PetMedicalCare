@@ -1,8 +1,11 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
@@ -144,5 +147,30 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     public Integer eliminar(CitaAtencionDto citaAtencion) {
         this.citaAtencion = citaAtencion;
         return super.eliminar();
+    }
+    
+    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha){
+        String fechaParaSP;
+
+        // 1. Lógica de Java para decidir la fecha
+        if (fecha == null || fecha.trim().isEmpty()) {
+
+            // Si la fecha es "" o null, Java obtiene la fecha de hoy
+            // (usando la zona horaria de tu máquina, que es la correcta)
+            fechaParaSP = LocalDate.now().toString(); // Ej: "2025-11-10"
+
+        } else {
+            // Si la fecha SÍ viene, se usa esa.
+            fechaParaSP = fecha;
+        }
+
+        // 2. Llama al SP
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+
+        // Aquí siempre pasas una fecha válida ("2025-11-10")
+        // ya sea la que escribió el usuario o la que calculó Java.
+        parametrosEntrada.put(1, fechaParaSP);
+        
+        return (ArrayList<CitaAtencionDto>)super.ejecutarProcedimientoLectura("sp_listar_citas_por_fecha", parametrosEntrada);
     }
 }

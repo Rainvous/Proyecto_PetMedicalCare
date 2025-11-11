@@ -1,18 +1,19 @@
-//package pe.edu.pucp.softpet.daoImp;
-//
-//import java.util.Date;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import org.junit.jupiter.api.Test;
+package pe.edu.pucp.softpet.daoImp;
+
+import java.util.ArrayList;
+import java.util.Date;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 //import pe.edu.pucp.softpet.daoImp.util.enums.EstadoCita;
-//import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 //import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 //import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
-//
-//public class CitaAtencionDaoImplTest {
-//    
-//    public CitaAtencionDaoImplTest() {
-//    }
-//
+
+public class CitaAtencionDaoImplTest {
+    
+    public CitaAtencionDaoImplTest() {
+    }
+
 //    @Test
 //    public void testSomeMethod() {
 //        
@@ -42,5 +43,16 @@
 //        }
 //        
 //    }
-//    
-//}
+    @Test
+    public void testListasBusquedaAvanzada() {
+        String Fecha = "";
+        CitaAtencionDaoImpl citadao = new CitaAtencionDaoImpl();
+        ArrayList<CitaAtencionDto> lista= citadao.ListasBusquedaAvanzada(Fecha);
+        System.out.println("BUSQUEDA DE CITAS AVANZADO");
+        for( CitaAtencionDto p : lista){
+            System.out.println("->"+p.getCitaId());
+        }
+        
+    }
+    
+}

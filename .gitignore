@@ -51,3 +51,6 @@
 /PetMedicalCare/BackEnd/SoftPetBusiness/target/
 /PetMedicalCare/BackEnd/WebServices/SoftPetWSFacturacion/target/
 /PetMedicalCare/BackEnd/WebServices/SoftPetWSGestionLogistica/target/
+/PetMedicalCare/BackEnd/SoftPetPersistance/nbproject/
+/PetMedicalCare/BackEnd/WebServices/SoftPetWSGestionNoLogistica/target/
+/PetMedicalCare/BackEnd/SoftPetServicios/CitasMedicasWS/target/

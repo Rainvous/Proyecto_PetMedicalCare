@@ -60,4 +60,16 @@ public class Mascotas {
     public ArrayList<MascotaDto> listarTodos() throws IOException, InterruptedException {
         return this.mascotaBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "ListasBusquedaAvanzada")
+    public ArrayList<MascotaDto> ListasBusquedaAvanzada(
+            @WebParam(name = "nombreMascota")String nombreMascota,
+            @WebParam(name = "raza")String raza,
+            @WebParam(name = "especie")String especie,
+            @WebParam(name = "nombreDeLaPersona")String nombreDeLaPersona)
+    {
+        return this.mascotaBo.ListasBusquedaAvanzada(nombreMascota, raza, especie, nombreDeLaPersona);
+    }
+    
+    
 }

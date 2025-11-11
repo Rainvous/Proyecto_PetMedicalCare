@@ -55,4 +55,13 @@ public class Servicios {
     public ArrayList<ServicioDto> listarTodos() {
         return this.servicioBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "ListasBusquedaAvanzada")
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada(
+            @WebParam(name = "nombre")String nombre,
+            @WebParam(name = "rango")String rango,
+            @WebParam(name = "activo")String activo){
+
+        return servicioBo.ListasBusquedaAvanzada(nombre, rango, activo);
+    }
 }

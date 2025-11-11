@@ -12,7 +12,7 @@ import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionBo {
 
-    private final CitaAtencionDao citaDao;
+    private final CitaAtencionDaoImpl citaDao;
 
     public CitaAtencionBo() {
         this.citaDao = new CitaAtencionDaoImpl();
@@ -93,5 +93,9 @@ public class CitaAtencionBo {
         cita.setActivo(activo);
 
         return this.citaDao.modificar(cita);
+    }
+    
+    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha){
+        return (ArrayList<CitaAtencionDto>)citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha);
     }
 }

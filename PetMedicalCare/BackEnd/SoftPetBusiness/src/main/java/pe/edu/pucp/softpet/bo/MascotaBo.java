@@ -6,10 +6,11 @@ import pe.edu.pucp.softpet.dao.MascotaDao;
 import pe.edu.pucp.softpet.daoImp.MascotaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class MascotaBo {
     
-    private final MascotaDao mascotaDao;
+    private final MascotaDaoImpl mascotaDao;
 
     public MascotaBo() {
         this.mascotaDao = new MascotaDaoImpl();
@@ -64,5 +65,18 @@ public class MascotaBo {
 
     public ArrayList<MascotaDto> listarTodos() {
         return this.mascotaDao.listarTodos();
+    }
+    
+    public ArrayList<MascotaDto> ListasBusquedaAvanzada(String nombreMascota,
+            String raza,String especie ,String nombreDeLaPersona){
+        MascotaDto mascota = new MascotaDto();
+        PersonaDto persona = new PersonaDto();
+        mascota.setNombre(nombreMascota == null ? "" : nombreMascota);
+        mascota.setRaza(raza == null ? "" : nombreMascota);
+        mascota.setEspecie(especie== null ? "" : nombreMascota );
+        persona.setNombre(nombreDeLaPersona== null ? "" : nombreMascota);
+        mascota.setPersona(persona);
+        
+        return (ArrayList<MascotaDto>)mascotaDao.ListasBusquedaAvanzada(mascota);
     }
 }

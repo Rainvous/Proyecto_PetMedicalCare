@@ -2,7 +2,9 @@ package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
@@ -182,5 +184,14 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
         String sql = GenerarSQLSelectPorNombre();
         return (ArrayList<ServicioDto>) super.listarTodos(sql, this::incluirValorDeParametrosPorNombre, Aux);
+    }
+    
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada(ServicioDto servicio,String rango,String activo){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        parametrosEntrada.put(1,servicio.getNombre());
+        parametrosEntrada.put(2,rango);
+        parametrosEntrada.put(3,activo);
+        
+        return (ArrayList<ServicioDto>)super.ejecutarProcedimientoLectura("sp_buscar_servicios_avanzada", parametrosEntrada);
     }
 }

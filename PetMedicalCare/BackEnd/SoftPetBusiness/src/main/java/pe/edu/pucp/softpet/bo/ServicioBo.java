@@ -8,7 +8,7 @@ import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
 public class ServicioBo {
 
-    private final ServicioDao servicioDao;
+    private final ServicioDaoImpl servicioDao;
 
     public ServicioBo() {
         this.servicioDao = new ServicioDaoImpl();
@@ -57,5 +57,13 @@ public class ServicioBo {
 
     public ArrayList<ServicioDto> listarTodos() {
         return this.servicioDao.listarTodos();
+    }
+    
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada(String nombre,String rango,String activo){
+        
+        ServicioDto servicio = new ServicioDto();
+        servicio.setNombre(nombre == null ? "" : nombre);
+
+        return (ArrayList<ServicioDto>)servicioDao.ListasBusquedaAvanzada(servicio, rango == null ? "" : rango, activo == null ? "" : activo);
     }
 }
