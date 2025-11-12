@@ -1,0 +1,17 @@
+pe\edu\pucp\softpet\bo\ProductoBo.class
+pe\edu\pucp\softpet\bo\RecetaMedicaBo.class
+pe\edu\pucp\softpet\bo\RolUsuarioBo.class
+pe\edu\pucp\softpet\bo\MetodoDePagoBo.class
+pe\edu\pucp\softpet\bo\TipoServicioBo.class
+pe\edu\pucp\softpet\bo\PersonaBo.class
+pe\edu\pucp\softpet\bo\MascotaBo.class
+pe\edu\pucp\softpet\bo\DetalleServicioBo.class
+pe\edu\pucp\softpet\bo\VeterinarioBo.class
+pe\edu\pucp\softpet\bo\TipoProductoBo.class
+pe\edu\pucp\softpet\bo\DetalleDocumentoDePagoBo.class
+pe\edu\pucp\softpet\bo\RolBO.class
+pe\edu\pucp\softpet\bo\UsuarioBo.class
+pe\edu\pucp\softpet\bo\CitaAtencionBo.class
+pe\edu\pucp\softpet\bo\DocumentoDePagoBo.class
+pe\edu\pucp\softpet\bo\ServicioBo.class
+pe\edu\pucp\softpet\bo\DetalleRecetaBo.class

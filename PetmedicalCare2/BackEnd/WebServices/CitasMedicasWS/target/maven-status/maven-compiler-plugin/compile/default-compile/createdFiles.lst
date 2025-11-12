@@ -1,0 +1,8 @@
+pe\edu\pucp\citasmedicas\resources\JakartaEE10Resource.class
+pe\edu\pucp\citasmedicas\DetalleServicio.class
+pe\edu\pucp\citasmedicas\CitaAtencion.class
+pe\edu\pucp\citasmedicas\DetalleRecetaMedica$ApiError.class
+pe\edu\pucp\citasmedicas\DetalleServicio$ApiError.class
+pe\edu\pucp\citasmedicas\RecetaMedica.class
+pe\edu\pucp\citasmedicas\DetalleRecetaMedica.class
+pe\edu\pucp\citasmedicas\JakartaRestConfiguration.class
