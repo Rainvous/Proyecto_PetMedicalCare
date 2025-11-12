@@ -62,4 +62,20 @@ public class Personas {
     public ArrayList<PersonaDto> listarTodos() throws IOException, InterruptedException {
         return this.personaBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "ListasBusquedaAvanzada")
+    public ArrayList<PersonaDto> ListasBusquedaAvanzada(
+            @WebParam(name = "nombre")String nombre,
+            @WebParam(name = "NroDocumento")String NroDocumento,
+            @WebParam(name = "Ruc")String Ruc,
+            @WebParam(name = "Telefono")String Telefono){
+         
+        return (ArrayList<PersonaDto>)this.personaBo.ListasBusquedaAvanzada(nombre, NroDocumento, Ruc, Telefono);
+    }
+    
+    @WebMethod(operationName = "ListasBusquedaAvanzadaParaCliente")
+    public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente()
+    {
+        return (ArrayList<PersonaDto>)this.personaBo.ListasBusquedaAvanzadaParaCliente();
+    }
 }

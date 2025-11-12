@@ -53,16 +53,32 @@ public class PersonaDaoImplTest {
     @Test
     public void testListasBusquedaAvanzada() {
         PersonaDaoImpl personadao= new PersonaDaoImpl();
-        PersonaDto person= new PersonaDto();
-        person.setNombre("");
-        person.setNroDocumento(234);
-        person.setRuc(0);
-        person.setTelefono("");
+        String nombre = "";
+        String NroDocumento = "";
+        String Ruc = "";
+        String Telefono = "";
         personadao.EstablecerMotorBaseDeDatos(MotorDeBaseDeDatos.MYSQL.toString());
-        ArrayList<PersonaDto> personas= personadao.ListasBusquedaAvanzada(person);
+        ArrayList<PersonaDto> personas= personadao.ListasBusquedaAvanzada(
+            nombre,
+            NroDocumento,
+            Ruc,
+            Telefono);
         System.out.println("BUSQUEDA DE PERSONAS AVANZADO");
         for( PersonaDto p : personas){
             System.out.println("->"+p.getNombre());
         }   
     }
+    
+    
+    @Test
+    public void testListasBusquedaAvanzadaParaCliente() {
+        PersonaDaoImpl personadao= new PersonaDaoImpl();
+        personadao.EstablecerMotorBaseDeDatos(MotorDeBaseDeDatos.MYSQL.toString());
+        ArrayList<PersonaDto> personas= personadao.ListasBusquedaAvanzadaParaCliente();
+        System.out.println("BUSQUEDA DE PERSONAS CLIENTE");
+        for( PersonaDto p : personas){
+            System.out.println("->"+p.getNombre());
+        }   
+    }
+    
 }

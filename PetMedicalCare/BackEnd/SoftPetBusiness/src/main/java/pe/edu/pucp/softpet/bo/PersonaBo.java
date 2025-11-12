@@ -11,7 +11,7 @@ import pe.edu.pucp.softpet.dto.util.enums.Sexo;
 
 public class PersonaBo {
 
-    private final PersonaDao dao;
+    private final PersonaDaoImpl dao;
 
     public PersonaBo() {
         this.dao = new PersonaDaoImpl();
@@ -87,5 +87,23 @@ public class PersonaBo {
 
     public ArrayList<PersonaDto> listarTodos() {
         return this.dao.listarTodos();
+    }
+    
+    public ArrayList<PersonaDto> ListasBusquedaAvanzada(
+            String nombre,
+            String NroDocumento,
+            String Ruc,
+            String Telefono){
+         
+        return (ArrayList<PersonaDto>)this.dao.ListasBusquedaAvanzada(
+                nombre == null ? "" : nombre,
+                NroDocumento== null ? "" : NroDocumento,
+                Ruc == null ? "" : Ruc,
+                Telefono== null ? "" : Telefono);
+    }
+    
+    public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente()
+    {
+        return (ArrayList<PersonaDto>)this.dao.ListasBusquedaAvanzadaParaCliente();
     }
 }

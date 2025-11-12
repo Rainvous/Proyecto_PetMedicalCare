@@ -131,13 +131,29 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         return super.eliminar();
     }
         
-    public ArrayList<PersonaDto> ListasBusquedaAvanzada(PersonaDto persona){
+    public ArrayList<PersonaDto> ListasBusquedaAvanzada(
+            String nombre,
+            String NroDocumento,
+            String Ruc,
+            String Telefono
+    )
+    {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
-        parametrosEntrada.put(1,persona.getNombre());
-        parametrosEntrada.put(2,persona.getNroDocumento());
-        parametrosEntrada.put(3,persona.getRuc());
-        parametrosEntrada.put(4,persona.getTelefono());
+        parametrosEntrada.put(1,nombre);
+        parametrosEntrada.put(2,NroDocumento);
+        parametrosEntrada.put(3,Ruc);
+        parametrosEntrada.put(4,Telefono);
         
         return (ArrayList<PersonaDto>)super.ejecutarProcedimientoLectura("sp_buscar_personas_avanzada", parametrosEntrada);
     }
+    
+    
+    public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente()
+    {
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        return (ArrayList<PersonaDto>)super.ejecutarProcedimientoLectura("sp_listar_solo_clientes", parametrosEntrada);
+    }
+    
+    
+    
 }
