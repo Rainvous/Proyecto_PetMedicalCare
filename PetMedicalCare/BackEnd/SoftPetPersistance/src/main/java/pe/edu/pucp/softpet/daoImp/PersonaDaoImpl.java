@@ -36,8 +36,9 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        this.statement.setString(1, this.persona.getNombre());
-        this.statement.setInt(2, this.persona.getUsuario().getUsuarioId());
+        
+        this.statement.setInt(1, this.persona.getUsuario().getUsuarioId());
+        this.statement.setString(2, this.persona.getNombre());
         this.statement.setString(3, this.persona.getDireccion());
         this.statement.setString(4, this.persona.getTelefono());
         this.statement.setString(5, this.persona.getSexo().toString());

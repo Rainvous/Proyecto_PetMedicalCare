@@ -45,6 +45,13 @@ public class DetalleRecetaBo {
 
         return this.dao.insertar(dto);
     }
+        public Integer insertar(
+            DetalleRecetaDto dto) {
+
+        
+
+        return this.dao.insertar(dto);
+    }
 
     // MODIFICAR con parámetros (retorna filas afectadas)
     public Integer modificar(
@@ -74,6 +81,13 @@ public class DetalleRecetaBo {
         dto.setIndicacion(indicacion);
         dto.setCantidad(cantidad);
         dto.setActivo(activo);
+
+        return this.dao.modificar(dto);
+    }
+        public Integer modificar(
+          DetalleRecetaDto dto) {
+
+        
 
         return this.dao.modificar(dto);
     }
