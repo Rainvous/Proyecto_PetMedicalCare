@@ -21,12 +21,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SoftPetModel</artifactId>
+            <artifactId>SoftPetBusiness</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SoftPetBusiness</artifactId>
+            <artifactId>SoftPetModel</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

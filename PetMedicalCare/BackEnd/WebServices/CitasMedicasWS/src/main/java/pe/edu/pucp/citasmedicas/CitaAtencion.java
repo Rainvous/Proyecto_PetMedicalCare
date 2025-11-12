@@ -79,8 +79,8 @@ public class CitaAtencion {
 
         cita.setCitaId(nuevoId);
         URI location = uriInfo.getAbsolutePathBuilder()
-                              .path(String.valueOf(nuevoId))
-                              .build();
+                .path(String.valueOf(nuevoId))
+                .build();
         return Response.created(location).entity(cita).build(); // 201 + Location
     }
 
@@ -117,5 +117,29 @@ public class CitaAtencion {
             return Response.noContent().build(); // 204
         }
         return Response.status(Response.Status.NOT_FOUND).build();
+    }
+    // --- MÉTODO 1: El que ya tienes ---
+    // Responde a: .../busqueda/2025-11-10
+
+    @GET
+    @Path("busqueda/{fecha}")
+    public Response ListasBusquedaAvanzada(@PathParam("fecha") String fecha) {
+        // Llama al BO (y al SP) pasando la fecha que llegó
+        ArrayList<CitaAtencionDto> lista = citaBo.ListasBusquedaAvanzada(fecha);
+        return Response.ok(lista).build();
+    }
+
+    // --- MÉTODO 2: El que debes AGREGAR ---
+    // Responde a: .../busqueda/
+    @GET
+    @Path("busqueda") // <-- Nota: El @Path no tiene "/{fecha}"
+    public Response ListasBusquedaAvanzadaHoy() { // <-- Le puedes poner un nombre diferente
+
+        // Llama a la MISMA lógica de negocio, pero pasando NULL.
+        // Tu SP sp_listar_citas_por_fecha(NULL) ya sabe que 
+        // si recibe NULL, debe buscar las citas de HOY (CURDATE()).
+        ArrayList<CitaAtencionDto> lista = citaBo.ListasBusquedaAvanzada(null);
+
+        return Response.ok(lista).build();
     }
 }
