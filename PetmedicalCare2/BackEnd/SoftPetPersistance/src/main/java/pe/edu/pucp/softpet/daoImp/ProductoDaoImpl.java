@@ -67,8 +67,10 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.producto = new ProductoDto();
         this.producto.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
-        this.producto.setTipoProducto(new TipoProductoDaoImpl().
-                obtenerPorId(this.resultSet.getInt("TIPO_PRODUCTO_ID")));
+        
+        TipoProductoDto tp= new TipoProductoDto();
+        tp.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
+        this.producto.setTipoProducto(tp);
         this.producto.setNombre(this.resultSet.getString("NOMBRE"));
         this.producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
         this.producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
+import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
 public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao {
@@ -64,8 +65,9 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.recetaMedica = new RecetaMedicaDto();
         this.recetaMedica.setRecetaMedicaId(this.resultSet.getInt("RECETA_MEDICA_ID"));
-        this.recetaMedica.setCita(new CitaAtencionDaoImpl().
-                obtenerPorId(this.resultSet.getInt("CITA_ID")));
+        CitaAtencionDto ci= new CitaAtencionDto();
+        ci.setCitaId(this.resultSet.getInt("CITA_ID"));
+        this.recetaMedica.setCita(ci);
         this.recetaMedica.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
         this.recetaMedica.setDiagnostico(this.resultSet.getString("DIAGNOSTICO"));
         this.recetaMedica.setVigenciaHasta(this.resultSet.getDate("VIGENCIA_HASTA"));

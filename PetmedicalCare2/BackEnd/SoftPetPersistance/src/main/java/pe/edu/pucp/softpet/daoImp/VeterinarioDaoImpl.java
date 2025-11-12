@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
@@ -63,8 +64,9 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.veterinario = new VeterinarioDto();
         this.veterinario.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
-        this.veterinario.setPersona(new PersonaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        PersonaDto persona=new PersonaDto();
+        persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+        this.veterinario.setPersona(persona);
         this.veterinario.setFechaContratacion(this.resultSet.getDate("FECHA_DE_CONTRATACION"));
         this.veterinario.setEstado(EstadoVeterinario.valueOf(this.resultSet.getString("ESTADO")));
         this.veterinario.setEspecialidad(this.resultSet.getString("ESPECIALIDAD"));

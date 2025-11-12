@@ -69,8 +69,9 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.servicio = new ServicioDto();
         this.servicio.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
-        this.servicio.setTipoServicio(new TipoServicioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
+        TipoServicioDto tp= new TipoServicioDto();
+        tp.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
+        this.servicio.setTipoServicio(tp);
         this.servicio.setNombre(this.resultSet.getString("NOMBRE"));
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setCosto(this.resultSet.getDouble("COSTO"));

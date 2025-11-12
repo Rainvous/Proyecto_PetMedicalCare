@@ -8,6 +8,7 @@ import java.util.Map;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
+import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.Sexo;
 
 public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
@@ -77,8 +78,10 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.persona = new PersonaDto();
         this.persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-        this.persona.setUsuario(new UsuarioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
+        
+        UsuarioDto us=new UsuarioDto();
+        us.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
+        this.persona.setUsuario(us);
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
         this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));

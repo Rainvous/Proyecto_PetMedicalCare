@@ -74,8 +74,9 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.mascota = new MascotaDto();
         this.mascota.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
-        this.mascota.setPersona(new PersonaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        PersonaDto per= new PersonaDto();
+        per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+        this.mascota.setPersona(per);
         this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
         this.mascota.setEspecie(this.resultSet.getString("ESPECIE"));
         this.mascota.setSexo(this.resultSet.getString("SEXO"));
