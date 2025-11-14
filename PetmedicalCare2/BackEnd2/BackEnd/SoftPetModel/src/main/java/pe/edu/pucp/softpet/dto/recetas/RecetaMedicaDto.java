@@ -94,7 +94,10 @@ public class RecetaMedicaDto {
      * @param vigenciaHasta the vigenciaHasta to set
      */
     public void setVigenciaHasta(Date vigenciaHasta) {
-        this.fechaEmisionstr=vigenciaHasta.toString();
+        if(vigenciaHasta!=null)
+            this.fechaEmisionstr=vigenciaHasta.toString();
+        else
+            this.fechaEmisionstr="";
         this.vigenciaHasta = vigenciaHasta;
     }
 
