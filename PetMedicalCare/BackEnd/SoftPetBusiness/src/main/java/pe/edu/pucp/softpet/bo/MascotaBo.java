@@ -21,8 +21,8 @@ public class MascotaBo {
             boolean activo) {
 
         MascotaDto mascota = new MascotaDto();
-
-        mascota.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
+        PersonaDto persona= new PersonaDto();
+        persona.setPersonaId(personaId);
         mascota.setNombre(nombre);
         mascota.setEspecie(especie);
         mascota.setSexo(sexo);
