@@ -66,4 +66,12 @@ public class ServicioBo {
 
         return (ArrayList<ServicioDto>)servicioDao.ListasBusquedaAvanzada(servicio, rango == null ? "" : rango, activo == null ? "" : activo);
     }
+    
+    public ArrayList<ServicioDto> listarServiciosActivos() {
+        return this.servicioDao.listarServiciosActivos();
+    }
+    
+    public ArrayList<ServicioDto> ListarPorTipoServicio(String nombreTipo) {
+        return this.servicioDao.ListarPorTipoServicio(nombreTipo);
+    }
 }

@@ -79,4 +79,12 @@ public class MascotaBo {
         
         return (ArrayList<MascotaDto>)mascotaDao.ListasBusquedaAvanzada(mascota);
     }
+    
+    public ArrayList<MascotaDto> listarPorIdPersona(int personaId) {
+        return this.mascotaDao.listarPorIdPersona(personaId);
+    }
+
+    public ArrayList<MascotaDto> listarMascotasActivas() {
+        return this.mascotaDao.listarMascotasActivas();
+    }
 }

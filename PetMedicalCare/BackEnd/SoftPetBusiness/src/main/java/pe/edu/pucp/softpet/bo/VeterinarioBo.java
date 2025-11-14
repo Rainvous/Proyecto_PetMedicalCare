@@ -58,4 +58,8 @@ public class VeterinarioBo {
     public ArrayList<VeterinarioDto> listarTodos() {
         return this.veterinarioDao.listarTodos();
     }
+    
+    public ArrayList<VeterinarioDto> listarVeterinariosActivos() {
+        return this.veterinarioDao.listarVeterinariosActivos();
+    }
 }

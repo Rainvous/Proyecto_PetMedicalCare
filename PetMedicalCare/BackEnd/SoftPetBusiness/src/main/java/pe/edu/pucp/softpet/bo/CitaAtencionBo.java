@@ -106,4 +106,8 @@ public class CitaAtencionBo {
     public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha) {
         return (ArrayList<CitaAtencionDto>) citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha);
     }
+    
+    public ArrayList<CitaAtencionDto> listarPorIdMascota(int mascotaId) {
+        return this.citaDao.listarPorIdMascota(mascotaId);
+    }
 }

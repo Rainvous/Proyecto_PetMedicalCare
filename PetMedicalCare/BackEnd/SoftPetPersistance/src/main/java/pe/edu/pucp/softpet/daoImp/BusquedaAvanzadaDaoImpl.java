@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.util.ArrayList;
@@ -9,17 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
-/**
- *
- * @author User
- */
 public class BusquedaAvanzadaDaoImpl extends DaoBaseImpl {
 
     private PersonaDto persona;
-    public BusquedaAvanzadaDaoImpl(){
+
+    public BusquedaAvanzadaDaoImpl() {
         super("NO_TABLE");
-        
-    } 
+
+    }
 //    public ArrayList<PersonaDto> BuscarPersonaPorNombreDocRucTelef(PersonaDto persona) {
 //        Map<Integer, Object> parametrosEntrada = new HashMap<>();
 //        parametrosEntrada.put(1, persona.getNombre());
@@ -33,6 +26,7 @@ public class BusquedaAvanzadaDaoImpl extends DaoBaseImpl {
 //    public ArrayList<PersonaDto> BuscarPersonaAvanzadoV2(PersonaDto persona){
 //        
 //    }
+
     /*
     Select a usar
     SELECT
@@ -57,18 +51,18 @@ ORDER BY NOMBRE ASC, PERSONA_ID ASC;
     
     
     
-    */
-    private String sqlParaBusquedaAvanzaV2(PersonaDto persona){
+     */
+    private String sqlParaBusquedaAvanzaV2(PersonaDto persona) {
         //Parametros
-        String name= persona.getNombre();
-        int documento= persona.getNroDocumento();
-        int ruc= persona.getRuc();
-        String tele=persona.getTelefono();
-        
-        int flag1,flag2,flag3;
-        
+        String name = persona.getNombre();
+        int documento = persona.getNroDocumento();
+        int ruc = persona.getRuc();
+        String tele = persona.getTelefono();
+
+        int flag1, flag2, flag3;
+
         return "";
-        
+
     }
 
     @Override

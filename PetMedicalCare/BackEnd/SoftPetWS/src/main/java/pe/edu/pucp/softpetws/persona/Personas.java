@@ -77,4 +77,9 @@ public class Personas {
     public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente() {
         return (ArrayList<PersonaDto>) this.personaBo.ListasBusquedaAvanzadaParaCliente();
     }
+    
+    @WebMethod(operationName = "listar_personas_activas")
+    public ArrayList<PersonaDto> listarPersonasActivas() throws IOException, InterruptedException {
+        return this.personaBo.listarPersonasActivas();
+    }
 }

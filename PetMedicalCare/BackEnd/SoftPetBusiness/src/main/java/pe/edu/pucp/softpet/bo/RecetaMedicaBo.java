@@ -61,4 +61,7 @@ public class RecetaMedicaBo {
         return this.recetaDao.listarTodos();
     }
 
+    public RecetaMedicaDto obtenerPorIdCita(int citaId) {
+        return this.recetaDao.obtenerPorIdCita(citaId);
+    }
 }

@@ -164,4 +164,11 @@ public class CitaAtencion {
         // Espera exactamente los nombres del enum: PROGRAMADA, ATENDIDA, CANCELADA...
         return EstadoCita.valueOf(estadoStr);
     }
+    
+    @WebMethod(operationName = "listar_citas_por_mascota")
+    public ArrayList<CitaAtencionDto> listarPorIdMascota(
+            @WebParam(name = "mascotaId") int mascotaId) {
+        
+        return this.citaBo.listarPorIdMascota(mascotaId);
+    }
 }

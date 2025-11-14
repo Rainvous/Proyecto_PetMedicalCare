@@ -64,4 +64,16 @@ public class Servicios {
 
         return servicioBo.ListasBusquedaAvanzada(nombre, rango, activo);
     }
+    
+    @WebMethod(operationName = "listar_servicios_activos")
+    public ArrayList<ServicioDto> listarServiciosActivos() {
+        return this.servicioBo.listarServiciosActivos();
+    }
+    
+    @WebMethod(operationName = "listar_servicios_por_tipo")
+    public ArrayList<ServicioDto> ListarPorTipoServicio(
+            @WebParam(name = "nombreTipo") String nombreTipo) {
+        
+        return this.servicioBo.ListarPorTipoServicio(nombreTipo);
+    }
 }

@@ -102,4 +102,11 @@ public class DetallesReceta {
     public ArrayList<DetalleRecetaDto> listarTodos() {
         return this.detalleRecetaBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "listar_detalles_por_receta")
+    public ArrayList<DetalleRecetaDto> listarPorIdReceta(
+            @WebParam(name = "recetaId") int recetaId) {
+        
+        return this.detalleRecetaBo.listarPorIdReceta(recetaId);
+    }
 }

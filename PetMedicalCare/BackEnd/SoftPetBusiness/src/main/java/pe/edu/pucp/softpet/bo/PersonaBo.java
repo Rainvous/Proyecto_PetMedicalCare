@@ -38,7 +38,9 @@ public class PersonaBo {
         dto.setTelefono(telefono);
         dto.setSexo(Sexo.valueOf(sexo));
         dto.setNroDocumento(nroDocumento);
-        if(ruc != null)dto.setRuc(ruc);
+        if (ruc != null) {
+            dto.setRuc(ruc);
+        }
         dto.setTipoDocumento(tipoDocumento);
         dto.setActivo(activo);
 
@@ -88,22 +90,25 @@ public class PersonaBo {
     public ArrayList<PersonaDto> listarTodos() {
         return this.dao.listarTodos();
     }
-    
+
     public ArrayList<PersonaDto> ListasBusquedaAvanzada(
             String nombre,
             String NroDocumento,
             String Ruc,
-            String Telefono){
-         
-        return (ArrayList<PersonaDto>)this.dao.ListasBusquedaAvanzada(
+            String Telefono) {
+
+        return (ArrayList<PersonaDto>) this.dao.ListasBusquedaAvanzada(
                 nombre == null ? "" : nombre,
-                NroDocumento== null ? "" : NroDocumento,
+                NroDocumento == null ? "" : NroDocumento,
                 Ruc == null ? "" : Ruc,
-                Telefono== null ? "" : Telefono);
+                Telefono == null ? "" : Telefono);
     }
-    
-    public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente()
-    {
-        return (ArrayList<PersonaDto>)this.dao.ListasBusquedaAvanzadaParaCliente();
+
+    public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente() {
+        return (ArrayList<PersonaDto>) this.dao.ListasBusquedaAvanzadaParaCliente();
+    }
+
+    public ArrayList<PersonaDto> listarPersonasActivas() {
+        return this.dao.listarPersonasActivas();
     }
 }

@@ -89,4 +89,11 @@ public class RecetasMedica {
     public ArrayList<RecetaMedicaDto> listarTodos() {
         return this.recetaBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "obtener_receta_por_cita")
+    public RecetaMedicaDto obtenerPorIdCita(
+            @WebParam(name = "citaId") int citaId) {
+        
+        return this.recetaBo.obtenerPorIdCita(citaId);
+    }
 }

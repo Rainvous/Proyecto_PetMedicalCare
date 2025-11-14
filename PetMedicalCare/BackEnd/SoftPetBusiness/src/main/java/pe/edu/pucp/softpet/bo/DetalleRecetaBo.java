@@ -105,4 +105,8 @@ public class DetalleRecetaBo {
     public ArrayList<DetalleRecetaDto> listarTodos() {
         return this.dao.listarTodos();
     }
+    
+    public ArrayList<DetalleRecetaDto> listarPorIdReceta(int recetaMedicaId) {
+        return this.dao.listarPorIdReceta(recetaMedicaId);
+    }
 }

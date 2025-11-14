@@ -60,4 +60,16 @@ public class Productos {
     public ArrayList<ProductoDto> listarTodos() {
         return this.productoBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "listar_productos_activos")
+    public ArrayList<ProductoDto> listarProductosActivos() {
+        return this.productoBo.listarProductosActivos();
+    }
+    
+    @WebMethod(operationName = "listar_productos_por_tipo")
+    public ArrayList<ProductoDto> ListarPorTipo(
+            @WebParam(name = "nombreTipo") String nombreTipo) {
+        
+        return this.productoBo.ListarPorTipo(nombreTipo);
+    }
 }

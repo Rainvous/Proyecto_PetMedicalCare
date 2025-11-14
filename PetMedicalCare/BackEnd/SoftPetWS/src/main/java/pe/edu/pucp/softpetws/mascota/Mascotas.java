@@ -69,4 +69,16 @@ public class Mascotas {
             @WebParam(name = "nombreDeLaPersona") String nombreDeLaPersona) {
         return this.mascotaBo.ListasBusquedaAvanzada(nombreMascota, raza, especie, nombreDeLaPersona);
     }
+    
+    @WebMethod(operationName = "listar_mascotas_por_persona")
+    public ArrayList<MascotaDto> listarPorIdPersona(
+            @WebParam(name = "personaId") int personaId) throws IOException, InterruptedException {
+        
+        return this.mascotaBo.listarPorIdPersona(personaId);
+    }
+
+    @WebMethod(operationName = "listar_mascotas_activas")
+    public ArrayList<MascotaDto> listarMascotasActivas() throws IOException, InterruptedException {
+        return this.mascotaBo.listarMascotasActivas();
+    }
 }

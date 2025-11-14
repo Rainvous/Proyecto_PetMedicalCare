@@ -58,4 +58,13 @@ public class ProductoBo {
     public ArrayList<ProductoDto> listarTodos() {
         return this.productoDao.listarTodos();
     }
+    
+    public ArrayList<ProductoDto> listarProductosActivos() {
+        return this.productoDao.listarProductosActivos();
+    }
+    
+    public ArrayList<ProductoDto> ListarPorTipo(String nombreTipo) {
+        // El DAO ya maneja el 'LIKE' y el '%', solo pasamos el string.
+        return this.productoDao.ListarPorTipo(nombreTipo);
+    }
 }

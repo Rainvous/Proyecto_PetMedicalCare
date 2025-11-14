@@ -54,4 +54,9 @@ public class Veterinarios {
     public ArrayList<VeterinarioDto> listarTodos() throws IOException, InterruptedException {
         return this.veterinarioBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "listar_veterinarios_activos")
+    public ArrayList<VeterinarioDto> listarVeterinariosActivos() throws IOException, InterruptedException {
+        return this.veterinarioBo.listarVeterinariosActivos();
+    }
 }
