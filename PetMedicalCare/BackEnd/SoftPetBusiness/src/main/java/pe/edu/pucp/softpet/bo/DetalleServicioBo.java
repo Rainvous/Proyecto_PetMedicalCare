@@ -23,8 +23,11 @@ public class DetalleServicioBo {
         DetalleServicioDto dto = new DetalleServicioDto();
 
         // Resolver FKs como objetos (el DaoImpl espera DTOs anidados)
-        CitaAtencionDto cita = new CitaAtencionDaoImpl().obtenerPorId(citaId);
-        ServicioDto servicio = new ServicioDaoImpl().obtenerPorId(servicioId);
+        CitaAtencionDto cita = new CitaAtencionDto();
+        cita.setCitaId(citaId);
+
+        ServicioDto servicio= new ServicioDto();
+        servicio.setServicioId(servicioId);
 
         dto.setCita(cita);
         dto.setServicio(servicio);
