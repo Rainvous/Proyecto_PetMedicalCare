@@ -21,6 +21,7 @@ public class DetalleDocumentoDePagoBo {
             double precioUnitario, double valorVenta, boolean activo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
+        
         DocumentoPagoDto documento= new DocumentoPagoDto();
         ServicioDto servicio=new ServicioDto();
         ProductoDto producto=new ProductoDto();
@@ -49,9 +50,11 @@ public class DetalleDocumentoDePagoBo {
             double precioUnitario, double valorVenta, boolean activo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
+        
         DocumentoPagoDto documento= new DocumentoPagoDto();
         ServicioDto servicio=new ServicioDto();
         ProductoDto producto=new ProductoDto();
+        
         detalle.setDddpId(ddpId);
         documento.setDocumentoPagoId(documentoPagoId);
         servicio.setServicioId(servicioId);

@@ -3,10 +3,7 @@ package pe.edu.pucp.softpet.bo;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import pe.edu.pucp.softpet.dao.CitaAtencionDao;
 import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
-import pe.edu.pucp.softpet.daoImp.MascotaDaoImpl;
-import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
@@ -60,12 +57,14 @@ public class CitaAtencionBo {
             double monto, EstadoCita estado, String observacion, boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
+        
         VeterinarioDto vet = new VeterinarioDto();
         MascotaDto mas = new MascotaDto();
+        
         mas.setMascotaId(mascotaId);
         vet.setVeterinarioId(veterinarioId);
+        
         cita.setVeterinario(vet);
-
         cita.setMascota(mas);
         cita.setFechaRegistro(fechaRegistro);
         cita.setFechaHoraInicio(fechaHoraInicio);
@@ -85,12 +84,14 @@ public class CitaAtencionBo {
             boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
+        
         VeterinarioDto vet = new VeterinarioDto();
         MascotaDto mas = new MascotaDto();
+        
         mas.setMascotaId(mascotaId);
         vet.setVeterinarioId(veterinarioId);
+        
         cita.setCitaId(citaId);
-
         cita.setFechaRegistro(fechaRegistro);
         cita.setFechaHoraInicio(fechaHoraInicio);
         cita.setFechaHoraFin(fechaHoraFin);
