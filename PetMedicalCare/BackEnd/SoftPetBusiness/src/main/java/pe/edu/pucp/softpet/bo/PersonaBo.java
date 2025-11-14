@@ -30,7 +30,7 @@ public class PersonaBo {
             Boolean activo) {
 
         UsuarioDto usuario = new UsuarioDto();
-        usario.setUsuarioId(usuarioId);
+        usuario.setUsuarioId(usuarioId);
 
         PersonaDto dto = new PersonaDto();
         dto.setUsuario(usuario);

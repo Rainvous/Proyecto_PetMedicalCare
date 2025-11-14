@@ -6,6 +6,7 @@ import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
 import pe.edu.pucp.softpet.daoImp.MetodoDePagoDaoImpl;
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 
@@ -30,7 +31,7 @@ public class DocumentoDePagoBo {
         TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
         java.sql.Date fechaEmisionDate = java.sql.Date.valueOf(fechaEmision);
         
-        metodoPago.setMetodoDePago(metodoDePagoId);
+        metodoPago.setMetodoDePagoId(metodoDePagoId);
         documentoPago.setMetodoDePago(metodoPago);
         
         documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
