@@ -6,6 +6,9 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.DetalleDocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.productos.ProductoDto;
+import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
 public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements DetalleDocumentoDePagoDao {
 
@@ -74,12 +77,17 @@ public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements Detall
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.detalleDocumento = new DetalleDocumentoPagoDto();
         this.detalleDocumento.setDddpId(this.resultSet.getInt("DDDP_ID"));
-        this.detalleDocumento.setDocumentoPago(new DocumentoDePagoDaoImpl().
-                obtenerPorId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID")));
-        this.detalleDocumento.setServicio(new ServicioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("SERVICIO_ID")));
-        this.detalleDocumento.setProducto(new ProductoDaoImpl().
-                obtenerPorId(this.resultSet.getInt("PRODUCTO_ID")));
+        DocumentoPagoDto docpag= new DocumentoPagoDto();
+        docpag.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID"));
+        
+        this.detalleDocumento.setDocumentoPago(docpag);
+        ServicioDto servi= new ServicioDto();
+        servi.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
+        this.detalleDocumento.setServicio(servi);
+        
+        ProductoDto prd= new ProductoDto();
+        prd.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
+        this.detalleDocumento.setProducto(prd);
         this.detalleDocumento.setNroItem(this.resultSet.getInt("NRO_ITEM"));
         this.detalleDocumento.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.detalleDocumento.setCantidad(this.resultSet.getInt("CANTIDAD"));

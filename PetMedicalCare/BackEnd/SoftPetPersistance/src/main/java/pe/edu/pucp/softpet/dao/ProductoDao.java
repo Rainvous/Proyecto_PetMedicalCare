@@ -8,4 +8,6 @@ public interface ProductoDao extends DaoBase<ProductoDto> {
     ArrayList<ProductoDto> ListarPorTipo(String NombreTipo);
 
     ArrayList<ProductoDto> ListarPorNombre(String Nombre);
+    
+    ArrayList<ProductoDto> listarProductosActivos();
 }

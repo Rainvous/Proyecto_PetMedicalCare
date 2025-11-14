@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
+import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.Sexo;
 
 public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
@@ -77,8 +80,10 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.persona = new PersonaDto();
         this.persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-        this.persona.setUsuario(new UsuarioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("USUARIO_ID")));
+        
+        UsuarioDto us=new UsuarioDto();
+        us.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
+        this.persona.setUsuario(us);
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
         this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
@@ -154,6 +159,32 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         return (ArrayList<PersonaDto>)super.ejecutarProcedimientoLectura("sp_listar_solo_clientes", parametrosEntrada);
     }
     
+    @Override
+    public ArrayList<PersonaDto> listarPersonasActivas() {
+        
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM PERSONAS"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE ACTIVO = ?");
+        
+        // 3. El parámetro es fijo: 1 (para activo)
+        Object parametros = 1;
+        
+        // 4. Llamamos al método listarTodos de la clase base
+        return (ArrayList<PersonaDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarActivas, 
+                parametros);
+    }
     
-    
+    private void incluirValorDeParametrosParaListarActivas(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer activoFlag = (Integer) objetoParametros;
+        try {            
+            // Asignamos el '1' al primer '?' en el SQL
+            this.statement.setInt(1, activoFlag);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

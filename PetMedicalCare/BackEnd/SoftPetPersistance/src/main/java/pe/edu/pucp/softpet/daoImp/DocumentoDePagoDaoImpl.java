@@ -6,6 +6,8 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 
@@ -103,10 +105,13 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.documentoPago = new DocumentoPagoDto();
         this.documentoPago.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID"));
-        this.documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().
-                obtenerPorId(this.resultSet.getInt("METODO_DE_PAGO_ID")));
-        this.documentoPago.setPersona(new PersonaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        MetodoDePagoDto met= new MetodoDePagoDto();
+        PersonaDto per=new PersonaDto();
+        met.setMetodoDePagoId(this.resultSet.getInt("METODO_DE_PAGO_ID"));
+        
+        this.documentoPago.setMetodoDePago(met);
+        per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+        this.documentoPago.setPersona(per);
         this.documentoPago.setTipoDocumento(TipoDocumentoDePago.
                 valueOf(this.resultSet.getString("TIPO_DOCUMENTO")));
         this.documentoPago.setSerie(this.resultSet.getString("SERIE"));

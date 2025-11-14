@@ -6,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.HorarioLaboralDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.HorarioLaboralDto;
+import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoLaboral;
 
 public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboralDao {
@@ -65,8 +66,9 @@ public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboral
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.horario = new HorarioLaboralDto();
         this.horario.setHorarioLaboralId(this.resultSet.getInt("HORARIO_LABORAL_ID"));
-        this.horario.setVeterinario(new VeterinarioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
+        VeterinarioDto vet= new VeterinarioDto();
+        vet.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
+        this.horario.setVeterinario(vet);
         this.horario.setFecha(this.resultSet.getDate("FECHA"));
         this.horario.setEstado(EstadoLaboral.valueOf(this.resultSet.getString("ESTADO")));
         this.horario.setHoraInicio(this.resultSet.getDate("HORA_INICIO"));

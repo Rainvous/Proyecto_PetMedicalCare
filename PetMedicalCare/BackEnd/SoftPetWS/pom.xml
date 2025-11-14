@@ -5,7 +5,7 @@
     <artifactId>SoftPetWS</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>SoftPetWS-1.0-SNAPSHOT</name>
+    <name>SoftPetWS</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,19 +20,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.glassfish.metro</groupId>
-            <artifactId>webservices-rt</artifactId>
-            <version>2.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SoftPetModel</artifactId>
+            <artifactId>SoftPetBusiness</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SoftPetBusiness</artifactId>
+            <artifactId>SoftPetModel</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

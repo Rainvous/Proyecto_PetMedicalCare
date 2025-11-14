@@ -5,10 +5,14 @@ import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 
 public class RecetaMedicaDto {
 
+ 
+
     private Integer recetaMedicaId;
     private CitaAtencionDto cita;
     private Date fechaEmision;
     private Date vigenciaHasta;
+    private String fechaEmisionstr;
+    private String vigenciaHastastr;
     private String diagnostico;
     private String observaciones;
     private Boolean activo;
@@ -60,6 +64,7 @@ public class RecetaMedicaDto {
      * @param cita the cita to set
      */
     public void setCita(CitaAtencionDto cita) {
+        
         this.cita = cita;
     }
 
@@ -74,6 +79,7 @@ public class RecetaMedicaDto {
      * @param fechaEmision the fechaEmision to set
      */
     public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmisionstr=fechaEmision.toString();
         this.fechaEmision = fechaEmision;
     }
 
@@ -88,6 +94,10 @@ public class RecetaMedicaDto {
      * @param vigenciaHasta the vigenciaHasta to set
      */
     public void setVigenciaHasta(Date vigenciaHasta) {
+        if(vigenciaHasta!=null)
+            this.fechaEmisionstr=vigenciaHasta.toString();
+        else
+            this.fechaEmisionstr="";
         this.vigenciaHasta = vigenciaHasta;
     }
 
@@ -131,5 +141,32 @@ public class RecetaMedicaDto {
      */
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+       /**
+     * @return the fechaEmisionstr
+     */
+    public String getFechaEmisionstr() {
+        return fechaEmisionstr;
+    }
+
+    /**
+     * @param fechaEmisionstr the fechaEmisionstr to set
+     */
+    public void setFechaEmisionstr(String fechaEmisionstr) {
+        this.fechaEmisionstr = fechaEmisionstr;
+    }
+
+    /**
+     * @return the vigenciaHastastr
+     */
+    public String getVigenciaHastastr() {
+        return vigenciaHastastr;
+    }
+
+    /**
+     * @param vigenciaHastastr the vigenciaHastastr to set
+     */
+    public void setVigenciaHastastr(String vigenciaHastastr) {
+        this.vigenciaHastastr = vigenciaHastastr;
     }
 }

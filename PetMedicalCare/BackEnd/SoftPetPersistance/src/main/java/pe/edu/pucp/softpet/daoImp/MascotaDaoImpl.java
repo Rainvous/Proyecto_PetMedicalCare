@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dao.MascotaDao;
@@ -74,8 +76,9 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.mascota = new MascotaDto();
         this.mascota.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
-        this.mascota.setPersona(new PersonaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
+        PersonaDto per= new PersonaDto();
+        per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+        this.mascota.setPersona(per);
         this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
         this.mascota.setEspecie(this.resultSet.getString("ESPECIE"));
         this.mascota.setSexo(this.resultSet.getString("SEXO"));
@@ -138,5 +141,56 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         return (ArrayList<MascotaDto>)super.ejecutarProcedimientoLectura("sp_buscar_mascotas_avanzada", parametrosEntrada);
     }
     
+    @Override
+    public ArrayList<MascotaDto> listarPorIdPersona(Integer personaId) {
+        
+        // Obtenemos el SQL base: "SELECT ..., ..., FROM MASCOTAS" y añadimos el filtro
+        String sql = super.generarSQLParaListarTodos();
+        sql = sql.concat(" WHERE PERSONA_ID = ?");
+        
+        Object parametros = personaId;
+        return (ArrayList<MascotaDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarPorIdPersona, 
+                parametros);
+    }
+
+    private void incluirValorDeParametrosParaListarPorIdPersona(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer personaId = (Integer) objetoParametros;
+        try {            
+            // Asignamos el ID al primer '?' en el SQL
+            this.statement.setInt(1, personaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(MascotaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+    @Override
+    public ArrayList<MascotaDto> listarMascotasActivas() {
+        
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM MASCOTAS"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE ACTIVO = ?");
+        
+        // 3. El parámetro es fijo: 1 (para activo)
+        Object parametros = 1;
+        
+        // 4. Llamamos al método listarTodos de la clase base
+        return (ArrayList<MascotaDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarActivas, 
+                parametros);
+    }
+
+    private void incluirValorDeParametrosParaListarActivas(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer activoFlag = (Integer) objetoParametros;
+        try {            
+            // Asignamos el '1' al primer '?' en el SQL
+            this.statement.setInt(1, activoFlag);
+        } catch (SQLException ex) {
+            Logger.getLogger(MascotaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

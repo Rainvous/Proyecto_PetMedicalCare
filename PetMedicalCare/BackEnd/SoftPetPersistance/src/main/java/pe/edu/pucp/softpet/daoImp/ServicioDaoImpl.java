@@ -1,10 +1,13 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
@@ -69,8 +72,9 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.servicio = new ServicioDto();
         this.servicio.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
-        this.servicio.setTipoServicio(new TipoServicioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("TIPO_SERVICIO_ID")));
+        TipoServicioDto tp= new TipoServicioDto();
+        tp.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
+        this.servicio.setTipoServicio(tp);
         this.servicio.setNombre(this.resultSet.getString("NOMBRE"));
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setCosto(this.resultSet.getDouble("COSTO"));
@@ -193,5 +197,45 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         parametrosEntrada.put(3,activo);
         
         return (ArrayList<ServicioDto>)super.ejecutarProcedimientoLectura("sp_buscar_servicios_avanzada", parametrosEntrada);
+    }
+    
+    public int VerificarSiElServicioTieneInformacion(int idServicio){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        Map<Integer, Object> parametrosSalida = new HashMap<>();
+        String NombreProcedure="sp_verificar_relacion_servicio";
+        parametrosEntrada.put(1,idServicio);
+        parametrosSalida.put(2, Types.INTEGER);
+        ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
+        int resultado= (int)parametrosSalida.get(2);
+        return  resultado;
+    }
+    
+    @Override
+    public ArrayList<ServicioDto> listarServiciosActivos() {
+        
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM SERVICIOS"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE ACTIVO = ?");
+        
+        // 3. El parámetro es fijo: 1 (para activo)
+        Object parametros = 1;
+        
+        // 4. Llamamos al método listarTodos de la clase base
+        return (ArrayList<ServicioDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarActivos, 
+                parametros);
+    }
+
+    private void incluirValorDeParametrosParaListarActivos(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer activoFlag = (Integer) objetoParametros;
+        try {            
+            // Asignamos el '1' al primer '?' en el SQL
+            this.statement.setInt(1, activoFlag);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

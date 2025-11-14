@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao {
@@ -92,11 +96,13 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.citaAtencion = new CitaAtencionDto();
+                VeterinarioDto vet= new VeterinarioDto();
+        MascotaDto mas= new MascotaDto();
+        vet.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
+        mas.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
         this.citaAtencion.setCitaId(this.resultSet.getInt("CITA_ID"));
-        this.citaAtencion.setVeterinario(new VeterinarioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
-        this.citaAtencion.setMascota(new MascotaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));
+        this.citaAtencion.setVeterinario(vet );
+        this.citaAtencion.setMascota(mas);
         this.citaAtencion.setFechaRegistro(this.resultSet.getDate("FECHA_REGISTRO"));
         this.citaAtencion.setFechaHoraInicio(this.resultSet.getTimestamp("FECHA_HORA_INICIO"));
         this.citaAtencion.setFechaHoraFin(this.resultSet.getTimestamp("FECHA_HORA_FIN"));
@@ -172,5 +178,41 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         parametrosEntrada.put(1, fechaParaSP);
         
         return (ArrayList<CitaAtencionDto>)super.ejecutarProcedimientoLectura("sp_listar_citas_por_fecha", parametrosEntrada);
+    }
+    
+    @Override
+    public ArrayList<CitaAtencionDto> listarPorIdMascota(Integer mascotaId) {
+        
+        // 1. Obtenemos el SQL (cumpliendo la solicitud de "método aparte")
+        String sql = this.generarSQLParaListarPorIdMascota();
+        
+        // 2. El ID de la mascota es el parámetro
+        Object parametros = mascotaId;
+        
+        // 3. Llamamos al método listarTodos de la clase base
+        return (ArrayList<CitaAtencionDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarPorIdMascota, 
+                parametros);
+    }
+
+    private String generarSQLParaListarPorIdMascota() {
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM CITAS_ATENCION"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE MASCOTA_ID = ?");
+        
+        return sql;
+    }
+
+    private void incluirValorDeParametrosParaListarPorIdMascota(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer mascotaId = (Integer) objetoParametros;
+        try {            
+            // Asignamos el ID al primer '?' en el SQL
+            this.statement.setInt(1, mascotaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(CitaAtencionDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
