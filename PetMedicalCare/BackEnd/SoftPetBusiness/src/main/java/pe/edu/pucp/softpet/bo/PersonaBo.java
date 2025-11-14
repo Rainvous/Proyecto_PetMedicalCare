@@ -2,9 +2,7 @@ package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 
-import pe.edu.pucp.softpet.dao.PersonaDao;
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
-import pe.edu.pucp.softpet.daoImp.UsuarioDaoImpl;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.Sexo;
@@ -29,10 +27,12 @@ public class PersonaBo {
             String tipoDocumento,
             Boolean activo) {
 
+        
+        PersonaDto dto = new PersonaDto();
+        
         UsuarioDto usuario = new UsuarioDto();
         usuario.setUsuarioId(usuarioId);
-
-        PersonaDto dto = new PersonaDto();
+        
         dto.setUsuario(usuario);
         dto.setNombre(nombre);
         dto.setDireccion(direccion);
@@ -61,10 +61,11 @@ public class PersonaBo {
             String tipoDocumento,
             Boolean activo) {
 
-         UsuarioDto usuario = new UsuarioDto();
-        usuario.setUsuarioId(usuarioId);
-
         PersonaDto dto = new PersonaDto();
+        
+        UsuarioDto usuario = new UsuarioDto();
+        usuario.setUsuarioId(usuarioId);
+        
         dto.setUsuario(usuario);
         dto.setNombre(nombre);
         dto.setDireccion(direccion);

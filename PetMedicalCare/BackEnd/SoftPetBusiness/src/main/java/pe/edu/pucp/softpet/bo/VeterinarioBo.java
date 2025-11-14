@@ -3,8 +3,8 @@ package pe.edu.pucp.softpet.bo;
 import java.sql.Date;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.VeterinarioDao;
-import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
@@ -21,7 +21,10 @@ public class VeterinarioBo {
 
         VeterinarioDto veterinario = new VeterinarioDto();
 
-        veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
+        PersonaDto persona = new PersonaDto();
+        persona.setPersonaId(personaId);
+        
+        veterinario.setPersona(persona);
         veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
         veterinario.setEstado(EstadoVeterinario.valueOf(estado));
         veterinario.setEspecialidad(especialidad);
@@ -35,8 +38,11 @@ public class VeterinarioBo {
 
         VeterinarioDto veterinario = new VeterinarioDto();
 
+        PersonaDto persona = new PersonaDto();
+        persona.setPersonaId(personaId);
+        
         veterinario.setVeterinarioId(veterinarioId);
-        veterinario.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
+        veterinario.setPersona(persona);
         veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
         veterinario.setEstado(EstadoVeterinario.valueOf(estado));
         veterinario.setEspecialidad(especialidad);

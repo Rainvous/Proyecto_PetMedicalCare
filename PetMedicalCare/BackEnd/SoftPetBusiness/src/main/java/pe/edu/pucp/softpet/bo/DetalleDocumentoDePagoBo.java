@@ -21,26 +21,24 @@ public class DetalleDocumentoDePagoBo {
             double precioUnitario, double valorVenta, boolean activo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
-        
-        DocumentoPagoDto documento= new DocumentoPagoDto();
-        ServicioDto servicio=new ServicioDto();
-        ProductoDto producto=new ProductoDto();
-        
+
+        DocumentoPagoDto documento = new DocumentoPagoDto();
+        ServicioDto servicio = new ServicioDto();
+        ProductoDto producto = new ProductoDto();
+
         documento.setDocumentoPagoId(documentoPagoId);
         servicio.setServicioId(servicioId);
         producto.setProductoId(productoId);
+        
+        detalle.setDocumentoPago(documento);
+        detalle.setServicio(servicio);
+        detalle.setProducto(producto);
         detalle.setNroItem(nroItem);
         detalle.setDescripcion(descripcion);
         detalle.setCantidad(cantidad);
         detalle.setPrecioUnitario(precioUnitario);
         detalle.setValorVenta(valorVenta);
         detalle.setActivo(activo);
-        
-        //detalle.setDetalleDocumentoPago(detalle);
-        detalle.setDocumentoPago(documento);
-        detalle.setServicio(servicio);
-        detalle.setProducto(producto);
-        
 
         return this.detalleDao.insertar(detalle);
     }
@@ -50,19 +48,19 @@ public class DetalleDocumentoDePagoBo {
             double precioUnitario, double valorVenta, boolean activo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
+
+        DocumentoPagoDto documento = new DocumentoPagoDto();
+        ServicioDto servicio = new ServicioDto();
+        ProductoDto producto = new ProductoDto();
         
-        DocumentoPagoDto documento= new DocumentoPagoDto();
-        ServicioDto servicio=new ServicioDto();
-        ProductoDto producto=new ProductoDto();
-        
-        detalle.setDddpId(ddpId);
         documento.setDocumentoPagoId(documentoPagoId);
         servicio.setServicioId(servicioId);
         producto.setProductoId(productoId);
+        
+        detalle.setDddpId(ddpId);
         detalle.setDocumentoPago(documento);
         detalle.setServicio(servicio);
         detalle.setProducto(producto);
-        
         detalle.setNroItem(nroItem);
         detalle.setDescripcion(descripcion);
         detalle.setCantidad(cantidad);

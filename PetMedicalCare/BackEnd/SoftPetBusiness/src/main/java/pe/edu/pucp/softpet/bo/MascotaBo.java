@@ -2,52 +2,60 @@ package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import pe.edu.pucp.softpet.dao.MascotaDao;
 import pe.edu.pucp.softpet.daoImp.MascotaDaoImpl;
-import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class MascotaBo {
-    
+
     private final MascotaDaoImpl mascotaDao;
 
     public MascotaBo() {
         this.mascotaDao = new MascotaDaoImpl();
     }
-    
-    public Integer insertar(int personaId, String nombre, String especie, 
+
+    public Integer insertar(int personaId, String nombre, String especie,
             String sexo, String raza, String color, String fechaDefuncion,
             boolean activo) {
 
         MascotaDto mascota = new MascotaDto();
-        PersonaDto persona= new PersonaDto();
+
+        PersonaDto persona = new PersonaDto();
         persona.setPersonaId(personaId);
+
+        mascota.setPersona(persona);
         mascota.setNombre(nombre);
         mascota.setEspecie(especie);
         mascota.setSexo(sexo);
         mascota.setRaza(raza);
         mascota.setColor(color);
-        if(fechaDefuncion != null)mascota.setFechaDefuncion(Date.valueOf(fechaDefuncion));
+        if (fechaDefuncion != null) {
+            mascota.setFechaDefuncion(Date.valueOf(fechaDefuncion));
+        }
         mascota.setActivo(activo);
 
         return this.mascotaDao.insertar(mascota);
     }
 
-    public Integer modificar(int mascotaId, int personaId, String nombre, String especie, 
+    public Integer modificar(int mascotaId, int personaId, String nombre, String especie,
             String sexo, String raza, String color, String fechaDefuncion,
             boolean activo) {
 
         MascotaDto mascota = new MascotaDto();
-        PersonaDto persona= new PersonaDto();
+
+        PersonaDto persona = new PersonaDto();
         persona.setPersonaId(personaId);
+
         mascota.setMascotaId(mascotaId);
+        mascota.setPersona(persona);
         mascota.setNombre(nombre);
         mascota.setEspecie(especie);
         mascota.setSexo(sexo);
         mascota.setRaza(raza);
         mascota.setColor(color);
-        if(fechaDefuncion != null)mascota.setFechaDefuncion(Date.valueOf(fechaDefuncion));
+        if (fechaDefuncion != null) {
+            mascota.setFechaDefuncion(Date.valueOf(fechaDefuncion));
+        }
         mascota.setActivo(activo);
 
         return this.mascotaDao.insertar(mascota);
@@ -66,20 +74,20 @@ public class MascotaBo {
     public ArrayList<MascotaDto> listarTodos() {
         return this.mascotaDao.listarTodos();
     }
-    
+
     public ArrayList<MascotaDto> ListasBusquedaAvanzada(String nombreMascota,
-            String raza,String especie ,String nombreDeLaPersona){
+            String raza, String especie, String nombreDeLaPersona) {
         MascotaDto mascota = new MascotaDto();
         PersonaDto persona = new PersonaDto();
         mascota.setNombre(nombreMascota == null ? "" : nombreMascota);
         mascota.setRaza(raza == null ? "" : nombreMascota);
-        mascota.setEspecie(especie== null ? "" : nombreMascota );
-        persona.setNombre(nombreDeLaPersona== null ? "" : nombreMascota);
+        mascota.setEspecie(especie == null ? "" : nombreMascota);
+        persona.setNombre(nombreDeLaPersona == null ? "" : nombreMascota);
         mascota.setPersona(persona);
-        
-        return (ArrayList<MascotaDto>)mascotaDao.ListasBusquedaAvanzada(mascota);
+
+        return (ArrayList<MascotaDto>) mascotaDao.ListasBusquedaAvanzada(mascota);
     }
-    
+
     public ArrayList<MascotaDto> listarPorIdPersona(int personaId) {
         return this.mascotaDao.listarPorIdPersona(personaId);
     }

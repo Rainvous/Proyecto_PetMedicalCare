@@ -5,6 +5,7 @@ import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
 import pe.edu.pucp.softpet.daoImp.TipoServicioDaoImpl;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
+import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
 public class ServicioBo {
 
@@ -19,7 +20,10 @@ public class ServicioBo {
 
         ServicioDto servicio = new ServicioDto();
 
-        servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(tipoServicioId));
+        TipoServicioDto tipoServicio = new TipoServicioDto();
+        tipoServicio.setTipoServicioId(tipoServicioId);
+        
+        servicio.setTipoServicio(tipoServicio);
         servicio.setNombre(nombre);
         servicio.setDescripcion(descripcion);
         servicio.setCosto(costo);
@@ -34,8 +38,11 @@ public class ServicioBo {
 
         ServicioDto servicio = new ServicioDto();
 
+        TipoServicioDto tipoServicio = new TipoServicioDto();
+        tipoServicio.setTipoServicioId(tipoServicioId);
+        
         servicio.setServicioId(servicioId);
-        servicio.setTipoServicio(new TipoServicioDaoImpl().obtenerPorId(tipoServicioId));
+        servicio.setTipoServicio(tipoServicio);
         servicio.setNombre(nombre);
         servicio.setDescripcion(descripcion);
         servicio.setCosto(costo);

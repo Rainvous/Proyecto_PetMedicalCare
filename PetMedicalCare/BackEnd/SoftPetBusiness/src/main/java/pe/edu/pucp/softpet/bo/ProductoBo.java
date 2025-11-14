@@ -5,6 +5,7 @@ import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
 import pe.edu.pucp.softpet.daoImp.TipoProductoDaoImpl;
+import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
 public class ProductoBo {
 
@@ -18,8 +19,11 @@ public class ProductoBo {
             double precioUnitario, int stock, boolean activo) {
 
         ProductoDto producto = new ProductoDto();
+        
+        TipoProductoDto tipoProd = new TipoProductoDto();
+        tipoProd.setTipoProductoId(tipoProductoId);
 
-        producto.setTipoProducto(new TipoProductoDaoImpl().obtenerPorId(tipoProductoId));
+        producto.setTipoProducto(tipoProd);
         producto.setNombre(nombre);
         producto.setPresentacion(presentacion);
         producto.setPrecioUnitario(precioUnitario);
@@ -33,9 +37,12 @@ public class ProductoBo {
             String presentacion, double precioUnitario, int stock, boolean activo) {
 
         ProductoDto producto = new ProductoDto();
+        
+        TipoProductoDto tipoProd = new TipoProductoDto();
+        tipoProd.setTipoProductoId(tipoProductoId);
 
         producto.setProductoId(productoId);
-        producto.setTipoProducto(new TipoProductoDaoImpl().obtenerPorId(tipoProductoId));
+        producto.setTipoProducto(tipoProd);
         producto.setNombre(nombre);
         producto.setPresentacion(presentacion);
         producto.setPrecioUnitario(precioUnitario);
@@ -64,7 +71,6 @@ public class ProductoBo {
     }
     
     public ArrayList<ProductoDto> ListarPorTipo(String nombreTipo) {
-        // El DAO ya maneja el 'LIKE' y el '%', solo pasamos el string.
         return this.productoDao.ListarPorTipo(nombreTipo);
     }
 }

@@ -5,6 +5,7 @@ import java.sql.Date;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.RecetaMedicaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
+import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
 public class RecetaMedicaBo {
@@ -19,8 +20,11 @@ public class RecetaMedicaBo {
             String diagnostico, String observaciones, boolean activo) {
 
         RecetaMedicaDto receta = new RecetaMedicaDto();
+        
+        CitaAtencionDto cita = new CitaAtencionDto();
+        cita.setCitaId(citaId);
 
-        receta.setCita(new CitaAtencionDaoImpl().obtenerPorId(citaId));
+        receta.setCita(cita);
         receta.setFechaEmision(fechaEmision);
         receta.setVigenciaHasta(vigenciaHasta);
         receta.setDiagnostico(diagnostico);
@@ -35,9 +39,12 @@ public class RecetaMedicaBo {
             boolean activo) {
 
         RecetaMedicaDto receta = new RecetaMedicaDto();
+        
+        CitaAtencionDto cita = new CitaAtencionDto();
+        cita.setCitaId(citaId);
 
         receta.setRecetaMedicaId(recetaId);
-        receta.setCita(new CitaAtencionDaoImpl().obtenerPorId(citaId));
+        receta.setCita(cita);
         receta.setFechaEmision(fechaEmision);
         receta.setVigenciaHasta(vigenciaHasta);
         receta.setDiagnostico(diagnostico);

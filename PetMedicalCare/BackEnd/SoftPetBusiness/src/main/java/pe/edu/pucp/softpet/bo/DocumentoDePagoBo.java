@@ -1,12 +1,12 @@
 package pe.edu.pucp.softpet.bo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
-import pe.edu.pucp.softpet.daoImp.MetodoDePagoDaoImpl;
-import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 
@@ -19,22 +19,25 @@ public class DocumentoDePagoBo {
 
     }
 
-        public Integer insertar(int metodoDePagoId, int personaId,
+    public Integer insertar(int metodoDePagoId, int personaId,
             String tipoDocumento, String serie, String numero,
             String fechaEmision, String estado, double subtotal,
             double igvTotal, double total, boolean activo) {
 
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
-        MetodoDePagoDto metodoPago= new MetodoDePagoDto();
-        //Modificado para el SOAP
+        
+        MetodoDePagoDto metodoPago = new MetodoDePagoDto();
+        PersonaDto persona = new PersonaDto();
+        
         EstadoDocumentoDePago estadoEnum = EstadoDocumentoDePago.valueOf(estado.toUpperCase());
         TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
-        java.sql.Date fechaEmisionDate = java.sql.Date.valueOf(fechaEmision);
-        
+        Date fechaEmisionDate = Date.valueOf(fechaEmision);
+
         metodoPago.setMetodoDePagoId(metodoDePagoId);
-        documentoPago.setMetodoDePago(metodoPago);
+        persona.setPersonaId(personaId);
         
-        documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
+        documentoPago.setMetodoDePago(metodoPago);
+        documentoPago.setPersona(persona);
         documentoPago.setTipoDocumento(tipoDocumentoEnum);
         documentoPago.setSerie(serie);
         documentoPago.setNumero(numero);
@@ -55,14 +58,19 @@ public class DocumentoDePagoBo {
 
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
         
-        //Modificado para el SOAP
+        MetodoDePagoDto metodoPago = new MetodoDePagoDto();
+        PersonaDto persona = new PersonaDto();
+        
         EstadoDocumentoDePago estadoEnum = EstadoDocumentoDePago.valueOf(estado.toUpperCase());
         TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
-        java.sql.Date fechaEmisionDate = java.sql.Date.valueOf(fechaEmision);
+        Date fechaEmisionDate = Date.valueOf(fechaEmision);
 
+        metodoPago.setMetodoDePagoId(metodoDePagoId);
+        persona.setPersonaId(personaId);
+        
         documentoPago.setDocumentoPagoId(documentoPagoId);
-        documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().obtenerPorId(metodoDePagoId));
-        documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
+        documentoPago.setMetodoDePago(metodoPago);
+        documentoPago.setPersona(persona);
         documentoPago.setTipoDocumento(tipoDocumentoEnum);
         documentoPago.setSerie(serie);
         documentoPago.setNumero(numero);

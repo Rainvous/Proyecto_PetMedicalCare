@@ -38,7 +38,6 @@ public class UsuarioBo {
         usuarioDto.setActivo(activo);
 
         return this.usuarioDao.modificar(usuarioDto);
-
     }
 
     public Integer eliminar(Integer usuarioId) {

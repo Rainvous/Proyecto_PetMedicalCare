@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import pe.edu.pucp.softpet.dao.DetalleRecetaDao;
 import pe.edu.pucp.softpet.daoImp.DetalleRecetaDaoImpl;
-import pe.edu.pucp.softpet.daoImp.RecetaMedicaDaoImpl;
 import pe.edu.pucp.softpet.dto.recetas.DetalleRecetaDto;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
@@ -16,7 +15,6 @@ public class DetalleRecetaBo {
         this.dao = new DetalleRecetaDaoImpl();
     }
 
-    // INSERTAR con parámetros (retorna PK autogenerada)
     public Integer insertar(
             int recetaMedicaId,
             String descripcionMedicamento,
@@ -29,10 +27,11 @@ public class DetalleRecetaBo {
             String cantidad,
             boolean activo) {
 
-        RecetaMedicaDto receta=new RecetaMedicaDto();
-        receta.setRecetaMedicaId(recetaMedicaId);
-
         DetalleRecetaDto dto = new DetalleRecetaDto();
+        
+        RecetaMedicaDto receta = new RecetaMedicaDto();
+        receta.setRecetaMedicaId(recetaMedicaId);
+        
         dto.setReceta(receta);
         dto.setDescripcionMedicamento(descripcionMedicamento);
         dto.setPresentacion(presentacion);
@@ -46,15 +45,13 @@ public class DetalleRecetaBo {
 
         return this.dao.insertar(dto);
     }
-        public Integer insertar(
-            DetalleRecetaDto dto) {
 
-        
+    public Integer insertar(
+            DetalleRecetaDto dto) {
 
         return this.dao.insertar(dto);
     }
 
-    // MODIFICAR con parámetros (retorna filas afectadas)
     public Integer modificar(
             int detalleRecetaId,
             int recetaMedicaId,
@@ -68,10 +65,11 @@ public class DetalleRecetaBo {
             String cantidad,
             boolean activo) {
 
-        RecetaMedicaDto receta=new RecetaMedicaDto();
+        DetalleRecetaDto dto = new DetalleRecetaDto();
+        
+        RecetaMedicaDto receta = new RecetaMedicaDto();
         receta.setRecetaMedicaId(recetaMedicaId);
 
-        DetalleRecetaDto dto = new DetalleRecetaDto();
         dto.setDetalleRecetaId(detalleRecetaId);
         dto.setReceta(receta);
         dto.setDescripcionMedicamento(descripcionMedicamento);
@@ -83,12 +81,12 @@ public class DetalleRecetaBo {
         dto.setIndicacion(indicacion);
         dto.setCantidad(cantidad);
         dto.setActivo(activo);
+        
         return this.dao.modificar(dto);
     }
-        public Integer modificar(
-          DetalleRecetaDto dto) {
 
-        
+    public Integer modificar(
+            DetalleRecetaDto dto) {
 
         return this.dao.modificar(dto);
     }
@@ -106,7 +104,7 @@ public class DetalleRecetaBo {
     public ArrayList<DetalleRecetaDto> listarTodos() {
         return this.dao.listarTodos();
     }
-    
+
     public ArrayList<DetalleRecetaDto> listarPorIdReceta(int recetaMedicaId) {
         return this.dao.listarPorIdReceta(recetaMedicaId);
     }

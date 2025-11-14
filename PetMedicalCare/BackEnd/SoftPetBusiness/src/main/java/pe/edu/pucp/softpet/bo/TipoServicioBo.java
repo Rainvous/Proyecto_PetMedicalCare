@@ -14,7 +14,6 @@ public class TipoServicioBo {
         this.dao = new TipoServicioDaoImpl();
     }
 
-    // INSERTAR con parámetros (retorna PK autogenerada)
     public Integer insertar(String nombre, String descripcion, boolean activo) {
         TipoServicioDto dto = new TipoServicioDto();
         dto.setNombre(nombre);
@@ -23,7 +22,6 @@ public class TipoServicioBo {
         return this.dao.insertar(dto);
     }
 
-    // MODIFICAR con parámetros (retorna filas afectadas)
     public Integer modificar(int tipoServicioId, String nombre, String descripcion, boolean activo) {
         TipoServicioDto dto = new TipoServicioDto();
         dto.setTipoServicioId(tipoServicioId);

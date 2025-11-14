@@ -18,14 +18,12 @@ public class DetalleServicioBo {
         this.dao = new DetalleServicioDaoImpl();
     }
 
-    // INSERTAR con parámetros (retorna PK autogenerada)
     public Integer insertar(int citaId, int servicioId, String descripcion, double costo, boolean activo) {
+        
         DetalleServicioDto dto = new DetalleServicioDto();
 
-        // Resolver FKs como objetos (el DaoImpl espera DTOs anidados)
         CitaAtencionDto cita = new CitaAtencionDto();
         cita.setCitaId(citaId);
-
         ServicioDto servicio= new ServicioDto();
         servicio.setServicioId(servicioId);
 
@@ -38,8 +36,8 @@ public class DetalleServicioBo {
         return this.dao.insertar(dto);
     }
 
-    // MODIFICAR con parámetros (retorna filas afectadas)
     public Integer modificar(int detalleServicioId, int citaId, int servicioId, String descripcion, double costo, boolean activo) {
+        
         DetalleServicioDto dto = new DetalleServicioDto();
 
         CitaAtencionDto cita = new CitaAtencionDaoImpl().obtenerPorId(citaId);

@@ -17,23 +17,10 @@ public class CitaAtencionBo {
         this.citaDao = new CitaAtencionDaoImpl();
     }
 
-    /**
-     * Inserta una nueva Cita de Atención.
-     *
-     * @param citaAtencion Objeto DTO con los datos de la cita a insertar.
-     * @return El ID de la cita insertada.
-     */
     public Integer insertar(CitaAtencionDto citaAtencion) {
         return this.citaDao.insertar(citaAtencion);
     }
 
-    /**
-     * Modifica una Cita de Atención existente.
-     *
-     * @param citaAtencion Objeto DTO con los datos de la cita a modificar.
-     * @return Número de filas afectadas (debería ser 1 si se actualiza
-     * correctamente).
-     */
     public Integer modificar(CitaAtencionDto citaAtencion) {
         return this.citaDao.modificar(citaAtencion);
     }

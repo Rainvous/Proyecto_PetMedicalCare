@@ -15,18 +15,16 @@ public class MetodoDePagoBo {
         this.dao = new MetodoDePagoDaoImpl();
     }
 
-    // INSERTAR con parámetros (retorna PK autogenerada)
     public Integer insertar(String nombre, boolean activo) {
         MetodoDePagoDto dto = new MetodoDePagoDto();
 
         TipoMetodoPago nombreEnum = TipoMetodoPago.valueOf(nombre.toUpperCase());
 
-        dto.setNombre(nombreEnum);      // se persiste como String con toString() en el DaoImpl
+        dto.setNombre(nombreEnum);
         dto.setActivo(activo);
         return this.dao.insertar(dto);
     }
 
-    // MODIFICAR con parámetros (retorna filas afectadas)
     public Integer modificar(int metodoDePagoId, String nombre, boolean activo) {
         MetodoDePagoDto dto = new MetodoDePagoDto();
 

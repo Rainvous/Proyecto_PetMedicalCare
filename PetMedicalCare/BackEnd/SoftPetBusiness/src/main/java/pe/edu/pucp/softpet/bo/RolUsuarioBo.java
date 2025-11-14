@@ -5,7 +5,9 @@ import pe.edu.pucp.softpet.dao.RolUsuarioDao;
 import pe.edu.pucp.softpet.daoImp.RolDaoImpl;
 import pe.edu.pucp.softpet.daoImp.RolUsuarioDaoImpl;
 import pe.edu.pucp.softpet.daoImp.UsuarioDaoImpl;
+import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
+import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 
 public class RolUsuarioBo {
 
@@ -19,19 +21,32 @@ public class RolUsuarioBo {
 
         RolUsuarioDto rolUsuario = new RolUsuarioDto();
 
-        rolUsuario.setRol(new RolDaoImpl().obtenerPorId(rolId));
-        rolUsuario.setUsuario(new UsuarioDaoImpl().obtenerPorId(usuarioId));
+        RolDto rol = new RolDto();
+        UsuarioDto usuario = new UsuarioDto();
+
+        rol.setRolId(rolId);
+        usuario.setUsuarioId(usuarioId);
+
+        rolUsuario.setRol(rol);
+        rolUsuario.setUsuario(usuario);
         rolUsuario.setActivo(activo);
 
         return this.rolUsuarioDao.insertar(rolUsuario);
     }
 
     public Integer modificar(int rolUsuarioId, int rolId, int usuarioId, boolean activo) {
+
         RolUsuarioDto rolUsuario = new RolUsuarioDto();
 
+        RolDto rol = new RolDto();
+        UsuarioDto usuario = new UsuarioDto();
+
+        rol.setRolId(rolId);
+        usuario.setUsuarioId(usuarioId);
+
         rolUsuario.setRolUsuarioId(rolUsuarioId);
-        rolUsuario.setRol(new RolDaoImpl().obtenerPorId(rolId));
-        rolUsuario.setUsuario(new UsuarioDaoImpl().obtenerPorId(usuarioId));
+        rolUsuario.setRol(rol);
+        rolUsuario.setUsuario(usuario);
         rolUsuario.setActivo(activo);
 
         return this.rolUsuarioDao.modificar(rolUsuario);
