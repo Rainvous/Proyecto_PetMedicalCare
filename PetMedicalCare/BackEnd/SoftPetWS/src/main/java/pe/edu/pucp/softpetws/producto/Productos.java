@@ -72,4 +72,6 @@ public class Productos {
         
         return this.productoBo.ListarPorTipo(nombreTipo);
     }
+    
+
 }

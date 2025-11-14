@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.bo.CitaAtencionBo;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 @WebService(serviceName = "CitasAtencion")
@@ -82,27 +84,32 @@ public class CitaAtencion {
             @WebParam(name = "activo") boolean activo) {
 
         try {
-            long millis = System.currentTimeMillis();
-            Date fechaRegistroSql = new Date(millis);
+//            long millis = System.currentTimeMillis();
+//            Date fechaRegistroSql = new Date(millis);
+            CitaAtencionDto cita = citaBo.obtenerPorId(citaId);
             //java.util.Date utilFecha = dfFecha.parse(fechaRegistro);
             // Date fechaRegistroSql = new Date(utilFecha.getTime());        // yyyyMMdd
             Timestamp fechaHoraInicioTs = parseFechaHora(fechaHoraInicio);  // yyyyMMddHHmmss
             Timestamp fechaHoraFinTs = parseFechaHora(fechaHoraFin);        // yyyyMMddHHmmss
             EstadoCita estadoEnum = parseEstado(estado);
 
-            return citaBo.modificar(
-                    citaId,
-                    veterinarioId,
-                    mascotaId,
-                    fechaRegistroSql,
-                    fechaHoraInicioTs,
-                    fechaHoraFinTs,
-                    pesoMascota,
-                    monto,
-                    estadoEnum,
-                    observacion,
-                    activo
-            );
+            CitaAtencionDto CitaModificada = new CitaAtencionDto();
+            CitaModificada.setCitaId(citaId);
+            CitaModificada.setActivo(activo);
+            CitaModificada.setEstado(estadoEnum);
+            CitaModificada.setFechaHoraFin(fechaHoraFinTs);
+            CitaModificada.setFechaHoraInicio(fechaHoraInicioTs);
+            CitaModificada.setFechaRegistro(cita.getFechaRegistro());
+            VeterinarioDto vet = new VeterinarioDto();
+            MascotaDto mas = new MascotaDto();
+            mas.setMascotaId(mascotaId);
+            vet.setVeterinarioId(veterinarioId);
+            CitaModificada.setMascota(mas);
+            CitaModificada.setVeterinario(vet);
+            CitaModificada.setMonto(monto);
+            CitaModificada.setObservacion(observacion);
+            CitaModificada.setPesoMascota(pesoMascota);
+            return this.citaBo.modificar(CitaModificada);
 
         } catch (ParseException e) {
             throw new WebServiceException("Error al convertir fechas: " + e.getMessage(), e);
@@ -164,11 +171,11 @@ public class CitaAtencion {
         // Espera exactamente los nombres del enum: PROGRAMADA, ATENDIDA, CANCELADA...
         return EstadoCita.valueOf(estadoStr);
     }
-    
+
     @WebMethod(operationName = "listar_citas_por_mascota")
     public ArrayList<CitaAtencionDto> listarPorIdMascota(
             @WebParam(name = "mascotaId") int mascotaId) {
-        
+
         return this.citaBo.listarPorIdMascota(mascotaId);
     }
 }

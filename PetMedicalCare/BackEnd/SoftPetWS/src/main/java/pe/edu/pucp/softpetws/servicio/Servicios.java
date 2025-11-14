@@ -1,4 +1,4 @@
-package pe.edu.pucp.softpetws.servicio;
+ package pe.edu.pucp.softpetws.servicio;
 
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
