@@ -24,14 +24,15 @@ public class DocumentoDePagoBo {
             double igvTotal, double total, boolean activo) {
 
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
-        
+        MetodoDePagoDto metodoPago= new MetodoDePagoDto();
         //Modificado para el SOAP
         EstadoDocumentoDePago estadoEnum = EstadoDocumentoDePago.valueOf(estado.toUpperCase());
         TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
         java.sql.Date fechaEmisionDate = java.sql.Date.valueOf(fechaEmision);
         
+        metodoPago.setMetodoDePago(metodoDePagoId);
+        documentoPago.setMetodoDePago(metodoPago);
         
-        documentoPago.setMetodoDePago(new MetodoDePagoDaoImpl().obtenerPorId(metodoDePagoId));
         documentoPago.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
         documentoPago.setTipoDocumento(tipoDocumentoEnum);
         documentoPago.setSerie(serie);
