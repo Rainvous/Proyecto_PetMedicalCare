@@ -61,21 +61,23 @@ public class PersonaBo {
             String tipoDocumento,
             Boolean activo) {
 
-        UsuarioDto usuario = new UsuarioDaoImpl().obtenerPorId(usuarioId);
+         UsuarioDto usuario = new UsuarioDto();
+        usuario.setUsuarioId(usuarioId);
 
         PersonaDto dto = new PersonaDto();
-        dto.setPersonaId(personaId);
         dto.setUsuario(usuario);
         dto.setNombre(nombre);
         dto.setDireccion(direccion);
         dto.setTelefono(telefono);
         dto.setSexo(Sexo.valueOf(sexo));
         dto.setNroDocumento(nroDocumento);
-        dto.setRuc(ruc);
+        if (ruc != null) {
+            dto.setRuc(ruc);
+        }
         dto.setTipoDocumento(tipoDocumento);
         dto.setActivo(activo);
 
-        return this.dao.modificar(dto);
+        return this.dao.insertar(dto);
     }
 
     public Integer eliminar(int personaId) {
