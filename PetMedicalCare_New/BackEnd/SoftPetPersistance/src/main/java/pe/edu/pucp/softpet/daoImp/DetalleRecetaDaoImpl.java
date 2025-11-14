@@ -3,6 +3,8 @@ package pe.edu.pucp.softpet.daoImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.DetalleRecetaDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.recetas.DetalleRecetaDto;
@@ -131,5 +133,41 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
     public Integer eliminar(DetalleRecetaDto detalleReceta) {
         this.detalleReceta = detalleReceta;
         return super.eliminar();
+    }
+    
+    @Override
+    public ArrayList<DetalleRecetaDto> listarPorIdReceta(Integer recetaMedicaId) {
+        
+        // 1. Obtenemos el SQL (cumpliendo la solicitud de "método aparte")
+        String sql = this.generarSQLParaListarPorIdReceta();
+        
+        // 2. El ID de la receta es el parámetro
+        Object parametros = recetaMedicaId;
+        
+        // 3. Llamamos al método listarTodos de la clase base
+        return (ArrayList<DetalleRecetaDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarPorIdReceta, 
+                parametros);
+    }
+
+    private String generarSQLParaListarPorIdReceta() {
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM DETALLES_RECETA"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE RECETA_MEDICA_ID = ?");
+        
+        return sql;
+    }
+
+    private void incluirValorDeParametrosParaListarPorIdReceta(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer recetaMedicaId = (Integer) objetoParametros;
+        try {            
+            // Asignamos el ID al primer '?' en el SQL
+            this.statement.setInt(1, recetaMedicaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(DetalleRecetaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

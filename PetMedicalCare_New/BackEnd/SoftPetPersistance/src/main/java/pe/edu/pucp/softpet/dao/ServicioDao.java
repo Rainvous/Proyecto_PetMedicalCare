@@ -8,4 +8,6 @@ public interface ServicioDao extends DaoBase<ServicioDto> {
     ArrayList<ServicioDto> ListarPorTipoServicio(String NombreTipo);
 
     ArrayList<ServicioDto> ListarPorNombre(String Nombre);
+    
+    ArrayList<ServicioDto> listarServiciosActivos();
 }

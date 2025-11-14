@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
@@ -114,5 +116,34 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     public Integer eliminar(VeterinarioDto veterinario) {
         this.veterinario = veterinario;
         return super.eliminar();
+    }
+    
+    @Override
+    public ArrayList<VeterinarioDto> listarVeterinariosActivos() {
+        
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM VETERINARIOS"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE ACTIVO = ?");
+        
+        // 3. El parámetro es fijo: 1 (para activo)
+        Object parametros = 1;
+        
+        // 4. Llamamos al método listarTodos de la clase base
+        return (ArrayList<VeterinarioDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarActivos, 
+                parametros);
+    }
+
+    private void incluirValorDeParametrosParaListarActivos(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer activoFlag = (Integer) objetoParametros;
+        try {            
+            // Asignamos el '1' al primer '?' en el SQL
+            this.statement.setInt(1, activoFlag);
+        } catch (SQLException ex) {
+            Logger.getLogger(VeterinarioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -3,6 +3,8 @@ package pe.edu.pucp.softpet.daoImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
@@ -187,5 +189,34 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
         String sql = GenerarSQLSelectPorNombre();
         return (ArrayList<ProductoDto>) super.listarTodos(sql, this::incluirValorDeParametrosPorNombre, productoAux);
+    }
+    
+    @Override
+    public ArrayList<ProductoDto> listarProductosActivos() {
+        
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM PRODUCTOS"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE ACTIVO = ?");
+        
+        // 3. El parámetro es fijo: 1 (para activo)
+        Object parametros = 1;
+        
+        // 4. Llamamos al método listarTodos de la clase base
+        return (ArrayList<ProductoDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarActivos, 
+                parametros);
+    }
+
+    private void incluirValorDeParametrosParaListarActivos(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer activoFlag = (Integer) objetoParametros;
+        try {            
+            // Asignamos el '1' al primer '?' en el SQL
+            this.statement.setInt(1, activoFlag);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

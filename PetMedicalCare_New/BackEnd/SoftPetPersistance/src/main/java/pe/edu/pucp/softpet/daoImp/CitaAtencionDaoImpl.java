@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
@@ -176,5 +178,41 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         parametrosEntrada.put(1, fechaParaSP);
         
         return (ArrayList<CitaAtencionDto>)super.ejecutarProcedimientoLectura("sp_listar_citas_por_fecha", parametrosEntrada);
+    }
+    
+    @Override
+    public ArrayList<CitaAtencionDto> listarPorIdMascota(Integer mascotaId) {
+        
+        // 1. Obtenemos el SQL (cumpliendo la solicitud de "método aparte")
+        String sql = this.generarSQLParaListarPorIdMascota();
+        
+        // 2. El ID de la mascota es el parámetro
+        Object parametros = mascotaId;
+        
+        // 3. Llamamos al método listarTodos de la clase base
+        return (ArrayList<CitaAtencionDto>) super.listarTodos(sql, 
+                this::incluirValorDeParametrosParaListarPorIdMascota, 
+                parametros);
+    }
+
+    private String generarSQLParaListarPorIdMascota() {
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM CITAS_ATENCION"
+        String sql = super.generarSQLParaListarTodos();
+        
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE MASCOTA_ID = ?");
+        
+        return sql;
+    }
+
+    private void incluirValorDeParametrosParaListarPorIdMascota(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer mascotaId = (Integer) objetoParametros;
+        try {            
+            // Asignamos el ID al primer '?' en el SQL
+            this.statement.setInt(1, mascotaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(CitaAtencionDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
