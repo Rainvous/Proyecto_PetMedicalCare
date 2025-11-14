@@ -26,18 +26,27 @@ public class ServicioDaoImplTest {
     
     @Test
     public void testListasBusquedaAvanzada() {
+//        ServicioDaoImpl servicioDao = new ServicioDaoImpl();
+//        ServicioDto servicio= new ServicioDto();
+//        servicio.setNombre("");
+//        String rango = "";
+//        String activo= "";
+//         
+//        ArrayList<ServicioDto> lista= servicioDao.ListasBusquedaAvanzada(servicio,rango,activo);
+//        System.out.println("BUSQUEDA DE PERSONAS AVANZADO");
+//        for( ServicioDto p : lista){
+//            System.out.println("->"+p.getNombre());
+//        }
         ServicioDaoImpl servicioDao = new ServicioDaoImpl();
-        ServicioDto servicio= new ServicioDto();
-        servicio.setNombre("");
-        String rango = "";
-        String activo= "";
-         
-        ArrayList<ServicioDto> lista= servicioDao.ListasBusquedaAvanzada(servicio,rango,activo);
-        System.out.println("BUSQUEDA DE PERSONAS AVANZADO");
-        for( ServicioDto p : lista){
-            System.out.println("->"+p.getNombre());
+        System.out.println("PRUEBA DE PROCEDURE CON PARAMETROS DE SALIDA");
+        int resultado=servicioDao.VerificarSiElServicioTieneInformacion(1);
+        assertTrue(resultado==1, "Problemas con el procedure");
+        System.out.println("Se encontró informacion con otras tabla? = "+resultado);
+        System.out.println("PRUEBA DE PROCEDURE CON PARAMETROS DE SALIDA");
+        for (int i = 0; i < 10; i++) {
+            resultado=servicioDao.VerificarSiElServicioTieneInformacion(i);
+            System.out.println("Se encontró informacion con otras tabla ("+i+")"+"? = "+resultado);
         }
-        
     }
     
 }

@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -194,5 +195,16 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         parametrosEntrada.put(3,activo);
         
         return (ArrayList<ServicioDto>)super.ejecutarProcedimientoLectura("sp_buscar_servicios_avanzada", parametrosEntrada);
+    }
+    
+    public int VerificarSiElServicioTieneInformacion(int idServicio){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        Map<Integer, Object> parametrosSalida = new HashMap<>();
+        String NombreProcedure="sp_verificar_relacion_servicio";
+        parametrosEntrada.put(1,idServicio);
+        parametrosSalida.put(2, Types.INTEGER);
+        ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
+        int resultado= (int)parametrosSalida.get(2);
+        return  resultado;
     }
 }

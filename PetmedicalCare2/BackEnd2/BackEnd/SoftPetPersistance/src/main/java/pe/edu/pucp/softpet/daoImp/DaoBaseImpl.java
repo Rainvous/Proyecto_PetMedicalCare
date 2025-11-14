@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.daoImp.util.Tipo_Operacion;
 import pe.edu.pucp.softpet.db.DBManager;
@@ -32,7 +34,7 @@ public abstract class DaoBaseImpl {
 
     /* NOTA: La auditoria solo es para tablas que tienen triggers */
 
-    /*
+ /*
     ------------------------------------------------------------------------
     INICIO DE FUNCIONES PARA AUDITORIA Y MOTOR DE BASE DE DATOS (by AmaruMVP)
     ------------------------------------------------------------------------
@@ -90,7 +92,7 @@ public abstract class DaoBaseImpl {
     ------------------------------------------------------------------------
      */
 
-    /*
+ /*
     ------------------------------------------------------------------------
     INICIO de las  Funciones del DaoImplBase Deafult
     ------------------------------------------------------------------------
@@ -140,6 +142,9 @@ public abstract class DaoBaseImpl {
     }
 
     protected Integer ejecutarDMLEnBD() throws SQLException {
+        return this.statement.executeUpdate();
+    }
+     protected Integer ejecutarProcedureConParametroEntradaSalida() throws SQLException {
         return this.statement.executeUpdate();
     }
 
@@ -485,9 +490,9 @@ public abstract class DaoBaseImpl {
     ------------------------------------------------------------------------
     FIN de las  Funciones del DaoImplBase Default 
     ------------------------------------------------------------------------
-    */
+     */
 
-    /*
+ /*
     ------------------------------------------------------------------------
     INICIO de las funcion DaoImplBase para procedures creado By AmaruMVP
     ------------------------------------------------------------------------
@@ -498,17 +503,17 @@ public abstract class DaoBaseImpl {
         List lista = new ArrayList<>();
         try {
             abrirConexion();
-           
+
             String ProcedureSQL = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, null);
             //call Nombre_procedure (?, ?,?,?)
             colocarSQLEnStatement(ProcedureSQL);
             if (parametrosEntrada != null) {
-                
+
                 registrarParametrosEntrada(parametrosEntrada);
                 //{ call Nombre_procedure ('pepe', '99','77','66') }
-                
+
             }
-            System.out.println("->"+this.statement);
+            System.out.println("->" + this.statement);
             ejecutarSelectEnDB();
             while (this.resultSet.next()) {
                 agregarObjetoALaLista(lista);
@@ -524,6 +529,38 @@ public abstract class DaoBaseImpl {
         }
 
         return lista;
+    }
+
+    /*FUNCION PARA PODER CAPTURAR PARAMETROS DE ENTRADA Y DE SALIDA */
+    public int ejecutarProcedimiento(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada, Map<Integer, Object> parametrosSalida) {
+        int resultado = 0;
+        try {
+            abrirConexion();
+            String ProcedureSQL = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, parametrosSalida);
+            colocarSQLEnStatement(ProcedureSQL);
+            //CallableStatement cst 
+            if (parametrosEntrada != null) {
+                registrarParametrosEntrada(this.statement, parametrosEntrada);
+            }
+            if (parametrosSalida != null) {
+                registrarParametrosSalida(this.statement, parametrosSalida);
+            }
+
+            
+             ejecutarProcedureConParametroEntradaSalida();
+            if (parametrosSalida != null) {
+                obtenerValoresSalida(this.statement, parametrosSalida);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error ejecutando procedimiento almacenado: " + ex.getMessage());
+        } finally {
+            try {
+                cerrarConexion();
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoBaseImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return resultado;
     }
 
     /* FUNCIONES DE APOYO PARA LO QUE ES LA LLAMADA A PROCEDIMIENTOS */
@@ -549,12 +586,12 @@ public abstract class DaoBaseImpl {
         call.append(")}");
         return call.toString();
         //return con.prepareCall(call.toString());
-        
+
     }
 
     //FUNCION 3    
     private void registrarParametrosEntrada(Map<Integer, Object> parametros) throws SQLException {
-        
+
         for (Map.Entry<Integer, Object> entry : parametros.entrySet()) {
             Integer key = entry.getKey();
             Object value = entry.getValue();
@@ -617,6 +654,34 @@ public abstract class DaoBaseImpl {
                 // Agregar más tipos según sea necesario
             }
             parametrosSalida.put(posicion, value);
+        }
+    }
+
+    //FUNCION 6 
+    //PARA PODER el procedure que tiene entrada y salida
+    private void registrarParametrosEntrada(CallableStatement cs, Map<Integer, Object> parametros) throws SQLException {
+        for (Map.Entry<Integer, Object> entry : parametros.entrySet()) {
+            Integer key = entry.getKey();
+            Object value = entry.getValue();
+            switch (value) {
+                case Integer entero ->
+                    cs.setInt(key, entero);
+                case String cadena ->
+                    cs.setString(key, cadena);
+                case Double decimal ->
+                    cs.setDouble(key, decimal);
+                case Boolean booleano ->
+                    cs.setBoolean(key, booleano);
+                case java.util.Date fecha ->
+                    cs.setDate(key, new java.sql.Date(fecha.getTime()));
+                case Character caracter ->
+                    cs.setString(key, String.valueOf(caracter));
+                case byte[] archivo ->
+                    cs.setBytes(key, archivo);
+                default -> {
+                }
+                // Agregar más tipos según sea necesario
+            }
         }
     }
     /*
