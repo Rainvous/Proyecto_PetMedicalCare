@@ -72,6 +72,7 @@ public class DetalleRecetaBo {
         receta.setRecetaMedicaId(recetaMedicaId);
 
         DetalleRecetaDto dto = new DetalleRecetaDto();
+        dto.setDetalleRecetaId(detalleRecetaId);
         dto.setReceta(receta);
         dto.setDescripcionMedicamento(descripcionMedicamento);
         dto.setPresentacion(presentacion);

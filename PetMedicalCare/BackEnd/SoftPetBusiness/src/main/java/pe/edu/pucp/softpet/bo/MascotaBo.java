@@ -38,9 +38,10 @@ public class MascotaBo {
             String sexo, String raza, String color, String fechaDefuncion,
             boolean activo) {
 
-        M MascotaDto mascota = new MascotaDto();
+        MascotaDto mascota = new MascotaDto();
         PersonaDto persona= new PersonaDto();
         persona.setPersonaId(personaId);
+        mascota.setMascotaId(mascotaId);
         mascota.setNombre(nombre);
         mascota.setEspecie(especie);
         mascota.setSexo(sexo);
