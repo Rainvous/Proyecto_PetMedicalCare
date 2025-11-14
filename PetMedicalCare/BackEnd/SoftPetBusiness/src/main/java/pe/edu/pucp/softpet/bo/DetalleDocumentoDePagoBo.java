@@ -3,10 +3,10 @@ package pe.edu.pucp.softpet.bo;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.DetalleDocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.DetalleDocumentoDePagoDaoImpl;
-import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
-import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
-import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
 import pe.edu.pucp.softpet.dto.facturacion.DetalleDocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.productos.ProductoDto;
+import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 
 public class DetalleDocumentoDePagoBo {
 
@@ -35,7 +35,7 @@ public class DetalleDocumentoDePagoBo {
         detalle.setValorVenta(valorVenta);
         detalle.setActivo(activo);
         
-        detalle.setDetalleDocumentoPago(detalle);
+        //detalle.setDetalleDocumentoPago(detalle);
         detalle.setDocumentoPago(documento);
         detalle.setServicio(servicio);
         detalle.setProducto(producto);
@@ -52,7 +52,7 @@ public class DetalleDocumentoDePagoBo {
         DocumentoPagoDto documento= new DocumentoPagoDto();
         ServicioDto servicio=new ServicioDto();
         ProductoDto producto=new ProductoDto();
-        detalle.setDdpId(ddpId);
+        detalle.setDddpId(ddpId);
         documento.setDocumentoPagoId(documentoPagoId);
         servicio.setServicioId(servicioId);
         producto.setProductoId(productoId);
