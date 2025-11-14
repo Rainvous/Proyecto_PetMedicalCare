@@ -38,16 +38,15 @@ public class MascotaBo {
             String sexo, String raza, String color, String fechaDefuncion,
             boolean activo) {
 
-        MascotaDto mascota = new MascotaDto();
-
-        mascota.setMascotaId(mascotaId);
-        mascota.setPersona(new PersonaDaoImpl().obtenerPorId(personaId));
+        M MascotaDto mascota = new MascotaDto();
+        PersonaDto persona= new PersonaDto();
+        persona.setPersonaId(personaId);
         mascota.setNombre(nombre);
         mascota.setEspecie(especie);
         mascota.setSexo(sexo);
         mascota.setRaza(raza);
         mascota.setColor(color);
-        mascota.setFechaDefuncion(Date.valueOf(fechaDefuncion));
+        if(fechaDefuncion != null)mascota.setFechaDefuncion(Date.valueOf(fechaDefuncion));
         mascota.setActivo(activo);
 
         return this.mascotaDao.insertar(mascota);
