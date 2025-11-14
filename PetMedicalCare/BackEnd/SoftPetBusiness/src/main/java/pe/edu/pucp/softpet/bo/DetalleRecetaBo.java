@@ -29,7 +29,8 @@ public class DetalleRecetaBo {
             String cantidad,
             boolean activo) {
 
-        RecetaMedicaDto receta = new RecetaMedicaDaoImpl().obtenerPorId(recetaMedicaId);
+        RecetaMedicaDto receta=new RecetaMedicaDto();
+        receta.setRecetaMedicaId(recetaMedicaId);
 
         DetalleRecetaDto dto = new DetalleRecetaDto();
         dto.setReceta(receta);
@@ -67,10 +68,10 @@ public class DetalleRecetaBo {
             String cantidad,
             boolean activo) {
 
-        RecetaMedicaDto receta = new RecetaMedicaDaoImpl().obtenerPorId(recetaMedicaId);
+        RecetaMedicaDto receta=new RecetaMedicaDto();
+        receta.setRecetaMedicaId(recetaMedicaId);
 
         DetalleRecetaDto dto = new DetalleRecetaDto();
-        dto.setDetalleRecetaId(detalleRecetaId);
         dto.setReceta(receta);
         dto.setDescripcionMedicamento(descripcionMedicamento);
         dto.setPresentacion(presentacion);
@@ -81,7 +82,6 @@ public class DetalleRecetaBo {
         dto.setIndicacion(indicacion);
         dto.setCantidad(cantidad);
         dto.setActivo(activo);
-
         return this.dao.modificar(dto);
     }
         public Integer modificar(
