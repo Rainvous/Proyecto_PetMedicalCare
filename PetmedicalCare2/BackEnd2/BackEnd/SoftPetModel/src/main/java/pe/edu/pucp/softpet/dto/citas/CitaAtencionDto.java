@@ -8,12 +8,17 @@ import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionDto {
 
+
+
     private Integer citaId;
     private VeterinarioDto veterinario;
     private MascotaDto mascota;
     private Date fechaRegistro;
+    private String fechaRegistroStr;
     private Timestamp fechaHoraInicio;
+    private String fechaHoraInicioStr;
     private Timestamp fechaHoraFin;
+    private String fechaHoraFinStr;
     private Double pesoMascota;
     private Double monto;
     private EstadoCita estado;
@@ -97,6 +102,7 @@ public class CitaAtencionDto {
      * @return the fechaRegistro
      */
     public Date getFechaRegistro() {
+        
         return fechaRegistro;
     }
 
@@ -104,6 +110,8 @@ public class CitaAtencionDto {
      * @param fechaRegistro the fechaRegistro to set
      */
     public void setFechaRegistro(Date fechaRegistro) {
+        if(fechaRegistro!=null)
+            this.fechaRegistroStr= fechaRegistro.toString();
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -111,6 +119,7 @@ public class CitaAtencionDto {
      * @return the fechaHoraInicio
      */
     public Timestamp getFechaHoraInicio() {
+        
         return fechaHoraInicio;
     }
 
@@ -118,6 +127,8 @@ public class CitaAtencionDto {
      * @param fechaHoraInicio the fechaHoraInicio to set
      */
     public void setFechaHoraInicio(Timestamp fechaHoraInicio) {
+        if(fechaHoraInicio!=null)
+            this.fechaHoraInicioStr= fechaHoraInicio.toString();
         this.fechaHoraInicio = fechaHoraInicio;
     }
 
@@ -125,6 +136,7 @@ public class CitaAtencionDto {
      * @return the fechaHoraFin
      */
     public Timestamp getFechaHoraFin() {
+        
         return fechaHoraFin;
     }
 
@@ -132,6 +144,8 @@ public class CitaAtencionDto {
      * @param fechaHoraFin the fechaHoraFin to set
      */
     public void setFechaHoraFin(Timestamp fechaHoraFin) {
+        if(fechaHoraFin!=null)
+            this.fechaHoraFinStr= fechaHoraFin.toString();
         this.fechaHoraFin = fechaHoraFin;
     }
 
@@ -204,4 +218,47 @@ public class CitaAtencionDto {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+    
+        /**
+     * @return the fechaRegistroStr
+     */
+    public String getFechaRegistroStr() {
+        return fechaRegistroStr;
+    }
+
+    /**
+     * @param fechaRegistroStr the fechaRegistroStr to set
+     */
+    public void setFechaRegistroStr(String fechaRegistroStr) {
+        this.fechaRegistroStr = fechaRegistroStr;
+    }
+
+    /**
+     * @return the fechaHoraInicioStr
+     */
+    public String getFechaHoraInicioStr() {
+        return fechaHoraInicioStr;
+    }
+
+    /**
+     * @param fechaHoraInicioStr the fechaHoraInicioStr to set
+     */
+    public void setFechaHoraInicioStr(String fechaHoraInicioStr) {
+        this.fechaHoraInicioStr = fechaHoraInicioStr;
+    }
+
+    /**
+     * @return the fechaHoraFinStr
+     */
+    public String getFechaHoraFinStr() {
+        return fechaHoraFinStr;
+    }
+
+    /**
+     * @param fechaHoraFinStr the fechaHoraFinStr to set
+     */
+    public void setFechaHoraFinStr(String fechaHoraFinStr) {
+        this.fechaHoraFinStr = fechaHoraFinStr;
+    }
+    
 }

@@ -21,7 +21,7 @@ public class DetalleDocumentoDePagoBo {
             double precioUnitario, double valorVenta, boolean activo) {
 
         DetalleDocumentoPagoDto detalle = new DetalleDocumentoPagoDto();
-
+        
         detalle.setDocumentoPago(new DocumentoDePagoDaoImpl().obtenerPorId(documentoPagoId));
         detalle.setServicio(new ServicioDaoImpl().obtenerPorId(servicioId));
         detalle.setProducto(new ProductoDaoImpl().obtenerPorId(productoId));

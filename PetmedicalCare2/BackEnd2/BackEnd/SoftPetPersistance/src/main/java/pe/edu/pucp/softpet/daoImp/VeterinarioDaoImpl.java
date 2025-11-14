@@ -63,6 +63,7 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.veterinario = new VeterinarioDto();
+        
         this.veterinario.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
         PersonaDto persona=new PersonaDto();
         persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));

@@ -6,6 +6,7 @@ import java.util.List;
 import pe.edu.pucp.softpet.dao.DetalleRecetaDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.recetas.DetalleRecetaDto;
+import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
 public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDao {
 
@@ -76,8 +77,9 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.detalleReceta = new DetalleRecetaDto();
         this.detalleReceta.setDetalleRecetaId(this.resultSet.getInt("DETALLE_RECETA_ID"));
-        this.detalleReceta.setReceta(new RecetaMedicaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("RECETA_MEDICA_ID")));
+        RecetaMedicaDto rec= new RecetaMedicaDto();
+        rec.setRecetaMedicaId(this.resultSet.getInt("RECETA_MEDICA_ID"));
+        this.detalleReceta.setReceta(rec);
         this.detalleReceta.setDescripcionMedicamento(this.resultSet.getString("DESCRIPCION_MEDICAMENTO"));
         this.detalleReceta.setPresentacion(this.resultSet.getString("PRESENTACION"));
         this.detalleReceta.setViaAdministracion(this.resultSet.getString("VIA_ADMINISTRACION"));

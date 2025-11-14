@@ -9,6 +9,8 @@ import java.util.Map;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao {
@@ -92,11 +94,13 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.citaAtencion = new CitaAtencionDto();
+                VeterinarioDto vet= new VeterinarioDto();
+        MascotaDto mas= new MascotaDto();
+        vet.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
+        mas.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
         this.citaAtencion.setCitaId(this.resultSet.getInt("CITA_ID"));
-        this.citaAtencion.setVeterinario(new VeterinarioDaoImpl().
-                obtenerPorId(this.resultSet.getInt("VETERINARIO_ID")));
-        this.citaAtencion.setMascota(new MascotaDaoImpl().
-                obtenerPorId(this.resultSet.getInt("MASCOTA_ID")));
+        this.citaAtencion.setVeterinario(vet );
+        this.citaAtencion.setMascota(mas);
         this.citaAtencion.setFechaRegistro(this.resultSet.getDate("FECHA_REGISTRO"));
         this.citaAtencion.setFechaHoraInicio(this.resultSet.getTimestamp("FECHA_HORA_INICIO"));
         this.citaAtencion.setFechaHoraFin(this.resultSet.getTimestamp("FECHA_HORA_FIN"));

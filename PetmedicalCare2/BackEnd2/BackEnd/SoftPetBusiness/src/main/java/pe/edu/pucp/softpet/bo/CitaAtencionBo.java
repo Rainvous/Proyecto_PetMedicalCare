@@ -8,6 +8,8 @@ import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
 import pe.edu.pucp.softpet.daoImp.MascotaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionBo {
@@ -58,9 +60,13 @@ public class CitaAtencionBo {
             double monto, EstadoCita estado, String observacion, boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
+        VeterinarioDto vet = new VeterinarioDto();
+        MascotaDto mas = new MascotaDto();
+        mas.setMascotaId(mascotaId);
+        vet.setVeterinarioId(veterinarioId);
+        cita.setVeterinario(vet);
 
-        cita.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(veterinarioId));
-        cita.setMascota(new MascotaDaoImpl().obtenerPorId(mascotaId));
+        cita.setMascota(mas);
         cita.setFechaRegistro(fechaRegistro);
         cita.setFechaHoraInicio(fechaHoraInicio);
         cita.setFechaHoraFin(fechaHoraFin);
@@ -79,10 +85,12 @@ public class CitaAtencionBo {
             boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
-
+        VeterinarioDto vet = new VeterinarioDto();
+        MascotaDto mas = new MascotaDto();
+        mas.setMascotaId(mascotaId);
+        vet.setVeterinarioId(veterinarioId);
         cita.setCitaId(citaId);
-        cita.setVeterinario(new VeterinarioDaoImpl().obtenerPorId(veterinarioId));
-        cita.setMascota(new MascotaDaoImpl().obtenerPorId(mascotaId));
+
         cita.setFechaRegistro(fechaRegistro);
         cita.setFechaHoraInicio(fechaHoraInicio);
         cita.setFechaHoraFin(fechaHoraFin);
@@ -94,8 +102,8 @@ public class CitaAtencionBo {
 
         return this.citaDao.modificar(cita);
     }
-    
-    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha){
-        return (ArrayList<CitaAtencionDto>)citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha);
+
+    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha) {
+        return (ArrayList<CitaAtencionDto>) citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha);
     }
 }
