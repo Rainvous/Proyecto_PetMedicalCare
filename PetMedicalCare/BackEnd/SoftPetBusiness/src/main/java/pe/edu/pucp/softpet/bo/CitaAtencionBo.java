@@ -78,6 +78,8 @@ public class CitaAtencionBo {
         mas.setMascotaId(mascotaId);
         vet.setVeterinarioId(veterinarioId);
         
+        cita.setVeterinario(vet);
+        cita.setMascota(mas);
         cita.setCitaId(citaId);
         cita.setFechaRegistro(fechaRegistro);
         cita.setFechaHoraInicio(fechaHoraInicio);
