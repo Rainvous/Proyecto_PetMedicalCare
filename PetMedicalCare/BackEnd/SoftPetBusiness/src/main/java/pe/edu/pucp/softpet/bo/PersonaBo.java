@@ -29,7 +29,8 @@ public class PersonaBo {
             String tipoDocumento,
             Boolean activo) {
 
-        UsuarioDto usuario = new UsuarioDaoImpl().obtenerPorId(usuarioId);
+        UsuarioDto usuario = new UsuarioDto();
+        usario.setUsuarioId(usuarioId);
 
         PersonaDto dto = new PersonaDto();
         dto.setUsuario(usuario);
