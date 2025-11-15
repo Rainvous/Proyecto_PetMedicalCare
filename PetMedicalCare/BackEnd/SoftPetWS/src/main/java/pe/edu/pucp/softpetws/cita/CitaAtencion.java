@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.bo.CitaAtencionBo;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.citas.CitaProgramadaDto;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
@@ -124,11 +125,12 @@ public class CitaAtencion {
     // =========================
     @WebMethod(operationName = "listas_busqueda_avanzada")
     public ArrayList<CitaAtencionDto> listasBusquedaAvanzada(
-            @WebParam(name = "fecha") String fecha) {
+            @WebParam(name = "fecha") String fecha, 
+            @WebParam(name = "idVeterianrio") Integer idVeterianrio) {
 
         // aquí tu BO ya sabe qué hacer con la fecha (string)
         return (ArrayList<CitaAtencionDto>) citaBo.ListasBusquedaAvanzada(
-                fecha == null ? "" : fecha
+                fecha == null ? "" : fecha,idVeterianrio
         );
     }
 
@@ -178,4 +180,26 @@ public class CitaAtencion {
 
         return this.citaBo.listarPorIdMascota(mascotaId);
     }
+    
+    
+    //LISTAR POR FECHAS PARA EL USO DE SLOTS A LA HORA DE PROGRAMAR
+    /*
+    -> 2025-11-03 09:00:00 - true
+    -> 2025-11-03 10:00:00 - true
+    -> 2025-11-03 11:00:00 - true
+    -> 2025-11-03 12:00:00 - true
+    -> 2025-11-03 13:00:00 - true
+    -> 2025-11-03 14:00:00 - false
+    -> 2025-11-03 15:00:00 - true
+    -> 2025-11-03 16:00:00 - true
+    */
+    @WebMethod(operationName = "listar_citas_Programadas")
+    public ArrayList<CitaProgramadaDto> ListarProgramadas(
+            @WebParam(name = "idVeterinario")int idVeterinario,
+            @WebParam(name = "fechaDeCitas") String fechaDeCitas
+    ) throws ParseException {
+        return this.citaBo.ListarProgramadas(idVeterinario, fechaDeCitas);
+    }
+    
+    
 }

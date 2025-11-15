@@ -2,9 +2,12 @@ package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.citas.CitaProgramadaDto;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
@@ -93,11 +96,34 @@ public class CitaAtencionBo {
         return this.citaDao.modificar(cita);
     }
 
-    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha) {
-        return (ArrayList<CitaAtencionDto>) citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha);
+    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(
+            String fecha,
+            Integer IdVeterianrio
+    ){
+        String IdVeterinarioString;
+        if(IdVeterianrio == null){
+            IdVeterinarioString = "";
+        }
+        else if(IdVeterianrio == 1){
+            IdVeterinarioString = "1";
+        }
+        else{
+            IdVeterinarioString = "0";
+        }
+        return (ArrayList<CitaAtencionDto>) citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha,IdVeterinarioString);
     }
     
     public ArrayList<CitaAtencionDto> listarPorIdMascota(int mascotaId) {
         return this.citaDao.listarPorIdMascota(mascotaId);
+    }
+    
+     public ArrayList<CitaProgramadaDto> ListarProgramadas(int idVeterinario, String fechaDeCitas) throws ParseException {
+         
+        String fechastr = "2025-11-03";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date fechautil = sdf.parse(fechastr);
+         
+        return (ArrayList<CitaProgramadaDto>) this.citaDao.ListarProgramadas(idVeterinario, fechautil);
+
     }
 }

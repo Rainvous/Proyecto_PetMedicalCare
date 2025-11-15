@@ -47,14 +47,13 @@ public class CitaAtencionDaoImplTest {
 //    }
     @Test
     public void testListasBusquedaAvanzada() {
-//        String Fecha = "";
-//        CitaAtencionDaoImpl citadao = new CitaAtencionDaoImpl();
-//        ArrayList<CitaAtencionDto> lista= citadao.ListasBusquedaAvanzada(Fecha);
-//        System.out.println("BUSQUEDA DE CITAS AVANZADO");
-//        for( CitaAtencionDto p : lista){
-//            System.out.println("->"+p.getCitaId());
-//        }
-        
+        String Fecha = "";
+        CitaAtencionDaoImpl citadao = new CitaAtencionDaoImpl();
+        ArrayList<CitaAtencionDto> lista= citadao.ListasBusquedaAvanzada("2025-11-03","1");
+        System.out.println("BUSQUEDA DE CITAS AVANZADO");
+        for( CitaAtencionDto p : lista){
+            System.out.println("->"+p.getCitaId());
+        } 
     }
     @Test
     public void testModificar(){
