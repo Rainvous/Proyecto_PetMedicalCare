@@ -3,56 +3,48 @@ DROP PROCEDURE IF EXISTS sp_listar_citas_por_fecha;
 
 DELIMITER $$
 CREATE PROCEDURE sp_listar_citas_por_fecha(
-    IN p_fecha VARCHAR(20) -- <-- CAMBIO AQUÍ
+    IN p_fecha VARCHAR(20),
+    IN p_veterinario_id VARCHAR(20)
 )
 BEGIN
     DECLARE v_fecha_busqueda DATE;
+    DECLARE v_vet_id_str VARCHAR(20);
 
-    -- CAMBIO AQUÍ:
-    -- Normaliza el string: si es NULL o '' usa la fecha de hoy.
-    -- Si no, usa la fecha enviada.
+    -- Normaliza la fecha (si es NULL o '', usa la fecha de hoy)
     SET v_fecha_busqueda = COALESCE(NULLIF(TRIM(p_fecha), ''), CURDATE());
-	
-    SELECT
-        -- Info de la Cita
-        c.CITA_ID,
-        c.VETERINARIO_ID,
-        c.MASCOTA_ID,
-        c.FECHA_REGISTRO,
-        c.FECHA_HORA_INICIO,
-        c.FECHA_HORA_FIN,
-        c.PESO_MASCOTA,
-        c.MONTO,
-        c.ESTADO_CITA,
-        c.OBSERVACION,
-        c.ACTIVO
+    
+    -- Normaliza el ID de Veterinario (si es NULL, '' o '0', se ignora)
+    SET v_vet_id_str = NULLIF(TRIM(p_veterinario_id), ''); 
+    SET v_vet_id_str = NULLIF(v_vet_id_str, '0');       
 
+    -- MODIFICACIÓN: Devuelve todas las columnas de CITAS_ATENCION
+    SELECT c.*
     FROM CITAS_ATENCION AS c
-
-    -- Unir con Veterinarios y su info personal
+    
+    -- Se mantienen los JOINs para asegurar la integridad de los datos
     JOIN VETERINARIOS AS v ON c.VETERINARIO_ID = v.VETERINARIO_ID
     JOIN PERSONAS AS p_vet ON v.PERSONA_ID = p_vet.PERSONA_ID
-
-    -- Unir con Mascotas y su dueño
     JOIN MASCOTAS AS m ON c.MASCOTA_ID = m.MASCOTA_ID
     JOIN PERSONAS AS p_cli ON m.PERSONA_ID = p_cli.PERSONA_ID
-
+    
     WHERE
-        -- Comparamos solo la parte de la FECHA del campo DATETIME
+        -- Filtro 1: Fecha
         DATE(c.FECHA_HORA_INICIO) = v_fecha_busqueda
+        
+        -- Filtro 2: Veterinario
+        AND (v_vet_id_str IS NULL OR c.VETERINARIO_ID = v_vet_id_str)
 
     ORDER BY
-        c.FECHA_HORA_INICIO ASC; -- Ordenadas de la más temprana a la más tarde
+        c.FECHA_HORA_INICIO ASC;
 END$$
 DELIMITER ;
 
-CALL sp_listar_citas_por_fecha('2025-11-09');
+-- Buscar citas de '2025-11-03' SOLO para 'Ana Pérez' (ID '1')
+CALL sp_listar_citas_por_fecha('2025-11-03', '1'); 
 
--- Buscar una fecha específica (usa tus datos de prueba)
-CALL sp_listar_citas_por_fecha('2025-11-03');
+-- Buscar citas de '2025-11-03' para TODOS los veterinarios
+-- (Enviando string vacío '' en lugar de NULL)
+CALL sp_listar_citas_por_fecha('2025-11-03', '');
 
--- Buscar las citas de HOY (enviando NULL)
-CALL sp_listar_citas_por_fecha(NULL);
-
--- Buscar las citas de HOY (enviando un string vacío)
-CALL sp_listar_citas_por_fecha('');
+-- Buscar citas de HOY para TODOS los veterinarios
+CALL sp_listar_citas_por_fecha('', '');
