@@ -684,8 +684,57 @@ public abstract class DaoBaseImpl {
             }
         }
     }
+    //FUNCION MAS GENERICA DEL PROCEDURE DE LECUTRA
+        /*
+    ------------------------------------------------------------------------
+    INICIO de las funcion DaoImplBase para procedures creado By AmaruMVP
+    ------------------------------------------------------------------------
+     */
+       protected void ejecutaProcedureDeLectura() throws SQLException {
+        this.resultSet = this.statement.executeQuery();
+    }
+    //FUNCION PROCEDURE PARA MANEJAR SELECTS que traen informacion de una entidad
+    public List ejecutarProcedimientoLectura(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada,
+            Consumer AgregarMiPropioObjetoALaLista) {
+        //esto es para procedures que tienen SELECTS
+        List lista = new ArrayList<>();
+        try {
+            abrirConexion();
+
+            String ProcedureSQL = formarLlamadaProcedimiento(nombreProcedimiento, parametrosEntrada, null);
+            //call Nombre_procedure (?, ?,?,?)
+            colocarSQLEnStatement(ProcedureSQL);
+            if (parametrosEntrada != null) {
+
+                registrarParametrosEntrada(parametrosEntrada);
+                //{ call Nombre_procedure ('pepe', '99','77','66') }
+
+            }
+            System.out.println("->" + this.statement);
+            ejecutaProcedureDeLectura();
+            while (this.resultSet.next()) {
+                if(AgregarMiPropioObjetoALaLista==null){
+                    agregarObjetoALaLista(lista);
+                }
+                else
+                    AgregarMiPropioObjetoALaLista.accept(lista);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error ejecutando procedimiento almacenado de lectura: " + ex.getMessage());
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar la conexión - " + ex);
+            }
+        }
+
+        return lista;
+    }
     /*
  
+    
+    
     FIN de las funcion DaoImplBase para procedures creado By AmaruMVP
     ------------------------------------------------------------------------
      */

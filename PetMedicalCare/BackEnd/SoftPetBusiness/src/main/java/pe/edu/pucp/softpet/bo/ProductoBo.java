@@ -1,10 +1,8 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
-import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
-import pe.edu.pucp.softpet.daoImp.TipoProductoDaoImpl;
 import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
 public class ProductoBo {
