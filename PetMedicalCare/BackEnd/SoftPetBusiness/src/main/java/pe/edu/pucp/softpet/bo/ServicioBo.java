@@ -81,4 +81,8 @@ public class ServicioBo {
     public ArrayList<ServicioDto> ListarPorTipoServicio(String nombreTipo) {
         return this.servicioDao.ListarPorTipoServicio(nombreTipo);
     }
+    
+    public int VerificarSiElServicioTieneInformacion(int idServicio){
+        return this.servicioDao.VerificarSiElServicioTieneInformacion(idServicio);
+    }
 }

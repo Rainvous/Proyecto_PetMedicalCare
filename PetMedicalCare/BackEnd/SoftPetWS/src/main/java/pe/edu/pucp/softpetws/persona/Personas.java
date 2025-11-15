@@ -68,9 +68,10 @@ public class Personas {
             @WebParam(name = "nombre") String nombre,
             @WebParam(name = "NroDocumento") String NroDocumento,
             @WebParam(name = "Ruc") String Ruc,
-            @WebParam(name = "Telefono") String Telefono) {
+            @WebParam(name = "Telefono") String Telefono,
+            @WebParam(name = "Activo") Boolean Activo){
 
-        return (ArrayList<PersonaDto>) this.personaBo.ListasBusquedaAvanzada(nombre, NroDocumento, Ruc, Telefono);
+        return (ArrayList<PersonaDto>) this.personaBo.ListasBusquedaAvanzada(nombre, NroDocumento, Ruc, Telefono,Activo);
     }
 
     @WebMethod(operationName = "ListasBusquedaAvanzadaParaCliente")
@@ -81,5 +82,11 @@ public class Personas {
     @WebMethod(operationName = "listar_personas_activas")
     public ArrayList<PersonaDto> listarPersonasActivas() throws IOException, InterruptedException {
         return this.personaBo.listarPersonasActivas();
+    }
+    
+    @WebMethod(operationName = "VerificarSiLaPersonaTieneInformacion")
+    public int VerificarSiLaPersonaTieneInformacion(
+            @WebParam(name = "nombreTipo") int idServicio){
+        return this.personaBo.VerificarSiLaPersonaTieneInformacion(idServicio);
     }
 }

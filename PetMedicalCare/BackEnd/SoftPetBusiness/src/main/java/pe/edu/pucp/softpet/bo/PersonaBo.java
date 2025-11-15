@@ -99,13 +99,28 @@ public class PersonaBo {
             String nombre,
             String NroDocumento,
             String Ruc,
-            String Telefono) {
+            String Telefono,
+            Boolean Activo) {
+        
+        String ActivoString; 
+        
+        if(null == Activo){
+            ActivoString = "";
+        }
+        else if(Activo == true){
+            ActivoString = "1";
+        }
+        else{
+            ActivoString = "0";
+        }
+        
 
         return (ArrayList<PersonaDto>) this.dao.ListasBusquedaAvanzada(
                 nombre == null ? "" : nombre,
                 NroDocumento == null ? "" : NroDocumento,
                 Ruc == null ? "" : Ruc,
-                Telefono == null ? "" : Telefono);
+                Telefono == null ? "" : Telefono,
+                ActivoString);
     }
 
     public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente() {
@@ -114,5 +129,9 @@ public class PersonaBo {
 
     public ArrayList<PersonaDto> listarPersonasActivas() {
         return this.dao.listarPersonasActivas();
+    }
+    
+    public int VerificarSiLaPersonaTieneInformacion(int idServicio){
+        return this.dao.VerificarSiLaPersonaTieneInformacion(idServicio);
     }
 }

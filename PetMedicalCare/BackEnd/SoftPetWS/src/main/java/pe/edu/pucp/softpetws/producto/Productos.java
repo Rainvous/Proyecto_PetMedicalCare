@@ -73,5 +73,9 @@ public class Productos {
         return this.productoBo.ListarPorTipo(nombreTipo);
     }
     
-
+    @WebMethod(operationName = "VerificarSiElProductoTieneInformacion")
+    public int VerificarSiElProductoTieneInformacion(
+            @WebParam(name = "nombreTipo") int idServicio){
+        return this.productoBo.VerificarSiElProductoTieneInformacion(idServicio);
+    }
 }

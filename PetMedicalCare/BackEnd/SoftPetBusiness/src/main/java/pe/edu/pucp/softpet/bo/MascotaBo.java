@@ -95,4 +95,8 @@ public class MascotaBo {
     public ArrayList<MascotaDto> listarMascotasActivas() {
         return this.mascotaDao.listarMascotasActivas();
     }
+    
+    public int VerificarSiLaMascotaTieneInformacion(int idServicio){
+        return this.mascotaDao.VerificarSiLaMascotaTieneInformacion(idServicio);
+    }
 }

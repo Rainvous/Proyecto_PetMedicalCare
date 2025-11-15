@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -140,7 +141,8 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
             String nombre,
             String NroDocumento,
             String Ruc,
-            String Telefono
+            String Telefono,
+            String Activo
     )
     {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
@@ -148,6 +150,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         parametrosEntrada.put(2,NroDocumento);
         parametrosEntrada.put(3,Ruc);
         parametrosEntrada.put(4,Telefono);
+        parametrosEntrada.put(5,Activo);
         
         return (ArrayList<PersonaDto>)super.ejecutarProcedimientoLectura("sp_buscar_personas_avanzada", parametrosEntrada);
     }
@@ -186,5 +189,16 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         } catch (SQLException ex) {
             Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int VerificarSiLaPersonaTieneInformacion(int idServicio){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        Map<Integer, Object> parametrosSalida = new HashMap<>();
+        String NombreProcedure="sp_verificar_relacion_persona";
+        parametrosEntrada.put(1,idServicio);
+        parametrosSalida.put(2, Types.INTEGER);
+        ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
+        int resultado= (int)parametrosSalida.get(2);
+        return  resultado;
     }
 }

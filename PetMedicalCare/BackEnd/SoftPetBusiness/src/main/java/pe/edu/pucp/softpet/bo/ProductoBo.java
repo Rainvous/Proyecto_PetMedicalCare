@@ -9,7 +9,7 @@ import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
 public class ProductoBo {
 
-    private final ProductoDao productoDao;
+    private final ProductoDaoImpl productoDao;
 
     public ProductoBo() {
         this.productoDao = new ProductoDaoImpl();
@@ -72,5 +72,9 @@ public class ProductoBo {
     
     public ArrayList<ProductoDto> ListarPorTipo(String nombreTipo) {
         return this.productoDao.ListarPorTipo(nombreTipo);
+    }
+    
+    public int VerificarSiElProductoTieneInformacion(int idServicio){
+        return this.productoDao.VerificarSiElProductoTieneInformacion(idServicio);
     }
 }

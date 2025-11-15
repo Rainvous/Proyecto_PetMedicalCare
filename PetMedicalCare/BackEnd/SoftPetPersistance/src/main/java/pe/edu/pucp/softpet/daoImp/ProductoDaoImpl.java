@@ -1,8 +1,11 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.ProductoDao;
@@ -218,5 +221,16 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         } catch (SQLException ex) {
             Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int VerificarSiElProductoTieneInformacion(int idServicio){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        Map<Integer, Object> parametrosSalida = new HashMap<>();
+        String NombreProcedure="sp_verificar_relacion_producto";
+        parametrosEntrada.put(1,idServicio);
+        parametrosSalida.put(2, Types.INTEGER);
+        ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
+        int resultado= (int)parametrosSalida.get(2);
+        return  resultado;
     }
 }

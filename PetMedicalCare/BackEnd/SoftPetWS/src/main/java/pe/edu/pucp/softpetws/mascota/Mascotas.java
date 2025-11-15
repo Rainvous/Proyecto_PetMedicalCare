@@ -81,4 +81,10 @@ public class Mascotas {
     public ArrayList<MascotaDto> listarMascotasActivas() throws IOException, InterruptedException {
         return this.mascotaBo.listarMascotasActivas();
     }
+    
+    @WebMethod(operationName = "VerificarSiLaMascotaTieneInformacion")
+    public int VerificarSiLaMascotaTieneInformacion(
+            @WebParam(name = "nombreTipo") int idServicio){
+        return this.mascotaBo.VerificarSiLaMascotaTieneInformacion(idServicio);
+    }
 }

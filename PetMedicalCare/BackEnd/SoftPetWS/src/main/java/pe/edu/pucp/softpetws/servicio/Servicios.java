@@ -76,4 +76,10 @@ public class Servicios {
         
         return this.servicioBo.ListarPorTipoServicio(nombreTipo);
     }
+    
+    @WebMethod(operationName = "VerificarSiElServicioTieneInformacion")
+    public int VerificarSiElServicioTieneInformacion(
+            @WebParam(name = "nombreTipo") int idServicio){
+        return this.servicioBo.VerificarSiElServicioTieneInformacion(idServicio);
+    }
 }
