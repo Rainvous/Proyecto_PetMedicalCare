@@ -58,7 +58,7 @@ public class MascotaBo {
         }
         mascota.setActivo(activo);
 
-        return this.mascotaDao.insertar(mascota);
+        return this.mascotaDao.modificar(mascota);
     }
 
     public Integer eliminar(int mascotaId) {

@@ -42,10 +42,18 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setInt(1, this.mascota.getPersona().getPersonaId());
         this.statement.setString(2, this.mascota.getNombre());
         this.statement.setString(3, this.mascota.getEspecie());
-        this.statement.setString(4, this.mascota.getSexo());
+        this.statement.setString(4, this.mascota.getSexo()); // Ahora recibirá "M" o "H"
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        this.statement.setDate(7, (Date) this.mascota.getFechaDefuncion());
+        
+        // CORRECCIÓN: Manejo seguro de Fechas y Nulos
+        if (this.mascota.getFechaDefuncion() != null) {
+            java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
+            this.statement.setDate(7, sqlDate);
+        } else {
+            this.statement.setNull(7, java.sql.Types.DATE);
+        }
+
         this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
     }
 
@@ -57,9 +65,16 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setString(4, this.mascota.getSexo());
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        this.statement.setDate(7, (Date) this.mascota.getFechaDefuncion());
-        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
+        
+        // CORRECCIÓN: Manejo seguro de Fechas y Nulos
+        if (this.mascota.getFechaDefuncion() != null) {
+            java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
+            this.statement.setDate(7, sqlDate);
+        } else {
+            this.statement.setNull(7, java.sql.Types.DATE);
+        }
 
+        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
         this.statement.setInt(9, this.mascota.getMascotaId());
     }
 
