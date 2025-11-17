@@ -42,7 +42,7 @@ public class Mascotas {
             @WebParam(name = "fechaDefuncion") String fechaDefuncion,
             @WebParam(name = "activo") Boolean activo) {
 
-        return this.mascotaBo.insertar(personaId, nombre, especie,
+        return this.mascotaBo.modificar(mascotaId, personaId, nombre, especie,
                 sexo, raza, color, fechaDefuncion, activo);
     }
 
