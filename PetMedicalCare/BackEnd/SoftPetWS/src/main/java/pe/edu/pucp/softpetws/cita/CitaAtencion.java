@@ -43,8 +43,8 @@ public class CitaAtencion {
             // yyyyMMdd
             long millis = System.currentTimeMillis();
             Date fechaRegistroSql = new Date(millis);
-            Timestamp fechaHoraInicioTs = parseFechaHora(fechaHoraInicio); // yyyyMMddHHmmss
-            Timestamp fechaHoraFinTs = parseFechaHora(fechaHoraFin);       // yyyyMMddHHmmss
+            Timestamp fechaHoraInicioTs = parseFechaHora(fechaHoraInicio); // yyyy-MM-dd HH:mm:ss
+            Timestamp fechaHoraFinTs = parseFechaHora(fechaHoraFin);       // yyyy-MM-dd HH:mm:ss
             EstadoCita estadoEnum = parseEstado(estado);
 
             return citaBo.insertar(
@@ -164,7 +164,7 @@ public class CitaAtencion {
 
     private Timestamp parseFechaHora(String fechaHoraStr) throws ParseException {
         // Formato esperado: yyyyMMddHHmmss -> 20250911245020
-        SimpleDateFormat dfFechaHora = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat dfFechaHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date utilFechaHora = dfFechaHora.parse(fechaHoraStr);
         return new Timestamp(utilFechaHora.getTime());
     }
