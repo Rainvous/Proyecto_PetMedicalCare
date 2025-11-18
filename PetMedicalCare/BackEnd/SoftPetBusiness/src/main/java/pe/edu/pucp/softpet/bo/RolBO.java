@@ -47,4 +47,8 @@ public class RolBO {
     public ArrayList<RolDto> listarTodos() {
         return this.rolDao.listarTodos();
     }
+    public ArrayList<RolDto> ObtenerRolesDelUsuario(Integer idUser) {
+        // Simplemente pasamos la llamada al DAO
+        return this.rolDao.ObtenerRolesDelUsuario(idUser);
+    }
 }

@@ -119,7 +119,7 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
 //         sql = sql.concat("WHERE usu.usuario_id= ? ");
 
         String sql = "SELECT * ";
-        sql = sql.concat("FROM USUARIO usu ");
+        sql = sql.concat("FROM USUARIOS usu ");
         sql = sql.concat("WHERE usu.correo like ? ");
         sql = sql.concat("AND usu.password like ? ");
         return sql;
