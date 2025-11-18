@@ -38,7 +38,7 @@ BEGIN
         c.FECHA_HORA_INICIO ASC;
 END$$
 DELIMITER ;
-
+SELECT * FROM petmedicalcare.CITAS_ATENCION;
 -- Buscar citas de '2025-11-03' SOLO para 'Ana Pérez' (ID '1')
 CALL sp_listar_citas_por_fecha('2025-11-03', '1'); 
 
