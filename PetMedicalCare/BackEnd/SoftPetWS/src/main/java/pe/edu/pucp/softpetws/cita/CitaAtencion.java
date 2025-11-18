@@ -201,5 +201,12 @@ public class CitaAtencion {
         return this.citaBo.ListarProgramadas(idVeterinario, fechaDeCitas);
     }
     
+    @WebMethod(operationName = "Listas_Citas_Por_Mascotas_Y_Fechas")
+    public ArrayList<CitaAtencionDto> ListasCitasPorMascotasYFechas(
+            @WebParam(name = "idMascota") Integer idMascota,
+            @WebParam(name = "fecha") String fecha)
+    {
+        return (ArrayList<CitaAtencionDto>) this.citaBo.ListasCitasPorMascotasYFechas(idMascota, fecha);
+    }
     
 }

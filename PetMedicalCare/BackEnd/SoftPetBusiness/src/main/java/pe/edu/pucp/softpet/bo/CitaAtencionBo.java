@@ -117,7 +117,7 @@ public class CitaAtencionBo {
         return this.citaDao.listarPorIdMascota(mascotaId);
     }
     
-     public ArrayList<CitaProgramadaDto> ListarProgramadas(int idVeterinario, String fechaDeCitas) throws ParseException {
+    public ArrayList<CitaProgramadaDto> ListarProgramadas(int idVeterinario, String fechaDeCitas) throws ParseException {
          
         String fechastr = "2025-11-03";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -126,4 +126,12 @@ public class CitaAtencionBo {
         return (ArrayList<CitaProgramadaDto>) this.citaDao.ListarProgramadas(idVeterinario, fechautil);
 
     }
+    
+    public ArrayList<CitaAtencionDto> ListasCitasPorMascotasYFechas(
+            Integer idMascota,
+            String fecha)
+    {
+        return (ArrayList<CitaAtencionDto>) this.citaDao.ListasCitasPorMascotasYFechas(idMascota, fecha);
+    }
+     
 }
