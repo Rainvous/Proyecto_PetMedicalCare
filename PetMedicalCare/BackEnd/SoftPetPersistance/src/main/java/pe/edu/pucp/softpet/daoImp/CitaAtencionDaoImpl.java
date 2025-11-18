@@ -253,5 +253,33 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         return (ArrayList<CitaProgramadaDto>) this.ejecutarProcedimientoLectura(sql, parametrosEntrada, this::AgregarObjetoCitaProgramadaALaLista);
 
     }
+    
+    public ArrayList<CitaAtencionDto> ListasCitasPorMascotasYFechas(
+            Integer idMascota,
+            String fecha)
+    {
+        String fechaParaSP;
 
+        // 1. Lógica de Java para decidir la fecha
+        if (fecha == null || fecha.trim().isEmpty()) {
+
+            // Si la fecha es "" o null, Java obtiene la fecha de hoy
+            // (usando la zona horaria de tu máquina, que es la correcta)
+            fechaParaSP = LocalDate.now().toString(); // Ej: "2025-11-10"
+
+        } else {
+            // Si la fecha SÍ viene, se usa esa.
+            fechaParaSP = fecha;
+        }
+
+        // 2. Llama al SP
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+
+        // Aquí siempre pasas una fecha válida ("2025-11-10")
+        // ya sea la que escribió el usuario o la que calculó Java.
+        parametrosEntrada.put(1,idMascota);
+        parametrosEntrada.put(2,fechaParaSP );
+
+        return (ArrayList<CitaAtencionDto>) super.ejecutarProcedimientoLectura("sp_listar_citas_por_mascota_y_fecha", parametrosEntrada);
+    }
 }

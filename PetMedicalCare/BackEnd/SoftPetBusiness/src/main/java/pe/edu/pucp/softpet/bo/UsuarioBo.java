@@ -55,4 +55,8 @@ public class UsuarioBo {
     public ArrayList<UsuarioDto> listarTodos() {
         return this.usuarioDao.listarTodos();
     }
+    public ArrayList<UsuarioDto> ObtenerPorCorreoYContra(String correo, String contra) {
+        // Simplemente pasamos la llamada al DAO
+        return this.usuarioDao.ObtenerPorCorreoYContra(correo, contra);
+    }
 }

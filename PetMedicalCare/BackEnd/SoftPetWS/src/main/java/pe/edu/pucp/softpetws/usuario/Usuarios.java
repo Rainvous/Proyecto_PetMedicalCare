@@ -63,4 +63,12 @@ public class Usuarios {
     public Integer eliminar(@WebParam(name = "usuarioId") int usuarioId) {
         return this.usuarioBo.eliminar(usuarioId);
     }
+    @WebMethod(operationName = "ObtenerPorCorreoYContra")
+    public ArrayList<UsuarioDto> ObtenerPorCorreoYContra(
+            @WebParam(name = "correo") String correo,
+            @WebParam(name = "password") String contra) {
+        
+        // Esto asume que tu UsuarioBo.java tiene este método
+        return this.usuarioBo.ObtenerPorCorreoYContra(correo, contra);
+    }
 }

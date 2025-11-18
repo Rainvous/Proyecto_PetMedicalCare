@@ -35,7 +35,10 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-        this.statement.setDate(2, (Date) this.veterinario.getFechaContratacion());
+        // CORRECCIÓN: Conversión segura de java.util.Date a java.sql.Date
+        java.util.Date fechaUtil = this.veterinario.getFechaContratacion();
+        java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
+        this.statement.setDate(2, fechaSql);
         this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);
@@ -44,7 +47,10 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-        this.statement.setDate(2, (Date) this.veterinario.getFechaContratacion());
+        // CORRECCIÓN: Conversión segura de java.util.Date a java.sql.Date
+        java.util.Date fechaUtil = this.veterinario.getFechaContratacion();
+        java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
+        this.statement.setDate(2, fechaSql);
         this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);

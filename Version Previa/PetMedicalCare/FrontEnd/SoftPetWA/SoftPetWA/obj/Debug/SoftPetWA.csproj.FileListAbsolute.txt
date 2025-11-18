@@ -54,3 +54,10 @@ C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCar
 C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.csproj.CoreCompileInputs.cache
 C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.dll
 C:\Users\ferro\Desktop\PUCP\PetMedicalCare\Proyecto_PetMedicalCare\PetMedicalCare\SoftpetWA\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.pdb
+C:\Users\marti\Desktop\Proyecto_PetMedicalCare\Version Previa\PetMedicalCare\FrontEnd\SoftPetWA\SoftPetWA\bin\SoftPetWA.dll.config
+C:\Users\marti\Desktop\Proyecto_PetMedicalCare\Version Previa\PetMedicalCare\FrontEnd\SoftPetWA\SoftPetWA\bin\SoftPetWA.dll
+C:\Users\marti\Desktop\Proyecto_PetMedicalCare\Version Previa\PetMedicalCare\FrontEnd\SoftPetWA\SoftPetWA\bin\SoftPetWA.pdb
+C:\Users\marti\Desktop\Proyecto_PetMedicalCare\Version Previa\PetMedicalCare\FrontEnd\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.csproj.AssemblyReference.cache
+C:\Users\marti\Desktop\Proyecto_PetMedicalCare\Version Previa\PetMedicalCare\FrontEnd\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.csproj.CoreCompileInputs.cache
+C:\Users\marti\Desktop\Proyecto_PetMedicalCare\Version Previa\PetMedicalCare\FrontEnd\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.dll
+C:\Users\marti\Desktop\Proyecto_PetMedicalCare\Version Previa\PetMedicalCare\FrontEnd\SoftPetWA\SoftPetWA\obj\Debug\SoftPetWA.pdb

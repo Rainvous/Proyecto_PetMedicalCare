@@ -26,7 +26,7 @@ public class VeterinarioBo {
         
         veterinario.setPersona(persona);
         veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
-        veterinario.setEstado(EstadoVeterinario.valueOf(estado));
+        veterinario.setEstado(EstadoVeterinario.valueOf(estado.toUpperCase()));
         veterinario.setEspecialidad(especialidad);
         veterinario.setActivo(activo);
 

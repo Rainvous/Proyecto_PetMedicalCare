@@ -42,10 +42,18 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setInt(1, this.mascota.getPersona().getPersonaId());
         this.statement.setString(2, this.mascota.getNombre());
         this.statement.setString(3, this.mascota.getEspecie());
-        this.statement.setString(4, this.mascota.getSexo());
+        this.statement.setString(4, this.mascota.getSexo()); // Ahora recibirá "M" o "H"
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        this.statement.setDate(7, (Date) this.mascota.getFechaDefuncion());
+        
+        // CORRECCIÓN: Manejo seguro de Fechas y Nulos
+        if (this.mascota.getFechaDefuncion() != null) {
+            java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
+            this.statement.setDate(7, sqlDate);
+        } else {
+            this.statement.setNull(7, java.sql.Types.DATE);
+        }
+
         this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
     }
 
@@ -57,9 +65,16 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setString(4, this.mascota.getSexo());
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        this.statement.setDate(7, (Date) this.mascota.getFechaDefuncion());
-        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
         
+        // CORRECCIÓN: Manejo seguro de Fechas y Nulos
+        if (this.mascota.getFechaDefuncion() != null) {
+            java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
+            this.statement.setDate(7, sqlDate);
+        } else {
+            this.statement.setNull(7, java.sql.Types.DATE);
+        }
+
+        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
         this.statement.setInt(9, this.mascota.getMascotaId());
     }
 
@@ -80,6 +95,7 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         PersonaDto per= new PersonaDto();
         per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
         this.mascota.setPersona(per);
+        //this.mascota.setPersona(new PersonaDaoImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
         this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
         this.mascota.setEspecie(this.resultSet.getString("ESPECIE"));
         this.mascota.setSexo(this.resultSet.getString("SEXO"));
@@ -130,79 +146,79 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.mascota = mascota;
         return super.eliminar();
     }
-    
-    public ArrayList<MascotaDto> ListasBusquedaAvanzada(MascotaDto mascota){
+
+    public ArrayList<MascotaDto> ListasBusquedaAvanzada(MascotaDto mascota) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
-       
-        parametrosEntrada.put(1,mascota.getNombre());
-        parametrosEntrada.put(2,mascota.getRaza());
-        parametrosEntrada.put(3,mascota.getEspecie());
-        parametrosEntrada.put(4,mascota.getPersona().getNombre());
-        
-        return (ArrayList<MascotaDto>)super.ejecutarProcedimientoLectura("sp_buscar_mascotas_avanzada", parametrosEntrada);
+
+        parametrosEntrada.put(1, mascota.getNombre());
+        parametrosEntrada.put(2, mascota.getRaza());
+        parametrosEntrada.put(3, mascota.getEspecie());
+        parametrosEntrada.put(4, mascota.getPersona().getNombre());
+
+        return (ArrayList<MascotaDto>) super.ejecutarProcedimientoLectura("sp_buscar_mascotas_avanzada", parametrosEntrada);
     }
-    
+
     @Override
     public ArrayList<MascotaDto> listarPorIdPersona(Integer personaId) {
-        
+
         // Obtenemos el SQL base: "SELECT ..., ..., FROM MASCOTAS" y añadimos el filtro
         String sql = super.generarSQLParaListarTodos();
         sql = sql.concat(" WHERE PERSONA_ID = ?");
-        
+
         Object parametros = personaId;
-        return (ArrayList<MascotaDto>) super.listarTodos(sql, 
-                this::incluirValorDeParametrosParaListarPorIdPersona, 
+        return (ArrayList<MascotaDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarPorIdPersona,
                 parametros);
     }
 
     private void incluirValorDeParametrosParaListarPorIdPersona(Object objetoParametros) {
         // Casteamos el objeto de parámetros a su tipo original
         Integer personaId = (Integer) objetoParametros;
-        try {            
+        try {
             // Asignamos el ID al primer '?' en el SQL
             this.statement.setInt(1, personaId);
         } catch (SQLException ex) {
             Logger.getLogger(MascotaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public ArrayList<MascotaDto> listarMascotasActivas() {
-        
+
         // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM MASCOTAS"
         String sql = super.generarSQLParaListarTodos();
-        
+
         // 2. Añadimos el filtro WHERE
         sql = sql.concat(" WHERE ACTIVO = ?");
-        
+
         // 3. El parámetro es fijo: 1 (para activo)
         Object parametros = 1;
-        
+
         // 4. Llamamos al método listarTodos de la clase base
-        return (ArrayList<MascotaDto>) super.listarTodos(sql, 
-                this::incluirValorDeParametrosParaListarActivas, 
+        return (ArrayList<MascotaDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarActivas,
                 parametros);
     }
 
     private void incluirValorDeParametrosParaListarActivas(Object objetoParametros) {
         // Casteamos el objeto de parámetros a su tipo original
         Integer activoFlag = (Integer) objetoParametros;
-        try {            
+        try {
             // Asignamos el '1' al primer '?' en el SQL
             this.statement.setInt(1, activoFlag);
         } catch (SQLException ex) {
             Logger.getLogger(MascotaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public int VerificarSiLaMascotaTieneInformacion(int idServicio){
+
+    public int VerificarSiLaMascotaTieneInformacion(int idServicio) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         Map<Integer, Object> parametrosSalida = new HashMap<>();
-        String NombreProcedure="sp_verificar_relacion_mascota";
-        parametrosEntrada.put(1,idServicio);
+        String NombreProcedure = "sp_verificar_relacion_mascota";
+        parametrosEntrada.put(1, idServicio);
         parametrosSalida.put(2, Types.INTEGER);
         ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
-        int resultado= (int)parametrosSalida.get(2);
-        return  resultado;
+        int resultado = (int) parametrosSalida.get(2);
+        return resultado;
     }
 }
