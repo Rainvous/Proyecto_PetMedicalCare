@@ -78,7 +78,7 @@ public class PersonaBo {
         dto.setTipoDocumento(tipoDocumento);
         dto.setActivo(activo);
 
-        return this.dao.insertar(dto);
+        return this.dao.modificar(dto);
     }
 
     public Integer eliminar(int personaId) {
