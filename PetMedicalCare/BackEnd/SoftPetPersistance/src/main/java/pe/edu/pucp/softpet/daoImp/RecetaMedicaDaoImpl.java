@@ -34,8 +34,19 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.recetaMedica.getCita().getCitaId());
-        this.statement.setDate(2, this.recetaMedica.getFechaEmision());
-        this.statement.setDate(3, this.recetaMedica.getVigenciaHasta());
+        
+        // Manejo seguro de Fecha
+        java.util.Date fechaUtil1 = this.recetaMedica.getFechaEmision();
+        java.sql.Date fechaSql1 = new java.sql.Date(fechaUtil1.getTime());
+        this.statement.setDate(2, fechaSql1);
+        
+        // Manejo seguro de Fecha
+        java.util.Date fechaUtil2 = this.recetaMedica.getVigenciaHasta();
+        java.sql.Date fechaSql2 = new java.sql.Date(fechaUtil2.getTime());
+        this.statement.setDate(3, fechaSql2);
+        
+//        this.statement.setDate(2, this.recetaMedica.getFechaEmision());
+//        this.statement.setDate(3, this.recetaMedica.getVigenciaHasta());
         this.statement.setString(4, this.recetaMedica.getDiagnostico());
         this.statement.setString(5, this.recetaMedica.getObservaciones());
         this.statement.setInt(6, this.recetaMedica.getActivo() ? 1 : 0);
@@ -44,8 +55,18 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.recetaMedica.getCita().getCitaId());
-        this.statement.setDate(2, this.recetaMedica.getFechaEmision());
-        this.statement.setDate(3, this.recetaMedica.getVigenciaHasta());
+        
+        // Manejo seguro de Fecha
+        java.util.Date fechaUtil1 = this.recetaMedica.getFechaEmision();
+        java.sql.Date fechaSql1 = new java.sql.Date(fechaUtil1.getTime());
+        this.statement.setDate(2, fechaSql1);
+        
+        // Manejo seguro de Fecha
+        java.util.Date fechaUtil2 = this.recetaMedica.getVigenciaHasta();
+        java.sql.Date fechaSql2 = new java.sql.Date(fechaUtil2.getTime());
+        this.statement.setDate(3, fechaSql2);
+//        this.statement.setDate(2, this.recetaMedica.getFechaEmision());
+//        this.statement.setDate(3, this.recetaMedica.getVigenciaHasta());
         this.statement.setString(4, this.recetaMedica.getDiagnostico());
         this.statement.setString(5, this.recetaMedica.getObservaciones());
         this.statement.setInt(6, this.recetaMedica.getActivo() ? 1 : 0);

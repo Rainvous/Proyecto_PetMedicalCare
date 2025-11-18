@@ -2,6 +2,7 @@ package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import java.time.LocalDate;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.RecetaMedicaDaoImpl;
 import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
@@ -16,7 +17,7 @@ public class RecetaMedicaBo {
         this.recetaDao = new RecetaMedicaDaoImpl();
     }
 
-    public Integer insertar(int citaId, Date fechaEmision, Date vigenciaHasta,
+    public Integer insertar(int citaId, String fechaEmision, String vigenciaHasta,
             String diagnostico, String observaciones, boolean activo) {
 
         RecetaMedicaDto receta = new RecetaMedicaDto();
@@ -25,8 +26,8 @@ public class RecetaMedicaBo {
         cita.setCitaId(citaId);
 
         receta.setCita(cita);
-        receta.setFechaEmision(fechaEmision);
-        receta.setVigenciaHasta(vigenciaHasta);
+        receta.setFechaEmision(Date.valueOf(fechaEmision));
+        receta.setVigenciaHasta(Date.valueOf(vigenciaHasta));
         receta.setDiagnostico(diagnostico);
         receta.setObservaciones(observaciones);
         receta.setActivo(activo);
@@ -34,8 +35,8 @@ public class RecetaMedicaBo {
         return this.recetaDao.insertar(receta);
     }
 
-    public Integer modificar(int recetaId, int citaId, Date fechaEmision,
-            Date vigenciaHasta, String diagnostico, String observaciones,
+    public Integer modificar(int recetaId, int citaId, String fechaEmision,
+            String vigenciaHasta, String diagnostico, String observaciones,
             boolean activo) {
 
         RecetaMedicaDto receta = new RecetaMedicaDto();
@@ -45,8 +46,8 @@ public class RecetaMedicaBo {
 
         receta.setRecetaMedicaId(recetaId);
         receta.setCita(cita);
-        receta.setFechaEmision(fechaEmision);
-        receta.setVigenciaHasta(vigenciaHasta);
+        receta.setFechaEmision(Date.valueOf(fechaEmision));
+        receta.setVigenciaHasta(Date.valueOf(vigenciaHasta));
         receta.setDiagnostico(diagnostico);
         receta.setObservaciones(observaciones);
         receta.setActivo(activo);

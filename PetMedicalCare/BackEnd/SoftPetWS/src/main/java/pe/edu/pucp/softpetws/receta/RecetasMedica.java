@@ -3,7 +3,6 @@ package pe.edu.pucp.softpetws.receta;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import pe.edu.pucp.softpet.bo.RecetaMedicaBo;
@@ -13,7 +12,7 @@ import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 public class RecetasMedica {
 
     private final RecetaMedicaBo recetaBo;
-    private static final Date FECHA_MIN = Date.valueOf("1900-01-01");
+//    private static final Date FECHA_MIN = Date.valueOf("1900-01-01");
 
     public RecetasMedica() {
         this.recetaBo = new RecetaMedicaBo();
@@ -31,15 +30,15 @@ public class RecetasMedica {
             @WebParam(name = "observaciones") String observaciones,
             @WebParam(name = "activo") boolean activo) {
 
-        Date fechaE = (fechaEmision != null && !fechaEmision.isEmpty())
-                ? Date.valueOf(fechaEmision)
-                : FECHA_MIN;
+//        Date fechaE = (fechaEmision != null && !fechaEmision.isEmpty())
+//                ? Date.valueOf(fechaEmision)
+//                : FECHA_MIN;
+//
+//        Date fechaV = (vigenciaHasta != null && !vigenciaHasta.isEmpty())
+//                ? Date.valueOf(vigenciaHasta)
+//                : FECHA_MIN;
 
-        Date fechaV = (vigenciaHasta != null && !vigenciaHasta.isEmpty())
-                ? Date.valueOf(vigenciaHasta)
-                : FECHA_MIN;
-
-        return this.recetaBo.insertar(citaId, fechaE, fechaV, diagnostico, observaciones, activo);
+        return this.recetaBo.insertar(citaId, fechaEmision, vigenciaHasta, diagnostico, observaciones, activo);
     }
 
     // =========================
@@ -55,15 +54,15 @@ public class RecetasMedica {
             @WebParam(name = "observaciones") String observaciones,
             @WebParam(name = "activo") boolean activo) {
 
-        Date fechaE = (fechaEmision != null && !fechaEmision.isEmpty())
-                ? Date.valueOf(fechaEmision)
-                : FECHA_MIN;
+//        Date fechaE = (fechaEmision != null && !fechaEmision.isEmpty())
+//                ? Date.valueOf(fechaEmision)
+//                : FECHA_MIN;
+//
+//        Date fechaV = (vigenciaHasta != null && !vigenciaHasta.isEmpty())
+//                ? Date.valueOf(vigenciaHasta)
+//                : FECHA_MIN;
 
-        Date fechaV = (vigenciaHasta != null && !vigenciaHasta.isEmpty())
-                ? Date.valueOf(vigenciaHasta)
-                : FECHA_MIN;
-
-        return this.recetaBo.modificar(recetaId, citaId, fechaE, fechaV, diagnostico, observaciones, activo);
+        return this.recetaBo.modificar(recetaId, citaId, fechaEmision, vigenciaHasta, diagnostico, observaciones, activo);
     }
 
     // =========================

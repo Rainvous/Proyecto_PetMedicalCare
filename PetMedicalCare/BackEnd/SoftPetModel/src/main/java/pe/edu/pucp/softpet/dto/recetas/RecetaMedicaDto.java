@@ -1,6 +1,6 @@
 package pe.edu.pucp.softpet.dto.recetas;
 
-import java.sql.Date;
+import java.util.Date;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 
 public class RecetaMedicaDto {
