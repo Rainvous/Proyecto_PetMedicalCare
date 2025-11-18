@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.daoImp;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,8 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         super("VETERINARIOS");
         this.veterinario = null;
         this.retornarLlavePrimaria = true;
+        // FIX CRÍTICO: Definir usuario para auditoría (Triggers de BD)
+        this.usuario = "user_backend"; 
     }
 
     @Override
@@ -35,10 +36,12 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-        // CORRECCIÓN: Conversión segura de java.util.Date a java.sql.Date
+        
+        // Manejo seguro de Fecha
         java.util.Date fechaUtil = this.veterinario.getFechaContratacion();
         java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
         this.statement.setDate(2, fechaSql);
+        
         this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);
@@ -47,10 +50,12 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-        // CORRECCIÓN: Conversión segura de java.util.Date a java.sql.Date
+        
+        // Manejo seguro de Fecha
         java.util.Date fechaUtil = this.veterinario.getFechaContratacion();
         java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
         this.statement.setDate(2, fechaSql);
+        
         this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);
@@ -71,11 +76,12 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.veterinario = new VeterinarioDto();
-        
         this.veterinario.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
-        PersonaDto persona=new PersonaDto();
+        
+        PersonaDto persona = new PersonaDto();
         persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
         this.veterinario.setPersona(persona);
+        
         this.veterinario.setFechaContratacion(this.resultSet.getDate("FECHA_DE_CONTRATACION"));
         this.veterinario.setEstado(EstadoVeterinario.valueOf(this.resultSet.getString("ESTADO")));
         this.veterinario.setEspecialidad(this.resultSet.getString("ESPECIALIDAD"));
@@ -100,9 +106,9 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     }
 
     @Override
-    public VeterinarioDto obtenerPorId(Integer personaId) {
+    public VeterinarioDto obtenerPorId(Integer veterinarioId) {
         this.veterinario = new VeterinarioDto();
-        this.veterinario.setVeterinarioId(personaId);
+        this.veterinario.setVeterinarioId(veterinarioId);
         super.obtenerPorId();
         return this.veterinario;
     }
@@ -126,27 +132,17 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     
     @Override
     public ArrayList<VeterinarioDto> listarVeterinariosActivos() {
-        
-        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM VETERINARIOS"
         String sql = super.generarSQLParaListarTodos();
-        
-        // 2. Añadimos el filtro WHERE
         sql = sql.concat(" WHERE ACTIVO = ?");
-        
-        // 3. El parámetro es fijo: 1 (para activo)
         Object parametros = 1;
-        
-        // 4. Llamamos al método listarTodos de la clase base
         return (ArrayList<VeterinarioDto>) super.listarTodos(sql, 
                 this::incluirValorDeParametrosParaListarActivos, 
                 parametros);
     }
 
     private void incluirValorDeParametrosParaListarActivos(Object objetoParametros) {
-        // Casteamos el objeto de parámetros a su tipo original
         Integer activoFlag = (Integer) objetoParametros;
         try {            
-            // Asignamos el '1' al primer '?' en el SQL
             this.statement.setInt(1, activoFlag);
         } catch (SQLException ex) {
             Logger.getLogger(VeterinarioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
