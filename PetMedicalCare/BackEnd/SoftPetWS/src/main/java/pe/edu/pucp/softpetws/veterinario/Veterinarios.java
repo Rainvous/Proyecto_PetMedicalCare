@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import pe.edu.pucp.softpet.bo.VeterinarioBo;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 
-@WebService(serviceName = "Veterinarios")
+@WebService(serviceName = "veterinarios")
 public class Veterinarios {
 
     private final VeterinarioBo veterinarioBo;
