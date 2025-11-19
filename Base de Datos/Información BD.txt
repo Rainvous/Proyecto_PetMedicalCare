@@ -1,16 +1,19 @@
----------------------
-MYSQL
-base de datos: softpet
-password: Fullchow#01
+=======================================================
+CONEXIÓN BD - MYSQL
+-------------------------------------------------------
+Base de datos: softpet
 user: admin
+password: Fullchow#01
 puerto: 3306
 esquema: petmedicalcare
-url: softpet.cyvzjhf4i02y.us-east-1.rds.amazonaws.com
----------------------
-MSSQL
-base de datos:softpet-mssql
-password: Fullchow#01
+host: softpet.cyvzjhf4i02y.us-east-1.rds.amazonaws.com
+=======================================================
+CONEXIÓN BD - MSSQL
+-------------------------------------------------------
+base de datos: softpet-mssql
 user: admin
+password: Fullchow#01
 puerto: 1433
-esquema: FALTA
-url: softpet-mssql.cyvzjhf4i02y.us-east-1.rds.amazonaws.com
+esquema: (por definir)
+host: softpet-mssql.cyvzjhf4i02y.us-east-1.rds.amazonaws.com
+=======================================================
