@@ -76,4 +76,18 @@ public class VeterinarioBo {
         return resultado;
         
     }
+    
+    public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
+            String Especialidad,
+            String nombre,
+            String Telefono,
+            String nroDocumento
+    )
+    {
+        return (ArrayList<VeterinarioDto>) this.veterinarioDao.ListasBusquedaAvanzadaVeterinario(
+                Especialidad == null ? "" : Especialidad,
+                nombre == null ? "" : nombre,
+                Telefono == null ? "" : Telefono,
+                nroDocumento== null ? "" : nroDocumento );
+    }
 }

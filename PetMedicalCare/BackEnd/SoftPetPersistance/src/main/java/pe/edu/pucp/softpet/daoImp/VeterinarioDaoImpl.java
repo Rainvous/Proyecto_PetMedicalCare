@@ -164,4 +164,21 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         int resultado = (int) parametrosSalida.get(3);
         return resultado;
     }
+    
+    public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
+            String Especialidad,
+            String nombre,
+            String Telefono,
+            String nroDocumento
+    )
+    {
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+
+        parametrosEntrada.put(1, Especialidad);
+        parametrosEntrada.put(2, nombre);
+        parametrosEntrada.put(3, Telefono);
+        parametrosEntrada.put(4, nroDocumento);
+
+        return (ArrayList<VeterinarioDto>) super.ejecutarProcedimientoLectura("sp_buscar_veterinarios_avanzada", parametrosEntrada);
+    }
 }

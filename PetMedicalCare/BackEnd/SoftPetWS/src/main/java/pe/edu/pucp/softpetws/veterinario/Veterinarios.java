@@ -60,7 +60,7 @@ public class Veterinarios {
         return this.veterinarioBo.listarVeterinariosActivos();
     }
     
-     @WebMethod(operationName = "VerificarSiExisteHorarioLaboral")
+    @WebMethod(operationName = "VerificarSiExisteHorarioLaboral")
     public int VerificarSiExisteHorarioLaboral(
             @WebParam(name = "fecha")String fecha,
             @WebParam(name = "idVeterinario")Integer idVeterinario 
@@ -68,5 +68,15 @@ public class Veterinarios {
     {
         return this.veterinarioBo.VerificarSiExisteHorarioLaboral(fecha, idVeterinario);
         
+    }
+    @WebMethod(operationName = "ListasBusquedaAvanzadaVeterinario")
+    public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
+            @WebParam(name = "Especialidad") String Especialidad,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "Telefono") String Telefono,
+            @WebParam(name = "nroDocumento") String nroDocumento
+    )
+    {
+        return (ArrayList<VeterinarioDto>) this.veterinarioBo.ListasBusquedaAvanzadaVeterinario(Especialidad, nombre, Telefono, nroDocumento);
     }
 }

@@ -52,5 +52,28 @@ public class VeterinarioDaoImplTest {
             System.err.println("---ID Horario "+Id);
             
         }
+        
+        
+        @Test
+    public void testListarVeterinariosActivos() {
+        System.out.println("--- Prueba: Listar Veterinarios Activos ---");
+
+        VeterinarioDaoImpl vetDao = new VeterinarioDaoImpl();
+        String Especialidad = "";
+        String nombre = "";
+        String Telefono = "";
+        String nroDocumento = "";
+        ArrayList<VeterinarioDto> veterinariosActivos = vetDao.ListasBusquedaAvanzadaVeterinario(Especialidad, nombre, Telefono, nroDocumento);
+        for (VeterinarioDto v :  veterinariosActivos ) {
+            System.out.println(
+                    "  -> ID: " + v.getVeterinarioId()
+                    + //
+                    ", Especialidad: " + v.getEspecialidad()
+                    + //
+                    ", Activo: " + v.getActivo() //
+            );
+        }
+
     }
-//}
+}
+
