@@ -1,8 +1,12 @@
 package pe.edu.pucp.softpet.daoImp;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.VeterinarioDao;
@@ -147,5 +151,17 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         } catch (SQLException ex) {
             Logger.getLogger(VeterinarioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int VerificarSiExisteHorarioLaboral(Date fecha,Integer idVeterinario ) {
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        Map<Integer, Object> parametrosSalida = new HashMap<>();
+        String NombreProcedure = "sp_verificar_horario_laboral_existente";
+        parametrosEntrada.put(1, fecha);
+        parametrosEntrada.put(2, idVeterinario);
+        parametrosSalida.put(3, Types.INTEGER);
+        ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
+        int resultado = (int) parametrosSalida.get(3);
+        return resultado;
     }
 }

@@ -233,4 +233,13 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         int resultado= (int)parametrosSalida.get(2);
         return  resultado;
     }
+    
+    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(ProductoDto producto,String rango,String activo){
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        parametrosEntrada.put(1,producto.getNombre());
+        parametrosEntrada.put(2,rango);
+        parametrosEntrada.put(3,activo);
+        
+        return (ArrayList<ProductoDto>)super.ejecutarProcedimientoLectura("sp_buscar_productos_avanzada", parametrosEntrada);
+    }
 }

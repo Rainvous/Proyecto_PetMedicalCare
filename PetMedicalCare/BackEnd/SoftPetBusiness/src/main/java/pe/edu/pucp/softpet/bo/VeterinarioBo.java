@@ -10,7 +10,7 @@ import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
 public class VeterinarioBo {
 
-    private final VeterinarioDao veterinarioDao;
+    private final VeterinarioDaoImpl veterinarioDao;
 
     public VeterinarioBo() {
         this.veterinarioDao = new VeterinarioDaoImpl();
@@ -67,5 +67,13 @@ public class VeterinarioBo {
     
     public ArrayList<VeterinarioDto> listarVeterinariosActivos() {
         return this.veterinarioDao.listarVeterinariosActivos();
+    }
+    
+    public int VerificarSiExisteHorarioLaboral(String fecha,Integer idVeterinario ) {
+
+        java.sql.Date FechaDate = java.sql.Date.valueOf(fecha); 
+        Integer resultado =veterinarioDao.VerificarSiExisteHorarioLaboral(FechaDate,idVeterinario);
+        return resultado;
+        
     }
 }

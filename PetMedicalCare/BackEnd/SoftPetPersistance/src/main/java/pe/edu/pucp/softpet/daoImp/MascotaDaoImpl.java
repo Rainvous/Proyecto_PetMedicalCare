@@ -221,4 +221,6 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         int resultado = (int) parametrosSalida.get(2);
         return resultado;
     }
+    
+    
 }

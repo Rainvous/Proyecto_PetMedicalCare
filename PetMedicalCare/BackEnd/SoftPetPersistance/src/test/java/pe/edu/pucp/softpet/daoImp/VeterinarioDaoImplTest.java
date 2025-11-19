@@ -1,12 +1,13 @@
-//package pe.edu.pucp.softpet.daoImp;
-//
-//import java.util.ArrayList;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
-//import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
-//import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
-//
-//public class VeterinarioDaoImplTest {
+package pe.edu.pucp.softpet.daoImp;
+
+import java.util.ArrayList;
+import java.util.Date;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
+
+public class VeterinarioDaoImplTest {
 //
 //    @Test
 //    public void testListarVeterinariosActivos() {
@@ -34,5 +35,22 @@
 //        if (veterinariosActivos.isEmpty()) {
 //            System.out.println("INFO: No se encontraron veterinarios activos (la lista está vacía).");
 //        }
-//    }
+    
+        @Test
+        public void VerificarSiExisteHorarioLaboral () {
+    
+            String fecha = "2025-11-03";
+            Integer idVeterinario = 1 ;
+            
+            java.sql.Date FechaDate = java.sql.Date.valueOf(fecha);
+            
+            VeterinarioDaoImpl vetDao = new VeterinarioDaoImpl();
+            
+            Integer Id =vetDao.VerificarSiExisteHorarioLaboral(FechaDate,idVeterinario);
+            
+            System.err.println("TEST DE EXISTENCIA DE HORAIO LABORAL");
+            System.err.println("---ID Horario "+Id);
+            
+        }
+    }
 //}

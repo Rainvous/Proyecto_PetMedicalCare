@@ -75,4 +75,12 @@ public class ProductoBo {
     public int VerificarSiElProductoTieneInformacion(int idServicio){
         return this.productoDao.VerificarSiElProductoTieneInformacion(idServicio);
     }
+    
+    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(String nombre,String rango,String activo){
+        
+        ProductoDto producto = new ProductoDto();
+        producto.setNombre(nombre == null ? "" : nombre);
+
+        return (ArrayList<ProductoDto>)productoDao.ListasBusquedaProductosAvanzada(producto, rango == null ? "" : rango, activo == null ? "" : activo);
+    }
 }

@@ -59,4 +59,14 @@ public class Veterinarios {
     public ArrayList<VeterinarioDto> listarVeterinariosActivos() throws IOException, InterruptedException {
         return this.veterinarioBo.listarVeterinariosActivos();
     }
+    
+     @WebMethod(operationName = "VerificarSiExisteHorarioLaboral")
+    public int VerificarSiExisteHorarioLaboral(
+            @WebParam(name = "fecha")String fecha,
+            @WebParam(name = "idVeterinario")Integer idVeterinario 
+    ) 
+    {
+        return this.veterinarioBo.VerificarSiExisteHorarioLaboral(fecha, idVeterinario);
+        
+    }
 }
