@@ -105,7 +105,7 @@ public class CitaAtencionBo {
             IdVeterinarioString = "";
         }
         else if(IdVeterianrio >= 1){
-            IdVeterinarioString = "1";
+            IdVeterinarioString = IdVeterianrio.toString();
         }
         else{
             IdVeterinarioString = "0";
