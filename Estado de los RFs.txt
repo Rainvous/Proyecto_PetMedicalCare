@@ -1,0 +1,13 @@
+Estado de Implementación de Requerimientos Funcionales
+======================================================
+
+Se ha completado la implementación de los requerimientos 
+comprendidos entre el RF-01 y el RF-13, así como el RF-16. 
+Actualmente, algunos de estos módulos se encuentran en fase 
+de refinamiento y ajustes menores para garantizar su correcto 
+funcionamiento según lo esperado.
+
+Por otro lado, los RF-03 y RF-10 han sido modificados en 
+concordancia con el diseño de las interfaces (pantallas). 
+Dichos cambios se encuentran a la espera de la validación 
+y aprobación por parte del jefe de práctica.
