@@ -48,7 +48,7 @@ public class VeterinarioDaoImplTest {
             
             Integer Id =vetDao.VerificarSiExisteHorarioLaboral(FechaDate,idVeterinario);
             
-            System.err.println("TEST DE EXISTENCIA DE HORAIO LABORAL");
+            System.out.println("TEST DE EXISTENCIA DE HORAIO LABORAL");
             System.err.println("---ID Horario "+Id);
             
         }

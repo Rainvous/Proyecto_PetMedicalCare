@@ -1,0 +1,12 @@
+ADMIN: 
+correo-> admin@gmail.com
+password-> 1234
+
+CLIENTE:
+correo-> amaru@gmail.com
+contra-> 44332211
+
+
+Veterinario:
+correo->alvaro@gmail.com
+password-->4321
