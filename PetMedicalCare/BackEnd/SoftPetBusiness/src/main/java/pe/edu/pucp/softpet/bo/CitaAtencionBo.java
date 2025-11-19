@@ -104,7 +104,7 @@ public class CitaAtencionBo {
         if(IdVeterianrio == null){
             IdVeterinarioString = "";
         }
-        else if(IdVeterianrio == 1){
+        else if(IdVeterianrio >= 1){
             IdVeterinarioString = "1";
         }
         else{
