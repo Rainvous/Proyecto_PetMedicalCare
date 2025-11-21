@@ -67,4 +67,11 @@ public class DocumentosDePago {
     public ArrayList<DocumentoPagoDto> listarTodos() {
         return this.documentoBo.listarTodos();
     }
+    
+    @WebMethod(operationName = "GeneracionDeSiguienteBoletaOFactura")
+    public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(
+            @WebParam(name = "tipoDocumento") String tipoDocumento
+    ) {
+        return this.documentoBo.GeneracionDeSiguienteBoletaOFactura(tipoDocumento);
+    }
 }

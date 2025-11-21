@@ -12,7 +12,7 @@ import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 
 public class DocumentoDePagoBo {
 
-    private final DocumentoDePagoDao documentoDePagoDao;
+    private final DocumentoDePagoDaoImpl documentoDePagoDao;
 
     public DocumentoDePagoBo() {
         this.documentoDePagoDao = new DocumentoDePagoDaoImpl();
@@ -96,5 +96,9 @@ public class DocumentoDePagoBo {
 
     public ArrayList<DocumentoPagoDto> listarTodos() {
         return this.documentoDePagoDao.listarTodos();
+    }
+    
+    public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(String tipoDocumento) {
+        return this.documentoDePagoDao.GeneracionDeSiguienteBoletaOFactura(tipoDocumento.toUpperCase());
     }
 }

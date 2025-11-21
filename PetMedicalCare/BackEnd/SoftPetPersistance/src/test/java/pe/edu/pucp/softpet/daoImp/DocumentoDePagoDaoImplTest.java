@@ -1,17 +1,15 @@
+
 package pe.edu.pucp.softpet.daoImp;
 
-//package pe.edu.pucp.softpet.daoImp;
-//
-//import java.sql.Date;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
-//import pe.edu.pucp.softpet.daoImp.util.enums.EstadoDocumentoDePago;
-//import pe.edu.pucp.softpet.daoImp.util.enums.TipoDocumentoDePago;
-//import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
-//import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
-//import pe.edu.pucp.softpet.dto.personas.PersonaDto;
-//
-//public class DocumentoDePagoDaoImplTest {
+import java.sql.Date;
+import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
+
+public class DocumentoDePagoDaoImplTest {
 //
 //    public DocumentoDePagoDaoImplTest() {
 //    }
@@ -49,4 +47,17 @@ package pe.edu.pucp.softpet.daoImp;
 //                    + " - " + det.getEstado());
 //        }
 //    }
-//}
+    
+    @Test
+    public void TestGeneracionDeSiguienteBoletaOFactura() {
+        String Tipo = "F";
+        
+        DocumentoDePagoDaoImpl doc = new DocumentoDePagoDaoImpl();
+        
+        ArrayList<String> Lista = doc.GeneracionDeSiguienteBoletaOFactura(Tipo);
+        
+        System.err.println("GeneracionDeSiguienteBoletaOFactura");
+        System.err.println("NUMERO : "+Lista.get(0));
+        System.err.println("Serie : "+Lista.get(1));
+    }
+}

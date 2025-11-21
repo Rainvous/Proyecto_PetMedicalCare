@@ -1,8 +1,11 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
@@ -165,5 +168,20 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     public Integer eliminar(DocumentoPagoDto documentoPago) {
         this.documentoPago = documentoPago;
         return super.eliminar();
+    }
+    
+    
+    public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(String tipoDocumento) {
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        Map<Integer, Object> parametrosSalida = new HashMap<>();
+        String NombreProcedure = "sp_generar_correlativo_pago";
+        parametrosEntrada.put(1, tipoDocumento);
+        parametrosSalida.put(2, Types.VARCHAR);
+        parametrosSalida.put(3, Types.VARCHAR);
+        ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
+        ArrayList<String> SerieYNumeroDocumento = new ArrayList();
+        SerieYNumeroDocumento.add((String)parametrosSalida.get(2));
+        SerieYNumeroDocumento.add((String)parametrosSalida.get(3));
+        return SerieYNumeroDocumento;
     }
 }
