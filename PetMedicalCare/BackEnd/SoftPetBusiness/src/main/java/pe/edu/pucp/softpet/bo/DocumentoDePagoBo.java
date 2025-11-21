@@ -2,7 +2,6 @@ package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
@@ -25,17 +24,17 @@ public class DocumentoDePagoBo {
             double igvTotal, double total, boolean activo) {
 
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
-        
+
         MetodoDePagoDto metodoPago = new MetodoDePagoDto();
         PersonaDto persona = new PersonaDto();
-        
+
         EstadoDocumentoDePago estadoEnum = EstadoDocumentoDePago.valueOf(estado.toUpperCase());
         TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
         Date fechaEmisionDate = Date.valueOf(fechaEmision);
 
         metodoPago.setMetodoDePagoId(metodoDePagoId);
         persona.setPersonaId(personaId);
-        
+
         documentoPago.setMetodoDePago(metodoPago);
         documentoPago.setPersona(persona);
         documentoPago.setTipoDocumento(tipoDocumentoEnum);
@@ -57,17 +56,17 @@ public class DocumentoDePagoBo {
             double igvTotal, double total, boolean activo) {
 
         DocumentoPagoDto documentoPago = new DocumentoPagoDto();
-        
+
         MetodoDePagoDto metodoPago = new MetodoDePagoDto();
         PersonaDto persona = new PersonaDto();
-        
+
         EstadoDocumentoDePago estadoEnum = EstadoDocumentoDePago.valueOf(estado.toUpperCase());
         TipoDocumentoDePago tipoDocumentoEnum = TipoDocumentoDePago.valueOf(tipoDocumento.toUpperCase());
         Date fechaEmisionDate = Date.valueOf(fechaEmision);
 
         metodoPago.setMetodoDePagoId(metodoDePagoId);
         persona.setPersonaId(personaId);
-        
+
         documentoPago.setDocumentoPagoId(documentoPagoId);
         documentoPago.setMetodoDePago(metodoPago);
         documentoPago.setPersona(persona);
@@ -97,7 +96,7 @@ public class DocumentoDePagoBo {
     public ArrayList<DocumentoPagoDto> listarTodos() {
         return this.documentoDePagoDao.listarTodos();
     }
-    
+
     public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(String tipoDocumento) {
         return this.documentoDePagoDao.GeneracionDeSiguienteBoletaOFactura(tipoDocumento.toUpperCase());
     }

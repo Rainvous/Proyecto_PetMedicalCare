@@ -28,10 +28,10 @@ public class DetalleRecetaBo {
             boolean activo) {
 
         DetalleRecetaDto dto = new DetalleRecetaDto();
-        
+
         RecetaMedicaDto receta = new RecetaMedicaDto();
         receta.setRecetaMedicaId(recetaMedicaId);
-        
+
         dto.setReceta(receta);
         dto.setDescripcionMedicamento(descripcionMedicamento);
         dto.setPresentacion(presentacion);
@@ -66,7 +66,7 @@ public class DetalleRecetaBo {
             boolean activo) {
 
         DetalleRecetaDto dto = new DetalleRecetaDto();
-        
+
         RecetaMedicaDto receta = new RecetaMedicaDto();
         receta.setRecetaMedicaId(recetaMedicaId);
 
@@ -81,7 +81,7 @@ public class DetalleRecetaBo {
         dto.setIndicacion(indicacion);
         dto.setCantidad(cantidad);
         dto.setActivo(activo);
-        
+
         return this.dao.modificar(dto);
     }
 

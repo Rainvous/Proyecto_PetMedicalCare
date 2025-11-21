@@ -1,9 +1,7 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
-import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
-import pe.edu.pucp.softpet.daoImp.TipoServicioDaoImpl;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
@@ -22,7 +20,7 @@ public class ServicioBo {
 
         TipoServicioDto tipoServicio = new TipoServicioDto();
         tipoServicio.setTipoServicioId(tipoServicioId);
-        
+
         servicio.setTipoServicio(tipoServicio);
         servicio.setNombre(nombre);
         servicio.setDescripcion(descripcion);
@@ -40,7 +38,7 @@ public class ServicioBo {
 
         TipoServicioDto tipoServicio = new TipoServicioDto();
         tipoServicio.setTipoServicioId(tipoServicioId);
-        
+
         servicio.setServicioId(servicioId);
         servicio.setTipoServicio(tipoServicio);
         servicio.setNombre(nombre);
@@ -65,24 +63,24 @@ public class ServicioBo {
     public ArrayList<ServicioDto> listarTodos() {
         return this.servicioDao.listarTodos();
     }
-    
-    public ArrayList<ServicioDto> ListasBusquedaAvanzada(String nombre,String rango,String activo){
-        
+
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada(String nombre, String rango, String activo) {
+
         ServicioDto servicio = new ServicioDto();
         servicio.setNombre(nombre == null ? "" : nombre);
 
-        return (ArrayList<ServicioDto>)servicioDao.ListasBusquedaAvanzada(servicio, rango == null ? "" : rango, activo == null ? "" : activo);
+        return (ArrayList<ServicioDto>) servicioDao.ListasBusquedaAvanzada(servicio, rango == null ? "" : rango, activo == null ? "" : activo);
     }
-    
+
     public ArrayList<ServicioDto> listarServiciosActivos() {
         return this.servicioDao.listarServiciosActivos();
     }
-    
+
     public ArrayList<ServicioDto> ListarPorTipoServicio(String nombreTipo) {
         return this.servicioDao.ListarPorTipoServicio(nombreTipo);
     }
-    
-    public int VerificarSiElServicioTieneInformacion(int idServicio){
+
+    public int VerificarSiElServicioTieneInformacion(int idServicio) {
         return this.servicioDao.VerificarSiElServicioTieneInformacion(idServicio);
     }
 }

@@ -1,4 +1,4 @@
- package pe.edu.pucp.softpetws.servicio;
+package pe.edu.pucp.softpetws.servicio;
 
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
@@ -64,22 +64,22 @@ public class Servicios {
 
         return servicioBo.ListasBusquedaAvanzada(nombre, rango, activo);
     }
-    
+
     @WebMethod(operationName = "listar_servicios_activos")
     public ArrayList<ServicioDto> listarServiciosActivos() {
         return this.servicioBo.listarServiciosActivos();
     }
-    
+
     @WebMethod(operationName = "listar_servicios_por_tipo")
     public ArrayList<ServicioDto> ListarPorTipoServicio(
             @WebParam(name = "nombreTipo") String nombreTipo) {
-        
+
         return this.servicioBo.ListarPorTipoServicio(nombreTipo);
     }
-    
+
     @WebMethod(operationName = "VerificarSiElServicioTieneInformacion")
     public int VerificarSiElServicioTieneInformacion(
-            @WebParam(name = "nombreTipo") int idServicio){
+            @WebParam(name = "nombreTipo") int idServicio) {
         return this.servicioBo.VerificarSiElServicioTieneInformacion(idServicio);
     }
 }

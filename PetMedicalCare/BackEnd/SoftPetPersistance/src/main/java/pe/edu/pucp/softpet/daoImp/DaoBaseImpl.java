@@ -144,7 +144,8 @@ public abstract class DaoBaseImpl {
     protected Integer ejecutarDMLEnBD() throws SQLException {
         return this.statement.executeUpdate();
     }
-     protected Integer ejecutarProcedureConParametroEntradaSalida() throws SQLException {
+
+    protected Integer ejecutarProcedureConParametroEntradaSalida() throws SQLException {
         return this.statement.executeUpdate();
     }
 
@@ -546,8 +547,7 @@ public abstract class DaoBaseImpl {
                 registrarParametrosSalida(this.statement, parametrosSalida);
             }
 
-            
-             ejecutarProcedureConParametroEntradaSalida();
+            ejecutarProcedureConParametroEntradaSalida();
             if (parametrosSalida != null) {
                 obtenerValoresSalida(this.statement, parametrosSalida);
             }
@@ -684,15 +684,17 @@ public abstract class DaoBaseImpl {
             }
         }
     }
+
     //FUNCION MAS GENERICA DEL PROCEDURE DE LECUTRA
-        /*
+    /*
     ------------------------------------------------------------------------
     INICIO de las funcion DaoImplBase para procedures creado By AmaruMVP
     ------------------------------------------------------------------------
      */
-       protected void ejecutaProcedureDeLectura() throws SQLException {
+    protected void ejecutaProcedureDeLectura() throws SQLException {
         this.resultSet = this.statement.executeQuery();
     }
+
     //FUNCION PROCEDURE PARA MANEJAR SELECTS que traen informacion de una entidad
     public List ejecutarProcedimientoLectura(String nombreProcedimiento, Map<Integer, Object> parametrosEntrada,
             Consumer AgregarMiPropioObjetoALaLista) {
@@ -713,11 +715,11 @@ public abstract class DaoBaseImpl {
             System.out.println("->" + this.statement);
             ejecutaProcedureDeLectura();
             while (this.resultSet.next()) {
-                if(AgregarMiPropioObjetoALaLista==null){
+                if (AgregarMiPropioObjetoALaLista == null) {
                     agregarObjetoALaLista(lista);
-                }
-                else
+                } else {
                     AgregarMiPropioObjetoALaLista.accept(lista);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error ejecutando procedimiento almacenado de lectura: " + ex.getMessage());

@@ -77,15 +77,15 @@ public class DetalleDocumentoDePagoDaoImpl extends DaoBaseImpl implements Detall
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.detalleDocumento = new DetalleDocumentoPagoDto();
         this.detalleDocumento.setDddpId(this.resultSet.getInt("DDDP_ID"));
-        DocumentoPagoDto docpag= new DocumentoPagoDto();
+        DocumentoPagoDto docpag = new DocumentoPagoDto();
         docpag.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID"));
-        
+
         this.detalleDocumento.setDocumentoPago(docpag);
-        ServicioDto servi= new ServicioDto();
+        ServicioDto servi = new ServicioDto();
         servi.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
         this.detalleDocumento.setServicio(servi);
-        
-        ProductoDto prd= new ProductoDto();
+
+        ProductoDto prd = new ProductoDto();
         prd.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
         this.detalleDocumento.setProducto(prd);
         this.detalleDocumento.setNroItem(this.resultSet.getInt("NRO_ITEM"));

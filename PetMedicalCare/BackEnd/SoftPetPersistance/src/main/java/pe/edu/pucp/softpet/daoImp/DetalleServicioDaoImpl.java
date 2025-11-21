@@ -33,7 +33,7 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
         this.statement.setInt(2, this.detalleServicio.getServicio().getServicioId());
         this.statement.setString(3, this.detalleServicio.getDescripcion());
         this.statement.setDouble(4, this.detalleServicio.getCosto());
-        this.statement.setInt(5, this.detalleServicio.getActivo() ? 1 : 0);  
+        this.statement.setInt(5, this.detalleServicio.getActivo() ? 1 : 0);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
         this.statement.setInt(2, this.detalleServicio.getServicio().getServicioId());
         this.statement.setString(3, this.detalleServicio.getDescripcion());
         this.statement.setDouble(4, this.detalleServicio.getCosto());
-        this.statement.setInt(5, this.detalleServicio.getActivo() ? 1 : 0);  
+        this.statement.setInt(5, this.detalleServicio.getActivo() ? 1 : 0);
 
         this.statement.setInt(6, this.detalleServicio.getDetalleServicioId());
     }

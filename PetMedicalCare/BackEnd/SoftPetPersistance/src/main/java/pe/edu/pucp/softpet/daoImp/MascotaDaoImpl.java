@@ -1,6 +1,5 @@
 package pe.edu.pucp.softpet.daoImp;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -45,8 +44,7 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setString(4, this.mascota.getSexo()); // Ahora recibirá "M" o "H"
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        
-        // CORRECCIÓN: Manejo seguro de Fechas y Nulos
+
         if (this.mascota.getFechaDefuncion() != null) {
             java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
             this.statement.setDate(7, sqlDate);
@@ -65,8 +63,7 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.statement.setString(4, this.mascota.getSexo());
         this.statement.setString(5, this.mascota.getRaza());
         this.statement.setString(6, this.mascota.getColor());
-        
-        // CORRECCIÓN: Manejo seguro de Fechas y Nulos
+
         if (this.mascota.getFechaDefuncion() != null) {
             java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
             this.statement.setDate(7, sqlDate);
@@ -92,7 +89,7 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.mascota = new MascotaDto();
         this.mascota.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
-        PersonaDto per= new PersonaDto();
+        PersonaDto per = new PersonaDto();
         per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
         this.mascota.setPersona(per);
         //this.mascota.setPersona(new PersonaDaoImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
@@ -221,6 +218,4 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         int resultado = (int) parametrosSalida.get(2);
         return resultado;
     }
-    
-    
 }

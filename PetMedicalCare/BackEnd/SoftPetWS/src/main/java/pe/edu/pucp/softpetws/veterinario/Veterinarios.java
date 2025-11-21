@@ -54,29 +54,28 @@ public class Veterinarios {
     public ArrayList<VeterinarioDto> listarTodos() throws IOException, InterruptedException {
         return this.veterinarioBo.listarTodos();
     }
-    
+
     @WebMethod(operationName = "listar_veterinarios_activos")
     public ArrayList<VeterinarioDto> listarVeterinariosActivos() throws IOException, InterruptedException {
         return this.veterinarioBo.listarVeterinariosActivos();
     }
-    
+
     @WebMethod(operationName = "VerificarSiExisteHorarioLaboral")
     public int VerificarSiExisteHorarioLaboral(
-            @WebParam(name = "fecha")String fecha,
-            @WebParam(name = "idVeterinario")Integer idVeterinario 
-    ) 
-    {
+            @WebParam(name = "fecha") String fecha,
+            @WebParam(name = "idVeterinario") Integer idVeterinario
+    ) {
         return this.veterinarioBo.VerificarSiExisteHorarioLaboral(fecha, idVeterinario);
-        
+
     }
+
     @WebMethod(operationName = "ListasBusquedaAvanzadaVeterinario")
     public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
             @WebParam(name = "Especialidad") String Especialidad,
             @WebParam(name = "nombre") String nombre,
             @WebParam(name = "Telefono") String Telefono,
             @WebParam(name = "nroDocumento") String nroDocumento
-    )
-    {
+    ) {
         return (ArrayList<VeterinarioDto>) this.veterinarioBo.ListasBusquedaAvanzadaVeterinario(Especialidad, nombre, Telefono, nroDocumento);
     }
 }

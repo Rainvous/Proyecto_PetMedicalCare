@@ -24,7 +24,7 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.veterinario = null;
         this.retornarLlavePrimaria = true;
         // FIX CRÍTICO: Definir usuario para auditoría (Triggers de BD)
-        this.usuario = "user_backend"; 
+        this.usuario = "user_backend";
     }
 
     @Override
@@ -40,12 +40,12 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-        
+
         // Manejo seguro de Fecha
         java.util.Date fechaUtil = this.veterinario.getFechaContratacion();
         java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
         this.statement.setDate(2, fechaSql);
-        
+
         this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);
@@ -54,12 +54,12 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.veterinario.getPersona().getPersonaId());
-        
+
         // Manejo seguro de Fecha
         java.util.Date fechaUtil = this.veterinario.getFechaContratacion();
         java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
         this.statement.setDate(2, fechaSql);
-        
+
         this.statement.setString(3, this.veterinario.getEstado().toString());
         this.statement.setString(4, this.veterinario.getEspecialidad());
         this.statement.setInt(5, this.veterinario.getActivo() ? 1 : 0);
@@ -81,11 +81,11 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.veterinario = new VeterinarioDto();
         this.veterinario.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
-        
+
         PersonaDto persona = new PersonaDto();
         persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
         this.veterinario.setPersona(persona);
-        
+
         this.veterinario.setFechaContratacion(this.resultSet.getDate("FECHA_DE_CONTRATACION"));
         this.veterinario.setEstado(EstadoVeterinario.valueOf(this.resultSet.getString("ESTADO")));
         this.veterinario.setEspecialidad(this.resultSet.getString("ESPECIALIDAD"));
@@ -133,27 +133,27 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         this.veterinario = veterinario;
         return super.eliminar();
     }
-    
+
     @Override
     public ArrayList<VeterinarioDto> listarVeterinariosActivos() {
         String sql = super.generarSQLParaListarTodos();
         sql = sql.concat(" WHERE ACTIVO = ?");
         Object parametros = 1;
-        return (ArrayList<VeterinarioDto>) super.listarTodos(sql, 
-                this::incluirValorDeParametrosParaListarActivos, 
+        return (ArrayList<VeterinarioDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarActivos,
                 parametros);
     }
 
     private void incluirValorDeParametrosParaListarActivos(Object objetoParametros) {
         Integer activoFlag = (Integer) objetoParametros;
-        try {            
+        try {
             this.statement.setInt(1, activoFlag);
         } catch (SQLException ex) {
             Logger.getLogger(VeterinarioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public int VerificarSiExisteHorarioLaboral(Date fecha,Integer idVeterinario ) {
+
+    public int VerificarSiExisteHorarioLaboral(Date fecha, Integer idVeterinario) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         Map<Integer, Object> parametrosSalida = new HashMap<>();
         String NombreProcedure = "sp_verificar_horario_laboral_existente";
@@ -164,14 +164,13 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         int resultado = (int) parametrosSalida.get(3);
         return resultado;
     }
-    
+
     public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
             String Especialidad,
             String nombre,
             String Telefono,
             String nroDocumento
-    )
-    {
+    ) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
 
         parametrosEntrada.put(1, Especialidad);

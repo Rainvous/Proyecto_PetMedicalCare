@@ -125,12 +125,12 @@ public class CitaAtencion {
     // =========================
     @WebMethod(operationName = "listas_busqueda_avanzada")
     public ArrayList<CitaAtencionDto> listasBusquedaAvanzada(
-            @WebParam(name = "fecha") String fecha, 
+            @WebParam(name = "fecha") String fecha,
             @WebParam(name = "idVeterianrio") Integer idVeterianrio) {
 
         // aquí tu BO ya sabe qué hacer con la fecha (string)
         return (ArrayList<CitaAtencionDto>) citaBo.ListasBusquedaAvanzada(
-                fecha == null ? "" : fecha,idVeterianrio
+                fecha == null ? "" : fecha, idVeterianrio
         );
     }
 
@@ -180,8 +180,7 @@ public class CitaAtencion {
 
         return this.citaBo.listarPorIdMascota(mascotaId);
     }
-    
-    
+
     //LISTAR POR FECHAS PARA EL USO DE SLOTS A LA HORA DE PROGRAMAR
     /*
     -> 2025-11-03 09:00:00 - true
@@ -192,21 +191,19 @@ public class CitaAtencion {
     -> 2025-11-03 14:00:00 - false
     -> 2025-11-03 15:00:00 - true
     -> 2025-11-03 16:00:00 - true
-    */
+     */
     @WebMethod(operationName = "listar_citas_Programadas")
     public ArrayList<CitaProgramadaDto> ListarProgramadas(
-            @WebParam(name = "idVeterinario")int idVeterinario,
+            @WebParam(name = "idVeterinario") int idVeterinario,
             @WebParam(name = "fechaDeCitas") String fechaDeCitas
     ) throws ParseException {
         return this.citaBo.ListarProgramadas(idVeterinario, fechaDeCitas);
     }
-    
+
     @WebMethod(operationName = "Listas_Citas_Por_Mascotas_Y_Fechas")
     public ArrayList<CitaAtencionDto> ListasCitasPorMascotasYFechas(
             @WebParam(name = "idMascota") Integer idMascota,
-            @WebParam(name = "fecha") String fecha)
-    {
+            @WebParam(name = "fecha") String fecha) {
         return (ArrayList<CitaAtencionDto>) this.citaBo.ListasCitasPorMascotasYFechas(idMascota, fecha);
     }
-    
 }

@@ -69,24 +69,24 @@ public class Personas {
             @WebParam(name = "NroDocumento") String NroDocumento,
             @WebParam(name = "Ruc") String Ruc,
             @WebParam(name = "Telefono") String Telefono,
-            @WebParam(name = "Activo") Boolean Activo){
+            @WebParam(name = "Activo") Boolean Activo) {
 
-        return (ArrayList<PersonaDto>) this.personaBo.ListasBusquedaAvanzada(nombre, NroDocumento, Ruc, Telefono,Activo);
+        return (ArrayList<PersonaDto>) this.personaBo.ListasBusquedaAvanzada(nombre, NroDocumento, Ruc, Telefono, Activo);
     }
 
     @WebMethod(operationName = "ListasBusquedaAvanzadaParaCliente")
     public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente() {
         return (ArrayList<PersonaDto>) this.personaBo.ListasBusquedaAvanzadaParaCliente();
     }
-    
+
     @WebMethod(operationName = "listar_personas_activas")
     public ArrayList<PersonaDto> listarPersonasActivas() throws IOException, InterruptedException {
         return this.personaBo.listarPersonasActivas();
     }
-    
+
     @WebMethod(operationName = "VerificarSiLaPersonaTieneInformacion")
     public int VerificarSiLaPersonaTieneInformacion(
-            @WebParam(name = "nombreTipo") int idServicio){
+            @WebParam(name = "nombreTipo") int idServicio) {
         return this.personaBo.VerificarSiLaPersonaTieneInformacion(idServicio);
     }
 }

@@ -79,7 +79,7 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.detalleReceta = new DetalleRecetaDto();
         this.detalleReceta.setDetalleRecetaId(this.resultSet.getInt("DETALLE_RECETA_ID"));
-        RecetaMedicaDto rec= new RecetaMedicaDto();
+        RecetaMedicaDto rec = new RecetaMedicaDto();
         rec.setRecetaMedicaId(this.resultSet.getInt("RECETA_MEDICA_ID"));
         this.detalleReceta.setReceta(rec);
         this.detalleReceta.setDescripcionMedicamento(this.resultSet.getString("DESCRIPCION_MEDICAMENTO"));
@@ -134,36 +134,36 @@ public class DetalleRecetaDaoImpl extends DaoBaseImpl implements DetalleRecetaDa
         this.detalleReceta = detalleReceta;
         return super.eliminar();
     }
-    
+
     @Override
     public ArrayList<DetalleRecetaDto> listarPorIdReceta(Integer recetaMedicaId) {
-        
+
         // 1. Obtenemos el SQL (cumpliendo la solicitud de "método aparte")
         String sql = this.generarSQLParaListarPorIdReceta();
-        
+
         // 2. El ID de la receta es el parámetro
         Object parametros = recetaMedicaId;
-        
+
         // 3. Llamamos al método listarTodos de la clase base
-        return (ArrayList<DetalleRecetaDto>) super.listarTodos(sql, 
-                this::incluirValorDeParametrosParaListarPorIdReceta, 
+        return (ArrayList<DetalleRecetaDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarPorIdReceta,
                 parametros);
     }
 
     private String generarSQLParaListarPorIdReceta() {
         // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM DETALLES_RECETA"
         String sql = super.generarSQLParaListarTodos();
-        
+
         // 2. Añadimos el filtro WHERE
         sql = sql.concat(" WHERE RECETA_MEDICA_ID = ?");
-        
+
         return sql;
     }
 
     private void incluirValorDeParametrosParaListarPorIdReceta(Object objetoParametros) {
         // Casteamos el objeto de parámetros a su tipo original
         Integer recetaMedicaId = (Integer) objetoParametros;
-        try {            
+        try {
             // Asignamos el ID al primer '?' en el SQL
             this.statement.setInt(1, recetaMedicaId);
         } catch (SQLException ex) {

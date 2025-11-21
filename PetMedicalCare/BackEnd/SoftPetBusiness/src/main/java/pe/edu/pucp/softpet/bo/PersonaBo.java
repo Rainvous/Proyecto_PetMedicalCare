@@ -27,12 +27,11 @@ public class PersonaBo {
             String tipoDocumento,
             Boolean activo) {
 
-        
         PersonaDto dto = new PersonaDto();
-        
+
         UsuarioDto usuario = new UsuarioDto();
         usuario.setUsuarioId(usuarioId);
-        
+
         dto.setUsuario(usuario);
         dto.setNombre(nombre);
         dto.setDireccion(direccion);
@@ -62,10 +61,10 @@ public class PersonaBo {
             Boolean activo) {
 
         PersonaDto dto = new PersonaDto();
-        
+
         UsuarioDto usuario = new UsuarioDto();
         usuario.setUsuarioId(usuarioId);
-        
+
         dto.setUsuario(usuario);
         dto.setNombre(nombre);
         dto.setDireccion(direccion);
@@ -101,19 +100,16 @@ public class PersonaBo {
             String Ruc,
             String Telefono,
             Boolean Activo) {
-        
-        String ActivoString; 
-        
-        if(null == Activo){
+
+        String ActivoString;
+
+        if (null == Activo) {
             ActivoString = "";
-        }
-        else if(Activo == true){
+        } else if (Activo == true) {
             ActivoString = "1";
-        }
-        else{
+        } else {
             ActivoString = "0";
         }
-        
 
         return (ArrayList<PersonaDto>) this.dao.ListasBusquedaAvanzada(
                 nombre == null ? "" : nombre,
@@ -130,8 +126,8 @@ public class PersonaBo {
     public ArrayList<PersonaDto> listarPersonasActivas() {
         return this.dao.listarPersonasActivas();
     }
-    
-    public int VerificarSiLaPersonaTieneInformacion(int idServicio){
+
+    public int VerificarSiLaPersonaTieneInformacion(int idServicio) {
         return this.dao.VerificarSiLaPersonaTieneInformacion(idServicio);
     }
 }

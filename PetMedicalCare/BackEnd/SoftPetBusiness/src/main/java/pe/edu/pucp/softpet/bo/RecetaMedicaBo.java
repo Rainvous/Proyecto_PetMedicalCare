@@ -2,10 +2,8 @@ package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import java.sql.Date;
-import java.time.LocalDate;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.RecetaMedicaDaoImpl;
-import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
@@ -21,7 +19,7 @@ public class RecetaMedicaBo {
             String diagnostico, String observaciones, boolean activo) {
 
         RecetaMedicaDto receta = new RecetaMedicaDto();
-        
+
         CitaAtencionDto cita = new CitaAtencionDto();
         cita.setCitaId(citaId);
 
@@ -40,7 +38,7 @@ public class RecetaMedicaBo {
             boolean activo) {
 
         RecetaMedicaDto receta = new RecetaMedicaDto();
-        
+
         CitaAtencionDto cita = new CitaAtencionDto();
         cita.setCitaId(citaId);
 

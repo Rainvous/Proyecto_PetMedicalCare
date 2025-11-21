@@ -2,9 +2,7 @@ package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.dao.RolUsuarioDao;
-import pe.edu.pucp.softpet.daoImp.RolDaoImpl;
 import pe.edu.pucp.softpet.daoImp.RolUsuarioDaoImpl;
-import pe.edu.pucp.softpet.daoImp.UsuarioDaoImpl;
 import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;

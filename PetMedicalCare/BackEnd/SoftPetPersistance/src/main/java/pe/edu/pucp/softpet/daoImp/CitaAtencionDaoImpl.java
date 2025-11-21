@@ -158,7 +158,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         return super.eliminar();
     }
 
-    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha,String idVeterinario) {
+    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(String fecha, String idVeterinario) {
         String fechaParaSP;
 
         // 1. Lógica de Java para decidir la fecha
@@ -225,7 +225,7 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
     ///Ahora un daoImplBase puede recibir cualquier objeto x,y,z... 
     ///Puedes devolver Arraylist de otros objetos!
       private void InstanciarObjetoCitaProgramada() throws SQLException {
-          //Paso 1: agregar el objeto que quieres y crea tu InstanciarObjeto a lo melgar
+        //Paso 1: agregar el objeto que quieres y crea tu InstanciarObjeto a lo melgar
         citaProg = new CitaProgramadaDto();
         citaProg.setFecha(this.resultSet.getString(1)); //en este caso se optó por el numero por si no sabemos 
         //el nombre de cada fila
@@ -244,20 +244,20 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
         }
 
     }
+
     public ArrayList<CitaProgramadaDto> ListarProgramadas(int idVeterinario, Date fechaDeCitas) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
-        parametrosEntrada.put(1,idVeterinario );
+        parametrosEntrada.put(1, idVeterinario);
         parametrosEntrada.put(2, fechaDeCitas);
         String sql = "sp_generar_horario_disponible";
         //pasas de parametro tu Void (*) () -> puntero a funcion y listo puedes instanciar cualquier objeto en un dao (USO SOLO PARA PROCEDURES)
         return (ArrayList<CitaProgramadaDto>) this.ejecutarProcedimientoLectura(sql, parametrosEntrada, this::AgregarObjetoCitaProgramadaALaLista);
 
     }
-    
+
     public ArrayList<CitaAtencionDto> ListasCitasPorMascotasYFechas(
             Integer idMascota,
-            String fecha)
-    {
+            String fecha) {
         String fechaParaSP;
 
         // 1. Lógica de Java para decidir la fecha
@@ -277,8 +277,8 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
 
         // Aquí siempre pasas una fecha válida ("2025-11-10")
         // ya sea la que escribió el usuario o la que calculó Java.
-        parametrosEntrada.put(1,idMascota);
-        parametrosEntrada.put(2,fechaParaSP );
+        parametrosEntrada.put(1, idMascota);
+        parametrosEntrada.put(2, fechaParaSP);
 
         return (ArrayList<CitaAtencionDto>) super.ejecutarProcedimientoLectura("sp_listar_citas_por_mascota_y_fecha", parametrosEntrada);
     }

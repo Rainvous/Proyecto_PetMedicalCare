@@ -40,7 +40,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
-        
+
         this.statement.setInt(1, this.persona.getUsuario().getUsuarioId());
         this.statement.setString(2, this.persona.getNombre());
         this.statement.setString(3, this.persona.getDireccion());
@@ -81,8 +81,8 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.persona = new PersonaDto();
         this.persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-        
-        UsuarioDto us=new UsuarioDto();
+
+        UsuarioDto us = new UsuarioDto();
         us.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
         this.persona.setUsuario(us);
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
@@ -136,69 +136,66 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.persona = persona;
         return super.eliminar();
     }
-        
+
     public ArrayList<PersonaDto> ListasBusquedaAvanzada(
             String nombre,
             String NroDocumento,
             String Ruc,
             String Telefono,
             String Activo
-    )
-    {
+    ) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
-        parametrosEntrada.put(1,nombre);
-        parametrosEntrada.put(2,NroDocumento);
-        parametrosEntrada.put(3,Ruc);
-        parametrosEntrada.put(4,Telefono);
-        parametrosEntrada.put(5,Activo);
-        
-        return (ArrayList<PersonaDto>)super.ejecutarProcedimientoLectura("sp_buscar_personas_avanzada", parametrosEntrada);
+        parametrosEntrada.put(1, nombre);
+        parametrosEntrada.put(2, NroDocumento);
+        parametrosEntrada.put(3, Ruc);
+        parametrosEntrada.put(4, Telefono);
+        parametrosEntrada.put(5, Activo);
+
+        return (ArrayList<PersonaDto>) super.ejecutarProcedimientoLectura("sp_buscar_personas_avanzada", parametrosEntrada);
     }
-    
-    
-    public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente()
-    {
+
+    public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente() {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
-        return (ArrayList<PersonaDto>)super.ejecutarProcedimientoLectura("sp_listar_solo_clientes", parametrosEntrada);
+        return (ArrayList<PersonaDto>) super.ejecutarProcedimientoLectura("sp_listar_solo_clientes", parametrosEntrada);
     }
-    
+
     @Override
     public ArrayList<PersonaDto> listarPersonasActivas() {
-        
+
         // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM PERSONAS"
         String sql = super.generarSQLParaListarTodos();
-        
+
         // 2. Añadimos el filtro WHERE
         sql = sql.concat(" WHERE ACTIVO = ?");
-        
+
         // 3. El parámetro es fijo: 1 (para activo)
         Object parametros = 1;
-        
+
         // 4. Llamamos al método listarTodos de la clase base
-        return (ArrayList<PersonaDto>) super.listarTodos(sql, 
-                this::incluirValorDeParametrosParaListarActivas, 
+        return (ArrayList<PersonaDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarActivas,
                 parametros);
     }
-    
+
     private void incluirValorDeParametrosParaListarActivas(Object objetoParametros) {
         // Casteamos el objeto de parámetros a su tipo original
         Integer activoFlag = (Integer) objetoParametros;
-        try {            
+        try {
             // Asignamos el '1' al primer '?' en el SQL
             this.statement.setInt(1, activoFlag);
         } catch (SQLException ex) {
             Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public int VerificarSiLaPersonaTieneInformacion(int idServicio){
+
+    public int VerificarSiLaPersonaTieneInformacion(int idServicio) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         Map<Integer, Object> parametrosSalida = new HashMap<>();
-        String NombreProcedure="sp_verificar_relacion_persona";
-        parametrosEntrada.put(1,idServicio);
+        String NombreProcedure = "sp_verificar_relacion_persona";
+        parametrosEntrada.put(1, idServicio);
         parametrosSalida.put(2, Types.INTEGER);
         ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
-        int resultado= (int)parametrosSalida.get(2);
-        return  resultado;
+        int resultado = (int) parametrosSalida.get(2);
+        return resultado;
     }
 }

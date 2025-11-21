@@ -19,12 +19,12 @@ public class DetalleServicioBo {
     }
 
     public Integer insertar(int citaId, int servicioId, String descripcion, double costo, boolean activo) {
-        
+
         DetalleServicioDto dto = new DetalleServicioDto();
 
         CitaAtencionDto cita = new CitaAtencionDto();
         cita.setCitaId(citaId);
-        ServicioDto servicio= new ServicioDto();
+        ServicioDto servicio = new ServicioDto();
         servicio.setServicioId(servicioId);
 
         dto.setCita(cita);
@@ -37,7 +37,7 @@ public class DetalleServicioBo {
     }
 
     public Integer modificar(int detalleServicioId, int citaId, int servicioId, String descripcion, double costo, boolean activo) {
-        
+
         DetalleServicioDto dto = new DetalleServicioDto();
 
         CitaAtencionDto cita = new CitaAtencionDaoImpl().obtenerPorId(citaId);

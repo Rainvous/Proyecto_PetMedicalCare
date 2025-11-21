@@ -47,13 +47,13 @@ public class CitaAtencionBo {
             double monto, EstadoCita estado, String observacion, boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
-        
+
         VeterinarioDto vet = new VeterinarioDto();
         MascotaDto mas = new MascotaDto();
-        
+
         mas.setMascotaId(mascotaId);
         vet.setVeterinarioId(veterinarioId);
-        
+
         cita.setVeterinario(vet);
         cita.setMascota(mas);
         cita.setFechaRegistro(fechaRegistro);
@@ -74,13 +74,13 @@ public class CitaAtencionBo {
             boolean activo) {
 
         CitaAtencionDto cita = new CitaAtencionDto();
-        
+
         VeterinarioDto vet = new VeterinarioDto();
         MascotaDto mas = new MascotaDto();
-        
+
         mas.setMascotaId(mascotaId);
         vet.setVeterinarioId(veterinarioId);
-        
+
         cita.setVeterinario(vet);
         cita.setMascota(mas);
         cita.setCitaId(citaId);
@@ -98,40 +98,36 @@ public class CitaAtencionBo {
 
     public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada(
             String fecha,
-            Integer IdVeterianrio
-    ){
+            Integer IdVeterinario
+    ) {
         String IdVeterinarioString;
-        if(IdVeterianrio == null){
+        if (IdVeterinario == null) {
             IdVeterinarioString = "";
-        }
-        else if(IdVeterianrio >= 1){
-            IdVeterinarioString = IdVeterianrio.toString();
-        }
-        else{
+        } else if (IdVeterinario >= 1) {
+            IdVeterinarioString = IdVeterinario.toString();
+        } else {
             IdVeterinarioString = "0";
         }
-        return (ArrayList<CitaAtencionDto>) citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha,IdVeterinarioString);
+        return (ArrayList<CitaAtencionDto>) citaDao.ListasBusquedaAvanzada(fecha == null ? "" : fecha, IdVeterinarioString);
     }
-    
+
     public ArrayList<CitaAtencionDto> listarPorIdMascota(int mascotaId) {
         return this.citaDao.listarPorIdMascota(mascotaId);
     }
-    
+
     public ArrayList<CitaProgramadaDto> ListarProgramadas(int idVeterinario, String fechaDeCitas) throws ParseException {
-         
+
         String fechastr = "2025-11-03";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date fechautil = sdf.parse(fechastr);
-         
+
         return (ArrayList<CitaProgramadaDto>) this.citaDao.ListarProgramadas(idVeterinario, fechautil);
 
     }
-    
+
     public ArrayList<CitaAtencionDto> ListasCitasPorMascotasYFechas(
             Integer idMascota,
-            String fecha)
-    {
+            String fecha) {
         return (ArrayList<CitaAtencionDto>) this.citaDao.ListasCitasPorMascotasYFechas(idMascota, fecha);
     }
-     
 }

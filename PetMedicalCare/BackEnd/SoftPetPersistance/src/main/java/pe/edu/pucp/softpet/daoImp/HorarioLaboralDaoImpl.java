@@ -66,7 +66,7 @@ public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboral
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.horario = new HorarioLaboralDto();
         this.horario.setHorarioLaboralId(this.resultSet.getInt("HORARIO_LABORAL_ID"));
-        VeterinarioDto vet= new VeterinarioDto();
+        VeterinarioDto vet = new VeterinarioDto();
         vet.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
         this.horario.setVeterinario(vet);
         this.horario.setFecha(this.resultSet.getDate("FECHA"));
@@ -83,7 +83,6 @@ public class HorarioLaboralDaoImpl extends DaoBaseImpl implements HorarioLaboral
 //            return EstadoLaboral.NO_DISPONIBLE.toString();
 //        }
 //    }
-
     @Override
     protected void limpiarObjetoDelResultSet() {
         this.horario = null;

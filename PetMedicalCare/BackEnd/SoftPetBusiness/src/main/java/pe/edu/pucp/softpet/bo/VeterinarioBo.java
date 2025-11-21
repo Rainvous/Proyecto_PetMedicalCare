@@ -2,7 +2,6 @@ package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
@@ -15,7 +14,7 @@ public class VeterinarioBo {
     public VeterinarioBo() {
         this.veterinarioDao = new VeterinarioDaoImpl();
     }
-    
+
     public Integer insertar(int personaId, String fechaContratacion,
             String estado, String especialidad, boolean activo) {
 
@@ -23,7 +22,7 @@ public class VeterinarioBo {
 
         PersonaDto persona = new PersonaDto();
         persona.setPersonaId(personaId);
-        
+
         veterinario.setPersona(persona);
         veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
         veterinario.setEstado(EstadoVeterinario.valueOf(estado.toUpperCase()));
@@ -40,7 +39,7 @@ public class VeterinarioBo {
 
         PersonaDto persona = new PersonaDto();
         persona.setPersonaId(personaId);
-        
+
         veterinario.setVeterinarioId(veterinarioId);
         veterinario.setPersona(persona);
         veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
@@ -64,30 +63,29 @@ public class VeterinarioBo {
     public ArrayList<VeterinarioDto> listarTodos() {
         return this.veterinarioDao.listarTodos();
     }
-    
+
     public ArrayList<VeterinarioDto> listarVeterinariosActivos() {
         return this.veterinarioDao.listarVeterinariosActivos();
     }
-    
-    public int VerificarSiExisteHorarioLaboral(String fecha,Integer idVeterinario ) {
 
-        java.sql.Date FechaDate = java.sql.Date.valueOf(fecha); 
-        Integer resultado =veterinarioDao.VerificarSiExisteHorarioLaboral(FechaDate,idVeterinario);
+    public int VerificarSiExisteHorarioLaboral(String fecha, Integer idVeterinario) {
+
+        java.sql.Date FechaDate = java.sql.Date.valueOf(fecha);
+        Integer resultado = veterinarioDao.VerificarSiExisteHorarioLaboral(FechaDate, idVeterinario);
         return resultado;
-        
+
     }
-    
+
     public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
             String Especialidad,
             String nombre,
             String Telefono,
             String nroDocumento
-    )
-    {
+    ) {
         return (ArrayList<VeterinarioDto>) this.veterinarioDao.ListasBusquedaAvanzadaVeterinario(
                 Especialidad == null ? "" : Especialidad,
                 nombre == null ? "" : nombre,
                 Telefono == null ? "" : Telefono,
-                nroDocumento== null ? "" : nroDocumento );
+                nroDocumento == null ? "" : nroDocumento);
     }
 }

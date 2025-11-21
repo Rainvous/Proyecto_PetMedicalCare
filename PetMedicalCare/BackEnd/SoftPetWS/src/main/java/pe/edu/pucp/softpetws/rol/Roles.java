@@ -55,12 +55,11 @@ public class Roles {
     public Integer eliminar(@WebParam(name = "rolId") int rolId) {
         return this.rolBo.eliminar(rolId);
     }
-    
-    // AÑADE ESTE WEB METHOD
+
     @WebMethod(operationName = "ObtenerRolesDelUsuario")
     public ArrayList<RolDto> ObtenerRolesDelUsuario(
             @WebParam(name = "idUser") Integer idUser) {
-        
+
         return this.rolBo.ObtenerRolesDelUsuario(idUser);
     }
 }

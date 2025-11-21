@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.CallableStatement;
@@ -18,10 +14,6 @@ import java.util.logging.Logger;
 import pe.edu.pucp.softpet.db.DBManager;
 import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
-/**
- *
- * @author User
- */
 public class DaoImplBaseProcedures {
 
     protected Connection conexion;
@@ -127,11 +119,11 @@ public class DaoImplBaseProcedures {
             System.out.println("->" + this.statement);
             ejecutaProcedureDeLectura();
             while (this.resultSet.next()) {
-                if(AgregarMiPropioObjetoALaLista==null){
+                if (AgregarMiPropioObjetoALaLista == null) {
                     agregarObjetoALaLista(lista);
-                }
-                else
+                } else {
                     AgregarMiPropioObjetoALaLista.accept(lista);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error ejecutando procedimiento almacenado de lectura: " + ex.getMessage());

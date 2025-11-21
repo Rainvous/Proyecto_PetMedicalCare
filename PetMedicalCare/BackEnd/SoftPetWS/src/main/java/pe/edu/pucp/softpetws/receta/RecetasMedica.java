@@ -37,7 +37,6 @@ public class RecetasMedica {
 //        Date fechaV = (vigenciaHasta != null && !vigenciaHasta.isEmpty())
 //                ? Date.valueOf(vigenciaHasta)
 //                : FECHA_MIN;
-
         return this.recetaBo.insertar(citaId, fechaEmision, vigenciaHasta, diagnostico, observaciones, activo);
     }
 
@@ -61,7 +60,6 @@ public class RecetasMedica {
 //        Date fechaV = (vigenciaHasta != null && !vigenciaHasta.isEmpty())
 //                ? Date.valueOf(vigenciaHasta)
 //                : FECHA_MIN;
-
         return this.recetaBo.modificar(recetaId, citaId, fechaEmision, vigenciaHasta, diagnostico, observaciones, activo);
     }
 
@@ -88,11 +86,11 @@ public class RecetasMedica {
     public ArrayList<RecetaMedicaDto> listarTodos() {
         return this.recetaBo.listarTodos();
     }
-    
+
     @WebMethod(operationName = "obtener_receta_por_cita")
     public RecetaMedicaDto obtenerPorIdCita(
             @WebParam(name = "citaId") int citaId) {
-        
+
         return this.recetaBo.obtenerPorIdCita(citaId);
     }
 }

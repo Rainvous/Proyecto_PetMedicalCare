@@ -29,7 +29,7 @@ public class DetalleDocumentoDePagoBo {
         documento.setDocumentoPagoId(documentoPagoId);
         servicio.setServicioId(servicioId);
         producto.setProductoId(productoId);
-        
+
         detalle.setDocumentoPago(documento);
         detalle.setServicio(servicio);
         detalle.setProducto(producto);
@@ -52,11 +52,11 @@ public class DetalleDocumentoDePagoBo {
         DocumentoPagoDto documento = new DocumentoPagoDto();
         ServicioDto servicio = new ServicioDto();
         ProductoDto producto = new ProductoDto();
-        
+
         documento.setDocumentoPagoId(documentoPagoId);
         servicio.setServicioId(servicioId);
         producto.setProductoId(productoId);
-        
+
         detalle.setDddpId(ddpId);
         detalle.setDocumentoPago(documento);
         detalle.setServicio(servicio);

@@ -72,8 +72,8 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.producto = new ProductoDto();
         this.producto.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
-        
-        TipoProductoDto tp= new TipoProductoDto();
+
+        TipoProductoDto tp = new TipoProductoDto();
         tp.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
         this.producto.setTipoProducto(tp);
         this.producto.setNombre(this.resultSet.getString("NOMBRE"));
@@ -193,53 +193,53 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         String sql = GenerarSQLSelectPorNombre();
         return (ArrayList<ProductoDto>) super.listarTodos(sql, this::incluirValorDeParametrosPorNombre, productoAux);
     }
-    
+
     @Override
     public ArrayList<ProductoDto> listarProductosActivos() {
-        
+
         // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM PRODUCTOS"
         String sql = super.generarSQLParaListarTodos();
-        
+
         // 2. Añadimos el filtro WHERE
         sql = sql.concat(" WHERE ACTIVO = ?");
-        
+
         // 3. El parámetro es fijo: 1 (para activo)
         Object parametros = 1;
-        
+
         // 4. Llamamos al método listarTodos de la clase base
-        return (ArrayList<ProductoDto>) super.listarTodos(sql, 
-                this::incluirValorDeParametrosParaListarActivos, 
+        return (ArrayList<ProductoDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarActivos,
                 parametros);
     }
 
     private void incluirValorDeParametrosParaListarActivos(Object objetoParametros) {
         // Casteamos el objeto de parámetros a su tipo original
         Integer activoFlag = (Integer) objetoParametros;
-        try {            
+        try {
             // Asignamos el '1' al primer '?' en el SQL
             this.statement.setInt(1, activoFlag);
         } catch (SQLException ex) {
             Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public int VerificarSiElProductoTieneInformacion(int idServicio){
+
+    public int VerificarSiElProductoTieneInformacion(int idServicio) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         Map<Integer, Object> parametrosSalida = new HashMap<>();
-        String NombreProcedure="sp_verificar_relacion_producto";
-        parametrosEntrada.put(1,idServicio);
+        String NombreProcedure = "sp_verificar_relacion_producto";
+        parametrosEntrada.put(1, idServicio);
         parametrosSalida.put(2, Types.INTEGER);
         ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
-        int resultado= (int)parametrosSalida.get(2);
-        return  resultado;
+        int resultado = (int) parametrosSalida.get(2);
+        return resultado;
     }
-    
-    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(ProductoDto producto,String rango,String activo){
+
+    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(ProductoDto producto, String rango, String activo) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
-        parametrosEntrada.put(1,producto.getNombre());
-        parametrosEntrada.put(2,rango);
-        parametrosEntrada.put(3,activo);
-        
-        return (ArrayList<ProductoDto>)super.ejecutarProcedimientoLectura("sp_buscar_productos_avanzada", parametrosEntrada);
+        parametrosEntrada.put(1, producto.getNombre());
+        parametrosEntrada.put(2, rango);
+        parametrosEntrada.put(3, activo);
+
+        return (ArrayList<ProductoDto>) super.ejecutarProcedimientoLectura("sp_buscar_productos_avanzada", parametrosEntrada);
     }
 }

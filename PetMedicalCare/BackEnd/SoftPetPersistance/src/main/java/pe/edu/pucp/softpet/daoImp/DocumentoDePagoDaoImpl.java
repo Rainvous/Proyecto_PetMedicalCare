@@ -76,7 +76,6 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
 //            return EstadoDocumentoDePago.ANULADO.toString();
 //        }
 //    }
-
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
@@ -108,10 +107,10 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.documentoPago = new DocumentoPagoDto();
         this.documentoPago.setDocumentoPagoId(this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID"));
-        MetodoDePagoDto met= new MetodoDePagoDto();
-        PersonaDto per=new PersonaDto();
+        MetodoDePagoDto met = new MetodoDePagoDto();
+        PersonaDto per = new PersonaDto();
         met.setMetodoDePagoId(this.resultSet.getInt("METODO_DE_PAGO_ID"));
-        
+
         this.documentoPago.setMetodoDePago(met);
         per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
         this.documentoPago.setPersona(per);
@@ -169,8 +168,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.documentoPago = documentoPago;
         return super.eliminar();
     }
-    
-    
+
     public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(String tipoDocumento) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         Map<Integer, Object> parametrosSalida = new HashMap<>();
@@ -180,8 +178,8 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         parametrosSalida.put(3, Types.VARCHAR);
         ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
         ArrayList<String> SerieYNumeroDocumento = new ArrayList();
-        SerieYNumeroDocumento.add((String)parametrosSalida.get(2));
-        SerieYNumeroDocumento.add((String)parametrosSalida.get(3));
+        SerieYNumeroDocumento.add((String) parametrosSalida.get(2));
+        SerieYNumeroDocumento.add((String) parametrosSalida.get(3));
         return SerieYNumeroDocumento;
     }
 }

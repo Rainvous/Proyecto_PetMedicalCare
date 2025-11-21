@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
@@ -24,10 +20,10 @@ public class HorarioLaboralBo {
             Date horaInicio, Date horaFin, boolean activo) {
 
         HorarioLaboralDto horarioDto = new HorarioLaboralDto();
-        
+
         VeterinarioDto veterinario = new VeterinarioDto();
         veterinario.setVeterinarioId(veterinarioId);
-        
+
         horarioDto.setVeterinario(veterinario);
         horarioDto.setFecha(fecha);
         horarioDto.setEstado(estado);
@@ -45,7 +41,7 @@ public class HorarioLaboralBo {
 
         VeterinarioDto veterinario = new VeterinarioDto();
         veterinario.setVeterinarioId(veterinarioId);
-        
+
         horarioDto.setHorarioLaboralId(hotarioId);
         horarioDto.setVeterinario(veterinario);
         horarioDto.setFecha(fecha);

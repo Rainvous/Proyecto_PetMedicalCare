@@ -17,7 +17,7 @@ public class ProductoBo {
             double precioUnitario, int stock, boolean activo) {
 
         ProductoDto producto = new ProductoDto();
-        
+
         TipoProductoDto tipoProd = new TipoProductoDto();
         tipoProd.setTipoProductoId(tipoProductoId);
 
@@ -35,7 +35,7 @@ public class ProductoBo {
             String presentacion, double precioUnitario, int stock, boolean activo) {
 
         ProductoDto producto = new ProductoDto();
-        
+
         TipoProductoDto tipoProd = new TipoProductoDto();
         tipoProd.setTipoProductoId(tipoProductoId);
 
@@ -63,24 +63,24 @@ public class ProductoBo {
     public ArrayList<ProductoDto> listarTodos() {
         return this.productoDao.listarTodos();
     }
-    
+
     public ArrayList<ProductoDto> listarProductosActivos() {
         return this.productoDao.listarProductosActivos();
     }
-    
+
     public ArrayList<ProductoDto> ListarPorTipo(String nombreTipo) {
         return this.productoDao.ListarPorTipo(nombreTipo);
     }
-    
-    public int VerificarSiElProductoTieneInformacion(int idServicio){
+
+    public int VerificarSiElProductoTieneInformacion(int idServicio) {
         return this.productoDao.VerificarSiElProductoTieneInformacion(idServicio);
     }
-    
-    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(String nombre,String rango,String activo){
-        
+
+    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(String nombre, String rango, String activo) {
+
         ProductoDto producto = new ProductoDto();
         producto.setNombre(nombre == null ? "" : nombre);
 
-        return (ArrayList<ProductoDto>)productoDao.ListasBusquedaProductosAvanzada(producto, rango == null ? "" : rango, activo == null ? "" : activo);
+        return (ArrayList<ProductoDto>) productoDao.ListasBusquedaProductosAvanzada(producto, rango == null ? "" : rango, activo == null ? "" : activo);
     }
 }
