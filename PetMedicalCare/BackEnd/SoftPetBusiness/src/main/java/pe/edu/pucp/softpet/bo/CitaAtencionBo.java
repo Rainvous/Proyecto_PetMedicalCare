@@ -117,9 +117,9 @@ public class CitaAtencionBo {
 
     public ArrayList<CitaProgramadaDto> ListarProgramadas(int idVeterinario, String fechaDeCitas) throws ParseException {
 
-        String fechastr = "2025-11-03";
+      //  String fechastr = "2025-11-03";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date fechautil = sdf.parse(fechastr);
+        java.util.Date fechautil = sdf.parse(fechaDeCitas);
 
         return (ArrayList<CitaProgramadaDto>) this.citaDao.ListarProgramadas(idVeterinario, fechautil);
 
