@@ -44,7 +44,13 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
-        this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
+        if(this.documentoPago.getPersona().getPersonaId()==null || this.documentoPago.getPersona().getPersonaId()==0){
+            this.statement.setNull(2, this.documentoPago.getPersona().getPersonaId());
+        }
+        else{
+             this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
+        }
+       
         this.statement.setString(3, this.documentoPago.getTipoDocumento().toString());
         this.statement.setString(4, this.documentoPago.getSerie());
         this.statement.setString(5, this.documentoPago.getNumero());

@@ -408,12 +408,17 @@ public abstract class DaoBaseImpl {
         String sql = null;
         Consumer incluirValorDeParametros = null;
         Object parametros = null;
-        return this.listarTodos(sql, incluirValorDeParametros, parametros);
+        return this.listarTodos(sql, incluirValorDeParametros, parametros,null);
+    }
+    public List listarTodos(String sql,
+            Consumer incluirValorDeParametros,
+            Object parametros){
+        return this.listarTodos(sql,incluirValorDeParametros,parametros,null);
     }
 
     public List listarTodos(String sql,
             Consumer incluirValorDeParametros,
-            Object parametros) {
+            Object parametros, Consumer agregarMiPropioObjetoALaLista) {
         List lista = new ArrayList<>();
         try {
             this.abrirConexion();
@@ -426,7 +431,11 @@ public abstract class DaoBaseImpl {
             }
             this.ejecutarSelectEnDB();
             while (this.resultSet.next()) {
-                agregarObjetoALaLista(lista);
+                if(agregarMiPropioObjetoALaLista==null){
+                    agregarObjetoALaLista(lista);
+                }else{
+                    agregarMiPropioObjetoALaLista.accept(lista);
+                }
             }
         } catch (SQLException ex) {
             System.err.println("Error al intentar listarTodos - " + ex);
