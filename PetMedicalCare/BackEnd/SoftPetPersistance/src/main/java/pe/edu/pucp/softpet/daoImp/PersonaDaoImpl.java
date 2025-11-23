@@ -115,12 +115,14 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
         // Usuario
         UsuarioDto u = new UsuarioDto();
+        u.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
         try {
-            u.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
+            
             u.setUsername(this.resultSet.getString("USERNAME"));
             u.setCorreo(this.resultSet.getString("CORREO"));
-            this.persona.setUsuario(u);
+            
         } catch (SQLException e) { /* Ignorar */ }
+        this.persona.setUsuario(u);
     }
 
     @Override
