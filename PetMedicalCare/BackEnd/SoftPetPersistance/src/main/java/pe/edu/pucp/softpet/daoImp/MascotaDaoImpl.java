@@ -89,10 +89,6 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.mascota = new MascotaDto();
         this.mascota.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
-        PersonaDto per = new PersonaDto();
-        per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-        this.mascota.setPersona(per);
-        //this.mascota.setPersona(new PersonaDaoImpl().obtenerPorId(this.resultSet.getInt("PERSONA_ID")));
         this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
         this.mascota.setEspecie(this.resultSet.getString("ESPECIE"));
         this.mascota.setSexo(this.resultSet.getString("SEXO"));
@@ -100,6 +96,14 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         this.mascota.setColor(this.resultSet.getString("COLOR"));
         this.mascota.setFechaDefuncion(this.resultSet.getDate("FECHA_DEFUNCION"));
         this.mascota.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+
+        PersonaDto per = new PersonaDto();
+        try {
+            per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+            per.setNombre(this.resultSet.getString("NOMBRE_DUENIO")); // Alias del SP
+            per.setTelefono(this.resultSet.getString("TELEFONO_DUENIO")); // Alias del SP
+        } catch (SQLException e) { }
+        this.mascota.setPersona(per);
     }
 
     @Override
@@ -144,13 +148,29 @@ public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
         return super.eliminar();
     }
 
-    public ArrayList<MascotaDto> ListasBusquedaAvanzada(MascotaDto mascota) {
+    @Override
+    public ArrayList<MascotaDto> ListasBusquedaAvanzada(
+            String nombreMascota, String especie, String nombreDuenio, Integer activo) {
+        
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
-
-        parametrosEntrada.put(1, mascota.getNombre());
-        parametrosEntrada.put(2, mascota.getRaza());
-        parametrosEntrada.put(3, mascota.getEspecie());
-        parametrosEntrada.put(4, mascota.getPersona().getNombre());
+        
+        parametrosEntrada.put(1, nombreMascota);
+        
+        // Manejo de Especie "Todas"
+        if (especie == null || especie.equals("Todas") || especie.isEmpty()) {
+            parametrosEntrada.put(2, null);
+        } else {
+            parametrosEntrada.put(2, especie);
+        }
+        
+        parametrosEntrada.put(3, nombreDuenio);
+        
+        // Manejo de Activo (-1 = Todos = NULL)
+        if (activo == null || activo == -1) {
+            parametrosEntrada.put(4, null);
+        } else {
+            parametrosEntrada.put(4, activo);
+        }
 
         return (ArrayList<MascotaDto>) super.ejecutarProcedimientoLectura("sp_buscar_mascotas_avanzada", parametrosEntrada);
     }

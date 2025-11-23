@@ -58,6 +58,22 @@ public class Personas {
         return this.personaBo.obtenerPorId(personaId);
     }
 
+    @WebMethod(operationName = "insertarPersonaCompleta")
+    public Integer insertarPersonaCompleta(
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password,
+            @WebParam(name = "correo") String correo,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "direccion") String direccion,
+            @WebParam(name = "telefono") String telefono,
+            @WebParam(name = "sexo") String sexo,
+            @WebParam(name = "nroDocumento") Integer nroDocumento,
+            @WebParam(name = "ruc") Integer ruc,
+            @WebParam(name = "tipoDocumento") String tipoDocumento) {
+        return this.personaBo.insertarPersonaCompleta(username, password, correo, true,
+                nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento);
+    }
+
     @WebMethod(operationName = "listar_personas")
     public ArrayList<PersonaDto> listarTodos() throws IOException, InterruptedException {
         return this.personaBo.listarTodos();
@@ -68,10 +84,8 @@ public class Personas {
             @WebParam(name = "nombre") String nombre,
             @WebParam(name = "NroDocumento") String NroDocumento,
             @WebParam(name = "Ruc") String Ruc,
-            @WebParam(name = "Telefono") String Telefono,
-            @WebParam(name = "Activo") Boolean Activo) {
-
-        return (ArrayList<PersonaDto>) this.personaBo.ListasBusquedaAvanzada(nombre, NroDocumento, Ruc, Telefono, Activo);
+            @WebParam(name = "Activo") Integer Activo) {
+        return this.personaBo.ListasBusquedaAvanzada(nombre, NroDocumento, Ruc, Activo);
     }
 
     @WebMethod(operationName = "ListasBusquedaAvanzadaParaCliente")

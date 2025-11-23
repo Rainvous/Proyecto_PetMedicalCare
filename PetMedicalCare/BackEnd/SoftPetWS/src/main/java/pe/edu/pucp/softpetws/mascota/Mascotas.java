@@ -64,10 +64,10 @@ public class Mascotas {
     @WebMethod(operationName = "ListasBusquedaAvanzada")
     public ArrayList<MascotaDto> ListasBusquedaAvanzada(
             @WebParam(name = "nombreMascota") String nombreMascota,
-            @WebParam(name = "raza") String raza,
             @WebParam(name = "especie") String especie,
-            @WebParam(name = "nombreDeLaPersona") String nombreDeLaPersona) {
-        return this.mascotaBo.ListasBusquedaAvanzada(nombreMascota, raza, especie, nombreDeLaPersona);
+            @WebParam(name = "nombreDeLaPersona") String nombreDeLaPersona,
+            @WebParam(name = "estadoActivo") Integer estadoActivo) {
+        return this.mascotaBo.ListasBusquedaAvanzada(nombreMascota, especie, nombreDeLaPersona, estadoActivo);
     }
 
     @WebMethod(operationName = "listar_mascotas_por_persona")

@@ -79,13 +79,21 @@ public class VeterinarioBo {
     public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
             String Especialidad,
             String nombre,
-            String Telefono,
-            String nroDocumento
-    ) {
+            String nroDocumento,
+            Integer estadoActivo) { // Parametro INT
         return (ArrayList<VeterinarioDto>) this.veterinarioDao.ListasBusquedaAvanzadaVeterinario(
-                Especialidad == null ? "" : Especialidad,
-                nombre == null ? "" : nombre,
-                Telefono == null ? "" : Telefono,
-                nroDocumento == null ? "" : nroDocumento);
+                Especialidad, nombre, nroDocumento, estadoActivo);
+    }
+
+    public Integer insertarVeterinarioCompleto(
+            String username, String password, String correo, boolean activoUsuario,
+            String nombre, String direccion, String telefono, String sexo,
+            Integer nroDocumento, Integer ruc, String tipoDocumento,
+            String fechaContratacion, String estado, String especialidad) {
+        return this.veterinarioDao.insertarVeterinarioCompleto(
+                username, password, correo, activoUsuario,
+                nombre, direccion, telefono, sexo,
+                nroDocumento, ruc, tipoDocumento,
+                fechaContratacion, estado, especialidad);
     }
 }

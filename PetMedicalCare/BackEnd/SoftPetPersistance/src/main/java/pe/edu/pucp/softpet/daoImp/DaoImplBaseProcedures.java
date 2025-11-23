@@ -2,6 +2,7 @@ package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import static java.sql.JDBCType.NULL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -201,6 +202,13 @@ public class DaoImplBaseProcedures {
         for (Map.Entry<Integer, Object> entry : parametros.entrySet()) {
             Integer key = entry.getKey();
             Object value = entry.getValue();
+            
+            // 1. SI EL VALOR ES NULL, LO MANDAMOS DIRECTAMENTE COMO NULL A LA BD
+            if (value == null) {
+                this.statement.setObject(key, null);
+                continue; // Pasamos al siguiente parámetro sin entrar al switch
+            }
+            
             switch (value) {
                 case Integer entero ->
                     this.statement.setInt(key, entero);

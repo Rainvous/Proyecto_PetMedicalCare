@@ -86,6 +86,14 @@ public class PersonaBo {
         return this.dao.eliminar(dto);
     }
 
+    public Integer insertarPersonaCompleta(
+            String username, String password, String correo, boolean activoUsuario,
+            String nombre, String direccion, String telefono, String sexo,
+            Integer nroDocumento, Integer ruc, String tipoDocumento) {
+        return this.dao.insertarPersonaCompleta(username, password, correo, activoUsuario,
+                nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento);
+    }
+
     public PersonaDto obtenerPorId(int personaId) {
         return this.dao.obtenerPorId(personaId);
     }
@@ -94,29 +102,13 @@ public class PersonaBo {
         return this.dao.listarTodos();
     }
 
-    public ArrayList<PersonaDto> ListasBusquedaAvanzada(
-            String nombre,
-            String NroDocumento,
-            String Ruc,
-            String Telefono,
-            Boolean Activo) {
-
-        String ActivoString;
-
-        if (null == Activo) {
-            ActivoString = "";
-        } else if (Activo == true) {
-            ActivoString = "1";
-        } else {
-            ActivoString = "0";
-        }
-
+    // Búsqueda de Clientes (Sin Teléfono, Con RUC y Estado INT)
+    public ArrayList<PersonaDto> ListasBusquedaAvanzada(String nombre, String NroDocumento, String Ruc, Integer Activo) {
         return (ArrayList<PersonaDto>) this.dao.ListasBusquedaAvanzada(
                 nombre == null ? "" : nombre,
                 NroDocumento == null ? "" : NroDocumento,
                 Ruc == null ? "" : Ruc,
-                Telefono == null ? "" : Telefono,
-                ActivoString);
+                Activo);
     }
 
     public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente() {

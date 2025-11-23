@@ -5,6 +5,8 @@ import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 
 public interface MascotaDao extends DaoBase<MascotaDto> {
     
+    ArrayList<MascotaDto> ListasBusquedaAvanzada(String nombreMascota, String especie, String nombreDuenio, Integer activo);
+    
     ArrayList<MascotaDto> listarPorIdPersona(Integer personaId);
     
     ArrayList<MascotaDto> listarMascotasActivas();

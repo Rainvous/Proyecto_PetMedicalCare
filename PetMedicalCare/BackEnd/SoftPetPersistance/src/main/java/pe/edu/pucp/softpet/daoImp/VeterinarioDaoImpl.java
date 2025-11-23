@@ -1,7 +1,10 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +16,9 @@ import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
+import pe.edu.pucp.softpet.dto.util.enums.Sexo;
 
 public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
 
@@ -80,16 +85,64 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.veterinario = new VeterinarioDto();
+        
         this.veterinario.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
-
-        PersonaDto persona = new PersonaDto();
-        persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-        this.veterinario.setPersona(persona);
-
         this.veterinario.setFechaContratacion(this.resultSet.getDate("FECHA_DE_CONTRATACION"));
-        this.veterinario.setEstado(EstadoVeterinario.valueOf(this.resultSet.getString("ESTADO")));
         this.veterinario.setEspecialidad(this.resultSet.getString("ESPECIALIDAD"));
-        this.veterinario.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+        
+        try {
+            this.veterinario.setActivo(this.resultSet.getInt("ACTIVO_VET") == 1);
+        } catch (SQLException e) {
+            // Fallback por si usamos un select simple sin el alias
+             try { this.veterinario.setActivo(this.resultSet.getInt("ACTIVO") == 1); } catch(Exception ex) { this.veterinario.setActivo(true); }
+        }
+
+        // CORRECCIÓN 2: Usar Alias ESTADO_VET y Validar Nulos
+        String estadoStr = null;
+        try { estadoStr = this.resultSet.getString("ESTADO_VET"); } catch(SQLException e) { 
+            try { estadoStr = this.resultSet.getString("ESTADO"); } catch(Exception ex) {} 
+        }
+
+        if (estadoStr != null) {
+            try {
+                this.veterinario.setEstado(EstadoVeterinario.valueOf(estadoStr));
+            } catch (IllegalArgumentException e) {
+                this.veterinario.setEstado(EstadoVeterinario.ACTIVO);
+            }
+        } else {
+            this.veterinario.setEstado(EstadoVeterinario.ACTIVO);
+        }
+
+        // 3. Mapeo de Persona
+        PersonaDto p = new PersonaDto();
+        try {
+            p.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+            p.setNombre(this.resultSet.getString("NOMBRE"));
+            p.setDireccion(this.resultSet.getString("DIRECCION"));
+            p.setTelefono(this.resultSet.getString("TELEFONO"));
+            p.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
+            p.setRuc(this.resultSet.getInt("RUC"));
+            p.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));
+            
+            // Validación de Sexo
+            String sexoStr = this.resultSet.getString("SEXO");
+            if (sexoStr != null) {
+                try { p.setSexo(Sexo.valueOf(sexoStr)); } catch (Exception ex) { p.setSexo(Sexo.O); }
+            } else {
+                p.setSexo(Sexo.O);
+            }
+        } catch (SQLException e) { /* Ignorar si no viene JOIN */ }
+
+        // 4. Mapeo de Usuario
+        UsuarioDto u = new UsuarioDto();
+        try {
+            u.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
+            u.setUsername(this.resultSet.getString("USERNAME"));
+            u.setCorreo(this.resultSet.getString("CORREO"));
+            p.setUsuario(u);
+        } catch (SQLException e) { /* Ignorar */ }
+        
+        this.veterinario.setPersona(p);
     }
 
     @Override
@@ -165,18 +218,88 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         return resultado;
     }
 
-    public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
-            String Especialidad,
-            String nombre,
-            String Telefono,
-            String nroDocumento
-    ) {
-        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+    public Integer insertarVeterinarioCompleto(
+            String username, String password, String correo, boolean activoUsuario,
+            String nombre, String direccion, String telefono, String sexo, 
+            Integer nroDocumento, Integer ruc, String tipoDocumento,
+            String fechaContratacion, String estado, String especialidad) {
+        
+        Integer resultado = 0;
+        try {
+            this.iniciarTransaccion(); // Usamos método del padre
 
-        parametrosEntrada.put(1, Especialidad);
+            // A. Insertar Usuario
+            String sqlUsu = "INSERT INTO USUARIOS (USERNAME, PASSWORD, CORREO, ACTIVO, FECHA_CREACION) VALUES (?, ?, ?, ?, NOW())";
+            Integer idUsuario = 0;
+            try (PreparedStatement psUsu = this.conexion.prepareStatement(sqlUsu, Statement.RETURN_GENERATED_KEYS)) {
+                psUsu.setString(1, username);
+                psUsu.setString(2, password);
+                psUsu.setString(3, correo);
+                psUsu.setInt(4, activoUsuario ? 1 : 0);
+                psUsu.executeUpdate();
+                try (ResultSet rs = psUsu.getGeneratedKeys()) { if (rs.next()) idUsuario = rs.getInt(1); }
+            }
+
+            // B. Asignar Rol
+            String sqlRol = "INSERT INTO ROLES_USUARIO (ROL_ID, USUARIO_ID, ACTIVO) VALUES (2, ?, 1)";
+            try(PreparedStatement psRol = this.conexion.prepareStatement(sqlRol)){
+                psRol.setInt(1, idUsuario);
+                psRol.executeUpdate();
+            }
+
+            // C. Insertar Persona
+            String sqlPer = "INSERT INTO PERSONAS (USUARIO_ID, NOMBRE, DIRECCION, TELEFONO, SEXO, NRO_DOCUMENTO, RUC, TIPO_DOCUMENTO, ACTIVO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)";
+            Integer idPersona = 0;
+            try (PreparedStatement psPer = this.conexion.prepareStatement(sqlPer, Statement.RETURN_GENERATED_KEYS)) {
+                psPer.setInt(1, idUsuario);
+                psPer.setString(2, nombre);
+                psPer.setString(3, direccion);
+                psPer.setString(4, telefono);
+                psPer.setString(5, sexo);
+                psPer.setInt(6, nroDocumento);
+                if(ruc != null && ruc != 0) psPer.setInt(7, ruc); else psPer.setNull(7, java.sql.Types.INTEGER);
+                psPer.setString(8, tipoDocumento);
+                psPer.executeUpdate();
+                try (ResultSet rs = psPer.getGeneratedKeys()) { if (rs.next()) idPersona = rs.getInt(1); }
+            }
+
+            // D. Insertar Veterinario
+            String sqlVet = "INSERT INTO VETERINARIOS (PERSONA_ID, FECHA_DE_CONTRATACION, ESTADO, ESPECIALIDAD, ACTIVO) VALUES (?, ?, ?, ?, 1)";
+            try (PreparedStatement psVet = this.conexion.prepareStatement(sqlVet, Statement.RETURN_GENERATED_KEYS)) {
+                psVet.setInt(1, idPersona);
+                psVet.setDate(2, Date.valueOf(fechaContratacion));
+                psVet.setString(3, estado);
+                psVet.setString(4, especialidad);
+                psVet.executeUpdate();
+                try (ResultSet rs = psVet.getGeneratedKeys()) { if (rs.next()) resultado = rs.getInt(1); }
+            }
+
+            this.comitarTransaccion(); // Commit final
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            try { this.rollbackTransaccion(); } catch (SQLException e) { }
+            resultado = 0;
+        } finally {
+            try { this.cerrarConexion(); } catch (SQLException ex) { }
+        }
+        return resultado;
+    }
+
+    @Override
+    public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
+            String especialidad, String nombre, String nroDocumento, Integer estadoActivo) {
+        
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        parametrosEntrada.put(1, especialidad);
         parametrosEntrada.put(2, nombre);
-        parametrosEntrada.put(3, Telefono);
-        parametrosEntrada.put(4, nroDocumento);
+        parametrosEntrada.put(3, nroDocumento);
+        
+        // Manejo de NULL (-1 = Todos)
+        if (estadoActivo == null || estadoActivo == -1) {
+            parametrosEntrada.put(4, null); 
+        } else {
+            parametrosEntrada.put(4, estadoActivo);
+        }
 
         return (ArrayList<VeterinarioDto>) super.ejecutarProcedimientoLectura("sp_buscar_veterinarios_avanzada", parametrosEntrada);
     }

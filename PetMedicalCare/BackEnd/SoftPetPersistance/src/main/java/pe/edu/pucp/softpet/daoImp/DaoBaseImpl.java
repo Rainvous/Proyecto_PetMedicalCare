@@ -408,12 +408,13 @@ public abstract class DaoBaseImpl {
         String sql = null;
         Consumer incluirValorDeParametros = null;
         Object parametros = null;
-        return this.listarTodos(sql, incluirValorDeParametros, parametros,null);
+        return this.listarTodos(sql, incluirValorDeParametros, parametros, null);
     }
+
     public List listarTodos(String sql,
             Consumer incluirValorDeParametros,
-            Object parametros){
-        return this.listarTodos(sql,incluirValorDeParametros,parametros,null);
+            Object parametros) {
+        return this.listarTodos(sql, incluirValorDeParametros, parametros, null);
     }
 
     public List listarTodos(String sql,
@@ -431,9 +432,9 @@ public abstract class DaoBaseImpl {
             }
             this.ejecutarSelectEnDB();
             while (this.resultSet.next()) {
-                if(agregarMiPropioObjetoALaLista==null){
+                if (agregarMiPropioObjetoALaLista == null) {
                     agregarObjetoALaLista(lista);
-                }else{
+                } else {
                     agregarMiPropioObjetoALaLista.accept(lista);
                 }
             }
@@ -604,6 +605,11 @@ public abstract class DaoBaseImpl {
         for (Map.Entry<Integer, Object> entry : parametros.entrySet()) {
             Integer key = entry.getKey();
             Object value = entry.getValue();
+            // 1. SI EL VALOR ES NULL, LO MANDAMOS DIRECTAMENTE COMO NULL A LA BD
+            if (value == null) {
+                this.statement.setObject(key, null);
+                continue; // Pasamos al siguiente parámetro sin entrar al switch
+            }
             switch (value) {
                 case Integer entero ->
                     this.statement.setInt(key, entero);

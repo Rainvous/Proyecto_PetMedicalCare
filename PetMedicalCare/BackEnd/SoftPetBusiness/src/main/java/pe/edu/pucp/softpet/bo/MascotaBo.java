@@ -75,19 +75,13 @@ public class MascotaBo {
         return this.mascotaDao.listarTodos();
     }
 
-    public ArrayList<MascotaDto> ListasBusquedaAvanzada(String nombreMascota,
-            String raza, String especie, String nombreDeLaPersona) {
-        MascotaDto mascota = new MascotaDto();
-        PersonaDto persona = new PersonaDto();
-
-        mascota.setNombre(nombreMascota == null ? "" : nombreMascota);
-        mascota.setRaza(raza == null ? "" : raza);
-        mascota.setEspecie(especie == null ? "" : especie);
-
-        persona.setNombre(nombreDeLaPersona == null ? "" : nombreDeLaPersona);
-        mascota.setPersona(persona);
-
-        return (ArrayList<MascotaDto>) mascotaDao.ListasBusquedaAvanzada(mascota);
+    public ArrayList<MascotaDto> ListasBusquedaAvanzada(
+            String nombreMascota, String especie, String nombreDeLaPersona, Integer estadoActivo) {
+        return (ArrayList<MascotaDto>) mascotaDao.ListasBusquedaAvanzada(
+                nombreMascota == null ? "" : nombreMascota,
+                especie == null ? "" : especie,
+                nombreDeLaPersona == null ? "" : nombreDeLaPersona,
+                estadoActivo);
     }
 
     public ArrayList<MascotaDto> listarPorIdPersona(int personaId) {

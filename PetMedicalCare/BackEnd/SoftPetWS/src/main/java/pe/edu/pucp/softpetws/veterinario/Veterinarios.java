@@ -73,9 +73,31 @@ public class Veterinarios {
     public ArrayList<VeterinarioDto> ListasBusquedaAvanzadaVeterinario(
             @WebParam(name = "Especialidad") String Especialidad,
             @WebParam(name = "nombre") String nombre,
-            @WebParam(name = "Telefono") String Telefono,
-            @WebParam(name = "nroDocumento") String nroDocumento
-    ) {
-        return (ArrayList<VeterinarioDto>) this.veterinarioBo.ListasBusquedaAvanzadaVeterinario(Especialidad, nombre, Telefono, nroDocumento);
+            @WebParam(name = "nroDocumento") String nroDocumento,
+            @WebParam(name = "estadoActivo") Integer estadoActivo) { // Parametro INT
+        return (ArrayList<VeterinarioDto>) this.veterinarioBo.ListasBusquedaAvanzadaVeterinario(
+                Especialidad, nombre, nroDocumento, estadoActivo);
+    }
+
+    @WebMethod(operationName = "insertarVeterinarioCompleto")
+    public Integer insertarVeterinarioCompleto(
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password,
+            @WebParam(name = "correo") String correo,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "direccion") String direccion,
+            @WebParam(name = "telefono") String telefono,
+            @WebParam(name = "sexo") String sexo,
+            @WebParam(name = "nroDocumento") Integer nroDocumento,
+            @WebParam(name = "ruc") Integer ruc,
+            @WebParam(name = "tipoDocumento") String tipoDocumento,
+            @WebParam(name = "fechaContratacion") String fechaContratacion,
+            @WebParam(name = "estado") String estado,
+            @WebParam(name = "especialidad") String especialidad) {
+        return this.veterinarioBo.insertarVeterinarioCompleto(
+                username, password, correo, true, // Activo por defecto
+                nombre, direccion, telefono, sexo,
+                nroDocumento, ruc, tipoDocumento,
+                fechaContratacion, estado, especialidad);
     }
 }

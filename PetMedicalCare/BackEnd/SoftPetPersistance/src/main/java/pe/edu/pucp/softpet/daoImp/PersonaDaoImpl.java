@@ -1,6 +1,9 @@
 package pe.edu.pucp.softpet.daoImp;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,18 +84,43 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.persona = new PersonaDto();
         this.persona.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
-
-        UsuarioDto us = new UsuarioDto();
-        us.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
-        this.persona.setUsuario(us);
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
         this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
-        this.persona.setSexo(Sexo.valueOf(this.resultSet.getString("SEXO")));
         this.persona.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
-        this.persona.setRuc(this.resultSet.getInt("RUC"));
+        
+        // RUC puede ser nulo en BD, manejar con cuidado
+        int rucVal = this.resultSet.getInt("RUC");
+        if (this.resultSet.wasNull()) {
+            this.persona.setRuc(0); // O null si tu DTO lo soporta
+        } else {
+            this.persona.setRuc(rucVal);
+        }
+        
         this.persona.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));
-        this.persona.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+        
+        try {
+            this.persona.setActivo(this.resultSet.getInt("ACTIVO_PERS") == 1);
+        } catch (Exception e) { 
+             this.persona.setActivo(true); 
+        }
+
+        // Sexo Seguro
+        String sexoStr = this.resultSet.getString("SEXO");
+        if (sexoStr != null) {
+            try { this.persona.setSexo(Sexo.valueOf(sexoStr)); } catch (Exception ex) { this.persona.setSexo(Sexo.O); }
+        } else {
+            this.persona.setSexo(Sexo.O);
+        }
+
+        // Usuario
+        UsuarioDto u = new UsuarioDto();
+        try {
+            u.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
+            u.setUsername(this.resultSet.getString("USERNAME"));
+            u.setCorreo(this.resultSet.getString("CORREO"));
+            this.persona.setUsuario(u);
+        } catch (SQLException e) { /* Ignorar */ }
     }
 
     @Override
@@ -136,22 +164,77 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.persona = persona;
         return super.eliminar();
     }
+    
+    public Integer insertarPersonaCompleta(
+            String username, String password, String correo, boolean activoUsuario,
+            String nombre, String direccion, String telefono, String sexo, 
+            Integer nroDocumento, Integer ruc, String tipoDocumento) {
+        
+        Integer resultado = 0;
+        try {
+            this.iniciarTransaccion();
+
+            // A. Insertar Usuario
+            String sqlUsu = "INSERT INTO USUARIOS (USERNAME, PASSWORD, CORREO, ACTIVO, FECHA_CREACION) VALUES (?, ?, ?, ?, NOW())";
+            Integer idUsuario = 0;
+            try (PreparedStatement psUsu = this.conexion.prepareStatement(sqlUsu, Statement.RETURN_GENERATED_KEYS)) {
+                psUsu.setString(1, username);
+                psUsu.setString(2, password);
+                psUsu.setString(3, correo);
+                psUsu.setInt(4, activoUsuario ? 1 : 0);
+                psUsu.executeUpdate();
+                try (ResultSet rs = psUsu.getGeneratedKeys()) { if (rs.next()) idUsuario = rs.getInt(1); }
+            }
+
+            // B. Asignar Rol (ID 4 = Cliente)
+            String sqlRol = "INSERT INTO ROLES_USUARIO (ROL_ID, USUARIO_ID, ACTIVO) VALUES (4, ?, 1)";
+            try(PreparedStatement psRol = this.conexion.prepareStatement(sqlRol)){
+                psRol.setInt(1, idUsuario);
+                psRol.executeUpdate();
+            }
+
+            // C. Insertar Persona
+            String sqlPer = "INSERT INTO PERSONAS (USUARIO_ID, NOMBRE, DIRECCION, TELEFONO, SEXO, NRO_DOCUMENTO, RUC, TIPO_DOCUMENTO, ACTIVO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)";
+            try (PreparedStatement psPer = this.conexion.prepareStatement(sqlPer, Statement.RETURN_GENERATED_KEYS)) {
+                psPer.setInt(1, idUsuario);
+                psPer.setString(2, nombre);
+                psPer.setString(3, direccion);
+                psPer.setString(4, telefono);
+                psPer.setString(5, sexo);
+                psPer.setInt(6, nroDocumento);
+                if(ruc != null && ruc != 0) psPer.setInt(7, ruc); else psPer.setNull(7, java.sql.Types.INTEGER);
+                psPer.setString(8, tipoDocumento);
+                psPer.executeUpdate();
+                try (ResultSet rs = psPer.getGeneratedKeys()) { if (rs.next()) resultado = rs.getInt(1); }
+            }
+
+            this.comitarTransaccion();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            try { this.rollbackTransaccion(); } catch (SQLException e) { }
+            resultado = 0;
+        } finally {
+            try { this.cerrarConexion(); } catch (SQLException ex) { }
+        }
+        return resultado;
+    }
 
     public ArrayList<PersonaDto> ListasBusquedaAvanzada(
-            String nombre,
-            String NroDocumento,
-            String Ruc,
-            String Telefono,
-            String Activo
-    ) {
+            String nombre, String NroDocumento, String Ruc, Integer Activo) {
+        
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         parametrosEntrada.put(1, nombre);
         parametrosEntrada.put(2, NroDocumento);
-        parametrosEntrada.put(3, Ruc);
-        parametrosEntrada.put(4, Telefono);
-        parametrosEntrada.put(5, Activo);
+        parametrosEntrada.put(3, Ruc); // Ahora pasamos RUC en vez de teléfono
+        
+        // Manejo de NULL para Estado (-1 = Todos)
+        if (Activo == null || Activo == -1) {
+            parametrosEntrada.put(4, null);
+        } else {
+            parametrosEntrada.put(4, Activo);
+        }
 
-        return (ArrayList<PersonaDto>) super.ejecutarProcedimientoLectura("sp_buscar_personas_avanzada", parametrosEntrada);
+        return (ArrayList<PersonaDto>) super.ejecutarProcedimientoLectura("sp_buscar_clientes_avanzada", parametrosEntrada);
     }
 
     public ArrayList<PersonaDto> ListasBusquedaAvanzadaParaCliente() {
