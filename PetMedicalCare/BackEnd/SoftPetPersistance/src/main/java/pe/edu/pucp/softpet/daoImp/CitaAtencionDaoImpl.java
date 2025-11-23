@@ -14,8 +14,11 @@ import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dao.CitaAtencionDao;
 import pe.edu.pucp.softpet.dto.citas.CitaProgramadaDto;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
+import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
 public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao {
 
@@ -282,4 +285,100 @@ public class CitaAtencionDaoImpl extends DaoBaseImpl implements CitaAtencionDao 
 
         return (ArrayList<CitaAtencionDto>) super.ejecutarProcedimientoLectura("sp_listar_citas_por_mascota_y_fecha", parametrosEntrada);
     }
+    
+    private void InstanciarObjetoCitaProgramada_2() throws SQLException {
+        this.citaAtencion = new CitaAtencionDto();
+        VeterinarioDto vet = new VeterinarioDto();
+        MascotaDto mas = new MascotaDto();
+        //VETERINARIO DATA
+        vet.setVeterinarioId(this.resultSet.getInt("VETERINARIO_ID"));
+        vet.setEspecialidad(this.resultSet.getString("VETERINARIO_ESPECIALIDAD"));
+        vet.setEstado(EstadoVeterinario.valueOf(this.resultSet.getString("VETERINARIO_ESTADO_LABORAL")));
+        PersonaDto per = new PersonaDto();
+        per.setNombre(this.resultSet.getString("VETERINARIO_NOMBRE"));
+        per.setNroDocumento(this.resultSet.getInt("VETERINARIO_DNI"));
+        per.setTelefono(this.resultSet.getString("VETERINARIO_TELEFONO"));
+        UsuarioDto usu = new UsuarioDto();
+        usu.setCorreo(this.resultSet.getString("VETERINARIO_CORREO"));
+        per.setUsuario(usu);
+        vet.setPersona(per);
+        //MASCOTA DATA
+        mas.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
+        mas.setNombre(this.resultSet.getString("MASCOTA_NOMBRE"));
+        mas.setEspecie(this.resultSet.getString("MASCOTA_ESPECIE"));
+        mas.setRaza(this.resultSet.getString("MASCOTA_RAZA"));
+        mas.setSexo(this.resultSet.getString("MASCOTA_SEXO"));
+        mas.setColor(this.resultSet.getString("MASCOTA_COLOR"));
+        mas.setFechaDefuncion(this.resultSet.getDate("MASCOTA_FECHA_DEFUNCION"));
+        
+//        //MASCOTA DUEÑO(CLIENTE)
+        PersonaDto perDu = new PersonaDto();
+        perDu.setPersonaId(this.resultSet.getInt("CLIENTE_PERSONA_ID"));
+        perDu.setNombre(this.resultSet.getString("CLIENTE_NOMBRE"));
+        perDu.setDireccion(this.resultSet.getString("CLIENTE_DIRECCION"));
+        perDu.setTelefono(this.resultSet.getString("CLIENTE_TELEFONO"));
+        perDu.setNroDocumento(this.resultSet.getInt("CLIENTE_NRO_DOCUMENTO"));
+        perDu.setTipoDocumento(this.resultSet.getString("CLIENTE_TIPO_DOC"));
+        UsuarioDto cliUsu = new UsuarioDto();
+        cliUsu.setCorreo(this.resultSet.getString("CLIENTE_CORREO"));
+        cliUsu.setUsername(this.resultSet.getString("CLIENTE_USERNAME"));
+        
+        perDu.setUsuario(cliUsu);
+        mas.setPersona(perDu);
+        
+        
+        this.citaAtencion.setCitaId(this.resultSet.getInt("CITA_ID"));
+        this.citaAtencion.setVeterinario(vet);
+        this.citaAtencion.setMascota(mas);
+        this.citaAtencion.setFechaRegistro(this.resultSet.getDate("FECHA_REGISTRO"));
+        this.citaAtencion.setFechaHoraInicio(this.resultSet.getTimestamp("FECHA_HORA_INICIO"));
+        this.citaAtencion.setFechaHoraFin(this.resultSet.getTimestamp("FECHA_HORA_FIN"));
+        this.citaAtencion.setEstado(EstadoCita.valueOf(this.resultSet.getString("ESTADO_CITA")));
+        this.citaAtencion.setPesoMascota(this.resultSet.getDouble("PESO_MASCOTA"));
+        this.citaAtencion.setMonto(this.resultSet.getDouble("MONTO"));
+        this.citaAtencion.setObservacion(this.resultSet.getString("OBSERVACION"));
+        this.citaAtencion.setActivo(this.resultSet.getInt("CITA_ACTIVO") == 1);
+    }
+
+    private void AgregarObjetoCitaProgramadaALaLista_2(Object objetoParametros) {
+        //Paso 2: Crea tu puntero a funcion este recibirá una lista
+        //No te preocupes la lista a pesar de ser casteada guardará la informacion del objeto
+        List<CitaAtencionDto> lista = (List<CitaAtencionDto>) objetoParametros;
+        try {
+            this.InstanciarObjetoCitaProgramada_2();
+            lista.add(this.citaAtencion);
+        } catch (SQLException ex) {
+            System.err.println("No se instancio bien el objeto");
+        }
+
+    }
+    
+    
+    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada_2(String fecha, String idVeterinario) {
+        String fechaParaSP;
+
+        // 1. Lógica de Java para decidir la fecha
+        if (fecha == null || fecha.trim().isEmpty()) {
+
+            // Si la fecha es "" o null, Java obtiene la fecha de hoy
+            // (usando la zona horaria de tu máquina, que es la correcta)
+            fechaParaSP = LocalDate.now().toString(); // Ej: "2025-11-10"
+
+        } else {
+            // Si la fecha SÍ viene, se usa esa.
+            fechaParaSP = fecha;
+        }
+
+        // 2. Llama al SP
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+
+        // Aquí siempre pasas una fecha válida ("2025-11-10")
+        // ya sea la que escribió el usuario o la que calculó Java.
+        parametrosEntrada.put(1, fechaParaSP);
+        parametrosEntrada.put(2, idVeterinario);
+        String sql = "sp_listar_citas_por_fecha_2";
+
+        return (ArrayList<CitaAtencionDto>) this.ejecutarProcedimientoLectura(sql, parametrosEntrada, this::AgregarObjetoCitaProgramadaALaLista_2);
+    }
+    
 }

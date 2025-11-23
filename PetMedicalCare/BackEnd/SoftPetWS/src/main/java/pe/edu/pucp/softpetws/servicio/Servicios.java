@@ -82,4 +82,13 @@ public class Servicios {
             @WebParam(name = "nombreTipo") int idServicio) {
         return this.servicioBo.VerificarSiElServicioTieneInformacion(idServicio);
     }
+    
+    @WebMethod(operationName = "ListasBusquedaAvanzada2")
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada2(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "rango") String rango,
+            @WebParam(name = "activo") String activo) {
+
+        return servicioBo.ListasBusquedaAvanzada2(nombre, rango, activo);
+    }
 }

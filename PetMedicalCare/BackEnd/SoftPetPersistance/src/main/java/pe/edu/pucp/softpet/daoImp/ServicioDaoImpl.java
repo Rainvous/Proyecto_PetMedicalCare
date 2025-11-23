@@ -238,4 +238,47 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
             Logger.getLogger(ServicioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+     private void InstanciarObjetoCitaProgramada() throws SQLException {
+        //Paso 1: agregar el objeto que quieres y crea tu InstanciarObjeto a lo melgar
+        servicio = new ServicioDto();
+        this.servicio.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
+        TipoServicioDto tp = new TipoServicioDto();
+        tp.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
+        tp.setNombre(this.resultSet.getString("NOMBRE_TIPO_SERVICIO"));
+        tp.setDescripcion(this.resultSet.getString("DESCRIPCION_TIPO_SERVICIO"));
+        tp.setActivo(this.resultSet.getInt("ACTIVO_TIPO_SERVICIO") == 1);
+        this.servicio.setTipoServicio(tp);
+        this.servicio.setNombre(this.resultSet.getString("NOMBRE"));
+        this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+        this.servicio.setCosto(this.resultSet.getDouble("COSTO"));
+        this.servicio.setEstado(this.resultSet.getString("ESTADO"));
+        this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);        
+        
+    }
+
+    private void AgregarObjetoCitaProgramadaALaLista(Object objetoParametros) {
+        //Paso 2: Crea tu puntero a funcion este recibirá una lista
+        //No te preocupes la lista a pesar de ser casteada guardará la informacion del objeto
+        List<ServicioDto> lista = (List<ServicioDto>) objetoParametros;
+        try {
+            this.InstanciarObjetoCitaProgramada();
+            lista.add(this.servicio);
+        } catch (SQLException ex) {
+            System.err.println("No se instancio bien el objeto");
+        }
+
+    }
+    
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada2(ServicioDto servicio, String rango, String activo) {
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        parametrosEntrada.put(1, servicio.getNombre());
+        parametrosEntrada.put(2, rango);
+        parametrosEntrada.put(3, activo);
+        String sql = "sp_buscar_servicios_avanzada_2";
+        
+        return (ArrayList<ServicioDto>) this.ejecutarProcedimientoLectura(sql, parametrosEntrada, this::AgregarObjetoCitaProgramadaALaLista);
+    }
+    
+    
 }

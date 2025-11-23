@@ -51,10 +51,53 @@ public class CitaAtencionDaoImplTest {
     public void testListasBusquedaAvanzada() {
         String Fecha = "";
         CitaAtencionDaoImpl citadao = new CitaAtencionDaoImpl();
-        ArrayList<CitaAtencionDto> lista= citadao.ListasBusquedaAvanzada("2025-11-03","1");
+        ArrayList<CitaAtencionDto> lista= citadao.ListasBusquedaAvanzada_2("2025-11-03","1");
         System.out.println("BUSQUEDA DE CITAS AVANZADO");
         for( CitaAtencionDto p : lista){
+            System.out.println("DATOS CITA");
             System.out.println("->"+p.getCitaId());
+            System.out.println("->"+p.getFechaRegistroStr());
+            System.out.println("->"+p.getFechaHoraInicioStr());
+            System.out.println("->"+p.getFechaHoraFinStr());
+            System.out.println("->"+p.getEstado());
+            System.out.println("->"+p.getPesoMascota());
+            System.out.println("->"+p.getMonto());
+            System.out.println("->"+p.getObservacion());
+            System.out.println("->"+p.getActivo());
+            
+            System.out.println("DATOS VETERINARIO");
+            
+            System.out.println("->"+p.getVeterinario().getVeterinarioId());
+            System.out.println("->"+p.getVeterinario().getEspecialidad());
+            System.out.println("->"+p.getVeterinario().getEstado());
+            System.out.println("->"+p.getVeterinario().getPersona().getNombre());
+            System.out.println("->"+p.getVeterinario().getPersona().getNroDocumento());
+            System.out.println("->"+p.getVeterinario().getPersona().getTelefono());
+            System.out.println("->"+p.getVeterinario().getPersona().getUsuario().getCorreo());
+            
+            
+            System.out.println("DATOS MASCOTA");
+            
+            System.out.println("->"+p.getMascota().getMascotaId());
+            System.out.println("->"+p.getMascota().getNombre());
+            System.out.println("->"+p.getMascota().getEspecie());
+            System.out.println("->"+p.getMascota().getRaza());
+            System.out.println("->"+p.getMascota().getSexo());
+            System.out.println("->"+p.getMascota().getColor());
+            System.out.println("->"+p.getMascota().getFechaDefuncion());
+            
+            System.out.println("DATOS MASCOTA DUEÑO ");
+            System.out.println("->"+p.getMascota().getPersona().getPersonaId());
+            System.out.println("->"+p.getMascota().getPersona().getNombre());
+            System.out.println("->"+p.getMascota().getPersona().getDireccion());
+            System.out.println("->"+p.getMascota().getPersona().getTelefono());
+            System.out.println("->"+p.getMascota().getPersona().getNroDocumento());
+            System.out.println("->"+p.getMascota().getPersona().getTipoDocumento());
+            System.out.println("->"+p.getMascota().getPersona().getUsuario().getCorreo());
+            System.out.println("->"+p.getMascota().getPersona().getUsuario().getUsername());
+            
+            
+
         } 
     }
     @Test

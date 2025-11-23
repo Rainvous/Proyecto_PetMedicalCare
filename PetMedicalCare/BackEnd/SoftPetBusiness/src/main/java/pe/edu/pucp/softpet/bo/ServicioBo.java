@@ -83,4 +83,13 @@ public class ServicioBo {
     public int VerificarSiElServicioTieneInformacion(int idServicio) {
         return this.servicioDao.VerificarSiElServicioTieneInformacion(idServicio);
     }
+    
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada2(String nombre, String rango, String activo) {
+
+        ServicioDto servicio = new ServicioDto();
+        servicio.setNombre(nombre == null ? "" : nombre);
+
+        return (ArrayList<ServicioDto>) servicioDao.ListasBusquedaAvanzada2(servicio, rango == null ? "" : rango, activo == null ? "" : activo);
+    }
+
 }

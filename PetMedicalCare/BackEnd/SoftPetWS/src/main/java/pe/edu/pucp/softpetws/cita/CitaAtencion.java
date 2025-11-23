@@ -206,4 +206,19 @@ public class CitaAtencion {
             @WebParam(name = "fecha") String fecha) {
         return (ArrayList<CitaAtencionDto>) this.citaBo.ListasCitasPorMascotasYFechas(idMascota, fecha);
     }
+    
+    
+    // =========================
+    //  BÚSQUEDA AVANZADA 2
+    // =========================
+    @WebMethod(operationName = "listas_busqueda_avanzada_2")
+    public ArrayList<CitaAtencionDto> listasBusquedaAvanzada2(
+            @WebParam(name = "fecha") String fecha,
+            @WebParam(name = "idVeterianrio") Integer idVeterianrio) {
+
+        // aquí tu BO ya sabe qué hacer con la fecha (string)
+        return (ArrayList<CitaAtencionDto>) citaBo.ListasBusquedaAvanzada2(
+                fecha == null ? "" : fecha, idVeterianrio
+        );
+    }
 }

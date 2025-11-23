@@ -130,4 +130,19 @@ public class CitaAtencionBo {
             String fecha) {
         return (ArrayList<CitaAtencionDto>) this.citaDao.ListasCitasPorMascotasYFechas(idMascota, fecha);
     }
+    
+    public ArrayList<CitaAtencionDto> ListasBusquedaAvanzada2(
+            String fecha,
+            Integer IdVeterinario
+    ) {
+        String IdVeterinarioString;
+        if (IdVeterinario == null) {
+            IdVeterinarioString = "";
+        } else if (IdVeterinario >= 1) {
+            IdVeterinarioString = IdVeterinario.toString();
+        } else {
+            IdVeterinarioString = "0";
+        }
+        return (ArrayList<CitaAtencionDto>) citaDao.ListasBusquedaAvanzada_2(fecha == null ? "" : fecha, IdVeterinarioString);
+    }
 }
