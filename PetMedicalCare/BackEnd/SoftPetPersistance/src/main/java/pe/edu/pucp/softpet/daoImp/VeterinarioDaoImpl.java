@@ -353,10 +353,73 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         return resultado;
     }
 
-    // ... (Mantener el resto: eliminarVeterinarioCompleto, búsquedas, etc.) ...
+    // =========================================================================
+    // 3. ELIMINAR TRANSACCIONAL (Cascada Lógica: VET -> PERS -> USU)
+    // =========================================================================
     public Integer eliminarVeterinarioCompleto(Integer idVeterinario) {
-        // ... (Misma lógica que te di antes) ...
-        return 1; // Simplificado para el ejemplo, asegúrate de implementar la lógica
+        Integer resultado = 0;
+        try {
+            this.iniciarTransaccion(); // Abre conexión única
+
+            // Paso 1: Obtener IDs relacionados (Lectura rápida dentro de la tx)
+            int idPersona = 0;
+            int idUsuario = 0;
+            
+            String sqlGet = "SELECT p.PERSONA_ID, p.USUARIO_ID " +
+                            "FROM VETERINARIOS v " +
+                            "JOIN PERSONAS p ON v.PERSONA_ID = p.PERSONA_ID " +
+                            "WHERE v.VETERINARIO_ID = ?";
+                            
+            try (PreparedStatement psGet = this.conexion.prepareStatement(sqlGet)) {
+                psGet.setInt(1, idVeterinario);
+                try (ResultSet rs = psGet.executeQuery()) {
+                    if (rs.next()) {
+                        idPersona = rs.getInt("PERSONA_ID");
+                        idUsuario = rs.getInt("USUARIO_ID");
+                    }
+                }
+            }
+
+            // Si no encontramos el veterinario, abortamos
+            if (idPersona == 0) {
+                this.rollbackTransaccion();
+                return 0;
+            }
+
+            // Paso 2: Desactivar Veterinario
+            String sqlVet = "UPDATE VETERINARIOS SET ACTIVO = 0 WHERE VETERINARIO_ID = ?";
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlVet)) {
+                ps.setInt(1, idVeterinario);
+                ps.executeUpdate();
+            }
+
+            // Paso 3: Desactivar Persona
+            String sqlPer = "UPDATE PERSONAS SET ACTIVO = 0 WHERE PERSONA_ID = ?";
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlPer)) {
+                ps.setInt(1, idPersona);
+                ps.executeUpdate();
+            }
+
+            // Paso 4: Desactivar Usuario (Si tiene)
+            if (idUsuario > 0) {
+                String sqlUsu = "UPDATE USUARIOS SET ACTIVO = 0 WHERE USUARIO_ID = ?";
+                try (PreparedStatement ps = this.conexion.prepareStatement(sqlUsu)) {
+                    ps.setInt(1, idUsuario);
+                    ps.executeUpdate();
+                }
+            }
+
+            this.comitarTransaccion();
+            resultado = 1; // Éxito
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            try { this.rollbackTransaccion(); } catch (SQLException e) { }
+            resultado = 0;
+        } finally {
+            try { this.cerrarConexion(); } catch (SQLException ex) { }
+        }
+        return resultado;
     }
 
     @Override
