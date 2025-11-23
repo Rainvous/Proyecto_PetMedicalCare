@@ -1,6 +1,9 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.daoImp.DocumentoDePagoDaoImpl;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
@@ -92,12 +95,34 @@ public class DocumentoDePagoBo {
     public DocumentoPagoDto obtenerPorId(int documentoPagoId) {
         return this.documentoDePagoDao.obtenerPorId(documentoPagoId);
     }
-
+    
+    public ArrayList<DocumentoPagoDto>listarPorFechaEmision(String fecha){
+//          if (!esFechaValida(fecha)) {
+//        throw new IllegalArgumentException(
+//            "La fecha debe tener el formato yyyy-MM-dd. Ejemplo: 2025-11-20"
+//        );
+   // }
+        return this.documentoDePagoDao.listarComprobantesPorFecha(fecha);
+    }
+    
     public ArrayList<DocumentoPagoDto> listarTodos() {
         return this.documentoDePagoDao.listarTodos();
     }
+    private boolean esFechaValida(String fecha) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                                                   .withResolverStyle(ResolverStyle.STRICT);
+    try {
+        LocalDate.parse(fecha, formatter);
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+}
+
+    
 
     public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(String tipoDocumento) {
         return this.documentoDePagoDao.GeneracionDeSiguienteBoletaOFactura(tipoDocumento.toUpperCase());
     }
 }
+

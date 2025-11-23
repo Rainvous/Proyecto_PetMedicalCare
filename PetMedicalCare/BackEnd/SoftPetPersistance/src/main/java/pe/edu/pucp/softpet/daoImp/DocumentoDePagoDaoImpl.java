@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.DocumentoDePagoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
@@ -13,18 +15,19 @@ import pe.edu.pucp.softpet.dto.facturacion.MetodoDePagoDto;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
+import pe.edu.pucp.softpet.dto.util.enums.TipoMetodoPago;
 
 public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePagoDao {
-
+    
     private DocumentoPagoDto documentoPago;
-
+    
     public DocumentoDePagoDaoImpl() {
         super("DOCUMENTOS_DE_PAGO");
         this.documentoPago = null;
         this.retornarLlavePrimaria = true;
         this.usuario = "user_backend";
     }
-
+    
     @Override
     protected void configurarListaDeColumnas() {
         this.listaColumnas.add(new Columna("DOCUMENTO_DE_PAGO_ID", true, true));
@@ -40,17 +43,16 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.listaColumnas.add(new Columna("TOTAL", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
     }
-
+    
     @Override
     protected void incluirValorDeParametrosParaInsercion() throws SQLException {
         this.statement.setInt(1, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
-        if(this.documentoPago.getPersona().getPersonaId()==null || this.documentoPago.getPersona().getPersonaId()==0){
+        if (this.documentoPago.getPersona().getPersonaId() == null || this.documentoPago.getPersona().getPersonaId() == 0) {
             this.statement.setNull(2, this.documentoPago.getPersona().getPersonaId());
+        } else {
+            this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
         }
-        else{
-             this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
-        }
-       
+        
         this.statement.setString(3, this.documentoPago.getTipoDocumento().toString());
         this.statement.setString(4, this.documentoPago.getSerie());
         this.statement.setString(5, this.documentoPago.getNumero());
@@ -95,20 +97,20 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.statement.setDouble(9, this.documentoPago.getIGVTotal());
         this.statement.setDouble(10, this.documentoPago.getTotal());
         this.statement.setInt(11, this.documentoPago.getActivo() ? 1 : 0);
-
+        
         this.statement.setInt(12, this.documentoPago.getDocumentoPagoId());
     }
-
+    
     @Override
     protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
         this.statement.setInt(1, this.documentoPago.getDocumentoPagoId());
     }
-
+    
     @Override
     protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
         this.statement.setInt(1, this.documentoPago.getDocumentoPagoId());
     }
-
+    
     @Override
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.documentoPago = new DocumentoPagoDto();
@@ -116,7 +118,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         MetodoDePagoDto met = new MetodoDePagoDto();
         PersonaDto per = new PersonaDto();
         met.setMetodoDePagoId(this.resultSet.getInt("METODO_DE_PAGO_ID"));
-
+        
         this.documentoPago.setMetodoDePago(met);
         per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
         this.documentoPago.setPersona(per);
@@ -132,24 +134,24 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.documentoPago.setTotal(this.resultSet.getDouble("TOTAL"));
         this.documentoPago.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
-
+    
     @Override
     protected void limpiarObjetoDelResultSet() {
         this.documentoPago = null;
     }
-
+    
     @Override
     protected void agregarObjetoALaLista(List lista) throws SQLException {
         this.instanciarObjetoDelResultSet();
         lista.add(this.documentoPago);
     }
-
+    
     @Override
     public Integer insertar(DocumentoPagoDto documentoPago) {
         this.documentoPago = documentoPago;
         return super.insertar();
     }
-
+    
     @Override
     public DocumentoPagoDto obtenerPorId(Integer documentoPagoId) {
         this.documentoPago = new DocumentoPagoDto();
@@ -157,24 +159,127 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         super.obtenerPorId();
         return this.documentoPago;
     }
-
+    
     @Override
     public ArrayList<DocumentoPagoDto> listarTodos() {
         return (ArrayList<DocumentoPagoDto>) super.listarTodos();
     }
-
+    
     @Override
     public Integer modificar(DocumentoPagoDto documentoPago) {
         this.documentoPago = documentoPago;
         return super.modificar();
     }
-
+    
     @Override
     public Integer eliminar(DocumentoPagoDto documentoPago) {
         this.documentoPago = documentoPago;
         return super.eliminar();
     }
 
+    public ArrayList<DocumentoPagoDto> listarComprobantesPorFecha(String fecha) {
+        
+        String sql = generarSQLparComprobantesPorFecha();
+        //fecha 2025-11-20
+        return (ArrayList<DocumentoPagoDto>) super.listarTodos(sql, this::IncluirEnSQLFecha, fecha, this::AgregarMiPropioObjetoALaLista);
+    }
+
+    public void AgregarMiPropioObjetoALaLista(Object listavoid)  {
+        List<DocumentoPagoDto> lista= (List<DocumentoPagoDto>)listavoid;
+        try {
+            this.instanciarMiPropioObjeto();
+        } catch (SQLException ex) {
+            Logger.getLogger(DocumentoDePagoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lista.add(this.documentoPago);
+        
+    }
+
+    private void instanciarMiPropioObjeto() throws SQLException {
+        this.documentoPago = new DocumentoPagoDto();
+
+        // --- Datos principales del documento ---
+        this.documentoPago.setDocumentoPagoId(
+                this.resultSet.getInt("DOCUMENTO_DE_PAGO_ID")
+        );
+        this.documentoPago.setTipoDocumento(
+                TipoDocumentoDePago.valueOf(this.resultSet.getString("TIPO_DOCUMENTO"))
+        );
+        this.documentoPago.setSerie(this.resultSet.getString("SERIE"));
+        this.documentoPago.setNumero(this.resultSet.getString("NUMERO"));
+        this.documentoPago.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
+        this.documentoPago.setSubtotal(this.resultSet.getDouble("SUBTOTAL"));
+        this.documentoPago.setIGVTotal(this.resultSet.getDouble("IGV_TOTAL"));
+        this.documentoPago.setTotal(this.resultSet.getDouble("TOTAL"));
+        this.documentoPago.setEstado(
+                EstadoDocumentoDePago.valueOf(this.resultSet.getString("ESTADO"))
+        );
+        this.documentoPago.setActivo(
+                this.resultSet.getInt("ACTIVO") == 1
+        );
+
+        // --- Método de pago ---
+        MetodoDePagoDto met = new MetodoDePagoDto();
+        met.setMetodoDePagoId(
+                this.resultSet.getInt("METODO_DE_PAGO_ID")
+        );
+        try {
+            met.setNombre(TipoMetodoPago.valueOf(
+                    this.resultSet.getString("METODO_DE_PAGO_NOMBRE")));
+        } catch (SQLException ex) {
+            Logger.getLogger(DocumentoDePagoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.documentoPago.setMetodoDePago(met);
+
+        // --- Persona (cliente) ---
+        PersonaDto per = new PersonaDto();
+        per.setPersonaId(
+                this.resultSet.getInt("PERSONA_ID")
+        );
+        per.setNombre(
+                this.resultSet.getString("PERSONA_NOMBRE")
+        );
+        this.documentoPago.setPersona(per);
+        
+    }
+
+    public void IncluirEnSQLFecha(Object fechaVoid) {
+        String fecha = (String) fechaVoid;
+        try {
+            this.statement.setString(1, fecha);
+            System.out.println(this.statement);
+        } catch (SQLException ex) {
+            Logger.getLogger(DocumentoDePagoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String generarSQLparComprobantesPorFecha() {
+        String sql
+                = "SELECT "
+                + "  dp.DOCUMENTO_DE_PAGO_ID, "
+                + "  dp.METODO_DE_PAGO_ID, "
+                + "  mp.NOMBRE AS METODO_DE_PAGO_NOMBRE, "
+                + "  dp.PERSONA_ID, "
+                + "  dp.TIPO_DOCUMENTO, "
+                + "  dp.SERIE, "
+                + "  dp.NUMERO, "
+                + "  dp.FECHA_EMISION, "
+                + "  dp.SUBTOTAL, "
+                + "  dp.IGV_TOTAL, "
+                + "  dp.TOTAL, "
+                + "  dp.ESTADO, "
+                + "  dp.ACTIVO, "
+                + "  p.NOMBRE AS PERSONA_NOMBRE "
+                + "FROM DOCUMENTOS_DE_PAGO dp "
+                + "LEFT JOIN PERSONAS p ON dp.PERSONA_ID = p.PERSONA_ID "
+                + "LEFT JOIN METODOS_DE_PAGO mp ON dp.METODO_DE_PAGO_ID = mp.METODO_DE_PAGO_ID "
+                + "WHERE DATE(dp.FECHA_EMISION) = ? "
+                + "AND dp.ACTIVO = 1";
+        
+        return sql;
+    }
+    
     public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(String tipoDocumento) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         Map<Integer, Object> parametrosSalida = new HashMap<>();
