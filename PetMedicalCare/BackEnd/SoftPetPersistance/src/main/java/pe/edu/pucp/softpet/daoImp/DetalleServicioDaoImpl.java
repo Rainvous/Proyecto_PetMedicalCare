@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.DetalleServicioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
+import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dto.servicios.DetalleServicioDto;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
@@ -129,12 +130,12 @@ public class DetalleServicioDaoImpl extends DaoBaseImpl implements DetalleServic
         this.detalleServicio.setDetalleServicioId(
                 this.resultSet.getInt("DETALLE_SERVICIO_ID")
         );
-
+        
         // Cita: mantenemos tu lógica de obtener la cita desde su DAO
+        CitaAtencionDto cita= new CitaAtencionDto();
+        cita.setCitaId(this.resultSet.getInt("CITA_ID"));
         this.detalleServicio.setCita(
-                new CitaAtencionDaoImpl().obtenerPorId(
-                        this.resultSet.getInt("CITA_ID")
-                )
+                cita
         );
 
         // --- Servicio (anidado) ---
