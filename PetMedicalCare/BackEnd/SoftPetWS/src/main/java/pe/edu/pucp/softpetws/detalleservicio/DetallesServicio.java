@@ -69,4 +69,9 @@ public class DetallesServicio {
     public ArrayList<DetalleServicioDto> listarTodos() {
         return this.detalleServicioBo.listarTodos();
     }
+    @WebMethod(operationName = "listar_por_id_cita")
+    public  ArrayList<DetalleServicioDto>  ListarPorIDCita(@WebParam(name = "idcita") int idcita) {
+        return this.detalleServicioBo.listarPorIdCita(idcita);
+    }
+        
 }

@@ -66,4 +66,7 @@ public class DetalleServicioBo {
     public ArrayList<DetalleServicioDto> listarTodos() {
         return this.dao.listarTodos();
     }
+    public ArrayList<DetalleServicioDto> listarPorIdCita(int idcita){
+        return this.dao.listarPorIdCita(idcita);
+    }
 }
