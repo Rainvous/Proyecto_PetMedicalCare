@@ -96,4 +96,27 @@ public class VeterinarioBo {
                 nroDocumento, ruc, tipoDocumento,
                 fechaContratacion, estado, especialidad);
     }
+    
+    // ... (Métodos existentes) ...
+
+    // NUEVO: Modificar Completo
+    public Integer modificarVeterinarioCompleto(
+            Integer idVeterinario, Integer idPersona, Integer idUsuario,
+            String username, String password, String correo, boolean activo,
+            String nombre, String direccion, String telefono, String sexo, 
+            Integer nroDocumento, Integer ruc, String tipoDocumento,
+            String fechaContratacion, String estado, String especialidad) {
+        
+        return this.veterinarioDao.modificarVeterinarioCompleto(
+                idVeterinario, idPersona, idUsuario,
+                username, password, correo, activo,
+                nombre, direccion, telefono, sexo,
+                nroDocumento, ruc, tipoDocumento,
+                fechaContratacion, estado, especialidad);
+    }
+
+    // NUEVO: Eliminar Completo
+    public Integer eliminarVeterinarioCompleto(Integer idVeterinario) {
+        return this.veterinarioDao.eliminarVeterinarioCompleto(idVeterinario);
+    }
 }

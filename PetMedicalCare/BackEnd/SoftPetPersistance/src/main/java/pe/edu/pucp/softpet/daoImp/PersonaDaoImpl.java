@@ -220,6 +220,16 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         }
         return resultado;
     }
+    
+    public Integer insertarTransaccional(PersonaDto persona, java.sql.Connection con) throws SQLException {
+        this.persona = persona; // Importante: Setear el atributo local
+        return super.insertarEnTransaccion(con);
+    }
+
+    public Integer modificarTransaccional(PersonaDto persona, java.sql.Connection con) throws SQLException {
+        this.persona = persona;
+        return super.modificarEnTransaccion(con);
+    }
 
     public ArrayList<PersonaDto> ListasBusquedaAvanzada(
             String nombre, String NroDocumento, String Ruc, Integer Activo) {

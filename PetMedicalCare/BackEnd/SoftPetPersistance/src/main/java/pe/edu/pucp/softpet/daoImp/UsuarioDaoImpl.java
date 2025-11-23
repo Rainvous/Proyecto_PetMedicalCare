@@ -107,6 +107,18 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
         this.usuario = usuario;
         return super.eliminar();
     }
+    
+    // Método para insertar dentro de la transacción de otro DAO
+    public Integer insertarTransaccional(UsuarioDto usuario, java.sql.Connection con) throws SQLException {
+        this.usuario = usuario; // Seteamos el DTO para que el padre lo lea
+        return super.insertarEnTransaccion(con);
+    }
+
+    // Método para modificar dentro de la transacción de otro DAO
+    public Integer modificarTransaccional(UsuarioDto usuario, java.sql.Connection con) throws SQLException {
+        this.usuario = usuario;
+        return super.modificarEnTransaccion(con);
+    }
 
     /// PROCEDURES Y SELECT'
     /// @return s

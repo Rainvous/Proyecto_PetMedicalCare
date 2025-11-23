@@ -101,4 +101,9 @@ public class RolUsuarioDaoImpl extends DaoBaseImpl implements RolUsuarioDao {
         this.rolUsuario = rolUsuario;
         return super.eliminar();
     }
+    
+    public Integer insertarTransaccional(RolUsuarioDto rolUsuario, java.sql.Connection con) throws SQLException {
+        this.rolUsuario = rolUsuario;
+        return super.insertarEnTransaccion(con);
+    }
 }

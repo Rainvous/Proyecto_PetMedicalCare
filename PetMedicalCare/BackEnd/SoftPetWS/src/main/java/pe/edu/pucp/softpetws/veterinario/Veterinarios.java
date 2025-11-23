@@ -100,4 +100,38 @@ public class Veterinarios {
                 nroDocumento, ruc, tipoDocumento,
                 fechaContratacion, estado, especialidad);
     }
+
+    // ... (Métodos existentes) ...
+    @WebMethod(operationName = "modificarVeterinarioCompleto")
+    public Integer modificarVeterinarioCompleto(
+            @WebParam(name = "idVeterinario") Integer idVeterinario,
+            @WebParam(name = "idPersona") Integer idPersona,
+            @WebParam(name = "idUsuario") Integer idUsuario,
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password,
+            @WebParam(name = "correo") String correo,
+            @WebParam(name = "activo") boolean activo,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "direccion") String direccion,
+            @WebParam(name = "telefono") String telefono,
+            @WebParam(name = "sexo") String sexo,
+            @WebParam(name = "nroDocumento") Integer nroDocumento,
+            @WebParam(name = "ruc") Integer ruc,
+            @WebParam(name = "tipoDocumento") String tipoDocumento,
+            @WebParam(name = "fechaContratacion") String fechaContratacion,
+            @WebParam(name = "estado") String estado,
+            @WebParam(name = "especialidad") String especialidad) {
+
+        return this.veterinarioBo.modificarVeterinarioCompleto(
+                idVeterinario, idPersona, idUsuario,
+                username, password, correo, activo,
+                nombre, direccion, telefono, sexo,
+                nroDocumento, ruc, tipoDocumento,
+                fechaContratacion, estado, especialidad);
+    }
+
+    @WebMethod(operationName = "eliminarVeterinarioCompleto")
+    public Integer eliminarVeterinarioCompleto(@WebParam(name = "idVeterinario") Integer idVeterinario) {
+        return this.veterinarioBo.eliminarVeterinarioCompleto(idVeterinario);
+    }
 }

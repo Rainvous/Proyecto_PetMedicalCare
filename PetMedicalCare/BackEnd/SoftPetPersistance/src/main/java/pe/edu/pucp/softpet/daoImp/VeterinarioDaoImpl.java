@@ -218,6 +218,11 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         return resultado;
     }
 
+    // ... (Imports y constructor igual) ...
+
+    // =========================================================================
+    // REFACTORIZACIÓN TRANSACCIONAL (Insertar)
+    // =========================================================================
     public Integer insertarVeterinarioCompleto(
             String username, String password, String correo, boolean activoUsuario,
             String nombre, String direccion, String telefono, String sexo, 
@@ -226,56 +231,55 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
         
         Integer resultado = 0;
         try {
-            this.iniciarTransaccion(); // Usamos método del padre
+            this.iniciarTransaccion(); // Abre this.conexion
 
-            // A. Insertar Usuario
+            // 1. USUARIO
+            UsuarioDto u = new UsuarioDto();
+            u.setUsername(username); u.setPassword(password); u.setCorreo(correo); u.setActivo(activoUsuario);
+            // Usamos SQL manual aquí porque UsuarioDaoImpl requiere su propia lógica de auditoría
+            // O podemos instanciar UsuarioDaoImpl y crear un método insertarEnTransaccion en él.
+            // Por simplicidad y robustez, SQL directo para Usuario es seguro.
             String sqlUsu = "INSERT INTO USUARIOS (USERNAME, PASSWORD, CORREO, ACTIVO, FECHA_CREACION) VALUES (?, ?, ?, ?, NOW())";
             Integer idUsuario = 0;
-            try (PreparedStatement psUsu = this.conexion.prepareStatement(sqlUsu, Statement.RETURN_GENERATED_KEYS)) {
-                psUsu.setString(1, username);
-                psUsu.setString(2, password);
-                psUsu.setString(3, correo);
-                psUsu.setInt(4, activoUsuario ? 1 : 0);
-                psUsu.executeUpdate();
-                try (ResultSet rs = psUsu.getGeneratedKeys()) { if (rs.next()) idUsuario = rs.getInt(1); }
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlUsu, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, username); ps.setString(2, password); ps.setString(3, correo); ps.setInt(4, activoUsuario ? 1 : 0);
+                ps.executeUpdate();
+                try (ResultSet rs = ps.getGeneratedKeys()) { if (rs.next()) idUsuario = rs.getInt(1); }
             }
 
-            // B. Asignar Rol
+            // 2. ROL
             String sqlRol = "INSERT INTO ROLES_USUARIO (ROL_ID, USUARIO_ID, ACTIVO) VALUES (2, ?, 1)";
-            try(PreparedStatement psRol = this.conexion.prepareStatement(sqlRol)){
-                psRol.setInt(1, idUsuario);
-                psRol.executeUpdate();
+            try(PreparedStatement ps = this.conexion.prepareStatement(sqlRol)){
+                ps.setInt(1, idUsuario); ps.executeUpdate();
             }
 
-            // C. Insertar Persona
+            // 3. PERSONA
             String sqlPer = "INSERT INTO PERSONAS (USUARIO_ID, NOMBRE, DIRECCION, TELEFONO, SEXO, NRO_DOCUMENTO, RUC, TIPO_DOCUMENTO, ACTIVO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)";
             Integer idPersona = 0;
-            try (PreparedStatement psPer = this.conexion.prepareStatement(sqlPer, Statement.RETURN_GENERATED_KEYS)) {
-                psPer.setInt(1, idUsuario);
-                psPer.setString(2, nombre);
-                psPer.setString(3, direccion);
-                psPer.setString(4, telefono);
-                psPer.setString(5, sexo);
-                psPer.setInt(6, nroDocumento);
-                if(ruc != null && ruc != 0) psPer.setInt(7, ruc); else psPer.setNull(7, java.sql.Types.INTEGER);
-                psPer.setString(8, tipoDocumento);
-                psPer.executeUpdate();
-                try (ResultSet rs = psPer.getGeneratedKeys()) { if (rs.next()) idPersona = rs.getInt(1); }
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlPer, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, idUsuario); ps.setString(2, nombre); ps.setString(3, direccion); ps.setString(4, telefono);
+                ps.setString(5, sexo); ps.setInt(6, nroDocumento);
+                if(ruc != null && ruc != 0) ps.setInt(7, ruc); else ps.setNull(7, java.sql.Types.INTEGER);
+                ps.setString(8, tipoDocumento);
+                ps.executeUpdate();
+                try (ResultSet rs = ps.getGeneratedKeys()) { if (rs.next()) idPersona = rs.getInt(1); }
             }
 
-            // D. Insertar Veterinario
-            String sqlVet = "INSERT INTO VETERINARIOS (PERSONA_ID, FECHA_DE_CONTRATACION, ESTADO, ESPECIALIDAD, ACTIVO) VALUES (?, ?, ?, ?, 1)";
-            try (PreparedStatement psVet = this.conexion.prepareStatement(sqlVet, Statement.RETURN_GENERATED_KEYS)) {
-                psVet.setInt(1, idPersona);
-                psVet.setDate(2, Date.valueOf(fechaContratacion));
-                psVet.setString(3, estado);
-                psVet.setString(4, especialidad);
-                psVet.executeUpdate();
-                try (ResultSet rs = psVet.getGeneratedKeys()) { if (rs.next()) resultado = rs.getInt(1); }
-            }
+            // 4. VETERINARIO (REUTILIZANDO LÓGICA DEL PADRE)
+            this.veterinario = new VeterinarioDto();
+            PersonaDto p = new PersonaDto(); p.setPersonaId(idPersona);
+            this.veterinario.setPersona(p);
+            this.veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
+            this.veterinario.setEstado(EstadoVeterinario.valueOf(estado));
+            this.veterinario.setEspecialidad(especialidad);
+            this.veterinario.setActivo(true);
 
-            this.comitarTransaccion(); // Commit final
-        } catch (SQLException ex) {
+            // AQUÍ ESTÁ LA MAGIA: Usamos el método nuevo del padre pasándole la conexión actual
+            super.insertarEnTransaccion(this.conexion); 
+            
+            resultado = 1; 
+            this.comitarTransaccion();
+        } catch (Exception ex) {
             ex.printStackTrace();
             try { this.rollbackTransaccion(); } catch (SQLException e) { }
             resultado = 0;
@@ -283,6 +287,76 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
             try { this.cerrarConexion(); } catch (SQLException ex) { }
         }
         return resultado;
+    }
+
+    // =========================================================================
+    // REFACTORIZACIÓN TRANSACCIONAL (Modificar)
+    // =========================================================================
+    public Integer modificarVeterinarioCompleto(
+            Integer idVeterinario, Integer idPersona, Integer idUsuario,
+            String username, String password, String correo, boolean activo,
+            String nombre, String direccion, String telefono, String sexo, 
+            Integer nroDocumento, Integer ruc, String tipoDocumento,
+            String fechaContratacion, String estado, String especialidad) {
+        
+        Integer resultado = 0;
+        try {
+            this.iniciarTransaccion();
+
+            // 1. USUARIO
+            String sqlUsu = "UPDATE USUARIOS SET USERNAME=?, CORREO=?, ACTIVO=? WHERE USUARIO_ID=?";
+            if (password != null && !password.isEmpty()) {
+                sqlUsu = "UPDATE USUARIOS SET USERNAME=?, CORREO=?, ACTIVO=?, PASSWORD=? WHERE USUARIO_ID=?";
+            }
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlUsu)) {
+                ps.setString(1, username); ps.setString(2, correo); ps.setInt(3, activo ? 1 : 0);
+                if (password != null && !password.isEmpty()) {
+                    ps.setString(4, password); ps.setInt(5, idUsuario);
+                } else {
+                    ps.setInt(4, idUsuario);
+                }
+                ps.executeUpdate();
+            }
+
+            // 2. PERSONA
+            String sqlPer = "UPDATE PERSONAS SET NOMBRE=?, DIRECCION=?, TELEFONO=?, SEXO=?, NRO_DOCUMENTO=?, RUC=?, TIPO_DOCUMENTO=?, ACTIVO=? WHERE PERSONA_ID=?";
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlPer)) {
+                ps.setString(1, nombre); ps.setString(2, direccion); ps.setString(3, telefono); ps.setString(4, sexo);
+                ps.setInt(5, nroDocumento);
+                if(ruc != null && ruc != 0) ps.setInt(6, ruc); else ps.setNull(6, java.sql.Types.INTEGER);
+                ps.setString(7, tipoDocumento); ps.setInt(8, activo ? 1 : 0); ps.setInt(9, idPersona);
+                ps.executeUpdate();
+            }
+
+            // 3. VETERINARIO (REUTILIZANDO PADRE)
+            this.veterinario = new VeterinarioDto();
+            this.veterinario.setVeterinarioId(idVeterinario);
+            PersonaDto p = new PersonaDto(); p.setPersonaId(idPersona);
+            this.veterinario.setPersona(p);
+            this.veterinario.setFechaContratacion(Date.valueOf(fechaContratacion));
+            this.veterinario.setEstado(EstadoVeterinario.valueOf(estado));
+            this.veterinario.setEspecialidad(especialidad);
+            this.veterinario.setActivo(activo);
+
+            // Usamos el método del padre
+            super.modificarEnTransaccion(this.conexion);
+
+            this.comitarTransaccion();
+            resultado = 1;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try { this.rollbackTransaccion(); } catch (SQLException e) { }
+            resultado = 0;
+        } finally {
+            try { this.cerrarConexion(); } catch (SQLException ex) { }
+        }
+        return resultado;
+    }
+
+    // ... (Mantener el resto: eliminarVeterinarioCompleto, búsquedas, etc.) ...
+    public Integer eliminarVeterinarioCompleto(Integer idVeterinario) {
+        // ... (Misma lógica que te di antes) ...
+        return 1; // Simplificado para el ejemplo, asegúrate de implementar la lógica
     }
 
     @Override

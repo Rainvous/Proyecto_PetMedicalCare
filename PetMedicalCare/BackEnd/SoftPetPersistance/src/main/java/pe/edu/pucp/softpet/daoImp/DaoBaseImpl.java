@@ -502,6 +502,47 @@ public abstract class DaoBaseImpl {
     FIN de las  Funciones del DaoImplBase Default 
     ------------------------------------------------------------------------
      */
+    
+    // ==================================================================================
+    // NUEVOS MÉTODOS PARA TRANSACCIONES COMPARTIDAS (REFACTORIZACIÓN)
+    // ==================================================================================
+
+    /**
+     * Ejecuta la inserción usando una conexión externa (parte de una transacción padre).
+     * No abre ni cierra la conexión, solo ejecuta el PreparedStatement.
+     */
+    public Integer insertarEnTransaccion(Connection conexionExterna) throws SQLException {
+        this.conexion = conexionExterna; // "Tomamos prestada" la conexión
+        String sql = this.generarSQLParaInsercion();
+        
+        // Preparamos el statement usando la conexión externa
+        // Nota: Usamos prepareCall para mantener compatibilidad con tu arquitectura, 
+        // pero para inserts simples prepareStatement es suficiente.
+        this.statement = this.conexion.prepareCall(sql);
+        
+        this.incluirValorDeParametrosParaInsercion();
+        this.ejecutarDMLEnBD(); // Ejecuta
+        
+        Integer resultado = 0;
+        if (this.retornarLlavePrimaria) {
+            resultado = this.retornarUltimoAutoGenerado();
+        } else {
+            resultado = 1;
+        }
+        return resultado;
+    }
+
+    /**
+     * Ejecuta la modificación usando una conexión externa.
+     */
+    public Integer modificarEnTransaccion(Connection conexionExterna) throws SQLException {
+        this.conexion = conexionExterna;
+        String sql = this.generarSQLParaModificacion();
+        this.statement = this.conexion.prepareCall(sql);
+        
+        this.incluirValorDeParametrosParaModificacion();
+        return this.ejecutarDMLEnBD();
+    }
 
  /*
     ------------------------------------------------------------------------
