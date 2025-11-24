@@ -83,8 +83,9 @@ public class Productos {
     public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(
             @WebParam(name = "nombre") String nombre,
             @WebParam(name = "rango") String rango,
-            @WebParam(name = "activo") String activo) {
+            @WebParam(name = "activo") String activo,
+            @WebParam(name = "tipoId") int tipoId) { // Nuevo @WebParam
 
-        return productoBo.ListasBusquedaProductosAvanzada(nombre, rango, activo);
+        return productoBo.ListasBusquedaProductosAvanzada(nombre, rango, activo, tipoId);
     }
 }

@@ -73,9 +73,18 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         this.producto = new ProductoDto();
         this.producto.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
 
+        // MAPEO DEL TIPO (JOIN)
         TipoProductoDto tp = new TipoProductoDto();
         tp.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
+        try {
+            // Intentamos leer el nombre del tipo si vino en el SP
+            tp.setNombre(this.resultSet.getString("NOMBRE_TIPO"));
+            tp.setDescripcion(this.resultSet.getString("DESC_TIPO"));
+        } catch (SQLException e) {
+            // Si es un select simple sin join, ignoramos
+        }
         this.producto.setTipoProducto(tp);
+
         this.producto.setNombre(this.resultSet.getString("NOMBRE"));
         this.producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
         this.producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
@@ -234,11 +243,27 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
         return resultado;
     }
 
-    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(ProductoDto producto, String rango, String activo) {
+    // Agrega el parámetro Integer tipoId a la firma
+    @Override
+    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(ProductoDto producto, String rango, String activo, Integer tipoId) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
+
         parametrosEntrada.put(1, producto.getNombre());
-        parametrosEntrada.put(2, rango);
-        parametrosEntrada.put(3, activo);
+
+        if (rango == null || rango.equals("Todos") || rango.isEmpty()) {
+            parametrosEntrada.put(2, null);
+        } else {
+            parametrosEntrada.put(2, rango);
+        }
+
+        if (activo == null || activo.equals("Todos") || activo.isEmpty()) {
+            parametrosEntrada.put(3, null);
+        } else {
+            parametrosEntrada.put(3, activo);
+        }
+
+        // Nuevo parámetro: Tipo ID (Si es null o 0, el SP lo maneja)
+        parametrosEntrada.put(4, tipoId);
 
         return (ArrayList<ProductoDto>) super.ejecutarProcedimientoLectura("sp_buscar_productos_avanzada", parametrosEntrada);
     }

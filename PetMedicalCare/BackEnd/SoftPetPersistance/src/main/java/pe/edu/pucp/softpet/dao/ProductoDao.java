@@ -10,4 +10,6 @@ public interface ProductoDao extends DaoBase<ProductoDto> {
     ArrayList<ProductoDto> ListarPorNombre(String Nombre);
     
     ArrayList<ProductoDto> listarProductosActivos();
+    
+    ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(ProductoDto producto, String rango, String activo, Integer tipoId);
 }
