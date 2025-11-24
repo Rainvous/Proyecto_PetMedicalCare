@@ -183,6 +183,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         //fecha 2025-11-20
         return (ArrayList<DocumentoPagoDto>) super.listarTodos(sql, this::IncluirEnSQLFecha, fecha, this::AgregarMiPropioObjetoALaLista);
     }
+    
 
     public void AgregarMiPropioObjetoALaLista(Object listavoid)  {
         List<DocumentoPagoDto> lista= (List<DocumentoPagoDto>)listavoid;
@@ -240,6 +241,10 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         per.setNombre(
                 this.resultSet.getString("PERSONA_NOMBRE")
         );
+        per.setRuc(
+                this.resultSet.getInt("RUC")
+                
+        );
         this.documentoPago.setPersona(per);
         
     }
@@ -270,11 +275,13 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
                 + "  dp.TOTAL, "
                 + "  dp.ESTADO, "
                 + "  dp.ACTIVO, "
-                + "  p.NOMBRE AS PERSONA_NOMBRE "
+                + "  p.NOMBRE AS PERSONA_NOMBRE ,"
+                + "  p.RUC  "
                 + "FROM DOCUMENTOS_DE_PAGO dp "
                 + "LEFT JOIN PERSONAS p ON dp.PERSONA_ID = p.PERSONA_ID "
                 + "LEFT JOIN METODOS_DE_PAGO mp ON dp.METODO_DE_PAGO_ID = mp.METODO_DE_PAGO_ID "
                 + "WHERE DATE(dp.FECHA_EMISION) = ? "
+                
                 + "AND dp.ACTIVO = 1";
         
         return sql;

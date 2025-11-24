@@ -74,4 +74,8 @@ public class DocumentosDePago {
     ) {
         return this.documentoBo.GeneracionDeSiguienteBoletaOFactura(tipoDocumento);
     }
+    @WebMethod(operationName = "listar_por_fecha")
+    public ArrayList<DocumentoPagoDto> listarporcita(@WebParam(name = "fecha") String fecha) {
+        return this.documentoBo.listarPorFechaEmision(fecha);
+    }
 }
