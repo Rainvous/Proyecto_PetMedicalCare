@@ -42,6 +42,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.listaColumnas.add(new Columna("IGV_TOTAL", false, false));
         this.listaColumnas.add(new Columna("TOTAL", false, false));
         this.listaColumnas.add(new Columna("ACTIVO", false, false));
+       
     }
     
     @Override
@@ -62,6 +63,8 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.statement.setDouble(9, this.documentoPago.getIGVTotal());
         this.statement.setDouble(10, this.documentoPago.getTotal());
         this.statement.setInt(11, this.documentoPago.getActivo() ? 1 : 0);
+      
+        
     }
 
 //    protected String sacarTipoDocumento(String data) {
@@ -87,7 +90,13 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     @Override
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         this.statement.setInt(1, this.documentoPago.getMetodoDePago().getMetodoDePagoId());
-        this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
+        if(this.documentoPago.getPersona()==null || this.documentoPago.getPersona().getPersonaId()<=0){
+             this.statement.setNull(2, this.documentoPago.getPersona().getPersonaId());
+        }
+        else{
+            this.statement.setInt(2, this.documentoPago.getPersona().getPersonaId());
+        }
+        
         this.statement.setString(3, this.documentoPago.getTipoDocumento().toString());
         this.statement.setString(4, this.documentoPago.getSerie());
         this.statement.setString(5, this.documentoPago.getNumero());
@@ -97,6 +106,7 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
         this.statement.setDouble(9, this.documentoPago.getIGVTotal());
         this.statement.setDouble(10, this.documentoPago.getTotal());
         this.statement.setInt(11, this.documentoPago.getActivo() ? 1 : 0);
+       
         
         this.statement.setInt(12, this.documentoPago.getDocumentoPagoId());
     }

@@ -4,15 +4,22 @@ import java.util.ArrayList;
 
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
+import pe.edu.pucp.softpet.dto.usuarios.RolDto;
+import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.Sexo;
+import pe.edu.pucp.softpet.dto.util.enums.TipoRol;
 
 public class PersonaBo {
 
     private final PersonaDaoImpl dao;
+    private final RolBO rol;
+    private final RolUsuarioBo rolusuario;
 
     public PersonaBo() {
         this.dao = new PersonaDaoImpl();
+        this.rol= new RolBO();
+        this.rolusuario=new RolUsuarioBo();
     }
 
     // INSERTAR con parámetros (retorna PK autogenerada)
@@ -132,6 +139,50 @@ public class PersonaBo {
     public int VerificarSiLaPersonaTieneInformacion(int idServicio) {
         return this.dao.VerificarSiLaPersonaTieneInformacion(idServicio);
     }
+    //Funciones para PUNTO DE VENTA
+    public int obtenerIdDePersonaGuest(){
+        return this.dao.obtenerPersonaGuestOCero();
+    }
+    public PersonaDto ObtenerDatosPersonaGuest(){
+        int id=this.dao.obtenerPersonaGuestOCero();
+        return this.dao.obtenerPersonaPorIdCompleto(id);
+    }
+    public int  insertarOModificarUsuarioGest(String nombre, Integer RUC, Integer nroDocumento){
+           RolDto rol= new RolDto();
+           int idrol= TipoRol.GUEST.toString().equals("GUEST")? 5:0;
+           rol.setRolId(idrol);
+           RolUsuarioDto rolusuario=new RolUsuarioDto();
+           rolusuario.setRol(rol);
+           String username="guest";
+           String password="XXXXXXXXXXXX";
+           String correo="guest@gmail.com";
+           boolean activo=true;
+           String direccion="";
+           String telefono="";
+           String sexo="F";
+           String tipoDoc="DNI";
+         
+           System.out.println("=== Test: idrol ->"+idrol);
+           int idPersonasGest=this.dao.obtenerPersonaGuestOCero();
+           System.out.println("=== Test: id ->"+idPersonasGest);
+           if(idPersonasGest==0){
+               int idnuevo = this.dao.insertarPersonaCompleta(username, password, correo, activo, nombre, direccion, telefono, sexo, nroDocumento, RUC, tipoDoc,idrol);
+               
+                
+                return idnuevo!=0? idnuevo:0;
+           }
+           else{
+               PersonaDto person= this.dao.obtenerPersonaPorIdCompleto(idPersonasGest);
+               System.out.println("=== Test: Modificarr USUARIO DUMMY - PERSONAS ===");
+               int val=modificarPersonaCompleta(idPersonasGest, person.getUsuario().getUsuarioId(), username, password, correo, activo, nombre, direccion, telefono, sexo, nroDocumento, RUC, tipoDoc);
+               return val!=0? idPersonasGest:0;
+           }
+           
+           
+           
+           
+    }
+    
 
         
 }

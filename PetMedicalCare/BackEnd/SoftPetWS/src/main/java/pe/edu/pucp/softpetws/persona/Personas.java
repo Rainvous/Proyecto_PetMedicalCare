@@ -47,7 +47,7 @@ public class Personas {
         return this.personaBo.modificar(personaId, usuarioId, nombre, direccion,
                 telefono, sexo, nroDocumento, ruc, tipoDocumento, activo);
     }
-    
+
     @WebMethod(operationName = "modificarPersonaCompleta")
     public Integer modificarPersonaCompleta(
             @WebParam(name = "idPersona") Integer idPersona,
@@ -63,7 +63,7 @@ public class Personas {
             @WebParam(name = "nroDocumento") Integer nroDocumento,
             @WebParam(name = "ruc") Integer ruc,
             @WebParam(name = "tipoDocumento") String tipoDocumento) {
-        return this.personaBo.modificarPersonaCompleta(idPersona, idUsuario, username, password, correo, activo, 
+        return this.personaBo.modificarPersonaCompleta(idPersona, idUsuario, username, password, correo, activo,
                 nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento);
     }
 
@@ -127,4 +127,26 @@ public class Personas {
             @WebParam(name = "nombreTipo") int idServicio) {
         return this.personaBo.VerificarSiLaPersonaTieneInformacion(idServicio);
     }
+    // ================== MÉTODOS PARA PUNTO DE VENTA (GUEST) ==================
+
+    @WebMethod(operationName = "obtenerIdDePersonaGuest")
+    public int obtenerIdDePersonaGuest() {
+        return this.personaBo.obtenerIdDePersonaGuest();
+    }
+
+    @WebMethod(operationName = "ObtenerDatosPersonaGuest")
+    public PersonaDto ObtenerDatosPersonaGuest() {
+        // Delegamos directamente al BO
+        return this.personaBo.ObtenerDatosPersonaGuest();
+    }
+
+    @WebMethod(operationName = "insertarOModificarUsuarioGest")
+    public int insertarOModificarUsuarioGest(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "ruc") Integer ruc,
+            @WebParam(name = "nroDocumento") Integer nroDocumento) {
+
+        return this.personaBo.insertarOModificarUsuarioGest(nombre, ruc, nroDocumento);
+    }
+
 }

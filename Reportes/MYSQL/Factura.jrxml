@@ -1,0 +1,428 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="Factura" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="77777777-aaaa-bbbb-cccc-999999999999">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="softpet"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<dataset name="dsProductos" uuid="0d8a6331-1715-4e4a-9623-495ec5611e8c">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="softpet"/>
+		<parameter name="P_DOCUMENTO_ID" class="java.lang.Integer"/>
+		<query language="SQL"><![CDATA[SELECT 
+    dddp.NRO_ITEM,
+    p.NOMBRE AS PRODUCTO_NOMBRE,
+    p.PRESENTACION AS PRODUCTO_PRESENTACION,
+    dddp.CANTIDAD,
+    dddp.PRECIO_UNITARIO,
+    dddp.VALOR_VENTA
+FROM DETALLES_DOCUMENTO_DE_PAGO dddp
+JOIN PRODUCTOS p ON dddp.PRODUCTO_ID = p.PRODUCTO_ID
+WHERE dddp.DOCUMENTO_DE_PAGO_ID = $P{P_DOCUMENTO_ID}
+  AND dddp.PRODUCTO_ID IS NOT NULL
+]]></query>
+		<field name="NRO_ITEM" class="java.lang.Integer"/>
+		<field name="PRODUCTO_NOMBRE" class="java.lang.String"/>
+		<field name="PRODUCTO_PRESENTACION" class="java.lang.String"/>
+		<field name="CANTIDAD" class="java.lang.Integer"/>
+		<field name="PRECIO_UNITARIO" class="java.math.BigDecimal"/>
+		<field name="VALOR_VENTA" class="java.math.BigDecimal"/>
+	</dataset>
+	<dataset name="dsServicios" uuid="aa06e903-ef02-45bb-85ec-66531bc02768">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="softpet"/>
+		<parameter name="P_DOCUMENTO_ID" class="java.lang.Integer"/>
+		<query language="SQL"><![CDATA[SELECT 
+    dddp.NRO_ITEM,
+    s.NOMBRE AS SERVICIO_NOMBRE,
+    dddp.DESCRIPCION,
+    dddp.CANTIDAD,
+    dddp.PRECIO_UNITARIO,
+    dddp.VALOR_VENTA
+FROM DETALLES_DOCUMENTO_DE_PAGO dddp
+JOIN SERVICIOS s ON dddp.SERVICIO_ID = s.SERVICIO_ID
+WHERE dddp.DOCUMENTO_DE_PAGO_ID = $P{P_DOCUMENTO_ID}
+  AND dddp.SERVICIO_ID IS NOT NULL
+]]></query>
+		<field name="NRO_ITEM" class="java.lang.Integer"/>
+		<field name="SERVICIO_NOMBRE" class="java.lang.String"/>
+		<field name="DESCRIPCION" class="java.lang.String"/>
+		<field name="CANTIDAD" class="java.lang.Integer"/>
+		<field name="PRECIO_UNITARIO" class="java.math.BigDecimal"/>
+		<field name="VALOR_VENTA" class="java.math.BigDecimal"/>
+	</dataset>
+	<parameter name="P_DOCUMENTO_ID" class="java.lang.Integer"/>
+	<query language="SQL"><![CDATA[SELECT 
+    dp.DOCUMENTO_DE_PAGO_ID,
+    dp.SERIE,
+    dp.NUMERO,
+    dp.FECHA_EMISION,
+    dp.TIPO_DOCUMENTO,
+    dp.ESTADO,
+    dp.SUBTOTAL,
+    dp.IGV_TOTAL,
+    dp.TOTAL,
+    mp.NOMBRE AS METODO_PAGO_NOMBRE,
+    p.NOMBRE AS CLIENTE_NOMBRE,
+    p.RUC AS CLIENTE_RUC
+FROM DOCUMENTOS_DE_PAGO dp
+LEFT JOIN METODOS_DE_PAGO mp
+       ON dp.METODO_DE_PAGO_ID = mp.METODO_DE_PAGO_ID
+LEFT JOIN PERSONAS p
+       ON dp.PERSONA_ID = p.PERSONA_ID
+WHERE dp.DOCUMENTO_DE_PAGO_ID = $P{P_DOCUMENTO_ID}
+]]></query>
+	<field name="DOCUMENTO_DE_PAGO_ID" class="java.lang.Integer"/>
+	<field name="SERIE" class="java.lang.String"/>
+	<field name="NUMERO" class="java.lang.String"/>
+	<field name="FECHA_EMISION" class="java.sql.Date"/>
+	<field name="TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="ESTADO" class="java.lang.String"/>
+	<field name="SUBTOTAL" class="java.math.BigDecimal"/>
+	<field name="IGV_TOTAL" class="java.math.BigDecimal"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<field name="METODO_PAGO_NOMBRE" class="java.lang.String"/>
+	<field name="CLIENTE_NOMBRE" class="java.lang.String"/>
+	<field name="CLIENTE_RUC" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title height="80" splitType="Stretch">
+		<element kind="staticText" uuid="008bdf40-a992-4e1c-abc2-e9f15ef43c92" x="210" y="20" width="300" height="40" fontSize="25.0">
+			<text><![CDATA[FACTURA]]></text>
+		</element>
+	</title>
+	<pageHeader height="95" splitType="Stretch">
+		<element kind="staticText" uuid="e0d7a9e0-abd5-4468-92ff-90a91f203dbd" x="-10" y="0" width="90" height="18">
+			<text><![CDATA[Nro. Factura:]]></text>
+		</element>
+		<element kind="textField" uuid="f698028b-e8f0-4d9f-a737-698f18668548" x="90" y="0" width="185" height="18">
+			<expression><![CDATA[$F{SERIE} + "-" + $F{NUMERO}]]></expression>
+		</element>
+		<element kind="staticText" uuid="b949c536-6d08-47ad-9816-c52d84f2fc28" x="290" y="0" width="110" height="18">
+			<text><![CDATA[Fecha de emisión:]]></text>
+		</element>
+		<element kind="textField" uuid="a7875d9a-6879-4dde-aa6d-da49a6d378aa" x="400" y="0" width="175" height="18">
+			<expression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{FECHA_EMISION})]]></expression>
+		</element>
+		<element kind="staticText" uuid="11111111-1111-1111-1111-111111111111" x="-10" y="22" width="100" height="18">
+			<text><![CDATA[Método de pago:]]></text>
+		</element>
+		<element kind="textField" uuid="22222222-2222-2222-2222-222222222222" x="90" y="22" width="200" height="18">
+			<expression><![CDATA[$F{METODO_PAGO_NOMBRE}]]></expression>
+		</element>
+		<element kind="line" uuid="33333333-3333-3333-3333-333333333333" x="-10" y="40" width="570" height="1"/>
+		<element kind="staticText" uuid="44444444-4444-4444-4444-444444444444" x="-10" y="45" width="150" height="18">
+			<text><![CDATA[Datos del cliente]]></text>
+		</element>
+		<element kind="staticText" uuid="55555555-5555-5555-5555-555555555555" x="-10" y="65" width="60" height="18">
+			<text><![CDATA[Nombre:]]></text>
+		</element>
+		<element kind="textField" uuid="66666666-6666-6666-6666-666666666666" x="60" y="65" width="250" height="18">
+			<expression><![CDATA[$F{CLIENTE_NOMBRE}]]></expression>
+		</element>
+		<element kind="staticText" uuid="77777777-7777-7777-7777-777777777777" x="320" y="65" width="80" height="18">
+			<text><![CDATA[RUC:]]></text>
+		</element>
+		<element kind="textField" uuid="88888888-8888-8888-8888-888888888888" x="400" y="65" width="150" height="18">
+			<expression><![CDATA[$F{CLIENTE_RUC}]]></expression>
+		</element>
+	</pageHeader>
+	<columnHeader height="30" splitType="Stretch">
+		<element kind="staticText" uuid="e58bd602-efaa-4cc0-9ca7-0cab1b68f8f4" x="240" y="5" width="100" height="20">
+			<text><![CDATA[Productos]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="440" splitType="Stretch">
+			<element kind="component" uuid="567fed13-6fca-438a-adb5-1a9b2111e3b8" x="-10" y="0" width="580" height="130">
+				<component kind="table" horizontalPosition="Center" shrinkWidth="false">
+					<datasetRun uuid="c78f3efe-8da9-4978-a711-e23bdffb0582" subDataset="dsProductos">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<parameter name="P_DOCUMENTO_ID">
+							<expression><![CDATA[$P{P_DOCUMENTO_ID}]]></expression>
+						</parameter>
+					</datasetRun>
+					<column kind="single" uuid="f2ed14dc-fd5d-4ceb-9541-b67075b4c7e2" width="98">
+						<tableHeader height="30" style="Table_TH"/>
+						<tableFooter height="30" style="Table_TH"/>
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="a2c364fc-67b6-4a91-ace8-bb562c1712b2" x="0" y="0" width="98" height="30">
+								<text><![CDATA[Ítem]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table_CH"/>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="eebaf608-a3d3-49d5-8da7-f472375e25ae" x="0" y="0" width="98" height="30">
+								<expression><![CDATA[$F{NRO_ITEM}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="61513c72-2852-4b80-9d0a-92826db21291" width="98">
+						<tableHeader height="30" style="Table_TH"/>
+						<tableFooter height="30" style="Table_TH"/>
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="d1efc704-8023-4a6b-b9bb-7b255b22f654" x="0" y="0" width="98" height="30">
+								<text><![CDATA[Producto]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table_CH"/>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="b6a79e04-27ff-4d6a-b366-1f5aeb021e11" x="0" y="0" width="98" height="30">
+								<expression><![CDATA[$F{PRODUCTO_NOMBRE}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="83ddc18b-6489-403f-b51e-41665abb2ebe" width="122">
+						<tableHeader height="30" style="Table_TH"/>
+						<tableFooter height="30" style="Table_TH"/>
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="aca887c7-bcf0-4bb2-b140-4d4c92197b60" x="0" y="0" width="122" height="30">
+								<text><![CDATA[Presentación]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table_CH"/>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="88d45ade-0bea-4234-aeb1-868872d77e27" x="0" y="0" width="122" height="30">
+								<expression><![CDATA[$F{PRODUCTO_PRESENTACION}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="523574fc-1836-422f-9c42-6cb5bb15ea38" width="72">
+						<tableHeader height="30" style="Table_TH"/>
+						<tableFooter height="30" style="Table_TH"/>
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="359ab000-9565-4a42-bbe1-5103aba328c9" x="0" y="0" width="72" height="30">
+								<text><![CDATA[Cant.]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table_CH"/>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="3b5b2371-497a-45d6-b725-36d01896a1c9" x="0" y="0" width="72" height="30">
+								<expression><![CDATA[$F{CANTIDAD}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="fe161eac-1de5-4f9c-ba94-26894e5e2541" width="110">
+						<tableHeader height="30" style="Table_TH"/>
+						<tableFooter height="30" style="Table_TH"/>
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="2cd396ec-9256-4d2a-9d6b-b2fcd1ca3c4d" x="0" y="0" width="110" height="30">
+								<text><![CDATA[P. Unitario]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table_CH"/>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="24528527-1eef-4e01-a88d-7e1312cf054e" x="0" y="0" width="110" height="30">
+								<expression><![CDATA[$F{PRECIO_UNITARIO}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="32d81878-e439-46bc-950e-be2f15514c8a" width="80">
+						<tableHeader height="30" style="Table_TH"/>
+						<tableFooter height="30" style="Table_TH"/>
+						<columnHeader height="30" style="Table_CH">
+							<element kind="staticText" uuid="e15792ca-b232-4767-97bc-05a60ce9db5c" x="0" y="0" width="80" height="30">
+								<text><![CDATA[Importe]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table_CH"/>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="9489137d-3d42-4321-81b5-999d257e2639" x="0" y="0" width="80" height="30">
+								<expression><![CDATA[$F{VALOR_VENTA}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+				<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+			</element>
+			<element kind="staticText" uuid="23db5c83-feca-411b-a7ee-927599a04cc7" x="240" y="140" width="100" height="30">
+				<text><![CDATA[Servicios]]></text>
+			</element>
+			<element kind="component" uuid="2c942ad8-b2ed-47aa-96f9-6a0d95c3ba4a" x="-10" y="170" width="580" height="200">
+				<component kind="table">
+					<datasetRun uuid="7b488a24-ae6e-42b5-97eb-90a261ec2853" subDataset="dsServicios">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<parameter name="P_DOCUMENTO_ID">
+							<expression><![CDATA[$P{P_DOCUMENTO_ID}]]></expression>
+						</parameter>
+					</datasetRun>
+					<column kind="single" uuid="3df4900f-aefb-4269-b66f-9bef70d78fbc" width="98">
+						<tableHeader height="30" style="Table 1_TH"/>
+						<tableFooter height="30" style="Table 1_TH"/>
+						<columnHeader height="30" style="Table 1_CH">
+							<element kind="staticText" uuid="7ddb2302-3236-4648-aa31-d60730743a2e" x="0" y="0" width="98" height="30">
+								<text><![CDATA[Ítem]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table 1_CH"/>
+						<detailCell height="30" style="Table 1_TD">
+							<element kind="textField" uuid="e69398e9-dd96-4b2d-80d6-b81ebd076cc5" x="0" y="0" width="98" height="30">
+								<expression><![CDATA[$F{NRO_ITEM}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="4a6e8faf-3521-43f6-8181-8cc6df0c0436" width="97">
+						<tableHeader height="30" style="Table 1_TH"/>
+						<tableFooter height="30" style="Table 1_TH"/>
+						<columnHeader height="30" style="Table 1_CH">
+							<element kind="staticText" uuid="0fa5c910-ac0d-4bdf-8539-16adfc1d6c7b" x="0" y="0" width="97" height="30">
+								<text><![CDATA[Servicio]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table 1_CH"/>
+						<detailCell height="30" style="Table 1_TD">
+							<element kind="textField" uuid="db32976a-07b9-4d16-ab21-440dcf928f77" x="0" y="0" width="97" height="30">
+								<expression><![CDATA[$F{SERVICIO_NOMBRE}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="5c278b3c-6041-46b1-89d5-f3c5a2493183" width="97">
+						<tableHeader height="30" style="Table 1_TH"/>
+						<tableFooter height="30" style="Table 1_TH"/>
+						<columnHeader height="30" style="Table 1_CH">
+							<element kind="staticText" uuid="0626fcb1-fa93-4b2d-b53d-017806422444" x="0" y="0" width="97" height="30">
+								<text><![CDATA[Descripción]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table 1_CH"/>
+						<detailCell height="30" style="Table 1_TD">
+							<element kind="textField" uuid="eebf835e-7429-4eae-bfda-d3cc82e94fc5" x="0" y="0" width="97" height="30">
+								<expression><![CDATA[$F{DESCRIPCION}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="7d51fa4a-6405-4b18-9492-dd48a023f522" width="96">
+						<tableHeader height="30" style="Table 1_TH"/>
+						<tableFooter height="30" style="Table 1_TH"/>
+						<columnHeader height="30" style="Table 1_CH">
+							<element kind="staticText" uuid="981eaeea-3a69-43ed-970f-836f575f5b53" x="0" y="0" width="96" height="30">
+								<text><![CDATA[Cant.]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table 1_CH"/>
+						<detailCell height="30" style="Table 1_TD">
+							<element kind="textField" uuid="55d6266a-0979-4de0-85e6-7995f9d9e2ba" x="0" y="0" width="96" height="30">
+								<expression><![CDATA[$F{CANTIDAD}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="3897d833-48b8-41bd-b9b8-63783e185a39" width="96">
+						<tableHeader height="30" style="Table 1_TH"/>
+						<tableFooter height="30" style="Table 1_TH"/>
+						<columnHeader height="30" style="Table 1_CH">
+							<element kind="staticText" uuid="b30c2c54-f983-4379-82b7-8a38ed9712b3" x="0" y="0" width="96" height="30">
+								<text><![CDATA[P. Unitario]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table 1_CH"/>
+						<detailCell height="30" style="Table 1_TD">
+							<element kind="textField" uuid="2be0b580-357a-4bb3-9d77-6f9766169468" x="0" y="0" width="96" height="30">
+								<expression><![CDATA[$F{PRECIO_UNITARIO}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+					<column kind="single" uuid="8313c9ed-3228-4ce7-a4ca-489eb52e16cb" width="96">
+						<tableHeader height="30" style="Table 1_TH"/>
+						<tableFooter height="30" style="Table 1_TH"/>
+						<columnHeader height="30" style="Table 1_CH">
+							<element kind="staticText" uuid="31230a55-695c-48d9-aad9-ac1453080aea" x="0" y="0" width="96" height="30">
+								<text><![CDATA[Importe]]></text>
+							</element>
+						</columnHeader>
+						<columnFooter height="30" style="Table 1_CH"/>
+						<detailCell height="30" style="Table 1_TD">
+							<element kind="textField" uuid="cc14d2cf-c51e-476d-a98f-e88b95e18e09" x="0" y="0" width="96" height="30">
+								<expression><![CDATA[$F{VALOR_VENTA}]]></expression>
+							</element>
+						</detailCell>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+				<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+				<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="36" splitType="Stretch">
+		<element kind="staticText" uuid="12ed9e55-265d-4391-b9ae-14b5654c8f83" x="30" y="-5" width="100" height="20">
+			<text><![CDATA[Subtotal]]></text>
+		</element>
+		<element kind="textField" uuid="61657d35-b48c-4f7f-baee-6fd7af47e167" x="0" y="15" width="185" height="20">
+			<expression><![CDATA[$F{SUBTOTAL}]]></expression>
+		</element>
+		<element kind="staticText" uuid="1d88afdb-bf9d-46ac-887f-eeae79fc3972" x="227" y="-5" width="100" height="20">
+			<text><![CDATA[IGV total]]></text>
+		</element>
+		<element kind="textField" uuid="866bcc97-3665-4c55-9a89-7d566513eb06" x="185" y="15" width="185" height="20">
+			<expression><![CDATA[$F{IGV_TOTAL}]]></expression>
+		</element>
+		<element kind="staticText" uuid="55ac3548-b4ad-4884-9a97-dc5b0f7d1793" x="400" y="-5" width="100" height="20">
+			<text><![CDATA[Total]]></text>
+		</element>
+		<element kind="textField" uuid="11272d9c-9908-427a-8b07-52f7e9164e90" x="370" y="15" width="185" height="20">
+			<expression><![CDATA[$F{TOTAL}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="10" splitType="Stretch"/>
+</jasperReport>

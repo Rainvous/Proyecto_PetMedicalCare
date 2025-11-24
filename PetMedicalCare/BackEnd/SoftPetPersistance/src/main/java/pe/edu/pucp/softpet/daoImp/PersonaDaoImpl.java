@@ -16,10 +16,12 @@ import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.Sexo;
+import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
     private PersonaDto persona;
+    private int idGuest;
 
     public PersonaDaoImpl() {
         super("PERSONAS");
@@ -30,12 +32,11 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     // -------------------------------------------------------------------------
     // MÉTODOS ABSTRACTOS DE DaoBaseImpl IMPLEMENTADOS
     // -------------------------------------------------------------------------
-
     @Override
     protected void configurarListaDeColumnas() {
         // EL ORDEN ES IMPORTANTE: Define la estructura para INSERT y UPDATE genéricos
         this.listaColumnas.add(new Columna("PERSONA_ID", true, true)); // PK
-        this.listaColumnas.add(new Columna("USUARIO_ID", false, false)); 
+        this.listaColumnas.add(new Columna("USUARIO_ID", false, false));
         this.listaColumnas.add(new Columna("NOMBRE", false, false));
         this.listaColumnas.add(new Columna("DIRECCION", false, false));
         this.listaColumnas.add(new Columna("TELEFONO", false, false));
@@ -63,7 +64,14 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         // 5. SEXO
         this.statement.setString(5, this.persona.getSexo().toString());
         // 6. NRO_DOCUMENTO
-        this.statement.setInt(6, this.persona.getNroDocumento());
+        String nroDoc = String.valueOf(this.persona.getNroDocumento());
+        if (this.persona.getNroDocumento() == 0 || this.persona.getNroDocumento() == null) {
+            this.statement.setNull(6, java.sql.Types.VARCHAR);
+        } else {
+
+            this.statement.setString(6, nroDoc);
+        }
+
         // 7. RUC
         if (this.persona.getRuc() != null && this.persona.getRuc() != 0) {
             this.statement.setInt(7, this.persona.getRuc());
@@ -80,7 +88,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     protected void incluirValorDeParametrosParaModificacion() throws SQLException {
         // CORRECCIÓN CRÍTICA: El orden debe coincidir EXACTAMENTE con configurarListaDeColumnas
         // (saltando la llave primaria inicial, que va al final en el WHERE)
-        
+
         // 1. USUARIO_ID
         if (this.persona.getUsuario() != null && this.persona.getUsuario().getUsuarioId() != 0) {
             this.statement.setInt(1, this.persona.getUsuario().getUsuarioId());
@@ -90,29 +98,35 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
         // 2. NOMBRE
         this.statement.setString(2, this.persona.getNombre());
-        
+
         // 3. DIRECCION
         this.statement.setString(3, this.persona.getDireccion());
-        
+
         // 4. TELEFONO
         this.statement.setString(4, this.persona.getTelefono());
-        
+
         // 5. SEXO
         this.statement.setString(5, this.persona.getSexo().toString());
-        
+
         // 6. NRO_DOCUMENTO
-        this.statement.setInt(6, this.persona.getNroDocumento());
-        
+        String nroDoc = String.valueOf(this.persona.getNroDocumento());
+        if (this.persona.getNroDocumento() == 0 || this.persona.getNroDocumento() == null) {
+            this.statement.setNull(6, java.sql.Types.VARCHAR);
+        } else {
+
+            this.statement.setString(6, nroDoc);
+        }
+
         // 7. RUC
         if (this.persona.getRuc() != null && this.persona.getRuc() != 0) {
             this.statement.setInt(7, this.persona.getRuc());
         } else {
             this.statement.setNull(7, Types.INTEGER);
         }
-        
+
         // 8. TIPO_DOCUMENTO
         this.statement.setString(8, this.persona.getTipoDocumento());
-        
+
         // 9. ACTIVO
         this.statement.setInt(9, this.persona.getActivo() ? 1 : 0);
 
@@ -137,36 +151,37 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
         this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
-        this.persona.setNroDocumento(this.resultSet.getInt("NRO_DOCUMENTO"));
-        
+        int nroDoc = Integer.parseInt(this.resultSet.getString("NRO_DOCUMENTO"));
+        this.persona.setNroDocumento(nroDoc);
+
         // Manejo seguro de RUC (puede ser NULL en BD, retorna 0 en int)
         int rucVal = this.resultSet.getInt("RUC");
         if (this.resultSet.wasNull()) {
-            this.persona.setRuc(0); 
+            this.persona.setRuc(0);
         } else {
             this.persona.setRuc(rucVal);
         }
-        
+
         this.persona.setTipoDocumento(this.resultSet.getString("TIPO_DOCUMENTO"));
-        
+
         // Manejo flexible de la columna ACTIVO (a veces se llama ACTIVO_PERS en joins)
         try {
             this.persona.setActivo(this.resultSet.getInt("ACTIVO") == 1);
-        } catch (Exception e) { 
-             try {
+        } catch (Exception e) {
+            try {
                 this.persona.setActivo(this.resultSet.getInt("ACTIVO_PERS") == 1);
-             } catch(Exception ex) { 
-                 this.persona.setActivo(true); 
-             }
+            } catch (Exception ex) {
+                this.persona.setActivo(true);
+            }
         }
 
         // Manejo de Enum Sexo
         String sexoStr = this.resultSet.getString("SEXO");
         if (sexoStr != null) {
-            try { 
-                this.persona.setSexo(Sexo.valueOf(sexoStr)); 
-            } catch (Exception ex) { 
-                this.persona.setSexo(Sexo.O); 
+            try {
+                this.persona.setSexo(Sexo.valueOf(sexoStr));
+            } catch (Exception ex) {
+                this.persona.setSexo(Sexo.O);
             }
         } else {
             this.persona.setSexo(Sexo.O);
@@ -175,14 +190,14 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         // Manejo de Usuario (JOIN)
         UsuarioDto u = new UsuarioDto();
         u.setUsuarioId(this.resultSet.getInt("USUARIO_ID"));
-        
+
         // Intentamos obtener username/correo para visualización en listados
         try {
             u.setUsername(this.resultSet.getString("USERNAME"));
             u.setCorreo(this.resultSet.getString("CORREO"));
-        } catch (SQLException e) { 
+        } catch (SQLException e) {
             // Si la consulta no trae estos campos, no rompemos el flujo
-            u.setUsername(""); 
+            u.setUsername("");
             u.setCorreo("");
         }
         this.persona.setUsuario(u);
@@ -202,12 +217,12 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     // -------------------------------------------------------------------------
     // SOBREESCRITURA DE MÉTODOS CRUD BÁSICOS (Para asignar this.persona)
     // -------------------------------------------------------------------------
-
     @Override
     public Integer insertar(PersonaDto persona) {
         this.persona = persona;
         return super.insertar();
     }
+
     @Override
     public PersonaDto obtenerPorId(Integer personaId) {
         this.persona = new PersonaDto();
@@ -215,30 +230,39 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         super.obtenerPorId();
         return this.persona;
     }
+
     @Override
     public ArrayList<PersonaDto> listarTodos() {
         return (ArrayList<PersonaDto>) super.listarTodos();
     }
+
     @Override
     public Integer modificar(PersonaDto persona) {
         this.persona = persona;
         return super.modificar();
     }
+
     @Override
     public Integer eliminar(PersonaDto persona) {
         this.persona = persona;
         return super.eliminar();
     }
-    
+
     // -------------------------------------------------------------------------
     // MÉTODOS TRANSACCIONALES (COMPLEJOS)
     // -------------------------------------------------------------------------
+    public Integer insertarPersonaCompleta(
+            String username, String password, String correo, boolean activoUsuario,
+            String nombre, String direccion, String telefono, String sexo,
+            Integer nroDocumento, Integer ruc, String tipoDocumento) {
+        return this.insertarPersonaCompleta(username, password, correo, true, nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento, 1);
+    }
 
     public Integer insertarPersonaCompleta(
             String username, String password, String correo, boolean activoUsuario,
-            String nombre, String direccion, String telefono, String sexo, 
-            Integer nroDocumento, Integer ruc, String tipoDocumento) {
-        
+            String nombre, String direccion, String telefono, String sexo,
+            Integer nroDocumento, Integer ruc, String tipoDocumento, int idrol) {
+
         Integer resultado = 0;
         try {
             this.iniciarTransaccion();
@@ -252,14 +276,26 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
                 psUsu.setString(3, correo);
                 psUsu.setInt(4, activoUsuario ? 1 : 0);
                 psUsu.executeUpdate();
-                try (ResultSet rs = psUsu.getGeneratedKeys()) { if (rs.next()) idUsuario = rs.getInt(1); }
+                try (ResultSet rs = psUsu.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        idUsuario = rs.getInt(1);
+                    }
+                }
             }
 
             // 2. Asignar Rol (Asumimos ROL_ID = 4 para Clientes)
-            String sqlRol = "INSERT INTO ROLES_USUARIO (ROL_ID, USUARIO_ID, ACTIVO) VALUES (4, ?, 1)";
-            try(PreparedStatement psRol = this.conexion.prepareStatement(sqlRol)){
-                psRol.setInt(1, idUsuario);
-                psRol.executeUpdate();
+            if (idrol == 0) {
+                String sqlRol = "INSERT INTO ROLES_USUARIO (ROL_ID, USUARIO_ID, ACTIVO) VALUES (4, ?, 1)";
+                try (PreparedStatement psRol = this.conexion.prepareStatement(sqlRol)) {
+                    psRol.setInt(1, idUsuario);
+                    psRol.executeUpdate();
+                }
+            } else {
+                String sqlRol = "INSERT INTO ROLES_USUARIO (ROL_ID, USUARIO_ID, ACTIVO) VALUES (" + idrol + ", ?, 1)";
+                try (PreparedStatement psRol = this.conexion.prepareStatement(sqlRol)) {
+                    psRol.setInt(1, idUsuario);
+                    psRol.executeUpdate();
+                }
             }
 
             // 3. Insertar Persona
@@ -271,29 +307,43 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
                 psPer.setString(4, telefono);
                 psPer.setString(5, sexo);
                 psPer.setInt(6, nroDocumento);
-                if(ruc != null && ruc != 0) psPer.setInt(7, ruc); else psPer.setNull(7, java.sql.Types.INTEGER);
+                if (ruc != null && ruc != 0) {
+                    psPer.setInt(7, ruc);
+                } else {
+                    psPer.setNull(7, java.sql.Types.INTEGER);
+                }
                 psPer.setString(8, tipoDocumento);
                 psPer.executeUpdate();
-                try (ResultSet rs = psPer.getGeneratedKeys()) { if (rs.next()) resultado = rs.getInt(1); }
+                try (ResultSet rs = psPer.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        resultado = rs.getInt(1);
+                    }
+                }
             }
 
             this.comitarTransaccion();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            try { this.rollbackTransaccion(); } catch (SQLException e) { }
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException e) {
+            }
             resultado = 0;
         } finally {
-            try { this.cerrarConexion(); } catch (SQLException ex) { }
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+            }
         }
         return resultado;
     }
-    
+
     public Integer modificarPersonaCompleta(
             Integer idPersona, Integer idUsuario,
             String username, String password, String correo, boolean activo,
-            String nombre, String direccion, String telefono, String sexo, 
+            String nombre, String direccion, String telefono, String sexo,
             Integer nroDocumento, Integer ruc, String tipoDocumento) {
-        
+
         Integer resultado = 0;
         try {
             this.iniciarTransaccion();
@@ -306,17 +356,17 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
             } else {
                 sqlUsu = "UPDATE USUARIOS SET USERNAME=?, CORREO=?, ACTIVO=? WHERE USUARIO_ID=?";
             }
-            
+
             try (PreparedStatement ps = this.conexion.prepareStatement(sqlUsu)) {
-                ps.setString(1, username); 
-                ps.setString(2, correo); 
+                ps.setString(1, username);
+                ps.setString(2, correo);
                 ps.setInt(3, activo ? 1 : 0);
-                
-                if (password != null && !password.isEmpty()) { 
-                    ps.setString(4, password); 
-                    ps.setInt(5, idUsuario); 
-                } else { 
-                    ps.setInt(4, idUsuario); 
+
+                if (password != null && !password.isEmpty()) {
+                    ps.setString(4, password);
+                    ps.setInt(5, idUsuario);
+                } else {
+                    ps.setInt(4, idUsuario);
                 }
                 ps.executeUpdate();
             }
@@ -324,33 +374,47 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
             // 2. Actualizar Persona (Usando la lógica genérica corregida)
             this.persona = new PersonaDto();
             this.persona.setPersonaId(idPersona);
-            
-            UsuarioDto u = new UsuarioDto(); 
+
+            UsuarioDto u = new UsuarioDto();
             u.setUsuarioId(idUsuario);
             this.persona.setUsuario(u);
-            
-            this.persona.setNombre(nombre); 
-            this.persona.setDireccion(direccion); 
+
+            this.persona.setNombre(nombre);
+            this.persona.setDireccion(direccion);
             this.persona.setTelefono(telefono);
-            
-            try { this.persona.setSexo(Sexo.valueOf(sexo)); } catch(Exception ex) { this.persona.setSexo(Sexo.O); }
-            
+
+            try {
+                this.persona.setSexo(Sexo.valueOf(sexo));
+            } catch (Exception ex) {
+                this.persona.setSexo(Sexo.O);
+            }
+
             this.persona.setNroDocumento(nroDocumento);
-            if(ruc != null) this.persona.setRuc(ruc); else this.persona.setRuc(0);
-            this.persona.setTipoDocumento(tipoDocumento); 
+            if (ruc != null) {
+                this.persona.setRuc(ruc);
+            } else {
+                this.persona.setRuc(0);
+            }
+            this.persona.setTipoDocumento(tipoDocumento);
             this.persona.setActivo(activo);
 
             // Llamada al método del padre que usa nuestra conexión abierta
-            super.modificarEnTransaccion(this.conexion);
-            
-            resultado = 1; // Éxito
+            resultado=super.modificarEnTransaccion(this.conexion);
+
+           // resultado = 1; // Éxito
             this.comitarTransaccion();
         } catch (Exception ex) {
             ex.printStackTrace();
-            try { this.rollbackTransaccion(); } catch (SQLException e) { }
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException e) {
+            }
             resultado = 0;
-        } finally { 
-            try { this.cerrarConexion(); } catch (SQLException ex) { } 
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+            }
         }
         return resultado;
     }
@@ -359,45 +423,58 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         Integer resultado = 0;
         try {
             this.iniciarTransaccion();
-            
+
             // Obtener el Usuario ID asociado
             int idUsuario = 0;
             String sqlGet = "SELECT USUARIO_ID FROM PERSONAS WHERE PERSONA_ID = ?";
-            try(PreparedStatement ps = this.conexion.prepareStatement(sqlGet)){
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlGet)) {
                 ps.setInt(1, idPersona);
-                try(ResultSet rs = ps.executeQuery()){ if(rs.next()) idUsuario = rs.getInt(1); }
-            }
-            
-            // Soft Delete Persona
-            String sqlPer = "UPDATE PERSONAS SET ACTIVO=0 WHERE PERSONA_ID=?";
-            try(PreparedStatement ps = this.conexion.prepareStatement(sqlPer)){ 
-                ps.setInt(1, idPersona); 
-                ps.executeUpdate(); 
-            }
-            
-            // Soft Delete Usuario
-            if(idUsuario > 0){
-                String sqlUsu = "UPDATE USUARIOS SET ACTIVO=0 WHERE USUARIO_ID=?";
-                try(PreparedStatement ps = this.conexion.prepareStatement(sqlUsu)){ 
-                    ps.setInt(1, idUsuario); 
-                    ps.executeUpdate(); 
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        idUsuario = rs.getInt(1);
+                    }
                 }
             }
-            
+
+            // Soft Delete Persona
+            String sqlPer = "UPDATE PERSONAS SET ACTIVO=0 WHERE PERSONA_ID=?";
+            try (PreparedStatement ps = this.conexion.prepareStatement(sqlPer)) {
+                ps.setInt(1, idPersona);
+                ps.executeUpdate();
+            }
+
+            // Soft Delete Usuario
+            if (idUsuario > 0) {
+                String sqlUsu = "UPDATE USUARIOS SET ACTIVO=0 WHERE USUARIO_ID=?";
+                try (PreparedStatement ps = this.conexion.prepareStatement(sqlUsu)) {
+                    ps.setInt(1, idUsuario);
+                    ps.executeUpdate();
+                }
+            }
+
             resultado = 1;
             this.comitarTransaccion();
         } catch (Exception ex) {
-            try { this.rollbackTransaccion(); } catch (SQLException e) { }
+            try {
+                this.rollbackTransaccion();
+            } catch (SQLException e) {
+            }
             resultado = 0;
-        } finally { try { this.cerrarConexion(); } catch (SQLException ex) { } }
+        } finally {
+            try {
+                this.cerrarConexion();
+            } catch (SQLException ex) {
+            }
+        }
         return resultado;
     }
-    
+
     // Métodos auxiliares para transacciones externas
     public Integer insertarTransaccional(PersonaDto persona, java.sql.Connection con) throws SQLException {
         this.persona = persona;
         return super.insertarEnTransaccion(con);
     }
+
     public Integer modificarTransaccional(PersonaDto persona, java.sql.Connection con) throws SQLException {
         this.persona = persona;
         return super.modificarEnTransaccion(con);
@@ -406,14 +483,13 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
     // -------------------------------------------------------------------------
     // MÉTODOS DE BÚSQUEDA Y CONSULTAS ESPECÍFICAS
     // -------------------------------------------------------------------------
-
     public ArrayList<PersonaDto> ListasBusquedaAvanzada(
             String nombre, String NroDocumento, String Ruc, Integer Activo) {
-        
+
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         parametrosEntrada.put(1, nombre);
         parametrosEntrada.put(2, NroDocumento);
-        parametrosEntrada.put(3, Ruc); 
+        parametrosEntrada.put(3, Ruc);
         if (Activo == null || Activo == -1) {
             parametrosEntrada.put(4, null);
         } else {
@@ -455,4 +531,156 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         int resultado = (int) parametrosSalida.get(2);
         return resultado;
     }
+    // -------------------------------------------------------------------------
+    // MÉTODO DE APOYO PARA COMPROBANTE (USUARIO DUMMY)
+    // -------------------------------------------------------------------------
+
+    public String generarSQLparaPersonaGuestOCero() {
+
+        String sql;
+
+        if (this.tipoMotor==MotorDeBaseDeDatos.MSSQL) {
+
+            // ---------- SQL SERVER (MSSQL) ----------
+            sql
+                    = "SELECT "
+                    + "CASE "
+                    + "    WHEN EXISTS ( "
+                    + "        SELECT 1 "
+                    + "        FROM ROLES r "
+                    + "        JOIN ROLES_USUARIO ru ON r.ROL_ID = ru.ROL_ID "
+                    + "        WHERE r.NOMBRE = 'GUEST' "
+                    + "    ) THEN ( "
+                    + "        SELECT TOP 1 p.PERSONA_ID "
+                    + "        FROM PERSONAS p "
+                    + "        JOIN USUARIOS u ON p.USUARIO_ID = u.USUARIO_ID "
+                    + "        JOIN ROLES_USUARIO ru ON u.USUARIO_ID = ru.USUARIO_ID "
+                    + "        JOIN ROLES r ON ru.ROL_ID = r.ROL_ID "
+                    + "        WHERE r.NOMBRE = 'GUEST' "
+                    + "    ) "
+                    + "    ELSE 0 "
+                    + "END AS RESULTADO";
+
+        } else {
+
+            // ---------- MYSQL ----------
+            sql
+                    = "SELECT "
+                    + "    IF( "
+                    + "        EXISTS ( "
+                    + "            SELECT 1 "
+                    + "            FROM ROLES r "
+                    + "            JOIN ROLES_USUARIO ru ON r.ROL_ID = ru.ROL_ID "
+                    + "            WHERE r.NOMBRE = 'GUEST' "
+                    + "        ), "
+                    + "        (SELECT p.PERSONA_ID "
+                    + "         FROM PERSONAS p "
+                    + "         JOIN USUARIOS u ON p.USUARIO_ID = u.USUARIO_ID "
+                    + "         JOIN ROLES_USUARIO ru ON u.USUARIO_ID = ru.USUARIO_ID "
+                    + "         JOIN ROLES r ON ru.ROL_ID = r.ROL_ID "
+                    + "         WHERE r.NOMBRE = 'GUEST' "
+                    + "         LIMIT 1), "
+                    + "        0 "
+                    + "    ) AS RESULTADO";
+
+        }
+
+        return sql;
+    }
+
+    private void instanciarParaGuest() throws SQLException {
+        this.idGuest = this.resultSet.getInt("RESULTADO");
+    }
+
+    public void AgregarMiPropioObjetoALaLista(Object listavoid) {
+        List<Integer> lista = (List<Integer>) listavoid;
+        try {
+            this.instanciarParaGuest();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lista.add(this.idGuest);
+    }
+
+    public int obtenerPersonaGuestOCero() {
+
+        String sql = generarSQLparaPersonaGuestOCero();
+
+        // super.listarTodos devolverá una List<Integer>
+        List<Integer> lista = (List<Integer>) super.listarTodos(
+                sql,
+                null, // no hace nada
+                null,
+                this::AgregarMiPropioObjetoALaLista
+        );
+
+        // Como la consulta devuelve solo una fila, tomamos el primero
+        if (lista == null || lista.isEmpty()) {
+            // en teoría no debería pasar, pero por seguridad:
+            return 0;
+        }
+
+        return lista.get(0);
+    }
+
+    public String generarSQLparaPersonaPorId() {
+        String sql
+                = "SELECT "
+                + " p.PERSONA_ID, "
+                + " p.USUARIO_ID, "
+                + " p.NOMBRE, "
+                + " p.DIRECCION, "
+                + " p.TELEFONO, "
+                + " p.SEXO, "
+                + " p.NRO_DOCUMENTO, "
+                + " p.RUC, "
+                + " p.TIPO_DOCUMENTO, "
+                + " p.ACTIVO AS PERSONA_ACTIVO, "
+                + " u.USERNAME, "
+                + " u.CORREO, "
+                + " u.PASSWORD, "
+                + " u.ACTIVO AS USUARIO_ACTIVO "
+                + "FROM PERSONAS p "
+                + "INNER JOIN USUARIOS u ON p.USUARIO_ID = u.USUARIO_ID "
+                + "WHERE p.PERSONA_ID = ?;";
+        return sql;
+    }
+
+    public void IncluirEnSQLPersonaId(Object personaIdVoid) {
+        int personaId = (int) personaIdVoid;
+        try {
+            this.statement.setInt(1, personaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void AgregarMiPropioObjetoALaLista2(Object listaVoid) {
+        List<PersonaDto> lista = (List<PersonaDto>) listaVoid;
+        try {
+            this.instanciarObjetoDelResultSet();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lista.add(this.persona);
+    }
+
+    public PersonaDto obtenerPersonaPorIdCompleto(int personaId) {
+
+        String sql = generarSQLparaPersonaPorId();
+
+        List<PersonaDto> lista = (List<PersonaDto>) super.listarTodos(
+                sql,
+                this::IncluirEnSQLPersonaId,
+                personaId,
+                this::AgregarMiPropioObjetoALaLista2
+        );
+
+        if (lista == null || lista.isEmpty()) {
+            return null;
+        }
+
+        return lista.get(0);
+    }
+
 }

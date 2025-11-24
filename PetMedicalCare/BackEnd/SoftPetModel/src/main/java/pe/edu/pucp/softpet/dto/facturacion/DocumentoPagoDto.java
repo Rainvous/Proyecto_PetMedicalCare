@@ -7,19 +7,7 @@ import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 
 public class DocumentoPagoDto {
 
-    /**
-     * @return the fechaEmisionString
-     */
-    public String getFechaEmisionString() {
-        return fechaEmisionString;
-    }
 
-    /**
-     * @param fechaEmisionString the fechaEmisionString to set
-     */
-    public void setFechaEmisionString(String fechaEmisionString) {
-        this.fechaEmisionString = fechaEmisionString;
-    }
 
     private Integer documentoPagoId;
     private MetodoDePagoDto metodoDePago;
@@ -34,6 +22,7 @@ public class DocumentoPagoDto {
     private Double IGVTotal;
     private Double total;
     private Boolean activo;
+    
 
     public DocumentoPagoDto() {
         this.documentoPagoId = null;
@@ -238,5 +227,23 @@ public class DocumentoPagoDto {
      */
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+        /**
+     * @return the ruc
+     */
+ 
+
+    /**
+     * @return the fechaEmisionString
+     */
+    public String getFechaEmisionString() {
+        return fechaEmisionString;
+    }
+
+    /**
+     * @param fechaEmisionString the fechaEmisionString to set
+     */
+    public void setFechaEmisionString(String fechaEmisionString) {
+        this.fechaEmisionString = fechaEmisionString;
     }
 }
