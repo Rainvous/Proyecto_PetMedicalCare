@@ -47,6 +47,30 @@ public class Personas {
         return this.personaBo.modificar(personaId, usuarioId, nombre, direccion,
                 telefono, sexo, nroDocumento, ruc, tipoDocumento, activo);
     }
+    
+    @WebMethod(operationName = "modificarPersonaCompleta")
+    public Integer modificarPersonaCompleta(
+            @WebParam(name = "idPersona") Integer idPersona,
+            @WebParam(name = "idUsuario") Integer idUsuario,
+            @WebParam(name = "username") String username,
+            @WebParam(name = "password") String password,
+            @WebParam(name = "correo") String correo,
+            @WebParam(name = "activo") boolean activo,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "direccion") String direccion,
+            @WebParam(name = "telefono") String telefono,
+            @WebParam(name = "sexo") String sexo,
+            @WebParam(name = "nroDocumento") Integer nroDocumento,
+            @WebParam(name = "ruc") Integer ruc,
+            @WebParam(name = "tipoDocumento") String tipoDocumento) {
+        return this.personaBo.modificarPersonaCompleta(idPersona, idUsuario, username, password, correo, activo, 
+                nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento);
+    }
+
+    @WebMethod(operationName = "eliminarPersonaCompleta")
+    public Integer eliminarPersonaCompleta(@WebParam(name = "idPersona") Integer idPersona) {
+        return this.personaBo.eliminarPersonaCompleta(idPersona);
+    }
 
     @WebMethod(operationName = "eliminar_persona")
     public Integer eliminar(@WebParam(name = "personaId") int personaId) {

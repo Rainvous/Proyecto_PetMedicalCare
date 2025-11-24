@@ -46,7 +46,7 @@ public class PersonaBo {
 
         return this.dao.insertar(dto);
     }
-
+    
     // MODIFICAR con parámetros (retorna filas afectadas)
     public Integer modificar(
             Integer personaId,
@@ -85,6 +85,16 @@ public class PersonaBo {
         dto.setPersonaId(personaId);
         return this.dao.eliminar(dto);
     }
+    
+    // MODIFICAR con parámetros (retorna filas afectadas)
+    // ...
+    public Integer modificarPersonaCompleta(Integer idPersona, Integer idUsuario, String username, String password, String correo, boolean activo, String nombre, String direccion, String telefono, String sexo, Integer nroDocumento, Integer ruc, String tipoDocumento) {
+        return this.dao.modificarPersonaCompleta(idPersona, idUsuario, username, password, correo, activo, nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento);
+    }
+
+    public Integer eliminarPersonaCompleta(Integer idPersona) {
+        return this.dao.eliminarPersonaCompleta(idPersona);
+    }
 
     public Integer insertarPersonaCompleta(
             String username, String password, String correo, boolean activoUsuario,
@@ -122,4 +132,6 @@ public class PersonaBo {
     public int VerificarSiLaPersonaTieneInformacion(int idServicio) {
         return this.dao.VerificarSiLaPersonaTieneInformacion(idServicio);
     }
+
+        
 }
