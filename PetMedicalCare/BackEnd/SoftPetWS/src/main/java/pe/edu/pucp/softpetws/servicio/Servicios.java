@@ -87,8 +87,9 @@ public class Servicios {
     public ArrayList<ServicioDto> ListasBusquedaAvanzada2(
             @WebParam(name = "nombre") String nombre,
             @WebParam(name = "rango") String rango,
-            @WebParam(name = "activo") String activo) {
+            @WebParam(name = "activo") String activo,
+            @WebParam(name = "tipoId") Integer tipoId) {
 
-        return servicioBo.ListasBusquedaAvanzada2(nombre, rango, activo);
+        return servicioBo.ListasBusquedaAvanzada2(nombre, rango, activo, tipoId);
     }
 }

@@ -238,8 +238,8 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
             Logger.getLogger(ServicioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-     private void InstanciarObjetoCitaProgramada() throws SQLException {
+
+    private void InstanciarObjetoCitaProgramada() throws SQLException {
         //Paso 1: agregar el objeto que quieres y crea tu InstanciarObjeto a lo melgar
         servicio = new ServicioDto();
         this.servicio.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
@@ -253,8 +253,8 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
         this.servicio.setCosto(this.resultSet.getDouble("COSTO"));
         this.servicio.setEstado(this.resultSet.getString("ESTADO"));
-        this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);        
-        
+        this.servicio.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+
     }
 
     private void AgregarObjetoCitaProgramadaALaLista(Object objetoParametros) {
@@ -269,16 +269,21 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         }
 
     }
-    
-    public ArrayList<ServicioDto> ListasBusquedaAvanzada2(ServicioDto servicio, String rango, String activo) {
+
+    // Reemplaza o actualiza tu método de búsqueda avanzada
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada2(ServicioDto servicio, String rango, String activo, Integer tipoId) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
         parametrosEntrada.put(1, servicio.getNombre());
         parametrosEntrada.put(2, rango);
         parametrosEntrada.put(3, activo);
-        String sql = "sp_buscar_servicios_avanzada_2";
-        
+        parametrosEntrada.put(4, tipoId); // Nuevo
+
+        // Usamos el SP v3
+        String sql = "sp_buscar_servicios_avanzada_v3";
+
+        // Reutilizamos tu lógica de mapeo que ya tienes (AgregarObjetoCitaProgramadaALaLista)
+        // PD: Sugiero renombrar ese método a "AgregarServicioConTipoALaLista" para que tenga sentido semántico
         return (ArrayList<ServicioDto>) this.ejecutarProcedimientoLectura(sql, parametrosEntrada, this::AgregarObjetoCitaProgramadaALaLista);
     }
-    
-    
+
 }
