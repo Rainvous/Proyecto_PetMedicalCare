@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
+import java.util.List;
 import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
@@ -90,6 +91,37 @@ public class ServicioBo {
         servicio.setNombre(nombre == null ? "" : nombre);
 
         return (ArrayList<ServicioDto>) servicioDao.ListasBusquedaAvanzada2(servicio, rango == null ? "" : rango, activo == null ? "" : activo, tipoId);
+    }
+    public ArrayList<ServicioDto> ListaBusqeudaAvanzada2ConPaginado(String nombre, String rango, Boolean activo, Integer tipo) {
+        
+        // 1. Limpieza de datos: Convertir vacíos a NULL
+        // Para nombre y rango seguimos validando cadenas vacías
+        String nombreFiltro = (nombre != null && !nombre.trim().isEmpty()) ? nombre.trim() : null;
+        String rangoFiltro = (rango != null && !rango.trim().isEmpty()) ? rango.trim() : null;
+
+        // 2. Manejo de ACTIVO
+        // Como ya recibimos un Boolean (true, false o null), lo pasamos directamente.
+        // El DAO ya sabe que 'null' significa "traer todos".
+        
+        // 3. Validación de PAGINACIÓN (tipo -> pagina)
+        // Si es nulo o <= 0, forzamos página 1
+        int numeroPagina = (tipo != null && tipo > 0) ? tipo : 1;
+
+        // 4. Llamada al DAO
+        // Pasamos el booleano 'activo' directamente
+        List<ServicioDto> listaResultado = this.servicioDao.buscarServiciosPaginados(
+            nombreFiltro, 
+            rangoFiltro, 
+            activo, 
+            numeroPagina
+        );
+
+        // 5. Conversión de retorno (List -> ArrayList)
+        if (listaResultado instanceof ArrayList) {
+            return (ArrayList<ServicioDto>) listaResultado;
+        } else {
+            return new ArrayList<>(listaResultado);
+        }
     }
 
 }

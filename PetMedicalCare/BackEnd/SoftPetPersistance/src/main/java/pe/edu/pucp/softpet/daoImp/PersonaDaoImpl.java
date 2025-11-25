@@ -686,5 +686,6 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
         return lista.get(0);
     }
+    
 
 }
