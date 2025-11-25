@@ -70,4 +70,10 @@ public class RecetaMedicaBo {
     public RecetaMedicaDto obtenerPorIdCita(int citaId) {
         return this.recetaDao.obtenerPorIdCita(citaId);
     }
+    
+    // ... otros métodos ...
+
+    public ArrayList<RecetaMedicaDto> listarPorMascotaYFecha(int mascotaId, String fecha) {
+        return this.recetaDao.listarPorMascotaYFecha(mascotaId, fecha);
+    }
 }
