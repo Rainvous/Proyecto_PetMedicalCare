@@ -25,7 +25,7 @@ public class Correo {
         
     }
     @WebMethod(operationName = "enviar_correo")
-    public int enviarCorreo_sinArchivos(String destinatariao){
+    public int enviarCorreo_sinArchivos(String destinatario){
         return this.servicioGmail.enviarCorreo_VerficarCuenta(destinatario);
     }
 }
