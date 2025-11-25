@@ -35,13 +35,14 @@ public class Correo {
         return this.servicioGmail.enviarCorreo_Credenciales(destinatario, password);
     }
     @WebMethod(operationName = "enviar_comprobante")
-    public String enviarComprobante(@WebParam(name = "destinatario") String destinatario) {
+    public String enviarComprobante(@WebParam(name = "destinatario") String destinatario,
+            @WebParam(name = "destinatario")byte[]pdfEnviado) {
         
         // MODO PRUEBA: Pasamos 'null' como pediste para probar solo el diseño HTML
-        byte[] pdfDePrueba = null; 
+         
         
         // Si ya tuvieras el PDF, aquí recibirías los bytes en lugar de null.
         
-        return this.servicioGmail.enviarCorreo_ComprobantePago(destinatario, pdfDePrueba);
+        return this.servicioGmail.enviarCorreo_ComprobantePago(destinatario, pdfEnviado);
     }
 }
