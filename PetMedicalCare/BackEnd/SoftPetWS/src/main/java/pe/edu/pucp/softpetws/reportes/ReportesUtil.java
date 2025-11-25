@@ -54,10 +54,10 @@ public class ReportesUtil {
         HashMap parametros = new HashMap();
         parametros.put("P_DOCUMENTO_ID", iddocumento);
         if ("BOLETA".equals(tipoDocumento) || "Boleta".equals(tipoDocumento) || "boleta".equals(tipoDocumento)) {
-            return invocarReporte("ComprobanteDePago", parametros);
+            return invocarReporte("boleta", parametros);
         }
         else if("FACTURA".equals(tipoDocumento) || "Factura".equals(tipoDocumento)|| "factura".equals(tipoDocumento)){
-            return invocarReporte("Factura", parametros);
+            return invocarReporte("factura", parametros);
         }
         return null;
     }
