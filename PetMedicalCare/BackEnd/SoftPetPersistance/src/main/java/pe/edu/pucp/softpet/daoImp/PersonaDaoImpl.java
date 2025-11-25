@@ -259,7 +259,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
             String username, String password, String correo, boolean activoUsuario,
             String nombre, String direccion, String telefono, String sexo,
             Integer nroDocumento, Integer ruc, String tipoDocumento) {
-        return this.insertarPersonaCompleta(username, password, correo, true, nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento, 1);
+        return this.insertarPersonaCompleta(username, password, correo, true, nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento, 4);
     }
 
     public Integer insertarPersonaCompleta(
