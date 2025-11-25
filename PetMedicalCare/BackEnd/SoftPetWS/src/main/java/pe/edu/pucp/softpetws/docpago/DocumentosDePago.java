@@ -6,6 +6,7 @@ import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.bo.DocumentoDePagoBo;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
+import pe.edu.pucp.softpetws.reportes.ReportesUtil;
 
 @WebService(serviceName = "DocumentosDePago")
 public class DocumentosDePago {
@@ -77,5 +78,11 @@ public class DocumentosDePago {
     @WebMethod(operationName = "listar_por_fecha")
     public ArrayList<DocumentoPagoDto> listarporcita(@WebParam(name = "fecha") String fecha) {
         return this.documentoBo.listarPorFechaEmision(fecha);
+    }
+    @WebMethod(operationName = "generar_comprobante_de_pago_pdf")
+    public byte [] retornarComprobanteDePago(@WebParam(name = "tipoDocumento")String TipoDocumento,
+            @WebParam(name = "idcomprobante") int idcita){
+        
+        return ReportesUtil.reporteComprobanteDePago(TipoDocumento, idcita);
     }
 }

@@ -42,6 +42,9 @@ public abstract class DaoBaseImpl {
     public void EstablecerMotorBaseDeDatos(MotorDeBaseDeDatos input) {
         tipoMotor = input;
     }
+    public String RetornarMotorDeBaseDeDatos() {
+        return this.tipoMotor.toString();
+    }
 
     public void EstablecerMotorBaseDeDatos(String input) {
         if (MotorDeBaseDeDatos.MSSQL.toString().equals(input)) {

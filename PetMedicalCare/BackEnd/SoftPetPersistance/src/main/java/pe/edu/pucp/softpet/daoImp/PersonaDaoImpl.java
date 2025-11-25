@@ -151,7 +151,11 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
         this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
-        int nroDoc = Integer.parseInt(this.resultSet.getString("NRO_DOCUMENTO"));
+        int nroDoc=0;
+        if(this.resultSet.getString("NRO_DOCUMENTO")!=null){
+             nroDoc= Integer.parseInt(this.resultSet.getString("NRO_DOCUMENTO"));
+        }
+            
         this.persona.setNroDocumento(nroDoc);
 
         // Manejo seguro de RUC (puede ser NULL en BD, retorna 0 en int)

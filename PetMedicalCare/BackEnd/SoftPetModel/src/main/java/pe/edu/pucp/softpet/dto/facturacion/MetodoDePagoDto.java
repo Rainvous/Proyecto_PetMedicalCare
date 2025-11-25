@@ -4,8 +4,24 @@ import pe.edu.pucp.softpet.dto.util.enums.TipoMetodoPago;
 
 public class MetodoDePagoDto {
 
+    /**
+     * @return the nombreStr
+     */
+    public String getNombreStr() {
+        return nombreStr;
+    }
+
+    /**
+     * @param nombreStr the nombreStr to set
+     */
+    public void setNombreStr(String nombreStr) {
+        this.nombre.valueOf(nombreStr);
+        this.nombreStr = nombreStr;
+    }
+
     private Integer metodoDePagoId;
     private TipoMetodoPago nombre;
+    private String nombreStr;
     private Boolean activo;
 
     public MetodoDePagoDto() {
@@ -46,6 +62,7 @@ public class MetodoDePagoDto {
      * @param nombre the nombre to set
      */
     public void setNombre(TipoMetodoPago nombre) {
+        this.setNombreStr(nombre.toString());
         this.nombre = nombre;
     }
 
