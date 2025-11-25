@@ -2,7 +2,9 @@ package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
@@ -181,5 +183,16 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
         } catch (SQLException ex) {
             Logger.getLogger(RecetaMedicaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    // ... otros métodos ...
+
+    public ArrayList<RecetaMedicaDto> listarPorMascotaYFecha(int mascotaId, String fecha) {
+        Map<Integer, Object> parametros = new HashMap<>();
+        parametros.put(1, mascotaId);
+        parametros.put(2, fecha); // Pasamos fecha como String 'yyyy-MM-dd'
+        
+        // Usamos tu método genérico ejecutarProcedimientoLectura
+        return (ArrayList<RecetaMedicaDto>) super.ejecutarProcedimientoLectura("sp_listar_recetas_por_mascota_y_fecha", parametros);
     }
 }

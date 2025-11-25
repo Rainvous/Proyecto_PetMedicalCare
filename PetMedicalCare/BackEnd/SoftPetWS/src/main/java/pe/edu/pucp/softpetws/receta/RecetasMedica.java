@@ -93,4 +93,13 @@ public class RecetasMedica {
 
         return this.recetaBo.obtenerPorIdCita(citaId);
     }
+    
+    // ... otros métodos ...
+
+    @WebMethod(operationName = "listar_recetas_por_mascota_y_fecha")
+    public ArrayList<RecetaMedicaDto> listarPorMascotaYFecha(
+            @WebParam(name = "mascotaId") int mascotaId,
+            @WebParam(name = "fecha") String fecha) {
+        return this.recetaBo.listarPorMascotaYFecha(mascotaId, fecha);
+    }
 }
