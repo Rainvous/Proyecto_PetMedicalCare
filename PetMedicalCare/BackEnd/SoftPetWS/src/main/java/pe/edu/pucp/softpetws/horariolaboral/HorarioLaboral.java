@@ -133,4 +133,43 @@ public class HorarioLaboral {
     private EstadoLaboral parseEstado(String estadoStr) {
         return EstadoLaboral.valueOf(estadoStr);
     }
+    
+    // ==========================================
+    //  NUEVO WEB METHOD: REGISTRAR RANGO
+    // ==========================================
+    @WebMethod(operationName = "registrar_horario_rango")
+    public Integer registrarHorarioRango(
+            @WebParam(name = "veterinarioId") int veterinarioId,
+            @WebParam(name = "fechaInicio") String fechaInicioStr, // Formato: "yyyy-MM-dd"
+            @WebParam(name = "fechaFin") String fechaFinStr,       // Formato: "yyyy-MM-dd"
+            @WebParam(name = "horaInicio") String horaInicio,      // Formato: "HH:mm"
+            @WebParam(name = "horaFin") String horaFin,            // Formato: "HH:mm"
+            @WebParam(name = "activo") boolean activo) {
+        
+        try {
+            // Parseo de fechas
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            
+            // Convertimos de String a java.util.Date y luego a java.sql.Date
+            java.util.Date uInicio = sdf.parse(fechaInicioStr);
+            java.util.Date uFin = sdf.parse(fechaFinStr);
+            
+            Date fInicio = new Date(uInicio.getTime());
+            Date fFin = new Date(uFin.getTime());
+
+            return horarioBo.registrarHorarioRango(veterinarioId, fInicio, fFin, horaInicio, horaFin, activo);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    // ==========================================
+    //  NUEVO WEB METHOD: LISTAR POR VETERINARIO
+    // ==========================================
+    @WebMethod(operationName = "listar_por_veterinario")
+    public ArrayList<HorarioLaboralDto> listarPorVeterinario(@WebParam(name = "veterinarioId") int veterinarioId) {
+        return horarioBo.listarPorVeterinario(veterinarioId);
+    }
 }
