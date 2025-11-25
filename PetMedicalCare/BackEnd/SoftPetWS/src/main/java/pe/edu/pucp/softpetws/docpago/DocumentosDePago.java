@@ -81,8 +81,8 @@ public class DocumentosDePago {
     }
     @WebMethod(operationName = "generar_comprobante_de_pago_pdf")
     public byte [] retornarComprobanteDePago(@WebParam(name = "tipoDocumento")String TipoDocumento,
-            @WebParam(name = "idcomprobante") int idcita){
+            @WebParam(name = "idcomprobante") int idcomprobante){
         
-        return ReportesUtil.reporteComprobanteDePago(TipoDocumento, idcita);
+        return ReportesUtil.reporteComprobanteDePago(TipoDocumento, idcomprobante);
     }
 }
