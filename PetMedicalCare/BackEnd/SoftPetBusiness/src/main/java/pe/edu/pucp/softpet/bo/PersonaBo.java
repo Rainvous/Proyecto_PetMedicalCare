@@ -161,23 +161,10 @@ public class PersonaBo {
            String telefono="";
            String sexo="F";
            String tipoDoc="DNI";
-         
-           System.out.println("=== Test: idrol ->"+idrol);
-           int idPersonasGest=this.dao.obtenerPersonaGuestOCero();
-           System.out.println("=== Test: id ->"+idPersonasGest);
-           if(idPersonasGest==0){
-               int idnuevo = this.dao.insertarPersonaCompleta(username, password, correo, activo, nombre, direccion, telefono, sexo, nroDocumento, RUC, tipoDoc,idrol);
-               
-                
-                return idnuevo!=0? idnuevo:0;
-           }
-           else{
-               PersonaDto person= this.dao.obtenerPersonaPorIdCompleto(idPersonasGest);
-               System.out.println("=== Test: Modificarr USUARIO DUMMY - PERSONAS ===");
-               int val=modificarPersonaCompleta(idPersonasGest, person.getUsuario().getUsuarioId(), username, password, correo, activo, nombre, direccion, telefono, sexo, nroDocumento, RUC, tipoDoc);
-               return val!=0? idPersonasGest:0;
-           }
-           
+           int idnuevo = this.dao.insertarPersonaCompleta(username, password, correo, activo, nombre, direccion, telefono, sexo, nroDocumento, RUC, tipoDoc,idrol);
+           return idnuevo;
+
+//           
            
            
            
