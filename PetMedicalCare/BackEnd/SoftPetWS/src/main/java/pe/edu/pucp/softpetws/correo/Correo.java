@@ -20,12 +20,28 @@ public class Correo {
      * This is a sample web service operation
      */
     private GmailService servicioGmail;
-    public Correo(){
-        this.servicioGmail=new GmailService();
-        
+
+    public Correo() {
+        this.servicioGmail = new GmailService();
     }
+
     @WebMethod(operationName = "enviar_correo")
-    public int enviarCorreo_sinArchivos(String destinatario){
+    public String enviarCorreo_sinArchivos(String destinatario) { // <-- OJO: String
         return this.servicioGmail.enviarCorreo_VerficarCuenta(destinatario);
+    }
+    @WebMethod(operationName = "enviar_credenciales")
+    public String enviarCredenciales(@WebParam(name = "destinatario") String destinatario, 
+                                     @WebParam(name = "password") String password){
+        return this.servicioGmail.enviarCorreo_Credenciales(destinatario, password);
+    }
+    @WebMethod(operationName = "enviar_comprobante")
+    public String enviarComprobante(@WebParam(name = "destinatario") String destinatario) {
+        
+        // MODO PRUEBA: Pasamos 'null' como pediste para probar solo el diseño HTML
+        byte[] pdfDePrueba = null; 
+        
+        // Si ya tuvieras el PDF, aquí recibirías los bytes en lugar de null.
+        
+        return this.servicioGmail.enviarCorreo_ComprobantePago(destinatario, pdfDePrueba);
     }
 }
