@@ -76,4 +76,14 @@ public class RecetaMedicaBo {
     public ArrayList<RecetaMedicaDto> listarPorMascotaYFecha(int mascotaId, String fecha) {
         return this.recetaDao.listarPorMascotaYFecha(mascotaId, fecha);
     }
+    
+    public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(String mascota, String duenio, String fechaStr, String activo) {
+        java.sql.Date fechaSql = null;
+        if (fechaStr != null && !fechaStr.isEmpty()) {
+            try {
+                fechaSql = java.sql.Date.valueOf(fechaStr);
+            } catch (Exception e) {}
+        }
+        return this.recetaDao.listarBusquedaAvanzada(mascota, duenio, fechaSql, activo);
+    }
 }
