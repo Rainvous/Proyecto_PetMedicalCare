@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.daoImp;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -207,5 +208,33 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
             try { this.cerrarConexion(); } catch (Exception e) {}
         }
         return passwordHash;
+    }
+    
+    // NUEVO: Buscar ID por Correo (Para recuperación)
+    @Override
+    public UsuarioDto obtenerPorCorreo(String correo) {
+        UsuarioDto user = null;
+        String sql = "SELECT USUARIO_ID, USERNAME, ACTIVO FROM USUARIOS WHERE CORREO = ? AND ACTIVO = 1";
+        
+        try {
+            this.abrirConexion();
+            try (PreparedStatement ps = this.conexion.prepareStatement(sql)) {
+                ps.setString(1, correo);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        user = new UsuarioDto();
+                        user.setUsuarioId(rs.getInt("USUARIO_ID"));
+                        user.setUsername(rs.getString("USERNAME"));
+                        user.setCorreo(correo);
+                        user.setActivo(true);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try { this.cerrarConexion(); } catch (Exception e) {}
+        }
+        return user;
     }
 }

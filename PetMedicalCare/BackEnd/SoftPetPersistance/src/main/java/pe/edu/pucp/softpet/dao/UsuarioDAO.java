@@ -10,4 +10,6 @@ public interface UsuarioDAO extends DaoBase<UsuarioDto> {
     String obtenerPasswordActual(int idUsuario);
     
     ArrayList<UsuarioDto> ObtenerPorCorreoYContra(String correo, String contra);
+    
+    UsuarioDto obtenerPorCorreo(String correo);
 }

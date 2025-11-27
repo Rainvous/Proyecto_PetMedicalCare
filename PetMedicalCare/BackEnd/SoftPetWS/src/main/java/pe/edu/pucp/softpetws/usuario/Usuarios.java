@@ -89,4 +89,13 @@ public class Usuarios {
         
         return this.usuarioBo.cambiarPassword(idUsuario, passwordActual, passwordNueva);
     }
+    
+    // ========================================================
+    // NUEVO MÉTODO: RECUPERAR CONTRASEÑA
+    // ========================================================
+    @WebMethod(operationName = "recuperarPassword")
+    public Integer recuperarPassword(@WebParam(name = "correo") String correo) {
+        // Llama al BO que genera la clave, la hashea y envía el correo
+        return this.usuarioBo.recuperarPassword(correo);
+    }
 }
