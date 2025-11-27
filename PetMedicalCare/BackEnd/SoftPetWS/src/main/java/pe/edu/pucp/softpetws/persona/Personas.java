@@ -148,5 +148,15 @@ public class Personas {
 
         return this.personaBo.insertarOModificarUsuarioGest(nombre, ruc, nroDocumento);
     }
+     @WebMethod(operationName = "buscar_clientes_paginados")
+    public ArrayList<PersonaDto> buscarClientesPaginados(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "nroDoc") String nroDoc,
+            @WebParam(name = "ruc") String ruc,
+            @WebParam(name = "activo") Boolean activo,
+            @WebParam(name = "pagina") int pagina) {
+        
+        return this.personaBo.buscarClientesPaginados(nombre, nroDoc, ruc, activo, pagina);
+    }
 
 }

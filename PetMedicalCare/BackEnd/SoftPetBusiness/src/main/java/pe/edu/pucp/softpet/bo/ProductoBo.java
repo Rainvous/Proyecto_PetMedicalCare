@@ -1,13 +1,14 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
+import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
 import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
 
 public class ProductoBo {
 
-    private final ProductoDaoImpl productoDao;
+    private final ProductoDao productoDao;
 
     public ProductoBo() {
         this.productoDao = new ProductoDaoImpl();
@@ -85,5 +86,12 @@ public class ProductoBo {
                 rango == null ? "" : rango,
                 activo == null ? "" : activo,
                 tipoId);
+    }
+
+    // -----------------------------------------------------------------------------------
+    // NUEVA FUNCIÓN PAGINADO: Búsqueda Paginada de Productos
+    // -----------------------------------------------------------------------------------
+    public ArrayList<ProductoDto> buscarProductosPaginados(String nombre, String rangoId, Boolean activo, int pagina) {
+        return (ArrayList<ProductoDto>) this.productoDao.buscarProductosPaginados(nombre, rangoId, activo, pagina);
     }
 }

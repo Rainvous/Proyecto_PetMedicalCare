@@ -2,13 +2,14 @@ package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
 import java.util.List;
+import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.ServicioDaoImpl;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
 
 public class ServicioBo {
 
-    private final ServicioDaoImpl servicioDao;
+    private final ServicioDao servicioDao;
 
     public ServicioBo() {
         this.servicioDao = new ServicioDaoImpl();
@@ -92,23 +93,19 @@ public class ServicioBo {
 
         return (ArrayList<ServicioDto>) servicioDao.ListasBusquedaAvanzada2(servicio, rango == null ? "" : rango, activo == null ? "" : activo, tipoId);
     }
-    public ArrayList<ServicioDto> ListaBusqeudaAvanzada2ConPaginado(String nombre, String rango, Boolean activo, Integer tipo) {
+        // -----------------------------------------------------------------------------------
+    //  FUNCIÓN ´PAGINACION: Búsqueda Paginada de SERVICIOS
+    // -----------------------------------------------------------------------------------
+    public ArrayList<ServicioDto> buscarServiciosPaginados(String nombre, String rango, Boolean activo, int pagina) {
         
-        // 1. Limpieza de datos: Convertir vacíos a NULL
-        // Para nombre y rango seguimos validando cadenas vacías
+        // 1. Limpieza de datos: Convertir vacíos a NULL para optimizar el 'IS NULL' del SQL
         String nombreFiltro = (nombre != null && !nombre.trim().isEmpty()) ? nombre.trim() : null;
         String rangoFiltro = (rango != null && !rango.trim().isEmpty()) ? rango.trim() : null;
 
-        // 2. Manejo de ACTIVO
-        // Como ya recibimos un Boolean (true, false o null), lo pasamos directamente.
-        // El DAO ya sabe que 'null' significa "traer todos".
-        
-        // 3. Validación de PAGINACIÓN (tipo -> pagina)
-        // Si es nulo o <= 0, forzamos página 1
-        int numeroPagina = (tipo != null && tipo > 0) ? tipo : 1;
+        // 2. Validación de Página: Si es <= 0, forzamos página 1
+        int numeroPagina = pagina > 0 ? pagina : 1;
 
-        // 4. Llamada al DAO
-        // Pasamos el booleano 'activo' directamente
+        // 3. Llamada al DAO (El DAO ya maneja la lógica de MySQL vs MSSQL)
         List<ServicioDto> listaResultado = this.servicioDao.buscarServiciosPaginados(
             nombreFiltro, 
             rangoFiltro, 
@@ -116,12 +113,14 @@ public class ServicioBo {
             numeroPagina
         );
 
-        // 5. Conversión de retorno (List -> ArrayList)
+        // 4. Conversión segura a ArrayList
         if (listaResultado instanceof ArrayList) {
             return (ArrayList<ServicioDto>) listaResultado;
         } else {
             return new ArrayList<>(listaResultado);
         }
     }
+    
+    
 
 }
