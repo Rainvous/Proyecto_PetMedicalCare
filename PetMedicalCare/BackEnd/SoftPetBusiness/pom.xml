@@ -39,6 +39,20 @@
             <artifactId>SoftPetPersistance</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <!-- Implementación completa de Jakarta Mail (incluye API + Impl) -->
+<dependency>
+    <groupId>org.eclipse.angus</groupId>
+    <artifactId>angus-mail</artifactId>
+    <version>2.0.3</version>
+</dependency>
+
+<!-- Jakarta Activation (Necesario para adjuntar archivos/PDFs) -->
+<dependency>
+    <groupId>org.eclipse.angus</groupId>
+    <artifactId>angus-activation</artifactId>
+    <version>2.0.2</version>
+</dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

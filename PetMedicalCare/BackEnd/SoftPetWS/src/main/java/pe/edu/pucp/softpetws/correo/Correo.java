@@ -4,10 +4,10 @@
  */
 package pe.edu.pucp.softpetws.correo;
 
-import pe.edu.pucp.softpetws.correo.GmailService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
+import pe.edu.pucp.softpet.bo.utils.GmailService;
 import pe.edu.pucp.softpetws.reportes.ReportesUtil;
 
 /**

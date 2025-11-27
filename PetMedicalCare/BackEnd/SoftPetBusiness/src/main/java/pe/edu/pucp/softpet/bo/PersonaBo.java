@@ -1,9 +1,11 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
+import pe.edu.pucp.softpet.bo.utils.GmailService;
 import pe.edu.pucp.softpet.dao.PersonaDao;
 
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
+import pe.edu.pucp.softpet.bo.utils.SecurityUtil;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 import pe.edu.pucp.softpet.dto.usuarios.RolUsuarioDto;
@@ -16,11 +18,15 @@ public class PersonaBo {
     private final PersonaDao dao;
     private final RolBO rol;
     private final RolUsuarioBo rolusuario;
+    
+    private final GmailService gmailService;
 
     public PersonaBo() {
         this.dao = new PersonaDaoImpl();
         this.rol= new RolBO();
         this.rolusuario=new RolUsuarioBo();
+        
+        this.gmailService = new GmailService(); 
     }
 
     // INSERTAR con parámetros (retorna PK autogenerada)
@@ -104,11 +110,31 @@ public class PersonaBo {
         return this.dao.eliminarPersonaCompleta(idPersona);
     }
 
+//    public Integer insertarPersonaCompleta(
+//            String username, String password, String correo, boolean activoUsuario,
+//            String nombre, String direccion, String telefono, String sexo,
+//            Integer nroDocumento, Integer ruc, String tipoDocumento) {
+//        return this.dao.insertarPersonaCompleta(username, password, correo, activoUsuario,
+//                nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento);
+//    }
+    
+    // INSERTAR CLIENTE COMPLETO SEGURO
     public Integer insertarPersonaCompleta(
-            String username, String password, String correo, boolean activoUsuario,
+            String username, String passwordIgnorada, String correo, boolean activoUsuario,
             String nombre, String direccion, String telefono, String sexo,
             Integer nroDocumento, Integer ruc, String tipoDocumento) {
-        return this.dao.insertarPersonaCompleta(username, password, correo, activoUsuario,
+        
+        // 1. Seguridad
+        String passwordRaw = SecurityUtil.generarPasswordAleatoria();
+        String passwordHashed = SecurityUtil.sha256(passwordRaw);
+        
+        // 2. Correo
+        new Thread(() -> {
+            this.gmailService.enviarCorreo_Credenciales(correo, passwordRaw);
+        }).start();
+
+        // 3. BD (Guardamos el Hash)
+        return this.dao.insertarPersonaCompleta(username, passwordHashed, correo, activoUsuario,
                 nombre, direccion, telefono, sexo, nroDocumento, ruc, tipoDocumento);
     }
 

@@ -1,5 +1,6 @@
 package pe.edu.pucp.softpet.daoImp;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -161,5 +162,50 @@ public class UsuarioDaoImpl extends DaoBaseImpl implements UsuarioDAO {
         usuario.setPassword(contra);
         String sql = generarListarPorCorreoYContra();
         return (ArrayList<UsuarioDto>) super.listarTodos(sql, this::incluirValorDeParametrosParaListarPorCorreoYContra, usuario);
+    }
+    
+    // ================================================================
+    //  NUEVOS MÉTODOS AGREGADOS PARA CAMBIO DE CONTRASEÑA
+    // ================================================================
+
+    @Override
+    public Integer actualizarPassword(int idUsuario, String nuevaPasswordHash) {
+        Integer resultado = 0;
+        String sql = "UPDATE USUARIOS SET PASSWORD = ? WHERE USUARIO_ID = ?";
+        try {
+            this.abrirConexion();
+            try (PreparedStatement ps = this.conexion.prepareStatement(sql)) {
+                ps.setString(1, nuevaPasswordHash);
+                ps.setInt(2, idUsuario);
+                resultado = ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try { this.cerrarConexion(); } catch (Exception e) {}
+        }
+        return resultado;
+    }
+
+    @Override
+    public String obtenerPasswordActual(int idUsuario) {
+        String passwordHash = null;
+        String sql = "SELECT PASSWORD FROM USUARIOS WHERE USUARIO_ID = ?";
+        try {
+            this.abrirConexion();
+            try (PreparedStatement ps = this.conexion.prepareStatement(sql)) {
+                ps.setInt(1, idUsuario);
+                try (var rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        passwordHash = rs.getString("PASSWORD");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try { this.cerrarConexion(); } catch (Exception e) {}
+        }
+        return passwordHash;
     }
 }

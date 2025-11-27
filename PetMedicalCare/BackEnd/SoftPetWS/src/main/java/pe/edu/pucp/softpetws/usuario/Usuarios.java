@@ -64,11 +64,29 @@ public class Usuarios {
         return this.usuarioBo.eliminar(usuarioId);
     }
 
+//    @WebMethod(operationName = "ObtenerPorCorreoYContra")
+//    public ArrayList<UsuarioDto> ObtenerPorCorreoYContra(
+//            @WebParam(name = "correo") String correo,
+//            @WebParam(name = "password") String contra) {
+//        
+//        return this.usuarioBo.ObtenerPorCorreoYContra(correo, contra);
+//    }
+    
     @WebMethod(operationName = "ObtenerPorCorreoYContra")
     public ArrayList<UsuarioDto> ObtenerPorCorreoYContra(
             @WebParam(name = "correo") String correo,
             @WebParam(name = "password") String contra) {
-        
+        // El BO ya se encarga de hashear 'contra' antes de buscar
         return this.usuarioBo.ObtenerPorCorreoYContra(correo, contra);
+    }
+
+    // NUEVO: Cambiar Contraseña
+    @WebMethod(operationName = "cambiarPassword")
+    public Integer cambiarPassword(
+            @WebParam(name = "idUsuario") int idUsuario,
+            @WebParam(name = "passwordActual") String passwordActual,
+            @WebParam(name = "passwordNueva") String passwordNueva) {
+        
+        return this.usuarioBo.cambiarPassword(idUsuario, passwordActual, passwordNueva);
     }
 }

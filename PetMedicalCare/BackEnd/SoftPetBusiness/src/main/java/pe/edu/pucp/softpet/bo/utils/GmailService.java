@@ -1,4 +1,4 @@
-package pe.edu.pucp.softpetws.correo;
+package pe.edu.pucp.softpet.bo.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
