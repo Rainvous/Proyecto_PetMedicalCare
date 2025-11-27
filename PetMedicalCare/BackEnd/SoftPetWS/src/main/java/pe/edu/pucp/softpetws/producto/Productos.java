@@ -88,4 +88,14 @@ public class Productos {
 
         return productoBo.ListasBusquedaProductosAvanzada(nombre, rango, activo, tipoId);
     }
+
+    @WebMethod(operationName = "buscar_productos_paginados")
+    public ArrayList<ProductoDto> buscarProductosPaginados(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "rangoId") String rangoId,
+            @WebParam(name = "activo") Boolean activo,
+            @WebParam(name = "pagina") int pagina) {
+
+        return this.productoBo.buscarProductosPaginados(nombre, rangoId, activo, pagina);
+    }
 }

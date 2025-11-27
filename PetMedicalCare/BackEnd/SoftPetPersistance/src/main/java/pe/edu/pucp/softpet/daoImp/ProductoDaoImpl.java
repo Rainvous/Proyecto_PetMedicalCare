@@ -12,6 +12,7 @@ import pe.edu.pucp.softpet.dao.ProductoDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.productos.ProductoDto;
 import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
+import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
@@ -267,4 +268,145 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
 
         return (ArrayList<ProductoDto>) super.ejecutarProcedimientoLectura("sp_buscar_productos_avanzada", parametrosEntrada);
     }
+
+    public String generarSQLparaBusquedaAvanzadaProducto() {
+        // Definimos la consulta base común para ambos motores
+        String sqlBase = "SELECT "
+                + "    p.PRODUCTO_ID, "
+                + "    p.NOMBRE, "
+                + "    p.PRESENTACION, "
+                + "    p.PRECIO_UNITARIO, "
+                + "    p.STOCK, "
+                + "    p.ACTIVO, "
+                // Datos del Tipo de Producto (Anidado)
+                + "    tp.TIPO_PRODUCTO_ID, "
+                + "    tp.NOMBRE AS NOMBRE_TIPO, "
+                + "    tp.DESCRIPCION AS DESC_TIPO, "
+                + "    tp.ACTIVO AS ACTIVO_TIPO "
+                + "FROM PRODUCTOS p "
+                + "INNER JOIN TIPOS_PRODUCTO tp ON p.TIPO_PRODUCTO_ID = tp.TIPO_PRODUCTO_ID "
+                + "WHERE "
+                + "    (? IS NULL OR p.NOMBRE LIKE CONCAT('%', ?, '%')) " // 1, 2: Nombre
+                + "    AND (? IS NULL OR p.ACTIVO = ?) " // 3, 4: Activo
+                + "    AND ( "
+                + "        ? IS NULL " // 5: Rango Check Null
+                + "        OR (? = '1' AND p.PRECIO_UNITARIO BETWEEN 0 AND 50) " // 6: Rango 1
+                + "        OR (? = '2' AND p.PRECIO_UNITARIO BETWEEN 51 AND 150) " // 7: Rango 2
+                + "        OR (? = '3' AND p.PRECIO_UNITARIO > 150) " // 8: Rango 3
+                + "    ) "
+                + "ORDER BY p.NOMBRE ASC ";
+
+        // Agregamos la paginación según el motor
+        if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+            // MySQL: LIMIT [cantidad] OFFSET [salto]
+            return sqlBase + "LIMIT ? OFFSET ?;";
+
+        } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+            // SQL Server: OFFSET [salto] ... FETCH NEXT [cantidad] ...
+            return sqlBase + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        }
+
+        return sqlBase;
+    }
+
+    public void IncluirEnSQLBusquedaAvanzadaProducto(Object parametrosVoid) {
+        Map<String, Object> params = (Map<String, Object>) parametrosVoid;
+
+        String nombre = (String) params.get("nombre");
+        String rango = (String) params.get("rango");
+        Boolean activo = (Boolean) params.get("activo");
+        Integer pagina = (Integer) params.get("pagina");
+
+        int limit = 8; // Tamaño de página fijo
+        int offset = (pagina - 1) * limit;
+
+        try {
+            int i = 1;
+
+            // --- Filtro Nombre ---
+            this.statement.setString(i++, nombre);
+            this.statement.setString(i++, nombre);
+
+            // --- Filtro Activo ---
+            if (activo == null) {
+                this.statement.setObject(i++, null);
+                this.statement.setObject(i++, null);
+            } else {
+                int valorBit = activo ? 1 : 0;
+                this.statement.setInt(i++, valorBit);
+                this.statement.setInt(i++, valorBit);
+            }
+
+            // --- Filtro Rango de Precio ---
+            this.statement.setString(i++, rango);
+            this.statement.setString(i++, rango);
+            this.statement.setString(i++, rango);
+            this.statement.setString(i++, rango);
+
+            // --- Paginación (Adaptada al Motor) ---
+            if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+                // MySQL espera: LIMIT (cantidad), OFFSET (salto)
+                this.statement.setInt(i++, limit);
+                this.statement.setInt(i++, offset);
+
+            } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+                // SQL Server espera: OFFSET (salto) ... FETCH NEXT (cantidad)
+                this.statement.setInt(i++, offset); // Primero el salto
+                this.statement.setInt(i++, limit);  // Luego la cantidad
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    // 3. Mapeo de Resultados (ResultSet -> ProductoDto)
+
+    public void AgregarProductoLigeroALaLista(Object listaVoid) {
+        List<ProductoDto> lista = (List<ProductoDto>) listaVoid;
+        try {
+            // A. Instanciar TipoProductoDto
+            TipoProductoDto tipo = new TipoProductoDto();
+            tipo.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
+            tipo.setNombre(this.resultSet.getString("NOMBRE_TIPO"));
+            tipo.setDescripcion(this.resultSet.getString("DESC_TIPO"));
+            tipo.setActivo(this.resultSet.getBoolean("ACTIVO_TIPO"));
+
+            // B. Instanciar ProductoDto
+            this.producto = new ProductoDto();
+            producto.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
+            producto.setNombre(this.resultSet.getString("NOMBRE"));
+            producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
+            producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
+            producto.setStock(this.resultSet.getInt("STOCK"));
+            producto.setActivo(this.resultSet.getBoolean("ACTIVO"));
+
+            // Asignar el objeto anidado
+            producto.setTipoProducto(tipo);
+
+            lista.add(producto);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+// 4. Método Público Orquestador
+    public List<ProductoDto> buscarProductosPaginados(String nombre, String rangoId, Boolean activo, int pagina) {
+
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("nombre", nombre);
+        parametros.put("rango", rangoId);
+        parametros.put("activo", activo);
+        parametros.put("pagina", pagina);
+
+        String sql = generarSQLparaBusquedaAvanzadaProducto();
+
+        return (List<ProductoDto>) super.listarTodos(
+                sql,
+                this::IncluirEnSQLBusquedaAvanzadaProducto,
+                parametros,
+                this::AgregarProductoLigeroALaLista
+        );
+    }
+
 }

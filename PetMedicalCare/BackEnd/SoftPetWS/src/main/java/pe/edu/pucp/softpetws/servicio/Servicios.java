@@ -82,7 +82,7 @@ public class Servicios {
             @WebParam(name = "nombreTipo") int idServicio) {
         return this.servicioBo.VerificarSiElServicioTieneInformacion(idServicio);
     }
-    
+
     @WebMethod(operationName = "ListasBusquedaAvanzada2")
     public ArrayList<ServicioDto> ListasBusquedaAvanzada2(
             @WebParam(name = "nombre") String nombre,
@@ -91,5 +91,15 @@ public class Servicios {
             @WebParam(name = "tipoId") Integer tipoId) {
 
         return servicioBo.ListasBusquedaAvanzada2(nombre, rango, activo, tipoId);
+    }
+
+    @WebMethod(operationName = "buscar_servicios_paginados")
+    public ArrayList<ServicioDto> buscarServiciosPaginados(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "rango") String rango,
+            @WebParam(name = "activo") Boolean activo,
+            @WebParam(name = "pagina") int pagina) {
+
+        return this.servicioBo.buscarServiciosPaginados(nombre, rango, activo, pagina);
     }
 }

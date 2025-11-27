@@ -12,6 +12,7 @@ import pe.edu.pucp.softpet.dao.ServicioDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
 import pe.edu.pucp.softpet.dto.servicios.TipoServicioDto;
+import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
 
@@ -287,14 +288,15 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
     }
 
     public String generarSQLparaBusquedaAvanzada() {
-        return "SELECT "
+        // 1. Definimos la consulta base (común para ambos motores)
+        // Nota: SQL Server soporta CONCAT desde la versión 2012, así que es compatible.
+        String sqlBase = "SELECT "
                 + "    s.SERVICIO_ID, "
                 + "    s.NOMBRE, "
                 + "    s.DESCRIPCION, "
                 + "    s.COSTO, "
                 + "    s.ESTADO, "
                 + "    s.ACTIVO, "
-                // Datos del Tipo de Servicio (Necesarios para el DTO anidado)
                 + "    ts.TIPO_SERVICIO_ID, "
                 + "    ts.NOMBRE AS NOMBRE_TIPO, "
                 + "    ts.DESCRIPCION AS DESC_TIPO, "
@@ -310,9 +312,21 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
                 + "        OR (? = '2' AND s.COSTO BETWEEN 51 AND 150) "
                 + "        OR (? = '3' AND s.COSTO >= 151) "
                 + "    ) "
-                + "ORDER BY s.COSTO ASC, s.NOMBRE ASC "
-                + "LIMIT ? OFFSET ?;";
+                + "ORDER BY s.COSTO ASC, s.NOMBRE ASC ";
+
+        // 2. Agregamos la paginación según el motor
+        if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+            // MySQL: LIMIT (cantidad), OFFSET (salto)
+            return sqlBase + "LIMIT ? OFFSET ?;";
+
+        } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+            // MSSQL: OFFSET (salto) ROWS FETCH NEXT (cantidad) ROWS ONLY
+            return sqlBase + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        }
+
+        return sqlBase;
     }
+
     // Este método reemplaza la lógica de "instanciarObjetoDelResultSet" para esta consulta específica
     public void AgregarServicioLigeroALaLista2(Object listaVoid) {
         List<ServicioDto> lista = (List<ServicioDto>) listaVoid;
@@ -332,12 +346,11 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
             servicio.setCosto(this.resultSet.getDouble("COSTO"));
             servicio.setEstado(this.resultSet.getString("ESTADO"));
             servicio.setActivo(this.resultSet.getBoolean("ACTIVO"));
-            
+
             // Inyectamos el objeto anidado
             servicio.setTipoServicio(tipo);
 
             // NOTA: Los campos de auditoría (usuarioCreador, etc.) se quedan en null por defecto.
-
             lista.add(servicio);
 
         } catch (SQLException ex) {
@@ -362,31 +375,40 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         try {
             int i = 1;
 
+            // ... [Tus seteos de NOMBRE, ACTIVO y RANGO se mantienen igual] ...
+            // (Solo copio el final para ahorrar espacio)
             // --- FILTRO NOMBRE ---
             this.statement.setString(i++, nombre);
             this.statement.setString(i++, nombre);
 
             // --- FILTRO ACTIVO ---
-            // Convertimos el Boolean de Java a Integer (1 o 0) para la BD
             if (activo == null) {
                 this.statement.setObject(i++, null);
                 this.statement.setObject(i++, null);
             } else {
                 int activoInt = activo ? 1 : 0;
-                this.statement.setInt(i++, activoInt); // Para el check IS NULL
-                this.statement.setInt(i++, activoInt); // Para la comparación
+                this.statement.setInt(i++, activoInt);
+                this.statement.setInt(i++, activoInt);
             }
 
             // --- FILTRO RANGO DE PRECIO ---
-            // Se repite 4 veces por la lógica del SQL (check null + 3 condiciones OR)
             this.statement.setString(i++, rango);
             this.statement.setString(i++, rango);
             this.statement.setString(i++, rango);
             this.statement.setString(i++, rango);
 
-            // --- PAGINACIÓN ---
-            this.statement.setInt(i++, limit);
-            this.statement.setInt(i++, offset);
+            // --- PAGINACIÓN (AQUI ESTA EL CAMBIO CLAVE) ---
+            if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+                // MySQL espera: LIMIT ?, OFFSET ?
+                this.statement.setInt(i++, limit);  // Cantidad a mostrar
+                this.statement.setInt(i++, offset); // Cantidad a saltar
+
+            } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+                // SQL Server espera: OFFSET ? ... FETCH NEXT ? ...
+                // El orden se invierte respecto a MySQL
+                this.statement.setInt(i++, offset); // Cantidad a saltar va PRIMERO
+                this.statement.setInt(i++, limit);  // Cantidad a mostrar va SEGUNDO
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(ServicioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);

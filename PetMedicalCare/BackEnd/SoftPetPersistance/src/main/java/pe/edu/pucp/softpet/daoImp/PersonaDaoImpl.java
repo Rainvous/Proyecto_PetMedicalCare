@@ -151,11 +151,11 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
         this.persona.setNombre(this.resultSet.getString("NOMBRE"));
         this.persona.setDireccion(this.resultSet.getString("DIRECCION"));
         this.persona.setTelefono(this.resultSet.getString("TELEFONO"));
-        int nroDoc=0;
-        if(this.resultSet.getString("NRO_DOCUMENTO")!=null){
-             nroDoc= Integer.parseInt(this.resultSet.getString("NRO_DOCUMENTO"));
+        int nroDoc = 0;
+        if (this.resultSet.getString("NRO_DOCUMENTO") != null) {
+            nroDoc = Integer.parseInt(this.resultSet.getString("NRO_DOCUMENTO"));
         }
-            
+
         this.persona.setNroDocumento(nroDoc);
 
         // Manejo seguro de RUC (puede ser NULL en BD, retorna 0 en int)
@@ -403,9 +403,9 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
             this.persona.setActivo(activo);
 
             // Llamada al método del padre que usa nuestra conexión abierta
-            resultado=super.modificarEnTransaccion(this.conexion);
+            resultado = super.modificarEnTransaccion(this.conexion);
 
-           // resultado = 1; // Éxito
+            // resultado = 1; // Éxito
             this.comitarTransaccion();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -543,7 +543,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
         String sql;
 
-        if (this.tipoMotor==MotorDeBaseDeDatos.MSSQL) {
+        if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
 
             // ---------- SQL SERVER (MSSQL) ----------
             sql
@@ -686,6 +686,138 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
         return lista.get(0);
     }
-    
+
+    // PAGINACION
+    public String generarSQLparaBusquedaClientesAvanzada() {
+        // Definimos la consulta base común para ambos motores
+        String sqlBase = "SELECT "
+                + "    p.PERSONA_ID, "
+                + "    p.NOMBRE, "
+                + "    p.DIRECCION, "
+                + "    p.TELEFONO, "
+                + "    p.SEXO, "
+                + "    p.NRO_DOCUMENTO, "
+                + "    p.RUC, "
+                + "    p.TIPO_DOCUMENTO, "
+                + "    p.ACTIVO, "
+                + "    u.USUARIO_ID, "
+                + "    u.USERNAME, "
+                + "    u.CORREO "
+                + "FROM PERSONAS p "
+                + "INNER JOIN USUARIOS u ON p.USUARIO_ID = u.USUARIO_ID "
+                + "WHERE "
+                + "    (? IS NULL OR p.NOMBRE LIKE CONCAT('%', ?, '%')) " // 1, 2: Nombre
+                + "    AND (? IS NULL OR p.NRO_DOCUMENTO LIKE CONCAT('%', ?, '%')) " // 3, 4: DNI
+                + "    AND (? IS NULL OR p.RUC LIKE CONCAT('%', ?, '%')) " // 5, 6: RUC
+                + "    AND (? IS NULL OR p.ACTIVO = ?) " // 7, 8: Activo
+                // Lógica para EXCLUIR empleados (Admin, Vet, Recepcion) - Solo Clientes
+                + "    AND NOT EXISTS ( "
+                + "        SELECT 1 "
+                + "        FROM ROLES_USUARIO RU "
+                + "        JOIN ROLES R ON RU.ROL_ID = R.ROL_ID "
+                + "        WHERE RU.USUARIO_ID = p.USUARIO_ID "
+                + "        AND R.NOMBRE IN ('ADMIN', 'VET', 'RECEPCION') "
+                + "    ) "
+                + "ORDER BY p.NOMBRE ASC ";
+
+        // Agregamos la paginación según el motor
+        if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+            // MySQL: LIMIT [cantidad] OFFSET [salto]
+            return sqlBase + "LIMIT ? OFFSET ?;";
+
+        } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+            // SQL Server: OFFSET [salto] ... FETCH NEXT [cantidad] ...
+            return sqlBase + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        }
+
+        return sqlBase;
+    }
+
+    // 2. Inyección de Parámetros
+    public void IncluirEnSQLBusquedaClientes(Object parametrosVoid) {
+        Map<String, Object> params = (Map<String, Object>) parametrosVoid;
+
+        String nombre = (String) params.get("nombre");
+        String nroDoc = (String) params.get("nroDoc");
+        String ruc = (String) params.get("ruc");
+        Boolean activo = (Boolean) params.get("activo");
+        Integer pagina = (Integer) params.get("pagina");
+
+        int limit = 8; // Tamaño de página
+        int offset = (pagina - 1) * limit;
+
+        try {
+            int i = 1;
+
+            // --- Filtro Nombre ---
+            this.statement.setString(i++, nombre);
+            this.statement.setString(i++, nombre);
+
+            // --- Filtro Nro Documento ---
+            this.statement.setString(i++, nroDoc);
+            this.statement.setString(i++, nroDoc);
+
+            // --- Filtro RUC ---
+            this.statement.setString(i++, ruc);
+            this.statement.setString(i++, ruc);
+
+            // --- Filtro Activo ---
+            if (activo == null) {
+                this.statement.setObject(i++, null);
+                this.statement.setObject(i++, null);
+            } else {
+                int valorBit = activo ? 1 : 0;
+                this.statement.setInt(i++, valorBit);
+                this.statement.setInt(i++, valorBit);
+            }
+
+            // --- Paginación (Adaptada al Motor) ---
+            if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+                // MySQL espera: LIMIT (cantidad), OFFSET (salto)
+                this.statement.setInt(i++, limit);
+                this.statement.setInt(i++, offset);
+
+            } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+                // SQL Server espera: OFFSET (salto) ... FETCH NEXT (cantidad)
+                this.statement.setInt(i++, offset); // Primero el salto
+                this.statement.setInt(i++, limit);  // Luego la cantidad
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // 3. Método de Mapeo
+    public void AgregarClientePaginadoALaLista(Object listaVoid) {
+        List<PersonaDto> lista = (List<PersonaDto>) listaVoid;
+        try {
+            // Reutilizamos tu método robusto que ya maneja NULOS, ENUMS y USUARIOS
+            this.instanciarObjetoDelResultSet();
+            lista.add(this.persona);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // 4. Método Público Orquestador (Este llamarás desde el BO)
+    public List<PersonaDto> buscarClientesPaginados(String nombre, String nroDoc, String ruc, Boolean activo, int pagina) {
+
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("nombre", nombre);
+        parametros.put("nroDoc", nroDoc);
+        parametros.put("ruc", ruc);
+        parametros.put("activo", activo);
+        parametros.put("pagina", pagina);
+
+        String sql = generarSQLparaBusquedaClientesAvanzada();
+
+        return (List<PersonaDto>) super.listarTodos(
+                sql,
+                this::IncluirEnSQLBusquedaClientes,
+                parametros,
+                this::AgregarClientePaginadoALaLista
+        );
+    }
 
 }

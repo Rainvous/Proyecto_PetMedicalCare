@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Verificación de Cuenta</title>
+    <style>
+        /* Estilos básicos en línea para que Gmail los lea bien */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { background-color: #ffffff; padding: 30px; border-radius: 8px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .header { color: #2c3e50; text-align: center; }
+        .button { background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+        .footer { margin-top: 30px; font-size: 12px; color: #888; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="header">¡Hola! Recupera tu cuenta en SoftPet</h2>
+        <p>Hemos recibido una solicitud para restablecer tu contraseña o verificar tu cuenta.</p>
+        <p>Para continuar, por favor haz clic en el siguiente botón:</p>
+        
+        <div style="text-align: center;">
+            <a href="{{LINK_RECUPERACION}}" class="button" style="color: white;">Verificar mi Cuenta</a>
+        </div>
+
+        <p>Si el botón no funciona, copia y pega este enlace en tu navegador:</p>
+        <p style="word-break: break-all; color: #007bff;">{{LINK_RECUPERACION}}</p>
+        
+        <div class="footer">
+            <p>Si tú no solicitaste esto, por favor ignora este correo.</p>
+            <p>&copy; 2025 SoftPet Veterinaria System</p>
+        </div>
+    </div>
+</body>
+</html>

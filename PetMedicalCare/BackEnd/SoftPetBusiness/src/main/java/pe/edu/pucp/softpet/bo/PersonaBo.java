@@ -1,6 +1,7 @@
 package pe.edu.pucp.softpet.bo;
 
 import java.util.ArrayList;
+import pe.edu.pucp.softpet.dao.PersonaDao;
 
 import pe.edu.pucp.softpet.daoImp.PersonaDaoImpl;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
@@ -12,7 +13,7 @@ import pe.edu.pucp.softpet.dto.util.enums.TipoRol;
 
 public class PersonaBo {
 
-    private final PersonaDaoImpl dao;
+    private final PersonaDao dao;
     private final RolBO rol;
     private final RolUsuarioBo rolusuario;
 
@@ -168,6 +169,12 @@ public class PersonaBo {
            
            
            
+    }
+    // -----------------------------------------------------------------------------------
+    //  FUNCIÓN ´PAGINACION: Búsqueda Paginada de Clientes
+    // -----------------------------------------------------------------------------------
+    public ArrayList<PersonaDto> buscarClientesPaginados(String nombre, String nroDoc, String ruc, Boolean activo, int pagina) {
+        return (ArrayList<PersonaDto>) this.dao.buscarClientesPaginados(nombre, nroDoc, ruc, activo, pagina);
     }
     
 
