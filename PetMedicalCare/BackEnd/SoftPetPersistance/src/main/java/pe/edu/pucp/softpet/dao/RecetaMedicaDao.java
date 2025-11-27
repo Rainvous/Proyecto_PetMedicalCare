@@ -9,5 +9,7 @@ public interface RecetaMedicaDao extends DaoBase<RecetaMedicaDto> {
     
     ArrayList<RecetaMedicaDto> listarPorMascotaYFecha(int mascotaId, String fecha);
     
-    ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(String mascota, String duenio, java.sql.Date fecha, String activo);
+    //ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(String mascota, String duenio, java.sql.Date fecha, String activo);
+
+    ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(RecetaMedicaDto dto, String fechaStr, String activo);
 }

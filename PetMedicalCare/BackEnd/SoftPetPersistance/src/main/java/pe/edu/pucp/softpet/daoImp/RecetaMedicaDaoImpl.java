@@ -1,5 +1,6 @@
 package pe.edu.pucp.softpet.daoImp;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +11,8 @@ import java.util.logging.Logger;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
 public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao {
@@ -104,42 +107,83 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
     protected void instanciarObjetoDelResultSet() throws SQLException {
         this.recetaMedica = new RecetaMedicaDto();
         this.recetaMedica.setRecetaMedicaId(this.resultSet.getInt("RECETA_MEDICA_ID"));
-        
-        // 1. Instanciamos la Cita Base
+
+        // 1. Instanciar Cita Base
         CitaAtencionDto cita = new CitaAtencionDto();
         cita.setCitaId(this.resultSet.getInt("CITA_ID"));
-        
-        // 2. BLOQUE DE HIDRATACIÓN INTELIGENTE (Para Búsqueda Avanzada)
-        // Intentamos leer las columnas del JOIN (Mascota, Dueño).
-        // Si el SP no las trae (ej. en un listar normal), el catch captura el error y no pasa nada.
+
+        // 2. HIDRATACIÓN INTELIGENTE (Datos del JOIN en SP de Búsqueda)
         try {
-            // Instanciar y llenar Mascota
-            pe.edu.pucp.softpet.dto.mascotas.MascotaDto mascota = new pe.edu.pucp.softpet.dto.mascotas.MascotaDto();
-            // Nota: Asegúrate que el nombre de columna coincida con el 'AS' del SP
-            mascota.setNombre(this.resultSet.getString("MASCOTA_NOMBRE")); 
+            // Datos de Mascota
+            MascotaDto mascota = new MascotaDto();
+            mascota.setNombre(this.resultSet.getString("MASCOTA_NOMBRE")); // Viene del SP
+            // Datos Extra opcionales para mostrar en grilla si quisieras
+            // mascota.setEspecie(this.resultSet.getString("MASCOTA_DETALLE")); 
+
+            // Datos de Dueño
+            PersonaDto duenio = new PersonaDto();
+            duenio.setNombre(this.resultSet.getString("DUENIO_NOMBRE")); // Viene del SP
             
-            // Instanciar y llenar Dueño (Persona)
-            pe.edu.pucp.softpet.dto.personas.PersonaDto duenio = new pe.edu.pucp.softpet.dto.personas.PersonaDto();
-            duenio.setNombre(this.resultSet.getString("DUENIO_NOMBRE"));
-            
-            // Enlazar la cadena: Receta -> Cita -> Mascota -> Dueño
+            // Vincular
             mascota.setPersona(duenio);
             cita.setMascota(mascota);
             
+            // Fecha Cita (Opcional)
+            // cita.setFechaHoraInicio(this.resultSet.getTimestamp("FECHA_CITA"));
+
         } catch (SQLException e) {
-            // Ignoramos el error si las columnas no existen en este ResultSet
-            // Esto permite reutilizar este método para consultas simples y complejas
+            // Si las columnas no existen (listarTodos simple), se ignora silenciosamente
         }
         
         this.recetaMedica.setCita(cita);
 
-        // 3. Datos propios de la Receta
         this.recetaMedica.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
         this.recetaMedica.setVigenciaHasta(this.resultSet.getDate("VIGENCIA_HASTA"));
         this.recetaMedica.setDiagnostico(this.resultSet.getString("DIAGNOSTICO"));
         this.recetaMedica.setObservaciones(this.resultSet.getString("OBSERVACIONES"));
         this.recetaMedica.setActivo(this.resultSet.getInt("ACTIVO") == 1);
     }
+    
+//    @Override
+//    protected void instanciarObjetoDelResultSet() throws SQLException {
+//        this.recetaMedica = new RecetaMedicaDto();
+//        this.recetaMedica.setRecetaMedicaId(this.resultSet.getInt("RECETA_MEDICA_ID"));
+//        
+//        // 1. Instanciamos la Cita Base
+//        CitaAtencionDto cita = new CitaAtencionDto();
+//        cita.setCitaId(this.resultSet.getInt("CITA_ID"));
+//        
+//        // 2. BLOQUE DE HIDRATACIÓN INTELIGENTE (Para Búsqueda Avanzada)
+//        // Intentamos leer las columnas del JOIN (Mascota, Dueño).
+//        // Si el SP no las trae (ej. en un listar normal), el catch captura el error y no pasa nada.
+//        try {
+//            // Instanciar y llenar Mascota
+//            pe.edu.pucp.softpet.dto.mascotas.MascotaDto mascota = new pe.edu.pucp.softpet.dto.mascotas.MascotaDto();
+//            // Nota: Asegúrate que el nombre de columna coincida con el 'AS' del SP
+//            mascota.setNombre(this.resultSet.getString("MASCOTA_NOMBRE")); 
+//            
+//            // Instanciar y llenar Dueño (Persona)
+//            pe.edu.pucp.softpet.dto.personas.PersonaDto duenio = new pe.edu.pucp.softpet.dto.personas.PersonaDto();
+//            duenio.setNombre(this.resultSet.getString("DUENIO_NOMBRE"));
+//            
+//            // Enlazar la cadena: Receta -> Cita -> Mascota -> Dueño
+//            mascota.setPersona(duenio);
+//            cita.setMascota(mascota);
+//            
+//        } catch (SQLException e) {
+//            // Ignoramos el error si las columnas no existen en este ResultSet
+//            // Esto permite reutilizar este método para consultas simples y complejas
+//        }
+//        
+//        this.recetaMedica.setCita(cita);
+//
+//        // 3. Datos propios de la Receta
+//        this.recetaMedica.setFechaEmision(this.resultSet.getDate("FECHA_EMISION"));
+//        this.recetaMedica.setVigenciaHasta(this.resultSet.getDate("VIGENCIA_HASTA"));
+//        this.recetaMedica.setDiagnostico(this.resultSet.getString("DIAGNOSTICO"));
+//        this.recetaMedica.setObservaciones(this.resultSet.getString("OBSERVACIONES"));
+//        this.recetaMedica.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+//    }
 
     @Override
     protected void limpiarObjetoDelResultSet() {
@@ -238,23 +282,46 @@ public class RecetaMedicaDaoImpl extends DaoBaseImpl implements RecetaMedicaDao 
         return (ArrayList<RecetaMedicaDto>) super.ejecutarProcedimientoLectura("sp_listar_recetas_por_mascota_y_fecha", parametros);
     }
     
-    @Override
-    public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(String mascota, String duenio, java.sql.Date fecha, String activo) {
+    // NUEVO: Búsqueda Avanzada (Llama al SP)
+    public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(RecetaMedicaDto dto, String fechaStr, String activo) {
         Map<Integer, Object> parametros = new HashMap<>();
+        // Mapeamos parámetros del SP: mascota, duenio, fecha, activo
+        // Usamos dto.getCita().getMascota().getNombre() para pasar el nombre mascota
+        // y dto.getCita().getMascota().getPersona().getNombre() para duenio
+        
+        String mascota = (dto.getCita()!=null && dto.getCita().getMascota()!=null) ? dto.getCita().getMascota().getNombre() : "";
+        String duenio = (dto.getCita()!=null && dto.getCita().getMascota()!=null && dto.getCita().getMascota().getPersona()!=null) ? dto.getCita().getMascota().getPersona().getNombre() : "";
+        
         parametros.put(1, mascota);
         parametros.put(2, duenio);
-        parametros.put(3, fecha);
-        parametros.put(4, activo);
         
-        // Usamos un método custom o el genérico si soporta el mapeo complejo.
-        // Nota: Como el SP devuelve columnas extra (MASCOTA_NOMBRE, etc.), 
-        // tu instanciarObjetoDelResultSet debería intentar leerlas o ignorarlas.
-        // Para este caso, usaremos el mapeo estándar, asumiendo que en el Frontend
-        // usaremos los IDs para buscar nombres o que el DTO tiene campos auxiliares.
-        // *Mejor aún*: En el DTO de Receta, asegúrate de que el objeto Cita->Mascota->Persona esté instanciado.
-        
+        if(fechaStr != null && !fechaStr.isEmpty()) 
+            parametros.put(3, Date.valueOf(fechaStr));
+        else 
+            parametros.put(3, null);
+            
+        parametros.put(4, activo.equals("-1") ? null : activo); // "1", "0" o null
+
         return (ArrayList<RecetaMedicaDto>) super.ejecutarProcedimientoLectura("sp_buscar_recetas_avanzada", parametros);
     }
+    
+//    @Override
+//    public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(String mascota, String duenio, java.sql.Date fecha, String activo) {
+//        Map<Integer, Object> parametros = new HashMap<>();
+//        parametros.put(1, mascota);
+//        parametros.put(2, duenio);
+//        parametros.put(3, fecha);
+//        parametros.put(4, activo);
+//        
+//        // Usamos un método custom o el genérico si soporta el mapeo complejo.
+//        // Nota: Como el SP devuelve columnas extra (MASCOTA_NOMBRE, etc.), 
+//        // tu instanciarObjetoDelResultSet debería intentar leerlas o ignorarlas.
+//        // Para este caso, usaremos el mapeo estándar, asumiendo que en el Frontend
+//        // usaremos los IDs para buscar nombres o que el DTO tiene campos auxiliares.
+//        // *Mejor aún*: En el DTO de Receta, asegúrate de que el objeto Cita->Mascota->Persona esté instanciado.
+//        
+//        return (ArrayList<RecetaMedicaDto>) super.ejecutarProcedimientoLectura("sp_buscar_recetas_avanzada", parametros);
+//    }
     
     // SOBREESCRIBIR instanciarObjetoDelResultSet PARA LEER LOS JOIN (OPCIONAL PERO RECOMENDADO)
     // Si no lo haces, tendrás que hacer "hidratación" en C# como hicimos antes. 

@@ -103,6 +103,15 @@ public class RecetasMedica {
         return this.recetaBo.listarPorMascotaYFecha(mascotaId, fecha);
     }
     
+//    @WebMethod(operationName = "listar_busqueda_avanzada")
+//    public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(
+//            @WebParam(name = "mascota") String mascota,
+//            @WebParam(name = "duenio") String duenio,
+//            @WebParam(name = "fecha") String fecha,
+//            @WebParam(name = "activo") String activo) {
+//        return this.recetaBo.listarBusquedaAvanzada(mascota, duenio, fecha, activo);
+//    }
+    
     @WebMethod(operationName = "listar_busqueda_avanzada")
     public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(
             @WebParam(name = "mascota") String mascota,

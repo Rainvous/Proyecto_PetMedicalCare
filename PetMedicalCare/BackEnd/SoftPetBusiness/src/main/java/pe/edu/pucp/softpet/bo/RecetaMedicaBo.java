@@ -5,6 +5,8 @@ import java.sql.Date;
 import pe.edu.pucp.softpet.dao.RecetaMedicaDao;
 import pe.edu.pucp.softpet.daoImp.RecetaMedicaDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.recetas.RecetaMedicaDto;
 
 public class RecetaMedicaBo {
@@ -77,13 +79,21 @@ public class RecetaMedicaBo {
         return this.recetaDao.listarPorMascotaYFecha(mascotaId, fecha);
     }
     
-    public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(String mascota, String duenio, String fechaStr, String activo) {
-        java.sql.Date fechaSql = null;
-        if (fechaStr != null && !fechaStr.isEmpty()) {
-            try {
-                fechaSql = java.sql.Date.valueOf(fechaStr);
-            } catch (Exception e) {}
-        }
-        return this.recetaDao.listarBusquedaAvanzada(mascota, duenio, fechaSql, activo);
+    // NUEVO
+    public ArrayList<RecetaMedicaDto> listarBusquedaAvanzada(String nombreMascota, String nombreDuenio, String fecha, String activo) {
+        RecetaMedicaDto filtro = new RecetaMedicaDto();
+        
+        CitaAtencionDto cita = new CitaAtencionDto();
+        MascotaDto mascota = new MascotaDto();
+        mascota.setNombre(nombreMascota);
+        
+        PersonaDto persona = new PersonaDto();
+        persona.setNombre(nombreDuenio);
+        
+        mascota.setPersona(persona);
+        cita.setMascota(mascota);
+        filtro.setCita(cita);
+
+        return this.recetaDao.listarBusquedaAvanzada(filtro, fecha, activo);
     }
 }
