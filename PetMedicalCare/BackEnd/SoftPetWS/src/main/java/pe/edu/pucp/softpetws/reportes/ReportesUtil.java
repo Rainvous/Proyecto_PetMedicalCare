@@ -51,7 +51,7 @@ public class ReportesUtil {
 
     public static byte[] reporteComprobanteDePago(String tipoDocumento, int iddocumento) {
         HashMap parametros = new HashMap();
-        String motor = DBManager.devolverMotor();
+        String motor = DBManager.DevolverMotorString();
         parametros.put("P_DOCUMENTO_ID", iddocumento);
         if (motor.equals("MSSQL")) {
             if ("BOLETA".equals(tipoDocumento) || "Boleta".equals(tipoDocumento) || "boleta".equals(tipoDocumento)) {

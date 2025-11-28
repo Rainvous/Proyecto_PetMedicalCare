@@ -31,11 +31,11 @@ public class DBManagerTest {
         System.out.println("getConnection");
         DBManager dBManager;
         Connection conexion;
-        dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MSSQL);
+        dBManager = DBManager.getInstance();
         conexion = dBManager.getConnection();
         assertNotNull(conexion);
-        dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MYSQL);
-        conexion = dBManager.getConnection();
-        assertNotNull(conexion);
+//        dBManager = DBManager.getInstance(MotorDeBaseDeDatos.MYSQL);
+//        conexion = dBManager.getConnection();
+//        assertNotNull(conexion);
     }
 }

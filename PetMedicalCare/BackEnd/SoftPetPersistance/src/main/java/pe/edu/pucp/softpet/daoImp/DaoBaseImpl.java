@@ -103,7 +103,7 @@ public abstract class DaoBaseImpl {
     public DaoBaseImpl(String nombre_tabla) {
         this.nombre_tabla = nombre_tabla;
         this.retornarLlavePrimaria = false;
-
+        this.tipoMotor = DBManager.DevolverMotorEnum();
         this.incluirListaDeColumnas();
     }
 
@@ -115,7 +115,7 @@ public abstract class DaoBaseImpl {
     protected abstract void configurarListaDeColumnas();
 
     protected void abrirConexion() {
-        this.conexion = DBManager.getInstance(this.tipoMotor).getConnection();
+        this.conexion = DBManager.getInstance().getConnection();
     }
 
     protected void cerrarConexion() throws SQLException {

@@ -35,9 +35,7 @@ public abstract class DBManager {
         }
         return DBManager.dbManager;
     }
-    public static String devolverMotor(){
-        return motorElegido.toString();
-    }
+
     public static DBManager getInstance(MotorDeBaseDeDatos tipobase) {
         if (DBManager.dbManager == null || tipobase != motorElegido) {
             DBManager.dbManager = null;
@@ -73,14 +71,8 @@ public abstract class DBManager {
         if (DBManager.dbManager == null) {
             if (DBManager.obtenerMotorDeBaseDeDato() == MotorDeBaseDeDatos.MYSQL) {
                 DBManager.dbManager = new DBManagerMySQL();
-                DBManager.motorElegido = MotorDeBaseDeDatos.MYSQL;
-                DBManager.prefijo = "_mysql";
-                System.out.println("ENTRO A MYSQL");
             } else {
                 DBManager.dbManager = new DBManagerMSSQL();
-                motorElegido = MotorDeBaseDeDatos.MSSQL;
-                DBManager.prefijo = "_mssql";
-                System.out.println("ENTRO A MSSQL");
 
             }
             // System.out.println("-> " + DBManager.obtenerMotorDeBaseDeDato().toString());
@@ -95,8 +87,8 @@ public abstract class DBManager {
             // System.out.println("Contraseña: " + this.contraseña);
             // System.out.println("getURL(): " + getURL());
             // System.out.println(Cifrado.descifrarMD5(this.contraseña));
-            // this.conexion = DriverManager.getConnection(getURL(), this.usuario, Cifrado.descifrarMD5(this.contraseña));
-            this.conexion = DriverManager.getConnection(getURL(), this.usuario, this.contraseña);
+            this.conexion = DriverManager.getConnection(getURL(), this.usuario, Cifrado.descifrarMD5(this.contraseña));
+            //this.conexion = DriverManager.getConnection(getURL(), this.usuario, this.contraseña);
             // System.out.println("url: " + getURL());
             // System.out.println("conext: " + this.conexion);
         } catch (ClassNotFoundException | SQLException ex) {
@@ -113,13 +105,13 @@ public abstract class DBManager {
             // El archivo de configuración se encuentra en la carpeta src/main/resources/jdbc.properties            
             String nmArchivoConf = "/" + ARCHIVO_CONFIGURACION;
             properties.load(this.getClass().getResourceAsStream(nmArchivoConf));
-            this.driver = properties.getProperty("driver" + prefijo);
-            this.tipo_de_driver = properties.getProperty("tipo_de_driver" + prefijo);
-            this.base_de_datos = properties.getProperty("base_de_datos" + prefijo);
-            this.nombre_de_host = properties.getProperty("nombre_de_host" + prefijo);
-            this.puerto = properties.getProperty("puerto" + prefijo);
+            this.driver = properties.getProperty("driver");
+            this.tipo_de_driver = properties.getProperty("tipo_de_driver");
+            this.base_de_datos = properties.getProperty("base_de_datos");
+            this.nombre_de_host = properties.getProperty("nombre_de_host");
+            this.puerto = properties.getProperty("puerto");
             this.usuario = properties.getProperty("usuario");
-            this.contraseña = properties.getProperty("contra" + prefijo);
+            this.contraseña = properties.getProperty("contrasenha");
         } catch (FileNotFoundException ex) {
             System.err.println("Error al leer el archivo de propiedades - " + ex);
         } catch (IOException ex) {
@@ -133,11 +125,13 @@ public abstract class DBManager {
             String nmArchivoConf = "/" + ARCHIVO_CONFIGURACION;
 
             properties.load(DBManager.class.getResourceAsStream(nmArchivoConf));
-            String tipo_de_driver = properties.getProperty("tipo_de_driver_mysql");
+            String tipo_de_driver = properties.getProperty("tipo_de_driver");
 
             if (tipo_de_driver.equals("jdbc:mysql")) {
+                motorElegido = MotorDeBaseDeDatos.MYSQL;
                 return MotorDeBaseDeDatos.MYSQL;
             } else {
+                motorElegido = MotorDeBaseDeDatos.MSSQL;
                 return MotorDeBaseDeDatos.MSSQL;
             }
         } catch (FileNotFoundException ex) {
@@ -146,6 +140,14 @@ public abstract class DBManager {
             System.err.println("Error al leer el archivo de propiedades - " + ex);
         }
         return null;
+    }
+    
+    public static MotorDeBaseDeDatos DevolverMotorEnum(){
+        return motorElegido;
+    }
+    
+    public static String DevolverMotorString(){
+        return motorElegido.toString();
     }
 
     public abstract String retornarSQLParaUltimoAutoGenerado();
