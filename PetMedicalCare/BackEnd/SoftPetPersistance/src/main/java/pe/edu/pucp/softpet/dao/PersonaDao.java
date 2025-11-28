@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
+import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 
 public interface PersonaDao extends DaoBase<PersonaDto> {
 
@@ -53,4 +54,6 @@ public interface PersonaDao extends DaoBase<PersonaDto> {
     // VERIFICACIONES
     // -------------------------------------------------------------------------
     int VerificarSiLaPersonaTieneInformacion(int idServicio);
+    public RolDto obtenerRolPorPersonaId(int personaId);
+     public String obtenerCorreoPorPersonaId(int personaId) ;
 }

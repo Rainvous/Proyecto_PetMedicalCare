@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import pe.edu.pucp.softpet.daoImp.util.Columna;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dao.PersonaDao;
+import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 import pe.edu.pucp.softpet.dto.usuarios.UsuarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.Sexo;
 import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
@@ -22,6 +23,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
 
     private PersonaDto persona;
     private int idGuest;
+    private RolDto rol;
 
     public PersonaDaoImpl() {
         super("PERSONAS");
@@ -818,6 +820,144 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
                 parametros,
                 this::AgregarClientePaginadoALaLista
         );
+    }
+
+    //OBTENER ROL DE PERSONA
+    public String generarSQLparaObtenerRolPorPersonaId() {
+        String sql = "SELECT ";
+
+        // MSSQL usa TOP al inicio
+        if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+            sql += "TOP 1 ";
+        }
+
+        sql += "    r.ROL_ID, "
+                + "    r.NOMBRE, "
+                + "    r.ACTIVO "
+                + "FROM PERSONAS p "
+                + "INNER JOIN USUARIOS u ON p.USUARIO_ID = u.USUARIO_ID "
+                + "INNER JOIN ROLES_USUARIO ru ON u.USUARIO_ID = ru.USUARIO_ID "
+                + "INNER JOIN ROLES r ON ru.ROL_ID = r.ROL_ID "
+                + "WHERE p.PERSONA_ID = ? ";
+
+        // MySQL usa LIMIT al final
+        if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+            sql += "LIMIT 1";
+        }
+
+        return sql + ";";
+    }
+
+    // 2. Inyección de Parámetros
+    public void IncluirEnSQLRolPorPersonaId(Object parametroId) {
+        Integer personaId = (Integer) parametroId;
+        try {
+            // Solo tenemos un parámetro: el ID de la persona
+            this.statement.setInt(1, personaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(RolDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // 3. Mapeo de Resultados (ResultSet -> RolDto)
+    public void AgregarRolALaLista(Object listaVoid) {
+        List<RolDto> lista = (List<RolDto>) listaVoid;
+        try {
+            this.rol = new RolDto();
+
+            // Mapeamos los campos directos de la tabla ROLES
+            this.rol.setRolId(this.resultSet.getInt("ROL_ID"));
+            this.rol.setNombre(this.resultSet.getString("NOMBRE"));
+
+            // Manejo seguro del booleano (tinyint en BD)
+            // Asumiendo que en tu BD 1 es true y 0 es false
+            this.rol.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+
+            lista.add(this.rol);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RolDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // 4. Método Público Orquestador
+    public RolDto obtenerRolPorPersonaId(int personaId) {
+
+        String sql = generarSQLparaObtenerRolPorPersonaId();
+
+        // Usamos listarTodos para aprovechar la infraestructura, aunque solo venga 1
+        List<RolDto> lista = (List<RolDto>) super.listarTodos(
+                sql,
+                this::IncluirEnSQLRolPorPersonaId,
+                personaId, // Pasamos el Integer directamente
+                this::AgregarRolALaLista
+        );
+
+        if (lista != null && !lista.isEmpty()) {
+            return lista.get(0); // Devolvemos el primer rol encontrado
+        }
+
+        return null; // Si no tiene rol o no existe la persona
+    }
+
+    // 1. Generar SQL
+    public String generarSQLparaObtenerCorreoPorPersonaId() {
+        String sql = "SELECT ";
+
+        if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+            sql += "TOP 1 ";
+        }
+
+        sql += "u.CORREO "
+                + "FROM PERSONAS p "
+                + "INNER JOIN USUARIOS u ON p.USUARIO_ID = u.USUARIO_ID "
+                + "WHERE p.PERSONA_ID = ? ";
+
+        if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+            sql += "LIMIT 1";
+        }
+        return sql + ";";
+    }
+
+    // 2. Inyección de Parámetros (Podríamos reusar el anterior, pero creamos uno propio por orden)
+    public void IncluirEnSQLCorreoPorPersonaId(Object parametroId) {
+        Integer personaId = (Integer) parametroId;
+        try {
+            this.statement.setInt(1, personaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(RolDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // 3. Mapeo de Resultados (ResultSet -> String)
+    public void AgregarCorreoALaLista(Object listaVoid) {
+        List<String> lista = (List<String>) listaVoid;
+        try {
+            // Obtenemos directamente la columna CORREO
+            String correo = this.resultSet.getString("CORREO");
+            lista.add(correo);
+        } catch (SQLException ex) {
+            Logger.getLogger(RolDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // 4. Método Público Orquestador
+    public String obtenerCorreoPorPersonaId(int personaId) {
+
+        String sql = generarSQLparaObtenerCorreoPorPersonaId();
+
+        // Notar que casteamos a List<String>
+        List<String> lista = (List<String>) super.listarTodos(
+                sql,
+                this::IncluirEnSQLCorreoPorPersonaId,
+                personaId,
+                this::AgregarCorreoALaLista
+        );
+
+        if (lista != null && !lista.isEmpty()) {
+            return lista.get(0);
+        }
+        return null; // No se encontró correo
     }
 
 }

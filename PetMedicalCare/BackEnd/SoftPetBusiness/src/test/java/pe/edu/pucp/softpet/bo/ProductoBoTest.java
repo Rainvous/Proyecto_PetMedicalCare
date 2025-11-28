@@ -1,23 +1,23 @@
-//package pe.edu.pucp.softpet.bo;
-//
-//import java.util.ArrayList;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
-//import pe.edu.pucp.softpet.dto.productos.ProductoDto;
-//
-//public class ProductoBoTest {
-//
-//    private final ProductoBo productoBo;
-//
-//    public ProductoBoTest() {
-//        this.productoBo = new ProductoBo();
-//    }
-//
-//    /**
-//     * Test of insertar method, of class ProductoBo.
-//     */
-//    @Test
-//    public void testInsertar() {
+package pe.edu.pucp.softpet.bo;
+
+import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import pe.edu.pucp.softpet.dto.productos.ProductoDto;
+
+public class ProductoBoTest {
+
+    private final ProductoBo productoBo;
+
+    public ProductoBoTest() {
+        this.productoBo = new ProductoBo();
+    }
+
+    /**
+     * Test of insertar method, of class ProductoBo.
+     */
+    @Test
+    public void testInsertar() {
 //        System.out.println("=== Test: Insertar - PRODUCTOS ===");
 //
 //        // Datos de entrada (nombre y presentacion con espacios/minúsculas)
@@ -36,13 +36,13 @@
 //
 //        // Solo verificar que el ID generado sea válido
 //        assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
-//    }
-//
-//    /**
-//     * Test of modificar method, of class ProductoBO.
-//     */
-//    @Test
-//    public void testModificar() {
+    }
+
+    /**
+     * Test of modificar method, of class ProductoBO.
+     */
+    @Test
+    public void testModificar() {
 //        System.out.println("=== Test: Modificar - PRODUCTOS ===");
 //
 //        int idProductoExistente = 8; // Asumimos que ya existe
@@ -59,13 +59,13 @@
 //        );
 //
 //        assertTrue(resultado > 0, "El método modificar debe retornar true si la actualización fue exitosa");
-//    }
-//
-//    /**
-//     * Test of eliminar method, of class ProductoBo.
-//     */
-//    @Test
-//    public void testEliminar() {
+    }
+
+    /**
+     * Test of eliminar method, of class ProductoBo.
+     */
+    @Test
+    public void testEliminar() {
 //        System.out.println("=== Test: Eliminar - PRODUCTOS ===");
 //
 //        // Insertamos un producto temporal para eliminarlo
@@ -84,13 +84,13 @@
 //        // Ahora eliminamos
 //        Integer resultado = productoBo.eliminar(idGenerado);
 //        assertTrue(resultado > 0, "El método eliminar debe retornar true si la eliminación fue exitosa");
-//    }
-//
-//    /**
-//     * Test of obtenerPorId method, of class ProductoBo.
-//     */
-//    @Test
-//    public void testObtenerPorId() {
+    }
+
+    /**
+     * Test of obtenerPorId method, of class ProductoBo.
+     */
+    @Test
+    public void testObtenerPorId() {
 //        System.out.println("=== Test: Obtener por ID - PRODUCTOS ===");
 //
 //        int idProductoExistente = 1; // Asegurarse de que este ID exista
@@ -98,34 +98,56 @@
 //
 //        assertNotNull(producto, "El producto no debe ser null");
 //        assertEquals(idProductoExistente, producto.getProductoId(), "El ID obtenido no coincide");
-//    }
-//
-//    /**
-//     * Test of listarTodos method, of class ProductoBo.
-//     */
-//    @Test
-//    public void testListarTodos() {
-//        System.out.println("=== Test: Listar todos - PRODUCTOS ===");
-//
-//        ArrayList<ProductoDto> lista = productoBo.listarTodos();
-//
-//        // Validaciones básicas
-//        assertNotNull(lista, "La lista no debe ser null");
-//        assertFalse(lista.isEmpty(), "La lista no debe estar vacía");
-//
-//        // Mostrar en consola los productos obtenidos
-//        System.out.println("Productos encontrados: " + lista.size());
-//        for (ProductoDto p : lista) {
-//            System.out.println("-----------------------------------");
-//            System.out.println("ID: " + p.getProductoId());
-//            System.out.println("Nombre: " + p.getNombre());
-//            System.out.println("Presentación: " + p.getPresentacion());
-//            System.out.println("Precio: " + p.getPrecioUnitario());
-//            System.out.println("Activo: " + (p.getActivo() ? "Sí" : "No"));
-//            System.out.println("Stock: " + p.getStock());
-//            if (p.getTipoProducto() != null) {
-//                System.out.println("Tipo de producto ID: " + p.getTipoProducto().getTipoProductoId());
-//            }
-//        }
-//    }
-//}
+    }
+
+    /**
+     * Test of listarTodos method, of class ProductoBo.
+     */
+    @Test
+    public void testListarTodos() {
+        System.out.println("=== Test: Listar todos - PRODUCTOS ===");
+
+        ArrayList<ProductoDto> lista = productoBo.buscarProductosPaginados("", "", true, 1);
+
+        // Validaciones básicas
+        assertNotNull(lista, "La lista no debe ser null");
+        assertFalse(lista.isEmpty(), "La lista no debe estar vacía");
+
+        // Mostrar en consola los productos obtenidos
+        System.out.println("Productos encontrados: " + lista.size());
+        for (ProductoDto p : lista) {
+            System.out.println("-----------------------------------");
+            System.out.println("ID: " + p.getProductoId());
+            System.out.println("Nombre: " + p.getNombre());
+            System.out.println("Presentación: " + p.getPresentacion());
+            System.out.println("Precio: " + p.getPrecioUnitario());
+            System.out.println("Activo: " + (p.getActivo() ? "Sí" : "No"));
+            System.out.println("Stock: " + p.getStock());
+            if (p.getTipoProducto() != null) {
+                System.out.println("Tipo de producto ID: " + p.getTipoProducto().getTipoProductoId());
+            }
+        }
+        
+        System.out.println("=== Test: Listar todos 2222 - PRODUCTOS ===");
+         lista = productoBo.buscarProductosPaginados("", "", true, 2);
+
+        // Validaciones básicas
+        assertNotNull(lista, "La lista no debe ser null");
+        assertFalse(lista.isEmpty(), "La lista no debe estar vacía");
+
+        // Mostrar en consola los productos obtenidos
+        System.out.println("Productos encontrados: " + lista.size());
+        for (ProductoDto p : lista) {
+            System.out.println("-----------------------------------");
+            System.out.println("ID: " + p.getProductoId());
+            System.out.println("Nombre: " + p.getNombre());
+            System.out.println("Presentación: " + p.getPresentacion());
+            System.out.println("Precio: " + p.getPrecioUnitario());
+            System.out.println("Activo: " + (p.getActivo() ? "Sí" : "No"));
+            System.out.println("Stock: " + p.getStock());
+            if (p.getTipoProducto() != null) {
+                System.out.println("Tipo de producto ID: " + p.getTipoProducto().getTipoProductoId());
+            }
+        }
+    }
+}

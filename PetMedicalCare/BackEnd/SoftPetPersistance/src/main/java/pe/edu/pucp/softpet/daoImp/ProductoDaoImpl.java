@@ -278,7 +278,6 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
                 + "    p.PRECIO_UNITARIO, "
                 + "    p.STOCK, "
                 + "    p.ACTIVO, "
-                // Datos del Tipo de Producto (Anidado)
                 + "    tp.TIPO_PRODUCTO_ID, "
                 + "    tp.NOMBRE AS NOMBRE_TIPO, "
                 + "    tp.DESCRIPCION AS DESC_TIPO, "
@@ -287,7 +286,7 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
                 + "INNER JOIN TIPOS_PRODUCTO tp ON p.TIPO_PRODUCTO_ID = tp.TIPO_PRODUCTO_ID "
                 + "WHERE "
                 + "    (? IS NULL OR p.NOMBRE LIKE CONCAT('%', ?, '%')) " // 1, 2: Nombre
-                + "    AND (? IS NULL OR p.ACTIVO = ?) " // 3, 4: Activo
+                + "    AND (? IS NULL OR p.ACTIVO = ?) " // 3, 4: Activo (Si pasas NULL trae todo, si pasas 1 solo activos)
                 + "    AND ( "
                 + "        ? IS NULL " // 5: Rango Check Null
                 + "        OR (? = '1' AND p.PRECIO_UNITARIO BETWEEN 0 AND 50) " // 6: Rango 1
@@ -296,107 +295,111 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
                 + "    ) "
                 + "ORDER BY p.NOMBRE ASC ";
 
-        // Agregamos la paginación según el motor
         if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
-            // MySQL: LIMIT [cantidad] OFFSET [salto]
             return sqlBase + "LIMIT ? OFFSET ?;";
-
         } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
-            // SQL Server: OFFSET [salto] ... FETCH NEXT [cantidad] ...
             return sqlBase + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
         }
-
         return sqlBase;
     }
 
     public void IncluirEnSQLBusquedaAvanzadaProducto(Object parametrosVoid) {
         Map<String, Object> params = (Map<String, Object>) parametrosVoid;
 
-        String nombre = (String) params.get("nombre");
-        String rango = (String) params.get("rango");
-        Boolean activo = (Boolean) params.get("activo");
+        // Validación y limpieza: Convertir cadenas vacías "" a NULL para que el SQL funcione
+        String nombreRaw = (String) params.get("nombre");
+        // Nombre vacío funciona con LIKE '%%'
+
+        String rangoRaw = (String) params.get("rango");
+        String rango = (rangoRaw != null && !rangoRaw.isEmpty()) ? rangoRaw : null; // Rango vacío DEBE ser NULL
+
+        Integer activoInt = (Integer) params.get("activo"); // Recibimos Integer (1, 0 o NULL)
         Integer pagina = (Integer) params.get("pagina");
 
-        int limit = 8; // Tamaño de página fijo
+        // CAMBIO SOLICITADO: Limite de 9 items por página
+        int limit = 9;
         int offset = (pagina - 1) * limit;
 
         try {
             int i = 1;
 
             // --- Filtro Nombre ---
-            this.statement.setString(i++, nombre);
-            this.statement.setString(i++, nombre);
+            // Si es nulo o vacío, pasamos null al primer '?' para activar el IS NULL
+            // O podemos pasar "" al segundo '?' para que el LIKE '%%' funcione.
+            // Opción segura: Si hay dato, se usa. Si no, se manda null para activar el IS NULL.
+            String nombreParam = (nombreRaw != null && !nombreRaw.isEmpty()) ? nombreRaw : null;
+
+            this.statement.setString(i++, nombreParam); // Para el check IS NULL
+            // Si nombreParam es null, pasamos "" al concat para evitar problemas, aunque el IS NULL ya nos salvó.
+            this.statement.setString(i++, (nombreParam != null) ? nombreParam : "");
 
             // --- Filtro Activo ---
-            if (activo == null) {
+            if (activoInt == null) {
                 this.statement.setObject(i++, null);
                 this.statement.setObject(i++, null);
             } else {
-                int valorBit = activo ? 1 : 0;
-                this.statement.setInt(i++, valorBit);
-                this.statement.setInt(i++, valorBit);
+                this.statement.setInt(i++, activoInt);
+                this.statement.setInt(i++, activoInt);
             }
 
             // --- Filtro Rango de Precio ---
-            this.statement.setString(i++, rango);
-            this.statement.setString(i++, rango);
-            this.statement.setString(i++, rango);
-            this.statement.setString(i++, rango);
+            // IMPORTANTE: Aquí usamos la variable 'rango' que ya saneamos a NULL si venía vacía
+            this.statement.setString(i++, rango); // Check IS NULL
+            this.statement.setString(i++, rango); // Comp 1
+            this.statement.setString(i++, rango); // Comp 2
+            this.statement.setString(i++, rango); // Comp 3
 
-            // --- Paginación (Adaptada al Motor) ---
+            // --- Paginación ---
             if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
-                // MySQL espera: LIMIT (cantidad), OFFSET (salto)
                 this.statement.setInt(i++, limit);
                 this.statement.setInt(i++, offset);
-
             } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
-                // SQL Server espera: OFFSET (salto) ... FETCH NEXT (cantidad)
-                this.statement.setInt(i++, offset); // Primero el salto
-                this.statement.setInt(i++, limit);  // Luego la cantidad
+                this.statement.setInt(i++, offset);
+                this.statement.setInt(i++, limit);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // 3. Mapeo de Resultados (ResultSet -> ProductoDto)
 
     public void AgregarProductoLigeroALaLista(Object listaVoid) {
         List<ProductoDto> lista = (List<ProductoDto>) listaVoid;
         try {
-            // A. Instanciar TipoProductoDto
             TipoProductoDto tipo = new TipoProductoDto();
             tipo.setTipoProductoId(this.resultSet.getInt("TIPO_PRODUCTO_ID"));
             tipo.setNombre(this.resultSet.getString("NOMBRE_TIPO"));
             tipo.setDescripcion(this.resultSet.getString("DESC_TIPO"));
             tipo.setActivo(this.resultSet.getBoolean("ACTIVO_TIPO"));
 
-            // B. Instanciar ProductoDto
             this.producto = new ProductoDto();
-            producto.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
-            producto.setNombre(this.resultSet.getString("NOMBRE"));
-            producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
-            producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
-            producto.setStock(this.resultSet.getInt("STOCK"));
-            producto.setActivo(this.resultSet.getBoolean("ACTIVO"));
+            this.producto.setProductoId(this.resultSet.getInt("PRODUCTO_ID"));
+            this.producto.setNombre(this.resultSet.getString("NOMBRE"));
+            this.producto.setPresentacion(this.resultSet.getString("PRESENTACION"));
+            this.producto.setPrecioUnitario(this.resultSet.getDouble("PRECIO_UNITARIO"));
+            this.producto.setStock(this.resultSet.getInt("STOCK"));
+            this.producto.setActivo(this.resultSet.getBoolean("ACTIVO"));
+            this.producto.setTipoProducto(tipo);
 
-            // Asignar el objeto anidado
-            producto.setTipoProducto(tipo);
-
-            lista.add(producto);
-
+            lista.add(this.producto);
         } catch (SQLException ex) {
             Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-// 4. Método Público Orquestador
+    // 4. Método Público Orquestador
     public List<ProductoDto> buscarProductosPaginados(String nombre, String rangoId, Boolean activo, int pagina) {
 
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", nombre);
         parametros.put("rango", rangoId);
-        parametros.put("activo", activo);
+
+        Integer activoParam = null;
+        if (activo != null && activo) {
+            activoParam = 1;
+        }
+
+        parametros.put("activo", activoParam);
         parametros.put("pagina", pagina);
 
         String sql = generarSQLparaBusquedaAvanzadaProducto();
@@ -408,5 +411,4 @@ public class ProductoDaoImpl extends DaoBaseImpl implements ProductoDao {
                 this::AgregarProductoLigeroALaLista
         );
     }
-
 }

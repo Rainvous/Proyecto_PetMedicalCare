@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.bo.PersonaBo;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
+import pe.edu.pucp.softpet.dto.usuarios.RolDto;
 
 @WebService(serviceName = "Personas")
 public class Personas {
@@ -158,5 +159,13 @@ public class Personas {
         
         return this.personaBo.buscarClientesPaginados(nombre, nroDoc, ruc, activo, pagina);
     }
-
+    @WebMethod(operationName = "obtener_rol_de_cliente")
+    public RolDto obtenerRolPorPersonaId(@WebParam(name = "idpersona") int personaId){
+        return this.personaBo.obtenerRolPorPersonaId(personaId);
+    }
+    @WebMethod(operationName = "obtener_correo_cliente")
+     public String obtenerCorreoPorPersonaId(@WebParam(name = "idpersona")int personaId){
+         return this.personaBo.obtenerCorreoPorPersonaId(personaId);
+         
+     }
 }

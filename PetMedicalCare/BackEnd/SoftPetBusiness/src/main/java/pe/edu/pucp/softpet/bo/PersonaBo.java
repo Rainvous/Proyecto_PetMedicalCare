@@ -222,5 +222,10 @@ public class PersonaBo {
     public ArrayList<PersonaDto> buscarClientesPaginados(String nombre, String nroDoc, String ruc, Boolean activo, int pagina) {
         return (ArrayList<PersonaDto>) this.dao.buscarClientesPaginados(nombre, nroDoc, ruc, activo, pagina);
     }
-
+    public RolDto obtenerRolPorPersonaId(int personaId){
+        return this.dao.obtenerRolPorPersonaId(personaId);
+    }
+    public String obtenerCorreoPorPersonaId(int personaId) {
+        return this.dao.obtenerCorreoPorPersonaId(personaId);
+    }
 }

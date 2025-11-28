@@ -287,9 +287,7 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
         return (ArrayList<ServicioDto>) this.ejecutarProcedimientoLectura(sql, parametrosEntrada, this::AgregarObjetoCitaProgramadaALaLista);
     }
 
-    public String generarSQLparaBusquedaAvanzada() {
-        // 1. Definimos la consulta base (común para ambos motores)
-        // Nota: SQL Server soporta CONCAT desde la versión 2012, así que es compatible.
+         public String generarSQLparaBusquedaAvanzada() {
         String sqlBase = "SELECT "
                 + "    s.SERVICIO_ID, "
                 + "    s.NOMBRE, "
@@ -305,7 +303,7 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
                 + "INNER JOIN TIPOS_SERVICIO ts ON s.TIPO_SERVICIO_ID = ts.TIPO_SERVICIO_ID "
                 + "WHERE "
                 + "    (? IS NULL OR s.NOMBRE LIKE CONCAT('%', ?, '%')) "
-                + "    AND (? IS NULL OR s.ACTIVO = ?) "
+                + "    AND (? IS NULL OR s.ACTIVO = ?) " // Si pasas NULL trae todo, si pasas 1 solo activos
                 + "    AND ( "
                 + "        ? IS NULL "
                 + "        OR (? = '1' AND s.COSTO BETWEEN 0 AND 50) "
@@ -314,127 +312,119 @@ public class ServicioDaoImpl extends DaoBaseImpl implements ServicioDao {
                 + "    ) "
                 + "ORDER BY s.COSTO ASC, s.NOMBRE ASC ";
 
-        // 2. Agregamos la paginación según el motor
         if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
-            // MySQL: LIMIT (cantidad), OFFSET (salto)
             return sqlBase + "LIMIT ? OFFSET ?;";
-
         } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
-            // MSSQL: OFFSET (salto) ROWS FETCH NEXT (cantidad) ROWS ONLY
             return sqlBase + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
         }
-
         return sqlBase;
     }
 
-    // Este método reemplaza la lógica de "instanciarObjetoDelResultSet" para esta consulta específica
-    public void AgregarServicioLigeroALaLista2(Object listaVoid) {
-        List<ServicioDto> lista = (List<ServicioDto>) listaVoid;
+    public void IncluirEnSQLBusquedaAvanzada(Object parametrosVoid) {
+        Map<String, Object> params = (Map<String, Object>) parametrosVoid;
+
+        // Validación y limpieza: Convertir cadenas vacías "" a NULL
+        String nombreRaw = (String) params.get("nombre");
+        // Nombre vacío funciona con LIKE '%%'
+        
+        String rangoRaw = (String) params.get("rango");
+        String rango = (rangoRaw != null && !rangoRaw.isEmpty()) ? rangoRaw : null; // Rango vacío DEBE ser NULL
+
+        Integer activoInt = (Integer) params.get("activo"); // Recibimos Integer (1, 0 o NULL)
+        Integer pagina = (Integer) params.get("pagina");
+
+        int limit = 9;
+        int offset = (pagina - 1) * limit;
+
         try {
-            // 1. Llenar el TipoServicioDto (Anidado)
-            TipoServicioDto tipo = new TipoServicioDto();
-            tipo.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
-            tipo.setNombre(this.resultSet.getString("NOMBRE_TIPO")); // Ojo al alias del SQL
-            tipo.setDescripcion(this.resultSet.getString("DESC_TIPO")); // Ojo al alias
-            tipo.setActivo(this.resultSet.getBoolean("ACTIVO_TIPO")); // Ojo al alias
+            int i = 1;
 
-            // 2. Llenar el ServicioDto Principal
-            servicio = new ServicioDto();
-            servicio.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
-            servicio.setNombre(this.resultSet.getString("NOMBRE"));
-            servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
-            servicio.setCosto(this.resultSet.getDouble("COSTO"));
-            servicio.setEstado(this.resultSet.getString("ESTADO"));
-            servicio.setActivo(this.resultSet.getBoolean("ACTIVO"));
+            // --- Filtro Nombre ---
+            // Si es nulo o vacío, pasamos null al primer '?' para activar el IS NULL
+            // O podemos pasar "" al segundo '?' para que el LIKE '%%' funcione.
+            // Opción segura: Si hay dato, se usa. Si no, se manda null para activar el IS NULL.
+            String nombreParam = (nombreRaw != null && !nombreRaw.isEmpty()) ? nombreRaw : null;
+            
+            this.statement.setString(i++, nombreParam); // IS NULL check
+            // Si nombreParam es null, pasamos "" al concat para evitar problemas, aunque el IS NULL ya nos salvó.
+            this.statement.setString(i++, (nombreParam != null) ? nombreParam : ""); 
 
-            // Inyectamos el objeto anidado
-            servicio.setTipoServicio(tipo);
+            // --- Filtro Activo ---
+            if (activoInt == null) {
+                this.statement.setObject(i++, null);
+                this.statement.setObject(i++, null);
+            } else {
+                this.statement.setInt(i++, activoInt); 
+                this.statement.setInt(i++, activoInt);
+            }
 
-            // NOTA: Los campos de auditoría (usuarioCreador, etc.) se quedan en null por defecto.
-            lista.add(servicio);
+            // --- Filtro Rango de Precio ---
+            // IMPORTANTE: Aquí usamos la variable 'rango' que ya saneamos a NULL si venía vacía
+            this.statement.setString(i++, rango);
+            this.statement.setString(i++, rango);
+            this.statement.setString(i++, rango);
+            this.statement.setString(i++, rango);
+
+            // --- Paginación ---
+            if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
+                this.statement.setInt(i++, limit);
+                this.statement.setInt(i++, offset);
+            } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+                this.statement.setInt(i++, offset);
+                this.statement.setInt(i++, limit);
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(ServicioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void IncluirEnSQLBusquedaAvanzada(Object parametrosVoid) {
-        // Desempaquetamos el Map
-        Map<String, Object> params = (Map<String, Object>) parametrosVoid;
-
-        // Extraemos los datos individuales
-        String nombre = (String) params.get("nombre");
-        String rango = (String) params.get("rango"); // "1", "2", "3", ""
-        Boolean activo = (Boolean) params.get("activo");
-        Integer pagina = (Integer) params.get("pagina");
-
-        // Calculamos paginación
-        int limit = 8;
-        int offset = (pagina - 1) * limit;
-
+    public void AgregarServicioLigeroALaLista2(Object listaVoid) {
+        List<ServicioDto> lista = (List<ServicioDto>) listaVoid;
         try {
-            int i = 1;
+            TipoServicioDto tipo = new TipoServicioDto();
+            tipo.setTipoServicioId(this.resultSet.getInt("TIPO_SERVICIO_ID"));
+            tipo.setNombre(this.resultSet.getString("NOMBRE_TIPO"));
+            tipo.setDescripcion(this.resultSet.getString("DESC_TIPO"));
+            tipo.setActivo(this.resultSet.getBoolean("ACTIVO_TIPO"));
 
-            // ... [Tus seteos de NOMBRE, ACTIVO y RANGO se mantienen igual] ...
-            // (Solo copio el final para ahorrar espacio)
-            // --- FILTRO NOMBRE ---
-            this.statement.setString(i++, nombre);
-            this.statement.setString(i++, nombre);
+            this.servicio = new ServicioDto();
+            this.servicio.setServicioId(this.resultSet.getInt("SERVICIO_ID"));
+            this.servicio.setNombre(this.resultSet.getString("NOMBRE"));
+            this.servicio.setDescripcion(this.resultSet.getString("DESCRIPCION"));
+            this.servicio.setCosto(this.resultSet.getDouble("COSTO"));
+            this.servicio.setEstado(this.resultSet.getString("ESTADO"));
+            this.servicio.setActivo(this.resultSet.getBoolean("ACTIVO"));
+            this.servicio.setTipoServicio(tipo);
 
-            // --- FILTRO ACTIVO ---
-            if (activo == null) {
-                this.statement.setObject(i++, null);
-                this.statement.setObject(i++, null);
-            } else {
-                int activoInt = activo ? 1 : 0;
-                this.statement.setInt(i++, activoInt);
-                this.statement.setInt(i++, activoInt);
-            }
-
-            // --- FILTRO RANGO DE PRECIO ---
-            this.statement.setString(i++, rango);
-            this.statement.setString(i++, rango);
-            this.statement.setString(i++, rango);
-            this.statement.setString(i++, rango);
-
-            // --- PAGINACIÓN (AQUI ESTA EL CAMBIO CLAVE) ---
-            if (this.tipoMotor == MotorDeBaseDeDatos.MYSQL) {
-                // MySQL espera: LIMIT ?, OFFSET ?
-                this.statement.setInt(i++, limit);  // Cantidad a mostrar
-                this.statement.setInt(i++, offset); // Cantidad a saltar
-
-            } else if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
-                // SQL Server espera: OFFSET ? ... FETCH NEXT ? ...
-                // El orden se invierte respecto a MySQL
-                this.statement.setInt(i++, offset); // Cantidad a saltar va PRIMERO
-                this.statement.setInt(i++, limit);  // Cantidad a mostrar va SEGUNDO
-            }
-
+            lista.add(this.servicio);
         } catch (SQLException ex) {
             Logger.getLogger(ServicioDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public List<ServicioDto> buscarServiciosPaginados(String nombre, String rangoId, Boolean activo, int pagina) {
-
-        // Usamos un Map para no crear una clase DTO nueva solo para la búsqueda
+        
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", nombre);
         parametros.put("rango", rangoId);
-        parametros.put("activo", activo);
+        
+        Integer activoParam = null;
+        if (activo != null && activo) {
+            activoParam = 1;
+        } 
+        // Si activo es false o null, activoParam queda null (Traer Todo)
+
+        parametros.put("activo", activoParam);
         parametros.put("pagina", pagina);
 
         String sql = generarSQLparaBusquedaAvanzada();
 
-        // Llamamos al método padre pasándole el Map
-        List<ServicioDto> lista = (List<ServicioDto>) super.listarTodos(
+        return (List<ServicioDto>) super.listarTodos(
                 sql,
                 this::IncluirEnSQLBusquedaAvanzada,
-                parametros, // Pasamos el Map aquí
+                parametros,
                 this::AgregarServicioLigeroALaLista2
         );
-
-        return lista;
     }
-
 }

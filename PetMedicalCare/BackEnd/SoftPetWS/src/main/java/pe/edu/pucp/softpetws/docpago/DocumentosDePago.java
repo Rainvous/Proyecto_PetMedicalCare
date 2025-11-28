@@ -5,6 +5,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import java.util.ArrayList;
 import pe.edu.pucp.softpet.bo.DocumentoDePagoBo;
+import pe.edu.pucp.softpet.bo.utils.GmailService;
 import pe.edu.pucp.softpet.dto.facturacion.DocumentoPagoDto;
 import pe.edu.pucp.softpetws.reportes.ReportesUtil;
 
@@ -12,9 +13,11 @@ import pe.edu.pucp.softpetws.reportes.ReportesUtil;
 public class DocumentosDePago {
 
     private final DocumentoDePagoBo documentoBo;
+    private final GmailService gmailservice;
 
     public DocumentosDePago() {
         this.documentoBo = new DocumentoDePagoBo();
+        this.gmailservice= new GmailService();
     }
 
     @WebMethod(operationName = "insertar_Documento_De_Pago")
@@ -75,14 +78,23 @@ public class DocumentosDePago {
     ) {
         return this.documentoBo.GeneracionDeSiguienteBoletaOFactura(tipoDocumento);
     }
+
     @WebMethod(operationName = "listar_por_fecha")
     public ArrayList<DocumentoPagoDto> listarporcita(@WebParam(name = "fecha") String fecha) {
         return this.documentoBo.listarPorFechaEmision(fecha);
     }
+
     @WebMethod(operationName = "generar_comprobante_de_pago_pdf")
-    public byte [] retornarComprobanteDePago(@WebParam(name = "tipoDocumento")String TipoDocumento,
-            @WebParam(name = "idcomprobante") int idcomprobante){
-        
+    public byte[] retornarComprobanteDePago(@WebParam(name = "tipoDocumento") String TipoDocumento,
+            @WebParam(name = "idcomprobante") int idcomprobante) {
+
         return ReportesUtil.reporteComprobanteDePago(TipoDocumento, idcomprobante);
     }
+    @WebMethod(operationName = "enviar_comprobante_al_correo")
+    public String enviarComprobanteAlCorreo(@WebParam(name = "correo")String correo, @WebParam(name = "tipoDocumento") String TipoDocumento,
+            @WebParam(name = "idcomprobante") int idcomprobante) {
+        byte[] archivo= ReportesUtil.reporteComprobanteDePago(TipoDocumento, idcomprobante);
+        return gmailservice.enviarCorreo_ComprobantePago(correo, archivo);
+    }
+
 }
