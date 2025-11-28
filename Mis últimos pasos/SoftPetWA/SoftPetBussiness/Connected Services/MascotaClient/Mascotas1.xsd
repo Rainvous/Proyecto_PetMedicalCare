@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://mascota.softpetws.pucp.edu.pe/" targetNamespace="http://mascota.softpetws.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IOException" type="tns:IOException" />
+  <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="ListasBusquedaAvanzada" type="tns:ListasBusquedaAvanzada" />
+  <xs:element name="ListasBusquedaAvanzadaResponse" type="tns:ListasBusquedaAvanzadaResponse" />
+  <xs:element name="VerificarSiLaMascotaTieneInformacion" type="tns:VerificarSiLaMascotaTieneInformacion" />
+  <xs:element name="VerificarSiLaMascotaTieneInformacionResponse" type="tns:VerificarSiLaMascotaTieneInformacionResponse" />
+  <xs:element name="eliminar_mascota" type="tns:eliminar_mascota" />
+  <xs:element name="eliminar_mascotaResponse" type="tns:eliminar_mascotaResponse" />
+  <xs:element name="insertar_mascota" type="tns:insertar_mascota" />
+  <xs:element name="insertar_mascotaResponse" type="tns:insertar_mascotaResponse" />
+  <xs:element name="listar_mascotas" type="tns:listar_mascotas" />
+  <xs:element name="listar_mascotasResponse" type="tns:listar_mascotasResponse" />
+  <xs:element name="listar_mascotas_activas" type="tns:listar_mascotas_activas" />
+  <xs:element name="listar_mascotas_activasResponse" type="tns:listar_mascotas_activasResponse" />
+  <xs:element name="listar_mascotas_por_persona" type="tns:listar_mascotas_por_persona" />
+  <xs:element name="listar_mascotas_por_personaResponse" type="tns:listar_mascotas_por_personaResponse" />
+  <xs:element name="modificar_mascota" type="tns:modificar_mascota" />
+  <xs:element name="modificar_mascotaResponse" type="tns:modificar_mascotaResponse" />
+  <xs:element name="obtenerPorId_mascota" type="tns:obtenerPorId_mascota" />
+  <xs:element name="obtenerPorId_mascotaResponse" type="tns:obtenerPorId_mascotaResponse" />
+  <xs:complexType name="eliminar_mascota">
+    <xs:sequence>
+      <xs:element name="mascotaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_mascotaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_mascotas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_mascotasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:mascotaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="mascotaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="color" type="xs:string" />
+      <xs:element minOccurs="0" name="especie" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaDefuncion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="mascotaId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="persona" type="tns:personaDto" />
+      <xs:element minOccurs="0" name="raza" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="personaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="sexo" type="tns:sexo" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:date" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreador" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="usuarioModificador" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="IOException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InterruptedException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_mascota">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="especie" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="raza" type="xs:string" />
+      <xs:element minOccurs="0" name="color" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaDefuncion" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_mascotaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_mascotas_por_persona">
+    <xs:sequence>
+      <xs:element name="personaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_mascotas_por_personaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:mascotaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_mascotas_activas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_mascotas_activasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:mascotaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId_mascota">
+    <xs:sequence>
+      <xs:element name="mascotaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId_mascotaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:mascotaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzada">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombreMascota" type="xs:string" />
+      <xs:element minOccurs="0" name="especie" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreDeLaPersona" type="xs:string" />
+      <xs:element minOccurs="0" name="estadoActivo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzadaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:mascotaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_mascota">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="mascotaId" type="xs:int" />
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="especie" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="raza" type="xs:string" />
+      <xs:element minOccurs="0" name="color" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaDefuncion" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_mascotaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiLaMascotaTieneInformacion">
+    <xs:sequence>
+      <xs:element name="nombreTipo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiLaMascotaTieneInformacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="sexo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M" />
+      <xs:enumeration value="F" />
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

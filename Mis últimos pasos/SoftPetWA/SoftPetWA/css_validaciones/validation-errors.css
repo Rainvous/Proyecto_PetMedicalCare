@@ -1,0 +1,105 @@
+﻿/* 1. Aseguramos que el modal tenga posición relativa para contener la huella */
+.modal-content {
+    position: relative;
+    overflow: hidden; /* Corta la huella si se sale del borde */
+}
+
+    /* 2. Creamos la huella gigante con CSS puro (usando el código de FontAwesome) */
+    .modal-content::before {
+        content: "\f1b0"; /* Este es el código Unicode de la huella (fa-paw) */
+        font-family: "Font Awesome 5 Free"; /* Asegúrate que coincida con tu versión */
+        font-weight: 900;
+        /* Posición y Tamaño */
+        position: absolute;
+        top: -30px; /* La subimos un poco */
+        right: -30px; /* La movemos a la derecha */
+        font-size: 10rem; /* ¡Gigante! */
+        /* Color y Transparencia */
+        color: var(--danger-color); /* Usa el rojo del error */
+        opacity: 0.08; /* Muy transparente (solo marca de agua) */
+        /* Rotación para estilo */
+        transform: rotate(35deg);
+        z-index: 0; /* Para que quede detrás del texto */
+    }
+
+
+/* --- Variables de Color (Asegúrate de tenerlas o usa los hex directos) --- */
+:root {
+    --danger-color: #dc3545; /* Rojo estándar de Bootstrap */
+    --danger-bg-light: #f8d7da; /* Fondo rojo muy suave */
+}
+
+/* --- Cabecera de Error --- */
+.validation-header h4 {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--danger-color); /* Título en Rojo */
+}
+
+/* --- Lista de Errores (Estilo similar a confirmation-summary) --- */
+.validation-summary {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid var(--danger-color); /* Línea superior roja para énfasis */
+}
+
+    .validation-summary li {
+        display: flex;
+        justify-content: flex-start; /* Alineado a la izquierda, no separado como el recibo */
+        align-items: center;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid #e9ecef;
+        font-size: 0.95rem;
+    }
+
+        .validation-summary li:last-of-type {
+            border-bottom: none;
+        }
+
+    /* El ícono de error (X o Admiración) */
+    .validation-summary .icon-box {
+        width: 32px;
+        height: 32px;
+        background-color: var(--danger-bg-light);
+        color: var(--danger-color);
+        border-radius: 50%; /* Círculo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0; /* Evita que el ícono se aplaste si hay mucho texto */
+    }
+
+    /* El texto del error */
+    .validation-summary .error-text {
+        color: #333;
+        font-weight: 500;
+    }
+
+    /* Opcional: Si quieres resaltar qué campo falló (Estilo "Label: Valor") */
+    .validation-summary .error-field {
+        font-weight: 700;
+        color: #555;
+        margin-right: 0.5rem;
+    }
+
+        .validation-summary .error-field::after {
+            content: ":";
+        }
+
+/* --- Botón de Acción --- */
+.btn-fix {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 0.5rem 2rem;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+    .btn-fix:hover {
+        background-color: #c82333; /* Rojo más oscuro */
+        color: white;
+    }

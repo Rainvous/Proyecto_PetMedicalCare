@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Despliegue_FrontEnd\Front</_PublishTargetUrl>
+    <History>True|2025-11-28T15:08:19.3982467Z||;True|2025-11-27T20:32:48.0560567-05:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/SoftPetBussiness.dll">
+      <publishTime>11/28/2025 10:08:17</publishTime>
+    </File>
+    <File Include="bin/SoftPetBussiness.dll.config">
+      <publishTime>11/26/2025 19:11:52</publishTime>
+    </File>
+    <File Include="bin/SoftPetBussiness.pdb">
+      <publishTime>11/28/2025 10:08:17</publishTime>
+    </File>
+    <File Include="bin/SoftPetWA.dll">
+      <publishTime>11/28/2025 10:08:18</publishTime>
+    </File>
+    <File Include="bin/SoftPetWA.pdb">
+      <publishTime>11/28/2025 10:08:18</publishTime>
+    </File>
+    <File Include="CambiarPassword.aspx">
+      <publishTime>11/27/2025 13:26:16</publishTime>
+    </File>
+    <File Include="Cliente.Master">
+      <publishTime>11/26/2025 22:56:30</publishTime>
+    </File>
+    <File Include="Cliente_AgendaCitas.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Cliente_HistorialMedico.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Cliente_Inicio.aspx">
+      <publishTime>11/26/2025 22:44:26</publishTime>
+    </File>
+    <File Include="Cliente_Mascotas.aspx">
+      <publishTime>11/26/2025 22:30:54</publishTime>
+    </File>
+    <File Include="Cliente_ReservarCita_Paso1.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Cliente_ReservarCita_Paso2.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Cliente_ReservarCita_Paso3.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Cliente_ReservarCita_Paso4.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Content/agendacitas.css">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css.map">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/cargando.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/clientedashboard.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/clientemascotas.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/clientes.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/dashboard.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/expedientes.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/all.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/all.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/brands.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/brands.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/fontawesome.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/fontawesome.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/regular.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/regular.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/solid.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/solid.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/svg-with-js.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/svg-with-js.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/svg.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/svg.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/v4-font-face.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/v4-font-face.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/v4-shims.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/v4-shims.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/v5-font-face.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/css/v5-font-face.min.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/LICENSE.txt">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/webfonts/fa-brands-400.woff2">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/webfonts/fa-regular-400.woff2">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/webfonts/fa-solid-900.woff2">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/Fonts/webfonts/fa-v4compatibility.woff2">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/GestionVeterinarios.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/historialmedico.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/inventario.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/login.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/mascotas.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/perfilcliente.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/puntoventa.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/recetas.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/reportes.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/reservarcita-calendario.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/reservarcita-calendario2.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/reservarcita-confirmacion.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/reservarcita.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/servicios.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/sidebar.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/site.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/success-modal.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/usuarios.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Content/validation-errors.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="css_validaciones/validation-errors.css">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Images/Avatars/cat-avatar.png">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Images/Avatars/dog-avatar.png">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Images/pet_login.png">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>11/27/2025 13:21:04</publishTime>
+    </File>
+    <File Include="RecuperarPassword.aspx">
+      <publishTime>11/27/2025 13:42:08</publishTime>
+    </File>
+    <File Include="Registro.aspx">
+      <publishTime>11/27/2025 13:56:16</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.min.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.min.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.min.js">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.min.map">
+      <publishTime>11/26/2025 19:11:56</publishTime>
+    </File>
+    <File Include="Secretaria.Master">
+      <publishTime>11/26/2025 22:57:24</publishTime>
+    </File>
+    <File Include="Secretaria_AgendaCitas.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_Clientes.aspx">
+      <publishTime>11/27/2025 00:49:40</publishTime>
+    </File>
+    <File Include="Secretaria_Dashboard.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_ExpedienteDetalle.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_Expedientes.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_Inventario.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_Mascotas.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_PuntoVenta.aspx">
+      <publishTime>11/28/2025 01:48:54</publishTime>
+    </File>
+    <File Include="Secretaria_Reportes.aspx">
+      <publishTime>11/28/2025 01:48:54</publishTime>
+    </File>
+    <File Include="Secretaria_ReservarCita_Paso1.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_ReservarCita_Paso2.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_ReservarCita_Paso3.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_ReservarCita_Paso4.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_Servicios.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Secretaria_Veterinarios.aspx">
+      <publishTime>11/27/2025 00:46:42</publishTime>
+    </File>
+    <File Include="Veterinario.Master">
+      <publishTime>11/26/2025 22:57:18</publishTime>
+    </File>
+    <File Include="Veterinario_Agenda.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Veterinario_Consulta.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Veterinario_Inicio.aspx">
+      <publishTime>11/26/2025 19:11:54</publishTime>
+    </File>
+    <File Include="Veterinario_Recetas.aspx">
+      <publishTime>11/26/2025 21:01:10</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/28/2025 10:08:18</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

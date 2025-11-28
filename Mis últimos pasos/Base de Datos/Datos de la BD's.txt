@@ -1,0 +1,20 @@
+AWS Academy Learner Lab [134458]
+================================
+DATOS DE LAS BASE DE DATOS
+================================
+MYSQL: softpet-mysql
+--------------------------------
+hostname: softpet-mysql.czi2gssum6x2.us-east-1.rds.amazonaws.com
+user: admin
+password: FullChow#G3
+esquema: petmedicalcare
+puerto: 3306
+================================
+MSSQL: softpet-mssql
+--------------------------------
+hostname: softpet-mssql.czi2gssum6x2.us-east-1.rds.amazonaws.com
+user: admin
+password: FullChow#G3
+esquema: petmedicalcare
+puerto: 1433
+================================

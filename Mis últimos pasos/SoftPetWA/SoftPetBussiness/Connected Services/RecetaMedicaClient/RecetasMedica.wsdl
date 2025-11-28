@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://receta.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="RecetasMedica" targetNamespace="http://receta.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/RecetasMedica?xsd=1" namespace="http://receta.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="obtener_receta_por_cita">
+    <part name="parameters" element="tns:obtener_receta_por_cita" />
+  </message>
+  <message name="obtener_receta_por_citaResponse">
+    <part name="parameters" element="tns:obtener_receta_por_citaResponse" />
+  </message>
+  <message name="insertar_receta">
+    <part name="parameters" element="tns:insertar_receta" />
+  </message>
+  <message name="insertar_recetaResponse">
+    <part name="parameters" element="tns:insertar_recetaResponse" />
+  </message>
+  <message name="modificar_receta">
+    <part name="parameters" element="tns:modificar_receta" />
+  </message>
+  <message name="modificar_recetaResponse">
+    <part name="parameters" element="tns:modificar_recetaResponse" />
+  </message>
+  <message name="eliminar_receta">
+    <part name="parameters" element="tns:eliminar_receta" />
+  </message>
+  <message name="eliminar_recetaResponse">
+    <part name="parameters" element="tns:eliminar_recetaResponse" />
+  </message>
+  <message name="listar_recetas_por_mascota_y_fecha">
+    <part name="parameters" element="tns:listar_recetas_por_mascota_y_fecha" />
+  </message>
+  <message name="listar_recetas_por_mascota_y_fechaResponse">
+    <part name="parameters" element="tns:listar_recetas_por_mascota_y_fechaResponse" />
+  </message>
+  <message name="listar_busqueda_avanzada">
+    <part name="parameters" element="tns:listar_busqueda_avanzada" />
+  </message>
+  <message name="listar_busqueda_avanzadaResponse">
+    <part name="parameters" element="tns:listar_busqueda_avanzadaResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <portType name="RecetasMedica">
+    <operation name="obtener_receta_por_cita">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/obtener_receta_por_citaRequest" message="tns:obtener_receta_por_cita" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/obtener_receta_por_citaResponse" message="tns:obtener_receta_por_citaResponse" />
+    </operation>
+    <operation name="insertar_receta">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/insertar_recetaRequest" message="tns:insertar_receta" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/insertar_recetaResponse" message="tns:insertar_recetaResponse" />
+    </operation>
+    <operation name="modificar_receta">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/modificar_recetaRequest" message="tns:modificar_receta" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/modificar_recetaResponse" message="tns:modificar_recetaResponse" />
+    </operation>
+    <operation name="eliminar_receta">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/eliminar_recetaRequest" message="tns:eliminar_receta" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/eliminar_recetaResponse" message="tns:eliminar_recetaResponse" />
+    </operation>
+    <operation name="listar_recetas_por_mascota_y_fecha">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/listar_recetas_por_mascota_y_fechaRequest" message="tns:listar_recetas_por_mascota_y_fecha" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/listar_recetas_por_mascota_y_fechaResponse" message="tns:listar_recetas_por_mascota_y_fechaResponse" />
+    </operation>
+    <operation name="listar_busqueda_avanzada">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/listar_busqueda_avanzadaRequest" message="tns:listar_busqueda_avanzada" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/listar_busqueda_avanzadaResponse" message="tns:listar_busqueda_avanzadaResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://receta.softpetws.pucp.edu.pe/RecetasMedica/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+  </portType>
+  <binding name="RecetasMedicaPortBinding" type="tns:RecetasMedica">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="obtener_receta_por_cita">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertar_receta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_receta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_receta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_recetas_por_mascota_y_fecha">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_busqueda_avanzada">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="RecetasMedica">
+    <port name="RecetasMedicaPort" binding="tns:RecetasMedicaPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/RecetasMedica" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,241 @@
+package pe.edu.pucp.softpet.daoImp;
+
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pe.edu.pucp.softpet.daoImp.util.Columna;
+import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
+import pe.edu.pucp.softpet.dao.MascotaDao;
+import pe.edu.pucp.softpet.dto.personas.PersonaDto;
+
+public class MascotaDaoImpl extends DaoBaseImpl implements MascotaDao {
+
+    private MascotaDto mascota;
+
+    public MascotaDaoImpl() {
+        super("MASCOTAS");
+        this.mascota = null;
+        this.retornarLlavePrimaria = true;
+    }
+
+    @Override
+    protected void configurarListaDeColumnas() {
+        this.listaColumnas.add(new Columna("MASCOTA_ID", true, true));
+        this.listaColumnas.add(new Columna("PERSONA_ID", false, false));
+        this.listaColumnas.add(new Columna("NOMBRE", false, false));
+        this.listaColumnas.add(new Columna("ESPECIE", false, false));
+        this.listaColumnas.add(new Columna("SEXO", false, false));
+        this.listaColumnas.add(new Columna("RAZA", false, false));
+        this.listaColumnas.add(new Columna("COLOR", false, false));
+        this.listaColumnas.add(new Columna("FECHA_DEFUNCION", false, false));
+        this.listaColumnas.add(new Columna("ACTIVO", false, false));
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaInsercion() throws SQLException {
+        this.statement.setInt(1, this.mascota.getPersona().getPersonaId());
+        this.statement.setString(2, this.mascota.getNombre());
+        this.statement.setString(3, this.mascota.getEspecie());
+        this.statement.setString(4, this.mascota.getSexo()); // Ahora recibirá "M" o "H"
+        this.statement.setString(5, this.mascota.getRaza());
+        this.statement.setString(6, this.mascota.getColor());
+
+        if (this.mascota.getFechaDefuncion() != null) {
+            java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
+            this.statement.setDate(7, sqlDate);
+        } else {
+            this.statement.setNull(7, java.sql.Types.DATE);
+        }
+
+        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaModificacion() throws SQLException {
+        this.statement.setInt(1, this.mascota.getPersona().getPersonaId());
+        this.statement.setString(2, this.mascota.getNombre());
+        this.statement.setString(3, this.mascota.getEspecie());
+        this.statement.setString(4, this.mascota.getSexo());
+        this.statement.setString(5, this.mascota.getRaza());
+        this.statement.setString(6, this.mascota.getColor());
+
+        if (this.mascota.getFechaDefuncion() != null) {
+            java.sql.Date sqlDate = new java.sql.Date(this.mascota.getFechaDefuncion().getTime());
+            this.statement.setDate(7, sqlDate);
+        } else {
+            this.statement.setNull(7, java.sql.Types.DATE);
+        }
+
+        this.statement.setInt(8, this.mascota.getActivo() ? 1 : 0);
+        this.statement.setInt(9, this.mascota.getMascotaId());
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaEliminacion() throws SQLException {
+        this.statement.setInt(1, this.mascota.getMascotaId());
+    }
+
+    @Override
+    protected void incluirValorDeParametrosParaObtenerPorId() throws SQLException {
+        this.statement.setInt(1, this.mascota.getMascotaId());
+    }
+
+    @Override
+    protected void instanciarObjetoDelResultSet() throws SQLException {
+        this.mascota = new MascotaDto();
+        this.mascota.setMascotaId(this.resultSet.getInt("MASCOTA_ID"));
+        this.mascota.setNombre(this.resultSet.getString("NOMBRE"));
+        this.mascota.setEspecie(this.resultSet.getString("ESPECIE"));
+        this.mascota.setSexo(this.resultSet.getString("SEXO"));
+        this.mascota.setRaza(this.resultSet.getString("RAZA"));
+        this.mascota.setColor(this.resultSet.getString("COLOR"));
+        this.mascota.setFechaDefuncion(this.resultSet.getDate("FECHA_DEFUNCION"));
+        this.mascota.setActivo(this.resultSet.getInt("ACTIVO") == 1);
+
+        PersonaDto per = new PersonaDto();
+        try {
+            per.setPersonaId(this.resultSet.getInt("PERSONA_ID"));
+            per.setNombre(this.resultSet.getString("NOMBRE_DUENIO")); // Alias del SP
+            per.setTelefono(this.resultSet.getString("TELEFONO_DUENIO")); // Alias del SP
+        } catch (SQLException e) { }
+        this.mascota.setPersona(per);
+    }
+
+    @Override
+    protected void limpiarObjetoDelResultSet() {
+        this.mascota = null;
+    }
+
+    @Override
+    protected void agregarObjetoALaLista(List lista) throws SQLException {
+        this.instanciarObjetoDelResultSet();
+        lista.add(this.mascota);
+    }
+
+    @Override
+    public Integer insertar(MascotaDto mascota) {
+        this.mascota = mascota;
+        return super.insertar();
+    }
+
+    @Override
+    public MascotaDto obtenerPorId(Integer mascotaId) {
+        this.mascota = new MascotaDto();
+        this.mascota.setMascotaId(mascotaId);
+        super.obtenerPorId();
+        return this.mascota;
+    }
+
+    @Override
+    public ArrayList<MascotaDto> listarTodos() {
+        return (ArrayList<MascotaDto>) super.listarTodos();
+    }
+
+    @Override
+    public Integer modificar(MascotaDto mascota) {
+        this.mascota = mascota;
+        return super.modificar();
+    }
+
+    @Override
+    public Integer eliminar(MascotaDto mascota) {
+        this.mascota = mascota;
+        return super.eliminar();
+    }
+
+    @Override
+    public ArrayList<MascotaDto> ListasBusquedaAvanzada(
+            String nombreMascota, String especie, String nombreDuenio, Integer activo) {
+        
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put(1, nombreMascota);
+        
+        // Manejo de Especie "Todas"
+        if (especie == null || especie.equals("Todas") || especie.isEmpty()) {
+            parametrosEntrada.put(2, null);
+        } else {
+            parametrosEntrada.put(2, especie);
+        }
+        
+        parametrosEntrada.put(3, nombreDuenio);
+        
+        // Manejo de Activo (-1 = Todos = NULL)
+        if (activo == null || activo == -1) {
+            parametrosEntrada.put(4, null);
+        } else {
+            parametrosEntrada.put(4, activo);
+        }
+
+        return (ArrayList<MascotaDto>) super.ejecutarProcedimientoLectura("sp_buscar_mascotas_avanzada", parametrosEntrada);
+    }
+
+    @Override
+    public ArrayList<MascotaDto> listarPorIdPersona(Integer personaId) {
+
+        // Obtenemos el SQL base: "SELECT ..., ..., FROM MASCOTAS" y añadimos el filtro
+        String sql = super.generarSQLParaListarTodos();
+        sql = sql.concat(" WHERE PERSONA_ID = ?");
+
+        Object parametros = personaId;
+        return (ArrayList<MascotaDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarPorIdPersona,
+                parametros);
+    }
+
+    private void incluirValorDeParametrosParaListarPorIdPersona(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer personaId = (Integer) objetoParametros;
+        try {
+            // Asignamos el ID al primer '?' en el SQL
+            this.statement.setInt(1, personaId);
+        } catch (SQLException ex) {
+            Logger.getLogger(MascotaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public ArrayList<MascotaDto> listarMascotasActivas() {
+
+        // 1. Obtenemos el SQL base: "SELECT ..., ..., FROM MASCOTAS"
+        String sql = super.generarSQLParaListarTodos();
+
+        // 2. Añadimos el filtro WHERE
+        sql = sql.concat(" WHERE ACTIVO = ?");
+
+        // 3. El parámetro es fijo: 1 (para activo)
+        Object parametros = 1;
+
+        // 4. Llamamos al método listarTodos de la clase base
+        return (ArrayList<MascotaDto>) super.listarTodos(sql,
+                this::incluirValorDeParametrosParaListarActivas,
+                parametros);
+    }
+
+    private void incluirValorDeParametrosParaListarActivas(Object objetoParametros) {
+        // Casteamos el objeto de parámetros a su tipo original
+        Integer activoFlag = (Integer) objetoParametros;
+        try {
+            // Asignamos el '1' al primer '?' en el SQL
+            this.statement.setInt(1, activoFlag);
+        } catch (SQLException ex) {
+            Logger.getLogger(MascotaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int VerificarSiLaMascotaTieneInformacion(int idServicio) {
+        Map<Integer, Object> parametrosEntrada = new HashMap<>();
+        Map<Integer, Object> parametrosSalida = new HashMap<>();
+        String NombreProcedure = "sp_verificar_relacion_mascota";
+        parametrosEntrada.put(1, idServicio);
+        parametrosSalida.put(2, Types.INTEGER);
+        ejecutarProcedimiento(NombreProcedure, parametrosEntrada, parametrosSalida);
+        int resultado = (int) parametrosSalida.get(2);
+        return resultado;
+    }
+}

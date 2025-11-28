@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://metodopago.softpetws.pucp.edu.pe/" targetNamespace="http://metodopago.softpetws.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eliminar_modificar_MetodoDePago" type="tns:eliminar_modificar_MetodoDePago" />
+  <xs:element name="eliminar_modificar_MetodoDePagoResponse" type="tns:eliminar_modificar_MetodoDePagoResponse" />
+  <xs:element name="insertar_MetodoDePago" type="tns:insertar_MetodoDePago" />
+  <xs:element name="insertar_MetodoDePagoResponse" type="tns:insertar_MetodoDePagoResponse" />
+  <xs:element name="listar_todos" type="tns:listar_todos" />
+  <xs:element name="listar_todosResponse" type="tns:listar_todosResponse" />
+  <xs:element name="modificar_MetodoDePago" type="tns:modificar_MetodoDePago" />
+  <xs:element name="modificar_MetodoDePagoResponse" type="tns:modificar_MetodoDePagoResponse" />
+  <xs:element name="obtener_por_id" type="tns:obtener_por_id" />
+  <xs:element name="obtener_por_idResponse" type="tns:obtener_por_idResponse" />
+  <xs:complexType name="modificar_MetodoDePago">
+    <xs:sequence>
+      <xs:element name="metodoDePagoId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_MetodoDePagoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_MetodoDePago">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_MetodoDePagoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_id">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_idResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:metodoDePagoDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="metodoDePagoDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="metodoDePagoId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="tns:tipoMetodoPago" />
+      <xs:element minOccurs="0" name="nombreStr" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_modificar_MetodoDePago">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_modificar_MetodoDePagoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_todos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_todosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:metodoDePagoDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tipoMetodoPago">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EFECTIVO" />
+      <xs:enumeration value="TRANSFERENCIA" />
+      <xs:enumeration value="YAPE" />
+      <xs:enumeration value="PLIN" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

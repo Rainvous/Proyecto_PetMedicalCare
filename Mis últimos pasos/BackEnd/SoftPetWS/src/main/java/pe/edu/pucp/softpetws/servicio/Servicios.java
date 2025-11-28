@@ -1,0 +1,105 @@
+package pe.edu.pucp.softpetws.servicio;
+
+import jakarta.jws.WebService;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import java.util.ArrayList;
+import pe.edu.pucp.softpet.bo.ServicioBo;
+import pe.edu.pucp.softpet.dto.servicios.ServicioDto;
+
+@WebService(serviceName = "Servicios")
+public class Servicios {
+
+    private final ServicioBo servicioBo;
+
+    public Servicios() {
+        this.servicioBo = new ServicioBo();
+    }
+
+    @WebMethod(operationName = "insertar_servicios")
+    public Integer insertar(@WebParam(name = "tipoServicioId") int tipoServicioId,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "descripcion") String descripcion,
+            @WebParam(name = "costo") double costo,
+            @WebParam(name = "estado") String estado,
+            @WebParam(name = "activo") boolean activo) {
+
+        return this.servicioBo.insertar(tipoServicioId, nombre, descripcion,
+                costo, estado, activo);
+    }
+
+    @WebMethod(operationName = "modificar_servicios")
+    public Integer modificar(@WebParam(name = "servicioId") int servicioId,
+            @WebParam(name = "tipoServicioId") int tipoServicioId,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "descripcion") String descripcion,
+            @WebParam(name = "costo") double costo,
+            @WebParam(name = "estado") String estado,
+            @WebParam(name = "activo") boolean activo) {
+
+        return this.servicioBo.modificar(servicioId, tipoServicioId, nombre,
+                descripcion, costo, estado, activo);
+    }
+
+    @WebMethod(operationName = "eliminar_servicios")
+    public Integer eliminar(int servicioId) {
+        return this.servicioBo.eliminar(servicioId);
+    }
+
+    @WebMethod(operationName = "obtener_por_id")
+    public ServicioDto obtenerPorId(@WebParam(name = "id") int servicioId) {
+        return this.servicioBo.obtenerPorId(servicioId);
+    }
+
+    @WebMethod(operationName = "listar_todos")
+    public ArrayList<ServicioDto> listarTodos() {
+        return this.servicioBo.listarTodos();
+    }
+
+    @WebMethod(operationName = "ListasBusquedaAvanzada")
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "rango") String rango,
+            @WebParam(name = "activo") String activo) {
+
+        return servicioBo.ListasBusquedaAvanzada(nombre, rango, activo);
+    }
+
+    @WebMethod(operationName = "listar_servicios_activos")
+    public ArrayList<ServicioDto> listarServiciosActivos() {
+        return this.servicioBo.listarServiciosActivos();
+    }
+
+    @WebMethod(operationName = "listar_servicios_por_tipo")
+    public ArrayList<ServicioDto> ListarPorTipoServicio(
+            @WebParam(name = "nombreTipo") String nombreTipo) {
+
+        return this.servicioBo.ListarPorTipoServicio(nombreTipo);
+    }
+
+    @WebMethod(operationName = "VerificarSiElServicioTieneInformacion")
+    public int VerificarSiElServicioTieneInformacion(
+            @WebParam(name = "nombreTipo") int idServicio) {
+        return this.servicioBo.VerificarSiElServicioTieneInformacion(idServicio);
+    }
+
+    @WebMethod(operationName = "ListasBusquedaAvanzada2")
+    public ArrayList<ServicioDto> ListasBusquedaAvanzada2(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "rango") String rango,
+            @WebParam(name = "activo") String activo,
+            @WebParam(name = "tipoId") Integer tipoId) {
+
+        return servicioBo.ListasBusquedaAvanzada2(nombre, rango, activo, tipoId);
+    }
+
+    @WebMethod(operationName = "buscar_servicios_paginados")
+    public ArrayList<ServicioDto> buscarServiciosPaginados(
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "rango") String rango,
+            @WebParam(name = "activo") Boolean activo,
+            @WebParam(name = "pagina") int pagina) {
+
+        return this.servicioBo.buscarServiciosPaginados(nombre, rango, activo, pagina);
+    }
+}

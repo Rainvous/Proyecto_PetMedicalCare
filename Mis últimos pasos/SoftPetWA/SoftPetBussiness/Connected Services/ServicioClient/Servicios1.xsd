@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://servicio.softpetws.pucp.edu.pe/" targetNamespace="http://servicio.softpetws.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ListasBusquedaAvanzada" type="tns:ListasBusquedaAvanzada" />
+  <xs:element name="ListasBusquedaAvanzada2" type="tns:ListasBusquedaAvanzada2" />
+  <xs:element name="ListasBusquedaAvanzada2Response" type="tns:ListasBusquedaAvanzada2Response" />
+  <xs:element name="ListasBusquedaAvanzadaResponse" type="tns:ListasBusquedaAvanzadaResponse" />
+  <xs:element name="VerificarSiElServicioTieneInformacion" type="tns:VerificarSiElServicioTieneInformacion" />
+  <xs:element name="VerificarSiElServicioTieneInformacionResponse" type="tns:VerificarSiElServicioTieneInformacionResponse" />
+  <xs:element name="buscar_servicios_paginados" type="tns:buscar_servicios_paginados" />
+  <xs:element name="buscar_servicios_paginadosResponse" type="tns:buscar_servicios_paginadosResponse" />
+  <xs:element name="eliminar_servicios" type="tns:eliminar_servicios" />
+  <xs:element name="eliminar_serviciosResponse" type="tns:eliminar_serviciosResponse" />
+  <xs:element name="insertar_servicios" type="tns:insertar_servicios" />
+  <xs:element name="insertar_serviciosResponse" type="tns:insertar_serviciosResponse" />
+  <xs:element name="listar_servicios_activos" type="tns:listar_servicios_activos" />
+  <xs:element name="listar_servicios_activosResponse" type="tns:listar_servicios_activosResponse" />
+  <xs:element name="listar_servicios_por_tipo" type="tns:listar_servicios_por_tipo" />
+  <xs:element name="listar_servicios_por_tipoResponse" type="tns:listar_servicios_por_tipoResponse" />
+  <xs:element name="listar_todos" type="tns:listar_todos" />
+  <xs:element name="listar_todosResponse" type="tns:listar_todosResponse" />
+  <xs:element name="modificar_servicios" type="tns:modificar_servicios" />
+  <xs:element name="modificar_serviciosResponse" type="tns:modificar_serviciosResponse" />
+  <xs:element name="obtener_por_id" type="tns:obtener_por_id" />
+  <xs:element name="obtener_por_idResponse" type="tns:obtener_por_idResponse" />
+  <xs:complexType name="modificar_servicios">
+    <xs:sequence>
+      <xs:element name="servicioId" type="xs:int" />
+      <xs:element name="tipoServicioId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element name="costo" type="xs:double" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_serviciosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzada2">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="rango" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzada2Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="servicioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="costo" type="xs:double" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:date" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="servicioId" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoServicio" type="tns:tipoServicioDto" />
+      <xs:element minOccurs="0" name="usuarioCreador" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificador" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="tipoServicioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoServicioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzada">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="rango" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzadaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_servicios_activos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_servicios_activosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_servicios">
+    <xs:sequence>
+      <xs:element name="tipoServicioId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element name="costo" type="xs:double" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_serviciosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_id">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_idResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiElServicioTieneInformacion">
+    <xs:sequence>
+      <xs:element name="nombreTipo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiElServicioTieneInformacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_servicios">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_serviciosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_servicios_por_tipo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombreTipo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_servicios_por_tipoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscar_servicios_paginados">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="rango" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element name="pagina" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscar_servicios_paginadosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_todos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_todosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

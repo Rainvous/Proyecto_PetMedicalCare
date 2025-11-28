@@ -1,0 +1,360 @@
+﻿/* Nombre del archivo: Content/puntoventa.css */
+
+/* --- Pestañas de Filtro (Reutilizamos la clase .filter-tabs de servicios.css) --- */
+/* NOTA: Si no tienes servicios.css, descomenta estas líneas.
+.filter-tabs .nav-link {
+    color: #6c757d; font-weight: 500; border: 1px solid #e0e0e0;
+    background-color: #f8f9fa; margin-right: 8px; border-radius: 20px;
+    padding: 0.3rem 1rem;
+}
+.filter-tabs .nav-link.active {
+    color: #fff; background-color: #00A3A3; border-color: #00A3A3;
+}
+.filter-tabs .nav-link:hover { background-color: #e0e0e0; }
+.filter-tabs .nav-link.active:hover { background-color: #008D8D; }
+.filter-tabs .badge { margin-left: 5px; }
+*/
+
+/* Nombre del archivo: Content/puntoventa.css */
+
+/* --- Tarjeta de Producto (Catálogo Izquierda) --- */
+.product-card-pos {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 100%; /* Mantiene la misma altura */
+    /* === CAMBIOS CLAVE === */
+    display: flex; /* Convierte la tarjeta en un contenedor flex */
+    flex-direction: column; /* Apila el contenido (ícono, nombre, etc.) verticalmente */
+    justify-content: space-between; /* Empuja el stock hacia abajo (opcional) */
+    text-decoration: none; /* Quita el subrayado del LinkButton */
+    /* ==================== */
+}
+
+    .product-card-pos:hover {
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+        border-color: #00A3A3;
+    }
+    /* ... (El resto de los estilos .product-icon-pos, .product-name, etc. quedan igual) ... */
+    .product-card-pos .product-icon-pos {
+        font-size: 1.5rem;
+        color: #00A3A3;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-card-pos .product-name {
+        font-weight: 600;
+        color: #333;
+        font-size: 0.9rem;
+    }
+
+    .product-card-pos .product-desc {
+        font-size: 0.8rem;
+        color: #6c757d;
+        display: block; /* Asegura que sea un bloque */
+        margin-top: 0.25rem; /* Pequeño espacio */
+    }
+
+    .product-card-pos .product-price {
+        font-weight: 700;
+        color: #00A3A3;
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
+
+    .product-card-pos .product-stock {
+        font-size: 0.75rem;
+        color: #6c757d;
+        margin-top: auto; /* Empuja el stock hacia abajo si justify-content: space-between está activo */
+    }
+
+
+/* ... (El resto de tus estilos para .shopping-cart-card, etc. quedan igual) ... */
+
+/* --- Carrito de Compras (Derecha) --- */
+.shopping-cart-card {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    height: 100%;
+}
+
+    .shopping-cart-card .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .shopping-cart-card .card-body {
+        padding: 1rem;
+    }
+
+.cart-client-info {
+    font-size: 0.9rem;
+}
+
+/* Ítems del carrito */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.cart-item-price {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Spinner de cantidad */
+.quantity-spinner {
+    display: flex;
+    align-items: center;
+}
+
+    .quantity-spinner .btn-qty {
+        border: none;
+        background: none;
+        font-size: 1rem;
+        padding: 0 0.5rem;
+        color: #00A3A3;
+    }
+
+    .quantity-spinner .qty-input {
+        width: 30px;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+.cart-item-remove .btn-remove {
+    border: none;
+    background: none;
+    color: #ef5350;
+    padding: 0 0.5rem;
+}
+
+/* Resumen del carrito */
+.cart-summary {
+    padding-top: 1rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+    .summary-row.total {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #333;
+        border-top: 1px dashed #ccc;
+        padding-top: 0.75rem;
+        margin-top: 0.75rem;
+    }
+
+.payment-section {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+/* --- ADICIONES PARA EL CARRITO ESTILO 2 --- */
+
+/* --- NUEVO: Bloque de Información del Cliente --- */
+.client-info-block {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1rem; /* Margen reducido dentro del card-body */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #343a40;
+    font-size: 0.95rem;
+}
+
+    .client-info-block .client-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.2;
+    }
+
+    .client-info-block .client-details {
+        font-size: 0.85rem;
+        color: #6c757d;
+        line-height: 1.2;
+    }
+
+    .client-info-block .client-icon {
+        font-size: 1.5rem;
+        color: #00A3A3;
+    }
+
+/* --- Contenedor de Items del Carrito (Ajuste Padding) --- */
+.cart-items-container {
+    padding: 0 1rem; /* Padding reducido */
+}
+
+/* --- AJUSTADO: Ítems del carrito --- */
+.cart-item {
+    display: flex; /* Mantiene flex */
+    justify-content: space-between;
+    align-items: flex-start; /* Alinea items arriba */
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+.cart-item-details {
+    flex-grow: 1; /* Mantiene crecimiento */
+    margin-right: 1rem; /* Espacio antes del precio */
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem; /* Más espacio bajo el nombre */
+    font-size: 0.95rem;
+    display: block; /* Asegura bloque */
+}
+
+/* --- NUEVO: Estilos de Botones de Cantidad (+/-) --- */
+.quantity-button {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 28px;
+    height: 28px;
+    display: inline-flex; /* Cambiado a inline-flex */
+    align-items: center;
+    justify-content: center;
+}
+
+    .quantity-button:hover {
+        background-color: #dee2e6;
+        color: #343a40;
+    }
+
+.quantity-input {
+    border: 1px solid #ced4da;
+    text-align: center;
+    width: 40px;
+    padding: 0.25rem 0.2rem;
+    margin: 0 0.2rem;
+    font-size: 0.9rem;
+    border-radius: 0.25rem;
+    display: inline-block; /* Asegura inline */
+    vertical-align: middle; /* Alinea con botones */
+    -moz-appearance: textfield;
+}
+
+    .quantity-input::-webkit-outer-spin-button,
+    .quantity-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+
+.cart-item-price-delete {
+    display: flex; /* Para poner precio y botón de eliminar en línea */
+    align-items: center; /* Centrar verticalmente */
+    flex-shrink: 0; /* Evita que se encoja */
+}
+
+.cart-item-price {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem; /* Tamaño consistente */
+    text-align: right;
+    min-width: 80px; /* Ancho mínimo para alinear precios */
+}
+
+/* --- NUEVO: Botón de Eliminar (Estilo Papelera) --- */
+.btn-remove-item {
+    background-color: #ffebee;
+    color: #dc3545;
+    border: none;
+    border-radius: 0.25rem;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-left: 0.75rem; /* Espacio desde el precio */
+}
+
+    .btn-remove-item:hover {
+        background-color: #ffcdd2;
+    }
+
+/* --- Pie del Carrito (Totales y Pago - Ajustes Menores) --- */
+.cart-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    background-color: #f8f9fa; /* Mantiene fondo gris */
+    margin-top: auto; /* Empuja el footer hacia abajo */
+}
+
+.cart-summary { /* Contenedor para subtotal, igv, total */
+    margin-bottom: 1.5rem; /* Espacio antes de opciones de pago */
+}
+
+    .cart-summary .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem; /* Tamaño consistente */
+    }
+
+        .cart-summary .summary-row span:first-child { /* Etiqueta (Subtotal, IGV) */
+            color: #6c757d;
+        }
+
+        .cart-summary .summary-row span:last-child { /* Valor */
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        .cart-summary .summary-row.total {
+            font-size: 1.25rem; /* Total más grande */
+            font-weight: 700;
+            border-top: 1px dashed #ced4da;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+            .cart-summary .summary-row.total span:last-child {
+                color: #00A3A3; /* Color teal para el total */
+            }

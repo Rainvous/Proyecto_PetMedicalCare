@@ -1,0 +1,6 @@
+pe\edu\pucp\softpet\db\DBManagerMySQL.class
+pe\edu\pucp\softpet\db\DBManager$1.class
+pe\edu\pucp\softpet\util\Cifrado.class
+pe\edu\pucp\softpet\util\MotorDeBaseDeDatos.class
+pe\edu\pucp\softpet\db\DBManagerMSSQL.class
+pe\edu\pucp\softpet\db\DBManager.class

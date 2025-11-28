@@ -1,0 +1,42 @@
+Usuarios para pruebas
+========================
+Admin: 
+------------------------
+usuario: admin@demo.com
+contraseña: PetMedicalCare#1
+
+cifrado: f6cc8d1d19e888c6a6910e3fbf02852f46a87760d34ce9a78a7db81db65ff059
+
+Cliente: 
+------------------------
+usuario: amaru@demo.com
+contraseña: FullChow#2
+
+cifrado: a40aeccf042aadbc5bbfb2215adb05a96baa5a07f53be48fda11644b2ec1b6ca
+
+martin@demo.com
+contraseña: FullChow#2
+
+cifrado: a40aeccf042aadbc5bbfb2215adb05a96baa5a07f53be48fda11644b2ec1b6ca
+
+adrianna@demo.com
+contraseña: FullChow#2
+
+cifrado: a40aeccf042aadbc5bbfb2215adb05a96baa5a07f53be48fda11644b2ec1b6ca
+
+Veterinario: 
+------------------------
+usuario: alvaro.vet@demo.com
+contraseña: ChowFull#3
+
+cifrado: 7a786a77dafb611f72ce430a6c0cca38003e390d4d055d36fc4eb4b50871feef
+
+ana.vet@demo.com 
+contraseña: ChowFull#3
+
+cifrado: 7a786a77dafb611f72ce430a6c0cca38003e390d4d055d36fc4eb4b50871feef
+
+david.vet@demo.com
+contraseña: ChowFull#3
+
+cifrado: 7a786a77dafb611f72ce430a6c0cca38003e390d4d055d36fc4eb4b50871feef

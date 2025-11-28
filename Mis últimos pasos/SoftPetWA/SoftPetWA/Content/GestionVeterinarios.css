@@ -1,0 +1,857 @@
+﻿/* ============================================================
+   ESTILOS DE CONTENIDO PARA VISTAS DE VETERINARIO (Actualizado)
+============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    font-weight: 600;
+}
+
+/* --- Dashboard - Resumen Superior --- */
+.summary-card {
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+
+    .summary-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .summary-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .summary-card .text-xs {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .summary-card .h5 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #5a5c69;
+    }
+
+    .summary-card .icon-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    /* Colores Resumen */
+    .summary-card .bg-primary {
+        background-color: #00bcd4 !important;
+    }
+
+    .summary-card .bg-success {
+        background-color: #28a745 !important;
+    }
+
+    .summary-card .bg-warning {
+        background-color: #ffc107 !important;
+    }
+
+    .summary-card .bg-danger {
+        background-color: #dc3545 !important;
+    }
+
+    .summary-card .text-primary {
+        color: #00bcd4 !important;
+    }
+
+    .summary-card .text-success {
+        color: #28a745 !important;
+    }
+
+    .summary-card .text-warning {
+        color: #ffc107 !important;
+    }
+
+    .summary-card .text-danger {
+        color: #dc3545 !important;
+    }
+
+/* --- Agenda - Encabezado --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+    .page-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0;
+        color: #333;
+    }
+
+    .page-header p.text-muted {
+        font-size: 0.9rem;
+        margin-top: 0.2rem;
+    }
+
+.date-selector-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+    margin-bottom: 1.5rem;
+}
+
+.date-selector-nav .btn {
+    background-color: #f0f2f5;
+    border: 1px solid #e3e6f0;
+    color: #6c757d;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+    .date-selector-nav .btn:hover {
+        background-color: #e9ecef;
+        color: #333;
+    }
+
+.date-input-title {
+    border: none;
+    background: transparent;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #5a5c69;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    width: auto;
+    display: inline-block;
+}
+
+    .date-input-title:hover {
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        color: #00bcd4;
+    }
+
+.btn-hoy {
+    background-color: #00bcd4 !important;
+    border-color: #00bcd4 !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+    .btn-hoy:hover {
+        background-color: #0097a7 !important;
+    }
+
+.agenda-filters .btn {
+    border-radius: 20px !important;
+    padding: 6px 15px;
+    font-size: 0.85rem;
+    margin-left: 5px;
+    border: 1px solid #00bcd4;
+    color: #00bcd4;
+}
+
+    .agenda-filters .btn.active, .agenda-filters .btn:hover {
+        background-color: #00bcd4;
+        color: white;
+    }
+
+/* --- CRONOGRAMA (Timeline) --- */
+.agenda-timeline {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    margin-left: 1rem;
+}
+
+    .agenda-timeline:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 22px;
+        width: 4px;
+        background: #e9ecef;
+        border-radius: 2px;
+    }
+
+.agenda-item {
+    position: relative;
+    margin-bottom: 25px;
+    padding-left: 70px;
+}
+
+/* Icono Flotante */
+.agenda-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    z-index: 2;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.agenda-item:hover .agenda-icon {
+    transform: scale(1.15);
+}
+
+.icon-completada {
+    border: 3px solid #28a745;
+    color: #28a745;
+    background-color: #e8f5e9;
+}
+
+.icon-pendiente {
+    border: 3px solid #ffc107;
+    color: #ffc107;
+    background-color: #fffde7;
+}
+
+.icon-cancelada {
+    border: 3px solid #dc3545;
+    color: #dc3545;
+    background-color: #ffebee;
+}
+
+/* Tarjeta Agenda */
+.agenda-card {
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 6px solid #ccc;
+}
+
+    .agenda-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    }
+
+.agenda-card-completada {
+    border-left-color: #28a745 !important;
+}
+
+.agenda-card-pendiente {
+    border-left-color: #ffc107 !important;
+}
+
+.agenda-card-cancelada {
+    border-left-color: #dc3545 !important;
+}
+
+/* Header con TAG DE ESTADO */
+.agenda-card-header {
+    padding: 15px 20px;
+    background: linear-gradient(to right, #f8f9fa, #fff);
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* IMPORTANTE: Alinea hora y tag */
+}
+
+.agenda-time {
+    font-weight: 700;
+    color: #555;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+    .agenda-time i {
+        margin-right: 8px;
+        color: #00bcd4;
+    }
+
+/* --- ESTILOS DE LA ETIQUETA (TAG) --- */
+.status-tag {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.tag-completada {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.tag-pendiente {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffecb5;
+}
+
+.tag-cancelada {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+/* ------------------------------------- */
+
+.agenda-card-body {
+    padding: 20px;
+}
+
+.paciente-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.paciente-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e0f7fa;
+    color: #006064;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-right: 15px;
+    border: 2px solid #b2ebf2;
+}
+
+.paciente-info .nombre {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.paciente-info .details {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.servicios-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .servicios-list li {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+        .servicios-list li i {
+            color: #00bcd4;
+            width: 24px;
+            text-align: center;
+            margin-right: 5px;
+        }
+
+.agenda-card-footer {
+    padding: 15px 20px;
+    background: #fcfcfc;
+    border-top: 1px solid #f0f0f0;
+    text-align: right;
+}
+
+/* BOTÓN "VER EXPEDIENTE" CORREGIDO */
+.btn-ver-expediente {
+    background-color: #00bcd4 !important; /* Cian */
+    color: #ffffff !important; /* Texto Blanco Puro */
+    border: 1px solid #00bcd4 !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 188, 212, 0.2);
+    display: inline-block; /* Asegura que se comporte como botón */
+    text-decoration: none; /* Quita subrayado si es link */
+}
+
+    .btn-ver-expediente:hover {
+        background-color: #0097a7 !important; /* Cian más oscuro */
+        border-color: #0097a7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 188, 212, 0.3);
+    }
+/* ============================================================
+   ESTILOS PARA LA CONSULTA MÉDICA (MODERNO)
+============================================================ */
+
+/* --- Tarjeta del Paciente (Izquierda) --- */
+.patient-card {
+    background: linear-gradient(145deg, #ffffff, #f0f9ff); /* Degradado suave */
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 188, 212, 0.15);
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 20px;
+    position: sticky;
+    top: 20px;
+}
+
+.patient-header-bg {
+    background-color: #00bcd4;
+    height: 80px;
+    width: 100%;
+    margin-bottom: -50px; /* Para superponer el avatar */
+}
+
+.patient-avatar-container {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+    .patient-avatar-container img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    /* Icono fallback */
+    .patient-avatar-container i {
+        font-size: 3rem;
+        color: #b0bec5;
+        line-height: 100px;
+    }
+
+.patient-name {
+    color: #37474f;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+.patient-breed {
+    color: #0097a7;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Lista de datos del paciente */
+.patient-info-list {
+    padding: 0 25px;
+    text-align: left;
+}
+
+.patient-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    border: 1px solid #e1f5fe;
+}
+
+.patient-info-icon {
+    width: 35px;
+    height: 35px;
+    background: #e0f7fa;
+    color: #006064;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 0.9rem;
+}
+
+.patient-info-text small {
+    display: block;
+    color: #90a4ae;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.patient-info-text span {
+    color: #455a64;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+
+/* --- Secciones del Formulario (Derecha) --- */
+.consult-section {
+    background: #fff;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.consult-header {
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+/* Colores por sección */
+.header-info {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+}
+/* Azul */
+.header-motivo {
+    background: linear-gradient(45deg, #43e97b, #38f9d7);
+    color: #2e7d32;
+}
+/* Verde */
+.header-diag {
+    background: linear-gradient(45deg, #fa709a, #fee140);
+    color: #c62828;
+}
+/* Naranja/Rojo */
+.header-trat {
+    background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+    color: #4a148c;
+}
+/* Morado */
+.header-receta {
+    background: linear-gradient(45deg, #2af598, #009efd);
+}
+/* Aqua */
+
+.consult-header i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.consult-body {
+    padding: 25px;
+}
+
+/* Inputs bonitos */
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #f1f3f5;
+    padding: 10px 15px;
+    transition: all 0.3s;
+}
+
+    .form-control:focus {
+        border-color: #00bcd4;
+        box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.1);
+    }
+
+.form-label {
+    font-weight: 700;
+    color: #607d8b;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+/* --- Tabla de Medicamentos --- */
+.med-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+    .med-table th {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: #90a4ae;
+        font-weight: 700;
+        padding: 0 10px;
+        border: none;
+    }
+
+    .med-table tbody tr {
+        background: #fcfcfc;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        border-radius: 8px;
+    }
+
+    .med-table td {
+        padding: 12px 10px;
+        border-top: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+        color: #546e7a;
+    }
+
+        .med-table td:first-child {
+            border-left: 1px solid #f0f0f0;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .med-table td:last-child {
+            border-right: 1px solid #f0f0f0;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+/* Botones */
+.btn-add-med {
+    background: #00e676;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+    .btn-add-med:hover {
+        transform: scale(1.05);
+        background: #00c853;
+        color: white;
+    }
+
+.btn-complete {
+    background: linear-gradient(45deg, #11998e, #38ef7d);
+    border: none;
+    font-size: 1.1rem;
+    padding: 12px 30px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
+}
+
+    .btn-complete:hover {
+        transform: translateY(-2px);
+    }
+/* ============================================================
+   ESTILOS DASHBOARD VETERINARIO (NUEVO)
+============================================================ */
+
+/* Banner de Bienvenida */
+.dash-welcome-banner {
+    background: linear-gradient(135deg, #00bcd4 0%, #1a237e 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 188, 212, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+    .dash-welcome-banner h1 {
+        color: white;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+
+    .dash-welcome-banner p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    /* Círculos decorativos en el banner */
+    .dash-welcome-banner::after {
+        content: '';
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+/* Tarjetas de Estadísticas (KPIs) */
+.dash-stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
+    border-left: 5px solid transparent;
+}
+
+    .dash-stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+.dash-stat-info h3 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.dash-stat-info span {
+    color: #858796;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dash-stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* Variantes de Color para Stats */
+.stat-primary {
+    border-left-color: #00bcd4;
+}
+
+    .stat-primary h3 {
+        color: #00bcd4;
+    }
+
+    .stat-primary .dash-stat-icon {
+        background: #e0f7fa;
+        color: #00bcd4;
+    }
+
+.stat-warning {
+    border-left-color: #f6c23e;
+}
+
+    .stat-warning h3 {
+        color: #f6c23e;
+    }
+
+    .stat-warning .dash-stat-icon {
+        background: #fff8e1;
+        color: #f6c23e;
+    }
+
+.stat-success {
+    border-left-color: #1cc88a;
+}
+
+    .stat-success h3 {
+        color: #1cc88a;
+    }
+
+    .stat-success .dash-stat-icon {
+        background: #e8f5e9;
+        color: #1cc88a;
+    }
+
+/* Lista de Citas de Hoy */
+.dash-appt-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #f1f3f9;
+    transition: all 0.2s;
+}
+
+    .dash-appt-item:hover {
+        border-color: #00bcd4;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+.appt-time {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.1rem;
+    width: 80px;
+    text-align: center;
+    border-right: 2px solid #f1f3f9;
+    margin-right: 1.5rem;
+}
+
+.appt-details h5 {
+    margin: 0;
+    font-weight: 700;
+    color: #333;
+}
+
+.appt-details p {
+    margin: 0;
+    color: #858796;
+    font-size: 0.9rem;
+}
+
+.appt-owner {
+    font-size: 0.85rem;
+    color: #00bcd4;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.appt-actions .btn {
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Badge de estado pequeño */
+.badge-soft {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-soft-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-soft-success {
+    background: #d1e7dd;
+    color: #0f5132;
+}

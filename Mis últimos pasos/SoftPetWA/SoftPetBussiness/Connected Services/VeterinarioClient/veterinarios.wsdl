@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://veterinario.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="veterinarios" targetNamespace="http://veterinario.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/veterinarios?xsd=1" namespace="http://veterinario.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="insertar_veterinario">
+    <part name="parameters" element="tns:insertar_veterinario" />
+  </message>
+  <message name="insertar_veterinarioResponse">
+    <part name="parameters" element="tns:insertar_veterinarioResponse" />
+  </message>
+  <message name="modificar_veterinario">
+    <part name="parameters" element="tns:modificar_veterinario" />
+  </message>
+  <message name="modificar_veterinarioResponse">
+    <part name="parameters" element="tns:modificar_veterinarioResponse" />
+  </message>
+  <message name="eliminar_veterinario">
+    <part name="parameters" element="tns:eliminar_veterinario" />
+  </message>
+  <message name="eliminar_veterinarioResponse">
+    <part name="parameters" element="tns:eliminar_veterinarioResponse" />
+  </message>
+  <message name="listar_veterinarios_activos">
+    <part name="parameters" element="tns:listar_veterinarios_activos" />
+  </message>
+  <message name="listar_veterinarios_activosResponse">
+    <part name="parameters" element="tns:listar_veterinarios_activosResponse" />
+  </message>
+  <message name="IOException">
+    <part name="fault" element="tns:IOException" />
+  </message>
+  <message name="InterruptedException">
+    <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="obtenerPorId_veterinario">
+    <part name="parameters" element="tns:obtenerPorId_veterinario" />
+  </message>
+  <message name="obtenerPorId_veterinarioResponse">
+    <part name="parameters" element="tns:obtenerPorId_veterinarioResponse" />
+  </message>
+  <message name="listar_veterinarios">
+    <part name="parameters" element="tns:listar_veterinarios" />
+  </message>
+  <message name="listar_veterinariosResponse">
+    <part name="parameters" element="tns:listar_veterinariosResponse" />
+  </message>
+  <message name="insertarVeterinarioCompleto">
+    <part name="parameters" element="tns:insertarVeterinarioCompleto" />
+  </message>
+  <message name="insertarVeterinarioCompletoResponse">
+    <part name="parameters" element="tns:insertarVeterinarioCompletoResponse" />
+  </message>
+  <message name="modificarVeterinarioCompleto">
+    <part name="parameters" element="tns:modificarVeterinarioCompleto" />
+  </message>
+  <message name="modificarVeterinarioCompletoResponse">
+    <part name="parameters" element="tns:modificarVeterinarioCompletoResponse" />
+  </message>
+  <message name="ListasBusquedaAvanzadaVeterinario">
+    <part name="parameters" element="tns:ListasBusquedaAvanzadaVeterinario" />
+  </message>
+  <message name="ListasBusquedaAvanzadaVeterinarioResponse">
+    <part name="parameters" element="tns:ListasBusquedaAvanzadaVeterinarioResponse" />
+  </message>
+  <message name="VerificarSiExisteHorarioLaboral">
+    <part name="parameters" element="tns:VerificarSiExisteHorarioLaboral" />
+  </message>
+  <message name="VerificarSiExisteHorarioLaboralResponse">
+    <part name="parameters" element="tns:VerificarSiExisteHorarioLaboralResponse" />
+  </message>
+  <message name="eliminarVeterinarioCompleto">
+    <part name="parameters" element="tns:eliminarVeterinarioCompleto" />
+  </message>
+  <message name="eliminarVeterinarioCompletoResponse">
+    <part name="parameters" element="tns:eliminarVeterinarioCompletoResponse" />
+  </message>
+  <portType name="Veterinarios">
+    <operation name="insertar_veterinario">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/insertar_veterinarioRequest" message="tns:insertar_veterinario" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/insertar_veterinarioResponse" message="tns:insertar_veterinarioResponse" />
+    </operation>
+    <operation name="modificar_veterinario">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/modificar_veterinarioRequest" message="tns:modificar_veterinario" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/modificar_veterinarioResponse" message="tns:modificar_veterinarioResponse" />
+    </operation>
+    <operation name="eliminar_veterinario">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/eliminar_veterinarioRequest" message="tns:eliminar_veterinario" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/eliminar_veterinarioResponse" message="tns:eliminar_veterinarioResponse" />
+    </operation>
+    <operation name="listar_veterinarios_activos">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinarios_activosRequest" message="tns:listar_veterinarios_activos" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinarios_activosResponse" message="tns:listar_veterinarios_activosResponse" />
+      <fault wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinarios_activos/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinarios_activos/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerPorId_veterinario">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/obtenerPorId_veterinarioRequest" message="tns:obtenerPorId_veterinario" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/obtenerPorId_veterinarioResponse" message="tns:obtenerPorId_veterinarioResponse" />
+    </operation>
+    <operation name="listar_veterinarios">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinariosRequest" message="tns:listar_veterinarios" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinariosResponse" message="tns:listar_veterinariosResponse" />
+      <fault wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinarios/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/listar_veterinarios/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="insertarVeterinarioCompleto">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/insertarVeterinarioCompletoRequest" message="tns:insertarVeterinarioCompleto" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/insertarVeterinarioCompletoResponse" message="tns:insertarVeterinarioCompletoResponse" />
+    </operation>
+    <operation name="modificarVeterinarioCompleto">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/modificarVeterinarioCompletoRequest" message="tns:modificarVeterinarioCompleto" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/modificarVeterinarioCompletoResponse" message="tns:modificarVeterinarioCompletoResponse" />
+    </operation>
+    <operation name="ListasBusquedaAvanzadaVeterinario">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/ListasBusquedaAvanzadaVeterinarioRequest" message="tns:ListasBusquedaAvanzadaVeterinario" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/ListasBusquedaAvanzadaVeterinarioResponse" message="tns:ListasBusquedaAvanzadaVeterinarioResponse" />
+    </operation>
+    <operation name="VerificarSiExisteHorarioLaboral">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/VerificarSiExisteHorarioLaboralRequest" message="tns:VerificarSiExisteHorarioLaboral" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/VerificarSiExisteHorarioLaboralResponse" message="tns:VerificarSiExisteHorarioLaboralResponse" />
+    </operation>
+    <operation name="eliminarVeterinarioCompleto">
+      <input wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/eliminarVeterinarioCompletoRequest" message="tns:eliminarVeterinarioCompleto" />
+      <output wsam:Action="http://veterinario.softpetws.pucp.edu.pe/Veterinarios/eliminarVeterinarioCompletoResponse" message="tns:eliminarVeterinarioCompletoResponse" />
+    </operation>
+  </portType>
+  <binding name="VeterinariosPortBinding" type="tns:Veterinarios">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="insertar_veterinario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_veterinario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_veterinario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_veterinarios_activos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="obtenerPorId_veterinario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_veterinarios">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="insertarVeterinarioCompleto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificarVeterinarioCompleto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListasBusquedaAvanzadaVeterinario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="VerificarSiExisteHorarioLaboral">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarVeterinarioCompleto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="veterinarios">
+    <port name="VeterinariosPort" binding="tns:VeterinariosPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/veterinarios" />
+    </port>
+  </service>
+</definitions>

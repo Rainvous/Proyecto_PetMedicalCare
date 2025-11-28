@@ -1,0 +1,132 @@
+USE petmedicalcare;
+GO
+
+-- =========================================================
+-- 1. AUDITORÍA USUARIOS
+-- =========================================================
+CREATE OR ALTER TRIGGER dbo.trg_USUARIOS_Audit_Insert
+ON dbo.USUARIOS
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Actualiza los campos de auditoría tras la inserción
+    UPDATE T
+    SET 
+        FECHA_CREACION = ISNULL(i.FECHA_CREACION, GETDATE()),
+        FECHA_MODIFICACION = ISNULL(i.FECHA_MODIFICACION, GETDATE()),
+        USUARIO_CREADOR = ISNULL(i.USUARIO_CREADOR, SYSTEM_USER),
+        USUARIO_MODIFICADOR = ISNULL(i.USUARIO_MODIFICADOR, SYSTEM_USER)
+    FROM dbo.USUARIOS T
+    INNER JOIN inserted i ON T.USUARIO_ID = i.USUARIO_ID;
+END
+GO
+
+CREATE OR ALTER TRIGGER dbo.trg_USUARIOS_Audit_Update
+ON dbo.USUARIOS
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE T
+    SET 
+        FECHA_MODIFICACION = GETDATE(),
+        USUARIO_MODIFICADOR = SYSTEM_USER
+    FROM dbo.USUARIOS T
+    INNER JOIN inserted i ON T.USUARIO_ID = i.USUARIO_ID;
+END
+GO
+
+-- =========================================================
+-- 2. AUDITORÍA SERVICIOS
+-- =========================================================
+CREATE OR ALTER TRIGGER dbo.trg_SERVICIOS_Audit_Insert
+ON dbo.SERVICIOS
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE T
+    SET 
+        FECHA_CREACION = ISNULL(i.FECHA_CREACION, GETDATE()),
+        FECHA_MODIFICACION = ISNULL(i.FECHA_MODIFICACION, GETDATE()),
+        USUARIO_CREADOR = ISNULL(i.USUARIO_CREADOR, SYSTEM_USER),
+        USUARIO_MODIFICADOR = ISNULL(i.USUARIO_MODIFICADOR, SYSTEM_USER)
+    FROM dbo.SERVICIOS T
+    INNER JOIN inserted i ON T.SERVICIO_ID = i.SERVICIO_ID;
+END
+GO
+
+CREATE OR ALTER TRIGGER dbo.trg_SERVICIOS_Audit_Update
+ON dbo.SERVICIOS
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE T
+    SET 
+        FECHA_MODIFICACION = GETDATE(),
+        USUARIO_MODIFICADOR = SYSTEM_USER
+    FROM dbo.SERVICIOS T
+    INNER JOIN inserted i ON T.SERVICIO_ID = i.SERVICIO_ID;
+END
+GO
+
+-- =========================================================
+-- 3. AUDITORÍA PRODUCTOS
+-- =========================================================
+CREATE OR ALTER TRIGGER dbo.trg_PRODUCTOS_Audit_Insert
+ON dbo.PRODUCTOS
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE T
+    SET 
+        FECHA_CREACION = ISNULL(i.FECHA_CREACION, GETDATE()),
+        FECHA_MODIFICACION = ISNULL(i.FECHA_MODIFICACION, GETDATE()),
+        USUARIO_CREADOR = ISNULL(i.USUARIO_CREADOR, SYSTEM_USER),
+        USUARIO_MODIFICADOR = ISNULL(i.USUARIO_MODIFICADOR, SYSTEM_USER)
+    FROM dbo.PRODUCTOS T
+    INNER JOIN inserted i ON T.PRODUCTO_ID = i.PRODUCTO_ID;
+END
+GO
+
+CREATE OR ALTER TRIGGER dbo.trg_PRODUCTOS_Audit_Update
+ON dbo.PRODUCTOS
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE T
+    SET 
+        FECHA_MODIFICACION = GETDATE(),
+        USUARIO_MODIFICADOR = SYSTEM_USER
+    FROM dbo.PRODUCTOS T
+    INNER JOIN inserted i ON T.PRODUCTO_ID = i.PRODUCTO_ID;
+END
+GO
+
+-- =========================================================
+-- 4. INTEGRIDAD REFERENCIAL (Cascada Manual)
+-- =========================================================
+CREATE OR ALTER TRIGGER dbo.trg_CITAS_ATENCION_Delete
+ON dbo.CITAS_ATENCION
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    -- 1. Borrar hijos (Detalles)
+    DELETE FROM dbo.DETALLES_SERVICIO 
+    WHERE CITA_ID IN (SELECT CITA_ID FROM deleted);
+
+    -- 2. Borrar hijos (Recetas)
+    DELETE FROM dbo.RECETAS_MEDICAS 
+    WHERE CITA_ID IN (SELECT CITA_ID FROM deleted);
+
+    -- 3. Finalmente borrar al padre
+    DELETE FROM dbo.CITAS_ATENCION 
+    WHERE CITA_ID IN (SELECT CITA_ID FROM deleted);
+END
+GO

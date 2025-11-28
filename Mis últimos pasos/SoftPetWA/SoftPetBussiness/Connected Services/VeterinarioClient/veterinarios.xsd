@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://veterinario.softpetws.pucp.edu.pe/" targetNamespace="http://veterinario.softpetws.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IOException" type="tns:IOException" />
+  <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="ListasBusquedaAvanzadaVeterinario" type="tns:ListasBusquedaAvanzadaVeterinario" />
+  <xs:element name="ListasBusquedaAvanzadaVeterinarioResponse" type="tns:ListasBusquedaAvanzadaVeterinarioResponse" />
+  <xs:element name="VerificarSiExisteHorarioLaboral" type="tns:VerificarSiExisteHorarioLaboral" />
+  <xs:element name="VerificarSiExisteHorarioLaboralResponse" type="tns:VerificarSiExisteHorarioLaboralResponse" />
+  <xs:element name="eliminarVeterinarioCompleto" type="tns:eliminarVeterinarioCompleto" />
+  <xs:element name="eliminarVeterinarioCompletoResponse" type="tns:eliminarVeterinarioCompletoResponse" />
+  <xs:element name="eliminar_veterinario" type="tns:eliminar_veterinario" />
+  <xs:element name="eliminar_veterinarioResponse" type="tns:eliminar_veterinarioResponse" />
+  <xs:element name="insertarVeterinarioCompleto" type="tns:insertarVeterinarioCompleto" />
+  <xs:element name="insertarVeterinarioCompletoResponse" type="tns:insertarVeterinarioCompletoResponse" />
+  <xs:element name="insertar_veterinario" type="tns:insertar_veterinario" />
+  <xs:element name="insertar_veterinarioResponse" type="tns:insertar_veterinarioResponse" />
+  <xs:element name="listar_veterinarios" type="tns:listar_veterinarios" />
+  <xs:element name="listar_veterinariosResponse" type="tns:listar_veterinariosResponse" />
+  <xs:element name="listar_veterinarios_activos" type="tns:listar_veterinarios_activos" />
+  <xs:element name="listar_veterinarios_activosResponse" type="tns:listar_veterinarios_activosResponse" />
+  <xs:element name="modificarVeterinarioCompleto" type="tns:modificarVeterinarioCompleto" />
+  <xs:element name="modificarVeterinarioCompletoResponse" type="tns:modificarVeterinarioCompletoResponse" />
+  <xs:element name="modificar_veterinario" type="tns:modificar_veterinario" />
+  <xs:element name="modificar_veterinarioResponse" type="tns:modificar_veterinarioResponse" />
+  <xs:element name="obtenerPorId_veterinario" type="tns:obtenerPorId_veterinario" />
+  <xs:element name="obtenerPorId_veterinarioResponse" type="tns:obtenerPorId_veterinarioResponse" />
+  <xs:complexType name="listar_veterinarios_activos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_veterinarios_activosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:veterinarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="veterinarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoVeterinario" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="persona" type="tns:personaDto" />
+      <xs:element minOccurs="0" name="veterinarioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="personaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="sexo" type="tns:sexo" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:date" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreador" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="usuarioModificador" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="IOException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InterruptedException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_veterinario">
+    <xs:sequence>
+      <xs:element name="veterinarioId" type="xs:int" />
+      <xs:element name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_veterinarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiExisteHorarioLaboral">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fecha" type="xs:string" />
+      <xs:element minOccurs="0" name="idVeterinario" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiExisteHorarioLaboralResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarVeterinarioCompleto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idVeterinario" type="xs:int" />
+      <xs:element minOccurs="0" name="idPersona" type="xs:int" />
+      <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarVeterinarioCompletoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzadaVeterinario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Especialidad" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="estadoActivo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzadaVeterinarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:veterinarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_veterinario">
+    <xs:sequence>
+      <xs:element name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_veterinarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId_veterinario">
+    <xs:sequence>
+      <xs:element name="veterinarioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId_veterinarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:veterinarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_veterinario">
+    <xs:sequence>
+      <xs:element name="veterinarioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_veterinarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarVeterinarioCompleto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarVeterinarioCompletoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarVeterinarioCompleto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idVeterinario" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarVeterinarioCompletoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_veterinarios">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_veterinariosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:veterinarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="estadoVeterinario">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACTIVO" />
+      <xs:enumeration value="INACTIVO" />
+      <xs:enumeration value="SUSPENDIDO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="sexo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M" />
+      <xs:enumeration value="F" />
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,208 @@
+﻿/* Nombre del archivo: Content/inventario.css */
+
+/* --- Pestañas de Filtro de Tipo de Producto --- */
+.product-filter-tabs .nav-link {
+    color: #6c757d;
+    font-weight: 500;
+    border: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    margin-right: 8px;
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 0.3rem 1rem;
+}
+
+    .product-filter-tabs .nav-link.active {
+        color: #fff;
+        background-color: #00A3A3; /* Azul/Teal */
+        border-color: #00A3A3;
+    }
+
+    .product-filter-tabs .nav-link:hover {
+        background-color: #e0e0e0;
+    }
+
+    .product-filter-tabs .nav-link.active:hover {
+        background-color: #008D8D;
+    }
+
+.product-filter-tabs .badge {
+    margin-left: 5px;
+}
+
+/* Nombre del archivo: Content/inventario.css (ACTUALIZADO) */
+
+
+/* --- Estilos para la Tabla de Inventario (AJUSTADOS) --- */
+
+.table tbody td {
+    vertical-align: middle; /* Centra verticalmente el contenido de las celdas */
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    font-size: 0.95rem; /* Tamaño de fuente base para la fila */
+}
+
+/* --- NUEVO/AJUSTADO: Icono Circular del Producto --- */
+.product-icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex; /* Para centrar el icono de FontAwesome */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem; /* Tamaño del icono FA */
+    color: white; /* Color del icono FA */
+    flex-shrink: 0; /* Evita que el círculo se encoja */
+    margin-right: 1rem; /* Espacio a la derecha del icono */
+}
+/* Colores de fondo para el círculo (basados en TipoClaseCss) */
+.icon-bg-medicamento {
+    background-color: #2196f3;
+}
+/* Azul */
+.icon-bg-alimento {
+    background-color: #ff9800;
+}
+/* Naranja */
+.icon-bg-accesorio {
+    background-color: #9c27b0;
+}
+/* Púrpura */
+.icon-bg-higiene {
+    background-color: #00bcd4;
+}
+/* Celeste */
+/* Añade más colores si tienes más tipos */
+
+
+/* Info del producto (Nombre + Descripción) - AJUSTADO */
+.product-info .name {
+    font-weight: 600;
+    color: #333;
+    display: block; /* Asegura que ocupe su línea */
+    font-size: 1rem; /* Un poco más grande */
+    line-height: 1.2;
+    margin-bottom: 0.1rem;
+}
+
+.product-info .description {
+    font-size: 0.85rem;
+    color: #6c757d;
+    display: block;
+    line-height: 1.2;
+}
+
+/* Insignias de Tipo (Medicamento, Alimento, etc.) - AJUSTADO */
+.type-badge {
+    font-size: 0.7rem; /* Ligeramente más pequeño */
+    font-weight: 600;
+    padding: 0.3em 0.7em;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+}
+/* Colores (Usaremos los nombres de clase directamente en el ASPX) */
+.type-medicamento {
+    background-color: #e3f2fd;
+    color: #2196f3;
+}
+
+.type-alimento {
+    background-color: #fff3e0;
+    color: #ff9800;
+}
+
+.type-accesorio {
+    background-color: #f3e5f5;
+    color: #9c27b0;
+}
+
+.type-higiene {
+    background-color: #e0f7fa;
+    color: #00bcd4;
+}
+
+
+/* Advertencia de Stock Bajo (Sin Cambios) */
+.stock-warning {
+    color: #dc3545 !important; /* Rojo estándar de Bootstrap */
+    font-weight: 600;
+}
+
+/* --- NUEVO: Badges de Estado (Status Badges) --- */
+.status-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3em 0.7em;
+    border-radius: 20px; /* Bordes redondeados (pill) */
+    text-transform: uppercase;
+}
+/* Colores */
+.status-activo {
+    background-color: #e8f5e9;
+    color: #198754;
+}
+/* Verde Bootstrap */
+.status-agotado {
+    background-color: #ffebee;
+    color: #dc3545;
+}
+/* Rojo Bootstrap */
+
+
+/* Botones de Acciones (AJUSTADOS) */
+.action-buttons .btn { /* Estilo base para los botones de acción */
+    width: 35px; /* Tamaño cuadrado */
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Quitamos padding para centrar icono */
+    border: none; /* Quitamos borde si usamos fondos sólidos */
+    font-size: 0.9rem; /* Tamaño del icono */
+    border-radius: 0.25rem; /* Ligeramente redondeado */
+}
+/* Colores específicos */
+.btn-action-view {
+    background-color: #e3f2fd;
+    color: #2196f3;
+}
+    /* Azul claro */
+    .btn-action-view:hover {
+        background-color: #bbdefb;
+    }
+
+.btn-action-edit {
+    background-color: #fff3e0;
+    color: #ff9800;
+}
+    /* Naranja claro */
+    .btn-action-edit:hover {
+        background-color: #ffe0b2;
+    }
+
+.btn-action-delete {
+    background-color: #ffebee;
+    color: #dc3545;
+}
+    /* Rojo claro */
+    .btn-action-delete:hover {
+        background-color: #ffcdd2;
+    }
+
+
+/* --- Paginación Personalizada --- */
+.custom-pagination .page-item .page-link {
+    border-radius: 50% !important; /* Círculos */
+    margin: 0 2px;
+    border: none;
+    color: #6c757d;
+}
+
+    .custom-pagination .page-item .page-link:hover {
+        background-color: #f0f0f0;
+    }
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #00A3A3; /* Azul/Teal */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,163,163,0.3);
+}

@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4239F60-3BF9-4473-BC4D-A91470758981}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SoftPetBussiness</RootNamespace>
+    <AssemblyName>SoftPetBussiness</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.10\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.10\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.10\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.9.0.10\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.9.0.10\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.9.0.10\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\CitaAtencionClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DetalleDocumentoDePagoClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DetalleRecetaClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DetalleServicioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DocumentoDePagoClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\HorarioLaboralClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\MascotaClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\MetodoDePagoClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\PersonaClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ProductoClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\RecetaMedicaClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\RolClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\RolUsuarioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServicioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\TipoProductoClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\TipoServicioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UsuarioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\VeterinarioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SOAPBo\Citas\CitaAtencionBo.cs" />
+    <Compile Include="SOAPBo\Citas\DetalleRecetaBO.cs" />
+    <Compile Include="SOAPBo\Citas\DetalleServicioBo.cs" />
+    <Compile Include="SOAPBo\Citas\RecetaMedicaBO.cs" />
+    <Compile Include="SOAPBo\DocumentoPago\DetalleDocumentoDePagoBo.cs" />
+    <Compile Include="SOAPBo\DocumentoPago\DocumentoDePagoBo.cs" />
+    <Compile Include="SOAPBo\DocumentoPago\MetodoDePagoBo.cs" />
+    <Compile Include="SOAPBo\GestionLogistica\ProductoBo.cs" />
+    <Compile Include="SOAPBo\GestionLogistica\ServicioBO.cs" />
+    <Compile Include="SOAPBo\GestionLogistica\TipoProductoBo.cs" />
+    <Compile Include="SOAPBo\GestionLogistica\TipoServicioBo.cs" />
+    <Compile Include="SOAPBo\GestionNOLogistica\HorarioLaboralBO.cs" />
+    <Compile Include="SOAPBo\GestionNOLogistica\MascotaBo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SOAPBo\GestionNOLogistica\PersonaBo.cs" />
+    <Compile Include="SOAPBo\GestionNOLogistica\VeterinarioBo.cs" />
+    <Compile Include="SOAPBo\Seguridad\RolBo.cs" />
+    <Compile Include="SOAPBo\Seguridad\RolUsuarioBo.cs" />
+    <Compile Include="SOAPBo\Seguridad\UsuarioBo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\CitaAtencionClient\CitasAtencion.wsdl" />
+    <None Include="Connected Services\CitaAtencionClient\CitasAtencion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.citaAtencionDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.citaProgramadaDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.insertar_citaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.listar_citas_por_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.listar_citas_ProgramadasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.listas_busqueda_avanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.listas_busqueda_avanzada_2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.Listas_Citas_Por_Mascotas_Y_FechasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.modificar_citaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CitaAtencionClient\SoftPetBussiness.CitaAtencionClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\DetallesDocumentoDePago1.wsdl" />
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\DetallesDocumentoDePago1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\SoftPetBussiness.DetalleDocumentoDePagoClient.detalleDocumentoPagoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\SoftPetBussiness.DetalleDocumentoDePagoClient.eliminar_Detalle_Documento_De_PagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\SoftPetBussiness.DetalleDocumentoDePagoClient.insertar_Detalle_Documento_De_PagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\SoftPetBussiness.DetalleDocumentoDePagoClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\SoftPetBussiness.DetalleDocumentoDePagoClient.modificar_Detalle_Documento_De_PagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\SoftPetBussiness.DetalleDocumentoDePagoClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\DetallesReceta1.wsdl" />
+    <None Include="Connected Services\DetalleRecetaClient\DetallesReceta1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\SoftPetBussiness.DetalleRecetaClient.detalleRecetaDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\SoftPetBussiness.DetalleRecetaClient.eliminar_detallerecetaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\SoftPetBussiness.DetalleRecetaClient.insertar_detallerecetaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\SoftPetBussiness.DetalleRecetaClient.listar_detalles_por_recetaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\SoftPetBussiness.DetalleRecetaClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\SoftPetBussiness.DetalleRecetaClient.modificar_detallerecetaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleRecetaClient\SoftPetBussiness.DetalleRecetaClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\DetallesServicio1.wsdl" />
+    <None Include="Connected Services\DetalleServicioClient\DetallesServicio1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\SoftPetBussiness.DetalleServicioClient.detalleServicioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\SoftPetBussiness.DetalleServicioClient.eliminar_detalleservicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\SoftPetBussiness.DetalleServicioClient.insertar_detalleservicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\SoftPetBussiness.DetalleServicioClient.listar_por_id_citaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\SoftPetBussiness.DetalleServicioClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\SoftPetBussiness.DetalleServicioClient.modificar_detalleservicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DetalleServicioClient\SoftPetBussiness.DetalleServicioClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\DocumentosDePago1.wsdl" />
+    <None Include="Connected Services\DocumentoDePagoClient\DocumentosDePago1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.documentoPagoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.eliminar_Documento_De_PagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.enviar_comprobante_al_correoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.GeneracionDeSiguienteBoletaOFacturaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.generar_comprobante_de_pago_pdfResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.insertar_Documento_De_PagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.listar_por_fechaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.modificar_Documento_De_PagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentoDePagoClient\SoftPetBussiness.DocumentoDePagoClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\Horarios.wsdl" />
+    <None Include="Connected Services\HorarioLaboralClient\Horarios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\SoftPetBussiness.HorarioLaboralClient.horarioLaboralDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\SoftPetBussiness.HorarioLaboralClient.insertar_horarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\SoftPetBussiness.HorarioLaboralClient.listar_por_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\SoftPetBussiness.HorarioLaboralClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\SoftPetBussiness.HorarioLaboralClient.modificar_horarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\SoftPetBussiness.HorarioLaboralClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioLaboralClient\SoftPetBussiness.HorarioLaboralClient.registrar_horario_rangoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\Mascotas1.wsdl" />
+    <None Include="Connected Services\MascotaClient\Mascotas1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.eliminar_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.insertar_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.listar_mascotasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.listar_mascotas_activasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.listar_mascotas_por_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.ListasBusquedaAvanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.mascotaDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.modificar_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.obtenerPorId_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MascotaClient\SoftPetBussiness.MascotaClient.VerificarSiLaMascotaTieneInformacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MetodoDePagoClient\MetodosDePago1.wsdl" />
+    <None Include="Connected Services\MetodoDePagoClient\MetodosDePago1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MetodoDePagoClient\SoftPetBussiness.MetodoDePagoClient.eliminar_modificar_MetodoDePagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MetodoDePagoClient\SoftPetBussiness.MetodoDePagoClient.insertar_MetodoDePagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MetodoDePagoClient\SoftPetBussiness.MetodoDePagoClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MetodoDePagoClient\SoftPetBussiness.MetodoDePagoClient.metodoDePagoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MetodoDePagoClient\SoftPetBussiness.MetodoDePagoClient.modificar_MetodoDePagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MetodoDePagoClient\SoftPetBussiness.MetodoDePagoClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\Personas1.wsdl" />
+    <None Include="Connected Services\PersonaClient\Personas1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.buscar_clientes_paginadosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.eliminarPersonaCompletaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.eliminar_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.insertarOModificarUsuarioGestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.insertarPersonaCompletaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.insertar_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.listar_personasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.listar_personas_activasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.ListasBusquedaAvanzadaParaClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.ListasBusquedaAvanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.modificarPersonaCompletaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.modificar_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.ObtenerDatosPersonaGuestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.obtenerIdDePersonaGuestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.obtenerPorId_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.obtener_correo_clienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.obtener_rol_de_clienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.personaDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.rolDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PersonaClient\SoftPetBussiness.PersonaClient.VerificarSiLaPersonaTieneInformacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\Productos.wsdl" />
+    <None Include="Connected Services\ProductoClient\Productos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.buscar_productos_paginadosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.eliminar_productosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.insertar_productosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.listar_productos_activosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.listar_productos_por_tipoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.ListasBusquedaProductosAvanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.modificar_productosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.productoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductoClient\SoftPetBussiness.ProductoClient.VerificarSiElProductoTieneInformacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\RecetasMedica.wsdl" />
+    <None Include="Connected Services\RecetaMedicaClient\RecetasMedica.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.eliminar_recetaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.insertar_recetaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.listar_busqueda_avanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.listar_recetas_por_mascota_y_fechaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.modificar_recetaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.obtener_receta_por_citaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RecetaMedicaClient\SoftPetBussiness.RecetaMedicaClient.recetaMedicaDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolClient\Roles.wsdl" />
+    <None Include="Connected Services\RolClient\Roles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RolClient\SoftPetBussiness.RolClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolClient\SoftPetBussiness.RolClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolClient\SoftPetBussiness.RolClient.listarTodosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolClient\SoftPetBussiness.RolClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolClient\SoftPetBussiness.RolClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolClient\SoftPetBussiness.RolClient.ObtenerRolesDelUsuarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolClient\SoftPetBussiness.RolClient.rolDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolUsuarioClient\RolesUsuario1.wsdl" />
+    <None Include="Connected Services\RolUsuarioClient\RolesUsuario1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RolUsuarioClient\SoftPetBussiness.RolUsuarioClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolUsuarioClient\SoftPetBussiness.RolUsuarioClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolUsuarioClient\SoftPetBussiness.RolUsuarioClient.listarTodosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolUsuarioClient\SoftPetBussiness.RolUsuarioClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolUsuarioClient\SoftPetBussiness.RolUsuarioClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolUsuarioClient\SoftPetBussiness.RolUsuarioClient.rolUsuarioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\Servicios1.wsdl" />
+    <None Include="Connected Services\ServicioClient\Servicios1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.buscar_servicios_paginadosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.eliminar_serviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.insertar_serviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.listar_servicios_activosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.listar_servicios_por_tipoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.ListasBusquedaAvanzada2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.ListasBusquedaAvanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.modificar_serviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.servicioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicioClient\SoftPetBussiness.ServicioClient.VerificarSiElServicioTieneInformacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoProductoClient\SoftPetBussiness.TipoProductoClient.eliminar_tipoproductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoProductoClient\SoftPetBussiness.TipoProductoClient.insertar_tipoproductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoProductoClient\SoftPetBussiness.TipoProductoClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoProductoClient\SoftPetBussiness.TipoProductoClient.modificar_tipoproductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoProductoClient\SoftPetBussiness.TipoProductoClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoProductoClient\SoftPetBussiness.TipoProductoClient.tipoProductoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoProductoClient\TiposProducto1.wsdl" />
+    <None Include="Connected Services\TipoProductoClient\TiposProducto1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\SoftPetBussiness.TipoServicioClient.eliminar_tiposerviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\SoftPetBussiness.TipoServicioClient.insertar_tiposerviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\SoftPetBussiness.TipoServicioClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\SoftPetBussiness.TipoServicioClient.modificar_tiposerviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\SoftPetBussiness.TipoServicioClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\SoftPetBussiness.TipoServicioClient.tipoServicioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\TiposServicio1.wsdl" />
+    <None Include="Connected Services\TipoServicioClient\TiposServicio1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.cambiarPasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.listarTodosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.ObtenerPorCorreoYContraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.recuperarPasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\SoftPetBussiness.UsuarioClient.usuarioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioClient\Usuarios.wsdl" />
+    <None Include="Connected Services\UsuarioClient\Usuarios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.eliminarVeterinarioCompletoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.eliminar_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.insertarVeterinarioCompletoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.insertar_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.listar_veterinariosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.listar_veterinarios_activosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.ListasBusquedaAvanzadaVeterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.modificarVeterinarioCompletoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.modificar_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.obtenerPorId_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.VerificarSiExisteHorarioLaboralResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\SoftPetBussiness.VeterinarioClient.veterinarioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\veterinarios.wsdl" />
+    <None Include="Connected Services\VeterinarioClient\veterinarios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CitaAtencionClient\" />
+    <WCFMetadataStorage Include="Connected Services\DetalleDocumentoDePagoClient\" />
+    <WCFMetadataStorage Include="Connected Services\DetalleRecetaClient\" />
+    <WCFMetadataStorage Include="Connected Services\DetalleServicioClient\" />
+    <WCFMetadataStorage Include="Connected Services\DocumentoDePagoClient\" />
+    <WCFMetadataStorage Include="Connected Services\HorarioLaboralClient\" />
+    <WCFMetadataStorage Include="Connected Services\MascotaClient\" />
+    <WCFMetadataStorage Include="Connected Services\MetodoDePagoClient\" />
+    <WCFMetadataStorage Include="Connected Services\PersonaClient\" />
+    <WCFMetadataStorage Include="Connected Services\ProductoClient\" />
+    <WCFMetadataStorage Include="Connected Services\RecetaMedicaClient\" />
+    <WCFMetadataStorage Include="Connected Services\RolClient\" />
+    <WCFMetadataStorage Include="Connected Services\RolUsuarioClient\" />
+    <WCFMetadataStorage Include="Connected Services\ServicioClient\" />
+    <WCFMetadataStorage Include="Connected Services\TipoProductoClient\" />
+    <WCFMetadataStorage Include="Connected Services\TipoServicioClient\" />
+    <WCFMetadataStorage Include="Connected Services\UsuarioClient\" />
+    <WCFMetadataStorage Include="Connected Services\VeterinarioClient\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoServicioClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoServicioClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoServicioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MascotaClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MascotaClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MascotaClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PersonaClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PersonaClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PersonaClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoProductoClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoProductoClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoProductoClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolUsuarioClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolUsuarioClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolUsuarioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleServicioClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleServicioClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleServicioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MetodoDePagoClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MetodoDePagoClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MetodoDePagoClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DocumentoDePagoClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DocumentoDePagoClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DocumentoDePagoClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleRecetaClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleRecetaClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleRecetaClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DetalleDocumentoDePagoClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UsuarioClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UsuarioClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UsuarioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RecetaMedicaClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RecetaMedicaClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RecetaMedicaClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CitaAtencionClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CitaAtencionClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CitaAtencionClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductoClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductoClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductoClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\VeterinarioClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\VeterinarioClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\VeterinarioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioLaboralClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioLaboralClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioLaboralClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

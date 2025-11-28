@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://mascota.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Mascotas" targetNamespace="http://mascota.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/Mascotas?xsd=1" namespace="http://mascota.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="listar_mascotas_por_persona">
+    <part name="parameters" element="tns:listar_mascotas_por_persona" />
+  </message>
+  <message name="listar_mascotas_por_personaResponse">
+    <part name="parameters" element="tns:listar_mascotas_por_personaResponse" />
+  </message>
+  <message name="IOException">
+    <part name="fault" element="tns:IOException" />
+  </message>
+  <message name="InterruptedException">
+    <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="ListasBusquedaAvanzada">
+    <part name="parameters" element="tns:ListasBusquedaAvanzada" />
+  </message>
+  <message name="ListasBusquedaAvanzadaResponse">
+    <part name="parameters" element="tns:ListasBusquedaAvanzadaResponse" />
+  </message>
+  <message name="listar_mascotas_activas">
+    <part name="parameters" element="tns:listar_mascotas_activas" />
+  </message>
+  <message name="listar_mascotas_activasResponse">
+    <part name="parameters" element="tns:listar_mascotas_activasResponse" />
+  </message>
+  <message name="insertar_mascota">
+    <part name="parameters" element="tns:insertar_mascota" />
+  </message>
+  <message name="insertar_mascotaResponse">
+    <part name="parameters" element="tns:insertar_mascotaResponse" />
+  </message>
+  <message name="modificar_mascota">
+    <part name="parameters" element="tns:modificar_mascota" />
+  </message>
+  <message name="modificar_mascotaResponse">
+    <part name="parameters" element="tns:modificar_mascotaResponse" />
+  </message>
+  <message name="eliminar_mascota">
+    <part name="parameters" element="tns:eliminar_mascota" />
+  </message>
+  <message name="eliminar_mascotaResponse">
+    <part name="parameters" element="tns:eliminar_mascotaResponse" />
+  </message>
+  <message name="obtenerPorId_mascota">
+    <part name="parameters" element="tns:obtenerPorId_mascota" />
+  </message>
+  <message name="obtenerPorId_mascotaResponse">
+    <part name="parameters" element="tns:obtenerPorId_mascotaResponse" />
+  </message>
+  <message name="listar_mascotas">
+    <part name="parameters" element="tns:listar_mascotas" />
+  </message>
+  <message name="listar_mascotasResponse">
+    <part name="parameters" element="tns:listar_mascotasResponse" />
+  </message>
+  <message name="VerificarSiLaMascotaTieneInformacion">
+    <part name="parameters" element="tns:VerificarSiLaMascotaTieneInformacion" />
+  </message>
+  <message name="VerificarSiLaMascotaTieneInformacionResponse">
+    <part name="parameters" element="tns:VerificarSiLaMascotaTieneInformacionResponse" />
+  </message>
+  <portType name="Mascotas">
+    <operation name="listar_mascotas_por_persona">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_por_personaRequest" message="tns:listar_mascotas_por_persona" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_por_personaResponse" message="tns:listar_mascotas_por_personaResponse" />
+      <fault wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_por_persona/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_por_persona/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="ListasBusquedaAvanzada">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/ListasBusquedaAvanzadaRequest" message="tns:ListasBusquedaAvanzada" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/ListasBusquedaAvanzadaResponse" message="tns:ListasBusquedaAvanzadaResponse" />
+    </operation>
+    <operation name="listar_mascotas_activas">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_activasRequest" message="tns:listar_mascotas_activas" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_activasResponse" message="tns:listar_mascotas_activasResponse" />
+      <fault wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_activas/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas_activas/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="insertar_mascota">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/insertar_mascotaRequest" message="tns:insertar_mascota" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/insertar_mascotaResponse" message="tns:insertar_mascotaResponse" />
+    </operation>
+    <operation name="modificar_mascota">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/modificar_mascotaRequest" message="tns:modificar_mascota" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/modificar_mascotaResponse" message="tns:modificar_mascotaResponse" />
+    </operation>
+    <operation name="eliminar_mascota">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/eliminar_mascotaRequest" message="tns:eliminar_mascota" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/eliminar_mascotaResponse" message="tns:eliminar_mascotaResponse" />
+    </operation>
+    <operation name="obtenerPorId_mascota">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/obtenerPorId_mascotaRequest" message="tns:obtenerPorId_mascota" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/obtenerPorId_mascotaResponse" message="tns:obtenerPorId_mascotaResponse" />
+    </operation>
+    <operation name="listar_mascotas">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotasRequest" message="tns:listar_mascotas" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotasResponse" message="tns:listar_mascotasResponse" />
+      <fault wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/listar_mascotas/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="VerificarSiLaMascotaTieneInformacion">
+      <input wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/VerificarSiLaMascotaTieneInformacionRequest" message="tns:VerificarSiLaMascotaTieneInformacion" />
+      <output wsam:Action="http://mascota.softpetws.pucp.edu.pe/Mascotas/VerificarSiLaMascotaTieneInformacionResponse" message="tns:VerificarSiLaMascotaTieneInformacionResponse" />
+    </operation>
+  </portType>
+  <binding name="MascotasPortBinding" type="tns:Mascotas">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="listar_mascotas_por_persona">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="ListasBusquedaAvanzada">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_mascotas_activas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="insertar_mascota">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_mascota">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_mascota">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerPorId_mascota">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_mascotas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="VerificarSiLaMascotaTieneInformacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Mascotas">
+    <port name="MascotasPort" binding="tns:MascotasPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/Mascotas" />
+    </port>
+  </service>
+</definitions>

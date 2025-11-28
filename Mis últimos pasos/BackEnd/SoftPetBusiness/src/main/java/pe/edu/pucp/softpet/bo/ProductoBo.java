@@ -1,0 +1,97 @@
+package pe.edu.pucp.softpet.bo;
+
+import java.util.ArrayList;
+import pe.edu.pucp.softpet.dao.ProductoDao;
+import pe.edu.pucp.softpet.daoImp.ProductoDaoImpl;
+import pe.edu.pucp.softpet.dto.productos.ProductoDto;
+import pe.edu.pucp.softpet.dto.productos.TipoProductoDto;
+
+public class ProductoBo {
+
+    private final ProductoDao productoDao;
+
+    public ProductoBo() {
+        this.productoDao = new ProductoDaoImpl();
+    }
+
+    public Integer insertar(int tipoProductoId, String nombre, String presentacion,
+            double precioUnitario, int stock, boolean activo) {
+
+        ProductoDto producto = new ProductoDto();
+
+        TipoProductoDto tipoProd = new TipoProductoDto();
+        tipoProd.setTipoProductoId(tipoProductoId);
+
+        producto.setTipoProducto(tipoProd);
+        producto.setNombre(nombre);
+        producto.setPresentacion(presentacion);
+        producto.setPrecioUnitario(precioUnitario);
+        producto.setStock(stock);
+        producto.setActivo(activo);
+
+        return this.productoDao.insertar(producto);
+    }
+
+    public Integer modificar(int productoId, int tipoProductoId, String nombre,
+            String presentacion, double precioUnitario, int stock, boolean activo) {
+
+        ProductoDto producto = new ProductoDto();
+
+        TipoProductoDto tipoProd = new TipoProductoDto();
+        tipoProd.setTipoProductoId(tipoProductoId);
+
+        producto.setProductoId(productoId);
+        producto.setTipoProducto(tipoProd);
+        producto.setNombre(nombre);
+        producto.setPresentacion(presentacion);
+        producto.setPrecioUnitario(precioUnitario);
+        producto.setStock(stock);
+        producto.setActivo(activo);
+
+        return this.productoDao.modificar(producto);
+    }
+
+    public Integer eliminar(int productoId) {
+        ProductoDto producto = new ProductoDto();
+        producto.setProductoId(productoId);
+        return this.productoDao.eliminar(producto);
+    }
+
+    public ProductoDto obtenerPorId(int productoId) {
+        return this.productoDao.obtenerPorId(productoId);
+    }
+
+    public ArrayList<ProductoDto> listarTodos() {
+        return this.productoDao.listarTodos();
+    }
+
+    public ArrayList<ProductoDto> listarProductosActivos() {
+        return this.productoDao.listarProductosActivos();
+    }
+
+    public ArrayList<ProductoDto> ListarPorTipo(String nombreTipo) {
+        return this.productoDao.ListarPorTipo(nombreTipo);
+    }
+
+    public int VerificarSiElProductoTieneInformacion(int idServicio) {
+        return this.productoDao.VerificarSiElProductoTieneInformacion(idServicio);
+    }
+
+    public ArrayList<ProductoDto> ListasBusquedaProductosAvanzada(String nombre, String rango, String activo, Integer tipoId) {
+        ProductoDto producto = new ProductoDto();
+        producto.setNombre(nombre == null ? "" : nombre);
+
+        // Pasamos el tipoId al DAO
+        return (ArrayList<ProductoDto>) productoDao.ListasBusquedaProductosAvanzada(producto,
+                rango == null ? "" : rango,
+                activo == null ? "" : activo,
+                tipoId);
+    }
+
+    // -----------------------------------------------------------------------------------
+    // NUEVA FUNCIÓN PAGINADO: Búsqueda Paginada de Productos
+    // -----------------------------------------------------------------------------------
+    public ArrayList<ProductoDto> buscarProductosPaginados(String nombre, String rangoId, Boolean activo, int pagina) {
+        return (ArrayList<ProductoDto>) this.productoDao.buscarProductosPaginados(nombre, rangoId, activo, pagina);
+    }
+}

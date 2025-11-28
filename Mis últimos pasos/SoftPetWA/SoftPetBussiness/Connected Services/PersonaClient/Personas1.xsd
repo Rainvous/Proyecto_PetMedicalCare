@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://persona.softpetws.pucp.edu.pe/" targetNamespace="http://persona.softpetws.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IOException" type="tns:IOException" />
+  <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="ListasBusquedaAvanzada" type="tns:ListasBusquedaAvanzada" />
+  <xs:element name="ListasBusquedaAvanzadaParaCliente" type="tns:ListasBusquedaAvanzadaParaCliente" />
+  <xs:element name="ListasBusquedaAvanzadaParaClienteResponse" type="tns:ListasBusquedaAvanzadaParaClienteResponse" />
+  <xs:element name="ListasBusquedaAvanzadaResponse" type="tns:ListasBusquedaAvanzadaResponse" />
+  <xs:element name="ObtenerDatosPersonaGuest" type="tns:ObtenerDatosPersonaGuest" />
+  <xs:element name="ObtenerDatosPersonaGuestResponse" type="tns:ObtenerDatosPersonaGuestResponse" />
+  <xs:element name="VerificarSiLaPersonaTieneInformacion" type="tns:VerificarSiLaPersonaTieneInformacion" />
+  <xs:element name="VerificarSiLaPersonaTieneInformacionResponse" type="tns:VerificarSiLaPersonaTieneInformacionResponse" />
+  <xs:element name="buscar_clientes_paginados" type="tns:buscar_clientes_paginados" />
+  <xs:element name="buscar_clientes_paginadosResponse" type="tns:buscar_clientes_paginadosResponse" />
+  <xs:element name="eliminarPersonaCompleta" type="tns:eliminarPersonaCompleta" />
+  <xs:element name="eliminarPersonaCompletaResponse" type="tns:eliminarPersonaCompletaResponse" />
+  <xs:element name="eliminar_persona" type="tns:eliminar_persona" />
+  <xs:element name="eliminar_personaResponse" type="tns:eliminar_personaResponse" />
+  <xs:element name="insertarOModificarUsuarioGest" type="tns:insertarOModificarUsuarioGest" />
+  <xs:element name="insertarOModificarUsuarioGestResponse" type="tns:insertarOModificarUsuarioGestResponse" />
+  <xs:element name="insertarPersonaCompleta" type="tns:insertarPersonaCompleta" />
+  <xs:element name="insertarPersonaCompletaResponse" type="tns:insertarPersonaCompletaResponse" />
+  <xs:element name="insertar_persona" type="tns:insertar_persona" />
+  <xs:element name="insertar_personaResponse" type="tns:insertar_personaResponse" />
+  <xs:element name="listar_personas" type="tns:listar_personas" />
+  <xs:element name="listar_personasResponse" type="tns:listar_personasResponse" />
+  <xs:element name="listar_personas_activas" type="tns:listar_personas_activas" />
+  <xs:element name="listar_personas_activasResponse" type="tns:listar_personas_activasResponse" />
+  <xs:element name="modificarPersonaCompleta" type="tns:modificarPersonaCompleta" />
+  <xs:element name="modificarPersonaCompletaResponse" type="tns:modificarPersonaCompletaResponse" />
+  <xs:element name="modificar_persona" type="tns:modificar_persona" />
+  <xs:element name="modificar_personaResponse" type="tns:modificar_personaResponse" />
+  <xs:element name="obtenerIdDePersonaGuest" type="tns:obtenerIdDePersonaGuest" />
+  <xs:element name="obtenerIdDePersonaGuestResponse" type="tns:obtenerIdDePersonaGuestResponse" />
+  <xs:element name="obtenerPorId_persona" type="tns:obtenerPorId_persona" />
+  <xs:element name="obtenerPorId_personaResponse" type="tns:obtenerPorId_personaResponse" />
+  <xs:element name="obtener_correo_cliente" type="tns:obtener_correo_cliente" />
+  <xs:element name="obtener_correo_clienteResponse" type="tns:obtener_correo_clienteResponse" />
+  <xs:element name="obtener_rol_de_cliente" type="tns:obtener_rol_de_cliente" />
+  <xs:element name="obtener_rol_de_clienteResponse" type="tns:obtener_rol_de_clienteResponse" />
+  <xs:complexType name="insertarPersonaCompleta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarPersonaCompletaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_persona">
+    <xs:sequence>
+      <xs:element name="personaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_personaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_correo_cliente">
+    <xs:sequence>
+      <xs:element name="idpersona" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_correo_clienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarOModificarUsuarioGest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarOModificarUsuarioGestResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscar_clientes_paginados">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDoc" type="xs:string" />
+      <xs:element minOccurs="0" name="ruc" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element name="pagina" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscar_clientes_paginadosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:personaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="personaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="sexo" type="tns:sexo" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:date" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreador" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="usuarioModificador" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="modificar_persona">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_personaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzada">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="NroDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="Ruc" type="xs:string" />
+      <xs:element minOccurs="0" name="Activo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzadaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:personaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_persona">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_personaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId_persona">
+    <xs:sequence>
+      <xs:element name="personaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId_personaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:personaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarPersonaCompleta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idPersona" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarPersonaCompletaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_personas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_personasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:personaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IOException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InterruptedException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_personas_activas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_personas_activasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:personaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_rol_de_cliente">
+    <xs:sequence>
+      <xs:element name="idpersona" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_rol_de_clienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:rolDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="rolDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="rolId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarPersonaCompleta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idPersona" type="xs:int" />
+      <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarPersonaCompletaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiLaPersonaTieneInformacion">
+    <xs:sequence>
+      <xs:element name="nombreTipo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificarSiLaPersonaTieneInformacionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzadaParaCliente">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="ListasBusquedaAvanzadaParaClienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:personaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerIdDePersonaGuest">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="obtenerIdDePersonaGuestResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ObtenerDatosPersonaGuest">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="ObtenerDatosPersonaGuestResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:personaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="sexo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M" />
+      <xs:enumeration value="F" />
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
