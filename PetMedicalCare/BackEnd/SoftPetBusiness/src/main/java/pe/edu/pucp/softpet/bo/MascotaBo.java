@@ -2,13 +2,14 @@ package pe.edu.pucp.softpet.bo;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import pe.edu.pucp.softpet.dao.MascotaDao;
 import pe.edu.pucp.softpet.daoImp.MascotaDaoImpl;
 import pe.edu.pucp.softpet.dto.mascotas.MascotaDto;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 
 public class MascotaBo {
 
-    private final MascotaDaoImpl mascotaDao;
+    private final MascotaDao mascotaDao;
 
     public MascotaBo() {
         this.mascotaDao = new MascotaDaoImpl();

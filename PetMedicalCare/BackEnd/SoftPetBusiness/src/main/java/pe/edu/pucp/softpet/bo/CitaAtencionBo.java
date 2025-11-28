@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import pe.edu.pucp.softpet.dao.CitaAtencionDao;
 import pe.edu.pucp.softpet.daoImp.CitaAtencionDaoImpl;
 import pe.edu.pucp.softpet.dto.citas.CitaAtencionDto;
 import pe.edu.pucp.softpet.dto.citas.CitaProgramadaDto;
@@ -14,7 +15,7 @@ import pe.edu.pucp.softpet.dto.util.enums.EstadoCita;
 
 public class CitaAtencionBo {
 
-    private final CitaAtencionDaoImpl citaDao;
+    private final CitaAtencionDao citaDao;
 
     public CitaAtencionBo() {
         this.citaDao = new CitaAtencionDaoImpl();

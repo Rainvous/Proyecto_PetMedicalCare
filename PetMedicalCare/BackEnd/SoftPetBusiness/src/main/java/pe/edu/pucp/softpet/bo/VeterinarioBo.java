@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import pe.edu.pucp.softpet.bo.utils.GmailService;
 import pe.edu.pucp.softpet.daoImp.VeterinarioDaoImpl;
 import pe.edu.pucp.softpet.bo.utils.SecurityUtil;
+import pe.edu.pucp.softpet.dao.VeterinarioDao;
 import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoVeterinario;
 
 public class VeterinarioBo {
 
-    private final VeterinarioDaoImpl veterinarioDao;
+    private final VeterinarioDao veterinarioDao;
     
     private final GmailService gmailService;
 
