@@ -158,7 +158,7 @@ public class DocumentoDePagoBoTest {
     @Order(5)
     public void testListarTodos() {
         System.out.println("=== Test: Listar por fecha - DOCUMENTOS_DE_PAGO ===");
-        String fecha= "2025-11-20";
+        String fecha= "2025-11-27";
         ArrayList<DocumentoPagoDto> lista = documentoBo.listarPorFechaEmision(fecha);
 
         assertNotNull(lista, "La lista no debe ser null");

@@ -100,7 +100,7 @@ public class DetalleServicioBoTest {
     public void testListarTodos() {
         System.out.println("=== Test: Listar por id cita - DETALLES_SERVICIO ===");
 
-        ArrayList<DetalleServicioDto> lista = bo.listarPorIdCita(30);
+        ArrayList<DetalleServicioDto> lista = bo.listarPorIdCita(2);
 
         assertNotNull(lista, "La lista no debe ser null");
         assertFalse(lista.isEmpty(), "La lista no debe estar vacía");

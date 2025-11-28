@@ -29,7 +29,7 @@ public abstract class DaoBaseImpl {
 
     /* ATRIBUTOS QUE HAN SIDO AGREGADOS AL DAO */
     protected String usuario; //Esto es para el trigger
-    protected MotorDeBaseDeDatos tipoMotor = MotorDeBaseDeDatos.MYSQL; // Ayuda a cambiar rapidamente entre motores (El dbManager tmb ha sido modificado)
+    protected MotorDeBaseDeDatos tipoMotor = MotorDeBaseDeDatos.MSSQL; // Ayuda a cambiar rapidamente entre motores (El dbManager tmb ha sido modificado)
     protected boolean TieneAuditoria = false; // Tiene auditoria es para activar el trigger de auditoria de algunas tablas (Y AYUDA A SETEAR EL USUARIO que modifico la tabla)
 
     /* NOTA: La auditoria solo es para tablas que tienen triggers */

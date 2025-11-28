@@ -16,6 +16,7 @@ import pe.edu.pucp.softpet.dto.personas.PersonaDto;
 import pe.edu.pucp.softpet.dto.util.enums.EstadoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.util.enums.TipoDocumentoDePago;
 import pe.edu.pucp.softpet.dto.util.enums.TipoMetodoPago;
+import pe.edu.pucp.softpet.util.MotorDeBaseDeDatos;
 
 public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePagoDao {
     
@@ -270,32 +271,41 @@ public class DocumentoDePagoDaoImpl extends DaoBaseImpl implements DocumentoDePa
     }
 
     public String generarSQLparComprobantesPorFecha() {
-        String sql
-                = "SELECT "
-                + "  dp.DOCUMENTO_DE_PAGO_ID, "
-                + "  dp.METODO_DE_PAGO_ID, "
-                + "  mp.NOMBRE AS METODO_DE_PAGO_NOMBRE, "
-                + "  dp.PERSONA_ID, "
-                + "  dp.TIPO_DOCUMENTO, "
-                + "  dp.SERIE, "
-                + "  dp.NUMERO, "
-                + "  dp.FECHA_EMISION, "
-                + "  dp.SUBTOTAL, "
-                + "  dp.IGV_TOTAL, "
-                + "  dp.TOTAL, "
-                + "  dp.ESTADO, "
-                + "  dp.ACTIVO, "
-                + "  p.NOMBRE AS PERSONA_NOMBRE ,"
-                + "  p.RUC  "
-                + "FROM DOCUMENTOS_DE_PAGO dp "
-                + "LEFT JOIN PERSONAS p ON dp.PERSONA_ID = p.PERSONA_ID "
-                + "LEFT JOIN METODOS_DE_PAGO mp ON dp.METODO_DE_PAGO_ID = mp.METODO_DE_PAGO_ID "
-                + "WHERE DATE(dp.FECHA_EMISION) = ? "
-                
-                + "AND dp.ACTIVO = 1";
-        
-        return sql;
+    String sql
+            = "SELECT "
+            + "  dp.DOCUMENTO_DE_PAGO_ID, "
+            + "  dp.METODO_DE_PAGO_ID, "
+            + "  mp.NOMBRE AS METODO_DE_PAGO_NOMBRE, "
+            + "  dp.PERSONA_ID, "
+            + "  dp.TIPO_DOCUMENTO, "
+            + "  dp.SERIE, "
+            + "  dp.NUMERO, "
+            + "  dp.FECHA_EMISION, "
+            + "  dp.SUBTOTAL, "
+            + "  dp.IGV_TOTAL, "
+            + "  dp.TOTAL, "
+            + "  dp.ESTADO, "
+            + "  dp.ACTIVO, "
+            + "  p.NOMBRE AS PERSONA_NOMBRE ,"
+            + "  p.RUC  "
+            + "FROM DOCUMENTOS_DE_PAGO dp "
+            + "LEFT JOIN PERSONAS p ON dp.PERSONA_ID = p.PERSONA_ID "
+            + "LEFT JOIN METODOS_DE_PAGO mp ON dp.METODO_DE_PAGO_ID = mp.METODO_DE_PAGO_ID "
+            + "WHERE ";
+
+    // ADAPTACIÓN DE FECHA SEGÚN EL MOTOR
+    if (this.tipoMotor == MotorDeBaseDeDatos.MSSQL) {
+        // SQL Server: CAST(dp.FECHA_EMISION AS DATE)
+        sql += "CAST(dp.FECHA_EMISION AS DATE) = ? ";
+    } else {
+        // MySQL: DATE(dp.FECHA_EMISION) (Asumimos MySQL por defecto)
+        sql += "DATE(dp.FECHA_EMISION) = ? ";
     }
+
+    sql += "AND dp.ACTIVO = 1";
+
+    return sql;
+}
     
     public ArrayList<String> GeneracionDeSiguienteBoletaOFactura(String tipoDocumento) {
         Map<Integer, Object> parametrosEntrada = new HashMap<>();
