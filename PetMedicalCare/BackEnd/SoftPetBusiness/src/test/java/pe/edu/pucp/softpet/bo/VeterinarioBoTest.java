@@ -1,48 +1,53 @@
-//package pe.edu.pucp.softpet.bo;
-//
-//import java.sql.Date;
-//import java.util.ArrayList;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
-//import org.junit.jupiter.api.Order;
-//import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
-//
-//public class VeterinarioBoTest {
-//
-//    private final VeterinarioBo veterinarioBo;
-//
-//    public VeterinarioBoTest() {
-//        this.veterinarioBo = new VeterinarioBo();
-//    }
-//
-//    /**
-//     * Test of insertar method, of class VeterinarioBo.
-//     */
-//    @Test
-//    @Order(1)
-//    public void testInsertar() {
-//        System.out.println("=== Test: Insertar - VETERINARIOS ===");
-//
-//        // Datos de prueba
-//        int personaId = 1;
-//        int especialidadId = 1;
-//        Date fechaContratacion = new Date(System.currentTimeMillis());
-//        String estado = "ACTIVO";
-//        String especialidad = "Cardiología";
-//        boolean activo = true;
-//        
-//        Integer idGenerado = veterinarioBo.insertar(
-//                personaId, especialidadId, fechaContratacion, estado,
-//                especialidad, activo
-//        );
-//
-//        assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
-//        System.out.println("Veterinario insertado con ID: " + idGenerado);
-//    }
-//
-//    /**
-//     * Test of modificar method, of class VeterinarioBo.
-//     */
+package pe.edu.pucp.softpet.bo;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Order;
+import pe.edu.pucp.softpet.dto.personas.VeterinarioDto;
+
+public class VeterinarioBoTest {
+
+    private final VeterinarioBo veterinarioBo;
+
+    public VeterinarioBoTest() {
+        this.veterinarioBo = new VeterinarioBo();
+    }
+
+    /**
+     * Test of insertar method, of class VeterinarioBo.
+     */
+    @Test
+    @Order(1)
+    public void testInsertar() {
+        System.out.println("=== Test: Insertar - VETERINARIOS ===");
+
+        // Datos de prueba
+        int personaId = 1;
+        int especialidadId = 1;
+        Date fechaContratacion = new Date(System.currentTimeMillis());
+        String estado = "ACTIVO";
+        String especialidad = "Cardiología";
+        boolean activo = true;
+        
+        Integer idGenerado = veterinarioBo.insertarVeterinarioCompleto("pe", "1234", "a@gmail.com", activo, "pepee2", "", "932092", "O", 98329832, null, "DNI", fechaContratacion.toString(), estado, especialidad);
+
+        assertTrue(idGenerado > 0, "El ID generado debe ser mayor que 0");
+        System.out.println("Veterinario insertado con ID: " + idGenerado);
+    }
+/*
+       public Integer insertarVeterinarioCompleto(
+            String username, String passwordIgnorada, String correo, boolean activoUsuario,
+            String nombre, String direccion, String telefono, String sexo,
+            Integer nroDocumento, Integer ruc, String tipoDocumento,
+            String fechaContratacion, String estado, String especialidad)
+    
+    */
+    
+    /**
+     * Test of modificar method, of class VeterinarioBo.
+     */
 //    @Test
 //    @Order(2)
 //    public void testModificar() {
@@ -147,4 +152,4 @@
 //            }
 //        }
 //    }
-//}
+}

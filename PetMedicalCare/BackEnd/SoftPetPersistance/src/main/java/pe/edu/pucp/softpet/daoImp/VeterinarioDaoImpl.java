@@ -239,7 +239,7 @@ public class VeterinarioDaoImpl extends DaoBaseImpl implements VeterinarioDao {
             // Usamos SQL manual aquí porque UsuarioDaoImpl requiere su propia lógica de auditoría
             // O podemos instanciar UsuarioDaoImpl y crear un método insertarEnTransaccion en él.
             // Por simplicidad y robustez, SQL directo para Usuario es seguro.
-            String sqlUsu = "INSERT INTO USUARIOS (USERNAME, PASSWORD, CORREO, ACTIVO) VALUES (?, ?, ?, ?, )";
+            String sqlUsu = "INSERT INTO USUARIOS (USERNAME, PASSWORD, CORREO, ACTIVO) VALUES (?, ?, ?, ? )";
             Integer idUsuario = 0;
             try (PreparedStatement ps = this.conexion.prepareStatement(sqlUsu, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, username); ps.setString(2, password); ps.setString(3, correo); ps.setInt(4, activoUsuario ? 1 : 0);
