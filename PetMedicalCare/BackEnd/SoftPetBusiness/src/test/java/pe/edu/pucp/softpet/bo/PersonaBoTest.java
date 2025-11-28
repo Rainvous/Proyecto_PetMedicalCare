@@ -23,9 +23,9 @@ public class PersonaBoTest {
     @Test
     public void testSomeMethod() {
         System.out.println("=== Test: Insertar Modificar USUARIO DUMMY - PERSONAS ===");
-        int val = bo.insertarOModificarUsuarioGest("PEPE", 21099032, 0);
-        int valor = TipoRol.GUEST.getValor();
-      //  System.out.println("=== Test: Modificarr USUARIO DUMMY - PERSONA ENCONTRADA---> " + valor);
+        int val = bo.insertarOModificarUsuarioGest("PEPE2", 21099032, 0);
+        //int valor = TipoRol.GUEST.getValor();
+       System.out.println("=== Test: Modificarr USUARIO DUMMY - PERSONA ENCONTRADA---> " + val);
         assertTrue(val > 0, "NO SE INSERTO BIEN EL DUMMY");
     }
 
