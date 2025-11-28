@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://usuario.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Usuarios" targetNamespace="http://usuario.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/Usuarios?xsd=1" namespace="http://usuario.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="recuperarPassword">
+    <part name="parameters" element="tns:recuperarPassword" />
+  </message>
+  <message name="recuperarPasswordResponse">
+    <part name="parameters" element="tns:recuperarPasswordResponse" />
+  </message>
+  <message name="ObtenerPorCorreoYContra">
+    <part name="parameters" element="tns:ObtenerPorCorreoYContra" />
+  </message>
+  <message name="ObtenerPorCorreoYContraResponse">
+    <part name="parameters" element="tns:ObtenerPorCorreoYContraResponse" />
+  </message>
+  <message name="cambiarPassword">
+    <part name="parameters" element="tns:cambiarPassword" />
+  </message>
+  <message name="cambiarPasswordResponse">
+    <part name="parameters" element="tns:cambiarPasswordResponse" />
+  </message>
+  <message name="insertar">
+    <part name="parameters" element="tns:insertar" />
+  </message>
+  <message name="insertarResponse">
+    <part name="parameters" element="tns:insertarResponse" />
+  </message>
+  <message name="modificar">
+    <part name="parameters" element="tns:modificar" />
+  </message>
+  <message name="modificarResponse">
+    <part name="parameters" element="tns:modificarResponse" />
+  </message>
+  <message name="eliminar">
+    <part name="parameters" element="tns:eliminar" />
+  </message>
+  <message name="eliminarResponse">
+    <part name="parameters" element="tns:eliminarResponse" />
+  </message>
+  <message name="obtenerPorId">
+    <part name="parameters" element="tns:obtenerPorId" />
+  </message>
+  <message name="obtenerPorIdResponse">
+    <part name="parameters" element="tns:obtenerPorIdResponse" />
+  </message>
+  <message name="listarTodos">
+    <part name="parameters" element="tns:listarTodos" />
+  </message>
+  <message name="listarTodosResponse">
+    <part name="parameters" element="tns:listarTodosResponse" />
+  </message>
+  <portType name="Usuarios">
+    <operation name="recuperarPassword">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/recuperarPasswordRequest" message="tns:recuperarPassword" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/recuperarPasswordResponse" message="tns:recuperarPasswordResponse" />
+    </operation>
+    <operation name="ObtenerPorCorreoYContra">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/ObtenerPorCorreoYContraRequest" message="tns:ObtenerPorCorreoYContra" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/ObtenerPorCorreoYContraResponse" message="tns:ObtenerPorCorreoYContraResponse" />
+    </operation>
+    <operation name="cambiarPassword">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/cambiarPasswordRequest" message="tns:cambiarPassword" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/cambiarPasswordResponse" message="tns:cambiarPasswordResponse" />
+    </operation>
+    <operation name="insertar">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/insertarRequest" message="tns:insertar" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/insertarResponse" message="tns:insertarResponse" />
+    </operation>
+    <operation name="modificar">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/modificarRequest" message="tns:modificar" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/modificarResponse" message="tns:modificarResponse" />
+    </operation>
+    <operation name="eliminar">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/eliminarRequest" message="tns:eliminar" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/eliminarResponse" message="tns:eliminarResponse" />
+    </operation>
+    <operation name="obtenerPorId">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/obtenerPorIdRequest" message="tns:obtenerPorId" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/obtenerPorIdResponse" message="tns:obtenerPorIdResponse" />
+    </operation>
+    <operation name="listarTodos">
+      <input wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/listarTodosRequest" message="tns:listarTodos" />
+      <output wsam:Action="http://usuario.softpetws.pucp.edu.pe/Usuarios/listarTodosResponse" message="tns:listarTodosResponse" />
+    </operation>
+  </portType>
+  <binding name="UsuariosPortBinding" type="tns:Usuarios">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="recuperarPassword">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ObtenerPorCorreoYContra">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cambiarPassword">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarTodos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Usuarios">
+    <port name="UsuariosPort" binding="tns:UsuariosPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/Usuarios" />
+    </port>
+  </service>
+</definitions>

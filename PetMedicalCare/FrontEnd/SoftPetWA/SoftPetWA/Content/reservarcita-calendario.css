@@ -1,0 +1,167 @@
+﻿/* Nombre del archivo: Content/reservarcita-calendario.css */
+/* DISEÑO MODERNO - ESTILO CLIENTE (CIRCULAR) */
+
+/* --- Contenedor Principal --- */
+.calendar-container {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px; /* Bordes muy redondeados */
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Sombra suave */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- Cabecera --- */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+    .calendar-header .month-year {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #212529;
+        text-transform: capitalize;
+    }
+
+/* Botones de navegación (< >) */
+.calendar-nav .btn-nav-cal {
+    width: 36px;
+    height: 36px;
+    border-radius: 50% !important; /* Círculo perfecto */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    color: #6c757d;
+    background: white;
+    transition: all 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .calendar-nav .btn-nav-cal:hover {
+        background-color: #f8f9fa;
+        border-color: #212529;
+        color: #212529;
+    }
+
+/* --- Grid del Calendario --- */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px; /* Espacio entre círculos */
+    text-align: center;
+}
+
+/* Cabecera de días (Dom, Lun...) */
+.day-header {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #adb5bd;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+/* --- Celdas de Días (LOS CÍRCULOS) --- */
+/* Nota: Usamos .calendar-day porque es lo que genera tu C# */
+.calendar-day {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 50%; /* ESTO HACE EL CÍRCULO */
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent; /* Sin bordes visibles por defecto */
+    background-color: transparent;
+}
+
+    /* Efecto Hover */
+    .calendar-day:hover:not(.disabled):not(.selected) {
+        background-color: #e9ecef;
+        color: #0d6efd; /* Azul al pasar el mouse */
+        transform: scale(1.1);
+    }
+
+    /* Día SELECCIONADO (Círculo Azul Sólido) */
+    .calendar-day.selected {
+        background-color: #0d6efd; /* Azul imagen */
+        color: white;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* Día ACTUAL (Hoy) */
+    .calendar-day.today:not(.selected) {
+        border-color: #0d6efd;
+        color: #0d6efd;
+    }
+
+    /* Días Deshabilitados (Pasados o de otro mes) */
+    .calendar-day.disabled, .calendar-day.other-month {
+        color: #e9ecef; /* Gris muy claro */
+        cursor: default;
+        pointer-events: none;
+    }
+
+
+/* --- Horarios (Panel Derecho) --- */
+.time-slots-container {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 20px;
+    height: 100%;
+    border: 1px solid #e9ecef;
+}
+
+.time-slots-header {
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 1rem;
+}
+
+.time-slot-btn {
+    display: block; /* Bloque completo */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+    .time-slot-btn:hover:not(.disabled) {
+        border-color: #198754; /* Verde al hover */
+        color: #198754;
+        background-color: #f0fdf4;
+    }
+
+    .time-slot-btn.selected {
+        background-color: #198754; /* Verde Éxito para la hora */
+        color: white;
+        border-color: #198754;
+        box-shadow: 0 4px 6px rgba(25, 135, 84, 0.2);
+    }
+
+    .time-slot-btn.disabled {
+        background-color: #e9ecef;
+        color: #ced4da;
+        cursor: not-allowed;
+    }

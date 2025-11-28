@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://horariolaboral.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Horarios" targetNamespace="http://horariolaboral.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/Horarios?xsd=1" namespace="http://horariolaboral.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="insertar_horario">
+    <part name="parameters" element="tns:insertar_horario" />
+  </message>
+  <message name="insertar_horarioResponse">
+    <part name="parameters" element="tns:insertar_horarioResponse" />
+  </message>
+  <message name="modificar_horario">
+    <part name="parameters" element="tns:modificar_horario" />
+  </message>
+  <message name="modificar_horarioResponse">
+    <part name="parameters" element="tns:modificar_horarioResponse" />
+  </message>
+  <message name="registrar_horario_rango">
+    <part name="parameters" element="tns:registrar_horario_rango" />
+  </message>
+  <message name="registrar_horario_rangoResponse">
+    <part name="parameters" element="tns:registrar_horario_rangoResponse" />
+  </message>
+  <message name="listar_por_veterinario">
+    <part name="parameters" element="tns:listar_por_veterinario" />
+  </message>
+  <message name="listar_por_veterinarioResponse">
+    <part name="parameters" element="tns:listar_por_veterinarioResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <portType name="HorarioLaboral">
+    <operation name="insertar_horario">
+      <input wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/insertar_horarioRequest" message="tns:insertar_horario" />
+      <output wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/insertar_horarioResponse" message="tns:insertar_horarioResponse" />
+    </operation>
+    <operation name="modificar_horario">
+      <input wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/modificar_horarioRequest" message="tns:modificar_horario" />
+      <output wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/modificar_horarioResponse" message="tns:modificar_horarioResponse" />
+    </operation>
+    <operation name="registrar_horario_rango">
+      <input wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/registrar_horario_rangoRequest" message="tns:registrar_horario_rango" />
+      <output wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/registrar_horario_rangoResponse" message="tns:registrar_horario_rangoResponse" />
+    </operation>
+    <operation name="listar_por_veterinario">
+      <input wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/listar_por_veterinarioRequest" message="tns:listar_por_veterinario" />
+      <output wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/listar_por_veterinarioResponse" message="tns:listar_por_veterinarioResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://horariolaboral.softpetws.pucp.edu.pe/HorarioLaboral/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+  </portType>
+  <binding name="HorarioLaboralPortBinding" type="tns:HorarioLaboral">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="insertar_horario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_horario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="registrar_horario_rango">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_por_veterinario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Horarios">
+    <port name="HorarioLaboralPort" binding="tns:HorarioLaboralPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/Horarios" />
+    </port>
+  </service>
+</definitions>

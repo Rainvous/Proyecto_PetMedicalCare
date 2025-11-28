@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://producto.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Productos" targetNamespace="http://producto.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/Productos?xsd=1" namespace="http://producto.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="listar_productos_activos">
+    <part name="parameters" element="tns:listar_productos_activos" />
+  </message>
+  <message name="listar_productos_activosResponse">
+    <part name="parameters" element="tns:listar_productos_activosResponse" />
+  </message>
+  <message name="buscar_productos_paginados">
+    <part name="parameters" element="tns:buscar_productos_paginados" />
+  </message>
+  <message name="buscar_productos_paginadosResponse">
+    <part name="parameters" element="tns:buscar_productos_paginadosResponse" />
+  </message>
+  <message name="listar_productos_por_tipo">
+    <part name="parameters" element="tns:listar_productos_por_tipo" />
+  </message>
+  <message name="listar_productos_por_tipoResponse">
+    <part name="parameters" element="tns:listar_productos_por_tipoResponse" />
+  </message>
+  <message name="insertar_productos">
+    <part name="parameters" element="tns:insertar_productos" />
+  </message>
+  <message name="insertar_productosResponse">
+    <part name="parameters" element="tns:insertar_productosResponse" />
+  </message>
+  <message name="modificar_productos">
+    <part name="parameters" element="tns:modificar_productos" />
+  </message>
+  <message name="modificar_productosResponse">
+    <part name="parameters" element="tns:modificar_productosResponse" />
+  </message>
+  <message name="eliminar_productos">
+    <part name="parameters" element="tns:eliminar_productos" />
+  </message>
+  <message name="eliminar_productosResponse">
+    <part name="parameters" element="tns:eliminar_productosResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <message name="ListasBusquedaProductosAvanzada">
+    <part name="parameters" element="tns:ListasBusquedaProductosAvanzada" />
+  </message>
+  <message name="ListasBusquedaProductosAvanzadaResponse">
+    <part name="parameters" element="tns:ListasBusquedaProductosAvanzadaResponse" />
+  </message>
+  <message name="VerificarSiElProductoTieneInformacion">
+    <part name="parameters" element="tns:VerificarSiElProductoTieneInformacion" />
+  </message>
+  <message name="VerificarSiElProductoTieneInformacionResponse">
+    <part name="parameters" element="tns:VerificarSiElProductoTieneInformacionResponse" />
+  </message>
+  <portType name="Productos">
+    <operation name="listar_productos_activos">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/listar_productos_activosRequest" message="tns:listar_productos_activos" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/listar_productos_activosResponse" message="tns:listar_productos_activosResponse" />
+    </operation>
+    <operation name="buscar_productos_paginados">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/buscar_productos_paginadosRequest" message="tns:buscar_productos_paginados" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/buscar_productos_paginadosResponse" message="tns:buscar_productos_paginadosResponse" />
+    </operation>
+    <operation name="listar_productos_por_tipo">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/listar_productos_por_tipoRequest" message="tns:listar_productos_por_tipo" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/listar_productos_por_tipoResponse" message="tns:listar_productos_por_tipoResponse" />
+    </operation>
+    <operation name="insertar_productos">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/insertar_productosRequest" message="tns:insertar_productos" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/insertar_productosResponse" message="tns:insertar_productosResponse" />
+    </operation>
+    <operation name="modificar_productos">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/modificar_productosRequest" message="tns:modificar_productos" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/modificar_productosResponse" message="tns:modificar_productosResponse" />
+    </operation>
+    <operation name="eliminar_productos">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/eliminar_productosRequest" message="tns:eliminar_productos" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/eliminar_productosResponse" message="tns:eliminar_productosResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+    <operation name="ListasBusquedaProductosAvanzada">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/ListasBusquedaProductosAvanzadaRequest" message="tns:ListasBusquedaProductosAvanzada" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/ListasBusquedaProductosAvanzadaResponse" message="tns:ListasBusquedaProductosAvanzadaResponse" />
+    </operation>
+    <operation name="VerificarSiElProductoTieneInformacion">
+      <input wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/VerificarSiElProductoTieneInformacionRequest" message="tns:VerificarSiElProductoTieneInformacion" />
+      <output wsam:Action="http://producto.softpetws.pucp.edu.pe/Productos/VerificarSiElProductoTieneInformacionResponse" message="tns:VerificarSiElProductoTieneInformacionResponse" />
+    </operation>
+  </portType>
+  <binding name="ProductosPortBinding" type="tns:Productos">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="listar_productos_activos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="buscar_productos_paginados">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_productos_por_tipo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertar_productos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_productos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_productos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListasBusquedaProductosAvanzada">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="VerificarSiElProductoTieneInformacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Productos">
+    <port name="ProductosPort" binding="tns:ProductosPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/Productos" />
+    </port>
+  </service>
+</definitions>

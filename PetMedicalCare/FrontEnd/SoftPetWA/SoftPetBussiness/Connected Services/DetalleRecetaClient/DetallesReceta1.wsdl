@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://detallereceta.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="DetallesReceta" targetNamespace="http://detallereceta.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/DetallesReceta?xsd=1" namespace="http://detallereceta.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="listar_detalles_por_receta">
+    <part name="parameters" element="tns:listar_detalles_por_receta" />
+  </message>
+  <message name="listar_detalles_por_recetaResponse">
+    <part name="parameters" element="tns:listar_detalles_por_recetaResponse" />
+  </message>
+  <message name="insertar_detallereceta">
+    <part name="parameters" element="tns:insertar_detallereceta" />
+  </message>
+  <message name="insertar_detallerecetaResponse">
+    <part name="parameters" element="tns:insertar_detallerecetaResponse" />
+  </message>
+  <message name="modificar_detallereceta">
+    <part name="parameters" element="tns:modificar_detallereceta" />
+  </message>
+  <message name="modificar_detallerecetaResponse">
+    <part name="parameters" element="tns:modificar_detallerecetaResponse" />
+  </message>
+  <message name="eliminar_detallereceta">
+    <part name="parameters" element="tns:eliminar_detallereceta" />
+  </message>
+  <message name="eliminar_detallerecetaResponse">
+    <part name="parameters" element="tns:eliminar_detallerecetaResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <portType name="DetallesReceta">
+    <operation name="listar_detalles_por_receta">
+      <input wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/listar_detalles_por_recetaRequest" message="tns:listar_detalles_por_receta" />
+      <output wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/listar_detalles_por_recetaResponse" message="tns:listar_detalles_por_recetaResponse" />
+    </operation>
+    <operation name="insertar_detallereceta">
+      <input wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/insertar_detallerecetaRequest" message="tns:insertar_detallereceta" />
+      <output wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/insertar_detallerecetaResponse" message="tns:insertar_detallerecetaResponse" />
+    </operation>
+    <operation name="modificar_detallereceta">
+      <input wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/modificar_detallerecetaRequest" message="tns:modificar_detallereceta" />
+      <output wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/modificar_detallerecetaResponse" message="tns:modificar_detallerecetaResponse" />
+    </operation>
+    <operation name="eliminar_detallereceta">
+      <input wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/eliminar_detallerecetaRequest" message="tns:eliminar_detallereceta" />
+      <output wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/eliminar_detallerecetaResponse" message="tns:eliminar_detallerecetaResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://detallereceta.softpetws.pucp.edu.pe/DetallesReceta/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+  </portType>
+  <binding name="DetallesRecetaPortBinding" type="tns:DetallesReceta">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="listar_detalles_por_receta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertar_detallereceta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_detallereceta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_detallereceta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="DetallesReceta">
+    <port name="DetallesRecetaPort" binding="tns:DetallesRecetaPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/DetallesReceta" />
+    </port>
+  </service>
+</definitions>

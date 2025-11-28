@@ -1,0 +1,749 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8976B935-D347-4B83-A10E-932C4BA8CA89}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SoftPetWA</RootNamespace>
+    <AssemblyName>SoftPetWA</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cliente_HistorialMedico.aspx" />
+    <Content Include="Cliente_Inicio.aspx" />
+    <Content Include="Cliente_Mascotas.aspx" />
+    <Content Include="Cliente_Perfil.aspx" />
+    <Content Include="Cliente_ReservarCita_Paso1.aspx" />
+    <Content Include="Cliente_ReservarCita_Paso2.aspx" />
+    <Content Include="Cliente_ReservarCita_Paso3.aspx" />
+    <Content Include="Cliente_ReservarCita_Paso4.aspx" />
+    <None Include="Connected Services\MascotaClient\Mascotas.wsdl" />
+    <None Include="Connected Services\MascotaClient\Mascotas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\MascotaClient\SoftPetWA.MascotaClient.eliminar_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\MascotaClient\SoftPetWA.MascotaClient.insertar_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\MascotaClient\SoftPetWA.MascotaClient.listar_mascotasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\MascotaClient\SoftPetWA.MascotaClient.ListasBusquedaAvanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\MascotaClient\SoftPetWA.MascotaClient.mascotaDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\MascotaClient\SoftPetWA.MascotaClient.modificar_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\MascotaClient\SoftPetWA.MascotaClient.obtenerPorId_mascotaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\PersonaClient\Personas.wsdl" />
+    <None Include="Connected Services\PersonaClient\Personas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\PersonaClient\SoftPetWA.PersonaClient.eliminar_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PersonaClient\SoftPetWA.PersonaClient.insertar_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PersonaClient\SoftPetWA.PersonaClient.listar_personasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PersonaClient\SoftPetWA.PersonaClient.modificar_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PersonaClient\SoftPetWA.PersonaClient.obtenerPorId_personaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\PersonaClient\SoftPetWA.PersonaClient.personaDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ProductoClient\producto.wsdl" />
+    <None Include="Connected Services\ProductoClient\producto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MascotaClient\configuration91.svcinfo" />
+    <None Include="Connected Services\MascotaClient\configuration.svcinfo" />
+    <None Include="Connected Services\MascotaClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\PersonaClient\configuration91.svcinfo" />
+    <None Include="Connected Services\PersonaClient\configuration.svcinfo" />
+    <None Include="Connected Services\PersonaClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\ProductoClient\SoftPetWA.ProductoClient.eliminar_productosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ProductoClient\SoftPetWA.ProductoClient.insertar_productosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ProductoClient\SoftPetWA.ProductoClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ProductoClient\SoftPetWA.ProductoClient.modificar_productosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ProductoClient\SoftPetWA.ProductoClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ProductoClient\SoftPetWA.ProductoClient.productoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServicioClient\servicios.wsdl" />
+    <None Include="Connected Services\ServicioClient\servicios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\ServicioClient\SoftPetWA.ServicioClient.eliminar_serviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioClient\SoftPetWA.ServicioClient.insertar_serviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioClient\SoftPetWA.ServicioClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioClient\SoftPetWA.ServicioClient.ListasBusquedaAvanzadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioClient\SoftPetWA.ServicioClient.modificar_serviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioClient\SoftPetWA.ServicioClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioClient\SoftPetWA.ServicioClient.servicioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\TipoProductoClient\configuration91.svcinfo" />
+    <None Include="Connected Services\TipoProductoClient\configuration.svcinfo" />
+    <None Include="Connected Services\TipoProductoClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ProductoClient\configuration91.svcinfo" />
+    <None Include="Connected Services\ProductoClient\configuration.svcinfo" />
+    <None Include="Connected Services\ProductoClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\TipoServicioClient\SoftPetWA.TipoServicioClient.eliminar_tiposerviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoServicioClient\SoftPetWA.TipoServicioClient.insertar_tiposerviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoServicioClient\SoftPetWA.TipoServicioClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoServicioClient\SoftPetWA.TipoServicioClient.modificar_tiposerviciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoServicioClient\SoftPetWA.TipoServicioClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoServicioClient\SoftPetWA.TipoServicioClient.tipoServicioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\TipoServicioClient\tiposervicio.wsdl" />
+    <None Include="Connected Services\TipoServicioClient\tiposervicio.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\UsuarioClient\SoftPetWA.UsuarioClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\UsuarioClient\SoftPetWA.UsuarioClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\UsuarioClient\SoftPetWA.UsuarioClient.listarTodosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\UsuarioClient\SoftPetWA.UsuarioClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\UsuarioClient\SoftPetWA.UsuarioClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\UsuarioClient\SoftPetWA.UsuarioClient.usuarioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\UsuarioClient\Usuarios.wsdl" />
+    <None Include="Connected Services\UsuarioClient\Usuarios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\VeterinarioClient\configuration91.svcinfo" />
+    <None Include="Connected Services\VeterinarioClient\configuration.svcinfo" />
+    <None Include="Connected Services\VeterinarioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServicioClient\configuration91.svcinfo" />
+    <None Include="Connected Services\ServicioClient\configuration.svcinfo" />
+    <None Include="Connected Services\ServicioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\TipoServicioClient\configuration91.svcinfo" />
+    <None Include="Connected Services\TipoServicioClient\configuration.svcinfo" />
+    <None Include="Connected Services\TipoServicioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UsuarioClient\configuration91.svcinfo" />
+    <None Include="Connected Services\UsuarioClient\configuration.svcinfo" />
+    <None Include="Connected Services\UsuarioClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Content\agendacitas.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\clientedashboard.css" />
+    <Content Include="Content\clientemascotas.css" />
+    <Content Include="Content\clientes.css" />
+    <Content Include="Content\dashboard.css" />
+    <Content Include="Content\expedientes.css" />
+    <Content Include="Content\GestionVeterinarios.css" />
+    <Content Include="Content\historialmedico.css" />
+    <Content Include="Content\inventario.css" />
+    <Content Include="Content\mascotas.css" />
+    <Content Include="Content\perfilcliente.css" />
+    <Content Include="Content\puntoventa.css" />
+    <Content Include="Content\recetas.css" />
+    <Content Include="Content\reservarcita-calendario.css" />
+    <Content Include="Content\reservarcita-confirmacion.css" />
+    <Content Include="Content\reservarcita.css" />
+    <Content Include="Content\servicios.css" />
+    <Content Include="Content\site.css" />
+    <Content Include="Content\Fonts\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\Fonts\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\Fonts\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\Fonts\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Cliente.Master" />
+    <Content Include="Connected Services\TipoProductoClient\SoftPetWA.TipoProductoClient.eliminar_tipoproductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoProductoClient\SoftPetWA.TipoProductoClient.insertar_tipoproductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoProductoClient\SoftPetWA.TipoProductoClient.listar_todosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoProductoClient\SoftPetWA.TipoProductoClient.modificar_tipoproductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoProductoClient\SoftPetWA.TipoProductoClient.obtener_por_idResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\TipoProductoClient\SoftPetWA.TipoProductoClient.tipoProductoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\TipoProductoClient\tipoproducto.wsdl" />
+    <None Include="Connected Services\TipoProductoClient\tipoproducto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\VeterinarioClient\SoftPetWA.VeterinarioClient.eliminar_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\VeterinarioClient\SoftPetWA.VeterinarioClient.insertar_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\VeterinarioClient\SoftPetWA.VeterinarioClient.listar_veterinariosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\VeterinarioClient\SoftPetWA.VeterinarioClient.modificar_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\VeterinarioClient\SoftPetWA.VeterinarioClient.obtenerPorId_veterinarioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\VeterinarioClient\SoftPetWA.VeterinarioClient.veterinarioDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\VeterinarioClient\Veterinarios.wsdl" />
+    <None Include="Connected Services\VeterinarioClient\Veterinarios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="Content\Fonts\css\all.css" />
+    <Content Include="Content\Fonts\css\all.min.css" />
+    <Content Include="Content\Fonts\css\brands.css" />
+    <Content Include="Content\Fonts\css\brands.min.css" />
+    <Content Include="Content\Fonts\css\fontawesome.css" />
+    <Content Include="Content\Fonts\css\fontawesome.min.css" />
+    <Content Include="Content\Fonts\css\regular.css" />
+    <Content Include="Content\Fonts\css\regular.min.css" />
+    <Content Include="Content\Fonts\css\solid.css" />
+    <Content Include="Content\Fonts\css\solid.min.css" />
+    <Content Include="Content\Fonts\css\svg-with-js.css" />
+    <Content Include="Content\Fonts\css\svg-with-js.min.css" />
+    <Content Include="Content\Fonts\css\svg.css" />
+    <Content Include="Content\Fonts\css\svg.min.css" />
+    <Content Include="Content\Fonts\css\v4-font-face.css" />
+    <Content Include="Content\Fonts\css\v4-font-face.min.css" />
+    <Content Include="Content\Fonts\css\v4-shims.css" />
+    <Content Include="Content\Fonts\css\v4-shims.min.css" />
+    <Content Include="Content\Fonts\css\v5-font-face.css" />
+    <Content Include="Content\Fonts\css\v5-font-face.min.css" />
+    <Content Include="Content\Fonts\LICENSE.txt" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\sidebar.css" />
+    <Content Include="Content\usuarios.css" />
+    <Content Include="Images\Avatars\cat-avatar.png" />
+    <Content Include="Images\Avatars\dog-avatar.png" />
+    <Content Include="Images\pet_login.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="Registro.aspx" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Secretaria_AgendaCitas.aspx" />
+    <Content Include="Secretaria_Clientes.aspx" />
+    <Content Include="Secretaria_Dashboard.aspx" />
+    <Content Include="Secretaria_ExpedienteDetalle.aspx" />
+    <Content Include="Secretaria_Expedientes.aspx" />
+    <Content Include="Secretaria_Inventario.aspx" />
+    <Content Include="Secretaria_Mascotas.aspx" />
+    <Content Include="Secretaria_PuntoVenta.aspx" />
+    <Content Include="Secretaria_ReservarCita_Paso1.aspx" />
+    <Content Include="Secretaria_ReservarCita_Paso2.aspx" />
+    <Content Include="Secretaria_ReservarCita_Paso3.aspx" />
+    <Content Include="Secretaria_ReservarCita_Paso4.aspx" />
+    <Content Include="Secretaria_Servicios.aspx" />
+    <Content Include="Secretaria_Veterinarios.aspx" />
+    <Content Include="Veterinario_Agenda.aspx" />
+    <Content Include="Veterinario_Consulta.aspx" />
+    <Content Include="Veterinario_Inicio.aspx" />
+    <Content Include="Veterinario_Recetas.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cliente.Master.cs">
+      <DependentUpon>Cliente.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente.Master.designer.cs">
+      <DependentUpon>Cliente.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_HistorialMedico.aspx.cs">
+      <DependentUpon>Cliente_HistorialMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_HistorialMedico.aspx.designer.cs">
+      <DependentUpon>Cliente_HistorialMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_Inicio.aspx.cs">
+      <DependentUpon>Cliente_Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_Inicio.aspx.designer.cs">
+      <DependentUpon>Cliente_Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_Mascotas.aspx.cs">
+      <DependentUpon>Cliente_Mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_Mascotas.aspx.designer.cs">
+      <DependentUpon>Cliente_Mascotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_Perfil.aspx.cs">
+      <DependentUpon>Cliente_Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_Perfil.aspx.designer.cs">
+      <DependentUpon>Cliente_Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso1.aspx.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso1.aspx.designer.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso2.aspx.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso2.aspx.designer.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso3.aspx.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso3.aspx.designer.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso4.aspx.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente_ReservarCita_Paso4.aspx.designer.cs">
+      <DependentUpon>Cliente_ReservarCita_Paso4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\MascotaClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\PersonaClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ProductoClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServicioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\TipoProductoClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\TipoServicioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UsuarioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\VeterinarioClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria.Master.cs">
+      <DependentUpon>Secretaria.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria.Master.designer.cs">
+      <DependentUpon>Secretaria.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_AgendaCitas.aspx.cs">
+      <DependentUpon>Secretaria_AgendaCitas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_AgendaCitas.aspx.designer.cs">
+      <DependentUpon>Secretaria_AgendaCitas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_Clientes.aspx.cs">
+      <DependentUpon>Secretaria_Clientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_Clientes.aspx.designer.cs">
+      <DependentUpon>Secretaria_Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_Dashboard.aspx.cs">
+      <DependentUpon>Secretaria_Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_Dashboard.aspx.designer.cs">
+      <DependentUpon>Secretaria_Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_ExpedienteDetalle.aspx.cs">
+      <DependentUpon>Secretaria_ExpedienteDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_ExpedienteDetalle.aspx.designer.cs">
+      <DependentUpon>Secretaria_ExpedienteDetalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_Expedientes.aspx.cs">
+      <DependentUpon>Secretaria_Expedientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_Expedientes.aspx.designer.cs">
+      <DependentUpon>Secretaria_Expedientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_Inventario.aspx.cs">
+      <DependentUpon>Secretaria_Inventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_Inventario.aspx.designer.cs">
+      <DependentUpon>Secretaria_Inventario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_Mascotas.aspx.cs">
+      <DependentUpon>Secretaria_Mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_Mascotas.aspx.designer.cs">
+      <DependentUpon>Secretaria_Mascotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_PuntoVenta.aspx.cs">
+      <DependentUpon>Secretaria_PuntoVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_PuntoVenta.aspx.designer.cs">
+      <DependentUpon>Secretaria_PuntoVenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso1.aspx.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso1.aspx.designer.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso2.aspx.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso2.aspx.designer.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso3.aspx.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso3.aspx.designer.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso4.aspx.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_ReservarCita_Paso4.aspx.designer.cs">
+      <DependentUpon>Secretaria_ReservarCita_Paso4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_Servicios.aspx.cs">
+      <DependentUpon>Secretaria_Servicios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_Servicios.aspx.designer.cs">
+      <DependentUpon>Secretaria_Servicios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secretaria_Veterinarios.aspx.cs">
+      <DependentUpon>Secretaria_Veterinarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secretaria_Veterinarios.aspx.designer.cs">
+      <DependentUpon>Secretaria_Veterinarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Veterinario.Master.cs">
+      <DependentUpon>Veterinario.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Veterinario.Master.designer.cs">
+      <DependentUpon>Veterinario.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Veterinario_Agenda.aspx.cs">
+      <DependentUpon>Veterinario_Agenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Veterinario_Agenda.aspx.designer.cs">
+      <DependentUpon>Veterinario_Agenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Veterinario_Consulta.aspx.cs">
+      <DependentUpon>Veterinario_Consulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Veterinario_Consulta.aspx.designer.cs">
+      <DependentUpon>Veterinario_Consulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Veterinario_Inicio.aspx.cs">
+      <DependentUpon>Veterinario_Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Veterinario_Inicio.aspx.designer.cs">
+      <DependentUpon>Veterinario_Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Veterinario_Recetas.aspx.cs">
+      <DependentUpon>Veterinario_Recetas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Veterinario_Recetas.aspx.designer.cs">
+      <DependentUpon>Veterinario_Recetas.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Secretaria.Master" />
+    <Content Include="Veterinario.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftPetBussiness\SoftPetBusiness.csproj">
+      <Project>{f4239f60-3bf9-4473-bc4d-a91470758981}</Project>
+      <Name>SoftPetBusiness</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\MascotaClient\" />
+    <WCFMetadataStorage Include="Connected Services\PersonaClient\" />
+    <WCFMetadataStorage Include="Connected Services\ProductoClient\" />
+    <WCFMetadataStorage Include="Connected Services\ServicioClient\" />
+    <WCFMetadataStorage Include="Connected Services\TipoProductoClient\" />
+    <WCFMetadataStorage Include="Connected Services\TipoServicioClient\" />
+    <WCFMetadataStorage Include="Connected Services\UsuarioClient\" />
+    <WCFMetadataStorage Include="Connected Services\VeterinarioClient\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65500</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:65500/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

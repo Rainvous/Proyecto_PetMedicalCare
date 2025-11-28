@@ -1,0 +1,308 @@
+﻿/* Nombre del archivo: Content/agendacitas.css */
+
+/* --- Estilos para el resumen superior (Citas de Hoy, Confirmadas, etc.) --- */
+.summary-item {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #e0e0e0;
+    padding: 0 1.5rem;
+}
+
+    .summary-item:last-child {
+        border-right: none;
+    }
+
+    .summary-item .count {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        line-height: 1;
+    }
+
+    .summary-item .label {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-left: 0.5rem;
+    }
+
+    .summary-item .icon-circle-sm {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+
+        .summary-item .icon-circle-sm i {
+            font-size: 1rem;
+        }
+
+/* Colores para los íconos del resumen */
+.text-primary-custom {
+    color: #29b6f6 !important;
+}
+
+.bg-primary-soft {
+    background-color: #e3f2fd;
+}
+
+.text-success-custom {
+    color: #66bb6a !important;
+}
+
+.bg-success-soft {
+    background-color: #e8f5e9;
+}
+
+.text-danger-custom {
+    color: #ef5350 !important;
+}
+
+.bg-danger-soft {
+    background-color: #ffebee;
+}
+
+
+/* --- Estilos para la Agenda (Timeline) --- */
+
+.agenda-timeline {
+    /* position: relative; */ /* Esta línea no es necesaria con el nuevo enfoque */
+    padding-left: 70px; /* Espacio para las etiquetas de hora */
+}
+
+/* NUEVA CLASE para la fila de la hora */
+.timeline-slot {
+    position: relative; /* Será el ancla para la etiqueta de la hora */
+    min-height: 40px; /* <-- ESTA ES LA CLAVE: da altura a las filas vacías */
+}
+
+/* Las etiquetas de hora (08:00, 09:00, etc.) */
+.time-label {
+    position: absolute;
+    left: -70px; /* Lo mueve al área del padding izquierdo */
+    top: 0;
+    width: 60px; /* Ancho fijo para la hora */
+    text-align: right; /* Alinea la hora a la derecha */
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+
+/* La tarjeta de cita */
+.appointment-card {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    /* El borde de color de la izquierda */
+    border-left-width: 5px;
+}
+
+    .appointment-card h6 {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+    }
+
+    .appointment-card .meta-info {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .appointment-card .appointment-time {
+        font-weight: 600;
+        color: #333;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+/* --- Colores de estado para las tarjetas de cita --- */
+
+/* Verde (Confirmada) */
+.status-confirmada {
+    border-left-color: #66bb6a;
+}
+
+    .status-confirmada .badge-status {
+        color: #66bb6a;
+    }
+
+/* Naranja/Amarillo (Pendiente) */
+.status-pendiente {
+    border-left-color: #ffa726;
+}
+
+    .status-pendiente .badge-status {
+        color: #ffa726;
+    }
+
+/* Rojo (Cancelada) */
+.status-cancelada {
+    border-left-color: #ef5350;
+}
+
+    .status-cancelada .badge-status {
+        color: #ef5350;
+    }
+
+/* ====================================================== */
+/* --- NUEVO: Estilos para el Calendario (Vista Calendario) --- */
+/* ====================================================== */
+
+/* Contenedor principal del calendario */
+.agenda-calendario {
+    border-collapse: collapse; /* Quita bordes dobles */
+    width: 100%;
+    border: 1px solid #dee2e6; /* Borde suave de Bootstrap */
+    border-radius: 0.375rem; /* Bootstrap's rounded-lg */
+    overflow: hidden; /* Para que el radius afecte a las celdas */
+    background-color: #fff;
+}
+
+    /* Título (Mes y Año) */
+    .agenda-calendario .cal-title {
+        background-color: #f8f9fa; /* Gris claro de Bootstrap */
+        padding: 1rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+        .agenda-calendario .cal-title a { /* Flechas de navegación < > */
+            color: #495057;
+            text-decoration: none;
+            padding: 0 0.5rem;
+        }
+
+            .agenda-calendario .cal-title a:hover {
+                color: #0d6efd;
+            }
+
+    /* Cabecera de Días (dom, lun, mar...) */
+    .agenda-calendario .cal-day-header {
+        background-color: #f8f9fa;
+        color: #6c757d; /* Gris de Bootstrap */
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 0.75rem 0.25rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    /* Celda de Día (General) */
+    .agenda-calendario .cal-day {
+        width: 14.28%; /* 100 / 7 */
+        height: 100px; /* Altura fija para la celda */
+        padding: 0.5rem;
+        text-align: right;
+        vertical-align: top;
+        border: 1px solid #f1f1f1; /* Borde muy suave entre celdas */
+        position: relative; /* Para el .cal-dot */
+    }
+
+        .agenda-calendario .cal-day a { /* El número del día */
+            color: #212529;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.25rem;
+        }
+
+            .agenda-calendario .cal-day a:hover {
+                color: #0d6efd; /* Azul primario de Bootstrap */
+            }
+
+    /* Días de otro mes (más claros) */
+    .agenda-calendario .cal-day-other {
+        background-color: #fdfdfd;
+    }
+
+        .agenda-calendario .cal-day-other a {
+            color: #adb5bd; /* Gris claro */
+            pointer-events: none; /* No clickeable */
+        }
+
+    /* Día de Hoy */
+    .agenda-calendario .cal-day-today a {
+        background-color: #0d6efd; /* Azul primario */
+        color: #fff !important;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: inline-block;
+        text-align: center;
+        line-height: 28px;
+        padding: 0;
+        font-weight: 700;
+    }
+
+    /* Día Seleccionado */
+    .agenda-calendario .cal-day-selected {
+        background-color: #eaf2ff; /* Fondo azulado muy suave */
+    }
+
+        .agenda-calendario .cal-day-selected a {
+            font-weight: 700;
+            color: #0b5ed7;
+        }
+
+/* Punto de evento (el span que añadimos en OnDayRender) */
+.cal-dot {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    background-color: #0d6efd; /* Azul */
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+/* --- Estilos específicos para el Modal de Buscar Paciente --- */
+
+/* --- Estilos específicos para el Modal de Buscar Paciente --- */
+
+/* 1. Estado Normal: FORZAMOS Fondo blanco y texto oscuro */
+#modalBuscarPaciente .list-group-item {
+    background-color: #ffffff !important; /* !important obliga al blanco */
+    color: #333333 !important; /* !important obliga al texto oscuro */
+    border: 1px solid #e9ecef;
+    transition: all 0.2s ease;
+}
+
+    /* 2. Estado Hover (al pasar el mouse): FORZAMOS Fondo Cyan y texto blanco */
+    #modalBuscarPaciente .list-group-item:hover {
+        background-color: #17a2b8 !important; /* !important obliga al Cyan */
+        color: #ffffff !important; /* !important obliga al texto blanco */
+        border-color: #17a2b8 !important;
+        cursor: pointer;
+    }
+
+        /* 3. Corrección para el texto pequeño (Documento/Teléfono) en Hover */
+        #modalBuscarPaciente .list-group-item:hover small,
+        #modalBuscarPaciente .list-group-item:hover .text-muted {
+            color: #e3f2fd !important; /* Blanco azulado muy claro */
+        }
+
+        /* 4. Ajuste para el botón 'Agendar Cita' dentro del ítem */
+        #modalBuscarPaciente .list-group-item:hover .btn-success {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid white;
+        }
+
+rder: 1px solid white; /* Un borde blanco sutil */
+}

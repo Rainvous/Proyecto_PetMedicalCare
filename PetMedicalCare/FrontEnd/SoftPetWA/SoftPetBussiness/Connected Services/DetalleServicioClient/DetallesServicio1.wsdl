@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://detalleservicio.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="DetallesServicio" targetNamespace="http://detalleservicio.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/DetallesServicio?xsd=1" namespace="http://detalleservicio.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="listar_por_id_cita">
+    <part name="parameters" element="tns:listar_por_id_cita" />
+  </message>
+  <message name="listar_por_id_citaResponse">
+    <part name="parameters" element="tns:listar_por_id_citaResponse" />
+  </message>
+  <message name="insertar_detalleservicio">
+    <part name="parameters" element="tns:insertar_detalleservicio" />
+  </message>
+  <message name="insertar_detalleservicioResponse">
+    <part name="parameters" element="tns:insertar_detalleservicioResponse" />
+  </message>
+  <message name="modificar_detalleservicio">
+    <part name="parameters" element="tns:modificar_detalleservicio" />
+  </message>
+  <message name="modificar_detalleservicioResponse">
+    <part name="parameters" element="tns:modificar_detalleservicioResponse" />
+  </message>
+  <message name="eliminar_detalleservicio">
+    <part name="parameters" element="tns:eliminar_detalleservicio" />
+  </message>
+  <message name="eliminar_detalleservicioResponse">
+    <part name="parameters" element="tns:eliminar_detalleservicioResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <portType name="DetallesServicio">
+    <operation name="listar_por_id_cita">
+      <input wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/listar_por_id_citaRequest" message="tns:listar_por_id_cita" />
+      <output wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/listar_por_id_citaResponse" message="tns:listar_por_id_citaResponse" />
+    </operation>
+    <operation name="insertar_detalleservicio">
+      <input wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/insertar_detalleservicioRequest" message="tns:insertar_detalleservicio" />
+      <output wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/insertar_detalleservicioResponse" message="tns:insertar_detalleservicioResponse" />
+    </operation>
+    <operation name="modificar_detalleservicio">
+      <input wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/modificar_detalleservicioRequest" message="tns:modificar_detalleservicio" />
+      <output wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/modificar_detalleservicioResponse" message="tns:modificar_detalleservicioResponse" />
+    </operation>
+    <operation name="eliminar_detalleservicio">
+      <input wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/eliminar_detalleservicioRequest" message="tns:eliminar_detalleservicio" />
+      <output wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/eliminar_detalleservicioResponse" message="tns:eliminar_detalleservicioResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://detalleservicio.softpetws.pucp.edu.pe/DetallesServicio/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+  </portType>
+  <binding name="DetallesServicioPortBinding" type="tns:DetallesServicio">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="listar_por_id_cita">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertar_detalleservicio">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_detalleservicio">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_detalleservicio">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="DetallesServicio">
+    <port name="DetallesServicioPort" binding="tns:DetallesServicioPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/DetallesServicio" />
+    </port>
+  </service>
+</definitions>

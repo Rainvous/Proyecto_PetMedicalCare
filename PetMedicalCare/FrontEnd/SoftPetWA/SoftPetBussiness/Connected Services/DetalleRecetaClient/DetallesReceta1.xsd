@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://detallereceta.softpetws.pucp.edu.pe/" targetNamespace="http://detallereceta.softpetws.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eliminar_detallereceta" type="tns:eliminar_detallereceta" />
+  <xs:element name="eliminar_detallerecetaResponse" type="tns:eliminar_detallerecetaResponse" />
+  <xs:element name="insertar_detallereceta" type="tns:insertar_detallereceta" />
+  <xs:element name="insertar_detallerecetaResponse" type="tns:insertar_detallerecetaResponse" />
+  <xs:element name="listar_detalles_por_receta" type="tns:listar_detalles_por_receta" />
+  <xs:element name="listar_detalles_por_recetaResponse" type="tns:listar_detalles_por_recetaResponse" />
+  <xs:element name="listar_todos" type="tns:listar_todos" />
+  <xs:element name="listar_todosResponse" type="tns:listar_todosResponse" />
+  <xs:element name="modificar_detallereceta" type="tns:modificar_detallereceta" />
+  <xs:element name="modificar_detallerecetaResponse" type="tns:modificar_detallerecetaResponse" />
+  <xs:element name="obtener_por_id" type="tns:obtener_por_id" />
+  <xs:element name="obtener_por_idResponse" type="tns:obtener_por_idResponse" />
+  <xs:complexType name="modificar_detallereceta">
+    <xs:sequence>
+      <xs:element name="detalleRecetaId" type="xs:int" />
+      <xs:element name="recetaMedicaId" type="xs:int" />
+      <xs:element minOccurs="0" name="descripcionMedicamento" type="xs:string" />
+      <xs:element minOccurs="0" name="presentacion" type="xs:string" />
+      <xs:element minOccurs="0" name="viaAdministracion" type="xs:string" />
+      <xs:element minOccurs="0" name="dosis" type="xs:string" />
+      <xs:element minOccurs="0" name="frecuencia" type="xs:string" />
+      <xs:element minOccurs="0" name="duracion" type="xs:string" />
+      <xs:element minOccurs="0" name="indicacion" type="xs:string" />
+      <xs:element minOccurs="0" name="cantidad" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_detallerecetaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_detalles_por_receta">
+    <xs:sequence>
+      <xs:element name="recetaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_detalles_por_recetaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:detalleRecetaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="detalleRecetaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cantidad" type="xs:string" />
+      <xs:element minOccurs="0" name="descripcionMedicamento" type="xs:string" />
+      <xs:element minOccurs="0" name="detalleRecetaId" type="xs:int" />
+      <xs:element minOccurs="0" name="dosis" type="xs:string" />
+      <xs:element minOccurs="0" name="duracion" type="xs:string" />
+      <xs:element minOccurs="0" name="frecuencia" type="xs:string" />
+      <xs:element minOccurs="0" name="indicacion" type="xs:string" />
+      <xs:element minOccurs="0" name="presentacion" type="xs:string" />
+      <xs:element minOccurs="0" name="receta" type="tns:recetaMedicaDto" />
+      <xs:element minOccurs="0" name="viaAdministracion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recetaMedicaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cita" type="tns:citaAtencionDto" />
+      <xs:element minOccurs="0" name="diagnostico" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaEmision" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaEmisionstr" type="xs:string" />
+      <xs:element minOccurs="0" name="observaciones" type="xs:string" />
+      <xs:element minOccurs="0" name="recetaMedicaId" type="xs:int" />
+      <xs:element minOccurs="0" name="vigenciaHasta" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="vigenciaHastastr" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="citaAtencionDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="citaId" type="xs:int" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoCita" />
+      <xs:element minOccurs="0" name="fechaHoraFin" type="tns:timestamp" />
+      <xs:element minOccurs="0" name="fechaHoraFinStr" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaHoraInicio" type="tns:timestamp" />
+      <xs:element minOccurs="0" name="fechaHoraInicioStr" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaRegistro" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaRegistroStr" type="xs:string" />
+      <xs:element minOccurs="0" name="mascota" type="tns:mascotaDto" />
+      <xs:element minOccurs="0" name="monto" type="xs:double" />
+      <xs:element minOccurs="0" name="observacion" type="xs:string" />
+      <xs:element minOccurs="0" name="pesoMascota" type="xs:double" />
+      <xs:element minOccurs="0" name="veterinario" type="tns:veterinarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="timestamp">
+    <xs:sequence>
+      <xs:element name="nanos" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="mascotaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="color" type="xs:string" />
+      <xs:element minOccurs="0" name="especie" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaDefuncion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="mascotaId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="persona" type="tns:personaDto" />
+      <xs:element minOccurs="0" name="raza" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="personaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="sexo" type="tns:sexo" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:date" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreador" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="usuarioModificador" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="veterinarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoVeterinario" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="persona" type="tns:personaDto" />
+      <xs:element minOccurs="0" name="veterinarioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_todos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_todosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:detalleRecetaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_detallereceta">
+    <xs:sequence>
+      <xs:element name="detalleRecetaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_detallerecetaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_id">
+    <xs:sequence>
+      <xs:element name="detalleRecetaId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_idResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:detalleRecetaDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_detallereceta">
+    <xs:sequence>
+      <xs:element name="recetaMedicaId" type="xs:int" />
+      <xs:element minOccurs="0" name="descripcionMedicamento" type="xs:string" />
+      <xs:element minOccurs="0" name="presentacion" type="xs:string" />
+      <xs:element minOccurs="0" name="viaAdministracion" type="xs:string" />
+      <xs:element minOccurs="0" name="dosis" type="xs:string" />
+      <xs:element minOccurs="0" name="frecuencia" type="xs:string" />
+      <xs:element minOccurs="0" name="duracion" type="xs:string" />
+      <xs:element minOccurs="0" name="indicacion" type="xs:string" />
+      <xs:element minOccurs="0" name="cantidad" type="xs:string" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_detallerecetaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="estadoCita">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROGRAMADA" />
+      <xs:enumeration value="ATENDIDA" />
+      <xs:enumeration value="CANCELADA" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="sexo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M" />
+      <xs:enumeration value="F" />
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="estadoVeterinario">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACTIVO" />
+      <xs:enumeration value="INACTIVO" />
+      <xs:enumeration value="SUSPENDIDO" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

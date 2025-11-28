@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://metodopago.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="MetodosDePago" targetNamespace="http://metodopago.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/MetodosDePago?xsd=1" namespace="http://metodopago.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="insertar_MetodoDePago">
+    <part name="parameters" element="tns:insertar_MetodoDePago" />
+  </message>
+  <message name="insertar_MetodoDePagoResponse">
+    <part name="parameters" element="tns:insertar_MetodoDePagoResponse" />
+  </message>
+  <message name="modificar_MetodoDePago">
+    <part name="parameters" element="tns:modificar_MetodoDePago" />
+  </message>
+  <message name="modificar_MetodoDePagoResponse">
+    <part name="parameters" element="tns:modificar_MetodoDePagoResponse" />
+  </message>
+  <message name="eliminar_modificar_MetodoDePago">
+    <part name="parameters" element="tns:eliminar_modificar_MetodoDePago" />
+  </message>
+  <message name="eliminar_modificar_MetodoDePagoResponse">
+    <part name="parameters" element="tns:eliminar_modificar_MetodoDePagoResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <portType name="MetodosDePago">
+    <operation name="insertar_MetodoDePago">
+      <input wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/insertar_MetodoDePagoRequest" message="tns:insertar_MetodoDePago" />
+      <output wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/insertar_MetodoDePagoResponse" message="tns:insertar_MetodoDePagoResponse" />
+    </operation>
+    <operation name="modificar_MetodoDePago">
+      <input wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/modificar_MetodoDePagoRequest" message="tns:modificar_MetodoDePago" />
+      <output wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/modificar_MetodoDePagoResponse" message="tns:modificar_MetodoDePagoResponse" />
+    </operation>
+    <operation name="eliminar_modificar_MetodoDePago">
+      <input wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/eliminar_modificar_MetodoDePagoRequest" message="tns:eliminar_modificar_MetodoDePago" />
+      <output wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/eliminar_modificar_MetodoDePagoResponse" message="tns:eliminar_modificar_MetodoDePagoResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://metodopago.softpetws.pucp.edu.pe/MetodosDePago/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+  </portType>
+  <binding name="MetodosDePagoPortBinding" type="tns:MetodosDePago">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="insertar_MetodoDePago">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_MetodoDePago">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_modificar_MetodoDePago">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MetodosDePago">
+    <port name="MetodosDePagoPort" binding="tns:MetodosDePagoPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/MetodosDePago" />
+    </port>
+  </service>
+</definitions>

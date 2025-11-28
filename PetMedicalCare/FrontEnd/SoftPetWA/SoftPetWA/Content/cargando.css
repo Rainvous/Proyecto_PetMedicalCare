@@ -1,0 +1,79 @@
+/* cargando.css - Estilo PetMedicalCare */
+
+/* 1. Overlay: Fondo oscuro que cubre todo */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semi-transparente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(3px); /* Efecto borroso elegante */
+}
+
+/* 2. Contenedor de la animación */
+.loading-content {
+    text-align: center;
+    color: #0097a7; /* Color de la marca (Teal) */
+}
+
+/* 3. Icono de Mascota Saltando/Latiendo */
+.pet-spinner {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: pet-bounce 1.2s infinite ease-in-out;
+}
+
+/* 4. Texto de carga */
+.loading-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #555;
+    animation: pulse-text 1.5s infinite;
+}
+
+/* Animaciones */
+@keyframes pet-bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+        color: #20c997;
+    }
+    /* Cambia a verde suave al crecer */
+}
+
+@keyframes pulse-text {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Modal de Logout personalizado (Opcional, para darle toque extra) */
+.modal-logout-icon {
+    color: #dc3545;
+    background-color: #fdecea;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+}

@@ -1,0 +1,187 @@
+﻿/* Nombre del archivo: Content/reservarcita.css (Corregido) */
+
+/* --- Stepper de Pasos (Sin cambios) --- */
+.stepper-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+    .stepper-wrapper::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 5%;
+        width: 90%;
+        height: 2px;
+        background-color: #e0e0e0;
+        z-index: 1;
+    }
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff;
+    padding: 0 10px;
+    z-index: 2;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid #e0e0e0;
+    flex-shrink: 0;
+}
+
+.step-label {
+    font-size: 0.9rem;
+    color: #adb5bd;
+    font-weight: 500;
+}
+
+.step-item.active .step-circle {
+    background-color: #00A3A3;
+    border-color: #00A3A3;
+}
+
+.step-item.active .step-label {
+    color: #00A3A3;
+    font-weight: 700;
+}
+
+/* --- Selección de Mascota (Paso 1 - CORREGIDO) --- */
+.pet-selection-card { /* La tarjeta LinkButton */
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 100%;
+    display: flex; /* Igual que puntoventa.css */
+    flex-direction: column; /* Igual que puntoventa.css */
+    align-items: center;
+    text-decoration: none;
+    background-color: #ffffff;
+}
+
+    .pet-selection-card:hover {
+        border-color: #00A3A3;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .pet-selection-card.selected {
+        border-color: #00A3A3;
+        background-color: #e3f2fd;
+        box-shadow: 0 4px 10px rgba(0,163,163,0.1);
+    }
+
+/* Contenedor del avatar */
+.pet-selection-avatar { /* Clase usada en el ASPX */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 0.75rem;
+    background-color: #f0f0f0;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden; /* Importante */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .pet-selection-avatar img { /* La imagen dentro del avatar */
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+        width: auto;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+/* Nombre de la mascota */
+.pet-selection-name { /* Clase que AÑADIREMOS en el ASPX */
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+}
+
+/* Raza/Especie de la mascota */
+.pet-selection-breed { /* Clase usada en el ASPX */
+    font-size: 0.85rem;
+    color: #6c757d;
+    line-height: 1.2;
+    margin-top: auto; /* Empuja hacia abajo si es necesario */
+}
+
+
+/*Agregado para el Cliente, reserva de citas*/
+.service-selection-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 100%; /* Para igualar alturas */
+    display: flex; /* Para alinear el checkbox */
+    align-items: flex-start; /* Alinea items arriba */
+}
+
+    .service-selection-card:hover {
+        border-color: #00A3A3;
+        box-shadow: 0 2px 6px rgba(0,163,163,0.1);
+    }
+
+    .service-selection-card.selected {
+        border-color: #00A3A3;
+        background-color: #e3f2fd; /* Fondo celeste suave */
+    }
+
+/* Contenedor para el checkbox */
+.service-checkbox-container {
+    margin-right: 1rem;
+    padding-top: 2px; /* Alineación vertical fina */
+}
+    /* Aumentar tamaño del checkbox */
+    .service-checkbox-container .form-check-input {
+        width: 1.25em;
+        height: 1.25em;
+    }
+
+/* Contenedor para la info del servicio */
+.service-info-container {
+    flex-grow: 1;
+}
+
+    .service-info-container .service-name {
+        font-weight: 700;
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 0.1rem;
+    }
+
+    .service-info-container .service-desc {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+    }
+
+    .service-info-container .service-price {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #00A3A3;
+    }

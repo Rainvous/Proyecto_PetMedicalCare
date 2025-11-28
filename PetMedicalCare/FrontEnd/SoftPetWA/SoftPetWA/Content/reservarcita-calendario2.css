@@ -1,0 +1,163 @@
+﻿/* Nombre del archivo: Content/reservarcita-calendario.css */
+
+/* --- Contenedor Principal del Calendario --- */
+.calendar-container {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px; /* Bordes redondeados estilo tarjeta */
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Sombra suave */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- Cabecera (Mes y Botones) --- */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.month-year, .month-year span {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #212529;
+    text-transform: capitalize;
+}
+
+/* Botones de navegación redondos (< >) */
+.calendar-nav .btn-nav-cal {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    color: #6c757d;
+    background: white;
+    transition: all 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .calendar-nav .btn-nav-cal:hover {
+        background-color: #f8f9fa;
+        border-color: #212529;
+        color: #212529;
+    }
+
+/* --- La Rejilla (Grid) --- */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas exactas */
+    gap: 10px; /* Espacio entre bolitas */
+    text-align: center;
+}
+
+/* Encabezados de días (DOM, LUN...) */
+.day-header {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #adb5bd;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+/* --- Los Días (Círculos) --- */
+.calendar-day {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 50%; /* Círculo perfecto */
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+}
+
+    /* Efecto Hover */
+    .calendar-day:hover:not(.disabled):not(.selected) {
+        background-color: #e9ecef;
+        color: #0d6efd;
+        transform: scale(1.1);
+    }
+
+    /* Día SELECCIONADO (Azul fuerte) */
+    .calendar-day.selected {
+        background-color: #0d6efd; /* Azul Bootstrap */
+        color: white;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* Día ACTUAL (Hoy) - Solo borde */
+    .calendar-day.today:not(.selected) {
+        border-color: #0d6efd;
+        color: #0d6efd;
+    }
+
+    /* Días Deshabilitados (Pasados o de otro mes) */
+    .calendar-day.disabled, .calendar-day.other-month {
+        color: #e9ecef;
+        cursor: default;
+        pointer-events: none; /* Evita clics */
+    }
+
+/* --- Estilos de la columna de Horarios (Derecha) --- */
+.time-slots-container {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 20px;
+    height: 100%;
+    border: 1px solid #e9ecef;
+}
+
+.time-slots-header {
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 1rem;
+}
+
+.time-slot-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+    .time-slot-btn:hover:not(.disabled) {
+        border-color: #198754;
+        color: #198754;
+        background-color: #f0fdf4;
+    }
+
+    .time-slot-btn.selected {
+        background-color: #198754; /* Verde Éxito */
+        color: white;
+        border-color: #198754;
+        box-shadow: 0 4px 6px rgba(25, 135, 84, 0.2);
+    }
+
+    .time-slot-btn.disabled {
+        background-color: #e9ecef;
+        color: #ced4da;
+        cursor: not-allowed;
+    }

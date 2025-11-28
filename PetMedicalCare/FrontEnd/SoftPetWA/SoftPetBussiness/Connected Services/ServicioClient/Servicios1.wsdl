@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://servicio.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Servicios" targetNamespace="http://servicio.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/Servicios?xsd=1" namespace="http://servicio.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="ListasBusquedaAvanzada">
+    <part name="parameters" element="tns:ListasBusquedaAvanzada" />
+  </message>
+  <message name="ListasBusquedaAvanzadaResponse">
+    <part name="parameters" element="tns:ListasBusquedaAvanzadaResponse" />
+  </message>
+  <message name="listar_servicios_activos">
+    <part name="parameters" element="tns:listar_servicios_activos" />
+  </message>
+  <message name="listar_servicios_activosResponse">
+    <part name="parameters" element="tns:listar_servicios_activosResponse" />
+  </message>
+  <message name="insertar_servicios">
+    <part name="parameters" element="tns:insertar_servicios" />
+  </message>
+  <message name="insertar_serviciosResponse">
+    <part name="parameters" element="tns:insertar_serviciosResponse" />
+  </message>
+  <message name="modificar_servicios">
+    <part name="parameters" element="tns:modificar_servicios" />
+  </message>
+  <message name="modificar_serviciosResponse">
+    <part name="parameters" element="tns:modificar_serviciosResponse" />
+  </message>
+  <message name="eliminar_servicios">
+    <part name="parameters" element="tns:eliminar_servicios" />
+  </message>
+  <message name="eliminar_serviciosResponse">
+    <part name="parameters" element="tns:eliminar_serviciosResponse" />
+  </message>
+  <message name="listar_servicios_por_tipo">
+    <part name="parameters" element="tns:listar_servicios_por_tipo" />
+  </message>
+  <message name="listar_servicios_por_tipoResponse">
+    <part name="parameters" element="tns:listar_servicios_por_tipoResponse" />
+  </message>
+  <message name="ListasBusquedaAvanzada2">
+    <part name="parameters" element="tns:ListasBusquedaAvanzada2" />
+  </message>
+  <message name="ListasBusquedaAvanzada2Response">
+    <part name="parameters" element="tns:ListasBusquedaAvanzada2Response" />
+  </message>
+  <message name="buscar_servicios_paginados">
+    <part name="parameters" element="tns:buscar_servicios_paginados" />
+  </message>
+  <message name="buscar_servicios_paginadosResponse">
+    <part name="parameters" element="tns:buscar_servicios_paginadosResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <message name="VerificarSiElServicioTieneInformacion">
+    <part name="parameters" element="tns:VerificarSiElServicioTieneInformacion" />
+  </message>
+  <message name="VerificarSiElServicioTieneInformacionResponse">
+    <part name="parameters" element="tns:VerificarSiElServicioTieneInformacionResponse" />
+  </message>
+  <portType name="Servicios">
+    <operation name="ListasBusquedaAvanzada">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/ListasBusquedaAvanzadaRequest" message="tns:ListasBusquedaAvanzada" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/ListasBusquedaAvanzadaResponse" message="tns:ListasBusquedaAvanzadaResponse" />
+    </operation>
+    <operation name="listar_servicios_activos">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/listar_servicios_activosRequest" message="tns:listar_servicios_activos" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/listar_servicios_activosResponse" message="tns:listar_servicios_activosResponse" />
+    </operation>
+    <operation name="insertar_servicios">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/insertar_serviciosRequest" message="tns:insertar_servicios" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/insertar_serviciosResponse" message="tns:insertar_serviciosResponse" />
+    </operation>
+    <operation name="modificar_servicios">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/modificar_serviciosRequest" message="tns:modificar_servicios" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/modificar_serviciosResponse" message="tns:modificar_serviciosResponse" />
+    </operation>
+    <operation name="eliminar_servicios">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/eliminar_serviciosRequest" message="tns:eliminar_servicios" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/eliminar_serviciosResponse" message="tns:eliminar_serviciosResponse" />
+    </operation>
+    <operation name="listar_servicios_por_tipo">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/listar_servicios_por_tipoRequest" message="tns:listar_servicios_por_tipo" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/listar_servicios_por_tipoResponse" message="tns:listar_servicios_por_tipoResponse" />
+    </operation>
+    <operation name="ListasBusquedaAvanzada2">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/ListasBusquedaAvanzada2Request" message="tns:ListasBusquedaAvanzada2" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/ListasBusquedaAvanzada2Response" message="tns:ListasBusquedaAvanzada2Response" />
+    </operation>
+    <operation name="buscar_servicios_paginados">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/buscar_servicios_paginadosRequest" message="tns:buscar_servicios_paginados" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/buscar_servicios_paginadosResponse" message="tns:buscar_servicios_paginadosResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+    <operation name="VerificarSiElServicioTieneInformacion">
+      <input wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/VerificarSiElServicioTieneInformacionRequest" message="tns:VerificarSiElServicioTieneInformacion" />
+      <output wsam:Action="http://servicio.softpetws.pucp.edu.pe/Servicios/VerificarSiElServicioTieneInformacionResponse" message="tns:VerificarSiElServicioTieneInformacionResponse" />
+    </operation>
+  </portType>
+  <binding name="ServiciosPortBinding" type="tns:Servicios">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="ListasBusquedaAvanzada">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_servicios_activos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertar_servicios">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_servicios">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_servicios">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_servicios_por_tipo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListasBusquedaAvanzada2">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="buscar_servicios_paginados">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="VerificarSiElServicioTieneInformacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Servicios">
+    <port name="ServiciosPort" binding="tns:ServiciosPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/Servicios" />
+    </port>
+  </service>
+</definitions>

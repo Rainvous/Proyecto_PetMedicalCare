@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tipoproducto.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="TiposProducto" targetNamespace="http://tipoproducto.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/TiposProducto?xsd=1" namespace="http://tipoproducto.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="insertar_tipoproductos">
+    <part name="parameters" element="tns:insertar_tipoproductos" />
+  </message>
+  <message name="insertar_tipoproductosResponse">
+    <part name="parameters" element="tns:insertar_tipoproductosResponse" />
+  </message>
+  <message name="modificar_tipoproductos">
+    <part name="parameters" element="tns:modificar_tipoproductos" />
+  </message>
+  <message name="modificar_tipoproductosResponse">
+    <part name="parameters" element="tns:modificar_tipoproductosResponse" />
+  </message>
+  <message name="eliminar_tipoproductos">
+    <part name="parameters" element="tns:eliminar_tipoproductos" />
+  </message>
+  <message name="eliminar_tipoproductosResponse">
+    <part name="parameters" element="tns:eliminar_tipoproductosResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <portType name="TiposProducto">
+    <operation name="insertar_tipoproductos">
+      <input wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/insertar_tipoproductosRequest" message="tns:insertar_tipoproductos" />
+      <output wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/insertar_tipoproductosResponse" message="tns:insertar_tipoproductosResponse" />
+    </operation>
+    <operation name="modificar_tipoproductos">
+      <input wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/modificar_tipoproductosRequest" message="tns:modificar_tipoproductos" />
+      <output wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/modificar_tipoproductosResponse" message="tns:modificar_tipoproductosResponse" />
+    </operation>
+    <operation name="eliminar_tipoproductos">
+      <input wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/eliminar_tipoproductosRequest" message="tns:eliminar_tipoproductos" />
+      <output wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/eliminar_tipoproductosResponse" message="tns:eliminar_tipoproductosResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://tipoproducto.softpetws.pucp.edu.pe/TiposProducto/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+  </portType>
+  <binding name="TiposProductoPortBinding" type="tns:TiposProducto">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="insertar_tipoproductos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_tipoproductos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_tipoproductos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="TiposProducto">
+    <port name="TiposProductoPort" binding="tns:TiposProductoPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/TiposProducto" />
+    </port>
+  </service>
+</definitions>

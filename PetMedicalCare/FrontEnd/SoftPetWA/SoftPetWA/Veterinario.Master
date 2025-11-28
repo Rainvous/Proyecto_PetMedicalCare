@@ -1,0 +1,204 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Veterinario.master.cs" Inherits="SoftPetWA.Veterinario" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <asp:ContentPlaceHolder ID="cphTitulo" runat="server">Inicio</asp:ContentPlaceHolder>
+        - PetMedicalCare</title>
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Fonts/css/all.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <link href="Content/sidebar.css" rel="stylesheet" />
+    <link href="Content/cargando.css" rel="stylesheet" />
+    
+    <%-- Estilos Standard --%>
+    <link href="css_validaciones/validation-errors.css" rel="stylesheet" />
+    <link href="css_validaciones/success-modal.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="cphHead" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="sm1" runat="server"></asp:ScriptManager>
+
+        <%-- LOADING --%>
+        <div id="divLoadingGlobal" class="loading-overlay" style="display: none;">
+            <div class="loading-content">
+                <i class="fas fa-user-md pet-spinner"></i>
+                <div class="loading-text">Cargando...</div>
+            </div>
+        </div>
+
+        <div class="main-wrapper d-flex" id="wrapper">
+            <%-- SIDEBAR --%>
+            <div id="bdSidebar" class="sidebar-petmedical d-flex flex-column flex-shrink-0">
+                <div class="sidebar-header">
+                    <div class="sidebar-brand-container">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        <span class="sidebar-brand">PetMedicalCare</span>
+                    </div>
+                </div>
+                <hr class="sidebar-divider">
+                <ul class="sidebar-nav nav flex-column">
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlInicio" runat="server" CssClass="sidebar-link" NavigateUrl="~/Veterinario_Inicio.aspx">
+                            <i class="fas fa-home"></i><span>Inicio</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlMiAgenda" runat="server" CssClass="sidebar-link" NavigateUrl="~/Veterinario_Agenda.aspx">
+                            <i class="fas fa-calendar-alt"></i><span>Mi Agenda</span>
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink ID="hlRecetas" runat="server" CssClass="sidebar-link" NavigateUrl="~/Veterinario_Recetas.aspx">
+                            <i class="fas fa-prescription-bottle-alt"></i><span>Recetas</span>
+                        </asp:HyperLink>
+                    </li>
+                </ul>
+                <div class="sidebar-footer">
+                    <div class="sidebar-link text-decoration-none user-profile-static">
+                        <div class="d-flex align-items-center">
+                            <div class="user-avatar">
+                                <span><asp:Literal ID="litInicial" runat="server">U</asp:Literal></span>
+                            </div>
+                            <div class="ms-2 text-truncate" style="max-width: 120px;">
+                                <div class="user-name"><asp:Label ID="lblNombreUsuario" runat="server">Usuario</asp:Label></div>
+                                <div class="user-role">Veterinario</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%-- CONTENT --%>
+            <div class="content-wrapper">
+                <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-outline-secondary" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                        
+                        <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout" title="Cerrar Sesión">
+                                    <span class="d-none d-md-inline me-2">Cerrar Sesión</span>
+                                    <i class="fas fa-sign-out-alt text-danger"></i>
+                                </a>
+                                <asp:LinkButton ID="lnkLogoutReal" runat="server" OnClick="lnkLogout_Click" Style="display: none;"></asp:LinkButton>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="p-4">
+                    <asp:ContentPlaceHolder ID="cphContenido" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+
+        <%-- MODAL LOGOUT --%>
+        <div class="modal fade" id="modalLogout" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow">
+                    <div class="modal-body text-center p-4">
+                        <div class="modal-logout-icon mb-3"><i class="fas fa-sign-out-alt fa-3x text-danger"></i></div>
+                        <h5 class="mb-3">¿Finalizar Turno?</h5>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="button" class="btn btn-secondary px-4 rounded-pill" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger px-4 rounded-pill" onclick="confirmarLogout()">Sí, Salir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%-- MODAL ÉXITO (Estandarizado) --%>
+        <div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg text-center">
+                    <div class="modal-body p-5">
+                        <div class="mb-4">
+                            <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                <div class="swal2-success-circular-line-left"></div>
+                                <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                                <div class="swal2-success-ring"></div> <div class="swal2-success-fix"></div> <div class="swal2-success-circular-line-right"></div>
+                            </div>
+                        </div>
+                        <h4 class="fw-bold text-success mb-3">¡Operación Exitosa!</h4>
+                        <p id="pMensajeExito" class="text-muted mb-4">Acción completada.</p>
+                        <button type="button" class="btn btn-success px-5 py-2 rounded-pill fw-bold" onclick="redirigirExito()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hdnUrlRedireccion" />
+
+        <%-- MODAL ERRORES (Huella) --%>
+        <div class="modal fade" id="modalErrores" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header border-0 pb-0"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                    <div class="card-body pt-0 text-center">
+                        <div class="mb-4"><i class="fas fa-exclamation-circle fa-4x text-danger animated rubberBand"></i></div>
+                        <h4 class="fw-bold">¡Atención!</h4>
+                        <ul class="validation-summary text-left list-unstyled"></ul>
+                        <button type="button" class="btn btn-warning text-white px-4 rounded-pill fw-bold mt-3" data-bs-dismiss="modal">Entendido</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="Scripts/jquery-3.7.1.js"></script>
+        <script src="Scripts/bootstrap.bundle.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#sidebarToggle").on("click", function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+                var url = window.location.pathname;
+                $('.sidebar-link').each(function () {
+                    if (url.includes(this.getAttribute("href"))) $(this).addClass('active');
+                });
+                $('.sidebar-link').on('click', function () {
+                    if (!$(this).hasClass('active')) $('#divLoadingGlobal').css('display', 'flex');
+                });
+            });
+
+            function confirmarLogout() {
+                var modalEl = document.getElementById('modalLogout');
+                if (modalEl) { var modal = bootstrap.Modal.getInstance(modalEl); if (modal) modal.hide(); }
+                $('#divLoadingGlobal').css('display', 'flex');
+                $("a[id$='lnkLogoutReal']")[0].click();
+            }
+
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_beginRequest(function () { $('#divLoadingGlobal').css('display', 'flex'); });
+            prm.add_endRequest(function () { $('#divLoadingGlobal').hide(); });
+            $(window).on('load', function () { $('#divLoadingGlobal').hide(); });
+
+            function mostrarExito(mensaje, url) {
+                $('#pMensajeExito').text(mensaje);
+                $('#hdnUrlRedireccion').val(url);
+                $('.modal').modal('hide');
+                new bootstrap.Modal(document.getElementById('modalExito')).show();
+            }
+            function redirigirExito() {
+                var url = $('#hdnUrlRedireccion').val();
+                if (url) window.location.href = url; else window.location.reload();
+            }
+            function mostrarErroresCliente(lista) {
+                var $ul = $('#modalErrores .validation-summary');
+                $ul.empty();
+                lista.forEach(function (msg) {
+                    $ul.append('<li class="mb-2 d-flex align-items-start"><div class="icon-box me-2 text-warning"><i class="fas fa-paw"></i></div><span class="error-text text-dark">' + msg + '</span></li>');
+                });
+                new bootstrap.Modal(document.getElementById('modalErrores')).show();
+            }
+        </script>
+        <asp:ContentPlaceHolder ID="cphScripts" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

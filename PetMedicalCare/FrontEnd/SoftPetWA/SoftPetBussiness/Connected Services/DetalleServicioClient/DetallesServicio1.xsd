@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://detalleservicio.softpetws.pucp.edu.pe/" targetNamespace="http://detalleservicio.softpetws.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="eliminar_detalleservicio" type="tns:eliminar_detalleservicio" />
+  <xs:element name="eliminar_detalleservicioResponse" type="tns:eliminar_detalleservicioResponse" />
+  <xs:element name="insertar_detalleservicio" type="tns:insertar_detalleservicio" />
+  <xs:element name="insertar_detalleservicioResponse" type="tns:insertar_detalleservicioResponse" />
+  <xs:element name="listar_por_id_cita" type="tns:listar_por_id_cita" />
+  <xs:element name="listar_por_id_citaResponse" type="tns:listar_por_id_citaResponse" />
+  <xs:element name="listar_todos" type="tns:listar_todos" />
+  <xs:element name="listar_todosResponse" type="tns:listar_todosResponse" />
+  <xs:element name="modificar_detalleservicio" type="tns:modificar_detalleservicio" />
+  <xs:element name="modificar_detalleservicioResponse" type="tns:modificar_detalleservicioResponse" />
+  <xs:element name="obtener_por_id" type="tns:obtener_por_id" />
+  <xs:element name="obtener_por_idResponse" type="tns:obtener_por_idResponse" />
+  <xs:complexType name="modificar_detalleservicio">
+    <xs:sequence>
+      <xs:element name="detalleServicioId" type="xs:int" />
+      <xs:element name="citaId" type="xs:int" />
+      <xs:element name="servicioId" type="xs:int" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element name="costo" type="xs:double" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar_detalleservicioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_por_id_cita">
+    <xs:sequence>
+      <xs:element name="idcita" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_por_id_citaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:detalleServicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="detalleServicioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cita" type="tns:citaAtencionDto" />
+      <xs:element minOccurs="0" name="costo" type="xs:double" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="detalleServicioId" type="xs:int" />
+      <xs:element minOccurs="0" name="servicio" type="tns:servicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="citaAtencionDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="citaId" type="xs:int" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoCita" />
+      <xs:element minOccurs="0" name="fechaHoraFin" type="tns:timestamp" />
+      <xs:element minOccurs="0" name="fechaHoraFinStr" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaHoraInicio" type="tns:timestamp" />
+      <xs:element minOccurs="0" name="fechaHoraInicioStr" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaRegistro" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaRegistroStr" type="xs:string" />
+      <xs:element minOccurs="0" name="mascota" type="tns:mascotaDto" />
+      <xs:element minOccurs="0" name="monto" type="xs:double" />
+      <xs:element minOccurs="0" name="observacion" type="xs:string" />
+      <xs:element minOccurs="0" name="pesoMascota" type="xs:double" />
+      <xs:element minOccurs="0" name="veterinario" type="tns:veterinarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="timestamp">
+    <xs:sequence>
+      <xs:element name="nanos" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="mascotaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="color" type="xs:string" />
+      <xs:element minOccurs="0" name="especie" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaDefuncion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="mascotaId" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="persona" type="tns:personaDto" />
+      <xs:element minOccurs="0" name="raza" type="xs:string" />
+      <xs:element minOccurs="0" name="sexo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="personaDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="personaId" type="xs:int" />
+      <xs:element minOccurs="0" name="ruc" type="xs:int" />
+      <xs:element minOccurs="0" name="sexo" type="tns:sexo" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuarioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:date" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreador" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioId" type="xs:int" />
+      <xs:element minOccurs="0" name="usuarioModificador" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="veterinarioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="especialidad" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoVeterinario" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="persona" type="tns:personaDto" />
+      <xs:element minOccurs="0" name="veterinarioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="servicioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="costo" type="xs:double" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="tns:date" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="tns:date" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="servicioId" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoServicio" type="tns:tipoServicioDto" />
+      <xs:element minOccurs="0" name="usuarioCreador" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificador" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tipoServicioDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoServicioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_detalleservicio">
+    <xs:sequence>
+      <xs:element name="citaId" type="xs:int" />
+      <xs:element name="servicioId" type="xs:int" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element name="costo" type="xs:double" />
+      <xs:element name="activo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar_detalleservicioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_id">
+    <xs:sequence>
+      <xs:element name="detalleServicioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtener_por_idResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:detalleServicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_detalleservicio">
+    <xs:sequence>
+      <xs:element name="detalleServicioId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar_detalleservicioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar_todos">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listar_todosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:detalleServicioDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="estadoCita">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROGRAMADA" />
+      <xs:enumeration value="ATENDIDA" />
+      <xs:enumeration value="CANCELADA" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="sexo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M" />
+      <xs:enumeration value="F" />
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="estadoVeterinario">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACTIVO" />
+      <xs:enumeration value="INACTIVO" />
+      <xs:enumeration value="SUSPENDIDO" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

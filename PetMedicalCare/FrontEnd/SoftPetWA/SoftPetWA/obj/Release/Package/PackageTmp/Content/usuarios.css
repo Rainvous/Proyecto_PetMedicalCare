@@ -1,0 +1,175 @@
+﻿/* ================================================= */
+/* ARCHIVO: Content/usuarios.css          */
+/* ================================================= */
+
+/* --- 1. BARRA DE FILTROS --- */
+.filter-bar .card-body {
+    padding: 1.25rem;
+}
+
+/* --- 2. CABECERA DE LA LISTA (para Desktop) --- */
+.client-list-header {
+    padding: 12px 20px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 8px;
+}
+
+.client-list-header .header-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- 3. FILA DE USUARIO (LA "VIÑETA" / "FIGURA") --- */
+.client-list-row {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 1rem 1.25rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.client-list-row:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+    border-color: #d8dce1;
+}
+
+/* --- Info del cliente (Avatar + Nombre) --- */
+.client-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* El avatar (la "figura" que pediste) */
+.client-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 1rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.client-info .name {
+    font-weight: 600;
+    color: #343a40;
+    font-size: 0.95rem;
+}
+
+/* --- Texto de la fila (Correo) --- */
+.row-text {
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+/* --- Insignias de Estado (Activo/Inactivo) --- */
+/* Estas clases ya las tenías en el ASPX, solo las estamos estilizando */
+.bg-success-soft {
+    background-color: #d1f7e1;
+    color: #118d45;
+}
+.bg-danger-soft {
+    background-color: #fce1e4;
+    color: #d9303e;
+}
+
+/* --- Botones de Acción (redondos y sutiles) --- */
+.action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background-color: #f1f3f5;
+    color: #495057;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    color: #fff;
+}
+
+.action-btn-view:hover {
+    background-color: #0d6efd; /* Azul */
+}
+.action-btn-edit:hover {
+    background-color: #ffc107; /* Amarillo */
+    color: #333;
+}
+.action-btn-delete:hover {
+    background-color: #dc3545; /* Rojo */
+}
+
+/* --- 4. PAGINACIÓN --- */
+/* Contenedor para alinear a la derecha */
+.pagination-container {
+    display: flex;
+    justify-content: flex-end; /* Alineado a la derecha */
+    padding: 10px 0;
+}
+
+/* Estilo para los botones (Primero, Anterior, Siguiente, Ultimo) */
+.pagination-container a {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 3px;
+    text-decoration: none;
+    color: #0d6efd; /* Azul de Bootstrap */
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.9rem;
+}
+
+.pagination-container a:hover {
+    background-color: #e9ecef;
+    border-color: #c0c0c0;
+}
+
+/* Estilo para el número de página ACTUAL (el que no es clicable) */
+.pagination-container span {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 3px;
+    color: #fff;
+    background-color: #0d6efd; /* Azul de Bootstrap */
+    border: 1px solid #0d6efd;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Estilos para móviles (responsive) */
+@media (max-width: 991.98px) {
+    .client-list-row {
+        padding: 1rem;
+    }
+    .client-list-row .row {
+        gap: 10px; /* Espacio entre filas en móvil */
+    }
+    /* En móvil, centramos las acciones */
+    .client-list-row .col-lg-2 {
+        text-align: center !important;
+        margin-top: 10px;
+    }
+    /* Ocultamos texto "Correo:" en móvil si es redundante */
+    .d-lg-none.header-text {
+        font-weight: 600;
+    }
+}

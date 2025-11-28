@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://persona.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Personas" targetNamespace="http://persona.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/Personas?xsd=1" namespace="http://persona.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="obtener_correo_cliente">
+    <part name="parameters" element="tns:obtener_correo_cliente" />
+  </message>
+  <message name="obtener_correo_clienteResponse">
+    <part name="parameters" element="tns:obtener_correo_clienteResponse" />
+  </message>
+  <message name="obtener_rol_de_cliente">
+    <part name="parameters" element="tns:obtener_rol_de_cliente" />
+  </message>
+  <message name="obtener_rol_de_clienteResponse">
+    <part name="parameters" element="tns:obtener_rol_de_clienteResponse" />
+  </message>
+  <message name="listar_personas_activas">
+    <part name="parameters" element="tns:listar_personas_activas" />
+  </message>
+  <message name="listar_personas_activasResponse">
+    <part name="parameters" element="tns:listar_personas_activasResponse" />
+  </message>
+  <message name="IOException">
+    <part name="fault" element="tns:IOException" />
+  </message>
+  <message name="InterruptedException">
+    <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="ObtenerDatosPersonaGuest">
+    <part name="parameters" element="tns:ObtenerDatosPersonaGuest" />
+  </message>
+  <message name="ObtenerDatosPersonaGuestResponse">
+    <part name="parameters" element="tns:ObtenerDatosPersonaGuestResponse" />
+  </message>
+  <message name="modificarPersonaCompleta">
+    <part name="parameters" element="tns:modificarPersonaCompleta" />
+  </message>
+  <message name="modificarPersonaCompletaResponse">
+    <part name="parameters" element="tns:modificarPersonaCompletaResponse" />
+  </message>
+  <message name="obtenerIdDePersonaGuest">
+    <part name="parameters" element="tns:obtenerIdDePersonaGuest" />
+  </message>
+  <message name="obtenerIdDePersonaGuestResponse">
+    <part name="parameters" element="tns:obtenerIdDePersonaGuestResponse" />
+  </message>
+  <message name="eliminarPersonaCompleta">
+    <part name="parameters" element="tns:eliminarPersonaCompleta" />
+  </message>
+  <message name="eliminarPersonaCompletaResponse">
+    <part name="parameters" element="tns:eliminarPersonaCompletaResponse" />
+  </message>
+  <message name="buscar_clientes_paginados">
+    <part name="parameters" element="tns:buscar_clientes_paginados" />
+  </message>
+  <message name="buscar_clientes_paginadosResponse">
+    <part name="parameters" element="tns:buscar_clientes_paginadosResponse" />
+  </message>
+  <message name="insertarPersonaCompleta">
+    <part name="parameters" element="tns:insertarPersonaCompleta" />
+  </message>
+  <message name="insertarPersonaCompletaResponse">
+    <part name="parameters" element="tns:insertarPersonaCompletaResponse" />
+  </message>
+  <message name="ListasBusquedaAvanzada">
+    <part name="parameters" element="tns:ListasBusquedaAvanzada" />
+  </message>
+  <message name="ListasBusquedaAvanzadaResponse">
+    <part name="parameters" element="tns:ListasBusquedaAvanzadaResponse" />
+  </message>
+  <message name="insertar_persona">
+    <part name="parameters" element="tns:insertar_persona" />
+  </message>
+  <message name="insertar_personaResponse">
+    <part name="parameters" element="tns:insertar_personaResponse" />
+  </message>
+  <message name="modificar_persona">
+    <part name="parameters" element="tns:modificar_persona" />
+  </message>
+  <message name="modificar_personaResponse">
+    <part name="parameters" element="tns:modificar_personaResponse" />
+  </message>
+  <message name="eliminar_persona">
+    <part name="parameters" element="tns:eliminar_persona" />
+  </message>
+  <message name="eliminar_personaResponse">
+    <part name="parameters" element="tns:eliminar_personaResponse" />
+  </message>
+  <message name="obtenerPorId_persona">
+    <part name="parameters" element="tns:obtenerPorId_persona" />
+  </message>
+  <message name="obtenerPorId_personaResponse">
+    <part name="parameters" element="tns:obtenerPorId_personaResponse" />
+  </message>
+  <message name="listar_personas">
+    <part name="parameters" element="tns:listar_personas" />
+  </message>
+  <message name="listar_personasResponse">
+    <part name="parameters" element="tns:listar_personasResponse" />
+  </message>
+  <message name="VerificarSiLaPersonaTieneInformacion">
+    <part name="parameters" element="tns:VerificarSiLaPersonaTieneInformacion" />
+  </message>
+  <message name="VerificarSiLaPersonaTieneInformacionResponse">
+    <part name="parameters" element="tns:VerificarSiLaPersonaTieneInformacionResponse" />
+  </message>
+  <message name="ListasBusquedaAvanzadaParaCliente">
+    <part name="parameters" element="tns:ListasBusquedaAvanzadaParaCliente" />
+  </message>
+  <message name="ListasBusquedaAvanzadaParaClienteResponse">
+    <part name="parameters" element="tns:ListasBusquedaAvanzadaParaClienteResponse" />
+  </message>
+  <message name="insertarOModificarUsuarioGest">
+    <part name="parameters" element="tns:insertarOModificarUsuarioGest" />
+  </message>
+  <message name="insertarOModificarUsuarioGestResponse">
+    <part name="parameters" element="tns:insertarOModificarUsuarioGestResponse" />
+  </message>
+  <portType name="Personas">
+    <operation name="obtener_correo_cliente">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtener_correo_clienteRequest" message="tns:obtener_correo_cliente" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtener_correo_clienteResponse" message="tns:obtener_correo_clienteResponse" />
+    </operation>
+    <operation name="obtener_rol_de_cliente">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtener_rol_de_clienteRequest" message="tns:obtener_rol_de_cliente" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtener_rol_de_clienteResponse" message="tns:obtener_rol_de_clienteResponse" />
+    </operation>
+    <operation name="listar_personas_activas">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personas_activasRequest" message="tns:listar_personas_activas" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personas_activasResponse" message="tns:listar_personas_activasResponse" />
+      <fault wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personas_activas/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personas_activas/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="ObtenerDatosPersonaGuest">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/ObtenerDatosPersonaGuestRequest" message="tns:ObtenerDatosPersonaGuest" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/ObtenerDatosPersonaGuestResponse" message="tns:ObtenerDatosPersonaGuestResponse" />
+    </operation>
+    <operation name="modificarPersonaCompleta">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/modificarPersonaCompletaRequest" message="tns:modificarPersonaCompleta" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/modificarPersonaCompletaResponse" message="tns:modificarPersonaCompletaResponse" />
+    </operation>
+    <operation name="obtenerIdDePersonaGuest">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtenerIdDePersonaGuestRequest" message="tns:obtenerIdDePersonaGuest" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtenerIdDePersonaGuestResponse" message="tns:obtenerIdDePersonaGuestResponse" />
+    </operation>
+    <operation name="eliminarPersonaCompleta">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/eliminarPersonaCompletaRequest" message="tns:eliminarPersonaCompleta" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/eliminarPersonaCompletaResponse" message="tns:eliminarPersonaCompletaResponse" />
+    </operation>
+    <operation name="buscar_clientes_paginados">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/buscar_clientes_paginadosRequest" message="tns:buscar_clientes_paginados" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/buscar_clientes_paginadosResponse" message="tns:buscar_clientes_paginadosResponse" />
+    </operation>
+    <operation name="insertarPersonaCompleta">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/insertarPersonaCompletaRequest" message="tns:insertarPersonaCompleta" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/insertarPersonaCompletaResponse" message="tns:insertarPersonaCompletaResponse" />
+    </operation>
+    <operation name="ListasBusquedaAvanzada">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/ListasBusquedaAvanzadaRequest" message="tns:ListasBusquedaAvanzada" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/ListasBusquedaAvanzadaResponse" message="tns:ListasBusquedaAvanzadaResponse" />
+    </operation>
+    <operation name="insertar_persona">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/insertar_personaRequest" message="tns:insertar_persona" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/insertar_personaResponse" message="tns:insertar_personaResponse" />
+    </operation>
+    <operation name="modificar_persona">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/modificar_personaRequest" message="tns:modificar_persona" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/modificar_personaResponse" message="tns:modificar_personaResponse" />
+    </operation>
+    <operation name="eliminar_persona">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/eliminar_personaRequest" message="tns:eliminar_persona" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/eliminar_personaResponse" message="tns:eliminar_personaResponse" />
+    </operation>
+    <operation name="obtenerPorId_persona">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtenerPorId_personaRequest" message="tns:obtenerPorId_persona" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/obtenerPorId_personaResponse" message="tns:obtenerPorId_personaResponse" />
+    </operation>
+    <operation name="listar_personas">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personasRequest" message="tns:listar_personas" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personasResponse" message="tns:listar_personasResponse" />
+      <fault wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personas/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/listar_personas/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="VerificarSiLaPersonaTieneInformacion">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/VerificarSiLaPersonaTieneInformacionRequest" message="tns:VerificarSiLaPersonaTieneInformacion" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/VerificarSiLaPersonaTieneInformacionResponse" message="tns:VerificarSiLaPersonaTieneInformacionResponse" />
+    </operation>
+    <operation name="ListasBusquedaAvanzadaParaCliente">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/ListasBusquedaAvanzadaParaClienteRequest" message="tns:ListasBusquedaAvanzadaParaCliente" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/ListasBusquedaAvanzadaParaClienteResponse" message="tns:ListasBusquedaAvanzadaParaClienteResponse" />
+    </operation>
+    <operation name="insertarOModificarUsuarioGest">
+      <input wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/insertarOModificarUsuarioGestRequest" message="tns:insertarOModificarUsuarioGest" />
+      <output wsam:Action="http://persona.softpetws.pucp.edu.pe/Personas/insertarOModificarUsuarioGestResponse" message="tns:insertarOModificarUsuarioGestResponse" />
+    </operation>
+  </portType>
+  <binding name="PersonasPortBinding" type="tns:Personas">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="obtener_correo_cliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_rol_de_cliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_personas_activas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="ObtenerDatosPersonaGuest">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificarPersonaCompleta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerIdDePersonaGuest">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarPersonaCompleta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="buscar_clientes_paginados">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertarPersonaCompleta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListasBusquedaAvanzada">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertar_persona">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_persona">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_persona">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerPorId_persona">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_personas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="VerificarSiLaPersonaTieneInformacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ListasBusquedaAvanzadaParaCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertarOModificarUsuarioGest">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Personas">
+    <port name="PersonasPort" binding="tns:PersonasPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/Personas" />
+    </port>
+  </service>
+</definitions>

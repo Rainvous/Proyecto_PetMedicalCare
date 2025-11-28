@@ -1,0 +1,77 @@
+﻿/* Nombre del archivo: Content/recetas.css */
+
+/* --- Estilos para la Lista de Recetas --- */
+.recipe-list-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.recipe-info {
+    display: flex;
+    align-items: center;
+}
+
+.recipe-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    /* Colores basados en estado u otro criterio */
+    background-color: #e3f2fd; /* Celeste por defecto */
+    color: #29b6f6; /* Azul por defecto */
+}
+
+.recipe-details .date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+    display: block;
+}
+
+.recipe-details .pet-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0;
+}
+
+.recipe-details .owner-name {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.recipe-actions .status-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3em 0.7em;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+/* Colores de Estado */
+.status-vigente {
+    background-color: #e8f5e9;
+    color: #66bb6a;
+}
+/* Verde */
+.status-expirada {
+    background-color: #ffebee;
+    color: #ef5350;
+}
+/* Rojo */
+
+.recipe-actions .btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+}

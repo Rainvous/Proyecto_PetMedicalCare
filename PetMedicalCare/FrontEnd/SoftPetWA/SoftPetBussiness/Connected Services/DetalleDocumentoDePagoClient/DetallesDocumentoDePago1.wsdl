@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://detalledocpago.softpetws.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="DetallesDocumentoDePago" targetNamespace="http://detalledocpago.softpetws.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftPetWS/DetallesDocumentoDePago?xsd=1" namespace="http://detalledocpago.softpetws.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="insertar_Detalle_Documento_De_Pago">
+    <part name="parameters" element="tns:insertar_Detalle_Documento_De_Pago" />
+  </message>
+  <message name="insertar_Detalle_Documento_De_PagoResponse">
+    <part name="parameters" element="tns:insertar_Detalle_Documento_De_PagoResponse" />
+  </message>
+  <message name="modificar_Detalle_Documento_De_Pago">
+    <part name="parameters" element="tns:modificar_Detalle_Documento_De_Pago" />
+  </message>
+  <message name="modificar_Detalle_Documento_De_PagoResponse">
+    <part name="parameters" element="tns:modificar_Detalle_Documento_De_PagoResponse" />
+  </message>
+  <message name="eliminar_Detalle_Documento_De_Pago">
+    <part name="parameters" element="tns:eliminar_Detalle_Documento_De_Pago" />
+  </message>
+  <message name="eliminar_Detalle_Documento_De_PagoResponse">
+    <part name="parameters" element="tns:eliminar_Detalle_Documento_De_PagoResponse" />
+  </message>
+  <message name="obtener_por_id">
+    <part name="parameters" element="tns:obtener_por_id" />
+  </message>
+  <message name="obtener_por_idResponse">
+    <part name="parameters" element="tns:obtener_por_idResponse" />
+  </message>
+  <message name="listar_todos">
+    <part name="parameters" element="tns:listar_todos" />
+  </message>
+  <message name="listar_todosResponse">
+    <part name="parameters" element="tns:listar_todosResponse" />
+  </message>
+  <portType name="DetallesDocumentoDePago">
+    <operation name="insertar_Detalle_Documento_De_Pago">
+      <input wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/insertar_Detalle_Documento_De_PagoRequest" message="tns:insertar_Detalle_Documento_De_Pago" />
+      <output wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/insertar_Detalle_Documento_De_PagoResponse" message="tns:insertar_Detalle_Documento_De_PagoResponse" />
+    </operation>
+    <operation name="modificar_Detalle_Documento_De_Pago">
+      <input wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/modificar_Detalle_Documento_De_PagoRequest" message="tns:modificar_Detalle_Documento_De_Pago" />
+      <output wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/modificar_Detalle_Documento_De_PagoResponse" message="tns:modificar_Detalle_Documento_De_PagoResponse" />
+    </operation>
+    <operation name="eliminar_Detalle_Documento_De_Pago">
+      <input wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/eliminar_Detalle_Documento_De_PagoRequest" message="tns:eliminar_Detalle_Documento_De_Pago" />
+      <output wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/eliminar_Detalle_Documento_De_PagoResponse" message="tns:eliminar_Detalle_Documento_De_PagoResponse" />
+    </operation>
+    <operation name="obtener_por_id">
+      <input wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/obtener_por_idRequest" message="tns:obtener_por_id" />
+      <output wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/obtener_por_idResponse" message="tns:obtener_por_idResponse" />
+    </operation>
+    <operation name="listar_todos">
+      <input wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/listar_todosRequest" message="tns:listar_todos" />
+      <output wsam:Action="http://detalledocpago.softpetws.pucp.edu.pe/DetallesDocumentoDePago/listar_todosResponse" message="tns:listar_todosResponse" />
+    </operation>
+  </portType>
+  <binding name="DetallesDocumentoDePagoPortBinding" type="tns:DetallesDocumentoDePago">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="insertar_Detalle_Documento_De_Pago">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificar_Detalle_Documento_De_Pago">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminar_Detalle_Documento_De_Pago">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtener_por_id">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listar_todos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="DetallesDocumentoDePago">
+    <port name="DetallesDocumentoDePagoPort" binding="tns:DetallesDocumentoDePagoPortBinding">
+      <soap:address location="http://localhost:8080/SoftPetWS/DetallesDocumentoDePago" />
+    </port>
+  </service>
+</definitions>
