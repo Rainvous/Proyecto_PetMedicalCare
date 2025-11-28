@@ -274,7 +274,7 @@ public class PersonaDaoImpl extends DaoBaseImpl implements PersonaDao {
             this.iniciarTransaccion();
 
             // 1. Insertar Usuario
-            String sqlUsu = "INSERT INTO USUARIOS (USERNAME, PASSWORD, CORREO, ACTIVO, FECHA_CREACION) VALUES (?, ?, ?, ?, NOW())";
+            String sqlUsu = "INSERT INTO USUARIOS (USERNAME, PASSWORD, CORREO, ACTIVO) VALUES (?, ?, ?, ?)";
             Integer idUsuario = 0;
             try (PreparedStatement psUsu = this.conexion.prepareStatement(sqlUsu, Statement.RETURN_GENERATED_KEYS)) {
                 psUsu.setString(1, username);
