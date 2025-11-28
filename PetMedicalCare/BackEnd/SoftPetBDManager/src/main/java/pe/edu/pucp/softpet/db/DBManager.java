@@ -35,7 +35,9 @@ public abstract class DBManager {
         }
         return DBManager.dbManager;
     }
-
+    public static String devolverMotor(){
+        return motorElegido.toString();
+    }
     public static DBManager getInstance(MotorDeBaseDeDatos tipobase) {
         if (DBManager.dbManager == null || tipobase != motorElegido) {
             DBManager.dbManager = null;
